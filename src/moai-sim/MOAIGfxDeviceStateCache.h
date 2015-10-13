@@ -6,7 +6,7 @@
 
 #include <moai-sim/MOAIGfxDeviceBase.h>
 #include <moai-sim/MOAIBlendMode.h>
-
+#include <zl-gfx/headers.h>
 
 class MOAICamera;
 class MOAIFrameBuffer;
