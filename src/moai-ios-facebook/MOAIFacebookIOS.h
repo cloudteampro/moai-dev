@@ -34,46 +34,68 @@
 	@const	REQUEST_RESPONSE_FAILED		Event code for failed graph request responses.
 */
 class MOAIFacebookIOS :
-	public MOAIGlobalClass < MOAIFacebookIOS, MOAILuaObject >,
-	public MOAIGlobalEventSource {
+	public MOAIGlobalClass < MOAIFacebookIOS, MOAIGlobalEventSource > {
 private:
-		
+
+	MOAILuaRefTable mRefs;
+
 	//----------------------------------------------------------------//
+	static int		_declinedPermissions		( lua_State* L );
+//	static int		_extendToken				( lua_State* L );
 	static int		_getExpirationDate			( lua_State* L );
 	static int		_getToken					( lua_State* L );
 	static int		_graphRequest				( lua_State* L );
+	static int		_hasGranted					( lua_State* L );
 	static int		_init						( lua_State* L );
+	static int		_logEvent					( lua_State* L );
+	static int		_logPurchase				( lua_State* L );
 	static int		_login						( lua_State* L );
 	static int		_logout						( lua_State* L );
 	static int		_postToFeed					( lua_State* L );
-	static int		_sendRequest				( lua_State* L );
+	static int		_requestPublishPermissions	( lua_State* L );
+	static int		_requestReadPermissions		( lua_State* L );
+	static int		_sendGameRequest			( lua_State* L );
 	static int		_sessionValid				( lua_State* L );
-	
+
 public:
-    
+	
 	DECL_LUA_SINGLETON ( MOAIFacebookIOS );
 	
 	enum {
 		DIALOG_DID_COMPLETE,
 		DIALOG_DID_NOT_COMPLETE,
+		PERMISSIONS_DENIED,
+		PERMISSIONS_GRANTED,
 		REQUEST_RESPONSE,
 		REQUEST_RESPONSE_FAILED,
+		REQUEST_DIALOG_DID_COMPLETE,
+		REQUEST_DIALOG_DID_FAIL,
+		REQUEST_DIALOG_DID_CANCEL,
 		SESSION_DID_LOGIN,
 		SESSION_DID_NOT_LOGIN,
 		SESSION_EXTENDED
 	};
 	
 	//----------------------------------------------------------------//
-	void		DialogDidNotComplete	        ();
-	void		DialogDidComplete		        ();
-				MOAIFacebookIOS			        ();
-				~MOAIFacebookIOS		        ();
-	void		RegisterLuaClass		        ( MOAILuaState& state );
-	void		ReceivedRequestResponse	        ( id result );
-	void		ReceivedRequestResponseFailure	();
-	void		SessionDidLogin			        ();
-	void		SessionDidNotLogin		        ();
-	void		SessionExtended			        ( cc8* token, cc8* expDate );
+	void		ClearCallbackRef				( int ref );
+	void		DialogDidNotComplete			();
+	void		DialogDidComplete				();
+	void		DialogDidComplete				( NSURL* result );
+	void		Logout							();
+				MOAIFacebookIOS					();
+				~MOAIFacebookIOS				();
+	void		PermissionsDenied				( NSString* error );
+	void		PermissionsGranted				();
+	void		RegisterLuaClass				( MOAILuaState& state );
+	void		ReceivedRequestResponse			( id result, int ref );
+	void		ReceivedRequestResponseFailure	( NSError* error );
+	void		RequestDialogDidComplete		( NSDictionary* results, int ref );
+	void		RequestDialogDidFail			( NSError* error, int ref );
+	void		RequestDialogDidCancel			( int ref );
+	void		SessionDidLogin					();
+	void		SessionDidNotLogin				();
+	void		SessionExtended					( cc8* token, cc8* expDate );
 };
+
 
 #endif // MOAIFACEBOOK_H

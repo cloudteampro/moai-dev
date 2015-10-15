@@ -147,6 +147,15 @@ void AKUModulesIosAppInitialize () {
 }
 
 //----------------------------------------------------------------//
+void AKUModulesIosApplicationDidBecomeActive ( UIApplication* application ) {
+    
+    // return
+    #if AKU_WITH_IOS_FACEBOOK
+        AKUIosFacebookApplicationDidBecomeActive ( application );
+    #endif
+}
+
+//----------------------------------------------------------------//
 BOOL AKUModulesIosApplicationDidFinishLaunchingWithOptions ( UIApplication* application, NSDictionary* launchOptions ) {
 
     BOOL status = YES;

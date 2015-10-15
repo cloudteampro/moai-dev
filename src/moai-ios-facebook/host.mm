@@ -19,6 +19,12 @@ void AKUIosFacebookAppInitialize () {
 }
 
 //----------------------------------------------------------------//
+BOOL AKUIosFacebookApplicationDidBecomeActive ( UIApplication* application ) {
+	
+	[ FBSDKAppEvents activateApp ];
+}
+
+//----------------------------------------------------------------//
 BOOL AKUIosFacebookApplicationDidFinishLaunchingWithOptions ( UIApplication* application, NSDictionary* launchOptions ) {
 
 	[[ FBSDKApplicationDelegate sharedInstance ] application:application didFinishLaunchingWithOptions:launchOptions ];
