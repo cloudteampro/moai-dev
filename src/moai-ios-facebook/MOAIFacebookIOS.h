@@ -8,7 +8,7 @@
 #define MOAIFACEBOOKIOS_H
 
 #import <Foundation/Foundation.h> 
-#import <moai-core/headers.h>    
+#import <moai-core/headers.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>

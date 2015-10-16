@@ -19,7 +19,7 @@ void AKUIosFacebookAppInitialize () {
 }
 
 //----------------------------------------------------------------//
-BOOL AKUIosFacebookApplicationDidBecomeActive ( UIApplication* application ) {
+void AKUIosFacebookApplicationDidBecomeActive ( UIApplication* application ) {
 	
 	[ FBSDKAppEvents activateApp ];
 }

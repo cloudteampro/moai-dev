@@ -439,16 +439,17 @@ int MOAIFacebookIOS::_sendGameRequest ( lua_State* L ) {
 	FBSDKGameRequestContent* content = [[ FBSDKGameRequestContent alloc ] init ];
 	content.message = message;
 
-	BOOL frictionless = false;
+	BOOL frictionless = NO;
 	if ( state.IsType ( 2, LUA_TTABLE )) {
-		frictionless		= state.GetValue < bool >( 2, "frictionless" );
+		
+		frictionless		= ( BOOL ) state.GetValue < bool >( 2, "frictionless" );
 		
 		cc8* data			= state.GetField < cc8* >( 2, "data", "" );
 		cc8* title			= state.GetField < cc8* >( 2, "title", "" );
 		cc8* objectID		= state.GetField < cc8* >( 2, "objectID", "" );
 		
-		content.actionType	= state.GetField < u32 >( 2, "actionType",	FBSDKGameRequestActionTypeNone );
-		content.filters		= state.GetField < u32 >( 2, "filters",		FBSDKGameRequestFilterNone );
+		content.actionType	= ( FBSDKGameRequestActionType )state.GetField < u32 >( 2, "actionType",	FBSDKGameRequestActionTypeNone );
+		content.filters		= ( FBSDKGameRequestFilter )	state.GetField < u32 >( 2, "filters",		FBSDKGameRequestFilterNone );
 		
 		content.data		= [ NSString stringWithUTF8String:data ];
 		content.title		= [ NSString stringWithUTF8String:title ];
@@ -457,28 +458,30 @@ int MOAIFacebookIOS::_sendGameRequest ( lua_State* L ) {
 		if ( state.GetFieldWithType ( 2, "recipients", LUA_TTABLE )) {
 			// TODO:	implement NSMutableArray+MOAILib initWithLua:
 			//			I recall my failed attempt
-			NSMutableDictionary* recipients = [[[ NSMutableDictionary alloc ] init ] autorelease ];
+			NSMutableDictionary* recipients = [[ NSMutableDictionary alloc ] init ];
 			[ recipients initWithLua:state stackIndex:-1 ];
 			content.recipients = [ recipients allValues ];
 			state.Pop ( 1 );
+			[ recipients release ];
 		}
 		
 		if ( state.GetFieldWithType ( 2, "recipientSuggestions", LUA_TTABLE )) {
-			NSMutableDictionary* recipients = [[[ NSMutableDictionary alloc ] init ] autorelease ];
+			NSMutableDictionary* recipients = [[ NSMutableDictionary alloc ] init ];
 			[ recipients initWithLua:state stackIndex:-1 ];
 			content.recipientSuggestions = [ recipients allValues ];
 			state.Pop ( 1 );
+			[ recipients release ];
 		}
 	}
 	
-	FBSDKGameRequestDialog* dialog = [[ FBSDKGameRequestDialog alloc ] init ];
-	NSError* error = nil;
+	FBSDKGameRequestDialog* dialog = [[[ FBSDKGameRequestDialog alloc ] init ] autorelease ];
+	[ dialog setDelegate: self->mGameRequestDelegate ];
+    [ dialog setContent: content ];
+    [ dialog setFrictionlessRequestsEnabled: frictionless ];
+	[ content release ];
+	
+    NSError* error = nil;
 	if ([ dialog validateWithError:&error ]) {
-		
-		[ dialog setDelegate: self->mGameRequestDelegate ];
-		[ dialog setContent: content ];
-		[ dialog setFrictionlessRequestsEnabled: frictionless ];
-		
 		state.Push ([ dialog show ]);
 		return 1;
 	}
