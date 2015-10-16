@@ -13,9 +13,7 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
 
-@class MOAIFacebookIOSDialogDelegate;
-@class MOAIFacebookIOSRequestDelegate;
-@class MOAIFacebookIOSSessionDelegate;
+@class MOAIFBGameRequestDialogDelegate;
 
 //================================================================//
 // MOAIFacebookIOS
@@ -37,8 +35,9 @@ class MOAIFacebookIOS :
 	public MOAIGlobalClass < MOAIFacebookIOS, MOAIGlobalEventSource > {
 private:
 
-	MOAILuaRefTable mRefs;
-
+	MOAILuaRefTable						mRefs;
+	MOAIFBGameRequestDialogDelegate*	mGameRequestDelegate;
+	
 	//----------------------------------------------------------------//
 	static int		_declinedPermissions		( lua_State* L );
 //	static int		_extendToken				( lua_State* L );
@@ -81,17 +80,17 @@ public:
 	void		DialogDidNotComplete			();
 	void		DialogDidComplete				();
 	void		DialogDidComplete				( NSURL* result );
+	void		GameRequestDialogDidComplete	( NSDictionary* results );
+	void		GameRequestDialogDidFail		( NSError* error );
+	void		GameRequestDialogDidCancel		();
+	void		GraphRequestResponse			( id result, int ref );
+	void		GraphRequestResponseFailure		( NSError* error, int ref );
 	void		Logout							();
 				MOAIFacebookIOS					();
 				~MOAIFacebookIOS				();
 	void		PermissionsDenied				( NSString* error );
 	void		PermissionsGranted				();
 	void		RegisterLuaClass				( MOAILuaState& state );
-	void		ReceivedRequestResponse			( id result, int ref );
-	void		ReceivedRequestResponseFailure	( NSError* error );
-	void		RequestDialogDidComplete		( NSDictionary* results, int ref );
-	void		RequestDialogDidFail			( NSError* error, int ref );
-	void		RequestDialogDidCancel			( int ref );
 	void		SessionDidLogin					();
 	void		SessionDidNotLogin				();
 	void		SessionExtended					( cc8* token, cc8* expDate );
