@@ -25,6 +25,12 @@
 //----------------------------------------------------------------//
 void MOAIGfxDeviceVertexWriter::BeginPrim () {
 
+	// TODO: this was commented out to deal with prims improperly batching in Vavius's
+	// spine implementation. this code did not handle indexed prims correctly. the
+	// fix was to introduce BeginPrimIndexed (). The TODO is to make sure that the
+	// original behavior is preserved, and to see if there's way to reconcile these
+	// ideas (to get back to one BeginPrim () to handle both cases).
+
 //	if ( this->mPrimSize ) {
 //
 //		u32 totalIndices	= this->mIdxBuffer.GetLength () / INDEX_SIZE;
