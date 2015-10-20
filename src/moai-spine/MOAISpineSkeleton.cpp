@@ -22,7 +22,7 @@ static void callback (spAnimationState* state, int trackIndex, spEventType type,
 
 //----------------------------------------------------------------//
 /**	@name	addAnimation
-    @text   Append another animation to animation track.
+	@text   Append another animation to animation track.
  
 	@in		MOAISpineSkeleton self
 	@in		number	track Id
@@ -191,29 +191,29 @@ int MOAISpineSkeleton::_getBone ( lua_State *L ) {
 
 //----------------------------------------------------------------//
 /**	@name	getDuration
-    @text   Returns animation duration
+	@text   Returns animation duration
  
-    @in		MOAISpineSkeleton self
-    @in		string	animation name
-    @out	number	duration
+	@in		MOAISpineSkeleton self
+	@in		string	animation name
+	@out	number	duration
 */
 int MOAISpineSkeleton::_getDuration ( lua_State *L ) {
 	MOAI_LUA_SETUP ( MOAISpineSkeleton, "US" );
-    
-    cc8* animationName = state.GetValue < cc8* >( 2, "" );
-    if ( !self->mSkeleton ) {
-        MOAILogF ( state, ZLLog::LOG_ERROR, "MOAISpineSkeleton not initialized \n" );
+	
+	cc8* animationName = state.GetValue < cc8* >( 2, "" );
+	if ( !self->mSkeleton ) {
+		MOAILogF ( state, ZLLog::LOG_ERROR, "MOAISpineSkeleton not initialized \n" );
 		return 0;
-    }
-    
-    spAnimation* animation = spSkeletonData_findAnimation ( self->mSkeleton->data, animationName );
-    if ( !animation ) {
-        MOAILogF ( state, ZLLog::LOG_ERROR, "MOAISpineSkeleton: animation not found \n" );
+	}
+	
+	spAnimation* animation = spSkeletonData_findAnimation ( self->mSkeleton->data, animationName );
+	if ( !animation ) {
+		MOAILogF ( state, ZLLog::LOG_ERROR, "MOAISpineSkeleton: animation not found \n" );
 		return 0;
-    }
-    state.Push ( animation->duration );
-    
-    return 1;
+	}
+	state.Push ( animation->duration );
+	
+	return 1;
 }
 
 //----------------------------------------------------------------//
@@ -399,7 +399,7 @@ int MOAISpineSkeleton::_setFlip ( lua_State *L ) {
 	}
 	self->mSkeleton->flipX = flipX;
 	self->mSkeleton->flipY = flipY;
-    
+	
 	return 0;
 }
 
@@ -612,48 +612,46 @@ void MOAISpineSkeleton::Draw ( int subPrimID, float lod ) {
 	
 	if ( !this->IsVisible ( lod )) return;
 	if ( !this->mSkeleton ) return;
-    
-    this->LoadGfxState ();
-    this->LoadVertexTransform ();
-    this->LoadUVTransform ();
-    
-    MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get ();
-    
+	
+	this->LoadGfxState ();
+	this->LoadVertexTransform ();
+	this->LoadUVTransform ();
+	
+	MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get ();
+	
 	MOAIShader* shader = this->mMaterialBatch ? this->mMaterialBatch->RawGetShader ( 0 ) : 0;
 	if ( !shader ) {
 		shader = MOAIShaderMgr::Get ().GetShader ( MOAIShaderMgr::DECK2D_SHADER );
 	}
 	
 	gfxDevice.SetShader ( shader );	
-    gfxDevice.SetVertexMtxMode ( MOAIGfxDevice::VTX_STAGE_MODEL, MOAIGfxDevice::VTX_STAGE_PROJ );
-    gfxDevice.SetUVMtxMode ( MOAIGfxDevice::UV_STAGE_MODEL, MOAIGfxDevice::UV_STAGE_TEXTURE );
-    
-	MOAIBlendMode normal;
-	MOAIBlendMode additive;
-	normal.SetBlend ( MOAIBlendMode::BLEND_NORMAL );
-	additive.SetBlend ( MOAIBlendMode::BLEND_ADD );
+	gfxDevice.SetVertexMtxMode ( MOAIGfxDevice::VTX_STAGE_MODEL, MOAIGfxDevice::VTX_STAGE_PROJ );
+	gfxDevice.SetUVMtxMode ( MOAIGfxDevice::UV_STAGE_MODEL, MOAIGfxDevice::UV_STAGE_TEXTURE );
 	
 	MOAIQuadBrush brush;
 	brush.BindVertexFormat ( gfxDevice );
 	
+	MOAITexture* texture;
+	float	r, g, b, a;
+	float*	uvs = 0;
+	int*	triangles = 0;
+	int		trianglesCount = 0;
+	int		blendMode = -1;
+
 	for ( u32 i = 0; i < mSkeleton->slotsCount; ++i ) {
+		
 		spSlot* slot = mSkeleton->drawOrder [ i ];
 		if ( !slot->attachment ) {
 			continue;
 		}
 		
-		MOAITexture* texture;
-		float*  uvs = 0;
-		int     trianglesCount = 0;
-		int*    triangles = 0;
-		float r, g, b, a;
-		
 		switch ( slot->attachment->type ) {
 			case SP_ATTACHMENT_REGION: {
 				spRegionAttachment *attachment = ( spRegionAttachment* ) slot->attachment;
-				texture = ( MOAITexture* ) (( spAtlasRegion* ) attachment->rendererObject )->page->rendererObject;
+				texture = ( MOAITexture* )(( spAtlasRegion* ) attachment->rendererObject )->page->rendererObject;
 				uvs = attachment->uvs;
-				
+				trianglesCount = 0;
+
 				r = attachment->r;
 				g = attachment->g;
 				b = attachment->b;
@@ -666,7 +664,7 @@ void MOAISpineSkeleton::Draw ( int subPrimID, float lod ) {
 				
 			case SP_ATTACHMENT_MESH: {
 				spMeshAttachment *attachment = ( spMeshAttachment* ) slot->attachment;
-				texture = ( MOAITexture* ) (( spAtlasRegion* ) attachment->rendererObject )->page->rendererObject;
+				texture = ( MOAITexture* )(( spAtlasRegion* ) attachment->rendererObject )->page->rendererObject;
 				uvs = attachment->uvs;
 				triangles = attachment->triangles;
 				trianglesCount = attachment->trianglesCount;
@@ -683,7 +681,7 @@ void MOAISpineSkeleton::Draw ( int subPrimID, float lod ) {
 				
 			case SP_ATTACHMENT_SKINNED_MESH: {
 				spSkinnedMeshAttachment *attachment = ( spSkinnedMeshAttachment* ) slot->attachment;
-				texture = ( MOAITexture* ) (( spAtlasRegion* ) attachment->rendererObject )->page->rendererObject;
+				texture = ( MOAITexture* )(( spAtlasRegion* ) attachment->rendererObject )->page->rendererObject;
 				uvs = attachment->uvs;
 				triangles = attachment->triangles;
 				trianglesCount = attachment->trianglesCount;
@@ -700,16 +698,29 @@ void MOAISpineSkeleton::Draw ( int subPrimID, float lod ) {
 				
 			default:
 				continue;
-				break;
 		}
 		
 		gfxDevice.SetTexture ( texture );
 		
-		if ( slot->data->additiveBlending ) {
-			gfxDevice.SetBlendMode ( additive );
-		}
-		else {
-			gfxDevice.SetBlendMode ( normal );
+		if ( blendMode != slot->data->blendMode ) {
+
+			MOAIBlendMode blend;
+			blendMode = slot->data->blendMode;
+
+			switch ( blendMode ) {
+				case SP_BLEND_MODE_ADDITIVE:
+					blend.SetBlend ( MOAIBlendMode::BLEND_ADD );
+					break;
+				case SP_BLEND_MODE_MULTIPLY:
+					blend.SetBlend ( MOAIBlendMode::BLEND_MULTIPLY );
+					break;
+				case SP_BLEND_MODE_SCREEN:
+					blend.SetBlend ( ZGL_BLEND_FACTOR_ONE, ZGL_BLEND_FACTOR_ONE_MINUS_SRC_COLOR );
+					break;
+				default:
+					blend.SetBlend ( MOAIBlendMode::BLEND_NORMAL );
+			}
+			gfxDevice.SetBlendMode ( blend );
 		}
 		
 		a = mSkeleton->a * slot->a * a;
@@ -717,7 +728,7 @@ void MOAISpineSkeleton::Draw ( int subPrimID, float lod ) {
 		g = mSkeleton->g * slot->g * g;
 		b = mSkeleton->b * slot->b * b;
 		
-        // premultiply alpha
+		// premultiply alpha
 		ZLColorVec slotColor (r * a, g * a, b * a, a);
 		ZLColorVec baseColor = this->mColor;
 		slotColor.Modulate ( baseColor );
@@ -725,11 +736,11 @@ void MOAISpineSkeleton::Draw ( int subPrimID, float lod ) {
 		
 		if ( trianglesCount > 0 ) {
 			
-			u32 vtxCount = ( u32 )( mVertices.GetTop () / 2 );
+			u32 vtxTop = mVertices.GetTop ();
 			
-			gfxDevice.BeginPrimIndexed ( ZGL_PRIM_TRIANGLES, vtxCount, trianglesCount );
+			gfxDevice.BeginPrimIndexed ( ZGL_PRIM_TRIANGLES, ( u32 )( vtxTop / 2 ), trianglesCount );
 
-			for ( u32 i = 0; i < mVertices.GetTop (); i += 2 ) {
+			for ( u32 i = 0; i < vtxTop; i += 2 ) {
 				gfxDevice.WriteVtx ( mVertices [ i ], mVertices [ i + 1 ], 0 );
 				gfxDevice.WriteUV ( uvs [ i ], uvs [ i + 1 ] );
 				gfxDevice.WriteFinalColor4b ();
@@ -871,17 +882,17 @@ void MOAISpineSkeleton::OnDepNodeUpdate () {
 //----------------------------------------------------------------//
 u32 MOAISpineSkeleton::OnGetModelBounds ( ZLBox &bounds ) {
 	
-    u32 size = mSkeleton->slotsCount;
-    
-    if ( size == 0) {
-        return MOAIProp::BOUNDS_EMPTY;
-    }
-    
-    if ( this->mComputeBounds ) {
-        this->UpdateBounds ();
-    }
-    bounds.Init ( mSkeletonBounds );
-    return MOAIProp::BOUNDS_OK;
+	u32 size = mSkeleton->slotsCount;
+	
+	if ( size == 0) {
+		return MOAIProp::BOUNDS_EMPTY;
+	}
+	
+	if ( this->mComputeBounds ) {
+		this->UpdateBounds ();
+	}
+	bounds.Init ( mSkeletonBounds );
+	return MOAIProp::BOUNDS_OK;
 }
 
 //----------------------------------------------------------------//
@@ -930,7 +941,7 @@ void MOAISpineSkeleton::RegisterLuaFuncs ( MOAILuaState& state ) {
 		{ "clearTrack", 			_clearTrack },
 		{ "getAttachmentVertices",	_getAttachmentVertices },
 		{ "getBone",				_getBone },
-        { "getDuration",            _getDuration },
+		{ "getDuration",            _getDuration },
 		{ "getSlot",				_getSlot },
 		{ "init", 					_init },
 		{ "initAnimationState", 	_initAnimationState },

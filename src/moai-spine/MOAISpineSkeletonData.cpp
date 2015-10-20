@@ -26,7 +26,7 @@ int MOAISpineSkeletonData::_load ( lua_State* L ) {
 	
 	self->mAtlas = spAtlas_createFromFile ( atlasPath, 0 );
 	if ( !self->mAtlas ) {
-		MOAILog ( state, MOAILogMessages::MOAI_FileNotFound_S, atlasPath );
+		MOAILogF ( state, ZLLog::LOG_ERROR, MOAILogMessages::MOAI_FileNotFound_S, atlasPath );
 		return 0;
 	}
 	
@@ -36,7 +36,7 @@ int MOAISpineSkeletonData::_load ( lua_State* L ) {
 	spSkeletonJson_dispose(json);
 	
 	if ( !self->mSkeletonData ) {
-		MOAILog ( state, MOAILogMessages::MOAI_FileOpenError_S, json->error );
+		MOAILogF ( state, ZLLog::LOG_ERROR, MOAILogMessages::MOAI_FileOpenError_S, json->error );
 		return 0;
 	}
 	

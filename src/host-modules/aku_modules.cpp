@@ -95,6 +95,10 @@ void AKUModulesAppFinalize () {
 		AKUSimAppFinalize ();
 	#endif
 
+	#if AKU_WITH_SPINE
+		AKUSpineAppFinalize ();
+	#endif
+
 	#if AKU_WITH_UNTZ
 		AKUUntzAppFinalize ();
 	#endif
@@ -171,6 +175,10 @@ void AKUModulesAppInitialize () {
 		AKUSimAppInitialize ();
 	#endif
 
+	#if AKU_WITH_SPINE
+		AKUSpineAppInitialize ();
+	#endif
+
 	#if AKU_WITH_UNTZ
 		AKUUntzAppInitialize ();
 	#endif
@@ -245,6 +253,10 @@ void AKUModulesContextInitialize () {
 
 	#if AKU_WITH_SIM
 		AKUSimContextInitialize ();
+	#endif
+
+	#if AKU_WITH_SPINE
+		AKUSpineContextInitialize ();
 	#endif
 
 	#if AKU_WITH_UNTZ
