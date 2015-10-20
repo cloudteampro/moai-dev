@@ -11,6 +11,29 @@
 //================================================================//
 
 //----------------------------------------------------------------//
+/**	@lua	appReceipt
+	@text	Returns json string containing app receipt. Can be used to
+			validate purchases on iOS 7 and above.
+ 
+	@out	string	or nil if not available
+*/
+int MOAIBillingIOS::_appReceipt ( lua_State* L ) {
+	
+	MOAILuaState state ( L );
+	
+	if ( NSFoundationVersionNumber >= NSFoundationVersionNumber_iOS_7_0 ) {
+		
+		NSData* receiptData = [ NSData dataWithContentsOfURL:[[ NSBundle mainBundle ] appStoreReceiptURL ]];
+		if ( receiptData ) {
+			[ receiptData toLua:L ];
+			return 1;
+		}
+	}
+	
+	return 0;
+}
+
+//----------------------------------------------------------------//
 /**	@lua	canMakePayments
 	@text	Determines whether or not the app has permission to 
 			request payments for in-app purchases.
@@ -121,6 +144,7 @@ int MOAIBillingIOS::_setListener ( lua_State* L ) {
 	
 	return 0;
 }
+
 
 //================================================================//
 // MOAIBillingIOS
@@ -334,24 +358,16 @@ void MOAIBillingIOS::PushPaymentTransaction ( lua_State* L, SKPaymentTransaction
 	if ( transaction.transactionState == SKPaymentTransactionStatePurchased ) {
 		
 		lua_pushstring ( L, "transactionReceipt" );
-
-		NSBundle *bundle = [ NSBundle mainBundle ];
-		NSData *receipt = nil;
-		if ([ bundle respondsToSelector:@selector ( appStoreReceiptURL )]) {
-			receipt = [ NSData dataWithContentsOfURL: [ bundle appStoreReceiptURL ]];
-		}
-		else {
-			receipt = transaction.transactionReceipt;
-		}
 		
-		if ( receipt != nil ) {
-			NSString *base64 = [ receipt base64Encoding ];
-			[ base64 toLua:L ];
+		if ( transaction.transactionReceipt != nil ) {
+			
+			[ transaction.transactionReceipt toLua:L ];
 		}
 		else {
+			
 			lua_pushnil ( L );
 		}
-
+		
 		lua_settable ( L, -3 );
 	}
 	
@@ -392,6 +408,7 @@ void MOAIBillingIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "TRANSACTION_STATE_CANCELLED", ( u32 )TRANSACTION_STATE_CANCELLED );
 	
 	luaL_Reg regTable [] = {
+		{ "appReceipt",						_appReceipt },
 		{ "canMakePayments",				_canMakePayments },
 		{ "restoreCompletedTransactions",	_restoreCompletedTransactions },
 		{ "requestPaymentForProduct",		_requestPaymentForProduct },

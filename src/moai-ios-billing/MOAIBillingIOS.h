@@ -35,6 +35,7 @@ class MOAIBillingIOS :
 private:
 
 	//----------------------------------------------------------------//
+	static int	_appReceipt						( lua_State* L );
 	static int	_canMakePayments				( lua_State* L );
 	static int	_restoreCompletedTransactions	( lua_State* L );
 	static int	_requestPaymentForProduct		( lua_State* L );
