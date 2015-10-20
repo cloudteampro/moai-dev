@@ -15,6 +15,22 @@
 //================================================================//
 
 //----------------------------------------------------------------//
+/**	@name	cancelAllLocalNotifications
+	@text	Cancel all scheduled local notifications
+			
+	@out 	nil
+*/
+int MOAINotificationsIOS::_cancelAllLocalNotifications ( lua_State* L ) {
+
+	MOAILuaState state ( L );
+	
+	UIApplication* application = [ UIApplication sharedApplication ];
+	[ application cancelAllLocalNotifications ];
+	
+	return 0;
+}
+
+//----------------------------------------------------------------//
 /**	@lua	getAppIconBadgeNumber
 	@text	Get the current icon badge number.
 				
@@ -32,15 +48,15 @@ int MOAINotificationsIOS::_getAppIconBadgeNumber ( lua_State* L ) {
 
 //----------------------------------------------------------------//
 int MOAINotificationsIOS::_localNotificationInSeconds ( lua_State* L ) {
- 	MOAILuaState state ( L );
- 	
+	MOAILuaState state ( L );
+	
 	int seconds					= state.GetValue < int > ( 1, 0 );
- 	
+	
 	cc8* alertBody				= state.GetValue < cc8* >( 2, 0 );
- 	
- 	UILocalNotification* notification = [[[ UILocalNotification alloc ] init ] autorelease ]; 	
- 	notification.fireDate			= [[ NSDate date ] dateByAddingTimeInterval:seconds ]; 	
- 	notification.alertBody			= [ NSString stringWithUTF8String:alertBody ];
+	
+	UILocalNotification* notification = [[[ UILocalNotification alloc ] init ] autorelease ]; 	
+	notification.fireDate			= [[ NSDate date ] dateByAddingTimeInterval:seconds ]; 	
+	notification.alertBody			= [ NSString stringWithUTF8String:alertBody ];
 	
 	if ( state.IsType ( 3, LUA_TTABLE )) {
 		
@@ -48,13 +64,43 @@ int MOAINotificationsIOS::_localNotificationInSeconds ( lua_State* L ) {
 		[ userInfoDictionary initWithLua:state stackIndex:3 ];
 		notification.userInfo = userInfoDictionary;
 	}
- 	
+	
 	notification.applicationIconBadgeNumber	= 1;
- 	
- 	UIApplication* application = [ UIApplication sharedApplication ];
- 	[ application scheduleLocalNotification:notification ];
- 	
- 	return 0;
+	
+	UIApplication* application = [ UIApplication sharedApplication ];
+	[ application scheduleLocalNotification:notification ];
+	
+	return 0;
+}
+
+//----------------------------------------------------------------//
+/*  @name	registerForNotificationTypes
+	@text	Register to receive local or remote notifications. 
+
+	@in		integer	types		A mask of requested notification types.
+	@out 	boolean result		Returns false on iOS < 8 (no need to call this, use registerForRemoteNotifications)
+*/
+int MOAINotificationsIOS::_registerForNotificationTypes ( lua_State* L ) {
+	
+	MOAILuaState state ( L );
+	
+	bool result = false;
+	UIApplication* application = [ UIApplication sharedApplication ];
+	
+	if ([ application respondsToSelector:@selector ( registerUserNotificationSettings: ) ]) {
+		
+		Class UserNotificationSettings = NSClassFromString(@"UIUserNotificationSettings");
+		if ( UserNotificationSettings != nil ) {
+			
+			UIUserNotificationType types = state.GetValue < u32 >( 1, ( u32 )( UIUserNotificationTypeAlert | UIUserNotificationTypeSound | UIUserNotificationTypeBadge ));
+			id settings = [ UserNotificationSettings settingsForTypes:types categories:nil];
+			[ application registerUserNotificationSettings:settings ];
+			result = true;
+		}
+	}
+	
+	state.Push ( result );
+	return 1;
 }
 
 //----------------------------------------------------------------//
@@ -69,8 +115,13 @@ int MOAINotificationsIOS::_registerForRemoteNotifications ( lua_State* L ) {
 	MOAILuaState state ( L );
 	
 	UIApplication* application = [ UIApplication sharedApplication ];
-	[ application registerForRemoteNotificationTypes:( UIRemoteNotificationType )state.GetValue < u32 >( 1, ( u32 )UIRemoteNotificationTypeNone ) ];
-	
+
+	if ([ application respondsToSelector:@selector ( registerForRemoteNotifications ) ]) {
+		[ application registerForRemoteNotifications ];
+	}
+	else {
+		[ application registerForRemoteNotificationTypes:( UIRemoteNotificationType )state.GetValue < u32 >( 1, ( u32 )UIRemoteNotificationTypeNone ) ];
+	}
 	return 0;
 }
 
@@ -147,17 +198,24 @@ void MOAINotificationsIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "REMOTE_NOTIFICATION_SOUND",					( u32 )UIRemoteNotificationTypeSound );
 	state.SetField ( -1, "REMOTE_NOTIFICATION_ALERT",					( u32 )UIRemoteNotificationTypeAlert );
 
+	state.SetField ( -1, "USER_NOTIFICATION_NONE",						( u32 )UIUserNotificationTypeNone );
+	state.SetField ( -1, "USER_NOTIFICATION_BADGE",						( u32 )UIUserNotificationTypeBadge );
+	state.SetField ( -1, "USER_NOTIFICATION_SOUND",						( u32 )UIUserNotificationTypeSound );
+	state.SetField ( -1, "USER_NOTIFICATION_ALERT",						( u32 )UIUserNotificationTypeAlert );
+
 	state.SetField ( -1, "LOCAL_NOTIFICATION_MESSAGE_RECEIVED", 		( u32 )LOCAL_NOTIFICATION_MESSAGE_RECEIVED );
 	state.SetField ( -1, "REMOTE_NOTIFICATION_REGISTRATION_COMPLETE", 	( u32 )REMOTE_NOTIFICATION_REGISTRATION_COMPLETE );
 	state.SetField ( -1, "REMOTE_NOTIFICATION_MESSAGE_RECEIVED", 		( u32 )REMOTE_NOTIFICATION_MESSAGE_RECEIVED );
-        
+		
 	state.SetField ( -1, "REMOTE_NOTIFICATION_RESULT_REGISTERED", 		( u32 )REMOTE_NOTIFICATION_RESULT_REGISTERED );
 	state.SetField ( -1, "REMOTE_NOTIFICATION_RESULT_UNREGISTERED", 	( u32 )REMOTE_NOTIFICATION_RESULT_UNREGISTERED );
 	state.SetField ( -1, "REMOTE_NOTIFICATION_RESULT_ERROR", 			( u32 )REMOTE_NOTIFICATION_RESULT_ERROR );
 	
 	luaL_Reg regTable [] = {
+		{ "cancelAllLocalNotifications",		_cancelAllLocalNotifications },
 		{ "getAppIconBadgeNumber",				_getAppIconBadgeNumber },
 		{ "localNotificationInSeconds",			_localNotificationInSeconds },
+		{ "registerForNotificationTypes",		_registerForNotificationTypes },
 		{ "registerForRemoteNotifications",		_registerForRemoteNotifications },
 		{ "setAppIconBadgeNumber",				_setAppIconBadgeNumber },
 		{ "setListener",						_setListener },
@@ -171,19 +229,19 @@ void MOAINotificationsIOS::RegisterLuaClass ( MOAILuaState& state ) {
 //----------------------------------------------------------------//
 void MOAINotificationsIOS::NotifyLocalNotificationReceived ( UILocalNotification* notification ) {
  
- 	MOAILuaRef& callback = this->mListeners [ LOCAL_NOTIFICATION_MESSAGE_RECEIVED ];
- 	
- 	if ( callback ) {
- 		MOAIScopedLuaState state = callback.GetSelf ();
- 		
- 		NSDictionary* userInfo = notification.userInfo;
- 		if ( userInfo ) {
+	MOAILuaRef& callback = this->mListeners [ LOCAL_NOTIFICATION_MESSAGE_RECEIVED ];
+	
+	if ( callback ) {
+		MOAIScopedLuaState state = callback.GetSelf ();
+		
+		NSDictionary* userInfo = notification.userInfo;
+		if ( userInfo ) {
 
 			[ userInfo toLua:state ];
- 		}
- 		
- 		state.DebugCall ( 1, 0 );
- 	}
+		}
+		
+		state.DebugCall ( 1, 0 );
+	}
 }
 
 //----------------------------------------------------------------//

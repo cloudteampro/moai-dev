@@ -36,8 +36,10 @@ class MOAINotificationsIOS :
 private:
 
 	//----------------------------------------------------------------//
+	static int	_cancelAllLocalNotifications		( lua_State* L );
 	static int	_getAppIconBadgeNumber				( lua_State* L );
 	static int	_localNotificationInSeconds			( lua_State* L );
+	static int	_registerForNotificationTypes		( lua_State* L );
 	static int	_registerForRemoteNotifications		( lua_State* L );
 	static int	_setAppIconBadgeNumber				( lua_State* L );
 	static int	_setListener						( lua_State* L );
