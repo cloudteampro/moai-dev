@@ -13,7 +13,7 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
 
-@class MOAIFBGameRequestDialogDelegate;
+@class MOAIFBSDKDelegate;
 
 //================================================================//
 // MOAIFacebookIOS
@@ -35,13 +35,14 @@ class MOAIFacebookIOS :
 	public MOAIGlobalClass < MOAIFacebookIOS, MOAIGlobalEventSource > {
 private:
 
-	MOAILuaRefTable						mRefs;
-	MOAIFBGameRequestDialogDelegate*	mGameRequestDelegate;
+	MOAILuaRefTable				mRefs;
+	MOAIFBSDKDelegate*			mDelegate;
 	
 	//----------------------------------------------------------------//
 	static int		_declinedPermissions		( lua_State* L );
 //	static int		_extendToken				( lua_State* L );
 	static int		_getExpirationDate			( lua_State* L );
+	static int		_getProfile					( lua_State* L );
 	static int		_getToken					( lua_State* L );
 	static int		_graphRequest				( lua_State* L );
 	static int		_hasGranted					( lua_State* L );
@@ -55,6 +56,7 @@ private:
 	static int		_requestReadPermissions		( lua_State* L );
 	static int		_sendGameRequest			( lua_State* L );
 	static int		_sessionValid				( lua_State* L );
+	static int		_setProfileAutoUpdate		( lua_State* L );
 
 public:
 	
@@ -65,6 +67,7 @@ public:
 		DIALOG_DID_NOT_COMPLETE,
 		PERMISSIONS_DENIED,
 		PERMISSIONS_GRANTED,
+		PROFILE_UPDATED,
 		REQUEST_RESPONSE,
 		REQUEST_RESPONSE_FAILED,
 		REQUEST_DIALOG_DID_COMPLETE,
@@ -72,7 +75,7 @@ public:
 		REQUEST_DIALOG_DID_CANCEL,
 		SESSION_DID_LOGIN,
 		SESSION_DID_NOT_LOGIN,
-		SESSION_EXTENDED
+		SESSION_EXTENDED,
 	};
 	
 	//----------------------------------------------------------------//
@@ -88,8 +91,10 @@ public:
 	void		Logout							();
 				MOAIFacebookIOS					();
 				~MOAIFacebookIOS				();
+	void		NotifyProfileChanged			( FBSDKProfile* profile );
 	void		PermissionsDenied				( NSString* error );
 	void		PermissionsGranted				();
+	void		PushProfile						( MOAILuaState& state, FBSDKProfile* profile );
 	void		RegisterLuaClass				( MOAILuaState& state );
 	void		SessionDidLogin					();
 	void		SessionDidNotLogin				();

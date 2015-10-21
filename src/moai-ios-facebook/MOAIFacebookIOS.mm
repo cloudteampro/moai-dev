@@ -8,19 +8,6 @@
 #import <moai-ios-facebook/MOAIFacebookIOS.h>
 
 //================================================================//
-// Little helper to avoid no-op behavior when sending messages to nil.
-// TODO: Naming; Macro? Move that into NSObject+MOAILib?
-//================================================================//
-static void nsObjToLua ( id obj, lua_State* state ) {
-	if ( obj == nil ) {
-		lua_pushnil ( state );
-	}
-	else {
-		[ obj toLua:state ];
-	}
-}
-
-//================================================================//
 // MOAIFacebookLuaCallback
 //================================================================//
 //
@@ -36,13 +23,14 @@ static void nsObjToLua ( id obj, lua_State* state ) {
 //----------------------------------------------------------------//
 -( id )	initWithRef :( int )ref;
 -( int ) ref;
+
 @end
 
 
 //================================================================//
-// MOAIFBGameRequestDialogDelegate
+// MOAIFBSDKDelegate
 //================================================================//
-@interface MOAIFBGameRequestDialogDelegate : NSObject < FBSDKGameRequestDialogDelegate > {
+@interface MOAIFBSDKDelegate : NSObject < FBSDKGameRequestDialogDelegate > {
 @private
 }
 
@@ -50,6 +38,10 @@ static void nsObjToLua ( id obj, lua_State* state ) {
 - ( void ) gameRequestDialog:( FBSDKGameRequestDialog* ) gameRequestDialog didCompleteWithResults:( NSDictionary* ) results;
 - ( void ) gameRequestDialog:( FBSDKGameRequestDialog* ) gameRequestDialog didFailWithError:( NSError* ) error;
 - ( void ) gameRequestDialogDidCancel:( FBSDKGameRequestDialog* ) gameRequestDialog;
+
+//----------------------------------------------------------------//
+- ( void ) onProfileChanged:( NSNotification* ) notification;
+
 @end
 
 
@@ -111,6 +103,20 @@ int MOAIFacebookIOS::_getToken ( lua_State* L ) {
 		lua_pushnil ( L );
 	}
 	
+	return 1;
+}
+
+//----------------------------------------------------------------//
+/**	@lua	getProfile
+	@text	Retrieve the current public profile info
+	
+	@in		nil
+	@out	table	Table with user info. Keys
+*/
+int MOAIFacebookIOS::_getProfile ( lua_State* L ) {
+	MOAI_LUA_SETUP_SINGLE ( MOAIFacebookIOS, "" )
+	
+	self->PushProfile ( state, [ FBSDKProfile currentProfile ]);
 	return 1;
 }
 
@@ -180,13 +186,13 @@ int MOAIFacebookIOS::_hasGranted ( lua_State* L ) {
 /**	@lua	init
 	@text	Initialize Facebook.
 
-	@in		string	loginAppId		Available in Facebook developer settings.
+	@in		string		loginAppId			Available in Facebook developer settings.
 	@out 	nil
 */
 int MOAIFacebookIOS::_init ( lua_State* L ) {
 	MOAI_LUA_SETUP_SINGLE ( MOAIFacebookIOS, "" )
 	
-	[ FBSDKSettings setAppID:[ NSString stringWithUTF8String:state.GetValue < cc8* >( 1, "" )]];
+	[ FBSDKSettings setAppID:[ NSString stringWithUTF8String:state.GetValue < cc8* >( 1, "" )]];	
 	return 0;
 }
 
@@ -475,7 +481,7 @@ int MOAIFacebookIOS::_sendGameRequest ( lua_State* L ) {
 	}
 	
 	FBSDKGameRequestDialog* dialog = [[[ FBSDKGameRequestDialog alloc ] init ] autorelease ];
-	[ dialog setDelegate: self->mGameRequestDelegate ];
+	[ dialog setDelegate: self->mDelegate ];
     [ dialog setContent: content ];
     [ dialog setFrictionlessRequestsEnabled: frictionless ];
 	[ content release ];
@@ -487,7 +493,7 @@ int MOAIFacebookIOS::_sendGameRequest ( lua_State* L ) {
 	}
 	else {
 		state.Push ( false );
-		nsObjToLua ( error, state );
+		OBJC_TO_LUA ( error, state );
 		return 2;
 	}
 }
@@ -505,6 +511,22 @@ int MOAIFacebookIOS::_sessionValid ( lua_State* L ) {
 	lua_pushboolean ( state, [ FBSDKAccessToken currentAccessToken ] != nil );
 	return 1;
 }
+
+//----------------------------------------------------------------//
+/**	@lua	setProfileAutoUpdate
+	@text	FB SDK will issue graph request for public profile data when
+			access token changes and dispatch PROFILE_UPDATED with new profile.
+ 
+	@in		boolean		enabled		default if false
+	@out 	nil
+*/
+int MOAIFacebookIOS::_setProfileAutoUpdate ( lua_State* L ) {
+	MOAI_LUA_SETUP_SINGLE ( MOAIFacebookIOS, "" )
+	
+	BOOL enable = state.GetValue < bool >( 1, false );
+	[ FBSDKProfile enableUpdatesOnAccessTokenChange: enable ];
+	return 0;
+}
 	
 //================================================================//
 // MOAIFacebookIOS
@@ -516,14 +538,21 @@ MOAIFacebookIOS::MOAIFacebookIOS () {
 	RTTI_SINGLE ( MOAIGlobalEventSource )
 
 	mRefs.InitStrong ();
-	mGameRequestDelegate = [[ MOAIFBGameRequestDialogDelegate alloc ] init ];
+	mDelegate = [[ MOAIFBSDKDelegate alloc ] init ];
+	
+	[[ NSNotificationCenter defaultCenter ] addObserver:mDelegate
+											   selector:@selector ( onProfileChanged: )
+												   name:FBSDKProfileDidChangeNotification
+												 object:nil ];
 }
 
 //----------------------------------------------------------------//
 MOAIFacebookIOS::~MOAIFacebookIOS () {
 	
 	mRefs.Clear ();
-	[ mGameRequestDelegate release ];
+	
+	[[ NSNotificationCenter defaultCenter ] removeObserver:mDelegate ];
+	[ mDelegate release ];
 }
 
 //----------------------------------------------------------------//
@@ -602,7 +631,7 @@ void MOAIFacebookIOS::RegisterLuaClass ( MOAILuaState& state ) {
 //----------------------------------------------------------------//
 void MOAIFacebookIOS::ClearCallbackRef ( int ref ) {
 	
-	if ( ref != LUA_NOREF ) {
+	if ( MOAILuaRuntime::IsValid () && ref != LUA_NOREF ) {
 		this->mRefs.Unref ( ref );
 	}
 }
@@ -610,44 +639,40 @@ void MOAIFacebookIOS::ClearCallbackRef ( int ref ) {
 //----------------------------------------------------------------//
 void MOAIFacebookIOS::DialogDidNotComplete () {
 	
-	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-	
-	if ( this->PushListener ( DIALOG_DID_NOT_COMPLETE, state )) {
-		state.DebugCall ( 0, 0 );
-	}
+	this->InvokeListener ( DIALOG_DID_NOT_COMPLETE );
 }
 
 //----------------------------------------------------------------//
 void MOAIFacebookIOS::DialogDidComplete () {
-		
-	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-	
-	if ( this->PushListener ( DIALOG_DID_COMPLETE, state )) {
-		state.DebugCall ( 0, 0 );
-	}
+
+	this->InvokeListener ( DIALOG_DID_COMPLETE );
 }
 
 //----------------------------------------------------------------//
 void MOAIFacebookIOS::GameRequestDialogDidComplete ( NSDictionary* results ) {
 	
-	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-	
-	if ( this->PushListener ( REQUEST_DIALOG_DID_COMPLETE, state )) {
+	if ( MOAILuaRuntime::IsValid ()) {
 		
-		nsObjToLua ( results, state );
-		state.DebugCall ( 1, 0 );
+		MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
+		
+		if ( this->PushListener ( REQUEST_DIALOG_DID_COMPLETE, state )) {
+			OBJC_TO_LUA ( results, state );
+			state.DebugCall ( 1, 0 );
+		}
 	}
 }
 
 //----------------------------------------------------------------//
 void MOAIFacebookIOS::GameRequestDialogDidFail ( NSError* error ) {
 	
-	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-	
-	if ( this->PushListener ( REQUEST_DIALOG_DID_FAIL, state )) {
+	if ( MOAILuaRuntime::IsValid ()) {
 		
-		nsObjToLua ( error, state );
-		state.DebugCall ( 1, 0 );
+		MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
+		
+		if ( this->PushListener ( REQUEST_DIALOG_DID_FAIL, state )) {
+			OBJC_TO_LUA ( error, state );
+			state.DebugCall ( 1, 0 );
+		}
 	}
 }
 
@@ -659,6 +684,8 @@ void MOAIFacebookIOS::GameRequestDialogDidCancel () {
 
 //----------------------------------------------------------------//
 void MOAIFacebookIOS::GraphRequestResponse ( id result, int ref ) {
+
+	if ( !MOAILuaRuntime::IsValid ()) return;
 	
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 	
@@ -672,13 +699,15 @@ void MOAIFacebookIOS::GraphRequestResponse ( id result, int ref ) {
 	if ( state.IsType ( -1, LUA_TFUNCTION )) {
 		
 		state.Push ( true );
-		nsObjToLua ( result, state );
+		OBJC_TO_LUA ( result, state );
 		state.DebugCall ( 2, 0 );
 	}
 }
 
 //----------------------------------------------------------------//
 void MOAIFacebookIOS::GraphRequestResponseFailure ( NSError* error, int ref ) {
+	
+	if ( !MOAILuaRuntime::IsValid ()) return;
 	
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 	
@@ -692,19 +721,35 @@ void MOAIFacebookIOS::GraphRequestResponseFailure ( NSError* error, int ref ) {
 	if ( state.IsType ( -1, LUA_TFUNCTION )) {
 		
 		state.Push ( false );
-		nsObjToLua ( error, state );
+		OBJC_TO_LUA ( error, state );
 		state.DebugCall ( 2, 0 );
 	}
 }
 
 //----------------------------------------------------------------//
+void MOAIFacebookIOS::NotifyProfileChanged ( FBSDKProfile* profile ) {
+	
+	if ( !MOAILuaRuntime::IsValid ()) return;
+	
+	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
+	
+	if ( this->PushListener ( PROFILE_UPDATED, state )) {
+		
+		this->PushProfile	( state, profile );
+		state.DebugCall		( 1, 0);
+	}
+}
+
+//----------------------------------------------------------------//
 void MOAIFacebookIOS::PermissionsDenied ( NSString *error ) {
+
+	if ( !MOAILuaRuntime::IsValid ()) return;
 	
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 	
 	if ( this->PushListener ( PERMISSIONS_DENIED, state )) {
 		
-		nsObjToLua ( error, state );
+		OBJC_TO_LUA ( error, state );
 		state.DebugCall ( 1, 0 );
 	}
 }
@@ -712,36 +757,65 @@ void MOAIFacebookIOS::PermissionsDenied ( NSString *error ) {
 //----------------------------------------------------------------//
 void MOAIFacebookIOS::PermissionsGranted () {
 	
-	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
+	this->InvokeListener ( PERMISSIONS_GRANTED );
+}
+
+//----------------------------------------------------------------//
+void MOAIFacebookIOS::PushProfile ( MOAILuaState& state, FBSDKProfile* profile ) {
 	
-	if ( this->PushListener ( PERMISSIONS_GRANTED, state )) {
+	lua_newtable ( state );
+	
+	if ( profile != nil ) {
 		
-		state.DebugCall ( 0, 0 );
+		if ( profile.userID ) {
+			state.SetField ( -1, "userID", [ profile.userID UTF8String ]);
+		}
+		
+		if ( profile.firstName ) {
+			state.SetField ( -1, "firstName", [ profile.firstName UTF8String ]);
+		}
+		
+		if ( profile.middleName ) {
+			state.SetField ( -1, "middleName", [ profile.middleName UTF8String ]);
+		}
+		
+		if ( profile.lastName ) {
+			state.SetField ( -1, "lastName", [ profile.lastName UTF8String ]);
+		}
+		
+		if ( profile.name ) {
+			state.SetField ( -1, "name", [ profile.name UTF8String ]);
+		}
+		
+		if ( profile.linkURL ) {
+			state.SetField ( -1, "linkURL", [[ profile.linkURL absoluteString ] UTF8String ]);
+		}
+		
+		if ( profile.refreshDate ) {
+			
+			lua_pushstring ( state, "refreshDate" );
+			[ profile.refreshDate toLua:state ];
+			lua_settable ( state, -3 );
+		}
 	}
 }
 
 //----------------------------------------------------------------//
 void MOAIFacebookIOS::SessionDidLogin () {
 	
-	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-	
-	if ( this->PushListener ( SESSION_DID_LOGIN, state )) {
-		state.DebugCall ( 0, 0 );
-	}
+	this->InvokeListener ( SESSION_DID_LOGIN );
 }
 
 //----------------------------------------------------------------//
 void MOAIFacebookIOS::SessionDidNotLogin () {
 	
-	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-	
-	if ( this->PushListener ( SESSION_DID_NOT_LOGIN, state )) {
-		state.DebugCall ( 0, 0 );
-	}
+	this->InvokeListener ( SESSION_DID_NOT_LOGIN );
 }
 
 //----------------------------------------------------------------//
 void MOAIFacebookIOS::SessionExtended ( cc8* token, cc8* expDate ) {
+	
+	if ( !MOAILuaRuntime::IsValid ()) return;
 	
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 	
@@ -786,9 +860,9 @@ void MOAIFacebookIOS::SessionExtended ( cc8* token, cc8* expDate ) {
 @end
 
 //================================================================//
-// MOAIFBGameRequestDialogDelegate
+// MOAIFBSDKDelegate
 //================================================================//
-@implementation MOAIFBGameRequestDialogDelegate
+@implementation MOAIFBSDKDelegate
 
 //----------------------------------------------------------------//
 - ( void ) gameRequestDialog:( FBSDKGameRequestDialog* ) gameRequestDialog didCompleteWithResults:( NSDictionary* ) results {
@@ -796,14 +870,29 @@ void MOAIFacebookIOS::SessionExtended ( cc8* token, cc8* expDate ) {
 	MOAIFacebookIOS::Get ().GameRequestDialogDidComplete ( results );
 }
 
+//----------------------------------------------------------------//
 - ( void ) gameRequestDialog:( FBSDKGameRequestDialog* ) gameRequestDialog didFailWithError:( NSError* ) error {
 
 	MOAIFacebookIOS::Get ().GameRequestDialogDidFail ( error );
 }
 
+//----------------------------------------------------------------//
 - ( void ) gameRequestDialogDidCancel:( FBSDKGameRequestDialog* ) gameRequestDialog {
 
 	MOAIFacebookIOS::Get ().GameRequestDialogDidCancel ();
+}
+
+//----------------------------------------------------------------//
+- ( void ) onProfileChanged:( NSNotification* ) notification {
+	
+	if ([ FBSDKAccessToken currentAccessToken ]) {
+		
+		FBSDKProfile* profile = ( FBSDKProfile* )[[ notification userInfo ] objectForKey:FBSDKProfileChangeNewKey ];
+		
+		if ( MOAIFacebookIOS::IsValid ()) {
+			MOAIFacebookIOS::Get ().NotifyProfileChanged ( profile );
+		}
+	}
 }
 
 @end
