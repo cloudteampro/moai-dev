@@ -76,15 +76,14 @@ int MOAINotificationsIOS::_localNotificationInSeconds ( lua_State* L ) {
 //----------------------------------------------------------------//
 /*  @name	registerForNotificationTypes
 	@text	Register to receive local or remote notifications. 
-
+	
 	@in		integer	types		A mask of requested notification types.
-	@out 	boolean result		Returns false on iOS < 8 (no need to call this, use registerForRemoteNotifications)
+	@out 	nil
 */
 int MOAINotificationsIOS::_registerForNotificationTypes ( lua_State* L ) {
 	
 	MOAILuaState state ( L );
 	
-	bool result = false;
 	UIApplication* application = [ UIApplication sharedApplication ];
 	
 	if ([ application respondsToSelector:@selector ( registerUserNotificationSettings: ) ]) {
@@ -92,22 +91,21 @@ int MOAINotificationsIOS::_registerForNotificationTypes ( lua_State* L ) {
 		Class UserNotificationSettings = NSClassFromString(@"UIUserNotificationSettings");
 		if ( UserNotificationSettings != nil ) {
 			
-			UIUserNotificationType types = state.GetValue < u32 >( 1, ( u32 )( UIUserNotificationTypeAlert | UIUserNotificationTypeSound | UIUserNotificationTypeBadge ));
+			UIUserNotificationType types = state.GetValue < u32 >( 1, ( u32 )UIUserNotificationTypeNone );
 			id settings = [ UserNotificationSettings settingsForTypes:types categories:nil];
 			[ application registerUserNotificationSettings:settings ];
-			result = true;
 		}
 	}
 	
-	state.Push ( result );
-	return 1;
+	return 0;
 }
 
 //----------------------------------------------------------------//
 /**	@lua	registerForRemoteNotifications
 	@text	Register to receive remote notifications.
 			
-	@in		integer	types			A mask of requested notification types. See Apple documentation.
+	@in		integer	types		A mask of requested notification types. See Apple documentation.
+								Ignored on iOS 8 and above - use registerForNotificationTypes first.
 	@out 	nil
 */
 int MOAINotificationsIOS::_registerForRemoteNotifications ( lua_State* L ) {
