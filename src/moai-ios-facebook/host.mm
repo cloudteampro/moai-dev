@@ -20,6 +20,7 @@ void AKUIosFacebookAppInitialize () {
 
 //----------------------------------------------------------------//
 void AKUIosFacebookApplicationDidBecomeActive ( UIApplication* application ) {
+	UNUSED ( application );
 	
 	[ FBSDKAppEvents activateApp ];
 }

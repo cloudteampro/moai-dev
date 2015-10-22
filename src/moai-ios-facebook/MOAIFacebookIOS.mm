@@ -251,12 +251,15 @@ int MOAIFacebookIOS::_logPurchase ( lua_State *L ) {
 //----------------------------------------------------------------//
 /**	@lua	login
 	@text	Prompt the user to login to Facebook.
- 
-	@opt	table	permissions		Optional set of required permissions. See Facebook documentation for a full list. Default is nil.
+	
+	@opt	table	permissions		Optional set of read permissions. See Facebook documentation for a full list. Default is nil.
+	@opt	number	loginBehavior	See Facebook documentation. Default is LOGIN_NATIVE
 	@out 	nil
 */
 int MOAIFacebookIOS::_login ( lua_State* L ) {
 	MOAI_LUA_SETUP_SINGLE ( MOAIFacebookIOS, "" )
+	
+	FBSDKLoginBehavior loginBehavior = state.GetValue < u32 >( 2, FBSDKLoginBehaviorNative );
 	
 	NSMutableDictionary* paramsDict = [[ NSMutableDictionary alloc ] init ];
 	if ( state.IsType ( 1, LUA_TTABLE )) {
@@ -265,7 +268,12 @@ int MOAIFacebookIOS::_login ( lua_State* L ) {
 	NSArray* paramsArray = [ paramsDict allValues ];
 	
 	FBSDKLoginManager* login = [[ FBSDKLoginManager alloc] init ];
-	[ login logInWithReadPermissions:paramsArray handler:^( FBSDKLoginManagerLoginResult *result, NSError *error ) {
+	login.loginBehavior = loginBehavior;
+	
+	UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
+	UIViewController* rootVC = [ window rootViewController ];
+	
+	[ login logInWithReadPermissions:paramsArray fromViewController:rootVC handler:^( FBSDKLoginManagerLoginResult *result, NSError *error ) {
 	
 		if ( error ) {
 			self->SessionDidNotLogin ();
@@ -363,9 +371,11 @@ int MOAIFacebookIOS::_requestPublishPermissions( lua_State *L ) {
 		[ requested removeObjectsInArray:granted];
 		
 		if ([ requested count ] > 0 ) {
-			FBSDKLoginManager* login = [[ FBSDKLoginManager alloc] init ];
+			UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
+			UIViewController* rootVC = [ window rootViewController ];
 			
-			[ login logInWithPublishPermissions:requested handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+			FBSDKLoginManager* login = [[ FBSDKLoginManager alloc] init ];
+			[ login logInWithPublishPermissions:requested fromViewController:rootVC handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
 				
 				if ( !error && [[ result declinedPermissions ] count ] == 0 ) {
 					MOAIFacebookIOS::Get ().PermissionsGranted ();
@@ -407,9 +417,11 @@ int MOAIFacebookIOS::_requestReadPermissions( lua_State *L ) {
 		[ requested removeObjectsInArray:granted];
 		
 		if ([ requested count ] > 0 ) {
-			FBSDKLoginManager* login = [[ FBSDKLoginManager alloc] init ];
+			UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
+			UIViewController* rootVC = [ window rootViewController ];
 			
-			[ login logInWithReadPermissions:requested handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+			FBSDKLoginManager* login = [[ FBSDKLoginManager alloc] init ];
+			[ login logInWithReadPermissions:requested fromViewController:rootVC handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
 				
 				if ( !error && [[ result declinedPermissions ] count ] == 0 ) {
 					MOAIFacebookIOS::Get ().PermissionsGranted ();
@@ -578,6 +590,7 @@ MOAIFacebookIOS::~MOAIFacebookIOS () {
 //----------------------------------------------------------------//
 void MOAIFacebookIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	
+	// Events
 	state.SetField ( -1, "DIALOG_DID_COMPLETE", 		( u32 )DIALOG_DID_COMPLETE );
 	state.SetField ( -1, "DIALOG_DID_NOT_COMPLETE",		( u32 )DIALOG_DID_NOT_COMPLETE );
 	state.SetField ( -1, "PERMISSIONS_DENIED",			( u32 )PERMISSIONS_DENIED );
@@ -591,17 +604,24 @@ void MOAIFacebookIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "SESSION_DID_NOT_LOGIN", 		( u32 )SESSION_DID_NOT_LOGIN );
 	state.SetField ( -1, "SESSION_EXTENDED",			( u32 )SESSION_EXTENDED );
 	
-
+	// Login behaviors
+	state.SetField ( -1, "LOGIN_NATIVE",				( u32 )FBSDKLoginBehaviorNative );
+	state.SetField ( -1, "LOGIN_BROWSER",				( u32 )FBSDKLoginBehaviorBrowser );
+	state.SetField ( -1, "LOGIN_SYSTEM_ACCOUNT",		( u32 )FBSDKLoginBehaviorSystemAccount );
+	state.SetField ( -1, "LOGIN_WEB",					( u32 )FBSDKLoginBehaviorWeb );
+	
+	// Game request action types
 	state.SetField ( -1, "ACTION_NONE", 				( u32 )FBSDKGameRequestActionTypeNone );
 	state.SetField ( -1, "ACTION_SEND", 				( u32 )FBSDKGameRequestActionTypeSend );
 	state.SetField ( -1, "ACTION_ASK_FOR", 				( u32 )FBSDKGameRequestActionTypeAskFor );
 	state.SetField ( -1, "ACTION_TURN", 				( u32 )FBSDKGameRequestActionTypeTurn );
-
+	
+	// Game request filters
 	state.SetField ( -1, "FILTER_NONE", 				( u32 )FBSDKGameRequestFilterNone );
 	state.SetField ( -1, "FILTER_APP_USERS", 			( u32 )FBSDKGameRequestFilterAppUsers );
 	state.SetField ( -1, "FILTER_APP_NON_USERS", 		( u32 )FBSDKGameRequestFilterAppNonUsers );
-
 	
+	// Analytics predefined event names
 	state.SetField ( -1, "NAME_ACHIEVED_LEVEL",			[ FBSDKAppEventNameAchievedLevel 			UTF8String ]);
 	state.SetField ( -1, "NAME_ADDED_PAYMENT_INFO",		[ FBSDKAppEventNameAddedPaymentInfo 		UTF8String ]);
 	state.SetField ( -1, "NAME_ADDED_TO_CART",			[ FBSDKAppEventNameAddedToCart 				UTF8String ]);
@@ -615,6 +635,7 @@ void MOAIFacebookIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "NAME_UNLOCKED_ACHIEVEMENT",	[ FBSDKAppEventNameUnlockedAchievement 		UTF8String ]);
 	state.SetField ( -1, "NAME_VIEWED_CONTENT",			[ FBSDKAppEventNameViewedContent 			UTF8String ]);
 
+	// Analytics predefined event parameters names
 	state.SetField ( -1, "PARAMETER_NAME_CONTENT_ID",				[ FBSDKAppEventParameterNameContentID 				UTF8String ]);
 	state.SetField ( -1, "PARAMETER_NAME_CONTENT_TYPE",				[ FBSDKAppEventParameterNameContentType 			UTF8String ]);
 	state.SetField ( -1, "PARAMETER_NAME_CURRENCY",					[ FBSDKAppEventParameterNameCurrency 				UTF8String ]);
@@ -626,7 +647,8 @@ void MOAIFacebookIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "PARAMETER_NAME_REGISTRATION_METHOD",		[ FBSDKAppEventParameterNameRegistrationMethod 		UTF8String ]);
 	state.SetField ( -1, "PARAMETER_NAME_SEARCH_STRING",			[ FBSDKAppEventParameterNameSearchString 			UTF8String ]);
 	state.SetField ( -1, "PARAMETER_NAME_SUCCESS",					[ FBSDKAppEventParameterNameSuccess 				UTF8String ]);
-	
+
+	// Analytics predefined event parameters values
 	state.SetField ( -1, "PARAMETER_VALUE_NO",			[ FBSDKAppEventParameterValueNo 	UTF8String ]);
 	state.SetField ( -1, "PARAMETER_VALUE_YES",			[ FBSDKAppEventParameterValueYes 	UTF8String ]);
 
