@@ -24,9 +24,13 @@ STLString ZLUnique::GetGUID () {
 		CFUUIDRef uuid = CFUUIDCreate( NULL );
 		CFStringRef guid = CFUUIDCreateString ( NULL, uuid );
 		CFRelease ( uuid );
-		STLString result = CFStringGetCStringPtr ( guid, kCFStringEncodingUTF8 );
+		const char* output = CFStringGetCStringPtr ( guid, kCFStringEncodingUTF8 );
+		if ( output == NULL ) {
+			output = CFStringGetCStringPtr ( guid, kCFStringEncodingMacRoman );
+		}
+		STLString result ( output );
 		CFRelease ( guid );
-		
+	
 		return result;
 	#else
 		kashmir::system::DevRand devrandom;
