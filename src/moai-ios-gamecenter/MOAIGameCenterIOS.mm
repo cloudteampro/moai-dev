@@ -163,7 +163,6 @@ int MOAIGameCenterIOS::_isAuthenticated ( lua_State* L ) {
 	
 	MOAILuaState state ( L );
 	
-	GKLocalPlayer* player = [ GKLocalPlayer localPlayer ];
 	lua_pushboolean ( state, [ GKLocalPlayer localPlayer ].isAuthenticated == YES );
 	
 	return 1;
