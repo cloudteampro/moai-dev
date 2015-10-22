@@ -9,6 +9,7 @@
 
 @class MOAIGameCenterIOSLeaderboardDelegate;
 @class MOAIGameCenterIOSAchievementDelegate;
+@class MOAIGameCenterIOSGameCenterDelegate;
 
 //================================================================//
 // MOAIGameCenterIOS
@@ -30,12 +31,14 @@ private:
 	//----------------------------------------------------------------//
 	static int	_authenticatePlayer			( lua_State* L );
 	static int	_getPlayerAlias				( lua_State* L );
+	static int	_getPlayerId				( lua_State* L );
 	static int	_getScores					( lua_State* L );
 	static int	_isAuthenticated			( lua_State* L );
 	static int	_isSupported				( lua_State* L );
 	static int	_reportAchievementProgress	( lua_State* L );
 	static int	_reportScore				( lua_State* L );
 	static int	_setGetScoresCallback		( lua_State* L );
+	static int	_showGameCenter				( lua_State* L );
 	static int	_showDefaultAchievements	( lua_State* L );
 	static int	_showDefaultLeaderboard		( lua_State* L );
 	
@@ -58,6 +61,7 @@ public:
 	BOOL									mIsGameCenterSupported;
 	MOAIGameCenterIOSLeaderboardDelegate*	mLeaderboardDelegate;
 	MOAIGameCenterIOSAchievementDelegate*	mAchievementDelegate;
+	MOAIGameCenterIOSGameCenterDelegate*	mGameCenterDelegate;
 	NSMutableDictionary*        			mAchievementsDictionary;
 	GKLocalPlayer*							mLocalPlayer;
 	
@@ -86,6 +90,14 @@ public:
 // MOAIGameCenterIOSAchievementDelegate
 //================================================================//
 @interface MOAIGameCenterIOSAchievementDelegate : NSObject < GKAchievementViewControllerDelegate > {
+@private
+}
+@end
+
+//================================================================//
+// MOAIGameCenterIOSGameCenterDelegate
+//================================================================//
+@interface MOAIGameCenterIOSGameCenterDelegate : NSObject < GKGameCenterControllerDelegate > {
 @private
 }
 @end
