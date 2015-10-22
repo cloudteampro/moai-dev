@@ -61,6 +61,11 @@ endif ( MOAI_LUAEXT OR LIB_PATH)
 #audiosampler
   target_link_libraries ( host-modules moai-audiosampler)
 
+#Spine
+if ( MOAI_SPINE OR LIB_PATH)
+  target_link_libraries ( host-modules moai-spine )
+endif ( MOAI_SPINE OR LIB_PATH)
+
 if ( MOAI_IMAGE_JPG OR LIB_PATH)
   target_link_libraries ( host-modules moai-image-jpg )
 endif ()
