@@ -7,15 +7,22 @@
 #import <moai-ios/headers.h>
 #import <moai-ios-facebook/MOAIFacebookIOS.h>
 
+// This is for gameRequest callback support
+#import <objc/runtime.h>
+
+// Key for objc_setAssociatedObject
+static const char kGameRequestCallbackRef = 0;
+
+
 //================================================================//
-// MOAIFacebookLuaCallback
+// MOAIFacebookLuaCallbackRef
 //================================================================//
 //
 // This class is for use with async objective-C block callbacks.
 // It should be retained by block and will ensure that Lua callback ref
 // will have the same lifetime as enclosing obj-C block.
 //
-@interface MOAIFacebookLuaCallback : NSObject {
+@interface MOAIFacebookLuaCallbackRef : NSObject {
 @protected
 	int mRef;
 }
@@ -145,7 +152,7 @@ int MOAIFacebookIOS::_graphRequest ( lua_State* L ) {
 	if ( state.IsType ( 4, LUA_TFUNCTION )) {
 		ref = self->mRefs.Ref ( state, 4 );
 	}
-	MOAIFacebookLuaCallback* callback = [[[ MOAIFacebookLuaCallback alloc ] initWithRef:ref ] autorelease ];
+	MOAIFacebookLuaCallbackRef* callback = [[[ MOAIFacebookLuaCallbackRef alloc ] initWithRef:ref ] autorelease ];
 	
 	NSString* nsMethod 	= [[[ NSString alloc ] initWithUTF8String:method ] autorelease ];
 	NSString* nsPath 	= [[[ NSString alloc ] initWithUTF8String:path ] autorelease ];
@@ -261,11 +268,11 @@ int MOAIFacebookIOS::_login ( lua_State* L ) {
 	[ login logInWithReadPermissions:paramsArray handler:^( FBSDKLoginManagerLoginResult *result, NSError *error ) {
 	
 		if ( error ) {
-			self->DialogDidNotComplete ();
+			self->SessionDidNotLogin ();
 		}
 		else if ( result.isCancelled ) {
 		
-			self->DialogDidNotComplete ();
+			self->SessionDidNotLogin ();
 		}
 		else {
 		
@@ -420,10 +427,12 @@ int MOAIFacebookIOS::_requestReadPermissions( lua_State *L ) {
 
 //----------------------------------------------------------------//
 /**	@lua	sendGameRequest
-	@text	Show game requests dialog. 
- 
-	@in		string		message			The message for the request. 
+	@text	Show game requests dialog.
+
+	@in		string		message			The message for the request.
 	@opt	table		parameters
+	@opt	function	callback		Signature function(boolean success, table results or error)
+										If not present, then REQUEST_DIALOG events are dispatched
 	
 	TODO: howto describe table fields in doc?
 		actionType				number	None, Send, Ask, Turn
@@ -480,11 +489,22 @@ int MOAIFacebookIOS::_sendGameRequest ( lua_State* L ) {
 		}
 	}
 	
+	int ref = LUA_NOREF;
+	if ( state.IsType ( 3, LUA_TFUNCTION )) {
+		ref = self->mRefs.Ref ( state, 3 );
+	}
+	MOAIFacebookLuaCallbackRef* callbackRef = [[[ MOAIFacebookLuaCallbackRef alloc ] initWithRef:ref ] autorelease ];
+	
 	FBSDKGameRequestDialog* dialog = [[[ FBSDKGameRequestDialog alloc ] init ] autorelease ];
 	[ dialog setDelegate: self->mDelegate ];
     [ dialog setContent: content ];
     [ dialog setFrictionlessRequestsEnabled: frictionless ];
+	
 	[ content release ];
+	
+	// Remember reference to lua callback ref.
+	// It will be released automatically in dialog destructor.
+	objc_setAssociatedObject ( dialog, kGameRequestCallbackRef, callbackRef, OBJC_ASSOCIATION_RETAIN_NONATOMIC );
 	
     NSError* error = nil;
 	if ([ dialog validateWithError:&error ]) {
@@ -560,11 +580,17 @@ void MOAIFacebookIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	
 	state.SetField ( -1, "DIALOG_DID_COMPLETE", 		( u32 )DIALOG_DID_COMPLETE );
 	state.SetField ( -1, "DIALOG_DID_NOT_COMPLETE",		( u32 )DIALOG_DID_NOT_COMPLETE );
+	state.SetField ( -1, "PERMISSIONS_DENIED",			( u32 )PERMISSIONS_DENIED );
+	state.SetField ( -1, "PERMISSIONS_GRANTED",			( u32 )PERMISSIONS_GRANTED );
+	state.SetField ( -1, "PROFILE_UPDATED",				( u32 )PROFILE_UPDATED );
 	state.SetField ( -1, "REQUEST_RESPONSE", 			( u32 )REQUEST_RESPONSE );
 	state.SetField ( -1, "REQUEST_RESPONSE_FAILED", 	( u32 )REQUEST_RESPONSE_FAILED );
+	state.SetField ( -1, "REQUEST_DIALOG_DID_COMPLETE", ( u32 )REQUEST_DIALOG_DID_COMPLETE );
+	state.SetField ( -1, "REQUEST_DIALOG_DID_FAIL", 	( u32 )REQUEST_DIALOG_DID_FAIL );
 	state.SetField ( -1, "SESSION_DID_LOGIN", 			( u32 )SESSION_DID_LOGIN );
 	state.SetField ( -1, "SESSION_DID_NOT_LOGIN", 		( u32 )SESSION_DID_NOT_LOGIN );
 	state.SetField ( -1, "SESSION_EXTENDED",			( u32 )SESSION_EXTENDED );
+	
 
 	state.SetField ( -1, "ACTION_NONE", 				( u32 )FBSDKGameRequestActionTypeNone );
 	state.SetField ( -1, "ACTION_SEND", 				( u32 )FBSDKGameRequestActionTypeSend );
@@ -649,37 +675,43 @@ void MOAIFacebookIOS::DialogDidComplete () {
 }
 
 //----------------------------------------------------------------//
-void MOAIFacebookIOS::GameRequestDialogDidComplete ( NSDictionary* results ) {
+void MOAIFacebookIOS::GameRequestDialogDidComplete ( NSDictionary* results, int ref ) {
 	
-	if ( MOAILuaRuntime::IsValid ()) {
-		
-		MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-		
-		if ( this->PushListener ( REQUEST_DIALOG_DID_COMPLETE, state )) {
-			OBJC_TO_LUA ( results, state );
-			state.DebugCall ( 1, 0 );
-		}
+	if ( !MOAILuaRuntime::IsValid ()) return;
+	
+	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
+	
+	if ( ref == LUA_NOREF ) {
+		this->PushListener ( REQUEST_DIALOG_DID_COMPLETE, state );
+	}
+	else {
+		this->mRefs.PushRef ( state, ref );
+	}
+	
+	if ( state.IsType ( -1, LUA_TFUNCTION )) {
+		OBJC_TO_LUA ( results, state );
+		state.DebugCall ( 1, 0 );
 	}
 }
 
 //----------------------------------------------------------------//
-void MOAIFacebookIOS::GameRequestDialogDidFail ( NSError* error ) {
+void MOAIFacebookIOS::GameRequestDialogDidFail ( NSError* error, int ref ) {
 	
-	if ( MOAILuaRuntime::IsValid ()) {
-		
-		MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-		
-		if ( this->PushListener ( REQUEST_DIALOG_DID_FAIL, state )) {
-			OBJC_TO_LUA ( error, state );
-			state.DebugCall ( 1, 0 );
-		}
+	if ( !MOAILuaRuntime::IsValid ()) return;
+	
+	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
+	
+	if ( ref == LUA_NOREF ) {
+		this->PushListener ( REQUEST_DIALOG_DID_FAIL, state );
 	}
-}
-
-//----------------------------------------------------------------//
-void MOAIFacebookIOS::GameRequestDialogDidCancel () {
+	else {
+		this->mRefs.PushRef ( state, ref );
+	}
 	
-	this->InvokeListener ( REQUEST_DIALOG_DID_CANCEL );
+	if ( state.IsType ( -1, LUA_TFUNCTION )) {
+		OBJC_TO_LUA ( error, state );
+		state.DebugCall ( 1, 0 );
+	}
 }
 
 //----------------------------------------------------------------//
@@ -828,9 +860,9 @@ void MOAIFacebookIOS::SessionExtended ( cc8* token, cc8* expDate ) {
 
 
 //================================================================//
-// MOAIFacebookLuaCallback
+// MOAIFacebookLuaCallbackRef
 //================================================================//
-@implementation MOAIFacebookLuaCallback
+@implementation MOAIFacebookLuaCallbackRef
 
 //----------------------------------------------------------------//
 - ( id ) initWithRef: ( int )ref {
@@ -859,6 +891,7 @@ void MOAIFacebookIOS::SessionExtended ( cc8* token, cc8* expDate ) {
 
 @end
 
+
 //================================================================//
 // MOAIFBSDKDelegate
 //================================================================//
@@ -866,20 +899,38 @@ void MOAIFacebookIOS::SessionExtended ( cc8* token, cc8* expDate ) {
 
 //----------------------------------------------------------------//
 - ( void ) gameRequestDialog:( FBSDKGameRequestDialog* ) gameRequestDialog didCompleteWithResults:( NSDictionary* ) results {
-
-	MOAIFacebookIOS::Get ().GameRequestDialogDidComplete ( results );
+	
+	int ref = LUA_NOREF;
+	id object = objc_getAssociatedObject ( gameRequestDialog, kGameRequestCallbackRef );
+	if ( object ) {
+		ref = [( MOAIFacebookLuaCallbackRef* )object ref ];
+	}
+	
+	MOAIFacebookIOS::Get ().GameRequestDialogDidComplete ( results, ref );
 }
 
 //----------------------------------------------------------------//
 - ( void ) gameRequestDialog:( FBSDKGameRequestDialog* ) gameRequestDialog didFailWithError:( NSError* ) error {
 
-	MOAIFacebookIOS::Get ().GameRequestDialogDidFail ( error );
+	int ref = LUA_NOREF;
+	id object = objc_getAssociatedObject ( gameRequestDialog, kGameRequestCallbackRef );
+	if ( object ) {
+		ref = [( MOAIFacebookLuaCallbackRef* )object ref ];
+	}
+	
+	MOAIFacebookIOS::Get ().GameRequestDialogDidFail ( error, ref );
 }
 
 //----------------------------------------------------------------//
 - ( void ) gameRequestDialogDidCancel:( FBSDKGameRequestDialog* ) gameRequestDialog {
-
-	MOAIFacebookIOS::Get ().GameRequestDialogDidCancel ();
+	
+	int ref = LUA_NOREF;
+	id object = objc_getAssociatedObject ( gameRequestDialog, kGameRequestCallbackRef );
+	if ( object ) {
+		ref = [( MOAIFacebookLuaCallbackRef* )object ref ];
+	}
+	
+	MOAIFacebookIOS::Get ().GameRequestDialogDidFail ( nil, ref );
 }
 
 //----------------------------------------------------------------//

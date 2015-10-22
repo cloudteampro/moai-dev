@@ -63,8 +63,8 @@ public:
 	DECL_LUA_SINGLETON ( MOAIFacebookIOS );
 	
 	enum {
-		DIALOG_DID_COMPLETE,
-		DIALOG_DID_NOT_COMPLETE,
+		DIALOG_DID_COMPLETE,		// deprecated, never dispatched
+		DIALOG_DID_NOT_COMPLETE,	// deprecated, never dispatched
 		PERMISSIONS_DENIED,
 		PERMISSIONS_GRANTED,
 		PROFILE_UPDATED,
@@ -72,7 +72,6 @@ public:
 		REQUEST_RESPONSE_FAILED,
 		REQUEST_DIALOG_DID_COMPLETE,
 		REQUEST_DIALOG_DID_FAIL,
-		REQUEST_DIALOG_DID_CANCEL,
 		SESSION_DID_LOGIN,
 		SESSION_DID_NOT_LOGIN,
 		SESSION_EXTENDED,
@@ -83,9 +82,8 @@ public:
 	void		DialogDidNotComplete			();
 	void		DialogDidComplete				();
 	void		DialogDidComplete				( NSURL* result );
-	void		GameRequestDialogDidComplete	( NSDictionary* results );
-	void		GameRequestDialogDidFail		( NSError* error );
-	void		GameRequestDialogDidCancel		();
+	void		GameRequestDialogDidComplete	( NSDictionary* results, int ref );
+	void		GameRequestDialogDidFail		( NSError* error, int ref );
 	void		GraphRequestResponse			( id result, int ref );
 	void		GraphRequestResponseFailure		( NSError* error, int ref );
 	void		Logout							();
