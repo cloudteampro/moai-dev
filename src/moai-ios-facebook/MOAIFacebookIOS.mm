@@ -182,8 +182,8 @@ int MOAIFacebookIOS::_hasGranted ( lua_State* L ) {
 	
 	if ( permission ) {
 		
-		BOOL result = [[ FBSDKAccessToken currentAccessToken ] hasGranted:[ NSString stringWithUTF8String:permission ]];
-		state.Push (( bool )result );
+		bool result = [[ FBSDKAccessToken currentAccessToken ] hasGranted:[ NSString stringWithUTF8String:permission ]];
+		state.Push ( result );
 		return 1;
 	}
 	return 0;
@@ -520,7 +520,7 @@ int MOAIFacebookIOS::_sendGameRequest ( lua_State* L ) {
 	
     NSError* error = nil;
 	if ([ dialog validateWithError:&error ]) {
-		state.Push ([ dialog show ]);
+		state.Push (( bool )[ dialog show ]);
 		return 1;
 	}
 	else {
