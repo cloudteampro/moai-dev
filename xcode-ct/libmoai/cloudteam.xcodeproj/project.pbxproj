@@ -13,10 +13,10 @@
 			buildPhases = (
 			);
 			dependencies = (
+				20993E8E1BDE94A4009D7CED /* PBXTargetDependency */,
 				206B9D3D1BDE49020021D349 /* PBXTargetDependency */,
 				206B9CF81BDABB1B0021D349 /* PBXTargetDependency */,
 				206B9CFA1BDABB1B0021D349 /* PBXTargetDependency */,
-				206B9CFC1BDABB1B0021D349 /* PBXTargetDependency */,
 			);
 			name = build_all_osx;
 			productName = build_all_osx;
@@ -27,10 +27,10 @@
 			buildPhases = (
 			);
 			dependencies = (
+				20993ECC1BDE94AA009D7CED /* PBXTargetDependency */,
 				206B9D3B1BDE48FD0021D349 /* PBXTargetDependency */,
 				206B9D041BDABB2E0021D349 /* PBXTargetDependency */,
 				206B9D061BDABB2E0021D349 /* PBXTargetDependency */,
-				206B9D081BDABB2E0021D349 /* PBXTargetDependency */,
 			);
 			name = build_all_ios;
 			productName = build_all_ios;
@@ -38,575 +38,169 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		206B9AE01BDAB5340021D349 /* headers.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9AD11BDAB5340021D349 /* headers.h */; };
-		206B9AE11BDAB5340021D349 /* headers.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9AD11BDAB5340021D349 /* headers.h */; };
-		206B9AE21BDAB5340021D349 /* host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206B9AD21BDAB5340021D349 /* host.cpp */; };
-		206B9AE31BDAB5340021D349 /* host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206B9AD21BDAB5340021D349 /* host.cpp */; };
-		206B9AE41BDAB5340021D349 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9AD31BDAB5340021D349 /* host.h */; };
-		206B9AE51BDAB5340021D349 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9AD31BDAB5340021D349 /* host.h */; };
-		206B9AE61BDAB5340021D349 /* MOAISpine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206B9AD41BDAB5340021D349 /* MOAISpine.cpp */; };
-		206B9AE71BDAB5340021D349 /* MOAISpine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206B9AD41BDAB5340021D349 /* MOAISpine.cpp */; };
-		206B9AE81BDAB5340021D349 /* MOAISpine.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9AD51BDAB5340021D349 /* MOAISpine.h */; };
-		206B9AE91BDAB5340021D349 /* MOAISpine.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9AD51BDAB5340021D349 /* MOAISpine.h */; };
-		206B9AEA1BDAB5340021D349 /* MOAISpineBone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206B9AD61BDAB5340021D349 /* MOAISpineBone.cpp */; };
-		206B9AEB1BDAB5340021D349 /* MOAISpineBone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206B9AD61BDAB5340021D349 /* MOAISpineBone.cpp */; };
-		206B9AEC1BDAB5340021D349 /* MOAISpineBone.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9AD71BDAB5340021D349 /* MOAISpineBone.h */; };
-		206B9AED1BDAB5340021D349 /* MOAISpineBone.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9AD71BDAB5340021D349 /* MOAISpineBone.h */; };
-		206B9AEE1BDAB5340021D349 /* MOAISpineSkeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206B9AD81BDAB5340021D349 /* MOAISpineSkeleton.cpp */; };
-		206B9AEF1BDAB5340021D349 /* MOAISpineSkeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206B9AD81BDAB5340021D349 /* MOAISpineSkeleton.cpp */; };
-		206B9AF01BDAB5340021D349 /* MOAISpineSkeleton.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9AD91BDAB5340021D349 /* MOAISpineSkeleton.h */; };
-		206B9AF11BDAB5340021D349 /* MOAISpineSkeleton.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9AD91BDAB5340021D349 /* MOAISpineSkeleton.h */; };
-		206B9AF21BDAB5340021D349 /* MOAISpineSkeletonData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206B9ADA1BDAB5340021D349 /* MOAISpineSkeletonData.cpp */; };
-		206B9AF31BDAB5340021D349 /* MOAISpineSkeletonData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206B9ADA1BDAB5340021D349 /* MOAISpineSkeletonData.cpp */; };
-		206B9AF41BDAB5340021D349 /* MOAISpineSkeletonData.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9ADB1BDAB5340021D349 /* MOAISpineSkeletonData.h */; };
-		206B9AF51BDAB5340021D349 /* MOAISpineSkeletonData.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9ADB1BDAB5340021D349 /* MOAISpineSkeletonData.h */; };
-		206B9AF61BDAB5340021D349 /* MOAISpineSlot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206B9ADC1BDAB5340021D349 /* MOAISpineSlot.cpp */; };
-		206B9AF71BDAB5340021D349 /* MOAISpineSlot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206B9ADC1BDAB5340021D349 /* MOAISpineSlot.cpp */; };
-		206B9AF81BDAB5340021D349 /* MOAISpineSlot.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9ADD1BDAB5340021D349 /* MOAISpineSlot.h */; };
-		206B9AF91BDAB5340021D349 /* MOAISpineSlot.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9ADD1BDAB5340021D349 /* MOAISpineSlot.h */; };
-		206B9AFA1BDAB5340021D349 /* pch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206B9ADE1BDAB5340021D349 /* pch.cpp */; };
-		206B9AFB1BDAB5340021D349 /* pch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206B9ADE1BDAB5340021D349 /* pch.cpp */; };
-		206B9AFC1BDAB5340021D349 /* pch.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9ADF1BDAB5340021D349 /* pch.h */; };
-		206B9AFD1BDAB5340021D349 /* pch.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9ADF1BDAB5340021D349 /* pch.h */; };
-		206B9B2F1BDAB5E10021D349 /* Animation.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B151BDAB5E10021D349 /* Animation.h */; };
-		206B9B301BDAB5E10021D349 /* Animation.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B151BDAB5E10021D349 /* Animation.h */; };
-		206B9B311BDAB5E10021D349 /* AnimationState.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B161BDAB5E10021D349 /* AnimationState.h */; };
-		206B9B321BDAB5E10021D349 /* AnimationState.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B161BDAB5E10021D349 /* AnimationState.h */; };
-		206B9B331BDAB5E10021D349 /* AnimationStateData.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B171BDAB5E10021D349 /* AnimationStateData.h */; };
-		206B9B341BDAB5E10021D349 /* AnimationStateData.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B171BDAB5E10021D349 /* AnimationStateData.h */; };
-		206B9B351BDAB5E10021D349 /* Atlas.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B181BDAB5E10021D349 /* Atlas.h */; };
-		206B9B361BDAB5E10021D349 /* Atlas.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B181BDAB5E10021D349 /* Atlas.h */; };
-		206B9B371BDAB5E10021D349 /* AtlasAttachmentLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B191BDAB5E10021D349 /* AtlasAttachmentLoader.h */; };
-		206B9B381BDAB5E10021D349 /* AtlasAttachmentLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B191BDAB5E10021D349 /* AtlasAttachmentLoader.h */; };
-		206B9B391BDAB5E10021D349 /* Attachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B1A1BDAB5E10021D349 /* Attachment.h */; };
-		206B9B3A1BDAB5E10021D349 /* Attachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B1A1BDAB5E10021D349 /* Attachment.h */; };
-		206B9B3B1BDAB5E10021D349 /* AttachmentLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B1B1BDAB5E10021D349 /* AttachmentLoader.h */; };
-		206B9B3C1BDAB5E10021D349 /* AttachmentLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B1B1BDAB5E10021D349 /* AttachmentLoader.h */; };
-		206B9B3D1BDAB5E10021D349 /* Bone.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B1C1BDAB5E10021D349 /* Bone.h */; };
-		206B9B3E1BDAB5E10021D349 /* Bone.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B1C1BDAB5E10021D349 /* Bone.h */; };
-		206B9B3F1BDAB5E10021D349 /* BoneData.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B1D1BDAB5E10021D349 /* BoneData.h */; };
-		206B9B401BDAB5E10021D349 /* BoneData.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B1D1BDAB5E10021D349 /* BoneData.h */; };
-		206B9B411BDAB5E10021D349 /* BoundingBoxAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B1E1BDAB5E10021D349 /* BoundingBoxAttachment.h */; };
-		206B9B421BDAB5E10021D349 /* BoundingBoxAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B1E1BDAB5E10021D349 /* BoundingBoxAttachment.h */; };
-		206B9B431BDAB5E10021D349 /* Event.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B1F1BDAB5E10021D349 /* Event.h */; };
-		206B9B441BDAB5E10021D349 /* Event.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B1F1BDAB5E10021D349 /* Event.h */; };
-		206B9B451BDAB5E10021D349 /* EventData.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B201BDAB5E10021D349 /* EventData.h */; };
-		206B9B461BDAB5E10021D349 /* EventData.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B201BDAB5E10021D349 /* EventData.h */; };
-		206B9B471BDAB5E10021D349 /* extension.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B211BDAB5E10021D349 /* extension.h */; };
-		206B9B481BDAB5E10021D349 /* extension.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B211BDAB5E10021D349 /* extension.h */; };
-		206B9B491BDAB5E10021D349 /* IkConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B221BDAB5E10021D349 /* IkConstraint.h */; };
-		206B9B4A1BDAB5E10021D349 /* IkConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B221BDAB5E10021D349 /* IkConstraint.h */; };
-		206B9B4B1BDAB5E10021D349 /* IkConstraintData.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B231BDAB5E10021D349 /* IkConstraintData.h */; };
-		206B9B4C1BDAB5E10021D349 /* IkConstraintData.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B231BDAB5E10021D349 /* IkConstraintData.h */; };
-		206B9B4D1BDAB5E10021D349 /* MeshAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B241BDAB5E10021D349 /* MeshAttachment.h */; };
-		206B9B4E1BDAB5E10021D349 /* MeshAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B241BDAB5E10021D349 /* MeshAttachment.h */; };
-		206B9B4F1BDAB5E10021D349 /* RegionAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B251BDAB5E10021D349 /* RegionAttachment.h */; };
-		206B9B501BDAB5E10021D349 /* RegionAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B251BDAB5E10021D349 /* RegionAttachment.h */; };
-		206B9B511BDAB5E10021D349 /* Skeleton.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B261BDAB5E10021D349 /* Skeleton.h */; };
-		206B9B521BDAB5E10021D349 /* Skeleton.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B261BDAB5E10021D349 /* Skeleton.h */; };
-		206B9B531BDAB5E10021D349 /* SkeletonBounds.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B271BDAB5E10021D349 /* SkeletonBounds.h */; };
-		206B9B541BDAB5E10021D349 /* SkeletonBounds.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B271BDAB5E10021D349 /* SkeletonBounds.h */; };
-		206B9B551BDAB5E10021D349 /* SkeletonData.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B281BDAB5E10021D349 /* SkeletonData.h */; };
-		206B9B561BDAB5E10021D349 /* SkeletonData.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B281BDAB5E10021D349 /* SkeletonData.h */; };
-		206B9B571BDAB5E10021D349 /* SkeletonJson.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B291BDAB5E10021D349 /* SkeletonJson.h */; };
-		206B9B581BDAB5E10021D349 /* SkeletonJson.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B291BDAB5E10021D349 /* SkeletonJson.h */; };
-		206B9B591BDAB5E10021D349 /* Skin.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B2A1BDAB5E10021D349 /* Skin.h */; };
-		206B9B5A1BDAB5E10021D349 /* Skin.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B2A1BDAB5E10021D349 /* Skin.h */; };
-		206B9B5B1BDAB5E10021D349 /* SkinnedMeshAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B2B1BDAB5E10021D349 /* SkinnedMeshAttachment.h */; };
-		206B9B5C1BDAB5E10021D349 /* SkinnedMeshAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B2B1BDAB5E10021D349 /* SkinnedMeshAttachment.h */; };
-		206B9B5D1BDAB5E10021D349 /* Slot.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B2C1BDAB5E10021D349 /* Slot.h */; };
-		206B9B5E1BDAB5E10021D349 /* Slot.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B2C1BDAB5E10021D349 /* Slot.h */; };
-		206B9B5F1BDAB5E10021D349 /* SlotData.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B2D1BDAB5E10021D349 /* SlotData.h */; };
-		206B9B601BDAB5E10021D349 /* SlotData.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B2D1BDAB5E10021D349 /* SlotData.h */; };
-		206B9B611BDAB5E10021D349 /* spine.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B2E1BDAB5E10021D349 /* spine.h */; };
-		206B9B621BDAB5E10021D349 /* spine.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B2E1BDAB5E10021D349 /* spine.h */; };
-		206B9B801BDAB5E70021D349 /* Animation.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B651BDAB5E70021D349 /* Animation.c */; };
-		206B9B811BDAB5E70021D349 /* Animation.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B651BDAB5E70021D349 /* Animation.c */; };
-		206B9B821BDAB5E70021D349 /* AnimationState.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B661BDAB5E70021D349 /* AnimationState.c */; };
-		206B9B831BDAB5E70021D349 /* AnimationState.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B661BDAB5E70021D349 /* AnimationState.c */; };
-		206B9B841BDAB5E70021D349 /* AnimationStateData.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B671BDAB5E70021D349 /* AnimationStateData.c */; };
-		206B9B851BDAB5E70021D349 /* AnimationStateData.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B671BDAB5E70021D349 /* AnimationStateData.c */; };
-		206B9B861BDAB5E70021D349 /* Atlas.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B681BDAB5E70021D349 /* Atlas.c */; };
-		206B9B871BDAB5E70021D349 /* Atlas.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B681BDAB5E70021D349 /* Atlas.c */; };
-		206B9B881BDAB5E70021D349 /* AtlasAttachmentLoader.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B691BDAB5E70021D349 /* AtlasAttachmentLoader.c */; };
-		206B9B891BDAB5E70021D349 /* AtlasAttachmentLoader.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B691BDAB5E70021D349 /* AtlasAttachmentLoader.c */; };
-		206B9B8A1BDAB5E70021D349 /* Attachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B6A1BDAB5E70021D349 /* Attachment.c */; };
-		206B9B8B1BDAB5E70021D349 /* Attachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B6A1BDAB5E70021D349 /* Attachment.c */; };
-		206B9B8C1BDAB5E70021D349 /* AttachmentLoader.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B6B1BDAB5E70021D349 /* AttachmentLoader.c */; };
-		206B9B8D1BDAB5E70021D349 /* AttachmentLoader.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B6B1BDAB5E70021D349 /* AttachmentLoader.c */; };
-		206B9B8E1BDAB5E70021D349 /* Bone.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B6C1BDAB5E70021D349 /* Bone.c */; };
-		206B9B8F1BDAB5E70021D349 /* Bone.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B6C1BDAB5E70021D349 /* Bone.c */; };
-		206B9B901BDAB5E70021D349 /* BoneData.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B6D1BDAB5E70021D349 /* BoneData.c */; };
-		206B9B911BDAB5E70021D349 /* BoneData.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B6D1BDAB5E70021D349 /* BoneData.c */; };
-		206B9B921BDAB5E70021D349 /* BoundingBoxAttachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B6E1BDAB5E70021D349 /* BoundingBoxAttachment.c */; };
-		206B9B931BDAB5E70021D349 /* BoundingBoxAttachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B6E1BDAB5E70021D349 /* BoundingBoxAttachment.c */; };
-		206B9B941BDAB5E70021D349 /* Event.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B6F1BDAB5E70021D349 /* Event.c */; };
-		206B9B951BDAB5E70021D349 /* Event.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B6F1BDAB5E70021D349 /* Event.c */; };
-		206B9B961BDAB5E70021D349 /* EventData.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B701BDAB5E70021D349 /* EventData.c */; };
-		206B9B971BDAB5E70021D349 /* EventData.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B701BDAB5E70021D349 /* EventData.c */; };
-		206B9B981BDAB5E70021D349 /* extension.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B711BDAB5E70021D349 /* extension.c */; };
-		206B9B991BDAB5E70021D349 /* extension.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B711BDAB5E70021D349 /* extension.c */; };
-		206B9B9A1BDAB5E70021D349 /* IkConstraint.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B721BDAB5E70021D349 /* IkConstraint.c */; };
-		206B9B9B1BDAB5E70021D349 /* IkConstraint.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B721BDAB5E70021D349 /* IkConstraint.c */; };
-		206B9B9C1BDAB5E70021D349 /* IkConstraintData.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B731BDAB5E70021D349 /* IkConstraintData.c */; };
-		206B9B9D1BDAB5E70021D349 /* IkConstraintData.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B731BDAB5E70021D349 /* IkConstraintData.c */; };
-		206B9B9E1BDAB5E70021D349 /* Json.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B741BDAB5E70021D349 /* Json.c */; };
-		206B9B9F1BDAB5E70021D349 /* Json.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B741BDAB5E70021D349 /* Json.c */; };
-		206B9BA01BDAB5E70021D349 /* Json.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B751BDAB5E70021D349 /* Json.h */; };
-		206B9BA11BDAB5E70021D349 /* Json.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9B751BDAB5E70021D349 /* Json.h */; };
-		206B9BA21BDAB5E70021D349 /* MeshAttachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B761BDAB5E70021D349 /* MeshAttachment.c */; };
-		206B9BA31BDAB5E70021D349 /* MeshAttachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B761BDAB5E70021D349 /* MeshAttachment.c */; };
-		206B9BA41BDAB5E70021D349 /* RegionAttachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B771BDAB5E70021D349 /* RegionAttachment.c */; };
-		206B9BA51BDAB5E70021D349 /* RegionAttachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B771BDAB5E70021D349 /* RegionAttachment.c */; };
-		206B9BA61BDAB5E70021D349 /* Skeleton.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B781BDAB5E70021D349 /* Skeleton.c */; };
-		206B9BA71BDAB5E70021D349 /* Skeleton.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B781BDAB5E70021D349 /* Skeleton.c */; };
-		206B9BA81BDAB5E70021D349 /* SkeletonBounds.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B791BDAB5E70021D349 /* SkeletonBounds.c */; };
-		206B9BA91BDAB5E70021D349 /* SkeletonBounds.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B791BDAB5E70021D349 /* SkeletonBounds.c */; };
-		206B9BAA1BDAB5E70021D349 /* SkeletonData.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B7A1BDAB5E70021D349 /* SkeletonData.c */; };
-		206B9BAB1BDAB5E70021D349 /* SkeletonData.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B7A1BDAB5E70021D349 /* SkeletonData.c */; };
-		206B9BAC1BDAB5E70021D349 /* SkeletonJson.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B7B1BDAB5E70021D349 /* SkeletonJson.c */; };
-		206B9BAD1BDAB5E70021D349 /* SkeletonJson.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B7B1BDAB5E70021D349 /* SkeletonJson.c */; };
-		206B9BAE1BDAB5E70021D349 /* Skin.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B7C1BDAB5E70021D349 /* Skin.c */; };
-		206B9BAF1BDAB5E70021D349 /* Skin.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B7C1BDAB5E70021D349 /* Skin.c */; };
-		206B9BB01BDAB5E70021D349 /* SkinnedMeshAttachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B7D1BDAB5E70021D349 /* SkinnedMeshAttachment.c */; };
-		206B9BB11BDAB5E70021D349 /* SkinnedMeshAttachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B7D1BDAB5E70021D349 /* SkinnedMeshAttachment.c */; };
-		206B9BB21BDAB5E70021D349 /* Slot.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B7E1BDAB5E70021D349 /* Slot.c */; };
-		206B9BB31BDAB5E70021D349 /* Slot.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B7E1BDAB5E70021D349 /* Slot.c */; };
-		206B9BB41BDAB5E70021D349 /* SlotData.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B7F1BDAB5E70021D349 /* SlotData.c */; };
-		206B9BB51BDAB5E70021D349 /* SlotData.c in Sources */ = {isa = PBXBuildFile; fileRef = 206B9B7F1BDAB5E70021D349 /* SlotData.c */; };
-		206B9BBF1BDAB5FF0021D349 /* host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206B9BB71BDAB5FF0021D349 /* host.cpp */; };
-		206B9BC01BDAB5FF0021D349 /* host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206B9BB71BDAB5FF0021D349 /* host.cpp */; };
-		206B9BC11BDAB5FF0021D349 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9BB81BDAB5FF0021D349 /* host.h */; };
-		206B9BC21BDAB5FF0021D349 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9BB81BDAB5FF0021D349 /* host.h */; };
-		206B9BC31BDAB5FF0021D349 /* MOAIFmodStudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206B9BB91BDAB5FF0021D349 /* MOAIFmodStudio.cpp */; };
-		206B9BC41BDAB5FF0021D349 /* MOAIFmodStudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206B9BB91BDAB5FF0021D349 /* MOAIFmodStudio.cpp */; };
-		206B9BC51BDAB5FF0021D349 /* MOAIFmodStudio.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9BBA1BDAB5FF0021D349 /* MOAIFmodStudio.h */; };
-		206B9BC61BDAB5FF0021D349 /* MOAIFmodStudio.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9BBA1BDAB5FF0021D349 /* MOAIFmodStudio.h */; };
-		206B9BC71BDAB5FF0021D349 /* MOAIFmodStudioChannel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206B9BBB1BDAB5FF0021D349 /* MOAIFmodStudioChannel.cpp */; };
-		206B9BC81BDAB5FF0021D349 /* MOAIFmodStudioChannel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206B9BBB1BDAB5FF0021D349 /* MOAIFmodStudioChannel.cpp */; };
-		206B9BC91BDAB5FF0021D349 /* MOAIFmodStudioChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9BBC1BDAB5FF0021D349 /* MOAIFmodStudioChannel.h */; };
-		206B9BCA1BDAB5FF0021D349 /* MOAIFmodStudioChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9BBC1BDAB5FF0021D349 /* MOAIFmodStudioChannel.h */; };
-		206B9BCB1BDAB5FF0021D349 /* MOAIFmodStudioSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206B9BBD1BDAB5FF0021D349 /* MOAIFmodStudioSound.cpp */; };
-		206B9BCC1BDAB5FF0021D349 /* MOAIFmodStudioSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206B9BBD1BDAB5FF0021D349 /* MOAIFmodStudioSound.cpp */; };
-		206B9BCD1BDAB5FF0021D349 /* MOAIFmodStudioSound.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9BBE1BDAB5FF0021D349 /* MOAIFmodStudioSound.h */; };
-		206B9BCE1BDAB5FF0021D349 /* MOAIFmodStudioSound.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9BBE1BDAB5FF0021D349 /* MOAIFmodStudioSound.h */; };
-		206B9D321BDE382A0021D349 /* CTUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206B9D2E1BDE382A0021D349 /* CTUtil.cpp */; };
-		206B9D331BDE382A0021D349 /* CTUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206B9D2E1BDE382A0021D349 /* CTUtil.cpp */; };
-		206B9D341BDE382A0021D349 /* CTUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9D2F1BDE382A0021D349 /* CTUtil.h */; };
-		206B9D351BDE382A0021D349 /* CTUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9D2F1BDE382A0021D349 /* CTUtil.h */; };
-		206B9D361BDE382A0021D349 /* host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206B9D301BDE382A0021D349 /* host.cpp */; };
-		206B9D371BDE382A0021D349 /* host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206B9D301BDE382A0021D349 /* host.cpp */; };
-		206B9D381BDE382A0021D349 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9D311BDE382A0021D349 /* host.h */; };
-		206B9D391BDE382A0021D349 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9D311BDE382A0021D349 /* host.h */; };
+		206BA00E1BDE92C40021D349 /* headers.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9FFF1BDE92C40021D349 /* headers.h */; };
+		206BA00F1BDE92C40021D349 /* headers.h in Headers */ = {isa = PBXBuildFile; fileRef = 206B9FFF1BDE92C40021D349 /* headers.h */; };
+		206BA0101BDE92C40021D349 /* host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA0001BDE92C40021D349 /* host.cpp */; };
+		206BA0111BDE92C40021D349 /* host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA0001BDE92C40021D349 /* host.cpp */; };
+		206BA0121BDE92C40021D349 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA0011BDE92C40021D349 /* host.h */; };
+		206BA0131BDE92C40021D349 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA0011BDE92C40021D349 /* host.h */; };
+		206BA0141BDE92C40021D349 /* MOAISpine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA0021BDE92C40021D349 /* MOAISpine.cpp */; };
+		206BA0151BDE92C40021D349 /* MOAISpine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA0021BDE92C40021D349 /* MOAISpine.cpp */; };
+		206BA0161BDE92C40021D349 /* MOAISpine.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA0031BDE92C40021D349 /* MOAISpine.h */; };
+		206BA0171BDE92C40021D349 /* MOAISpine.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA0031BDE92C40021D349 /* MOAISpine.h */; };
+		206BA0181BDE92C40021D349 /* MOAISpineBone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA0041BDE92C40021D349 /* MOAISpineBone.cpp */; };
+		206BA0191BDE92C40021D349 /* MOAISpineBone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA0041BDE92C40021D349 /* MOAISpineBone.cpp */; };
+		206BA01A1BDE92C40021D349 /* MOAISpineBone.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA0051BDE92C40021D349 /* MOAISpineBone.h */; };
+		206BA01B1BDE92C40021D349 /* MOAISpineBone.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA0051BDE92C40021D349 /* MOAISpineBone.h */; };
+		206BA01C1BDE92C40021D349 /* MOAISpineSkeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA0061BDE92C40021D349 /* MOAISpineSkeleton.cpp */; };
+		206BA01D1BDE92C40021D349 /* MOAISpineSkeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA0061BDE92C40021D349 /* MOAISpineSkeleton.cpp */; };
+		206BA01E1BDE92C40021D349 /* MOAISpineSkeleton.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA0071BDE92C40021D349 /* MOAISpineSkeleton.h */; };
+		206BA01F1BDE92C40021D349 /* MOAISpineSkeleton.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA0071BDE92C40021D349 /* MOAISpineSkeleton.h */; };
+		206BA0201BDE92C40021D349 /* MOAISpineSkeletonData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA0081BDE92C40021D349 /* MOAISpineSkeletonData.cpp */; };
+		206BA0211BDE92C40021D349 /* MOAISpineSkeletonData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA0081BDE92C40021D349 /* MOAISpineSkeletonData.cpp */; };
+		206BA0221BDE92C40021D349 /* MOAISpineSkeletonData.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA0091BDE92C40021D349 /* MOAISpineSkeletonData.h */; };
+		206BA0231BDE92C40021D349 /* MOAISpineSkeletonData.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA0091BDE92C40021D349 /* MOAISpineSkeletonData.h */; };
+		206BA0241BDE92C40021D349 /* MOAISpineSlot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA00A1BDE92C40021D349 /* MOAISpineSlot.cpp */; };
+		206BA0251BDE92C40021D349 /* MOAISpineSlot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA00A1BDE92C40021D349 /* MOAISpineSlot.cpp */; };
+		206BA0261BDE92C40021D349 /* MOAISpineSlot.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA00B1BDE92C40021D349 /* MOAISpineSlot.h */; };
+		206BA0271BDE92C40021D349 /* MOAISpineSlot.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA00B1BDE92C40021D349 /* MOAISpineSlot.h */; };
+		206BA0281BDE92C40021D349 /* pch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA00C1BDE92C40021D349 /* pch.cpp */; };
+		206BA0291BDE92C40021D349 /* pch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA00C1BDE92C40021D349 /* pch.cpp */; };
+		206BA02A1BDE92C40021D349 /* pch.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA00D1BDE92C40021D349 /* pch.h */; };
+		206BA02B1BDE92C40021D349 /* pch.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA00D1BDE92C40021D349 /* pch.h */; };
+		206BA0351BDE92CF0021D349 /* host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA02D1BDE92CF0021D349 /* host.cpp */; };
+		206BA0361BDE92CF0021D349 /* host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA02D1BDE92CF0021D349 /* host.cpp */; };
+		206BA0371BDE92CF0021D349 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA02E1BDE92CF0021D349 /* host.h */; };
+		206BA0381BDE92CF0021D349 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA02E1BDE92CF0021D349 /* host.h */; };
+		206BA0391BDE92CF0021D349 /* MOAIFmodStudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA02F1BDE92CF0021D349 /* MOAIFmodStudio.cpp */; };
+		206BA03A1BDE92CF0021D349 /* MOAIFmodStudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA02F1BDE92CF0021D349 /* MOAIFmodStudio.cpp */; };
+		206BA03B1BDE92CF0021D349 /* MOAIFmodStudio.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA0301BDE92CF0021D349 /* MOAIFmodStudio.h */; };
+		206BA03C1BDE92CF0021D349 /* MOAIFmodStudio.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA0301BDE92CF0021D349 /* MOAIFmodStudio.h */; };
+		206BA03D1BDE92CF0021D349 /* MOAIFmodStudioChannel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA0311BDE92CF0021D349 /* MOAIFmodStudioChannel.cpp */; };
+		206BA03E1BDE92CF0021D349 /* MOAIFmodStudioChannel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA0311BDE92CF0021D349 /* MOAIFmodStudioChannel.cpp */; };
+		206BA03F1BDE92CF0021D349 /* MOAIFmodStudioChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA0321BDE92CF0021D349 /* MOAIFmodStudioChannel.h */; };
+		206BA0401BDE92CF0021D349 /* MOAIFmodStudioChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA0321BDE92CF0021D349 /* MOAIFmodStudioChannel.h */; };
+		206BA0411BDE92CF0021D349 /* MOAIFmodStudioSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA0331BDE92CF0021D349 /* MOAIFmodStudioSound.cpp */; };
+		206BA0421BDE92CF0021D349 /* MOAIFmodStudioSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA0331BDE92CF0021D349 /* MOAIFmodStudioSound.cpp */; };
+		206BA0431BDE92CF0021D349 /* MOAIFmodStudioSound.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA0341BDE92CF0021D349 /* MOAIFmodStudioSound.h */; };
+		206BA0441BDE92CF0021D349 /* MOAIFmodStudioSound.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA0341BDE92CF0021D349 /* MOAIFmodStudioSound.h */; };
+		206BA04A1BDE92D60021D349 /* CTUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA0461BDE92D60021D349 /* CTUtil.cpp */; };
+		206BA04B1BDE92D60021D349 /* CTUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA0461BDE92D60021D349 /* CTUtil.cpp */; };
+		206BA04C1BDE92D60021D349 /* CTUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA0471BDE92D60021D349 /* CTUtil.h */; };
+		206BA04D1BDE92D60021D349 /* CTUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA0471BDE92D60021D349 /* CTUtil.h */; };
+		206BA04E1BDE92D60021D349 /* host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA0481BDE92D60021D349 /* host.cpp */; };
+		206BA04F1BDE92D60021D349 /* host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA0481BDE92D60021D349 /* host.cpp */; };
+		206BA0501BDE92D60021D349 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA0491BDE92D60021D349 /* host.h */; };
+		206BA0511BDE92D60021D349 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA0491BDE92D60021D349 /* host.h */; };
+		20DA09901BDE93FE0070C61F /* Animation.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09761BDE93FE0070C61F /* Animation.h */; };
+		20DA09911BDE93FE0070C61F /* Animation.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09761BDE93FE0070C61F /* Animation.h */; };
+		20DA09921BDE93FE0070C61F /* AnimationState.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09771BDE93FE0070C61F /* AnimationState.h */; };
+		20DA09931BDE93FE0070C61F /* AnimationState.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09771BDE93FE0070C61F /* AnimationState.h */; };
+		20DA09941BDE93FE0070C61F /* AnimationStateData.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09781BDE93FE0070C61F /* AnimationStateData.h */; };
+		20DA09951BDE93FE0070C61F /* AnimationStateData.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09781BDE93FE0070C61F /* AnimationStateData.h */; };
+		20DA09961BDE93FE0070C61F /* Atlas.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09791BDE93FE0070C61F /* Atlas.h */; };
+		20DA09971BDE93FE0070C61F /* Atlas.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09791BDE93FE0070C61F /* Atlas.h */; };
+		20DA09981BDE93FE0070C61F /* AtlasAttachmentLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA097A1BDE93FE0070C61F /* AtlasAttachmentLoader.h */; };
+		20DA09991BDE93FE0070C61F /* AtlasAttachmentLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA097A1BDE93FE0070C61F /* AtlasAttachmentLoader.h */; };
+		20DA099A1BDE93FE0070C61F /* Attachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA097B1BDE93FE0070C61F /* Attachment.h */; };
+		20DA099B1BDE93FE0070C61F /* Attachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA097B1BDE93FE0070C61F /* Attachment.h */; };
+		20DA099C1BDE93FE0070C61F /* AttachmentLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA097C1BDE93FE0070C61F /* AttachmentLoader.h */; };
+		20DA099D1BDE93FE0070C61F /* AttachmentLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA097C1BDE93FE0070C61F /* AttachmentLoader.h */; };
+		20DA099E1BDE93FE0070C61F /* Bone.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA097D1BDE93FE0070C61F /* Bone.h */; };
+		20DA099F1BDE93FE0070C61F /* Bone.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA097D1BDE93FE0070C61F /* Bone.h */; };
+		20DA09A01BDE93FE0070C61F /* BoneData.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA097E1BDE93FE0070C61F /* BoneData.h */; };
+		20DA09A11BDE93FE0070C61F /* BoneData.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA097E1BDE93FE0070C61F /* BoneData.h */; };
+		20DA09A21BDE93FE0070C61F /* BoundingBoxAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA097F1BDE93FE0070C61F /* BoundingBoxAttachment.h */; };
+		20DA09A31BDE93FE0070C61F /* BoundingBoxAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA097F1BDE93FE0070C61F /* BoundingBoxAttachment.h */; };
+		20DA09A41BDE93FE0070C61F /* Event.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09801BDE93FE0070C61F /* Event.h */; };
+		20DA09A51BDE93FE0070C61F /* Event.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09801BDE93FE0070C61F /* Event.h */; };
+		20DA09A61BDE93FE0070C61F /* EventData.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09811BDE93FE0070C61F /* EventData.h */; };
+		20DA09A71BDE93FE0070C61F /* EventData.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09811BDE93FE0070C61F /* EventData.h */; };
+		20DA09A81BDE93FE0070C61F /* extension.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09821BDE93FE0070C61F /* extension.h */; };
+		20DA09A91BDE93FE0070C61F /* extension.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09821BDE93FE0070C61F /* extension.h */; };
+		20DA09AA1BDE93FE0070C61F /* IkConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09831BDE93FE0070C61F /* IkConstraint.h */; };
+		20DA09AB1BDE93FE0070C61F /* IkConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09831BDE93FE0070C61F /* IkConstraint.h */; };
+		20DA09AC1BDE93FE0070C61F /* IkConstraintData.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09841BDE93FE0070C61F /* IkConstraintData.h */; };
+		20DA09AD1BDE93FE0070C61F /* IkConstraintData.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09841BDE93FE0070C61F /* IkConstraintData.h */; };
+		20DA09AE1BDE93FE0070C61F /* MeshAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09851BDE93FE0070C61F /* MeshAttachment.h */; };
+		20DA09AF1BDE93FE0070C61F /* MeshAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09851BDE93FE0070C61F /* MeshAttachment.h */; };
+		20DA09B01BDE93FE0070C61F /* RegionAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09861BDE93FE0070C61F /* RegionAttachment.h */; };
+		20DA09B11BDE93FE0070C61F /* RegionAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09861BDE93FE0070C61F /* RegionAttachment.h */; };
+		20DA09B21BDE93FE0070C61F /* Skeleton.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09871BDE93FE0070C61F /* Skeleton.h */; };
+		20DA09B31BDE93FE0070C61F /* Skeleton.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09871BDE93FE0070C61F /* Skeleton.h */; };
+		20DA09B41BDE93FE0070C61F /* SkeletonBounds.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09881BDE93FE0070C61F /* SkeletonBounds.h */; };
+		20DA09B51BDE93FE0070C61F /* SkeletonBounds.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09881BDE93FE0070C61F /* SkeletonBounds.h */; };
+		20DA09B61BDE93FE0070C61F /* SkeletonData.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09891BDE93FE0070C61F /* SkeletonData.h */; };
+		20DA09B71BDE93FE0070C61F /* SkeletonData.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09891BDE93FE0070C61F /* SkeletonData.h */; };
+		20DA09B81BDE93FE0070C61F /* SkeletonJson.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA098A1BDE93FE0070C61F /* SkeletonJson.h */; };
+		20DA09B91BDE93FE0070C61F /* SkeletonJson.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA098A1BDE93FE0070C61F /* SkeletonJson.h */; };
+		20DA09BA1BDE93FE0070C61F /* Skin.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA098B1BDE93FE0070C61F /* Skin.h */; };
+		20DA09BB1BDE93FE0070C61F /* Skin.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA098B1BDE93FE0070C61F /* Skin.h */; };
+		20DA09BC1BDE93FE0070C61F /* SkinnedMeshAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA098C1BDE93FE0070C61F /* SkinnedMeshAttachment.h */; };
+		20DA09BD1BDE93FE0070C61F /* SkinnedMeshAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA098C1BDE93FE0070C61F /* SkinnedMeshAttachment.h */; };
+		20DA09BE1BDE93FE0070C61F /* Slot.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA098D1BDE93FE0070C61F /* Slot.h */; };
+		20DA09BF1BDE93FE0070C61F /* Slot.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA098D1BDE93FE0070C61F /* Slot.h */; };
+		20DA09C01BDE93FE0070C61F /* SlotData.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA098E1BDE93FE0070C61F /* SlotData.h */; };
+		20DA09C11BDE93FE0070C61F /* SlotData.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA098E1BDE93FE0070C61F /* SlotData.h */; };
+		20DA09C21BDE93FE0070C61F /* spine.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA098F1BDE93FE0070C61F /* spine.h */; };
+		20DA09C31BDE93FE0070C61F /* spine.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA098F1BDE93FE0070C61F /* spine.h */; };
+		20DA09E11BDE94050070C61F /* Animation.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09C61BDE94050070C61F /* Animation.c */; };
+		20DA09E21BDE94050070C61F /* Animation.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09C61BDE94050070C61F /* Animation.c */; };
+		20DA09E31BDE94050070C61F /* AnimationState.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09C71BDE94050070C61F /* AnimationState.c */; };
+		20DA09E41BDE94050070C61F /* AnimationState.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09C71BDE94050070C61F /* AnimationState.c */; };
+		20DA09E51BDE94050070C61F /* AnimationStateData.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09C81BDE94050070C61F /* AnimationStateData.c */; };
+		20DA09E61BDE94050070C61F /* AnimationStateData.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09C81BDE94050070C61F /* AnimationStateData.c */; };
+		20DA09E71BDE94050070C61F /* Atlas.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09C91BDE94050070C61F /* Atlas.c */; };
+		20DA09E81BDE94050070C61F /* Atlas.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09C91BDE94050070C61F /* Atlas.c */; };
+		20DA09E91BDE94050070C61F /* AtlasAttachmentLoader.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09CA1BDE94050070C61F /* AtlasAttachmentLoader.c */; };
+		20DA09EA1BDE94050070C61F /* AtlasAttachmentLoader.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09CA1BDE94050070C61F /* AtlasAttachmentLoader.c */; };
+		20DA09EB1BDE94050070C61F /* Attachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09CB1BDE94050070C61F /* Attachment.c */; };
+		20DA09EC1BDE94050070C61F /* Attachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09CB1BDE94050070C61F /* Attachment.c */; };
+		20DA09ED1BDE94050070C61F /* AttachmentLoader.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09CC1BDE94050070C61F /* AttachmentLoader.c */; };
+		20DA09EE1BDE94050070C61F /* AttachmentLoader.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09CC1BDE94050070C61F /* AttachmentLoader.c */; };
+		20DA09EF1BDE94050070C61F /* Bone.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09CD1BDE94050070C61F /* Bone.c */; };
+		20DA09F01BDE94050070C61F /* Bone.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09CD1BDE94050070C61F /* Bone.c */; };
+		20DA09F11BDE94050070C61F /* BoneData.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09CE1BDE94050070C61F /* BoneData.c */; };
+		20DA09F21BDE94050070C61F /* BoneData.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09CE1BDE94050070C61F /* BoneData.c */; };
+		20DA09F31BDE94050070C61F /* BoundingBoxAttachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09CF1BDE94050070C61F /* BoundingBoxAttachment.c */; };
+		20DA09F41BDE94050070C61F /* BoundingBoxAttachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09CF1BDE94050070C61F /* BoundingBoxAttachment.c */; };
+		20DA09F51BDE94050070C61F /* Event.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09D01BDE94050070C61F /* Event.c */; };
+		20DA09F61BDE94050070C61F /* Event.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09D01BDE94050070C61F /* Event.c */; };
+		20DA09F71BDE94050070C61F /* EventData.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09D11BDE94050070C61F /* EventData.c */; };
+		20DA09F81BDE94050070C61F /* EventData.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09D11BDE94050070C61F /* EventData.c */; };
+		20DA09F91BDE94050070C61F /* extension.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09D21BDE94050070C61F /* extension.c */; };
+		20DA09FA1BDE94050070C61F /* extension.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09D21BDE94050070C61F /* extension.c */; };
+		20DA09FB1BDE94050070C61F /* IkConstraint.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09D31BDE94050070C61F /* IkConstraint.c */; };
+		20DA09FC1BDE94050070C61F /* IkConstraint.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09D31BDE94050070C61F /* IkConstraint.c */; };
+		20DA09FD1BDE94050070C61F /* IkConstraintData.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09D41BDE94050070C61F /* IkConstraintData.c */; };
+		20DA09FE1BDE94050070C61F /* IkConstraintData.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09D41BDE94050070C61F /* IkConstraintData.c */; };
+		20DA09FF1BDE94050070C61F /* Json.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09D51BDE94050070C61F /* Json.c */; };
+		20DA0A001BDE94050070C61F /* Json.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09D51BDE94050070C61F /* Json.c */; };
+		20DA0A011BDE94050070C61F /* Json.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09D61BDE94050070C61F /* Json.h */; };
+		20DA0A021BDE94050070C61F /* Json.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09D61BDE94050070C61F /* Json.h */; };
+		20DA0A031BDE94050070C61F /* MeshAttachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09D71BDE94050070C61F /* MeshAttachment.c */; };
+		20DA0A041BDE94050070C61F /* MeshAttachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09D71BDE94050070C61F /* MeshAttachment.c */; };
+		20DA0A051BDE94050070C61F /* RegionAttachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09D81BDE94050070C61F /* RegionAttachment.c */; };
+		20DA0A061BDE94050070C61F /* RegionAttachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09D81BDE94050070C61F /* RegionAttachment.c */; };
+		20DA0A071BDE94050070C61F /* Skeleton.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09D91BDE94050070C61F /* Skeleton.c */; };
+		20DA0A081BDE94050070C61F /* Skeleton.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09D91BDE94050070C61F /* Skeleton.c */; };
+		20DA0A091BDE94050070C61F /* SkeletonBounds.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09DA1BDE94050070C61F /* SkeletonBounds.c */; };
+		20DA0A0A1BDE94050070C61F /* SkeletonBounds.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09DA1BDE94050070C61F /* SkeletonBounds.c */; };
+		20DA0A0B1BDE94050070C61F /* SkeletonData.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09DB1BDE94050070C61F /* SkeletonData.c */; };
+		20DA0A0C1BDE94050070C61F /* SkeletonData.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09DB1BDE94050070C61F /* SkeletonData.c */; };
+		20DA0A0D1BDE94050070C61F /* SkeletonJson.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09DC1BDE94050070C61F /* SkeletonJson.c */; };
+		20DA0A0E1BDE94050070C61F /* SkeletonJson.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09DC1BDE94050070C61F /* SkeletonJson.c */; };
+		20DA0A0F1BDE94050070C61F /* Skin.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09DD1BDE94050070C61F /* Skin.c */; };
+		20DA0A101BDE94050070C61F /* Skin.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09DD1BDE94050070C61F /* Skin.c */; };
+		20DA0A111BDE94050070C61F /* SkinnedMeshAttachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09DE1BDE94050070C61F /* SkinnedMeshAttachment.c */; };
+		20DA0A121BDE94050070C61F /* SkinnedMeshAttachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09DE1BDE94050070C61F /* SkinnedMeshAttachment.c */; };
+		20DA0A131BDE94050070C61F /* Slot.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09DF1BDE94050070C61F /* Slot.c */; };
+		20DA0A141BDE94050070C61F /* Slot.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09DF1BDE94050070C61F /* Slot.c */; };
+		20DA0A151BDE94050070C61F /* SlotData.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09E01BDE94050070C61F /* SlotData.c */; };
+		20DA0A161BDE94050070C61F /* SlotData.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09E01BDE94050070C61F /* SlotData.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		206B9C0E1BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 03C2F6F4104DE130009A2D5D;
-			remoteInfo = "libmoai-ios";
-		};
-		206B9C101BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD257BA21A6255380057A53A;
-			remoteInfo = "libmoai-ios-apple";
-		};
-		206B9C121BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0379C5961333ECD800E89DDC;
-			remoteInfo = "libmoai-ios-3rdparty-core";
-		};
-		206B9C141BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CDD480D117FA78AE00525B77;
-			remoteInfo = "libmoai-ios-3rdparty-crypto";
-		};
-		206B9C161BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD27BE0D191D9F44000A7770;
-			remoteInfo = "libmoai-ios-adcolony";
-		};
-		206B9C181BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CDA0DA041A01B111002B71B6;
-			remoteInfo = "libmoai-ios-audio-sampler";
-		};
-		206B9C1A1BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CDA4B7AE1808AC61000129F9;
-			remoteInfo = "libmoai-ios-billing";
-		};
-		206B9C1C1BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 89BE74A1173AD2B600DFE837;
-			remoteInfo = "libmoai-ios-box2d";
-		};
-		206B9C1E1BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CDA4B8241808AC6E000129F9;
-			remoteInfo = "libmoai-ios-chartboost";
-		};
-		206B9C201BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD5232BC1808ADF400B81720;
-			remoteInfo = "libmoai-ios-crittercism";
-		};
-		206B9C221BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD4C3A81180A623200C02381;
-			remoteInfo = "libmoai-ios-crypto";
-		};
-		206B9C241BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CDA4B89A1808AC82000129F9;
-			remoteInfo = "libmoai-ios-facebook";
-		};
-		206B9C261BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD70C11C18441DD0005CEBC0;
-			remoteInfo = "libmoai-ios-flurry";
-		};
-		206B9C281BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CDDD30921574AE0000C410A0;
-			remoteInfo = "libmoai-ios-fmod-designer";
-		};
-		206B9C2A1BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD5089F9155E3A1B0002FC3B;
-			remoteInfo = "libmoai-ios-fmod-ex";
-		};
-		206B9C2C1BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CDA4B9101808AC8F000129F9;
-			remoteInfo = "libmoai-ios-gamecenter";
-		};
-		206B9C2E1BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 89BE75F7173C126100DFE837;
-			remoteInfo = "libmoai-ios-http-client";
-		};
-		206B9C301BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 89BE7686173C15F100DFE837;
-			remoteInfo = "libmoai-ios-http-server";
-		};
-		206B9C321BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD515F5E1BCDBBEC000718FB;
-			remoteInfo = "libmoai-ios-image-jpg";
-		};
-		206B9C341BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD515F6D1BCDBBF8000718FB;
-			remoteInfo = "libmoai-ios-image-png";
-		};
-		206B9C361BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD515F7C1BCDBC00000718FB;
-			remoteInfo = "libmoai-ios-image-pvr";
-		};
-		206B9C381BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD515F8B1BCDBC08000718FB;
-			remoteInfo = "libmoai-ios-image-webp";
-		};
-		206B9C3A1BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD70C20E18449935005CEBC0;
-			remoteInfo = "libmoai-ios-kontagent";
-		};
-		206B9C3C1BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CDD06BD01398822500AB0420;
-			remoteInfo = "libmoai-ios-luaext";
-		};
-		206B9C3E1BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD4C413F180A667300C02381;
-			remoteInfo = "libmoai-ios-mobile-app-tracker";
-		};
-		206B9C401BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CDD781CA1A11631E00AD133E;
-			remoteInfo = "libmoai-ios-motion";
-		};
-		206B9C421BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CDC097E11AE9C72E002E325F;
-			remoteInfo = "libmoai-ios-movie";
-		};
-		206B9C441BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 89BE6F06173AD06700DFE837;
-			remoteInfo = "libmoai-ios-sim";
-		};
-		206B9C461BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CDA4B9861808AC9D000129F9;
-			remoteInfo = "libmoai-ios-tapjoy";
-		};
-		206B9C481BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD07C3CD13A182AA00C9386C;
-			remoteInfo = "libmoai-ios-untz";
-		};
-		206B9C4A1BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD4C4174180A9AEA00C02381;
-			remoteInfo = "libmoai-ios-urban-airship";
-		};
-		206B9C4C1BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CDA4B9FC1808ACA6000129F9;
-			remoteInfo = "libmoai-ios-vungle";
-		};
-		206B9C4E1BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD04ACB414725568009C20E5;
-			remoteInfo = "libmoai-ios-zl-core";
-		};
-		206B9C501BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CDC1238317FA804C00FB64BB;
-			remoteInfo = "libmoai-ios-zl-crypto";
-		};
-		206B9C521BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CDF288BC17ED41CF00FD4F59;
-			remoteInfo = "libmoai-ios-zl-vfs";
-		};
-		206B9C541BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0324E2BB1356485F000ADC60;
-			remoteInfo = "libmoai-osx";
-		};
-		206B9C561BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD18459C1A626BD500FCCCE0;
-			remoteInfo = "libmoai-osx-apple";
-		};
-		206B9C581BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0324E2AF1356485F000ADC60;
-			remoteInfo = "libmoai-osx-3rdparty-core";
-		};
-		206B9C5A1BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD807B4A1831C3B500E658D9;
-			remoteInfo = "libmoai-osx-3rdparty-crypto";
-		};
-		206B9C5C1BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD32B4D819F9EDD10059D019;
-			remoteInfo = "libmoai-osx-3rdparty-sdl";
-		};
-		206B9C5E1BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CDA0DCA31A01B184002B71B6;
-			remoteInfo = "libmoai-osx-audio-sampler";
-		};
-		206B9C601BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 89BE737B173AD29200DFE837;
-			remoteInfo = "libmoai-osx-box2d";
-		};
-		206B9C621BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD95D4A51831D4E20080C34E;
-			remoteInfo = "libmoai-osx-crypto";
-		};
-		206B9C641BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CDDD30A51574AE0F00C410A0;
-			remoteInfo = "libmoai-osx-fmod-designer";
-		};
-		206B9C661BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CDE8A802155E42EF00C2DFF5;
-			remoteInfo = "libmoai-osx-fmod-ex";
-		};
-		206B9C681BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 89BE75DA173C121800DFE837;
-			remoteInfo = "libmoai-osx-http-client";
-		};
-		206B9C6A1BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 89BE769F173C160E00DFE837;
-			remoteInfo = "libmoai-osx-http-server";
-		};
-		206B9C6C1BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD515F1E1BCDB440000718FB;
-			remoteInfo = "libmoai-osx-image-jpg";
-		};
-		206B9C6E1BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD515F2D1BCDB45B000718FB;
-			remoteInfo = "libmoai-osx-image-png";
-		};
-		206B9C701BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD515F3C1BCDB467000718FB;
-			remoteInfo = "libmoai-osx-image-pvr";
-		};
-		206B9C721BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD515F4B1BCDB473000718FB;
-			remoteInfo = "libmoai-osx-image-webp";
-		};
-		206B9C741BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CDD06D87139882D900AB0420;
-			remoteInfo = "libmoai-osx-luaext";
-		};
-		206B9C761BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD42F3631A60A7CC001B6D72;
-			remoteInfo = "libmoai-osx-sdl";
-		};
-		206B9C781BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 89BE6F18173AD07100DFE837;
-			remoteInfo = "libmoai-osx-sim";
-		};
-		206B9C7A1BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD07C4E513A1918600C9386C;
-			remoteInfo = "libmoai-osx-untz";
-		};
-		206B9C7C1BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD04AE7F1472557F009C20E5;
-			remoteInfo = "libmoai-osx-zl-core";
-		};
-		206B9C7E1BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD807E981831C42100E658D9;
-			remoteInfo = "libmoai-osx-zl-crypto";
-		};
-		206B9C801BDAB6500021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD6D752517EE415D00964415;
-			remoteInfo = "libmoai-osx-zl-vfs";
-		};
 		206B9CF71BDABB1B0021D349 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -620,13 +214,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 206B9B081BDAB53F0021D349;
 			remoteInfo = "libmoai-osx-fmod-studio";
-		};
-		206B9CFB1BDABB1B0021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 3EDC16E519F6DD19007A7775;
-			remoteInfo = "libmoai-osx-all";
 		};
 		206B9D031BDABB2E0021D349 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -642,13 +229,6 @@
 			remoteGlobalIDString = 206B9AFE1BDAB53D0021D349;
 			remoteInfo = "libmoai-ios-fmod-studio";
 		};
-		206B9D071BDABB2E0021D349 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 3EDC171119F6DE00007A7775;
-			remoteInfo = "libmoai-ios-all";
-		};
 		206B9D3A1BDE48FD0021D349 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -663,96 +243,516 @@
 			remoteGlobalIDString = 206B9D1B1BDE37CA0021D349;
 			remoteInfo = "libmoai-osx-ct-util";
 		};
+		20993E8D1BDE94A4009D7CED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3EDC16E519F6DD19007A7775;
+			remoteInfo = "libmoai-osx-all";
+		};
+		20993ECB1BDE94AA009D7CED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3EDC171119F6DE00007A7775;
+			remoteInfo = "libmoai-ios-all";
+		};
+		20DA09001BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 03C2F6F4104DE130009A2D5D;
+			remoteInfo = "libmoai-ios";
+		};
+		20DA09021BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD257BA21A6255380057A53A;
+			remoteInfo = "libmoai-ios-apple";
+		};
+		20DA09041BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0379C5961333ECD800E89DDC;
+			remoteInfo = "libmoai-ios-3rdparty-core";
+		};
+		20DA09061BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDD480D117FA78AE00525B77;
+			remoteInfo = "libmoai-ios-3rdparty-crypto";
+		};
+		20DA09081BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD27BE0D191D9F44000A7770;
+			remoteInfo = "libmoai-ios-adcolony";
+		};
+		20DA090A1BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDA0DA041A01B111002B71B6;
+			remoteInfo = "libmoai-ios-audio-sampler";
+		};
+		20DA090C1BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDA4B7AE1808AC61000129F9;
+			remoteInfo = "libmoai-ios-billing";
+		};
+		20DA090E1BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 89BE74A1173AD2B600DFE837;
+			remoteInfo = "libmoai-ios-box2d";
+		};
+		20DA09101BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDA4B8241808AC6E000129F9;
+			remoteInfo = "libmoai-ios-chartboost";
+		};
+		20DA09121BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD5232BC1808ADF400B81720;
+			remoteInfo = "libmoai-ios-crittercism";
+		};
+		20DA09141BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD4C3A81180A623200C02381;
+			remoteInfo = "libmoai-ios-crypto";
+		};
+		20DA09161BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDA4B89A1808AC82000129F9;
+			remoteInfo = "libmoai-ios-facebook";
+		};
+		20DA09181BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD70C11C18441DD0005CEBC0;
+			remoteInfo = "libmoai-ios-flurry";
+		};
+		20DA091A1BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDDD30921574AE0000C410A0;
+			remoteInfo = "libmoai-ios-fmod-designer";
+		};
+		20DA091C1BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD5089F9155E3A1B0002FC3B;
+			remoteInfo = "libmoai-ios-fmod-ex";
+		};
+		20DA091E1BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDA4B9101808AC8F000129F9;
+			remoteInfo = "libmoai-ios-gamecenter";
+		};
+		20DA09201BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 89BE75F7173C126100DFE837;
+			remoteInfo = "libmoai-ios-http-client";
+		};
+		20DA09221BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 89BE7686173C15F100DFE837;
+			remoteInfo = "libmoai-ios-http-server";
+		};
+		20DA09241BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD515F5E1BCDBBEC000718FB;
+			remoteInfo = "libmoai-ios-image-jpg";
+		};
+		20DA09261BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD515F6D1BCDBBF8000718FB;
+			remoteInfo = "libmoai-ios-image-png";
+		};
+		20DA09281BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD515F7C1BCDBC00000718FB;
+			remoteInfo = "libmoai-ios-image-pvr";
+		};
+		20DA092A1BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD515F8B1BCDBC08000718FB;
+			remoteInfo = "libmoai-ios-image-webp";
+		};
+		20DA092C1BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD70C20E18449935005CEBC0;
+			remoteInfo = "libmoai-ios-kontagent";
+		};
+		20DA092E1BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDD06BD01398822500AB0420;
+			remoteInfo = "libmoai-ios-luaext";
+		};
+		20DA09301BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD4C413F180A667300C02381;
+			remoteInfo = "libmoai-ios-mobile-app-tracker";
+		};
+		20DA09321BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDD781CA1A11631E00AD133E;
+			remoteInfo = "libmoai-ios-motion";
+		};
+		20DA09341BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDC097E11AE9C72E002E325F;
+			remoteInfo = "libmoai-ios-movie";
+		};
+		20DA09361BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 89BE6F06173AD06700DFE837;
+			remoteInfo = "libmoai-ios-sim";
+		};
+		20DA09381BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDA4B9861808AC9D000129F9;
+			remoteInfo = "libmoai-ios-tapjoy";
+		};
+		20DA093A1BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD07C3CD13A182AA00C9386C;
+			remoteInfo = "libmoai-ios-untz";
+		};
+		20DA093C1BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD4C4174180A9AEA00C02381;
+			remoteInfo = "libmoai-ios-urban-airship";
+		};
+		20DA093E1BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDA4B9FC1808ACA6000129F9;
+			remoteInfo = "libmoai-ios-vungle";
+		};
+		20DA09401BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD04ACB414725568009C20E5;
+			remoteInfo = "libmoai-ios-zl-core";
+		};
+		20DA09421BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDC1238317FA804C00FB64BB;
+			remoteInfo = "libmoai-ios-zl-crypto";
+		};
+		20DA09441BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDF288BC17ED41CF00FD4F59;
+			remoteInfo = "libmoai-ios-zl-vfs";
+		};
+		20DA09461BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0324E2BB1356485F000ADC60;
+			remoteInfo = "libmoai-osx";
+		};
+		20DA09481BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD18459C1A626BD500FCCCE0;
+			remoteInfo = "libmoai-osx-apple";
+		};
+		20DA094A1BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0324E2AF1356485F000ADC60;
+			remoteInfo = "libmoai-osx-3rdparty-core";
+		};
+		20DA094C1BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD807B4A1831C3B500E658D9;
+			remoteInfo = "libmoai-osx-3rdparty-crypto";
+		};
+		20DA094E1BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD32B4D819F9EDD10059D019;
+			remoteInfo = "libmoai-osx-3rdparty-sdl";
+		};
+		20DA09501BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDA0DCA31A01B184002B71B6;
+			remoteInfo = "libmoai-osx-audio-sampler";
+		};
+		20DA09521BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 89BE737B173AD29200DFE837;
+			remoteInfo = "libmoai-osx-box2d";
+		};
+		20DA09541BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD95D4A51831D4E20080C34E;
+			remoteInfo = "libmoai-osx-crypto";
+		};
+		20DA09561BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDDD30A51574AE0F00C410A0;
+			remoteInfo = "libmoai-osx-fmod-designer";
+		};
+		20DA09581BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDE8A802155E42EF00C2DFF5;
+			remoteInfo = "libmoai-osx-fmod-ex";
+		};
+		20DA095A1BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 89BE75DA173C121800DFE837;
+			remoteInfo = "libmoai-osx-http-client";
+		};
+		20DA095C1BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 89BE769F173C160E00DFE837;
+			remoteInfo = "libmoai-osx-http-server";
+		};
+		20DA095E1BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD515F1E1BCDB440000718FB;
+			remoteInfo = "libmoai-osx-image-jpg";
+		};
+		20DA09601BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD515F2D1BCDB45B000718FB;
+			remoteInfo = "libmoai-osx-image-png";
+		};
+		20DA09621BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD515F3C1BCDB467000718FB;
+			remoteInfo = "libmoai-osx-image-pvr";
+		};
+		20DA09641BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD515F4B1BCDB473000718FB;
+			remoteInfo = "libmoai-osx-image-webp";
+		};
+		20DA09661BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDD06D87139882D900AB0420;
+			remoteInfo = "libmoai-osx-luaext";
+		};
+		20DA09681BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD42F3631A60A7CC001B6D72;
+			remoteInfo = "libmoai-osx-sdl";
+		};
+		20DA096A1BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 89BE6F18173AD07100DFE837;
+			remoteInfo = "libmoai-osx-sim";
+		};
+		20DA096C1BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD07C4E513A1918600C9386C;
+			remoteInfo = "libmoai-osx-untz";
+		};
+		20DA096E1BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD04AE7F1472557F009C20E5;
+			remoteInfo = "libmoai-osx-zl-core";
+		};
+		20DA09701BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD807E981831C42100E658D9;
+			remoteInfo = "libmoai-osx-zl-crypto";
+		};
+		20DA09721BDE93C50070C61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD6D752517EE415D00964415;
+			remoteInfo = "libmoai-osx-zl-vfs";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		206B9AC51BDAB4F60021D349 /* libmoai-osx-spine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-osx-spine.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		206B9ACF1BDAB5000021D349 /* libmoai-ios-spine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios-spine.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		206B9AD11BDAB5340021D349 /* headers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = headers.h; sourceTree = "<group>"; };
-		206B9AD21BDAB5340021D349 /* host.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = host.cpp; sourceTree = "<group>"; };
-		206B9AD31BDAB5340021D349 /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = host.h; sourceTree = "<group>"; };
-		206B9AD41BDAB5340021D349 /* MOAISpine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAISpine.cpp; sourceTree = "<group>"; };
-		206B9AD51BDAB5340021D349 /* MOAISpine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAISpine.h; sourceTree = "<group>"; };
-		206B9AD61BDAB5340021D349 /* MOAISpineBone.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAISpineBone.cpp; sourceTree = "<group>"; };
-		206B9AD71BDAB5340021D349 /* MOAISpineBone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAISpineBone.h; sourceTree = "<group>"; };
-		206B9AD81BDAB5340021D349 /* MOAISpineSkeleton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAISpineSkeleton.cpp; sourceTree = "<group>"; };
-		206B9AD91BDAB5340021D349 /* MOAISpineSkeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAISpineSkeleton.h; sourceTree = "<group>"; };
-		206B9ADA1BDAB5340021D349 /* MOAISpineSkeletonData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAISpineSkeletonData.cpp; sourceTree = "<group>"; };
-		206B9ADB1BDAB5340021D349 /* MOAISpineSkeletonData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAISpineSkeletonData.h; sourceTree = "<group>"; };
-		206B9ADC1BDAB5340021D349 /* MOAISpineSlot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAISpineSlot.cpp; sourceTree = "<group>"; };
-		206B9ADD1BDAB5340021D349 /* MOAISpineSlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAISpineSlot.h; sourceTree = "<group>"; };
-		206B9ADE1BDAB5340021D349 /* pch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pch.cpp; sourceTree = "<group>"; };
-		206B9ADF1BDAB5340021D349 /* pch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pch.h; sourceTree = "<group>"; };
 		206B9B071BDAB53D0021D349 /* libmoai-ios-fmod-studio.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios-fmod-studio.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		206B9B111BDAB53F0021D349 /* libmoai-osx-fmod-studio.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-osx-fmod-studio.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		206B9B151BDAB5E10021D349 /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
-		206B9B161BDAB5E10021D349 /* AnimationState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationState.h; sourceTree = "<group>"; };
-		206B9B171BDAB5E10021D349 /* AnimationStateData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationStateData.h; sourceTree = "<group>"; };
-		206B9B181BDAB5E10021D349 /* Atlas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Atlas.h; sourceTree = "<group>"; };
-		206B9B191BDAB5E10021D349 /* AtlasAttachmentLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtlasAttachmentLoader.h; sourceTree = "<group>"; };
-		206B9B1A1BDAB5E10021D349 /* Attachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Attachment.h; sourceTree = "<group>"; };
-		206B9B1B1BDAB5E10021D349 /* AttachmentLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttachmentLoader.h; sourceTree = "<group>"; };
-		206B9B1C1BDAB5E10021D349 /* Bone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bone.h; sourceTree = "<group>"; };
-		206B9B1D1BDAB5E10021D349 /* BoneData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoneData.h; sourceTree = "<group>"; };
-		206B9B1E1BDAB5E10021D349 /* BoundingBoxAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoundingBoxAttachment.h; sourceTree = "<group>"; };
-		206B9B1F1BDAB5E10021D349 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
-		206B9B201BDAB5E10021D349 /* EventData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventData.h; sourceTree = "<group>"; };
-		206B9B211BDAB5E10021D349 /* extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = extension.h; sourceTree = "<group>"; };
-		206B9B221BDAB5E10021D349 /* IkConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IkConstraint.h; sourceTree = "<group>"; };
-		206B9B231BDAB5E10021D349 /* IkConstraintData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IkConstraintData.h; sourceTree = "<group>"; };
-		206B9B241BDAB5E10021D349 /* MeshAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeshAttachment.h; sourceTree = "<group>"; };
-		206B9B251BDAB5E10021D349 /* RegionAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegionAttachment.h; sourceTree = "<group>"; };
-		206B9B261BDAB5E10021D349 /* Skeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Skeleton.h; sourceTree = "<group>"; };
-		206B9B271BDAB5E10021D349 /* SkeletonBounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkeletonBounds.h; sourceTree = "<group>"; };
-		206B9B281BDAB5E10021D349 /* SkeletonData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkeletonData.h; sourceTree = "<group>"; };
-		206B9B291BDAB5E10021D349 /* SkeletonJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkeletonJson.h; sourceTree = "<group>"; };
-		206B9B2A1BDAB5E10021D349 /* Skin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Skin.h; sourceTree = "<group>"; };
-		206B9B2B1BDAB5E10021D349 /* SkinnedMeshAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkinnedMeshAttachment.h; sourceTree = "<group>"; };
-		206B9B2C1BDAB5E10021D349 /* Slot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Slot.h; sourceTree = "<group>"; };
-		206B9B2D1BDAB5E10021D349 /* SlotData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlotData.h; sourceTree = "<group>"; };
-		206B9B2E1BDAB5E10021D349 /* spine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = spine.h; sourceTree = "<group>"; };
-		206B9B651BDAB5E70021D349 /* Animation.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Animation.c; sourceTree = "<group>"; };
-		206B9B661BDAB5E70021D349 /* AnimationState.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AnimationState.c; sourceTree = "<group>"; };
-		206B9B671BDAB5E70021D349 /* AnimationStateData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AnimationStateData.c; sourceTree = "<group>"; };
-		206B9B681BDAB5E70021D349 /* Atlas.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Atlas.c; sourceTree = "<group>"; };
-		206B9B691BDAB5E70021D349 /* AtlasAttachmentLoader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AtlasAttachmentLoader.c; sourceTree = "<group>"; };
-		206B9B6A1BDAB5E70021D349 /* Attachment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Attachment.c; sourceTree = "<group>"; };
-		206B9B6B1BDAB5E70021D349 /* AttachmentLoader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AttachmentLoader.c; sourceTree = "<group>"; };
-		206B9B6C1BDAB5E70021D349 /* Bone.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Bone.c; sourceTree = "<group>"; };
-		206B9B6D1BDAB5E70021D349 /* BoneData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BoneData.c; sourceTree = "<group>"; };
-		206B9B6E1BDAB5E70021D349 /* BoundingBoxAttachment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BoundingBoxAttachment.c; sourceTree = "<group>"; };
-		206B9B6F1BDAB5E70021D349 /* Event.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Event.c; sourceTree = "<group>"; };
-		206B9B701BDAB5E70021D349 /* EventData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EventData.c; sourceTree = "<group>"; };
-		206B9B711BDAB5E70021D349 /* extension.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = extension.c; sourceTree = "<group>"; };
-		206B9B721BDAB5E70021D349 /* IkConstraint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = IkConstraint.c; sourceTree = "<group>"; };
-		206B9B731BDAB5E70021D349 /* IkConstraintData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = IkConstraintData.c; sourceTree = "<group>"; };
-		206B9B741BDAB5E70021D349 /* Json.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Json.c; sourceTree = "<group>"; };
-		206B9B751BDAB5E70021D349 /* Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Json.h; sourceTree = "<group>"; };
-		206B9B761BDAB5E70021D349 /* MeshAttachment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MeshAttachment.c; sourceTree = "<group>"; };
-		206B9B771BDAB5E70021D349 /* RegionAttachment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = RegionAttachment.c; sourceTree = "<group>"; };
-		206B9B781BDAB5E70021D349 /* Skeleton.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Skeleton.c; sourceTree = "<group>"; };
-		206B9B791BDAB5E70021D349 /* SkeletonBounds.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SkeletonBounds.c; sourceTree = "<group>"; };
-		206B9B7A1BDAB5E70021D349 /* SkeletonData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SkeletonData.c; sourceTree = "<group>"; };
-		206B9B7B1BDAB5E70021D349 /* SkeletonJson.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SkeletonJson.c; sourceTree = "<group>"; };
-		206B9B7C1BDAB5E70021D349 /* Skin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Skin.c; sourceTree = "<group>"; };
-		206B9B7D1BDAB5E70021D349 /* SkinnedMeshAttachment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SkinnedMeshAttachment.c; sourceTree = "<group>"; };
-		206B9B7E1BDAB5E70021D349 /* Slot.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Slot.c; sourceTree = "<group>"; };
-		206B9B7F1BDAB5E70021D349 /* SlotData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SlotData.c; sourceTree = "<group>"; };
-		206B9BB71BDAB5FF0021D349 /* host.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = host.cpp; sourceTree = "<group>"; };
-		206B9BB81BDAB5FF0021D349 /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = host.h; sourceTree = "<group>"; };
-		206B9BB91BDAB5FF0021D349 /* MOAIFmodStudio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIFmodStudio.cpp; sourceTree = "<group>"; };
-		206B9BBA1BDAB5FF0021D349 /* MOAIFmodStudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIFmodStudio.h; sourceTree = "<group>"; };
-		206B9BBB1BDAB5FF0021D349 /* MOAIFmodStudioChannel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIFmodStudioChannel.cpp; sourceTree = "<group>"; };
-		206B9BBC1BDAB5FF0021D349 /* MOAIFmodStudioChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIFmodStudioChannel.h; sourceTree = "<group>"; };
-		206B9BBD1BDAB5FF0021D349 /* MOAIFmodStudioSound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIFmodStudioSound.cpp; sourceTree = "<group>"; };
-		206B9BBE1BDAB5FF0021D349 /* MOAIFmodStudioSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIFmodStudioSound.h; sourceTree = "<group>"; };
-		206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libmoai.xcodeproj; path = ../libmoai/libmoai.xcodeproj; sourceTree = "<group>"; };
 		206B9D1A1BDE37C80021D349 /* libmoai-ios-ct-util.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios-ct-util.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		206B9D2C1BDE37CA0021D349 /* libmoai-osx-ct-util.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-osx-ct-util.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		206B9D2E1BDE382A0021D349 /* CTUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CTUtil.cpp; sourceTree = "<group>"; };
-		206B9D2F1BDE382A0021D349 /* CTUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTUtil.h; sourceTree = "<group>"; };
-		206B9D301BDE382A0021D349 /* host.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = host.cpp; sourceTree = "<group>"; };
-		206B9D311BDE382A0021D349 /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = host.h; sourceTree = "<group>"; };
+		206B9FFF1BDE92C40021D349 /* headers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = headers.h; sourceTree = "<group>"; };
+		206BA0001BDE92C40021D349 /* host.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = host.cpp; sourceTree = "<group>"; };
+		206BA0011BDE92C40021D349 /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = host.h; sourceTree = "<group>"; };
+		206BA0021BDE92C40021D349 /* MOAISpine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAISpine.cpp; sourceTree = "<group>"; };
+		206BA0031BDE92C40021D349 /* MOAISpine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAISpine.h; sourceTree = "<group>"; };
+		206BA0041BDE92C40021D349 /* MOAISpineBone.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAISpineBone.cpp; sourceTree = "<group>"; };
+		206BA0051BDE92C40021D349 /* MOAISpineBone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAISpineBone.h; sourceTree = "<group>"; };
+		206BA0061BDE92C40021D349 /* MOAISpineSkeleton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAISpineSkeleton.cpp; sourceTree = "<group>"; };
+		206BA0071BDE92C40021D349 /* MOAISpineSkeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAISpineSkeleton.h; sourceTree = "<group>"; };
+		206BA0081BDE92C40021D349 /* MOAISpineSkeletonData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAISpineSkeletonData.cpp; sourceTree = "<group>"; };
+		206BA0091BDE92C40021D349 /* MOAISpineSkeletonData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAISpineSkeletonData.h; sourceTree = "<group>"; };
+		206BA00A1BDE92C40021D349 /* MOAISpineSlot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAISpineSlot.cpp; sourceTree = "<group>"; };
+		206BA00B1BDE92C40021D349 /* MOAISpineSlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAISpineSlot.h; sourceTree = "<group>"; };
+		206BA00C1BDE92C40021D349 /* pch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pch.cpp; sourceTree = "<group>"; };
+		206BA00D1BDE92C40021D349 /* pch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pch.h; sourceTree = "<group>"; };
+		206BA02D1BDE92CF0021D349 /* host.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = host.cpp; sourceTree = "<group>"; };
+		206BA02E1BDE92CF0021D349 /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = host.h; sourceTree = "<group>"; };
+		206BA02F1BDE92CF0021D349 /* MOAIFmodStudio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIFmodStudio.cpp; sourceTree = "<group>"; };
+		206BA0301BDE92CF0021D349 /* MOAIFmodStudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIFmodStudio.h; sourceTree = "<group>"; };
+		206BA0311BDE92CF0021D349 /* MOAIFmodStudioChannel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIFmodStudioChannel.cpp; sourceTree = "<group>"; };
+		206BA0321BDE92CF0021D349 /* MOAIFmodStudioChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIFmodStudioChannel.h; sourceTree = "<group>"; };
+		206BA0331BDE92CF0021D349 /* MOAIFmodStudioSound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIFmodStudioSound.cpp; sourceTree = "<group>"; };
+		206BA0341BDE92CF0021D349 /* MOAIFmodStudioSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIFmodStudioSound.h; sourceTree = "<group>"; };
+		206BA0461BDE92D60021D349 /* CTUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CTUtil.cpp; sourceTree = "<group>"; };
+		206BA0471BDE92D60021D349 /* CTUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTUtil.h; sourceTree = "<group>"; };
+		206BA0481BDE92D60021D349 /* host.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = host.cpp; sourceTree = "<group>"; };
+		206BA0491BDE92D60021D349 /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = host.h; sourceTree = "<group>"; };
+		20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libmoai.xcodeproj; path = ../../xcode/libmoai/libmoai.xcodeproj; sourceTree = "<group>"; };
+		20DA09761BDE93FE0070C61F /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
+		20DA09771BDE93FE0070C61F /* AnimationState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationState.h; sourceTree = "<group>"; };
+		20DA09781BDE93FE0070C61F /* AnimationStateData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationStateData.h; sourceTree = "<group>"; };
+		20DA09791BDE93FE0070C61F /* Atlas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Atlas.h; sourceTree = "<group>"; };
+		20DA097A1BDE93FE0070C61F /* AtlasAttachmentLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtlasAttachmentLoader.h; sourceTree = "<group>"; };
+		20DA097B1BDE93FE0070C61F /* Attachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Attachment.h; sourceTree = "<group>"; };
+		20DA097C1BDE93FE0070C61F /* AttachmentLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttachmentLoader.h; sourceTree = "<group>"; };
+		20DA097D1BDE93FE0070C61F /* Bone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bone.h; sourceTree = "<group>"; };
+		20DA097E1BDE93FE0070C61F /* BoneData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoneData.h; sourceTree = "<group>"; };
+		20DA097F1BDE93FE0070C61F /* BoundingBoxAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoundingBoxAttachment.h; sourceTree = "<group>"; };
+		20DA09801BDE93FE0070C61F /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		20DA09811BDE93FE0070C61F /* EventData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventData.h; sourceTree = "<group>"; };
+		20DA09821BDE93FE0070C61F /* extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = extension.h; sourceTree = "<group>"; };
+		20DA09831BDE93FE0070C61F /* IkConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IkConstraint.h; sourceTree = "<group>"; };
+		20DA09841BDE93FE0070C61F /* IkConstraintData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IkConstraintData.h; sourceTree = "<group>"; };
+		20DA09851BDE93FE0070C61F /* MeshAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeshAttachment.h; sourceTree = "<group>"; };
+		20DA09861BDE93FE0070C61F /* RegionAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegionAttachment.h; sourceTree = "<group>"; };
+		20DA09871BDE93FE0070C61F /* Skeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Skeleton.h; sourceTree = "<group>"; };
+		20DA09881BDE93FE0070C61F /* SkeletonBounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkeletonBounds.h; sourceTree = "<group>"; };
+		20DA09891BDE93FE0070C61F /* SkeletonData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkeletonData.h; sourceTree = "<group>"; };
+		20DA098A1BDE93FE0070C61F /* SkeletonJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkeletonJson.h; sourceTree = "<group>"; };
+		20DA098B1BDE93FE0070C61F /* Skin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Skin.h; sourceTree = "<group>"; };
+		20DA098C1BDE93FE0070C61F /* SkinnedMeshAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkinnedMeshAttachment.h; sourceTree = "<group>"; };
+		20DA098D1BDE93FE0070C61F /* Slot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Slot.h; sourceTree = "<group>"; };
+		20DA098E1BDE93FE0070C61F /* SlotData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlotData.h; sourceTree = "<group>"; };
+		20DA098F1BDE93FE0070C61F /* spine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = spine.h; sourceTree = "<group>"; };
+		20DA09C61BDE94050070C61F /* Animation.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Animation.c; sourceTree = "<group>"; };
+		20DA09C71BDE94050070C61F /* AnimationState.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AnimationState.c; sourceTree = "<group>"; };
+		20DA09C81BDE94050070C61F /* AnimationStateData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AnimationStateData.c; sourceTree = "<group>"; };
+		20DA09C91BDE94050070C61F /* Atlas.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Atlas.c; sourceTree = "<group>"; };
+		20DA09CA1BDE94050070C61F /* AtlasAttachmentLoader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AtlasAttachmentLoader.c; sourceTree = "<group>"; };
+		20DA09CB1BDE94050070C61F /* Attachment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Attachment.c; sourceTree = "<group>"; };
+		20DA09CC1BDE94050070C61F /* AttachmentLoader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AttachmentLoader.c; sourceTree = "<group>"; };
+		20DA09CD1BDE94050070C61F /* Bone.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Bone.c; sourceTree = "<group>"; };
+		20DA09CE1BDE94050070C61F /* BoneData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BoneData.c; sourceTree = "<group>"; };
+		20DA09CF1BDE94050070C61F /* BoundingBoxAttachment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BoundingBoxAttachment.c; sourceTree = "<group>"; };
+		20DA09D01BDE94050070C61F /* Event.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Event.c; sourceTree = "<group>"; };
+		20DA09D11BDE94050070C61F /* EventData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EventData.c; sourceTree = "<group>"; };
+		20DA09D21BDE94050070C61F /* extension.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = extension.c; sourceTree = "<group>"; };
+		20DA09D31BDE94050070C61F /* IkConstraint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = IkConstraint.c; sourceTree = "<group>"; };
+		20DA09D41BDE94050070C61F /* IkConstraintData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = IkConstraintData.c; sourceTree = "<group>"; };
+		20DA09D51BDE94050070C61F /* Json.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Json.c; sourceTree = "<group>"; };
+		20DA09D61BDE94050070C61F /* Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Json.h; sourceTree = "<group>"; };
+		20DA09D71BDE94050070C61F /* MeshAttachment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MeshAttachment.c; sourceTree = "<group>"; };
+		20DA09D81BDE94050070C61F /* RegionAttachment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = RegionAttachment.c; sourceTree = "<group>"; };
+		20DA09D91BDE94050070C61F /* Skeleton.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Skeleton.c; sourceTree = "<group>"; };
+		20DA09DA1BDE94050070C61F /* SkeletonBounds.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SkeletonBounds.c; sourceTree = "<group>"; };
+		20DA09DB1BDE94050070C61F /* SkeletonData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SkeletonData.c; sourceTree = "<group>"; };
+		20DA09DC1BDE94050070C61F /* SkeletonJson.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SkeletonJson.c; sourceTree = "<group>"; };
+		20DA09DD1BDE94050070C61F /* Skin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Skin.c; sourceTree = "<group>"; };
+		20DA09DE1BDE94050070C61F /* SkinnedMeshAttachment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SkinnedMeshAttachment.c; sourceTree = "<group>"; };
+		20DA09DF1BDE94050070C61F /* Slot.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Slot.c; sourceTree = "<group>"; };
+		20DA09E01BDE94050070C61F /* SlotData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SlotData.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -812,9 +812,9 @@
 		0324E4F113564BC7000ADC60 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				206B9D2D1BDE382A0021D349 /* ct-util */,
-				206B9BB61BDAB5FF0021D349 /* moai-fmod-studio */,
-				206B9AD01BDAB5340021D349 /* moai-spine */,
+				206BA0451BDE92D60021D349 /* ct-util */,
+				206B9FFE1BDE92C40021D349 /* moai-spine */,
+				206BA02C1BDE92CF0021D349 /* moai-fmod-studio */,
 			);
 			name = src;
 			path = ../../src;
@@ -833,217 +833,217 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		206B9AD01BDAB5340021D349 /* moai-spine */ = {
-			isa = PBXGroup;
-			children = (
-				206B9AD11BDAB5340021D349 /* headers.h */,
-				206B9AD21BDAB5340021D349 /* host.cpp */,
-				206B9AD31BDAB5340021D349 /* host.h */,
-				206B9AD41BDAB5340021D349 /* MOAISpine.cpp */,
-				206B9AD51BDAB5340021D349 /* MOAISpine.h */,
-				206B9AD61BDAB5340021D349 /* MOAISpineBone.cpp */,
-				206B9AD71BDAB5340021D349 /* MOAISpineBone.h */,
-				206B9AD81BDAB5340021D349 /* MOAISpineSkeleton.cpp */,
-				206B9AD91BDAB5340021D349 /* MOAISpineSkeleton.h */,
-				206B9ADA1BDAB5340021D349 /* MOAISpineSkeletonData.cpp */,
-				206B9ADB1BDAB5340021D349 /* MOAISpineSkeletonData.h */,
-				206B9ADC1BDAB5340021D349 /* MOAISpineSlot.cpp */,
-				206B9ADD1BDAB5340021D349 /* MOAISpineSlot.h */,
-				206B9ADE1BDAB5340021D349 /* pch.cpp */,
-				206B9ADF1BDAB5340021D349 /* pch.h */,
-			);
-			path = "moai-spine";
-			sourceTree = "<group>";
-		};
 		206B9B121BDAB5D70021D349 /* spine-c */ = {
 			isa = PBXGroup;
 			children = (
-				206B9B131BDAB5E10021D349 /* include */,
-				206B9B631BDAB5E70021D349 /* src */,
+				20DA09C41BDE94050070C61F /* src */,
+				20DA09741BDE93FE0070C61F /* include */,
 			);
 			name = "spine-c";
 			sourceTree = "<group>";
 		};
-		206B9B131BDAB5E10021D349 /* include */ = {
+		206B9FFE1BDE92C40021D349 /* moai-spine */ = {
 			isa = PBXGroup;
 			children = (
-				206B9B141BDAB5E10021D349 /* spine */,
+				206B9FFF1BDE92C40021D349 /* headers.h */,
+				206BA0001BDE92C40021D349 /* host.cpp */,
+				206BA0011BDE92C40021D349 /* host.h */,
+				206BA0021BDE92C40021D349 /* MOAISpine.cpp */,
+				206BA0031BDE92C40021D349 /* MOAISpine.h */,
+				206BA0041BDE92C40021D349 /* MOAISpineBone.cpp */,
+				206BA0051BDE92C40021D349 /* MOAISpineBone.h */,
+				206BA0061BDE92C40021D349 /* MOAISpineSkeleton.cpp */,
+				206BA0071BDE92C40021D349 /* MOAISpineSkeleton.h */,
+				206BA0081BDE92C40021D349 /* MOAISpineSkeletonData.cpp */,
+				206BA0091BDE92C40021D349 /* MOAISpineSkeletonData.h */,
+				206BA00A1BDE92C40021D349 /* MOAISpineSlot.cpp */,
+				206BA00B1BDE92C40021D349 /* MOAISpineSlot.h */,
+				206BA00C1BDE92C40021D349 /* pch.cpp */,
+				206BA00D1BDE92C40021D349 /* pch.h */,
+			);
+			path = "moai-spine";
+			sourceTree = "<group>";
+		};
+		206BA02C1BDE92CF0021D349 /* moai-fmod-studio */ = {
+			isa = PBXGroup;
+			children = (
+				206BA02D1BDE92CF0021D349 /* host.cpp */,
+				206BA02E1BDE92CF0021D349 /* host.h */,
+				206BA02F1BDE92CF0021D349 /* MOAIFmodStudio.cpp */,
+				206BA0301BDE92CF0021D349 /* MOAIFmodStudio.h */,
+				206BA0311BDE92CF0021D349 /* MOAIFmodStudioChannel.cpp */,
+				206BA0321BDE92CF0021D349 /* MOAIFmodStudioChannel.h */,
+				206BA0331BDE92CF0021D349 /* MOAIFmodStudioSound.cpp */,
+				206BA0341BDE92CF0021D349 /* MOAIFmodStudioSound.h */,
+			);
+			path = "moai-fmod-studio";
+			sourceTree = "<group>";
+		};
+		206BA0451BDE92D60021D349 /* ct-util */ = {
+			isa = PBXGroup;
+			children = (
+				206BA0461BDE92D60021D349 /* CTUtil.cpp */,
+				206BA0471BDE92D60021D349 /* CTUtil.h */,
+				206BA0481BDE92D60021D349 /* host.cpp */,
+				206BA0491BDE92D60021D349 /* host.h */,
+			);
+			path = "ct-util";
+			sourceTree = "<group>";
+		};
+		20DA08C21BDE93C30070C61F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				20DA09011BDE93C50070C61F /* libmoai-ios.a */,
+				20DA09031BDE93C50070C61F /* libmoai-ios-apple.a */,
+				20DA09051BDE93C50070C61F /* libmoai-ios-3rdparty-core.a */,
+				20DA09071BDE93C50070C61F /* libmoai-ios-3rdparty-crypto.a */,
+				20DA09091BDE93C50070C61F /* libmoai-ios-adcolony.a */,
+				20DA090B1BDE93C50070C61F /* libmoai-ios-audio-sampler.a */,
+				20DA090D1BDE93C50070C61F /* libmoai-ios-billing.a */,
+				20DA090F1BDE93C50070C61F /* libmoai-ios-box2d.a */,
+				20DA09111BDE93C50070C61F /* libmoai-ios-chartboost.a */,
+				20DA09131BDE93C50070C61F /* libmoai-ios-crittercism.a */,
+				20DA09151BDE93C50070C61F /* libmoai-ios-crypto.a */,
+				20DA09171BDE93C50070C61F /* libmoai-ios-facebook.a */,
+				20DA09191BDE93C50070C61F /* libmoai-ios-flurry.a */,
+				20DA091B1BDE93C50070C61F /* libmoai-ios-fmod-designer.a */,
+				20DA091D1BDE93C50070C61F /* libmoai-ios-fmod-ex.a */,
+				20DA091F1BDE93C50070C61F /* libmoai-ios-gamecenter.a */,
+				20DA09211BDE93C50070C61F /* libmoai-ios-http-client.a */,
+				20DA09231BDE93C50070C61F /* libmoai-ios-http-server.a */,
+				20DA09251BDE93C50070C61F /* libmoai-ios-image-jpg.a */,
+				20DA09271BDE93C50070C61F /* libmoai-ios-image-png.a */,
+				20DA09291BDE93C50070C61F /* libmoai-ios-image-pvr.a */,
+				20DA092B1BDE93C50070C61F /* libmoai-ios-image-webp.a */,
+				20DA092D1BDE93C50070C61F /* libmoai-ios-kontagent.a */,
+				20DA092F1BDE93C50070C61F /* libmoai-ios-luaext.a */,
+				20DA09311BDE93C50070C61F /* libmoai-ios-mobile-app-tracker.a */,
+				20DA09331BDE93C50070C61F /* libmoai-ios-motion.a */,
+				20DA09351BDE93C50070C61F /* libmoai-ios-movie.a */,
+				20DA09371BDE93C50070C61F /* libmoai-ios-sim.a */,
+				20DA09391BDE93C50070C61F /* libmoai-ios-tapjoy.a */,
+				20DA093B1BDE93C50070C61F /* libmoai-ios-untz.a */,
+				20DA093D1BDE93C50070C61F /* libmoai-ios-urban-airship.a */,
+				20DA093F1BDE93C50070C61F /* libmoai-ios-vungle.a */,
+				20DA09411BDE93C50070C61F /* libmoai-ios-zl-core.a */,
+				20DA09431BDE93C50070C61F /* libmoai-ios-zl-crypto.a */,
+				20DA09451BDE93C50070C61F /* libmoai-ios-zl-vfs.a */,
+				20DA09471BDE93C50070C61F /* libmoai-osx.a */,
+				20DA09491BDE93C50070C61F /* libmoai-osx-apple.a */,
+				20DA094B1BDE93C50070C61F /* libmoai-osx-3rdparty-core.a */,
+				20DA094D1BDE93C50070C61F /* libmoai-osx-3rdparty-crypto.a */,
+				20DA094F1BDE93C50070C61F /* libmoai-osx-3rdparty-sdl.a */,
+				20DA09511BDE93C50070C61F /* libmoai-osx-audio-sampler.a */,
+				20DA09531BDE93C50070C61F /* libmoai-osx-box2d.a */,
+				20DA09551BDE93C50070C61F /* libmoai-osx-crypto.a */,
+				20DA09571BDE93C50070C61F /* libmoai-osx-fmod-designer.a */,
+				20DA09591BDE93C50070C61F /* libmoai-osx-fmod-ex.a */,
+				20DA095B1BDE93C50070C61F /* libmoai-osx-http-client.a */,
+				20DA095D1BDE93C50070C61F /* libmoai-osx-http-server.a */,
+				20DA095F1BDE93C50070C61F /* libmoai-osx-image-jpg.a */,
+				20DA09611BDE93C50070C61F /* libmoai-osx-image-png.a */,
+				20DA09631BDE93C50070C61F /* libmoai-osx-image-pvr.a */,
+				20DA09651BDE93C50070C61F /* libmoai-osx-image-webp.a */,
+				20DA09671BDE93C50070C61F /* libmoai-osx-luaext.a */,
+				20DA09691BDE93C50070C61F /* libmoai-osx-sdl.a */,
+				20DA096B1BDE93C50070C61F /* libmoai-osx-sim.a */,
+				20DA096D1BDE93C50070C61F /* libmoai-osx-untz.a */,
+				20DA096F1BDE93C50070C61F /* libmoai-osx-zl-core.a */,
+				20DA09711BDE93C50070C61F /* libmoai-osx-zl-crypto.a */,
+				20DA09731BDE93C50070C61F /* libmoai-osx-zl-vfs.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		20DA09741BDE93FE0070C61F /* include */ = {
+			isa = PBXGroup;
+			children = (
+				20DA09751BDE93FE0070C61F /* spine */,
 			);
 			name = include;
 			path = "../../3rdparty/spine-c/include";
 			sourceTree = "<group>";
 		};
-		206B9B141BDAB5E10021D349 /* spine */ = {
+		20DA09751BDE93FE0070C61F /* spine */ = {
 			isa = PBXGroup;
 			children = (
-				206B9B151BDAB5E10021D349 /* Animation.h */,
-				206B9B161BDAB5E10021D349 /* AnimationState.h */,
-				206B9B171BDAB5E10021D349 /* AnimationStateData.h */,
-				206B9B181BDAB5E10021D349 /* Atlas.h */,
-				206B9B191BDAB5E10021D349 /* AtlasAttachmentLoader.h */,
-				206B9B1A1BDAB5E10021D349 /* Attachment.h */,
-				206B9B1B1BDAB5E10021D349 /* AttachmentLoader.h */,
-				206B9B1C1BDAB5E10021D349 /* Bone.h */,
-				206B9B1D1BDAB5E10021D349 /* BoneData.h */,
-				206B9B1E1BDAB5E10021D349 /* BoundingBoxAttachment.h */,
-				206B9B1F1BDAB5E10021D349 /* Event.h */,
-				206B9B201BDAB5E10021D349 /* EventData.h */,
-				206B9B211BDAB5E10021D349 /* extension.h */,
-				206B9B221BDAB5E10021D349 /* IkConstraint.h */,
-				206B9B231BDAB5E10021D349 /* IkConstraintData.h */,
-				206B9B241BDAB5E10021D349 /* MeshAttachment.h */,
-				206B9B251BDAB5E10021D349 /* RegionAttachment.h */,
-				206B9B261BDAB5E10021D349 /* Skeleton.h */,
-				206B9B271BDAB5E10021D349 /* SkeletonBounds.h */,
-				206B9B281BDAB5E10021D349 /* SkeletonData.h */,
-				206B9B291BDAB5E10021D349 /* SkeletonJson.h */,
-				206B9B2A1BDAB5E10021D349 /* Skin.h */,
-				206B9B2B1BDAB5E10021D349 /* SkinnedMeshAttachment.h */,
-				206B9B2C1BDAB5E10021D349 /* Slot.h */,
-				206B9B2D1BDAB5E10021D349 /* SlotData.h */,
-				206B9B2E1BDAB5E10021D349 /* spine.h */,
+				20DA09761BDE93FE0070C61F /* Animation.h */,
+				20DA09771BDE93FE0070C61F /* AnimationState.h */,
+				20DA09781BDE93FE0070C61F /* AnimationStateData.h */,
+				20DA09791BDE93FE0070C61F /* Atlas.h */,
+				20DA097A1BDE93FE0070C61F /* AtlasAttachmentLoader.h */,
+				20DA097B1BDE93FE0070C61F /* Attachment.h */,
+				20DA097C1BDE93FE0070C61F /* AttachmentLoader.h */,
+				20DA097D1BDE93FE0070C61F /* Bone.h */,
+				20DA097E1BDE93FE0070C61F /* BoneData.h */,
+				20DA097F1BDE93FE0070C61F /* BoundingBoxAttachment.h */,
+				20DA09801BDE93FE0070C61F /* Event.h */,
+				20DA09811BDE93FE0070C61F /* EventData.h */,
+				20DA09821BDE93FE0070C61F /* extension.h */,
+				20DA09831BDE93FE0070C61F /* IkConstraint.h */,
+				20DA09841BDE93FE0070C61F /* IkConstraintData.h */,
+				20DA09851BDE93FE0070C61F /* MeshAttachment.h */,
+				20DA09861BDE93FE0070C61F /* RegionAttachment.h */,
+				20DA09871BDE93FE0070C61F /* Skeleton.h */,
+				20DA09881BDE93FE0070C61F /* SkeletonBounds.h */,
+				20DA09891BDE93FE0070C61F /* SkeletonData.h */,
+				20DA098A1BDE93FE0070C61F /* SkeletonJson.h */,
+				20DA098B1BDE93FE0070C61F /* Skin.h */,
+				20DA098C1BDE93FE0070C61F /* SkinnedMeshAttachment.h */,
+				20DA098D1BDE93FE0070C61F /* Slot.h */,
+				20DA098E1BDE93FE0070C61F /* SlotData.h */,
+				20DA098F1BDE93FE0070C61F /* spine.h */,
 			);
 			path = spine;
 			sourceTree = "<group>";
 		};
-		206B9B631BDAB5E70021D349 /* src */ = {
+		20DA09C41BDE94050070C61F /* src */ = {
 			isa = PBXGroup;
 			children = (
-				206B9B641BDAB5E70021D349 /* spine */,
+				20DA09C51BDE94050070C61F /* spine */,
 			);
 			name = src;
 			path = "../../3rdparty/spine-c/src";
 			sourceTree = "<group>";
 		};
-		206B9B641BDAB5E70021D349 /* spine */ = {
+		20DA09C51BDE94050070C61F /* spine */ = {
 			isa = PBXGroup;
 			children = (
-				206B9B651BDAB5E70021D349 /* Animation.c */,
-				206B9B661BDAB5E70021D349 /* AnimationState.c */,
-				206B9B671BDAB5E70021D349 /* AnimationStateData.c */,
-				206B9B681BDAB5E70021D349 /* Atlas.c */,
-				206B9B691BDAB5E70021D349 /* AtlasAttachmentLoader.c */,
-				206B9B6A1BDAB5E70021D349 /* Attachment.c */,
-				206B9B6B1BDAB5E70021D349 /* AttachmentLoader.c */,
-				206B9B6C1BDAB5E70021D349 /* Bone.c */,
-				206B9B6D1BDAB5E70021D349 /* BoneData.c */,
-				206B9B6E1BDAB5E70021D349 /* BoundingBoxAttachment.c */,
-				206B9B6F1BDAB5E70021D349 /* Event.c */,
-				206B9B701BDAB5E70021D349 /* EventData.c */,
-				206B9B711BDAB5E70021D349 /* extension.c */,
-				206B9B721BDAB5E70021D349 /* IkConstraint.c */,
-				206B9B731BDAB5E70021D349 /* IkConstraintData.c */,
-				206B9B741BDAB5E70021D349 /* Json.c */,
-				206B9B751BDAB5E70021D349 /* Json.h */,
-				206B9B761BDAB5E70021D349 /* MeshAttachment.c */,
-				206B9B771BDAB5E70021D349 /* RegionAttachment.c */,
-				206B9B781BDAB5E70021D349 /* Skeleton.c */,
-				206B9B791BDAB5E70021D349 /* SkeletonBounds.c */,
-				206B9B7A1BDAB5E70021D349 /* SkeletonData.c */,
-				206B9B7B1BDAB5E70021D349 /* SkeletonJson.c */,
-				206B9B7C1BDAB5E70021D349 /* Skin.c */,
-				206B9B7D1BDAB5E70021D349 /* SkinnedMeshAttachment.c */,
-				206B9B7E1BDAB5E70021D349 /* Slot.c */,
-				206B9B7F1BDAB5E70021D349 /* SlotData.c */,
+				20DA09C61BDE94050070C61F /* Animation.c */,
+				20DA09C71BDE94050070C61F /* AnimationState.c */,
+				20DA09C81BDE94050070C61F /* AnimationStateData.c */,
+				20DA09C91BDE94050070C61F /* Atlas.c */,
+				20DA09CA1BDE94050070C61F /* AtlasAttachmentLoader.c */,
+				20DA09CB1BDE94050070C61F /* Attachment.c */,
+				20DA09CC1BDE94050070C61F /* AttachmentLoader.c */,
+				20DA09CD1BDE94050070C61F /* Bone.c */,
+				20DA09CE1BDE94050070C61F /* BoneData.c */,
+				20DA09CF1BDE94050070C61F /* BoundingBoxAttachment.c */,
+				20DA09D01BDE94050070C61F /* Event.c */,
+				20DA09D11BDE94050070C61F /* EventData.c */,
+				20DA09D21BDE94050070C61F /* extension.c */,
+				20DA09D31BDE94050070C61F /* IkConstraint.c */,
+				20DA09D41BDE94050070C61F /* IkConstraintData.c */,
+				20DA09D51BDE94050070C61F /* Json.c */,
+				20DA09D61BDE94050070C61F /* Json.h */,
+				20DA09D71BDE94050070C61F /* MeshAttachment.c */,
+				20DA09D81BDE94050070C61F /* RegionAttachment.c */,
+				20DA09D91BDE94050070C61F /* Skeleton.c */,
+				20DA09DA1BDE94050070C61F /* SkeletonBounds.c */,
+				20DA09DB1BDE94050070C61F /* SkeletonData.c */,
+				20DA09DC1BDE94050070C61F /* SkeletonJson.c */,
+				20DA09DD1BDE94050070C61F /* Skin.c */,
+				20DA09DE1BDE94050070C61F /* SkinnedMeshAttachment.c */,
+				20DA09DF1BDE94050070C61F /* Slot.c */,
+				20DA09E01BDE94050070C61F /* SlotData.c */,
 			);
 			path = spine;
-			sourceTree = "<group>";
-		};
-		206B9BB61BDAB5FF0021D349 /* moai-fmod-studio */ = {
-			isa = PBXGroup;
-			children = (
-				206B9BB71BDAB5FF0021D349 /* host.cpp */,
-				206B9BB81BDAB5FF0021D349 /* host.h */,
-				206B9BB91BDAB5FF0021D349 /* MOAIFmodStudio.cpp */,
-				206B9BBA1BDAB5FF0021D349 /* MOAIFmodStudio.h */,
-				206B9BBB1BDAB5FF0021D349 /* MOAIFmodStudioChannel.cpp */,
-				206B9BBC1BDAB5FF0021D349 /* MOAIFmodStudioChannel.h */,
-				206B9BBD1BDAB5FF0021D349 /* MOAIFmodStudioSound.cpp */,
-				206B9BBE1BDAB5FF0021D349 /* MOAIFmodStudioSound.h */,
-			);
-			path = "moai-fmod-studio";
-			sourceTree = "<group>";
-		};
-		206B9BD01BDAB6500021D349 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				206B9C0F1BDAB6500021D349 /* libmoai-ios.a */,
-				206B9C111BDAB6500021D349 /* libmoai-ios-apple.a */,
-				206B9C131BDAB6500021D349 /* libmoai-ios-3rdparty-core.a */,
-				206B9C151BDAB6500021D349 /* libmoai-ios-3rdparty-crypto.a */,
-				206B9C171BDAB6500021D349 /* libmoai-ios-adcolony.a */,
-				206B9C191BDAB6500021D349 /* libmoai-ios-audio-sampler.a */,
-				206B9C1B1BDAB6500021D349 /* libmoai-ios-billing.a */,
-				206B9C1D1BDAB6500021D349 /* libmoai-ios-box2d.a */,
-				206B9C1F1BDAB6500021D349 /* libmoai-ios-chartboost.a */,
-				206B9C211BDAB6500021D349 /* libmoai-ios-crittercism.a */,
-				206B9C231BDAB6500021D349 /* libmoai-ios-crypto.a */,
-				206B9C251BDAB6500021D349 /* libmoai-ios-facebook.a */,
-				206B9C271BDAB6500021D349 /* libmoai-ios-flurry.a */,
-				206B9C291BDAB6500021D349 /* libmoai-ios-fmod-designer.a */,
-				206B9C2B1BDAB6500021D349 /* libmoai-ios-fmod-ex.a */,
-				206B9C2D1BDAB6500021D349 /* libmoai-ios-gamecenter.a */,
-				206B9C2F1BDAB6500021D349 /* libmoai-ios-http-client.a */,
-				206B9C311BDAB6500021D349 /* libmoai-ios-http-server.a */,
-				206B9C331BDAB6500021D349 /* libmoai-ios-image-jpg.a */,
-				206B9C351BDAB6500021D349 /* libmoai-ios-image-png.a */,
-				206B9C371BDAB6500021D349 /* libmoai-ios-image-pvr.a */,
-				206B9C391BDAB6500021D349 /* libmoai-ios-image-webp.a */,
-				206B9C3B1BDAB6500021D349 /* libmoai-ios-kontagent.a */,
-				206B9C3D1BDAB6500021D349 /* libmoai-ios-luaext.a */,
-				206B9C3F1BDAB6500021D349 /* libmoai-ios-mobile-app-tracker.a */,
-				206B9C411BDAB6500021D349 /* libmoai-ios-motion.a */,
-				206B9C431BDAB6500021D349 /* libmoai-ios-movie.a */,
-				206B9C451BDAB6500021D349 /* libmoai-ios-sim.a */,
-				206B9C471BDAB6500021D349 /* libmoai-ios-tapjoy.a */,
-				206B9C491BDAB6500021D349 /* libmoai-ios-untz.a */,
-				206B9C4B1BDAB6500021D349 /* libmoai-ios-urban-airship.a */,
-				206B9C4D1BDAB6500021D349 /* libmoai-ios-vungle.a */,
-				206B9C4F1BDAB6500021D349 /* libmoai-ios-zl-core.a */,
-				206B9C511BDAB6500021D349 /* libmoai-ios-zl-crypto.a */,
-				206B9C531BDAB6500021D349 /* libmoai-ios-zl-vfs.a */,
-				206B9C551BDAB6500021D349 /* libmoai-osx.a */,
-				206B9C571BDAB6500021D349 /* libmoai-osx-apple.a */,
-				206B9C591BDAB6500021D349 /* libmoai-osx-3rdparty-core.a */,
-				206B9C5B1BDAB6500021D349 /* libmoai-osx-3rdparty-crypto.a */,
-				206B9C5D1BDAB6500021D349 /* libmoai-osx-3rdparty-sdl.a */,
-				206B9C5F1BDAB6500021D349 /* libmoai-osx-audio-sampler.a */,
-				206B9C611BDAB6500021D349 /* libmoai-osx-box2d.a */,
-				206B9C631BDAB6500021D349 /* libmoai-osx-crypto.a */,
-				206B9C651BDAB6500021D349 /* libmoai-osx-fmod-designer.a */,
-				206B9C671BDAB6500021D349 /* libmoai-osx-fmod-ex.a */,
-				206B9C691BDAB6500021D349 /* libmoai-osx-http-client.a */,
-				206B9C6B1BDAB6500021D349 /* libmoai-osx-http-server.a */,
-				206B9C6D1BDAB6500021D349 /* libmoai-osx-image-jpg.a */,
-				206B9C6F1BDAB6500021D349 /* libmoai-osx-image-png.a */,
-				206B9C711BDAB6500021D349 /* libmoai-osx-image-pvr.a */,
-				206B9C731BDAB6500021D349 /* libmoai-osx-image-webp.a */,
-				206B9C751BDAB6500021D349 /* libmoai-osx-luaext.a */,
-				206B9C771BDAB6500021D349 /* libmoai-osx-sdl.a */,
-				206B9C791BDAB6500021D349 /* libmoai-osx-sim.a */,
-				206B9C7B1BDAB6500021D349 /* libmoai-osx-untz.a */,
-				206B9C7D1BDAB6500021D349 /* libmoai-osx-zl-core.a */,
-				206B9C7F1BDAB6500021D349 /* libmoai-osx-zl-crypto.a */,
-				206B9C811BDAB6500021D349 /* libmoai-osx-zl-vfs.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		206B9D2D1BDE382A0021D349 /* ct-util */ = {
-			isa = PBXGroup;
-			children = (
-				206B9D2E1BDE382A0021D349 /* CTUtil.cpp */,
-				206B9D2F1BDE382A0021D349 /* CTUtil.h */,
-				206B9D301BDE382A0021D349 /* host.cpp */,
-				206B9D311BDE382A0021D349 /* host.h */,
-			);
-			path = "ct-util";
 			sourceTree = "<group>";
 		};
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */,
+				20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */,
 				032409EE13564CAF000ADC60 /* 3rd party */,
 				0324E4F113564BC7000ADC60 /* src */,
 				038DB6D7101FAA6700ECA0BF /* Products */,
@@ -1059,41 +1059,41 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				206B9B3D1BDAB5E10021D349 /* Bone.h in Headers */,
-				206B9AE41BDAB5340021D349 /* host.h in Headers */,
-				206B9B3B1BDAB5E10021D349 /* AttachmentLoader.h in Headers */,
-				206B9B3F1BDAB5E10021D349 /* BoneData.h in Headers */,
-				206B9AF81BDAB5340021D349 /* MOAISpineSlot.h in Headers */,
-				206B9B511BDAB5E10021D349 /* Skeleton.h in Headers */,
-				206B9AF41BDAB5340021D349 /* MOAISpineSkeletonData.h in Headers */,
-				206B9B311BDAB5E10021D349 /* AnimationState.h in Headers */,
-				206B9B431BDAB5E10021D349 /* Event.h in Headers */,
-				206B9AE01BDAB5340021D349 /* headers.h in Headers */,
-				206B9B611BDAB5E10021D349 /* spine.h in Headers */,
-				206B9B371BDAB5E10021D349 /* AtlasAttachmentLoader.h in Headers */,
-				206B9B5F1BDAB5E10021D349 /* SlotData.h in Headers */,
-				206B9B5B1BDAB5E10021D349 /* SkinnedMeshAttachment.h in Headers */,
-				206B9B471BDAB5E10021D349 /* extension.h in Headers */,
-				206B9AEC1BDAB5340021D349 /* MOAISpineBone.h in Headers */,
-				206B9B4D1BDAB5E10021D349 /* MeshAttachment.h in Headers */,
-				206B9B391BDAB5E10021D349 /* Attachment.h in Headers */,
-				206B9B591BDAB5E10021D349 /* Skin.h in Headers */,
-				206B9B571BDAB5E10021D349 /* SkeletonJson.h in Headers */,
-				206B9BA01BDAB5E70021D349 /* Json.h in Headers */,
-				206B9B491BDAB5E10021D349 /* IkConstraint.h in Headers */,
-				206B9B351BDAB5E10021D349 /* Atlas.h in Headers */,
-				206B9B451BDAB5E10021D349 /* EventData.h in Headers */,
-				206B9AE81BDAB5340021D349 /* MOAISpine.h in Headers */,
-				206B9B411BDAB5E10021D349 /* BoundingBoxAttachment.h in Headers */,
-				206B9B331BDAB5E10021D349 /* AnimationStateData.h in Headers */,
-				206B9B4F1BDAB5E10021D349 /* RegionAttachment.h in Headers */,
-				206B9AFC1BDAB5340021D349 /* pch.h in Headers */,
-				206B9B551BDAB5E10021D349 /* SkeletonData.h in Headers */,
-				206B9AF01BDAB5340021D349 /* MOAISpineSkeleton.h in Headers */,
-				206B9B4B1BDAB5E10021D349 /* IkConstraintData.h in Headers */,
-				206B9B2F1BDAB5E10021D349 /* Animation.h in Headers */,
-				206B9B5D1BDAB5E10021D349 /* Slot.h in Headers */,
-				206B9B531BDAB5E10021D349 /* SkeletonBounds.h in Headers */,
+				20DA099E1BDE93FE0070C61F /* Bone.h in Headers */,
+				206BA0221BDE92C40021D349 /* MOAISpineSkeletonData.h in Headers */,
+				20DA099C1BDE93FE0070C61F /* AttachmentLoader.h in Headers */,
+				20DA09A01BDE93FE0070C61F /* BoneData.h in Headers */,
+				206BA0261BDE92C40021D349 /* MOAISpineSlot.h in Headers */,
+				20DA09B21BDE93FE0070C61F /* Skeleton.h in Headers */,
+				206BA01A1BDE92C40021D349 /* MOAISpineBone.h in Headers */,
+				20DA09921BDE93FE0070C61F /* AnimationState.h in Headers */,
+				20DA09A41BDE93FE0070C61F /* Event.h in Headers */,
+				206BA01E1BDE92C40021D349 /* MOAISpineSkeleton.h in Headers */,
+				20DA09C21BDE93FE0070C61F /* spine.h in Headers */,
+				20DA09981BDE93FE0070C61F /* AtlasAttachmentLoader.h in Headers */,
+				20DA09C01BDE93FE0070C61F /* SlotData.h in Headers */,
+				20DA09BC1BDE93FE0070C61F /* SkinnedMeshAttachment.h in Headers */,
+				20DA09A81BDE93FE0070C61F /* extension.h in Headers */,
+				206BA0121BDE92C40021D349 /* host.h in Headers */,
+				20DA09AE1BDE93FE0070C61F /* MeshAttachment.h in Headers */,
+				20DA099A1BDE93FE0070C61F /* Attachment.h in Headers */,
+				20DA09BA1BDE93FE0070C61F /* Skin.h in Headers */,
+				20DA09B81BDE93FE0070C61F /* SkeletonJson.h in Headers */,
+				20DA0A011BDE94050070C61F /* Json.h in Headers */,
+				20DA09AA1BDE93FE0070C61F /* IkConstraint.h in Headers */,
+				20DA09961BDE93FE0070C61F /* Atlas.h in Headers */,
+				20DA09A61BDE93FE0070C61F /* EventData.h in Headers */,
+				206BA02A1BDE92C40021D349 /* pch.h in Headers */,
+				20DA09A21BDE93FE0070C61F /* BoundingBoxAttachment.h in Headers */,
+				20DA09941BDE93FE0070C61F /* AnimationStateData.h in Headers */,
+				20DA09B01BDE93FE0070C61F /* RegionAttachment.h in Headers */,
+				206BA0161BDE92C40021D349 /* MOAISpine.h in Headers */,
+				20DA09B61BDE93FE0070C61F /* SkeletonData.h in Headers */,
+				206BA00E1BDE92C40021D349 /* headers.h in Headers */,
+				20DA09AC1BDE93FE0070C61F /* IkConstraintData.h in Headers */,
+				20DA09901BDE93FE0070C61F /* Animation.h in Headers */,
+				20DA09BE1BDE93FE0070C61F /* Slot.h in Headers */,
+				20DA09B41BDE93FE0070C61F /* SkeletonBounds.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1101,41 +1101,41 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				206B9B3E1BDAB5E10021D349 /* Bone.h in Headers */,
-				206B9AE51BDAB5340021D349 /* host.h in Headers */,
-				206B9B3C1BDAB5E10021D349 /* AttachmentLoader.h in Headers */,
-				206B9B401BDAB5E10021D349 /* BoneData.h in Headers */,
-				206B9AF91BDAB5340021D349 /* MOAISpineSlot.h in Headers */,
-				206B9B521BDAB5E10021D349 /* Skeleton.h in Headers */,
-				206B9AF51BDAB5340021D349 /* MOAISpineSkeletonData.h in Headers */,
-				206B9B321BDAB5E10021D349 /* AnimationState.h in Headers */,
-				206B9B441BDAB5E10021D349 /* Event.h in Headers */,
-				206B9AE11BDAB5340021D349 /* headers.h in Headers */,
-				206B9B621BDAB5E10021D349 /* spine.h in Headers */,
-				206B9B381BDAB5E10021D349 /* AtlasAttachmentLoader.h in Headers */,
-				206B9B601BDAB5E10021D349 /* SlotData.h in Headers */,
-				206B9B5C1BDAB5E10021D349 /* SkinnedMeshAttachment.h in Headers */,
-				206B9B481BDAB5E10021D349 /* extension.h in Headers */,
-				206B9AED1BDAB5340021D349 /* MOAISpineBone.h in Headers */,
-				206B9B4E1BDAB5E10021D349 /* MeshAttachment.h in Headers */,
-				206B9B3A1BDAB5E10021D349 /* Attachment.h in Headers */,
-				206B9B5A1BDAB5E10021D349 /* Skin.h in Headers */,
-				206B9B581BDAB5E10021D349 /* SkeletonJson.h in Headers */,
-				206B9BA11BDAB5E70021D349 /* Json.h in Headers */,
-				206B9B4A1BDAB5E10021D349 /* IkConstraint.h in Headers */,
-				206B9B361BDAB5E10021D349 /* Atlas.h in Headers */,
-				206B9B461BDAB5E10021D349 /* EventData.h in Headers */,
-				206B9AE91BDAB5340021D349 /* MOAISpine.h in Headers */,
-				206B9B421BDAB5E10021D349 /* BoundingBoxAttachment.h in Headers */,
-				206B9B341BDAB5E10021D349 /* AnimationStateData.h in Headers */,
-				206B9B501BDAB5E10021D349 /* RegionAttachment.h in Headers */,
-				206B9AFD1BDAB5340021D349 /* pch.h in Headers */,
-				206B9B561BDAB5E10021D349 /* SkeletonData.h in Headers */,
-				206B9AF11BDAB5340021D349 /* MOAISpineSkeleton.h in Headers */,
-				206B9B4C1BDAB5E10021D349 /* IkConstraintData.h in Headers */,
-				206B9B301BDAB5E10021D349 /* Animation.h in Headers */,
-				206B9B5E1BDAB5E10021D349 /* Slot.h in Headers */,
-				206B9B541BDAB5E10021D349 /* SkeletonBounds.h in Headers */,
+				20DA099F1BDE93FE0070C61F /* Bone.h in Headers */,
+				206BA0231BDE92C40021D349 /* MOAISpineSkeletonData.h in Headers */,
+				20DA099D1BDE93FE0070C61F /* AttachmentLoader.h in Headers */,
+				20DA09A11BDE93FE0070C61F /* BoneData.h in Headers */,
+				206BA0271BDE92C40021D349 /* MOAISpineSlot.h in Headers */,
+				20DA09B31BDE93FE0070C61F /* Skeleton.h in Headers */,
+				206BA01B1BDE92C40021D349 /* MOAISpineBone.h in Headers */,
+				20DA09931BDE93FE0070C61F /* AnimationState.h in Headers */,
+				20DA09A51BDE93FE0070C61F /* Event.h in Headers */,
+				206BA01F1BDE92C40021D349 /* MOAISpineSkeleton.h in Headers */,
+				20DA09C31BDE93FE0070C61F /* spine.h in Headers */,
+				20DA09991BDE93FE0070C61F /* AtlasAttachmentLoader.h in Headers */,
+				20DA09C11BDE93FE0070C61F /* SlotData.h in Headers */,
+				20DA09BD1BDE93FE0070C61F /* SkinnedMeshAttachment.h in Headers */,
+				20DA09A91BDE93FE0070C61F /* extension.h in Headers */,
+				206BA0131BDE92C40021D349 /* host.h in Headers */,
+				20DA09AF1BDE93FE0070C61F /* MeshAttachment.h in Headers */,
+				20DA099B1BDE93FE0070C61F /* Attachment.h in Headers */,
+				20DA09BB1BDE93FE0070C61F /* Skin.h in Headers */,
+				20DA09B91BDE93FE0070C61F /* SkeletonJson.h in Headers */,
+				20DA0A021BDE94050070C61F /* Json.h in Headers */,
+				20DA09AB1BDE93FE0070C61F /* IkConstraint.h in Headers */,
+				20DA09971BDE93FE0070C61F /* Atlas.h in Headers */,
+				20DA09A71BDE93FE0070C61F /* EventData.h in Headers */,
+				206BA02B1BDE92C40021D349 /* pch.h in Headers */,
+				20DA09A31BDE93FE0070C61F /* BoundingBoxAttachment.h in Headers */,
+				20DA09951BDE93FE0070C61F /* AnimationStateData.h in Headers */,
+				20DA09B11BDE93FE0070C61F /* RegionAttachment.h in Headers */,
+				206BA0171BDE92C40021D349 /* MOAISpine.h in Headers */,
+				20DA09B71BDE93FE0070C61F /* SkeletonData.h in Headers */,
+				206BA00F1BDE92C40021D349 /* headers.h in Headers */,
+				20DA09AD1BDE93FE0070C61F /* IkConstraintData.h in Headers */,
+				20DA09911BDE93FE0070C61F /* Animation.h in Headers */,
+				20DA09BF1BDE93FE0070C61F /* Slot.h in Headers */,
+				20DA09B51BDE93FE0070C61F /* SkeletonBounds.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1143,10 +1143,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				206B9BCD1BDAB5FF0021D349 /* MOAIFmodStudioSound.h in Headers */,
-				206B9BC51BDAB5FF0021D349 /* MOAIFmodStudio.h in Headers */,
-				206B9BC11BDAB5FF0021D349 /* host.h in Headers */,
-				206B9BC91BDAB5FF0021D349 /* MOAIFmodStudioChannel.h in Headers */,
+				206BA0431BDE92CF0021D349 /* MOAIFmodStudioSound.h in Headers */,
+				206BA03B1BDE92CF0021D349 /* MOAIFmodStudio.h in Headers */,
+				206BA0371BDE92CF0021D349 /* host.h in Headers */,
+				206BA03F1BDE92CF0021D349 /* MOAIFmodStudioChannel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1154,10 +1154,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				206B9BCE1BDAB5FF0021D349 /* MOAIFmodStudioSound.h in Headers */,
-				206B9BC61BDAB5FF0021D349 /* MOAIFmodStudio.h in Headers */,
-				206B9BC21BDAB5FF0021D349 /* host.h in Headers */,
-				206B9BCA1BDAB5FF0021D349 /* MOAIFmodStudioChannel.h in Headers */,
+				206BA0441BDE92CF0021D349 /* MOAIFmodStudioSound.h in Headers */,
+				206BA03C1BDE92CF0021D349 /* MOAIFmodStudio.h in Headers */,
+				206BA0381BDE92CF0021D349 /* host.h in Headers */,
+				206BA0401BDE92CF0021D349 /* MOAIFmodStudioChannel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1165,8 +1165,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				206B9D381BDE382A0021D349 /* host.h in Headers */,
-				206B9D341BDE382A0021D349 /* CTUtil.h in Headers */,
+				206BA0501BDE92D60021D349 /* host.h in Headers */,
+				206BA04C1BDE92D60021D349 /* CTUtil.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1174,8 +1174,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				206B9D391BDE382A0021D349 /* host.h in Headers */,
-				206B9D351BDE382A0021D349 /* CTUtil.h in Headers */,
+				206BA0511BDE92D60021D349 /* host.h in Headers */,
+				206BA04D1BDE92D60021D349 /* CTUtil.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1325,8 +1325,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 206B9BD01BDAB6500021D349 /* Products */;
-					ProjectRef = 206B9BCF1BDAB6500021D349 /* libmoai.xcodeproj */;
+					ProductGroup = 20DA08C21BDE93C30070C61F /* Products */;
+					ProjectRef = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1344,410 +1344,410 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		206B9C0F1BDAB6500021D349 /* libmoai-ios.a */ = {
+		20DA09011BDE93C50070C61F /* libmoai-ios.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios.a";
-			remoteRef = 206B9C0E1BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09001BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C111BDAB6500021D349 /* libmoai-ios-apple.a */ = {
+		20DA09031BDE93C50070C61F /* libmoai-ios-apple.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-apple.a";
-			remoteRef = 206B9C101BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09021BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C131BDAB6500021D349 /* libmoai-ios-3rdparty-core.a */ = {
+		20DA09051BDE93C50070C61F /* libmoai-ios-3rdparty-core.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-3rdparty-core.a";
-			remoteRef = 206B9C121BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09041BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C151BDAB6500021D349 /* libmoai-ios-3rdparty-crypto.a */ = {
+		20DA09071BDE93C50070C61F /* libmoai-ios-3rdparty-crypto.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-3rdparty-crypto.a";
-			remoteRef = 206B9C141BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09061BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C171BDAB6500021D349 /* libmoai-ios-adcolony.a */ = {
+		20DA09091BDE93C50070C61F /* libmoai-ios-adcolony.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-adcolony.a";
-			remoteRef = 206B9C161BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09081BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C191BDAB6500021D349 /* libmoai-ios-audio-sampler.a */ = {
+		20DA090B1BDE93C50070C61F /* libmoai-ios-audio-sampler.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-audio-sampler.a";
-			remoteRef = 206B9C181BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA090A1BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C1B1BDAB6500021D349 /* libmoai-ios-billing.a */ = {
+		20DA090D1BDE93C50070C61F /* libmoai-ios-billing.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-billing.a";
-			remoteRef = 206B9C1A1BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA090C1BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C1D1BDAB6500021D349 /* libmoai-ios-box2d.a */ = {
+		20DA090F1BDE93C50070C61F /* libmoai-ios-box2d.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-box2d.a";
-			remoteRef = 206B9C1C1BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA090E1BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C1F1BDAB6500021D349 /* libmoai-ios-chartboost.a */ = {
+		20DA09111BDE93C50070C61F /* libmoai-ios-chartboost.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-chartboost.a";
-			remoteRef = 206B9C1E1BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09101BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C211BDAB6500021D349 /* libmoai-ios-crittercism.a */ = {
+		20DA09131BDE93C50070C61F /* libmoai-ios-crittercism.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-crittercism.a";
-			remoteRef = 206B9C201BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09121BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C231BDAB6500021D349 /* libmoai-ios-crypto.a */ = {
+		20DA09151BDE93C50070C61F /* libmoai-ios-crypto.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-crypto.a";
-			remoteRef = 206B9C221BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09141BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C251BDAB6500021D349 /* libmoai-ios-facebook.a */ = {
+		20DA09171BDE93C50070C61F /* libmoai-ios-facebook.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-facebook.a";
-			remoteRef = 206B9C241BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09161BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C271BDAB6500021D349 /* libmoai-ios-flurry.a */ = {
+		20DA09191BDE93C50070C61F /* libmoai-ios-flurry.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-flurry.a";
-			remoteRef = 206B9C261BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09181BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C291BDAB6500021D349 /* libmoai-ios-fmod-designer.a */ = {
+		20DA091B1BDE93C50070C61F /* libmoai-ios-fmod-designer.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-fmod-designer.a";
-			remoteRef = 206B9C281BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA091A1BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C2B1BDAB6500021D349 /* libmoai-ios-fmod-ex.a */ = {
+		20DA091D1BDE93C50070C61F /* libmoai-ios-fmod-ex.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-fmod-ex.a";
-			remoteRef = 206B9C2A1BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA091C1BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C2D1BDAB6500021D349 /* libmoai-ios-gamecenter.a */ = {
+		20DA091F1BDE93C50070C61F /* libmoai-ios-gamecenter.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-gamecenter.a";
-			remoteRef = 206B9C2C1BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA091E1BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C2F1BDAB6500021D349 /* libmoai-ios-http-client.a */ = {
+		20DA09211BDE93C50070C61F /* libmoai-ios-http-client.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-http-client.a";
-			remoteRef = 206B9C2E1BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09201BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C311BDAB6500021D349 /* libmoai-ios-http-server.a */ = {
+		20DA09231BDE93C50070C61F /* libmoai-ios-http-server.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-http-server.a";
-			remoteRef = 206B9C301BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09221BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C331BDAB6500021D349 /* libmoai-ios-image-jpg.a */ = {
+		20DA09251BDE93C50070C61F /* libmoai-ios-image-jpg.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-image-jpg.a";
-			remoteRef = 206B9C321BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09241BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C351BDAB6500021D349 /* libmoai-ios-image-png.a */ = {
+		20DA09271BDE93C50070C61F /* libmoai-ios-image-png.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-image-png.a";
-			remoteRef = 206B9C341BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09261BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C371BDAB6500021D349 /* libmoai-ios-image-pvr.a */ = {
+		20DA09291BDE93C50070C61F /* libmoai-ios-image-pvr.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-image-pvr.a";
-			remoteRef = 206B9C361BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09281BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C391BDAB6500021D349 /* libmoai-ios-image-webp.a */ = {
+		20DA092B1BDE93C50070C61F /* libmoai-ios-image-webp.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-image-webp.a";
-			remoteRef = 206B9C381BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA092A1BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C3B1BDAB6500021D349 /* libmoai-ios-kontagent.a */ = {
+		20DA092D1BDE93C50070C61F /* libmoai-ios-kontagent.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-kontagent.a";
-			remoteRef = 206B9C3A1BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA092C1BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C3D1BDAB6500021D349 /* libmoai-ios-luaext.a */ = {
+		20DA092F1BDE93C50070C61F /* libmoai-ios-luaext.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-luaext.a";
-			remoteRef = 206B9C3C1BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA092E1BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C3F1BDAB6500021D349 /* libmoai-ios-mobile-app-tracker.a */ = {
+		20DA09311BDE93C50070C61F /* libmoai-ios-mobile-app-tracker.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-mobile-app-tracker.a";
-			remoteRef = 206B9C3E1BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09301BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C411BDAB6500021D349 /* libmoai-ios-motion.a */ = {
+		20DA09331BDE93C50070C61F /* libmoai-ios-motion.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-motion.a";
-			remoteRef = 206B9C401BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09321BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C431BDAB6500021D349 /* libmoai-ios-movie.a */ = {
+		20DA09351BDE93C50070C61F /* libmoai-ios-movie.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-movie.a";
-			remoteRef = 206B9C421BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09341BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C451BDAB6500021D349 /* libmoai-ios-sim.a */ = {
+		20DA09371BDE93C50070C61F /* libmoai-ios-sim.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-sim.a";
-			remoteRef = 206B9C441BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09361BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C471BDAB6500021D349 /* libmoai-ios-tapjoy.a */ = {
+		20DA09391BDE93C50070C61F /* libmoai-ios-tapjoy.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-tapjoy.a";
-			remoteRef = 206B9C461BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09381BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C491BDAB6500021D349 /* libmoai-ios-untz.a */ = {
+		20DA093B1BDE93C50070C61F /* libmoai-ios-untz.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-untz.a";
-			remoteRef = 206B9C481BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA093A1BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C4B1BDAB6500021D349 /* libmoai-ios-urban-airship.a */ = {
+		20DA093D1BDE93C50070C61F /* libmoai-ios-urban-airship.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-urban-airship.a";
-			remoteRef = 206B9C4A1BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA093C1BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C4D1BDAB6500021D349 /* libmoai-ios-vungle.a */ = {
+		20DA093F1BDE93C50070C61F /* libmoai-ios-vungle.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-vungle.a";
-			remoteRef = 206B9C4C1BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA093E1BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C4F1BDAB6500021D349 /* libmoai-ios-zl-core.a */ = {
+		20DA09411BDE93C50070C61F /* libmoai-ios-zl-core.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-zl-core.a";
-			remoteRef = 206B9C4E1BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09401BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C511BDAB6500021D349 /* libmoai-ios-zl-crypto.a */ = {
+		20DA09431BDE93C50070C61F /* libmoai-ios-zl-crypto.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-zl-crypto.a";
-			remoteRef = 206B9C501BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09421BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C531BDAB6500021D349 /* libmoai-ios-zl-vfs.a */ = {
+		20DA09451BDE93C50070C61F /* libmoai-ios-zl-vfs.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-ios-zl-vfs.a";
-			remoteRef = 206B9C521BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09441BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C551BDAB6500021D349 /* libmoai-osx.a */ = {
+		20DA09471BDE93C50070C61F /* libmoai-osx.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-osx.a";
-			remoteRef = 206B9C541BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09461BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C571BDAB6500021D349 /* libmoai-osx-apple.a */ = {
+		20DA09491BDE93C50070C61F /* libmoai-osx-apple.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-osx-apple.a";
-			remoteRef = 206B9C561BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09481BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C591BDAB6500021D349 /* libmoai-osx-3rdparty-core.a */ = {
+		20DA094B1BDE93C50070C61F /* libmoai-osx-3rdparty-core.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-osx-3rdparty-core.a";
-			remoteRef = 206B9C581BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA094A1BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C5B1BDAB6500021D349 /* libmoai-osx-3rdparty-crypto.a */ = {
+		20DA094D1BDE93C50070C61F /* libmoai-osx-3rdparty-crypto.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-osx-3rdparty-crypto.a";
-			remoteRef = 206B9C5A1BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA094C1BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C5D1BDAB6500021D349 /* libmoai-osx-3rdparty-sdl.a */ = {
+		20DA094F1BDE93C50070C61F /* libmoai-osx-3rdparty-sdl.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-osx-3rdparty-sdl.a";
-			remoteRef = 206B9C5C1BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA094E1BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C5F1BDAB6500021D349 /* libmoai-osx-audio-sampler.a */ = {
+		20DA09511BDE93C50070C61F /* libmoai-osx-audio-sampler.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-osx-audio-sampler.a";
-			remoteRef = 206B9C5E1BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09501BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C611BDAB6500021D349 /* libmoai-osx-box2d.a */ = {
+		20DA09531BDE93C50070C61F /* libmoai-osx-box2d.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-osx-box2d.a";
-			remoteRef = 206B9C601BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09521BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C631BDAB6500021D349 /* libmoai-osx-crypto.a */ = {
+		20DA09551BDE93C50070C61F /* libmoai-osx-crypto.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-osx-crypto.a";
-			remoteRef = 206B9C621BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09541BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C651BDAB6500021D349 /* libmoai-osx-fmod-designer.a */ = {
+		20DA09571BDE93C50070C61F /* libmoai-osx-fmod-designer.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-osx-fmod-designer.a";
-			remoteRef = 206B9C641BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09561BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C671BDAB6500021D349 /* libmoai-osx-fmod-ex.a */ = {
+		20DA09591BDE93C50070C61F /* libmoai-osx-fmod-ex.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-osx-fmod-ex.a";
-			remoteRef = 206B9C661BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09581BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C691BDAB6500021D349 /* libmoai-osx-http-client.a */ = {
+		20DA095B1BDE93C50070C61F /* libmoai-osx-http-client.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-osx-http-client.a";
-			remoteRef = 206B9C681BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA095A1BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C6B1BDAB6500021D349 /* libmoai-osx-http-server.a */ = {
+		20DA095D1BDE93C50070C61F /* libmoai-osx-http-server.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-osx-http-server.a";
-			remoteRef = 206B9C6A1BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA095C1BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C6D1BDAB6500021D349 /* libmoai-osx-image-jpg.a */ = {
+		20DA095F1BDE93C50070C61F /* libmoai-osx-image-jpg.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-osx-image-jpg.a";
-			remoteRef = 206B9C6C1BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA095E1BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C6F1BDAB6500021D349 /* libmoai-osx-image-png.a */ = {
+		20DA09611BDE93C50070C61F /* libmoai-osx-image-png.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-osx-image-png.a";
-			remoteRef = 206B9C6E1BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09601BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C711BDAB6500021D349 /* libmoai-osx-image-pvr.a */ = {
+		20DA09631BDE93C50070C61F /* libmoai-osx-image-pvr.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-osx-image-pvr.a";
-			remoteRef = 206B9C701BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09621BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C731BDAB6500021D349 /* libmoai-osx-image-webp.a */ = {
+		20DA09651BDE93C50070C61F /* libmoai-osx-image-webp.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-osx-image-webp.a";
-			remoteRef = 206B9C721BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09641BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C751BDAB6500021D349 /* libmoai-osx-luaext.a */ = {
+		20DA09671BDE93C50070C61F /* libmoai-osx-luaext.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-osx-luaext.a";
-			remoteRef = 206B9C741BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09661BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C771BDAB6500021D349 /* libmoai-osx-sdl.a */ = {
+		20DA09691BDE93C50070C61F /* libmoai-osx-sdl.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-osx-sdl.a";
-			remoteRef = 206B9C761BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09681BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C791BDAB6500021D349 /* libmoai-osx-sim.a */ = {
+		20DA096B1BDE93C50070C61F /* libmoai-osx-sim.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-osx-sim.a";
-			remoteRef = 206B9C781BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA096A1BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C7B1BDAB6500021D349 /* libmoai-osx-untz.a */ = {
+		20DA096D1BDE93C50070C61F /* libmoai-osx-untz.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-osx-untz.a";
-			remoteRef = 206B9C7A1BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA096C1BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C7D1BDAB6500021D349 /* libmoai-osx-zl-core.a */ = {
+		20DA096F1BDE93C50070C61F /* libmoai-osx-zl-core.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-osx-zl-core.a";
-			remoteRef = 206B9C7C1BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA096E1BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C7F1BDAB6500021D349 /* libmoai-osx-zl-crypto.a */ = {
+		20DA09711BDE93C50070C61F /* libmoai-osx-zl-crypto.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-osx-zl-crypto.a";
-			remoteRef = 206B9C7E1BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09701BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		206B9C811BDAB6500021D349 /* libmoai-osx-zl-vfs.a */ = {
+		20DA09731BDE93C50070C61F /* libmoai-osx-zl-vfs.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libmoai-osx-zl-vfs.a";
-			remoteRef = 206B9C801BDAB6500021D349 /* PBXContainerItemProxy */;
+			remoteRef = 20DA09721BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1757,39 +1757,39 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				206B9B941BDAB5E70021D349 /* Event.c in Sources */,
-				206B9BB41BDAB5E70021D349 /* SlotData.c in Sources */,
-				206B9B9E1BDAB5E70021D349 /* Json.c in Sources */,
-				206B9BA61BDAB5E70021D349 /* Skeleton.c in Sources */,
-				206B9B981BDAB5E70021D349 /* extension.c in Sources */,
-				206B9B961BDAB5E70021D349 /* EventData.c in Sources */,
-				206B9B841BDAB5E70021D349 /* AnimationStateData.c in Sources */,
-				206B9B9C1BDAB5E70021D349 /* IkConstraintData.c in Sources */,
-				206B9B8C1BDAB5E70021D349 /* AttachmentLoader.c in Sources */,
-				206B9B921BDAB5E70021D349 /* BoundingBoxAttachment.c in Sources */,
-				206B9AF21BDAB5340021D349 /* MOAISpineSkeletonData.cpp in Sources */,
-				206B9B8A1BDAB5E70021D349 /* Attachment.c in Sources */,
-				206B9B861BDAB5E70021D349 /* Atlas.c in Sources */,
-				206B9AEE1BDAB5340021D349 /* MOAISpineSkeleton.cpp in Sources */,
-				206B9BA81BDAB5E70021D349 /* SkeletonBounds.c in Sources */,
-				206B9AE21BDAB5340021D349 /* host.cpp in Sources */,
-				206B9BAC1BDAB5E70021D349 /* SkeletonJson.c in Sources */,
-				206B9B821BDAB5E70021D349 /* AnimationState.c in Sources */,
-				206B9AFA1BDAB5340021D349 /* pch.cpp in Sources */,
-				206B9B901BDAB5E70021D349 /* BoneData.c in Sources */,
-				206B9B801BDAB5E70021D349 /* Animation.c in Sources */,
-				206B9BAE1BDAB5E70021D349 /* Skin.c in Sources */,
-				206B9B8E1BDAB5E70021D349 /* Bone.c in Sources */,
-				206B9AE61BDAB5340021D349 /* MOAISpine.cpp in Sources */,
-				206B9B881BDAB5E70021D349 /* AtlasAttachmentLoader.c in Sources */,
-				206B9BA41BDAB5E70021D349 /* RegionAttachment.c in Sources */,
-				206B9BB21BDAB5E70021D349 /* Slot.c in Sources */,
-				206B9AEA1BDAB5340021D349 /* MOAISpineBone.cpp in Sources */,
-				206B9B9A1BDAB5E70021D349 /* IkConstraint.c in Sources */,
-				206B9AF61BDAB5340021D349 /* MOAISpineSlot.cpp in Sources */,
-				206B9BB01BDAB5E70021D349 /* SkinnedMeshAttachment.c in Sources */,
-				206B9BAA1BDAB5E70021D349 /* SkeletonData.c in Sources */,
-				206B9BA21BDAB5E70021D349 /* MeshAttachment.c in Sources */,
+				20DA09F51BDE94050070C61F /* Event.c in Sources */,
+				20DA0A151BDE94050070C61F /* SlotData.c in Sources */,
+				20DA09FF1BDE94050070C61F /* Json.c in Sources */,
+				20DA0A071BDE94050070C61F /* Skeleton.c in Sources */,
+				20DA09F91BDE94050070C61F /* extension.c in Sources */,
+				20DA09F71BDE94050070C61F /* EventData.c in Sources */,
+				20DA09E51BDE94050070C61F /* AnimationStateData.c in Sources */,
+				20DA09FD1BDE94050070C61F /* IkConstraintData.c in Sources */,
+				20DA09ED1BDE94050070C61F /* AttachmentLoader.c in Sources */,
+				20DA09F31BDE94050070C61F /* BoundingBoxAttachment.c in Sources */,
+				206BA0101BDE92C40021D349 /* host.cpp in Sources */,
+				20DA09EB1BDE94050070C61F /* Attachment.c in Sources */,
+				20DA09E71BDE94050070C61F /* Atlas.c in Sources */,
+				206BA0281BDE92C40021D349 /* pch.cpp in Sources */,
+				20DA0A091BDE94050070C61F /* SkeletonBounds.c in Sources */,
+				206BA0141BDE92C40021D349 /* MOAISpine.cpp in Sources */,
+				20DA0A0D1BDE94050070C61F /* SkeletonJson.c in Sources */,
+				20DA09E31BDE94050070C61F /* AnimationState.c in Sources */,
+				206BA0241BDE92C40021D349 /* MOAISpineSlot.cpp in Sources */,
+				20DA09F11BDE94050070C61F /* BoneData.c in Sources */,
+				20DA09E11BDE94050070C61F /* Animation.c in Sources */,
+				20DA0A0F1BDE94050070C61F /* Skin.c in Sources */,
+				20DA09EF1BDE94050070C61F /* Bone.c in Sources */,
+				206BA0181BDE92C40021D349 /* MOAISpineBone.cpp in Sources */,
+				20DA09E91BDE94050070C61F /* AtlasAttachmentLoader.c in Sources */,
+				20DA0A051BDE94050070C61F /* RegionAttachment.c in Sources */,
+				20DA0A131BDE94050070C61F /* Slot.c in Sources */,
+				206BA01C1BDE92C40021D349 /* MOAISpineSkeleton.cpp in Sources */,
+				20DA09FB1BDE94050070C61F /* IkConstraint.c in Sources */,
+				206BA0201BDE92C40021D349 /* MOAISpineSkeletonData.cpp in Sources */,
+				20DA0A111BDE94050070C61F /* SkinnedMeshAttachment.c in Sources */,
+				20DA0A0B1BDE94050070C61F /* SkeletonData.c in Sources */,
+				20DA0A031BDE94050070C61F /* MeshAttachment.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1797,39 +1797,39 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				206B9B951BDAB5E70021D349 /* Event.c in Sources */,
-				206B9BB51BDAB5E70021D349 /* SlotData.c in Sources */,
-				206B9B9F1BDAB5E70021D349 /* Json.c in Sources */,
-				206B9BA71BDAB5E70021D349 /* Skeleton.c in Sources */,
-				206B9B991BDAB5E70021D349 /* extension.c in Sources */,
-				206B9B971BDAB5E70021D349 /* EventData.c in Sources */,
-				206B9B851BDAB5E70021D349 /* AnimationStateData.c in Sources */,
-				206B9B9D1BDAB5E70021D349 /* IkConstraintData.c in Sources */,
-				206B9B8D1BDAB5E70021D349 /* AttachmentLoader.c in Sources */,
-				206B9B931BDAB5E70021D349 /* BoundingBoxAttachment.c in Sources */,
-				206B9AF31BDAB5340021D349 /* MOAISpineSkeletonData.cpp in Sources */,
-				206B9B8B1BDAB5E70021D349 /* Attachment.c in Sources */,
-				206B9B871BDAB5E70021D349 /* Atlas.c in Sources */,
-				206B9AEF1BDAB5340021D349 /* MOAISpineSkeleton.cpp in Sources */,
-				206B9BA91BDAB5E70021D349 /* SkeletonBounds.c in Sources */,
-				206B9AE31BDAB5340021D349 /* host.cpp in Sources */,
-				206B9BAD1BDAB5E70021D349 /* SkeletonJson.c in Sources */,
-				206B9B831BDAB5E70021D349 /* AnimationState.c in Sources */,
-				206B9AFB1BDAB5340021D349 /* pch.cpp in Sources */,
-				206B9B911BDAB5E70021D349 /* BoneData.c in Sources */,
-				206B9B811BDAB5E70021D349 /* Animation.c in Sources */,
-				206B9BAF1BDAB5E70021D349 /* Skin.c in Sources */,
-				206B9B8F1BDAB5E70021D349 /* Bone.c in Sources */,
-				206B9AE71BDAB5340021D349 /* MOAISpine.cpp in Sources */,
-				206B9B891BDAB5E70021D349 /* AtlasAttachmentLoader.c in Sources */,
-				206B9BA51BDAB5E70021D349 /* RegionAttachment.c in Sources */,
-				206B9BB31BDAB5E70021D349 /* Slot.c in Sources */,
-				206B9AEB1BDAB5340021D349 /* MOAISpineBone.cpp in Sources */,
-				206B9B9B1BDAB5E70021D349 /* IkConstraint.c in Sources */,
-				206B9AF71BDAB5340021D349 /* MOAISpineSlot.cpp in Sources */,
-				206B9BB11BDAB5E70021D349 /* SkinnedMeshAttachment.c in Sources */,
-				206B9BAB1BDAB5E70021D349 /* SkeletonData.c in Sources */,
-				206B9BA31BDAB5E70021D349 /* MeshAttachment.c in Sources */,
+				20DA09F61BDE94050070C61F /* Event.c in Sources */,
+				20DA0A161BDE94050070C61F /* SlotData.c in Sources */,
+				20DA0A001BDE94050070C61F /* Json.c in Sources */,
+				20DA0A081BDE94050070C61F /* Skeleton.c in Sources */,
+				20DA09FA1BDE94050070C61F /* extension.c in Sources */,
+				20DA09F81BDE94050070C61F /* EventData.c in Sources */,
+				20DA09E61BDE94050070C61F /* AnimationStateData.c in Sources */,
+				20DA09FE1BDE94050070C61F /* IkConstraintData.c in Sources */,
+				20DA09EE1BDE94050070C61F /* AttachmentLoader.c in Sources */,
+				20DA09F41BDE94050070C61F /* BoundingBoxAttachment.c in Sources */,
+				206BA0111BDE92C40021D349 /* host.cpp in Sources */,
+				20DA09EC1BDE94050070C61F /* Attachment.c in Sources */,
+				20DA09E81BDE94050070C61F /* Atlas.c in Sources */,
+				206BA0291BDE92C40021D349 /* pch.cpp in Sources */,
+				20DA0A0A1BDE94050070C61F /* SkeletonBounds.c in Sources */,
+				206BA0151BDE92C40021D349 /* MOAISpine.cpp in Sources */,
+				20DA0A0E1BDE94050070C61F /* SkeletonJson.c in Sources */,
+				20DA09E41BDE94050070C61F /* AnimationState.c in Sources */,
+				206BA0251BDE92C40021D349 /* MOAISpineSlot.cpp in Sources */,
+				20DA09F21BDE94050070C61F /* BoneData.c in Sources */,
+				20DA09E21BDE94050070C61F /* Animation.c in Sources */,
+				20DA0A101BDE94050070C61F /* Skin.c in Sources */,
+				20DA09F01BDE94050070C61F /* Bone.c in Sources */,
+				206BA0191BDE92C40021D349 /* MOAISpineBone.cpp in Sources */,
+				20DA09EA1BDE94050070C61F /* AtlasAttachmentLoader.c in Sources */,
+				20DA0A061BDE94050070C61F /* RegionAttachment.c in Sources */,
+				20DA0A141BDE94050070C61F /* Slot.c in Sources */,
+				206BA01D1BDE92C40021D349 /* MOAISpineSkeleton.cpp in Sources */,
+				20DA09FC1BDE94050070C61F /* IkConstraint.c in Sources */,
+				206BA0211BDE92C40021D349 /* MOAISpineSkeletonData.cpp in Sources */,
+				20DA0A121BDE94050070C61F /* SkinnedMeshAttachment.c in Sources */,
+				20DA0A0C1BDE94050070C61F /* SkeletonData.c in Sources */,
+				20DA0A041BDE94050070C61F /* MeshAttachment.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1837,10 +1837,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				206B9BBF1BDAB5FF0021D349 /* host.cpp in Sources */,
-				206B9BCB1BDAB5FF0021D349 /* MOAIFmodStudioSound.cpp in Sources */,
-				206B9BC71BDAB5FF0021D349 /* MOAIFmodStudioChannel.cpp in Sources */,
-				206B9BC31BDAB5FF0021D349 /* MOAIFmodStudio.cpp in Sources */,
+				206BA0351BDE92CF0021D349 /* host.cpp in Sources */,
+				206BA0411BDE92CF0021D349 /* MOAIFmodStudioSound.cpp in Sources */,
+				206BA03D1BDE92CF0021D349 /* MOAIFmodStudioChannel.cpp in Sources */,
+				206BA0391BDE92CF0021D349 /* MOAIFmodStudio.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1848,10 +1848,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				206B9BC01BDAB5FF0021D349 /* host.cpp in Sources */,
-				206B9BCC1BDAB5FF0021D349 /* MOAIFmodStudioSound.cpp in Sources */,
-				206B9BC81BDAB5FF0021D349 /* MOAIFmodStudioChannel.cpp in Sources */,
-				206B9BC41BDAB5FF0021D349 /* MOAIFmodStudio.cpp in Sources */,
+				206BA0361BDE92CF0021D349 /* host.cpp in Sources */,
+				206BA0421BDE92CF0021D349 /* MOAIFmodStudioSound.cpp in Sources */,
+				206BA03E1BDE92CF0021D349 /* MOAIFmodStudioChannel.cpp in Sources */,
+				206BA03A1BDE92CF0021D349 /* MOAIFmodStudio.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1859,8 +1859,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				206B9D321BDE382A0021D349 /* CTUtil.cpp in Sources */,
-				206B9D361BDE382A0021D349 /* host.cpp in Sources */,
+				206BA04A1BDE92D60021D349 /* CTUtil.cpp in Sources */,
+				206BA04E1BDE92D60021D349 /* host.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1868,8 +1868,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				206B9D331BDE382A0021D349 /* CTUtil.cpp in Sources */,
-				206B9D371BDE382A0021D349 /* host.cpp in Sources */,
+				206BA04B1BDE92D60021D349 /* CTUtil.cpp in Sources */,
+				206BA04F1BDE92D60021D349 /* host.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1886,11 +1886,6 @@
 			target = 206B9B081BDAB53F0021D349 /* libmoai-osx-fmod-studio */;
 			targetProxy = 206B9CF91BDABB1B0021D349 /* PBXContainerItemProxy */;
 		};
-		206B9CFC1BDABB1B0021D349 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "libmoai-osx-all";
-			targetProxy = 206B9CFB1BDABB1B0021D349 /* PBXContainerItemProxy */;
-		};
 		206B9D041BDABB2E0021D349 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 206B9AC61BDAB5000021D349 /* libmoai-ios-spine */;
@@ -1901,11 +1896,6 @@
 			target = 206B9AFE1BDAB53D0021D349 /* libmoai-ios-fmod-studio */;
 			targetProxy = 206B9D051BDABB2E0021D349 /* PBXContainerItemProxy */;
 		};
-		206B9D081BDABB2E0021D349 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "libmoai-ios-all";
-			targetProxy = 206B9D071BDABB2E0021D349 /* PBXContainerItemProxy */;
-		};
 		206B9D3B1BDE48FD0021D349 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 206B9D091BDE37C80021D349 /* libmoai-ios-ct-util */;
@@ -1915,6 +1905,16 @@
 			isa = PBXTargetDependency;
 			target = 206B9D1B1BDE37CA0021D349 /* libmoai-osx-ct-util */;
 			targetProxy = 206B9D3C1BDE49020021D349 /* PBXContainerItemProxy */;
+		};
+		20993E8E1BDE94A4009D7CED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libmoai-osx-all";
+			targetProxy = 20993E8D1BDE94A4009D7CED /* PBXContainerItemProxy */;
+		};
+		20993ECC1BDE94AA009D7CED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libmoai-ios-all";
+			targetProxy = 20993ECB1BDE94AA009D7CED /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
