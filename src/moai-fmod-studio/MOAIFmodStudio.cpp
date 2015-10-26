@@ -262,6 +262,8 @@ MOAIFmodStudio::MOAIFmodStudio () :
     mBGMChannelGroup ( 0 ),
     mSFXChannelGroup ( 0 ) {
     
+    RTTI_SINGLE ( MOAILuaObject )
+
 }
 
 //----------------------------------------------------------------//

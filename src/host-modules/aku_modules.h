@@ -27,6 +27,10 @@
 	#include <moai-box2d/host.h>
 #endif
 
+#if AKU_WITH_CLOUDTEAM
+	#include <ct-util/host.h>
+#endif
+
 #if AKU_WITH_CRYPTO
 	#include <moai-crypto/host.h>
 #endif

@@ -55,6 +55,10 @@ void AKUModulesAppFinalize () {
 		AKUBox2DAppFinalize ();
 	#endif
 
+	#if AKU_WITH_CLOUDTEAM
+		AKUCTUtilAppFinalize ();
+	#endif
+
 	#if AKU_WITH_CRYPTO
 		AKUCryptoAppFinalize ();
 	#endif
@@ -135,6 +139,10 @@ void AKUModulesAppInitialize () {
 		AKUBox2DAppInitialize ();
 	#endif
 
+	#if AKU_WITH_CLOUDTEAM
+		AKUCTUtilAppInitialize ();
+	#endif
+
 	#if AKU_WITH_CRYPTO
 		AKUCryptoAppInitialize ();
 	#endif
@@ -213,6 +221,10 @@ void AKUModulesContextInitialize () {
 
 	#if AKU_WITH_BOX2D
 		AKUBox2DContextInitialize ();
+	#endif
+
+	#if AKU_WITH_CLOUDTEAM
+		AKUCTUtilContextInitialize ();
 	#endif
 
 	#if AKU_WITH_CRYPTO

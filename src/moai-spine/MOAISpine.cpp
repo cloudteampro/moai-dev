@@ -54,10 +54,7 @@ int MOAISpine::_setReadFile ( lua_State* L ) {
 
 //----------------------------------------------------------------//
 MOAISpine::MOAISpine () {
-	RTTI_BEGIN
-		RTTI_EXTEND ( MOAILuaObject )
-		
-	RTTI_END
+	RTTI_SINGLE ( MOAILuaObject )
 }
 
 //----------------------------------------------------------------//

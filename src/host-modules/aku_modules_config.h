@@ -9,6 +9,10 @@
 		#define AKU_WITH_BOX2D 1
 	#endif
 
+	#ifndef AKU_WITH_CLOUDTEAM
+		#define AKU_WITH_CLOUDTEAM 1
+	#endif
+
 	#ifndef AKU_WITH_CRYPTO
 		#define AKU_WITH_CRYPTO 1
 	#endif
