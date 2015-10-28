@@ -29,6 +29,10 @@ void AKUModulesIosAppFinalize () {
 		AKUIosChartBoostAppFinalize ();
 	#endif
 
+	#if AKU_WITH_IOS_CRASHLYTICS
+		AKUIosCrashlyticsAppFinalize ();
+	#endif
+
 	#if AKU_WITH_IOS_CRITTERCISM
 		AKUIosCrittercismAppFinalize ();
 	#endif
@@ -95,6 +99,10 @@ void AKUModulesIosAppInitialize () {
 
 	#if AKU_WITH_IOS_CHARTBOOST
 		AKUIosChartBoostAppInitialize ();
+	#endif
+
+	#if AKU_WITH_IOS_CRASHLYTICS
+		AKUIosCrashlyticsAppInitialize ();
 	#endif
 
 	#if AKU_WITH_IOS_CRITTERCISM
@@ -195,6 +203,10 @@ void AKUModulesIosContextInitialize () {
 
 	#if AKU_WITH_IOS_CHARTBOOST
 		AKUIosChartBoostContextInitialize ();
+	#endif
+
+	#if AKU_WITH_IOS_CRASHLYTICS
+		AKUIosCrashlyticsContextInitialize ();
 	#endif
 
 	#if AKU_WITH_IOS_CRITTERCISM

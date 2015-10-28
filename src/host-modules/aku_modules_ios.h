@@ -23,6 +23,10 @@
 	#include <moai-ios-chartboost/host.h>
 #endif
 
+#if AKU_WITH_IOS_CRASHLYTICS
+	#include <moai-ios-crashlytics/host.h>
+#endif
+
 #if AKU_WITH_IOS_CRITTERCISM
 	#include <moai-ios-crittercism/host.h>
 #endif
