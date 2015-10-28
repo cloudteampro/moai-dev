@@ -581,7 +581,9 @@ MOAIFacebookIOS::MOAIFacebookIOS () {
 //----------------------------------------------------------------//
 MOAIFacebookIOS::~MOAIFacebookIOS () {
 	
-	mRefs.Clear ();
+	if ( MOAILuaRuntime::IsValid ()) {
+		mRefs.Clear ();
+	}
 	
 	[[ NSNotificationCenter defaultCenter ] removeObserver:mDelegate ];
 	[ mDelegate release ];
