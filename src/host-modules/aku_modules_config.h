@@ -10,7 +10,7 @@
 	#endif
 
 	#ifndef AKU_WITH_CLOUDTEAM
-		#define AKU_WITH_CLOUDTEAM 1
+		#define AKU_WITH_CLOUDTEAM 0
 	#endif
 
 	#ifndef AKU_WITH_CRYPTO
@@ -74,7 +74,7 @@
 	#endif
 
 	#ifndef AKU_WITH_SPINE
-		#define AKU_WITH_SPINE 1
+		#define AKU_WITH_SPINE 0
 	#endif
 
 	#ifndef AKU_WITH_UNTZ
