@@ -11,10 +11,10 @@
 // CTUtil
 //================================================================//
 /**	@name	CTUtil
-	@text	CloudTeam lua utilities
+	@text	CloudTeam lua utilities. Mostly for temporary hacks
 */
 class CTUtil :
-	public MOAIGlobalClass < CTUtil, MOAILuaObject > {
+	public MOAIGlobalClass < CTUtil, MOAIGlobalEventSource > {
 private:
 
 	bool 	mRelaunchScheduled;
@@ -27,6 +27,11 @@ public:
 	DECL_LUA_SINGLETON ( CTUtil )
 
 	GET_BOOL ( IsRelaunchScheduled, mRelaunchScheduled )
+		
+	enum {
+		SESSION_END,
+		SESSION_START,
+	};
 
 	//----------------------------------------------------------------//
 					CTUtil		();

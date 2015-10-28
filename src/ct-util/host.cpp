@@ -25,6 +25,22 @@ void AKUCTUtilContextInitialize () {
 }
 
 //----------------------------------------------------------------//
+void AKUCTUtilSessionEnd () {
+	
+	if ( CTUtil::IsValid ()) {
+		CTUtil::Get ().InvokeListener ( CTUtil::SESSION_END );
+	}
+}
+
+//----------------------------------------------------------------//
+void AKUCTUtilSessionStart () {
+
+	if ( CTUtil::IsValid ()) {
+		CTUtil::Get ().InvokeListener ( CTUtil::SESSION_START );
+	}
+}
+
+//----------------------------------------------------------------//
 bool AKUIsRelaunchScheduled () {
 
     if ( CTUtil::IsValid ()) {

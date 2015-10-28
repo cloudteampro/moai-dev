@@ -13,6 +13,9 @@ AKU_API void	AKUCTUtilAppFinalize		();
 AKU_API void	AKUCTUtilAppInitialize		();
 AKU_API void	AKUCTUtilContextInitialize	();
 
+AKU_API void	AKUCTUtilSessionEnd			();
+AKU_API void	AKUCTUtilSessionStart		();
+
 AKU_API bool	AKUIsRelaunchScheduled		();
 
 #endif

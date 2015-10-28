@@ -20,7 +20,7 @@ int	CTUtil::_scheduleRelaunch ( lua_State* L ) {
 CTUtil::CTUtil () :
 	mRelaunchScheduled ( false ) {
     
-    RTTI_SINGLE ( MOAILuaObject )
+    RTTI_SINGLE ( MOAIGlobalEventSource )
 }
 
 //----------------------------------------------------------------//
@@ -31,8 +31,13 @@ CTUtil::~CTUtil () {
 //----------------------------------------------------------------//
 void CTUtil::RegisterLuaClass ( MOAILuaState& state ) {
 	
+	state.SetField ( -1, "SESSION_END",			( u32 )SESSION_END );
+	state.SetField ( -1, "SESSION_START",		( u32 )SESSION_START );
+	
 	luaL_Reg regTable [] = {
+		{ "getListener",			&MOAIGlobalEventSource::_getListener < CTUtil > },
 		{ "scheduleRelaunch",		_scheduleRelaunch },
+		{ "setListener",			&MOAIGlobalEventSource::_setListener < CTUtil > },
 		{ NULL, NULL }
 	};
 	
