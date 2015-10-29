@@ -599,9 +599,7 @@ void MOAIFacebookIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "PERMISSIONS_GRANTED",			( u32 )PERMISSIONS_GRANTED );
 	state.SetField ( -1, "PROFILE_UPDATED",				( u32 )PROFILE_UPDATED );
 	state.SetField ( -1, "REQUEST_RESPONSE", 			( u32 )REQUEST_RESPONSE );
-	state.SetField ( -1, "REQUEST_RESPONSE_FAILED", 	( u32 )REQUEST_RESPONSE_FAILED );
-	state.SetField ( -1, "REQUEST_DIALOG_DID_COMPLETE", ( u32 )REQUEST_DIALOG_DID_COMPLETE );
-	state.SetField ( -1, "REQUEST_DIALOG_DID_FAIL", 	( u32 )REQUEST_DIALOG_DID_FAIL );
+	state.SetField ( -1, "REQUEST_DIALOG_RESPONSE",		( u32 )REQUEST_DIALOG_RESPONSE );
 	state.SetField ( -1, "SESSION_DID_LOGIN", 			( u32 )SESSION_DID_LOGIN );
 	state.SetField ( -1, "SESSION_DID_NOT_LOGIN", 		( u32 )SESSION_DID_NOT_LOGIN );
 	state.SetField ( -1, "SESSION_EXTENDED",			( u32 )SESSION_EXTENDED );
@@ -706,15 +704,16 @@ void MOAIFacebookIOS::GameRequestDialogDidComplete ( NSDictionary* results, int 
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 	
 	if ( ref == LUA_NOREF ) {
-		this->PushListener ( REQUEST_DIALOG_DID_COMPLETE, state );
+		this->PushListener ( REQUEST_DIALOG_RESPONSE, state );
 	}
 	else {
 		this->mRefs.PushRef ( state, ref );
 	}
 	
 	if ( state.IsType ( -1, LUA_TFUNCTION )) {
+		state.Push ( true );
 		OBJC_TO_LUA ( results, state );
-		state.DebugCall ( 1, 0 );
+		state.DebugCall ( 2, 0 );
 	}
 }
 
@@ -726,15 +725,16 @@ void MOAIFacebookIOS::GameRequestDialogDidFail ( NSError* error, int ref ) {
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 	
 	if ( ref == LUA_NOREF ) {
-		this->PushListener ( REQUEST_DIALOG_DID_FAIL, state );
+		this->PushListener ( REQUEST_DIALOG_RESPONSE, state );
 	}
 	else {
 		this->mRefs.PushRef ( state, ref );
 	}
 	
 	if ( state.IsType ( -1, LUA_TFUNCTION )) {
+		state.Push ( false );
 		OBJC_TO_LUA ( error, state );
-		state.DebugCall ( 1, 0 );
+		state.DebugCall ( 2, 0 );
 	}
 }
 
