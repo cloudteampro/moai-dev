@@ -28,6 +28,7 @@
 			);
 			dependencies = (
 				20993ECC1BDE94AA009D7CED /* PBXTargetDependency */,
+				2010D68A1BE38397008AD676 /* PBXTargetDependency */,
 				206B9D3B1BDE48FD0021D349 /* PBXTargetDependency */,
 				206B9D041BDABB2E0021D349 /* PBXTargetDependency */,
 				206B9D061BDABB2E0021D349 /* PBXTargetDependency */,
@@ -213,6 +214,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2010D6891BE38397008AD676 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 203DA5761BDF92C700EC109A;
+			remoteInfo = "libmoai-ios-crashlytics";
+		};
 		206B9CF71BDABB1B0021D349 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -1957,6 +1965,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		2010D68A1BE38397008AD676 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 203DA5761BDF92C700EC109A /* libmoai-ios-crashlytics */;
+			targetProxy = 2010D6891BE38397008AD676 /* PBXContainerItemProxy */;
+		};
 		206B9CF81BDABB1B0021D349 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 206B9ABC1BDAB4F60021D349 /* libmoai-osx-spine */;

@@ -48,6 +48,7 @@
 				CDBA1E321B1E442500DCDC75 /* PBXTargetDependency */,
 				CDBA1E361B1E442500DCDC75 /* PBXTargetDependency */,
 				CDBA1E381B1E442500DCDC75 /* PBXTargetDependency */,
+				2010D6851BE380F6008AD676 /* PBXTargetDependency */,
 				CDBA1E421B1E442500DCDC75 /* PBXTargetDependency */,
 				CDBA1E441B1E442500DCDC75 /* PBXTargetDependency */,
 				3E72B9AA19F703FA00A9DE30 /* PBXTargetDependency */,
@@ -4809,6 +4810,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2010D6841BE380F6008AD676 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CD70C10F18441DD0005CEBC0;
+			remoteInfo = "libmoai-ios-flurry";
+		};
 		3E72B9A919F703FA00A9DE30 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -19716,6 +19724,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		2010D6851BE380F6008AD676 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CD70C10F18441DD0005CEBC0 /* libmoai-ios-flurry */;
+			targetProxy = 2010D6841BE380F6008AD676 /* PBXContainerItemProxy */;
+		};
 		3E72B9AA19F703FA00A9DE30 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 03C2F6F3104DE130009A2D5D /* libmoai-ios */;

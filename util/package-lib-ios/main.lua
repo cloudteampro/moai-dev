@@ -74,7 +74,8 @@ processConfigFile ( 'config.lua' )
 MOAIFileSystem.deleteDirectory ( PACKAGE_DIR, true )
 MOAIFileSystem.copy ( 'moai-sdk', PACKAGE_DIR )
 
-util.moaiexec ( './prepare-sdk-ios.sh' )
+util.moaiexec ( './build-ios.sh' )
+-- util.moaiexec ( './prepare-sdk-ios.sh' )
 
 for k, v in pairs ( COPY_FILES ) do
 	v = v == true and k or v
