@@ -622,35 +622,35 @@ void MOAIFacebookIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "FILTER_APP_NON_USERS", 		( u32 )FBSDKGameRequestFilterAppNonUsers );
 	
 	// Analytics predefined event names
-	state.SetField ( -1, "NAME_ACHIEVED_LEVEL",			[ FBSDKAppEventNameAchievedLevel 			UTF8String ]);
-	state.SetField ( -1, "NAME_ADDED_PAYMENT_INFO",		[ FBSDKAppEventNameAddedPaymentInfo 		UTF8String ]);
-	state.SetField ( -1, "NAME_ADDED_TO_CART",			[ FBSDKAppEventNameAddedToCart 				UTF8String ]);
-	state.SetField ( -1, "NAME_ADDED_TO_WISHLIST",		[ FBSDKAppEventNameAddedToWishlist 			UTF8String ]);
-	state.SetField ( -1, "NAME_COMPLETED_REGISTRATION", [ FBSDKAppEventNameCompletedRegistration 	UTF8String ]);
-	state.SetField ( -1, "NAME_COMPLETED_TUTORIAL",		[ FBSDKAppEventNameCompletedTutorial 		UTF8String ]);
-	state.SetField ( -1, "NAME_INITIATED_CHECKOUT",		[ FBSDKAppEventNameInitiatedCheckout 		UTF8String ]);
-	state.SetField ( -1, "NAME_RATED",					[ FBSDKAppEventNameRated 					UTF8String ]);
-	state.SetField ( -1, "NAME_SEARCHED",				[ FBSDKAppEventNameSearched 				UTF8String ]);
-	state.SetField ( -1, "NAME_SPENT_CREDITS",			[ FBSDKAppEventNameSpentCredits 			UTF8String ]);
-	state.SetField ( -1, "NAME_UNLOCKED_ACHIEVEMENT",	[ FBSDKAppEventNameUnlockedAchievement 		UTF8String ]);
-	state.SetField ( -1, "NAME_VIEWED_CONTENT",			[ FBSDKAppEventNameViewedContent 			UTF8String ]);
+	state.SetField ( -1, "EVENT_ACHIEVED_LEVEL",				[ FBSDKAppEventNameAchievedLevel 			UTF8String ]);
+	state.SetField ( -1, "EVENT_ADDED_PAYMENT_INFO",			[ FBSDKAppEventNameAddedPaymentInfo 		UTF8String ]);
+	state.SetField ( -1, "EVENT_ADDED_TO_CART",					[ FBSDKAppEventNameAddedToCart 				UTF8String ]);
+	state.SetField ( -1, "EVENT_ADDED_TO_WISHLIST",				[ FBSDKAppEventNameAddedToWishlist 			UTF8String ]);
+	state.SetField ( -1, "EVENT_COMPLETED_REGISTRATION", 		[ FBSDKAppEventNameCompletedRegistration 	UTF8String ]);
+	state.SetField ( -1, "EVENT_COMPLETED_TUTORIAL",			[ FBSDKAppEventNameCompletedTutorial 		UTF8String ]);
+	state.SetField ( -1, "EVENT_INITIATED_CHECKOUT",			[ FBSDKAppEventNameInitiatedCheckout 		UTF8String ]);
+	state.SetField ( -1, "EVENT_RATED",							[ FBSDKAppEventNameRated 					UTF8String ]);
+	state.SetField ( -1, "EVENT_SEARCHED",						[ FBSDKAppEventNameSearched 				UTF8String ]);
+	state.SetField ( -1, "EVENT_SPENT_CREDITS",					[ FBSDKAppEventNameSpentCredits 			UTF8String ]);
+	state.SetField ( -1, "EVENT_UNLOCKED_ACHIEVEMENT",			[ FBSDKAppEventNameUnlockedAchievement 		UTF8String ]);
+	state.SetField ( -1, "EVENT_VIEWED_CONTENT",				[ FBSDKAppEventNameViewedContent 			UTF8String ]);
 
 	// Analytics predefined event parameters names
-	state.SetField ( -1, "PARAMETER_NAME_CONTENT_ID",				[ FBSDKAppEventParameterNameContentID 				UTF8String ]);
-	state.SetField ( -1, "PARAMETER_NAME_CONTENT_TYPE",				[ FBSDKAppEventParameterNameContentType 			UTF8String ]);
-	state.SetField ( -1, "PARAMETER_NAME_CURRENCY",					[ FBSDKAppEventParameterNameCurrency 				UTF8String ]);
-	state.SetField ( -1, "PARAMETER_NAME_DESCRIPTION",				[ FBSDKAppEventParameterNameDescription 			UTF8String ]);
-	state.SetField ( -1, "PARAMETER_NAME_LEVEL",					[ FBSDKAppEventParameterNameLevel 					UTF8String ]);
-	state.SetField ( -1, "PARAMETER_NAME_MAX_RATING_VALUE",			[ FBSDKAppEventParameterNameMaxRatingValue 			UTF8String ]);
-	state.SetField ( -1, "PARAMETER_NAME_NUM_ITEMS",				[ FBSDKAppEventParameterNameNumItems 				UTF8String ]);
-	state.SetField ( -1, "PARAMETER_NAME_PAYMENT_INFO_AVAILABLE",	[ FBSDKAppEventParameterNamePaymentInfoAvailable 	UTF8String ]);
-	state.SetField ( -1, "PARAMETER_NAME_REGISTRATION_METHOD",		[ FBSDKAppEventParameterNameRegistrationMethod 		UTF8String ]);
-	state.SetField ( -1, "PARAMETER_NAME_SEARCH_STRING",			[ FBSDKAppEventParameterNameSearchString 			UTF8String ]);
-	state.SetField ( -1, "PARAMETER_NAME_SUCCESS",					[ FBSDKAppEventParameterNameSuccess 				UTF8String ]);
+	state.SetField ( -1, "PARAM_NAME_CONTENT_ID",				[ FBSDKAppEventParameterNameContentID 				UTF8String ]);
+	state.SetField ( -1, "PARAM_NAME_CONTENT_TYPE",				[ FBSDKAppEventParameterNameContentType 			UTF8String ]);
+	state.SetField ( -1, "PARAM_NAME_CURRENCY",					[ FBSDKAppEventParameterNameCurrency 				UTF8String ]);
+	state.SetField ( -1, "PARAM_NAME_DESCRIPTION",				[ FBSDKAppEventParameterNameDescription 			UTF8String ]);
+	state.SetField ( -1, "PARAM_NAME_LEVEL",					[ FBSDKAppEventParameterNameLevel 					UTF8String ]);
+	state.SetField ( -1, "PARAM_NAME_MAX_RATING_VALUE",			[ FBSDKAppEventParameterNameMaxRatingValue 			UTF8String ]);
+	state.SetField ( -1, "PARAM_NAME_NUM_ITEMS",				[ FBSDKAppEventParameterNameNumItems 				UTF8String ]);
+	state.SetField ( -1, "PARAM_NAME_PAYMENT_INFO_AVAILABLE",	[ FBSDKAppEventParameterNamePaymentInfoAvailable 	UTF8String ]);
+	state.SetField ( -1, "PARAM_NAME_REGISTRATION_METHOD",		[ FBSDKAppEventParameterNameRegistrationMethod 		UTF8String ]);
+	state.SetField ( -1, "PARAM_NAME_SEARCH_STRING",			[ FBSDKAppEventParameterNameSearchString 			UTF8String ]);
+	state.SetField ( -1, "PARAM_NAME_SUCCESS",					[ FBSDKAppEventParameterNameSuccess 				UTF8String ]);
 
 	// Analytics predefined event parameters values
-	state.SetField ( -1, "PARAMETER_VALUE_NO",			[ FBSDKAppEventParameterValueNo 	UTF8String ]);
-	state.SetField ( -1, "PARAMETER_VALUE_YES",			[ FBSDKAppEventParameterValueYes 	UTF8String ]);
+	state.SetField ( -1, "PARAM_VALUE_NO",			[ FBSDKAppEventParameterValueNo 	UTF8String ]);
+	state.SetField ( -1, "PARAM_VALUE_YES",			[ FBSDKAppEventParameterValueYes 	UTF8String ]);
 
 	luaL_Reg regTable[] = {
 		{ "declinedPermissions", 			_declinedPermissions },
