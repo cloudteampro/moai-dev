@@ -509,8 +509,8 @@ int MOAIFacebookIOS::_sendGameRequest ( lua_State* L ) {
 	
 	FBSDKGameRequestDialog* dialog = [[[ FBSDKGameRequestDialog alloc ] init ] autorelease ];
 	[ dialog setDelegate: self->mDelegate ];
-    [ dialog setContent: content ];
-    [ dialog setFrictionlessRequestsEnabled: frictionless ];
+	[ dialog setContent: content ];
+	[ dialog setFrictionlessRequestsEnabled: frictionless ];
 	
 	[ content release ];
 	
@@ -518,7 +518,7 @@ int MOAIFacebookIOS::_sendGameRequest ( lua_State* L ) {
 	// It will be released automatically in dialog destructor.
 	objc_setAssociatedObject ( dialog, kGameRequestCallbackRef, callbackRef, OBJC_ASSOCIATION_RETAIN_NONATOMIC );
 	
-    NSError* error = nil;
+	NSError* error = nil;
 	if ([ dialog validateWithError:&error ]) {
 		state.Push (( bool )[ dialog show ]);
 		return 1;

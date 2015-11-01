@@ -12,32 +12,32 @@ extern JavaVM* jvm;
 
 //----------------------------------------------------------------//
 jobject JniUtils::BundleFromLua ( lua_State* L, int index ) {
-    MOAILuaState state ( L );
+	MOAILuaState state ( L );
 
 	jclass clazz = this->Env ()->FindClass ( "android.os.Bundle" );
-    jobject bundle = this->Env ()->NewObject ( clazz, this->Env ()->GetMethodID ( clazz, "<init>", "()V" ));
-    jmethodID put = this->Env ()->GetMethodID ( clazz, "putString", "(Ljava/lang/String;Ljava/lang/String;)V" );
+	jobject bundle = this->Env ()->NewObject ( clazz, this->Env ()->GetMethodID ( clazz, "<init>", "()V" ));
+	jmethodID put = this->Env ()->GetMethodID ( clazz, "putString", "(Ljava/lang/String;Ljava/lang/String;)V" );
 
-    // table is in the stack at index 'index'
-    lua_pushnil ( state );  // first key
-    while ( lua_next ( state, index ) != 0 ) {
-        // use the 'key' (at index -2) and 'value' (at index -1)
-        cc8* key = lua_tostring( state, -2 );
+	// table is in the stack at index 'index'
+	lua_pushnil ( state );  // first key
+	while ( lua_next ( state, index ) != 0 ) {
+		// use the 'key' (at index -2) and 'value' (at index -1)
+		cc8* key = lua_tostring( state, -2 );
 
-        if( key != NULL ) {
-            cc8* value = lua_tostring( state, -1 );
-            if ( value != NULL ) {
+		if ( key != NULL ) {
+			cc8* value = lua_tostring( state, -1 );
+			if ( value != NULL ) {
 				
 				MOAIJString jkey = this->GetJString ( key );
 				MOAIJString jvalue = this->GetJString ( value );
 
-                this->Env ()->CallObjectMethod( bundle, put, ( jstring )jkey, ( jstring )jvalue );
-            }
-        }
-        // removes 'value'; keeps 'key' for next iteration
-        lua_pop ( state, 1 );
-    }
-    return bundle;
+				this->Env ()->CallObjectMethod( bundle, put, ( jstring )jkey, ( jstring )jvalue );
+			}
+		}
+		// removes 'value'; keeps 'key' for next iteration
+		lua_pop ( state, 1 );
+	}
+	return bundle;
 }
 
 //----------------------------------------------------------------//
@@ -93,13 +93,13 @@ void JniUtils::ClearException () {
 //----------------------------------------------------------------//
 jobject JniUtils::CreateObjectOfClass () {
 
-     if ( !this->mClass ) {
+	 if ( !this->mClass ) {
 		ZLLogF ( ZLLog::CONSOLE, "MOAI JNI: Missing class; cannot create object" );
 		assert ( false );
 		return NULL;
-    }
-    jmethodID constructor = this->Env ()->GetMethodID ( this->mClass, "<init>", "()V" );
-    return this->Env ()->NewObject ( this->mClass, constructor );
+	}
+	jmethodID constructor = this->Env ()->GetMethodID ( this->mClass, "<init>", "()V" );
+	return this->Env ()->NewObject ( this->mClass, constructor );
 }
 
 //----------------------------------------------------------------//
@@ -136,10 +136,10 @@ jclass JniUtils::GetClassViaLoader ( cc8* className ) {
 	jobject classLoader = this->Env ()->CallObjectMethod ( this->mActivity, getClassLoader );
 	jclass clazz = ( jclass )( this->Env ()->CallObjectMethod ( classLoader, loadClass, jclassName ));
 	
-    if ( clazz == NULL ) {
+	if ( clazz == NULL ) {
 		ZLLogF ( ZLLog::CONSOLE, "MOAI JNI: Missing class; cannot find java class %d", className );
 		this->ClearException ();
-    }
+	}
 	return clazz;
 	*/
 	return NULL;
@@ -166,13 +166,13 @@ jmethodID JniUtils::GetMethod ( cc8* methodName, cc8* methodSignature ) {
 //----------------------------------------------------------------//
 jmethodID JniUtils::GetMethod ( jclass clazz, cc8* methodName, cc8* methodSignature ) {
 	
-    if ( !clazz ) {
+	if ( !clazz ) {
 		ZLLogF ( ZLLog::CONSOLE, "MOAI JNI: Missing class; cannot find java method %d", methodName );
 		this->ClearException ();
 		return NULL;
-    }
+	}
 	
-    jmethodID method = this->Env ()->GetMethodID ( clazz, methodName, methodSignature );
+	jmethodID method = this->Env ()->GetMethodID ( clazz, methodName, methodSignature );
 	
 	if ( method == NULL ) {
 		ZLLogF ( ZLLog::CONSOLE, "MOAI JNI: Unable to find java method %s", methodName );
@@ -190,13 +190,13 @@ jmethodID JniUtils::GetStaticMethod ( cc8* methodName, cc8* methodSignature ) {
 //----------------------------------------------------------------//
 jmethodID JniUtils::GetStaticMethod ( jclass clazz, cc8* methodName, cc8* methodSignature ) {
 	
-    if ( !clazz ) {
+	if ( !clazz ) {
 		ZLLogF ( ZLLog::CONSOLE, "MOAI JNI: Missing class; cannot find static java method %d", methodName );
 		this->ClearException ();
 		return NULL;
-    }
+	}
 	
-    jmethodID method = this->Env ()->GetStaticMethodID ( clazz, methodName, methodSignature );
+	jmethodID method = this->Env ()->GetStaticMethodID ( clazz, methodName, methodSignature );
 	
 	if ( method == NULL ) {
 		ZLLogF ( ZLLog::CONSOLE, "MOAI JNI: Unable to find static java method %s", methodName );
@@ -207,32 +207,32 @@ jmethodID JniUtils::GetStaticMethod ( jclass clazz, cc8* methodName, cc8* method
 
 //----------------------------------------------------------------//
 jobject JniUtils::HashMapFromLua ( lua_State* L, int index ) {
-    MOAILuaState state ( L );
+	MOAILuaState state ( L );
 
 	jclass clazz = this->Env ()->FindClass ( "java/util/HashMap" );
-    jobject hashMap = this->Env ()->NewObject ( clazz, this->Env ()->GetMethodID ( clazz, "<init>", "()V" ));
-    jmethodID put = this->Env ()->GetMethodID ( clazz, "put", "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;" );
+	jobject hashMap = this->Env ()->NewObject ( clazz, this->Env ()->GetMethodID ( clazz, "<init>", "()V" ));
+	jmethodID put = this->Env ()->GetMethodID ( clazz, "put", "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;" );
 
-    // table is in the stack at index 'index'
-    lua_pushnil ( state );  // first key
-    while ( lua_next ( state, index ) != 0 ) {
-        // use the 'key' (at index -2) and 'value' (at index -1)
-        cc8* key = lua_tostring( state, -2 );
+	// table is in the stack at index 'index'
+	lua_pushnil ( state );  // first key
+	while ( lua_next ( state, index ) != 0 ) {
+		// use the 'key' (at index -2) and 'value' (at index -1)
+		cc8* key = lua_tostring( state, -2 );
 
-        if( key != NULL ) {
-            cc8* value = lua_tostring( state, -1 );
-            if ( value != NULL ) {
+		if( key != NULL ) {
+			cc8* value = lua_tostring( state, -1 );
+			if ( value != NULL ) {
 				
 				MOAIJString jkey = this->GetJString ( key );
 				MOAIJString jvalue = this->GetJString ( value );
 
-                this->Env ()->CallObjectMethod( hashMap, put, ( jstring )jkey, ( jstring )jvalue );
-            }
-        }
-        // removes 'value'; keeps 'key' for next iteration
-        lua_pop ( state, 1 );
-    }
-    return hashMap;
+				this->Env ()->CallObjectMethod( hashMap, put, ( jstring )jkey, ( jstring )jvalue );
+			}
+		}
+		// removes 'value'; keeps 'key' for next iteration
+		lua_pop ( state, 1 );
+	}
+	return hashMap;
 }
 
 //----------------------------------------------------------------//
@@ -240,7 +240,7 @@ JniUtils::JniUtils () :
 	mClass ( 0 ) {
 	
 	//jclass clazz = this->GetClass ( "com.ziplinegames.moai.Moai" );
-    //jmethodID getActivity = this->Env ()->GetStaticMethodID ( clazz, "getActivity", "()Landroid/app/Activity;" );
+	//jmethodID getActivity = this->Env ()->GetStaticMethodID ( clazz, "getActivity", "()Landroid/app/Activity;" );
 	//this->mActivity = this->Env ()->CallStaticObjectMethod ( clazz, getActivity );
 
 	//assert ( this->mActivity );
@@ -276,36 +276,36 @@ bool JniUtils::SetClassViaLoader ( cc8* className ) {
 
 //----------------------------------------------------------------//
 jobjectArray JniUtils::StringArrayFromLua ( lua_State* L, int index ) {
-    MOAILuaState state ( L );
+	MOAILuaState state ( L );
 
 	index = state.AbsIndex ( index );
 
-    int numEntries = 0;
-    for ( int key = 1; ; ++key ) {
-        state.GetField ( index, key );
-        cc8* value = state.GetValue < cc8* >( -1, 0 );
-        lua_pop ( state, 1 );
+	int numEntries = 0;
+	for ( int key = 1; ; ++key ) {
+		state.GetField ( index, key );
+		cc8* value = state.GetValue < cc8* >( -1, 0 );
+		lua_pop ( state, 1 );
 
-        if ( !value ) {
-            numEntries = key - 1;
-            break;
-        }
-    }
+		if ( !value ) {
+			numEntries = key - 1;
+			break;
+		}
+	}
 
-    jobjectArray array = this->Env ()->NewObjectArray ( numEntries, this->Env ()->FindClass( "java/lang/String" ), 0 );
-    for ( int key = 1; ; ++key ) {
+	jobjectArray array = this->Env ()->NewObjectArray ( numEntries, this->Env ()->FindClass( "java/lang/String" ), 0 );
+	for ( int key = 1; ; ++key ) {
 
-        state.GetField ( index, key );
-        cc8* value = state.GetValue < cc8* >( -1, 0 );
-        lua_pop ( state, 1 );
+		state.GetField ( index, key );
+		cc8* value = state.GetValue < cc8* >( -1, 0 );
+		lua_pop ( state, 1 );
 
-        if ( value ) {
-            MOAIJString jvalue = this->GetJString ( value );
-            this->Env ()->SetObjectArrayElement ( array, key - 1, jvalue );
-        }
-        else {
-            break;
-        }
-    }
-    return array;
+		if ( value ) {
+			MOAIJString jvalue = this->GetJString ( value );
+			this->Env ()->SetObjectArrayElement ( array, key - 1, jvalue );
+		}
+		else {
+			break;
+		}
+	}
+	return array;
 }
