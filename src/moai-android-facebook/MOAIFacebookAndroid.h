@@ -31,8 +31,6 @@ private:
 	MOAILuaRefTable			mRefs;
 
 	jclass					mJava_AppEventsConstants;
-	jclass					mJava_GameRequestActionTypeConstants;
-	jclass					mJava_GameRequestFilterConstants;
 
 	jmethodID 				mJava_GraphRequest;
 	jmethodID 				mJava_HasGranted;
@@ -46,6 +44,7 @@ private:
 	jmethodID 				mJava_RequestReadPermissions;
 	jmethodID 				mJava_SendGameRequest;
 	jmethodID 				mJava_SessionValid;
+	jmethodID				mJava_ShowInviteDialog;
 
 	//----------------------------------------------------------------//
 	// static int		_declinedPermissions		( lua_State* L );
@@ -59,11 +58,12 @@ private:
 	static int		_logPurchase				( lua_State* L );
 	static int		_login						( lua_State* L );
 	static int		_logout						( lua_State* L );
-	// static int		_postToFeed					( lua_State* L );
+	static int		_postToFeed					( lua_State* L );
 	static int		_requestPublishPermissions	( lua_State* L );
 	static int		_requestReadPermissions		( lua_State* L );
 	static int		_sendGameRequest			( lua_State* L );
 	static int		_sessionValid				( lua_State* L );
+	static int		_showInviteDialog			( lua_State* L );
 	// static int		_setProfileAutoUpdate		( lua_State* L );
 
 public:
@@ -84,9 +84,9 @@ public:
 	};
 
 	void	ClearCallbackRef				( int ref );
-	void	GameRequestDialogDidComplete	( jbundle result, int ref );
+	void	GameRequestDialogDidComplete	( cc8* requestId, jobjectArray recipients, int ref );
 	void	GameRequestDialogDidFail		( cc8* error, int ref );
-	void	GraphRequestResponse			( jbundle result, int ref );
+	void	GraphRequestResponse			( cc8* result, int ref );
 	void	GraphRequestResponseFailure		( cc8* error, int ref );
 			MOAIFacebookAndroid				();
 			~MOAIFacebookAndroid			();

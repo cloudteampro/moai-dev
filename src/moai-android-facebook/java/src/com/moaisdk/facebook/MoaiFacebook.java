@@ -7,9 +7,11 @@
 package com.moaisdk.facebook;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Currency;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Collection;
@@ -17,15 +19,14 @@ import com.moaisdk.core.*;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
 
 import com.facebook.AccessToken;
+import com.facebook.appevents.AppEventsLogger;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.FacebookRequestError;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphResponse;
 import com.facebook.GraphRequest;
@@ -70,9 +71,13 @@ public class MoaiFacebook {
 	private static Activity 			sActivity					= null;
 	private static CallbackManager 		sCallbackManager			= null;
 	private static String 				sAppId						= null;
-	private static AccessToken  		sLoginAccessToken			= null;
 	private static GameRequestDialog 	sGameRequestDialog			= null;
 	private static int					sGameRequestCallbackRef		= 0;
+	private static AppEventsLogger		sLogger						= null;
+
+	// If true then loginWithReadPermissions is called to request additional permissions.
+	// Necessary to distinguish different callbacks
+	private static boolean				sRequestingPermissions		= false;
 
 	protected static native void	AKUNotifyFacebookLoginSuccess	();
 	protected static native void	AKUNotifyFacebookLoginDismissed	();
@@ -84,7 +89,7 @@ public class MoaiFacebook {
 		public void onSuccess ( LoginResult loginResult ) {
 
 			MoaiLog.i ( "MoaiFacebook onSuccess" );
-			sLoginAccessToken = loginResult.getAccessToken ();
+			// sLoginAccessToken = loginResult.getAccessToken ();
 
 			synchronized ( Moai.sAkuLock ) {
 				AKUNotifyFacebookLoginSuccess ();
@@ -96,7 +101,7 @@ public class MoaiFacebook {
 
 			MoaiLog.i ( "MoaiFacebook onCancel" );
 			synchronized ( Moai.sAkuLock ) {
-				AKUNotifyFacebookLoginDismissed ();
+				AKUNotifyFacebookLoginDismissed ( "cancel" );
 			}
 		}
 
@@ -115,24 +120,30 @@ public class MoaiFacebook {
 		@Override
 		public void onSuccess ( GameRequestDialog.Result result ) {
 			synchronized ( Moai.sAkuLock ) {
-				AKUGameRequestDialogDidComplete ( result.getRequestId (), result.getRequestRecipients (), sGameRequestCallback );
-				sGameRequestCallback = AKUClearCallbackRef ( sGameRequestCallback );
+				
+				List recipientsList = result.getRequestRecipients ();
+
+				String[] recipientsArr = new String [ recipientsList.size () ];
+				recipientsArr = recipientsList.toArray ( recipientsArr );
+
+				AKUGameRequestDialogDidComplete ( result.getRequestId (), recipientsArr, sGameRequestCallbackRef );
+				sGameRequestCallbackRef = AKUClearCallbackRef ( sGameRequestCallbackRef );
 			}
 		}
 
 		@Override
 		public void onCancel () {
 			synchronized ( Moai.sAkuLock ) {
-				AKUGameRequestDialogDidFail ( "cancel", sGameRequestCallback );
-				sGameRequestCallback = AKUClearCallbackRef ( sGameRequestCallback );				
+				AKUGameRequestDialogDidFail ( "cancel", sGameRequestCallbackRef );
+				sGameRequestCallbackRef = AKUClearCallbackRef ( sGameRequestCallbackRef );
 			}
 		}
 
 		@Override
 		public void onError ( FacebookException error ) {
 			synchronized ( Moai.sAkuLock ) {
-				AKUGameRequestDialogDidFail ( error.toString (), sGameRequestCallback );
-				sGameRequestCallback = AKUClearCallbackRef ( sGameRequestCallback );
+				AKUGameRequestDialogDidFail ( error.toString (), sGameRequestCallbackRef );
+				sGameRequestCallbackRef = AKUClearCallbackRef ( sGameRequestCallbackRef );
 			}
 		}
 	}
@@ -141,7 +152,7 @@ public class MoaiFacebook {
 	public static void onActivityResult ( int requestCode, int resultCode, Intent data ) {
 
 		MoaiLog.i ( "MoaiFacebook onActivityResult: Calling Session onActivityResult ()" );
-		sCallbackManager.onActivityResult(requestCode, resultCode, data);
+		sCallbackManager.onActivityResult ( requestCode, resultCode, data );
 	}
 
 	//----------------------------------------------------------------//
@@ -152,6 +163,7 @@ public class MoaiFacebook {
 		sActivity = activity;
 		FacebookSdk.sdkInitialize ( sActivity );
 
+		sLogger = AppEventsLogger.newLogger ( sActivity );
 		sCallbackManager = CallbackManager.Factory.create ();
 
 		sRequestDialog = new GameRequestDialog ( sActivity );
@@ -160,12 +172,17 @@ public class MoaiFacebook {
 	}
 
 	//----------------------------------------------------------------//
+	public static void onPause( ) {
+
+		MoaiLog.i("MoaiFacebook on pause");
+		com.facebook.AppEventsLogger.deactivateApp ( sActivity );
+	}
+
+	//----------------------------------------------------------------//
 	public static void onResume ( ) {
 
 		MoaiLog.i("MoaiFacebook on resume");
-//		if(sAppId != null) {
-//			com.facebook.AppEventsLogger.activateApp(sActivity, sAppId);
-//		}
+		com.facebook.AppEventsLogger.activateApp ( sActivity );
 	}
 
 	//================================================================//
@@ -176,7 +193,66 @@ public class MoaiFacebook {
 	public static String getToken () {
 
 		MoaiLog.i ( "MoaiFacebook: getToken" );
-		return sLoginAccessToken.getToken ();
+		return AccessToken.getCurrentAccessToken ();
+	}
+
+	//----------------------------------------------------------------//
+	public static void graphRequest ( String method, String path, Bundle params, final int callbackRef ) {
+
+		AccessToken token = AccessToken.getCurrentAccessToken ();
+
+		if ( token ) {
+
+			GraphRequest.Callback callback = new GraphRequest.Callback () {
+				private int mRef;
+				private boolean mOneshot;
+
+				@Override
+				public void onCompleted ( GraphResponse response ) {
+					if ( !mOneshot ) return;
+
+					FacebookRequestError error = response.getError ();
+					if ( error ) {
+
+						AKUNotifyGraphRequestFailed ( error.toString (), mRef );
+						AKUClearCallbackRef ( mRef );
+					}
+					else {
+
+						AKUNotifyGraphRequestSuccess ( response.getRawResponse (), mRef );
+						AKUClearCallbackRef ( mRef );
+					}
+
+					mOneshot = false;
+				}
+
+				private GraphRequest.Callback init ( int ref ) {
+					mRef = ref;
+					mOneshot = true;
+				}
+			}.init ( callbackRef );
+
+			GraphRequest request = new GraphRequest ( token, path, params, method, callback );
+			request.executeAsync ();
+		}
+	}
+
+	//----------------------------------------------------------------//
+	public static boolean hasGranted ( String permission ) {
+
+		AccessToken token = AccessToken.getCurrentAccessToken ();
+
+		if ( token && !token.isExpired ()) {
+
+			Set granted = token.getPermissions ();
+			for ( String p : granted ) {
+				if ( permission.equals ( p )) {
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 
 	//----------------------------------------------------------------//
@@ -186,16 +262,17 @@ public class MoaiFacebook {
 	}
 
 	//----------------------------------------------------------------//
-	public static boolean isSessionValid () {
+	public static void logEvent ( String eventName, double valueToSum, Bundle params ) {
 
-		MoaiLog.i ( "MoaiFacebook: isSessionValid" );
-//		Session session = Session.getActiveSession ();
-//		if (( session != null ) && session.isOpened ()) {
-//			MoaiLog.i ( "MoaiFacebook: session is valid" );
-//			return true;
-//		}
-		MoaiLog.i ( "MoaiFacebook: SESSION IS INVALID" );
-		return false;
+		MoaiLog.i ( "MoaiFacebook: logEvent --- event = " + eventName + ", value = " + valueToSum );
+		sLogger.logEvent ( eventName, valueToSum, params );
+	}
+
+	//----------------------------------------------------------------//
+	public static void logPurchase (  ) {
+
+		MoaiLog.i ( "MoaiFacebook: logPurchase --- event = " + money + ", value = " + currency );
+		sLogger.logPurchase ( BigDecimal.valueOf ( money ), Currency.getInstance ( currency ), params );
 	}
 
 	//----------------------------------------------------------------//
@@ -204,11 +281,11 @@ public class MoaiFacebook {
 		MoaiLog.i("MoaiFacebook: login");
 
 		if ( permissions == null ) {
-			ArrayList<String> permissions = new ArrayList<String>();
-			permissions.add ( "public_profile" );
+			permissions = new String []{ "public_profile" };
 		}
 
-		LoginManager.getInstance().logInWithReadPermissions ( sActivity, permissions );
+		sRequestingPermissions = false;
+		LoginManager.getInstance().logInWithReadPermissions ( sActivity, Arrays.asList ( permissions ) );
 	}
 
 	//----------------------------------------------------------------//
@@ -224,11 +301,17 @@ public class MoaiFacebook {
 	}
 
 	//----------------------------------------------------------------//
-	public static boolean restoreSession () {
+	public static void requestPublishPermissions ( String [] permissions ) {
 
-		MoaiLog.i ( "MoaiFacebook: restoreSession" );
+		sRequestingPermissions = true;
+		LoginManager.getInstance ().logInWithPublishPermissions ( sActivity, Arrays.asList ( permissions ) );
+	}
 
-		return false;
+	//----------------------------------------------------------------//
+	public static void requestReadPermissions ( String [] permissions ) {
+
+		sRequestingPermissions = true;
+		LoginManager.getInstance ().logInWithReadPermissions ( sActivity, Arrays.asList ( permissions ) );
 	}
 
 	//----------------------------------------------------------------//
@@ -237,11 +320,19 @@ public class MoaiFacebook {
 		GameRequestContent.Builder builder = new GameRequestContent.Builder ();
 
 		builder.setMessage 		( message );
-		builder.setActionType 	( GameRequestContent.ActionType.valueOf ( actionType ));
 		builder.setObjectId 	( objectId );
-		builder.setFilters 		( GameRequestContent.Filters.valueOf ( filters ));
 		builder.setRecipients 	( recipients );
 		builder.setSuggestions 	( suggestions );
+		
+		try {
+			GameRequestContent.Filters filter = GameRequestContent.Filters.valueOf ( filters );
+			builder.setFilters ( filter );
+		} catch ( Exception e ) {}
+
+		try {
+			GameRequestContent.ActionType action = GameRequestContent.ActionType.valueOf ( actionType );
+			builder.setActionType ( action );
+		} catch ( Exception e ) {}
 
 		// Looks like callback is not bound to concrete GameRequestDialog instance, but is looked up by REQUEST_CODE.
 		// Therefore, there is no point in spawning different GameRequestDialogs, 
@@ -249,6 +340,15 @@ public class MoaiFacebook {
 		// Here we remember the last Lua callback ref in class variable to be used later from FB dialog callback.
 		sGameRequestCallbackRef = ref;
 		sGameRequestDialog.show ( builder.build ());
+	}
+
+	//----------------------------------------------------------------//
+	public static boolean sessionValid () {
+
+		MoaiLog.i ( "MoaiFacebook: sessionValid" );
+
+		AccessToken accessToken = AccessToken.getCurrentAccessToken ();
+		return accessToken != null && !accessToken.isExpired ();
 	}
 
 	//----------------------------------------------------------------//
