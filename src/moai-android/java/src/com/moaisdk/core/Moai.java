@@ -39,19 +39,19 @@ public class Moai {
 
 	public enum ApplicationState {
 
-        APPLICATION_UNINITIALIZED,
-        APPLICATION_RUNNING,
-        APPLICATION_PAUSED;
+		APPLICATION_UNINITIALIZED,
+		APPLICATION_RUNNING,
+		APPLICATION_PAUSED;
 
-        public static ApplicationState valueOf ( int index ) {
+		public static ApplicationState valueOf ( int index ) {
 
-            ApplicationState [] values = ApplicationState.values ();
-            if (( index < 0 ) || ( index >= values.length )) {
-                return APPLICATION_UNINITIALIZED;
-            }
-            return values [ index ];
-        }
-    }
+			ApplicationState [] values = ApplicationState.values ();
+			if (( index < 0 ) || ( index >= values.length )) {
+				return APPLICATION_UNINITIALIZED;
+			}
+			return values [ index ];
+		}
+	}
 
 	public enum DialogResult {
 
@@ -60,15 +60,15 @@ public class Moai {
 		RESULT_NEGATIVE,
 		RESULT_CANCEL;
 
-        public static DialogResult valueOf ( int index ) {
+		public static DialogResult valueOf ( int index ) {
 
-            DialogResult [] values = DialogResult.values ();
-            if (( index < 0 ) || ( index >= values.length )) {
-                return RESULT_CANCEL;
-            }
-            return values [ index ];
-        }
-    }
+			DialogResult [] values = DialogResult.values ();
+			if (( index < 0 ) || ( index >= values.length )) {
+				return RESULT_CANCEL;
+			}
+			return values [ index ];
+		}
+	}
 
 	public enum ConnectionType {
 
@@ -76,29 +76,29 @@ public class Moai {
 		CONNECTION_WIFI,
 		CONNECTION_WWAN;
 
-        public static ConnectionType valueOf ( int index ) {
+		public static ConnectionType valueOf ( int index ) {
 
-            ConnectionType [] values = ConnectionType.values ();
-            if (( index < 0 ) || ( index >= values.length )) {
-                return CONNECTION_NONE;
-            }
-            return values [ index ];
-        }
-    }
+			ConnectionType [] values = ConnectionType.values ();
+			if (( index < 0 ) || ( index >= values.length )) {
+				return CONNECTION_NONE;
+			}
+			return values [ index ];
+		}
+	}
 
 	public enum InputDevice {
 
 		INPUT_DEVICE;
 
-        public static InputDevice valueOf ( int index ) {
+		public static InputDevice valueOf ( int index ) {
 
-            InputDevice [] values = InputDevice.values ();
-            if (( index < 0 ) || ( index >= values.length )) {
-                return INPUT_DEVICE;
-            }
-            return values [ index ];
-        }
-    }
+			InputDevice [] values = InputDevice.values ();
+			if (( index < 0 ) || ( index >= values.length )) {
+				return INPUT_DEVICE;
+			}
+			return values [ index ];
+		}
+	}
 
 	public enum InputSensor {
 
@@ -107,15 +107,15 @@ public class Moai {
 		SENSOR_LOCATION,
 		SENSOR_TOUCH;
 
-        public static InputSensor valueOf ( int index ) {
+		public static InputSensor valueOf ( int index ) {
 
-            InputSensor [] values = InputSensor.values ();
-            if (( index < 0 ) || ( index >= values.length )) {
-                return SENSOR_TOUCH;
-            }
-            return values [ index ];
-        }
-    }
+			InputSensor [] values = InputSensor.values ();
+			if (( index < 0 ) || ( index >= values.length )) {
+				return SENSOR_TOUCH;
+			}
+			return values [ index ];
+		}
+	}
 
 	public enum ListenerEvent {
 
@@ -129,15 +129,15 @@ public class Moai {
 		BACK_BUTTON_PRESSED,
 		UNKNOWN;
 		
-        public static ListenerEvent valueOf ( int index ) {
+		public static ListenerEvent valueOf ( int index ) {
 
-            ListenerEvent [] values = ListenerEvent.values ();
-            if (( index < 0 ) || ( index >= values.length )) {
-                return UNKNOWN;
-            }
-            return values [ index ];
-        }
-    }
+			ListenerEvent [] values = ListenerEvent.values ();
+			if (( index < 0 ) || ( index >= values.length )) {
+				return UNKNOWN;
+			}
+			return values [ index ];
+		}
+	}
 
 	private static String [] sExternalClasses = {
 		"com.moaisdk.adcolony.MoaiAdColony",
@@ -145,7 +145,7 @@ public class Moai {
 		"com.moaisdk.chartboost.MoaiChartBoost",
 		"com.moaisdk.crittercism.MoaiCrittercism",
 		"com.moaisdk.facebook.MoaiFacebook",
-        "com.moaisdk.fortumo.MoaiFortumo",
+		"com.moaisdk.fortumo.MoaiFortumo",
 		"com.moaisdk.flurry.MoaiFlurry",
 		"com.moaisdk.googlebilling.MoaiGoogleBilling",
 		"com.moaisdk.googleplayservices.MoaiGooglePlayServices",
@@ -153,7 +153,7 @@ public class Moai {
 		"com.moaisdk.core.MoaiKeyboard",
 		"com.moaisdk.core.MoaiMoviePlayer",
 		"com.moaisdk.tapjoy.MoaiTapjoy",
-        "com.moaisdk.twitter.MoaiTwitter",
+		"com.moaisdk.twitter.MoaiTwitter",
 		"com.moaisdk.vungle.MoaiVungle",
 	};
 
@@ -203,16 +203,32 @@ public class Moai {
 
 		
 		try {
-  			String str =  new String ( bytes, "UTF8" );
+			String str =  new String ( bytes, "UTF8" );
 			MoaiLog.i ( "JAVA CreateJString Created a string:");
 			MoaiLog.i( str );
 			return str;
 
-  		}
+		}
 		catch(UnsupportedEncodingException e1) {
 
 			MoaiLog.i ( "JAVA CreateJString failed to convert string" );
 			return null;
+		}
+	}
+
+	//----------------------------------------------------------------//
+	static class NotifUid {
+		String message;
+		int seconds;
+		
+		NotifUid ( String message, int seconds ) {
+			this.message = message;
+			this.seconds = seconds;
+		}
+		
+		@Override
+		public int hashCode() {
+			return message.hashCode () + seconds;
 		}
 	}
 
@@ -328,7 +344,7 @@ public class Moai {
 			String appName;
 			try {
 
-			    appName = sActivity.getPackageManager ().getApplicationLabel ( sActivity.getPackageManager ().getApplicationInfo ( appId, 0 )).toString ();
+				appName = sActivity.getPackageManager ().getApplicationLabel ( sActivity.getPackageManager ().getApplicationInfo ( appId, 0 )).toString ();
 			} catch ( Exception e ) {
 				appName = "UNKNOWN";
 			}
@@ -603,18 +619,18 @@ public class Moai {
 
 		int myHeight = 0;
 		switch ( sActivity.getResources ().getDisplayMetrics ().densityDpi ) {
-	        case DisplayMetrics.DENSITY_HIGH:
+			case DisplayMetrics.DENSITY_HIGH:
 
-	            myHeight = 54;
-	            break;
-	        case DisplayMetrics.DENSITY_MEDIUM:
+				myHeight = 54;
+				break;
+			case DisplayMetrics.DENSITY_MEDIUM:
 
-	            myHeight = 36;
-	            break;
-	        case DisplayMetrics.DENSITY_LOW:
+				myHeight = 36;
+				break;
+			case DisplayMetrics.DENSITY_LOW:
 
-	            myHeight = 26;
-	            break;
+				myHeight = 26;
+				break;
 			default:
 
 				myHeight = 0;
@@ -646,7 +662,7 @@ public class Moai {
 		MoaiLog.i ( "Moai localNotificationInSeconds: Adding notification alarm" );
 
 		Calendar cal = Calendar.getInstance (); 	// get a Calendar object with current time
-        cal.setTimeInMillis ( System.currentTimeMillis ());
+		cal.setTimeInMillis ( System.currentTimeMillis ());
 		cal.add ( Calendar.SECOND, seconds );		// add desired time to the calendar object
 
 		Intent intent = new Intent ( sActivity, MoaiLocalNotificationReceiver.class );
@@ -654,7 +670,8 @@ public class Moai {
 			intent.putExtra ( keys [ i ], values [ i ]);
 		}
 
-		PendingIntent sender = PendingIntent.getBroadcast ( sActivity, 0, intent, 0 );
+		NotifUid uid = new NotifUid ( message, seconds );
+		PendingIntent sender = PendingIntent.getBroadcast ( sActivity, uid.hashCode (), intent, 0 );
 
 		AlarmManager am = ( AlarmManager ) sActivity.getSystemService ( Context.ALARM_SERVICE );
 		am.set ( AlarmManager.RTC_WAKEUP, cal.getTimeInMillis (), sender );
@@ -669,6 +686,40 @@ public class Moai {
 		Intent intent = new Intent ( Intent.ACTION_VIEW );
 		intent.setData ( Uri.parse( url ));
 		sActivity.startActivity ( intent );
+	}
+
+	//----------------------------------------------------------------//
+	public static void removeLocalNotification ( int seconds, String message ) {
+		MoaiLog.i ( "Moai removeLocalNotification: " );
+		
+		Intent intent = new Intent ( sActivity, MoaiLocalNotificationReceiver.class );
+		intent.putExtra ( "message", message );
+		intent.putExtra ( "seconds", seconds+"" );
+
+		NotifUid uid = new NotifUid ( message, seconds );
+
+		MoaiLog.i ( "Moai removeLocalNotification: uid = " + uid.hashCode ());
+
+		PendingIntent sender = PendingIntent.getBroadcast ( sActivity, uid.hashCode (), intent, 0 );
+		
+		try {
+			AlarmManager am = ( AlarmManager ) sActivity.getSystemService ( Context.ALARM_SERVICE );
+			am.cancel ( sender );
+		} catch ( Exception e ) {
+			 
+		}
+	}
+
+	//----------------------------------------------------------------//
+	public static void sendMail ( String recipient, String subject, String message ) {
+
+		Intent intent = new Intent ( Intent.ACTION_SEND ).setType ( "message/rfc822" );
+
+		if ( recipient != null ) intent.putExtra ( Intent.EXTRA_EMAIL, new String[] {recipient} );
+		if ( subject != null ) intent.putExtra ( Intent.EXTRA_SUBJECT, subject );
+		if ( message != null ) intent.putExtra ( Intent.EXTRA_TEXT, message );
+
+		sActivity.startActivity ( Intent.createChooser ( intent, "Send E-mail" ));
 	}
 
 	//----------------------------------------------------------------//

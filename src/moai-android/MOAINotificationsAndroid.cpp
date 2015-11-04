@@ -16,6 +16,45 @@ extern JavaVM* jvm;
 //================================================================//
 
 //----------------------------------------------------------------//
+/**	@lua	cancelLocalNotification
+	@text	Cancel previously scheduled local notification. Notification is looked up by
+			message and time offset. Params table is ignored. 
+	
+	@in 	number	seconds (the same value passed to localNotificationInSeconds)
+	@in 	string	message
+	@out 	nil
+*/
+int MOAINotificationsAndroid::_cancelLocalNotification ( lua_State* L ) {
+	
+	MOAILuaState state ( L );
+	
+	int seconds = lua_tointeger ( state, 1 );
+	cc8* message = lua_tostring ( state, 2 );
+	
+	JNI_GET_ENV ( jvm, env );
+	
+	MOAIJString jmessage = JNI_GET_JSTRING ( message );
+
+	jclass push = env->FindClass ( "com/ziplinegames/moai/Moai" );
+	if ( push == NULL ) {
+
+		ZLLogF ( ZLLog::CONSOLE, "MOAINotificationsAndroid: Unable to find java class %s", "com/ziplinegames/moai/Moai" );
+	} else {
+
+		jmethodID removeLocalNotification = env->GetStaticMethodID ( push, "removeLocalNotification", "(ILjava/lang/String;)V" );
+		if ( removeLocalNotification == NULL ) {
+
+			ZLLogF ( ZLLog::CONSOLE, "MOAINotificationsAndroid: Unable to find static java method %s", "removeLocalNotification" );
+		} else {
+
+			env->CallStaticVoidMethod ( push, removeLocalNotification, seconds, ( jstring )jmessage );
+		}
+	}
+
+	return 0;
+}
+
+//----------------------------------------------------------------//
 cc8* MOAINotificationsAndroid::_luaParseTable ( lua_State* L, int idx ) {
 
 	switch ( lua_type ( L, idx )) {
@@ -49,9 +88,9 @@ int MOAINotificationsAndroid::_getAppIconBadgeNumber ( lua_State* L ) {
 /**	@lua	localNotificationInSeconds
 	@text	Schedules a local notification to show a number of seconds after calling.
 	
-	@in		string message
 	@in		number seconds
-				
+	@in		string message
+	
 	@out 	nil
 */
 int MOAINotificationsAndroid::_localNotificationInSeconds ( lua_State* L ) {
@@ -130,18 +169,18 @@ int MOAINotificationsAndroid::_localNotificationInSeconds ( lua_State* L ) {
 	}
 
 	jclass moai = env->FindClass ( "com/moaisdk/core/Moai" );
-    if ( moai == NULL ) {
+	if ( moai == NULL ) {
 
 		ZLLogF ( ZLLog::CONSOLE, "MOAINotificationsAndroid: Unable to find java class %s", "com/ziplinegames/moai/Moai" );
-    }
-    else {
+	}
+	else {
 
-    	jmethodID localNotificationInSeconds = env->GetStaticMethodID ( moai, "localNotificationInSeconds", "(ILjava/lang/String;[Ljava/lang/String;[Ljava/lang/String;)V" );
-    	if ( localNotificationInSeconds == NULL ) {
+		jmethodID localNotificationInSeconds = env->GetStaticMethodID ( moai, "localNotificationInSeconds", "(ILjava/lang/String;[Ljava/lang/String;[Ljava/lang/String;)V" );
+		if ( localNotificationInSeconds == NULL ) {
 
 			ZLLogF ( ZLLog::CONSOLE, "MOAINotificationsAndroid: Unable to find static java method %s", "localNotificationInSeconds" );
-    	}
-    	else {
+		}
+		else {
 
 			env->CallStaticVoidMethod ( moai, localNotificationInSeconds, seconds, ( jstring )jmessage, ( jstring )jkeys, ( jstring )jvalues );				
 		}
@@ -168,18 +207,18 @@ int MOAINotificationsAndroid::_registerForRemoteNotifications ( lua_State* L ) {
 	MOAIJString jalias = JNI_GET_JSTRING ( alias );
 
 	jclass push = env->FindClass ( "com/moaisdk/core/MoaiGooglePush" );
-    if ( push == NULL ) {
+	if ( push == NULL ) {
 
 		ZLLogF ( ZLLog::CONSOLE, "MOAINotificationsAndroid: Unable to find java class %s", "com/ziplinegames/moai/MoaiGooglePush" );
-    }
-    else {
+	}
+	else {
 
-    	jmethodID registerForRemoteNotifications = env->GetStaticMethodID ( push, "registerForRemoteNotifications", "(Ljava/lang/String;)V" );
-    	if ( registerForRemoteNotifications == NULL ) {
+		jmethodID registerForRemoteNotifications = env->GetStaticMethodID ( push, "registerForRemoteNotifications", "(Ljava/lang/String;)V" );
+		if ( registerForRemoteNotifications == NULL ) {
 
 			ZLLogF ( ZLLog::CONSOLE, "MOAINotificationsAndroid: Unable to find static java method %s", "registerForRemoteNotifications" );
-    	}
-    	else {
+		}
+		else {
 			env->CallStaticVoidMethod ( push, registerForRemoteNotifications, ( jstring )jalias );				
 		}
 	}
@@ -226,20 +265,20 @@ int MOAINotificationsAndroid::_unregisterForRemoteNotifications ( lua_State* L )
 	JNI_GET_ENV ( jvm, env );
 
 	jclass push = env->FindClass ( "com/moaisdk/core/MoaiGooglePush" );
-    if ( push == NULL ) {
+	if ( push == NULL ) {
 
 		ZLLogF ( ZLLog::CONSOLE, "MOAINotificationsAndroid: Unable to find java class %s", "com/ziplinegames/moai/MoaiGooglePush" );
-    }
-    else {
+	}
+	else {
 
-    	jmethodID unregisterForRemoteNotifications = env->GetStaticMethodID ( push, "unregisterForRemoteNotifications", "()V" );
-    	if ( unregisterForRemoteNotifications == NULL ) {
+		jmethodID unregisterForRemoteNotifications = env->GetStaticMethodID ( push, "unregisterForRemoteNotifications", "()V" );
+		if ( unregisterForRemoteNotifications == NULL ) {
 
 			ZLLogF ( ZLLog::CONSOLE, "MOAINotificationsAndroid: Unable to find static java method %s", "unregisterForRemoteNotifications" );
-    	}
-    	else {
+		}
+		else {
 
-			env->CallStaticVoidMethod ( push, unregisterForRemoteNotifications );				
+			env->CallStaticVoidMethod ( push, unregisterForRemoteNotifications );
 		}
 	}
 
@@ -278,6 +317,7 @@ void MOAINotificationsAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "REMOTE_NOTIFICATION_RESULT_ERROR", 			( u32 )REMOTE_NOTIFICATION_RESULT_ERROR );
 	
 	luaL_Reg regTable [] = {
+		{ "cancelLocalNotification",			_cancelLocalNotification },
 		{ "getAppIconBadgeNumber",				_getAppIconBadgeNumber },
 		{ "localNotificationInSeconds",			_localNotificationInSeconds },
 		{ "registerForRemoteNotifications",		_registerForRemoteNotifications },

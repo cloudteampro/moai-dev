@@ -45,7 +45,9 @@ build_folder=$moai_root/build
 #we must have a success from here on
 set -e
 
-ARCHS="armeabi armeabi-v7a x86"
+# one arch currently
+ARCHS="armeabi-v7a"
+# ARCHS="armeabi armeabi-v7a x86"
 for ARCH in $ARCHS
 do
 
