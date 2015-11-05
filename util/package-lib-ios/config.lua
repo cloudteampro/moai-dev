@@ -24,6 +24,11 @@ COMMON = {
 	[ 'src/moai-untz/host.h' ]						= 'include/moai-untz/host.h',
 	[ 'src/moai-util/host.h' ]						= 'include/moai-util/host.h',
 
+	[ 'src/moai-image-jpg/host.h' ]					= 'include/moai-image-jpg/host.h',
+	[ 'src/moai-image-png/host.h' ]					= 'include/moai-image-png/host.h',
+	[ 'src/moai-image-pvr/host.h' ]					= 'include/moai-image-pvr/host.h',
+	[ 'src/moai-image-webp/host.h' ]				= 'include/moai-image-webp/host.h',
+
 	[ 'src/zl-common' ]								= 'include/zl-common',
 }
 
@@ -41,6 +46,7 @@ IOS = {
 	[ 'src/moai-ios-gamecenter/host.h' ]			= 'include/moai-ios-gamecenter/host.h',
 	[ 'src/moai-ios-motion/host.h' ]				= 'include/moai-ios-motion/host.h',
 	[ 'src/moai-ios-movie/host.h' ]					= 'include/moai-ios-movie/host.h',
+	[ 'src/moai-ios-unityads/host.h' ]				= 'include/moai-ios-unityads/host.h',
 
 	[ 'lib/ios' ]									= true,
 
@@ -57,6 +63,9 @@ IOS = {
 	[ '3rdparty/crashlytics/Fabric.framework' ]					= 'lib/ios/Fabric.framework',
 
 	[ '3rdparty/fmod-studio/lib/ios/libfmod_iphoneos.a' ]		= 'lib/ios/libfmod_iphoneos.a',
+
+	[ '3rdparty/unity-ads/UnityAds.bundle' ]		= 'lib/ios/UnityAds.bundle',
+	[ '3rdparty/unity-ads/UnityAds.framework' ]		= 'lib/ios/UnityAds.framework',
 }
 
 CLEAN_DIRS = {

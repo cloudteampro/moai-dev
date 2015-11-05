@@ -32,6 +32,7 @@
 				206B9D3B1BDE48FD0021D349 /* PBXTargetDependency */,
 				206B9D041BDABB2E0021D349 /* PBXTargetDependency */,
 				206B9D061BDABB2E0021D349 /* PBXTargetDependency */,
+				2090B6B01BEBA4A80057A676 /* PBXTargetDependency */,
 			);
 			name = build_all_ios;
 			productName = build_all_ios;
@@ -39,14 +40,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		203DA5781BDF92C700EC109A /* MOAIFmodStudioSound.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA0341BDE92CF0021D349 /* MOAIFmodStudioSound.h */; };
-		203DA5791BDF92C700EC109A /* MOAIFmodStudio.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA0301BDE92CF0021D349 /* MOAIFmodStudio.h */; };
-		203DA57A1BDF92C700EC109A /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA02E1BDE92CF0021D349 /* host.h */; };
-		203DA57B1BDF92C700EC109A /* MOAIFmodStudioChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA0321BDE92CF0021D349 /* MOAIFmodStudioChannel.h */; };
-		203DA57D1BDF92C700EC109A /* host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA02D1BDE92CF0021D349 /* host.cpp */; };
-		203DA57E1BDF92C700EC109A /* MOAIFmodStudioSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA0331BDE92CF0021D349 /* MOAIFmodStudioSound.cpp */; };
-		203DA57F1BDF92C700EC109A /* MOAIFmodStudioChannel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA0311BDE92CF0021D349 /* MOAIFmodStudioChannel.cpp */; };
-		203DA5801BDF92C700EC109A /* MOAIFmodStudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA02F1BDE92CF0021D349 /* MOAIFmodStudio.cpp */; };
 		203DA5C71BDF933C00EC109A /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 203DA5C31BDF933C00EC109A /* host.h */; };
 		203DA5C81BDF933C00EC109A /* host.mm in Sources */ = {isa = PBXBuildFile; fileRef = 203DA5C41BDF933C00EC109A /* host.mm */; };
 		203DA5C91BDF933C00EC109A /* MOAICrashlyticsIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 203DA5C51BDF933C00EC109A /* MOAICrashlyticsIOS.h */; };
@@ -105,6 +98,10 @@
 		206BA04F1BDE92D60021D349 /* host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 206BA0481BDE92D60021D349 /* host.cpp */; };
 		206BA0501BDE92D60021D349 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA0491BDE92D60021D349 /* host.h */; };
 		206BA0511BDE92D60021D349 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA0491BDE92D60021D349 /* host.h */; };
+		2090B6AB1BEBA4830057A676 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 2090B6A71BEBA4830057A676 /* host.h */; };
+		2090B6AC1BEBA4830057A676 /* host.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2090B6A81BEBA4830057A676 /* host.mm */; };
+		2090B6AD1BEBA4830057A676 /* MOAIUnityAdsIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 2090B6A91BEBA4830057A676 /* MOAIUnityAdsIOS.h */; };
+		2090B6AE1BEBA4830057A676 /* MOAIUnityAdsIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2090B6AA1BEBA4830057A676 /* MOAIUnityAdsIOS.mm */; };
 		20DA09901BDE93FE0070C61F /* Animation.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09761BDE93FE0070C61F /* Animation.h */; };
 		20DA09911BDE93FE0070C61F /* Animation.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09761BDE93FE0070C61F /* Animation.h */; };
 		20DA09921BDE93FE0070C61F /* AnimationState.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09771BDE93FE0070C61F /* AnimationState.h */; };
@@ -262,6 +259,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 206B9D1B1BDE37CA0021D349;
 			remoteInfo = "libmoai-osx-ct-util";
+		};
+		2090B6AF1BEBA4A80057A676 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2090B6561BEBA40A0057A676;
+			remoteInfo = "libmoai-ios-unityads";
 		};
 		20993E8D1BDE94A4009D7CED /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -724,6 +728,11 @@
 		206BA0471BDE92D60021D349 /* CTUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTUtil.h; sourceTree = "<group>"; };
 		206BA0481BDE92D60021D349 /* host.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = host.cpp; sourceTree = "<group>"; };
 		206BA0491BDE92D60021D349 /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = host.h; sourceTree = "<group>"; };
+		2090B66B1BEBA40A0057A676 /* libmoai-ios-unityads.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios-unityads.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2090B6A71BEBA4830057A676 /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = host.h; sourceTree = "<group>"; };
+		2090B6A81BEBA4830057A676 /* host.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = host.mm; sourceTree = "<group>"; };
+		2090B6A91BEBA4830057A676 /* MOAIUnityAdsIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIUnityAdsIOS.h; sourceTree = "<group>"; };
+		2090B6AA1BEBA4830057A676 /* MOAIUnityAdsIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MOAIUnityAdsIOS.mm; sourceTree = "<group>"; };
 		20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libmoai.xcodeproj; path = ../../xcode/libmoai/libmoai.xcodeproj; sourceTree = "<group>"; };
 		20DA09761BDE93FE0070C61F /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		20DA09771BDE93FE0070C61F /* AnimationState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationState.h; sourceTree = "<group>"; };
@@ -830,6 +839,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2090B6651BEBA40A0057A676 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -846,6 +862,7 @@
 			children = (
 				206BA0451BDE92D60021D349 /* ct-util */,
 				203DA5C21BDF933C00EC109A /* moai-ios-crashlytics */,
+				2090B6A61BEBA4830057A676 /* moai-ios-unityads */,
 				206BA02C1BDE92CF0021D349 /* moai-fmod-studio */,
 				206B9FFE1BDE92C40021D349 /* moai-spine */,
 			);
@@ -863,6 +880,7 @@
 				206B9D1A1BDE37C80021D349 /* libmoai-ios-ct-util.a */,
 				206B9D2C1BDE37CA0021D349 /* libmoai-osx-ct-util.a */,
 				203DA5871BDF92C700EC109A /* libmoai-ios-crashlytics.a */,
+				2090B66B1BEBA40A0057A676 /* libmoai-ios-unityads.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -933,6 +951,17 @@
 				206BA0491BDE92D60021D349 /* host.h */,
 			);
 			path = "ct-util";
+			sourceTree = "<group>";
+		};
+		2090B6A61BEBA4830057A676 /* moai-ios-unityads */ = {
+			isa = PBXGroup;
+			children = (
+				2090B6A71BEBA4830057A676 /* host.h */,
+				2090B6A81BEBA4830057A676 /* host.mm */,
+				2090B6A91BEBA4830057A676 /* MOAIUnityAdsIOS.h */,
+				2090B6AA1BEBA4830057A676 /* MOAIUnityAdsIOS.mm */,
+			);
+			path = "moai-ios-unityads";
 			sourceTree = "<group>";
 		};
 		20DA08C21BDE93C30070C61F /* Products */ = {
@@ -1106,10 +1135,6 @@
 			files = (
 				203DA5C91BDF933C00EC109A /* MOAICrashlyticsIOS.h in Headers */,
 				203DA5C71BDF933C00EC109A /* host.h in Headers */,
-				203DA5781BDF92C700EC109A /* MOAIFmodStudioSound.h in Headers */,
-				203DA5791BDF92C700EC109A /* MOAIFmodStudio.h in Headers */,
-				203DA57A1BDF92C700EC109A /* host.h in Headers */,
-				203DA57B1BDF92C700EC109A /* MOAIFmodStudioChannel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1237,6 +1262,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2090B6571BEBA40A0057A676 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2090B6AB1BEBA4830057A676 /* host.h in Headers */,
+				2090B6AD1BEBA4830057A676 /* MOAIUnityAdsIOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -1359,6 +1393,23 @@
 			productReference = 206B9D2C1BDE37CA0021D349 /* libmoai-osx-ct-util.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		2090B6561BEBA40A0057A676 /* libmoai-ios-unityads */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2090B6661BEBA40A0057A676 /* Build configuration list for PBXNativeTarget "libmoai-ios-unityads" */;
+			buildPhases = (
+				2090B6571BEBA40A0057A676 /* Headers */,
+				2090B65E1BEBA40A0057A676 /* Sources */,
+				2090B6651BEBA40A0057A676 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "libmoai-ios-unityads";
+			productName = OpenUSLS;
+			productReference = 2090B66B1BEBA40A0057A676 /* libmoai-ios-unityads.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1412,6 +1463,7 @@
 				206B9D091BDE37C80021D349 /* libmoai-ios-ct-util */,
 				206B9AFE1BDAB53D0021D349 /* libmoai-ios-fmod-studio */,
 				206B9AC61BDAB5000021D349 /* libmoai-ios-spine */,
+				2090B6561BEBA40A0057A676 /* libmoai-ios-unityads */,
 				206B9B081BDAB53F0021D349 /* libmoai-osx-fmod-studio */,
 				206B9ABC1BDAB4F60021D349 /* libmoai-osx-spine */,
 				206B9D1B1BDE37CA0021D349 /* libmoai-osx-ct-util */,
@@ -1833,11 +1885,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				203DA57D1BDF92C700EC109A /* host.cpp in Sources */,
-				203DA57E1BDF92C700EC109A /* MOAIFmodStudioSound.cpp in Sources */,
-				203DA57F1BDF92C700EC109A /* MOAIFmodStudioChannel.cpp in Sources */,
 				203DA5C81BDF933C00EC109A /* host.mm in Sources */,
-				203DA5801BDF92C700EC109A /* MOAIFmodStudio.cpp in Sources */,
 				203DA5CA1BDF933C00EC109A /* MOAICrashlyticsIOS.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1962,6 +2010,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2090B65E1BEBA40A0057A676 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2090B6AE1BEBA4830057A676 /* MOAIUnityAdsIOS.mm in Sources */,
+				2090B6AC1BEBA4830057A676 /* host.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -2000,6 +2057,11 @@
 			target = 206B9D1B1BDE37CA0021D349 /* libmoai-osx-ct-util */;
 			targetProxy = 206B9D3C1BDE49020021D349 /* PBXContainerItemProxy */;
 		};
+		2090B6B01BEBA4A80057A676 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2090B6561BEBA40A0057A676 /* libmoai-ios-unityads */;
+			targetProxy = 2090B6AF1BEBA4A80057A676 /* PBXContainerItemProxy */;
+		};
 		20993E8E1BDE94A4009D7CED /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "libmoai-osx-all";
@@ -2023,6 +2085,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					../../3rdparty/crashlytics,
+					"../../3rdparty/unity-ads",
 				);
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
@@ -3222,6 +3285,142 @@
 			};
 			name = Distribution;
 		};
+		2090B6671BEBA40A0057A676 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+				);
+				PRODUCT_NAME = "moai-ios-unityads";
+				SDKROOT = iphoneos;
+				WARNING_CFLAGS = "-w";
+			};
+			name = Debug;
+		};
+		2090B6681BEBA40A0057A676 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+				);
+				PRODUCT_NAME = "moai-ios-unityads";
+				SDKROOT = iphoneos;
+				WARNING_CFLAGS = "-w";
+			};
+			name = Release;
+		};
+		2090B6691BEBA40A0057A676 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+				);
+				PRODUCT_NAME = "moai-ios-unityads";
+				SDKROOT = iphoneos;
+				WARNING_CFLAGS = "-w";
+			};
+			name = AdHoc;
+		};
+		2090B66A1BEBA40A0057A676 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+				);
+				PRODUCT_NAME = "moai-ios-unityads";
+				SDKROOT = iphoneos;
+				WARNING_CFLAGS = "-w";
+			};
+			name = Distribution;
+		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3232,6 +3431,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					../../3rdparty/crashlytics,
+					"../../3rdparty/unity-ads",
 				);
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
@@ -3368,6 +3568,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					../../3rdparty/crashlytics,
+					"../../3rdparty/unity-ads",
 				);
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
@@ -3505,6 +3706,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					../../3rdparty/crashlytics,
+					"../../3rdparty/unity-ads",
 				);
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
@@ -3730,6 +3932,17 @@
 				206B9D291BDE37CA0021D349 /* Release */,
 				206B9D2A1BDE37CA0021D349 /* AdHoc */,
 				206B9D2B1BDE37CA0021D349 /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		2090B6661BEBA40A0057A676 /* Build configuration list for PBXNativeTarget "libmoai-ios-unityads" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2090B6671BEBA40A0057A676 /* Debug */,
+				2090B6681BEBA40A0057A676 /* Release */,
+				2090B6691BEBA40A0057A676 /* AdHoc */,
+				2090B66A1BEBA40A0057A676 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
