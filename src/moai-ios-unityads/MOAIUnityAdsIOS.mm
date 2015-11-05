@@ -85,7 +85,7 @@ int MOAIUnityAdsIOS::_show ( lua_State* L ) {
 //----------------------------------------------------------------//
 MOAIUnityAdsIOS::MOAIUnityAdsIOS () {
     
-    RTTI_SINGLE ( MOAILuaObject )
+    RTTI_SINGLE ( MOAIGlobalEventSource )
     
     mDelegate = [[ MOAIUnityAdsIOSDelegate alloc ] init];
 }

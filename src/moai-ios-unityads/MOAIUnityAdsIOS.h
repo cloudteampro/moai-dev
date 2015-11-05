@@ -17,8 +17,7 @@
 // MOAIUnityAdsIOS
 //================================================================//
 class MOAIUnityAdsIOS :
-    public MOAIGlobalClass < MOAIUnityAdsIOS, MOAILuaObject >,
-    public MOAIGlobalEventSource {
+    public MOAIGlobalClass < MOAIUnityAdsIOS, MOAIGlobalEventSource > {
 private:
     
     MOAIUnityAdsIOSDelegate*            mDelegate;
