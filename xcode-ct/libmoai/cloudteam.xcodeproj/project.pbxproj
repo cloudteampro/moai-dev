@@ -102,6 +102,7 @@
 		2090B6AC1BEBA4830057A676 /* host.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2090B6A81BEBA4830057A676 /* host.mm */; };
 		2090B6AD1BEBA4830057A676 /* MOAIUnityAdsIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 2090B6A91BEBA4830057A676 /* MOAIUnityAdsIOS.h */; };
 		2090B6AE1BEBA4830057A676 /* MOAIUnityAdsIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2090B6AA1BEBA4830057A676 /* MOAIUnityAdsIOS.mm */; };
+		20C0F7AA1BF0C2C8009CAA4F /* host-ios.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20C0F7A91BF0C2C8009CAA4F /* host-ios.mm */; };
 		20DA09901BDE93FE0070C61F /* Animation.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09761BDE93FE0070C61F /* Animation.h */; };
 		20DA09911BDE93FE0070C61F /* Animation.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09761BDE93FE0070C61F /* Animation.h */; };
 		20DA09921BDE93FE0070C61F /* AnimationState.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09771BDE93FE0070C61F /* AnimationState.h */; };
@@ -733,6 +734,8 @@
 		2090B6A81BEBA4830057A676 /* host.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = host.mm; sourceTree = "<group>"; };
 		2090B6A91BEBA4830057A676 /* MOAIUnityAdsIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIUnityAdsIOS.h; sourceTree = "<group>"; };
 		2090B6AA1BEBA4830057A676 /* MOAIUnityAdsIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MOAIUnityAdsIOS.mm; sourceTree = "<group>"; };
+		20C0F7A91BF0C2C8009CAA4F /* host-ios.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "host-ios.mm"; sourceTree = "<group>"; };
+		20C0F7E51BF0C2E6009CAA4F /* host-ios.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "host-ios.h"; sourceTree = "<group>"; };
 		20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libmoai.xcodeproj; path = ../../xcode/libmoai/libmoai.xcodeproj; sourceTree = "<group>"; };
 		20DA09761BDE93FE0070C61F /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		20DA09771BDE93FE0070C61F /* AnimationState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationState.h; sourceTree = "<group>"; };
@@ -930,6 +933,8 @@
 		206BA02C1BDE92CF0021D349 /* moai-fmod-studio */ = {
 			isa = PBXGroup;
 			children = (
+				20C0F7A91BF0C2C8009CAA4F /* host-ios.mm */,
+				20C0F7E51BF0C2E6009CAA4F /* host-ios.h */,
 				206BA02D1BDE92CF0021D349 /* host.cpp */,
 				206BA02E1BDE92CF0021D349 /* host.h */,
 				206BA02F1BDE92CF0021D349 /* MOAIFmodStudio.cpp */,
@@ -1977,6 +1982,7 @@
 				206BA0351BDE92CF0021D349 /* host.cpp in Sources */,
 				206BA0411BDE92CF0021D349 /* MOAIFmodStudioSound.cpp in Sources */,
 				206BA03D1BDE92CF0021D349 /* MOAIFmodStudioChannel.cpp in Sources */,
+				20C0F7AA1BF0C2C8009CAA4F /* host-ios.mm in Sources */,
 				206BA0391BDE92CF0021D349 /* MOAIFmodStudio.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
