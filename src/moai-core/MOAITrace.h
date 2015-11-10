@@ -117,6 +117,7 @@ protected:
 	static int			_run					( lua_State* L );
 	static int			_setVerbose				( lua_State* L );
 	static int			_start					( lua_State* L );
+	static int			_stop					( lua_State* L );
 
 	//----------------------------------------------------------------//
 	void				Callback				( lua_State* L, lua_Debug* ar );

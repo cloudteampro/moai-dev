@@ -41,6 +41,15 @@ int MOAITrace::_start ( lua_State* L ) {
 	UNUSED ( L );
 
 	MOAITrace::Get ().Start ();
+	MOAITrace::Get ().mEnableTrace = true;
+	return 0;
+}
+
+//----------------------------------------------------------------//
+int MOAITrace::_stop ( lua_State* L ) {
+	UNUSED ( L );
+
+	MOAITrace::Get ().mEnableTrace = false;
 	return 0;
 }
 
@@ -218,6 +227,7 @@ void MOAITrace::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "run",				_run },
 		{ "setVerbose",			_setVerbose },
 		{ "start",				_start },
+		{ "stop",				_stop },
 		{ NULL, NULL }
 	};
 
