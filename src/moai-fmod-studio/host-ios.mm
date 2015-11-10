@@ -57,25 +57,29 @@ void AKUInitializeIOSAudioSession () {
 				[[ AVAudioSession sharedInstance ] setActive:TRUE error:nil ];
 			}
 		}
-	 ];
+	];
+	
+//	You can receive notification when other app starts or stops playing music, so that
+//	it's possible to mute background music in the game.
+//	The notification is available in iOS 8, disabled for now.
 
-	[[ NSNotificationCenter defaultCenter ]
-		addObserverForName:AVAudioSessionSilenceSecondaryAudioHintNotification
-		object:nil
-		queue:nil
-		usingBlock:^( NSNotification *notification ) {
-	 
-			int hint = [[ notification.userInfo valueForKey:AVAudioSessionSilenceSecondaryAudioHintTypeKey ] intValue ];
-			switch ( hint ) {
-				case AVAudioSessionSilenceSecondaryAudioHintTypeBegin:
-					// mute BG sound?
-					break;
-				case AVAudioSessionSilenceSecondaryAudioHintTypeEnd:
-					// unmute BG sound?
-					break;
-			}
-		}
-	 ];
+//	[[ NSNotificationCenter defaultCenter ]
+//		addObserverForName:AVAudioSessionSilenceSecondaryAudioHintNotification
+//		object:nil
+//		queue:nil
+//		usingBlock:^( NSNotification *notification ) {
+//	 
+//			int hint = [[ notification.userInfo valueForKey:AVAudioSessionSilenceSecondaryAudioHintTypeKey ] intValue ];
+//			switch ( hint ) {
+//				case AVAudioSessionSilenceSecondaryAudioHintTypeBegin:
+//					// mute BG sound?
+//					break;
+//				case AVAudioSessionSilenceSecondaryAudioHintTypeEnd:
+//					// unmute BG sound?
+//					break;
+//			}
+//		}
+//	];
 
 	// Activate the audio session
 	success = [ session setActive:TRUE error:nil ];
