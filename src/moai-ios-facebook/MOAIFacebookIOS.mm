@@ -59,6 +59,77 @@ static const char kGameRequestCallbackRef = 0;
 //================================================================//
 
 //----------------------------------------------------------------//
+/** @lua	createTestUser
+	@text	Create test user for given facebook app
+	
+	@in		string	appId
+	@in		string	appToken
+	@opt	boolean	installed	install app for created user
+	@opt	boolean	login		login as test user
+	@opt	string	name		leave blank to generate random name
+*/
+int MOAIFacebookIOS::_createTestUser ( lua_State *L ) {
+	MOAI_LUA_SETUP_SINGLE ( MOAIFacebookIOS, "" )
+	
+	cc8* appId		= state.GetValue < cc8* >( 1, 0 );
+	cc8* token		= state.GetValue < cc8* >( 2, 0 );
+	bool installed	= state.GetValue < bool >( 3, true );
+	bool login		= state.GetValue < bool >( 4, true );
+	cc8* name		= state.GetValue < cc8* >( 5, 0 );
+	
+	if ( !appId || !token ) {
+		return 0;
+	}
+	
+	NSMutableDictionary *params = [[ NSMutableDictionary alloc ] init ];
+	[ params setObject: ( installed ? @"true" : @"false" ) forKey:@"installed" ];
+	
+	if ( installed ) {
+		[ params setObject:@"public_profile,user_friends" forKey:@"permissions" ];
+	}
+	
+	if ( name ) {
+		[ params setObject:[ NSString stringWithUTF8String:name ] forKey:@"name" ];
+	}
+	
+	NSString* appIdStr = [ NSString stringWithUTF8String:appId ];
+	NSString* graphPath = [ NSString stringWithFormat:@"/%@/accounts/test-users", appIdStr ];
+	
+	FBSDKGraphRequest *request = [[ FBSDKGraphRequest alloc ]
+		initWithGraphPath: graphPath
+		parameters: params
+		tokenString: [ NSString stringWithUTF8String:token ]
+		version: nil
+		HTTPMethod: @"POST"
+	];
+	
+	[ request startWithCompletionHandler:^( FBSDKGraphRequestConnection *connection, id result, NSError *error ) {
+		
+		if ( !error ) {
+			
+			NSString* tokenString = [ result objectForKey:@"access_token" ];
+			
+			if ( login && tokenString ) {
+				
+				FBSDKAccessToken* accessToken = [[ FBSDKAccessToken alloc ]
+					initWithTokenString: tokenString
+					permissions: @[ @"public_profile", @"user_friends" ]
+					declinedPermissions:nil
+					appID:appIdStr
+					userID:[ result objectForKey:@"id" ]
+					expirationDate:nil
+					refreshDate:nil
+				];
+				
+				[ FBSDKAccessToken setCurrentAccessToken:accessToken ];
+			}
+		}
+	}];
+	
+	return 0;
+}
+
+//----------------------------------------------------------------//
 // TODO: 3rdparty doxygen
 int	MOAIFacebookIOS::_declinedPermissions ( lua_State* L ) {
 	MOAI_LUA_SETUP_SINGLE ( MOAIFacebookIOS, "" )
@@ -593,8 +664,6 @@ MOAIFacebookIOS::~MOAIFacebookIOS () {
 void MOAIFacebookIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	
 	// Events
-	state.SetField ( -1, "DIALOG_DID_COMPLETE", 		( u32 )DIALOG_DID_COMPLETE );
-	state.SetField ( -1, "DIALOG_DID_NOT_COMPLETE",		( u32 )DIALOG_DID_NOT_COMPLETE );
 	state.SetField ( -1, "PERMISSIONS_DENIED",			( u32 )PERMISSIONS_DENIED );
 	state.SetField ( -1, "PERMISSIONS_GRANTED",			( u32 )PERMISSIONS_GRANTED );
 	state.SetField ( -1, "PROFILE_UPDATED",				( u32 )PROFILE_UPDATED );
@@ -653,6 +722,7 @@ void MOAIFacebookIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "PARAM_VALUE_YES",			[ FBSDKAppEventParameterValueYes 	UTF8String ]);
 
 	luaL_Reg regTable[] = {
+		{ "createTestUser",					_createTestUser },
 		{ "declinedPermissions", 			_declinedPermissions },
 		{ "getExpirationDate", 				_getExpirationDate },
 		{ "getListener",					&MOAIGlobalEventSource::_getListener < MOAIFacebookIOS > },
@@ -682,18 +752,6 @@ void MOAIFacebookIOS::ClearCallbackRef ( int ref ) {
 	if ( MOAILuaRuntime::IsValid () && ref != LUA_NOREF ) {
 		this->mRefs.Unref ( ref );
 	}
-}
-
-//----------------------------------------------------------------//
-void MOAIFacebookIOS::DialogDidNotComplete () {
-	
-	this->InvokeListener ( DIALOG_DID_NOT_COMPLETE );
-}
-
-//----------------------------------------------------------------//
-void MOAIFacebookIOS::DialogDidComplete () {
-
-	this->InvokeListener ( DIALOG_DID_COMPLETE );
 }
 
 //----------------------------------------------------------------//
@@ -959,7 +1017,7 @@ void MOAIFacebookIOS::SessionExtended ( cc8* token, cc8* expDate ) {
 
 //----------------------------------------------------------------//
 - ( void ) onProfileChanged:( NSNotification* ) notification {
-	
+
 	if ([ FBSDKAccessToken currentAccessToken ]) {
 		
 		FBSDKProfile* profile = ( FBSDKProfile* )[[ notification userInfo ] objectForKey:FBSDKProfileChangeNewKey ];

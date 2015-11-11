@@ -39,6 +39,7 @@ private:
 	MOAIFBSDKDelegate*			mDelegate;
 	
 	//----------------------------------------------------------------//
+	static int		_createTestUser				( lua_State* L );
 	static int		_declinedPermissions		( lua_State* L );
 //	static int		_extendToken				( lua_State* L );
 	static int		_getExpirationDate			( lua_State* L );
@@ -63,8 +64,6 @@ public:
 	DECL_LUA_SINGLETON ( MOAIFacebookIOS );
 	
 	enum {
-		DIALOG_DID_COMPLETE,		// deprecated, never dispatched
-		DIALOG_DID_NOT_COMPLETE,	// deprecated, never dispatched
 		PERMISSIONS_DENIED,
 		PERMISSIONS_GRANTED,
 		PROFILE_UPDATED,
@@ -77,9 +76,6 @@ public:
 	
 	//----------------------------------------------------------------//
 	void		ClearCallbackRef				( int ref );
-	void		DialogDidNotComplete			();
-	void		DialogDidComplete				();
-	void		DialogDidComplete				( NSURL* result );
 	void		GameRequestDialogDidComplete	( NSDictionary* results, int ref );
 	void		GameRequestDialogDidFail		( NSError* error, int ref );
 	void		GraphRequestResponse			( id result, int ref );
