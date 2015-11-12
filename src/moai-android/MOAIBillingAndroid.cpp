@@ -267,13 +267,13 @@ int MOAIBillingAndroid::_setBillingProvider ( lua_State* L ) {
 
 	if ( provider == BILLING_PROVIDER_GOOGLE ) {
 
-		MOAIBillingAndroid::Get ().mBillingProvider = "com/moaisdk/core/MoaiGoogleBilling";
+		MOAIBillingAndroid::Get ().mBillingProvider = "com/moaisdk/googlebilling/MoaiGoogleBilling";
 
 		ZLLogF ( ZLLog::CONSOLE, "MOAIBillingAndroid: Setting in-app billing provider to %s", MOAIBillingAndroid::Get ().mBillingProvider );
 	}
 	else if ( provider == BILLING_PROVIDER_AMAZON ) {
 
-		MOAIBillingAndroid::Get ().mBillingProvider = "com/moaisdk/core/MoaiAmazonBilling";
+		MOAIBillingAndroid::Get ().mBillingProvider = "com/moaisdk/amazonbilling/MoaiAmazonBilling";
 
 		ZLLogF ( ZLLog::CONSOLE, "MOAIBillingAndroid: Setting in-app billing provider to %s", MOAIBillingAndroid::Get ().mBillingProvider );
 
@@ -374,10 +374,10 @@ int MOAIBillingAndroid::_checkInAppSupported ( lua_State* L ) {
 
 	JNI_GET_ENV ( jvm, env );
 
-	jclass billing = env->FindClass ( "com/moaisdk/core/MoaiGoogleBilling" );
+	jclass billing = env->FindClass ( "com/moaisdk/googlebilling/MoaiGoogleBilling" );
 	if ( billing == NULL ) {
 
-		ZLLogF ( ZLLog::CONSOLE, "MOAIBillingAndroid: Unable to find java class %s", "com/ziplinegames/moai/MoaiGoogleBilling" );
+		ZLLogF ( ZLLog::CONSOLE, "MOAIBillingAndroid: Unable to find java class %s", "com/moaisdk/googlebilling/MoaiGoogleBilling" );
 
 	}
 	else {
@@ -413,10 +413,10 @@ int MOAIBillingAndroid::_checkSubscriptionSupported ( lua_State* L ) {
 
 	JNI_GET_ENV ( jvm, env );
 
-	jclass billing = env->FindClass ( "com/moaisdk/core/MoaiGoogleBilling" );
+	jclass billing = env->FindClass ( "com/moaisdk/googlebilling/MoaiGoogleBilling" );
 	if ( billing == NULL ) {
 
-		ZLLogF ( ZLLog::CONSOLE, "MOAIBillingAndroid: Unable to find java class %s", "com/ziplinegames/moai/MoaiGoogleBilling" );
+		ZLLogF ( ZLLog::CONSOLE, "MOAIBillingAndroid: Unable to find java class %s", "com/moaisdk/googlebilling/MoaiGoogleBilling" );
 
 	}
 	else {
@@ -456,10 +456,10 @@ int MOAIBillingAndroid::_consumePurchaseSync ( lua_State* L ) {
 	JNI_GET_ENV ( jvm, env );
 	MOAIJString jtoken = JNI_GET_JSTRING ( token );
 
-	jclass billing = env->FindClass ( "com/moaisdk/core/MoaiGoogleBilling" );
+	jclass billing = env->FindClass ( "com/moaisdk/googlebilling/MoaiGoogleBilling" );
 	if ( billing == NULL ) {
 
-		ZLLogF ( ZLLog::CONSOLE, "MOAIBillingAndroid: Unable to find java class %s", "com/ziplinegames/moai/MoaiGoogleBilling" );
+		ZLLogF ( ZLLog::CONSOLE, "MOAIBillingAndroid: Unable to find java class %s", "com/moaisdk/googlebilling/MoaiGoogleBilling" );
 	}
 	else {
 
@@ -500,10 +500,10 @@ int MOAIBillingAndroid::_getPurchasedProducts ( lua_State* L ) {
 	cc8* continuation = lua_tostring ( state, 2 );
 	MOAIJString jcontinuation = JNI_GET_JSTRING ( continuation );
 
-	jclass billing = env->FindClass ( "com/moaisdk/core/MoaiGoogleBilling" );
+	jclass billing = env->FindClass ( "com/moaisdk/googlebilling/MoaiGoogleBilling" );
 	if ( billing == NULL ) {
 
-		ZLLogF ( ZLLog::CONSOLE, "MOAIBillingAndroid: Unable to find java class %s", "com/ziplinegames/moai/MoaiGoogleBilling" );
+		ZLLogF ( ZLLog::CONSOLE, "MOAIBillingAndroid: Unable to find java class %s", "com/moaisdk/googlebilling/MoaiGoogleBilling" );
 	}
 	else {
 
@@ -547,10 +547,10 @@ int MOAIBillingAndroid::_purchaseProduct ( lua_State* L ) {
 	MOAIJString jsku = JNI_GET_JSTRING ( sku );
 	MOAIJString jdevPayload = JNI_GET_JSTRING ( devPayload );
 
-	jclass billing = env->FindClass ( "com/moaisdk/core/MoaiGoogleBilling" );
+	jclass billing = env->FindClass ( "com/moaisdk/googlebilling/MoaiGoogleBilling" );
 	if ( billing == NULL ) {
 
-		ZLLogF ( ZLLog::CONSOLE, "MOAIBillingAndroid: Unable to find java class %s", "com/ziplinegames/moai/MoaiGoogleBilling" );
+		ZLLogF ( ZLLog::CONSOLE, "MOAIBillingAndroid: Unable to find java class %s", "com/moaisdk/googlebilling/MoaiGoogleBilling" );
 
 	}
 	else {
@@ -682,10 +682,10 @@ int MOAIBillingAndroid::_requestProductsSync ( lua_State* L ) {
 	// get type
 	int type = lua_tointeger ( state, 2 );
 
-	jclass billing = env->FindClass ( "com/moaisdk/core/MoaiGoogleBilling" );
+	jclass billing = env->FindClass ( "com/moaisdk/googlebilling/MoaiGoogleBilling" );
 	if ( billing == NULL ) {
 
-		ZLLogF ( ZLLog::CONSOLE, "MOAIBillingAndroid: Unable to find java class %s", "com/ziplinegames/moai/MoaiGoogleBilling" );
+		ZLLogF ( ZLLog::CONSOLE, "MOAIBillingAndroid: Unable to find java class %s", "com/moaisdk/googlebilling/MoaiGoogleBilling" );
 	}
 	else {
 
@@ -1042,13 +1042,13 @@ extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_MoaiAmazonBilling_A
 //================================================================//
 
 //----------------------------------------------------------------//
-extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_MoaiGoogleBilling_AKUNotifyGoogleBillingSupported ( JNIEnv* env, jclass obj, jboolean supported ) {
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_googlebilling_MoaiGoogleBilling_AKUNotifyGoogleBillingSupported ( JNIEnv* env, jclass obj, jboolean supported ) {
 
 	MOAIBillingAndroid::Get ().NotifyBillingSupported ( supported );
 }
 
 //----------------------------------------------------------------//
-extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_MoaiGoogleBilling_AKUNotifyGooglePurchaseResponseReceived ( JNIEnv* env, jclass obj, jint code, jstring jresult ) {
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_googlebilling_MoaiGoogleBilling_AKUNotifyGooglePurchaseResponseReceived ( JNIEnv* env, jclass obj, jint code, jstring jresult ) {
 
 	// result is json array: [data, signature]
 	JNI_GET_CSTRING ( jresult, result );
@@ -1059,7 +1059,7 @@ extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_MoaiGoogleBilling_A
 }
 
 //----------------------------------------------------------------//
-extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_MoaiGoogleBilling_AKUNotifyGooglePurchaseStateChanged ( JNIEnv* env, jclass obj, jint code, jstring jidentifier, jstring jorder, jstring jnotification, jstring jpayload ) {
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_googlebilling_MoaiGoogleBilling_AKUNotifyGooglePurchaseStateChanged ( JNIEnv* env, jclass obj, jint code, jstring jidentifier, jstring jorder, jstring jnotification, jstring jpayload ) {
 
 	JNI_GET_CSTRING ( jidentifier, identifier );
 	JNI_GET_CSTRING ( jorder, order );
@@ -1075,7 +1075,7 @@ extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_MoaiGoogleBilling_A
 }
 
 //----------------------------------------------------------------//
-extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_MoaiGoogleBilling_AKUNotifyGoogleRestoreResponseReceived ( JNIEnv* env, jclass obj, jint code ) {
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_googlebilling_MoaiGoogleBilling_AKUNotifyGoogleRestoreResponseReceived ( JNIEnv* env, jclass obj, jint code ) {
 
 	MOAIBillingAndroid::Get ().NotifyRestoreResponseReceived ( MOAIBillingAndroid::MapGoogleResponseCode ( code ), false, NULL );
 }

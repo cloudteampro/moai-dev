@@ -83,7 +83,7 @@ int MOAIAppAndroid::_getStatusBarHeight ( lua_State* L ) {
 	jclass moai = env->FindClass ( "com/moaisdk/core/Moai" );
     if ( moai == NULL ) {
 
-		ZLLogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find java class %s", "com/ziplinegames/moai/Moai" );
+		ZLLogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find java class %s", "com/moaisdk/core/Moai" );
 
     }
     else {
@@ -118,10 +118,10 @@ int MOAIAppAndroid::_getSystemUptime ( lua_State* L ) {
     JNI_GET_ENV ( jvm, env );
 
     long outVal = 0;
-    jclass moai = env->FindClass ( "com/ziplinegames/moai/Moai" );
+    jclass moai = env->FindClass ( "com/moaisdk/core/Moai" );
     if ( moai == NULL ) {
 
-        ZLLogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find java class %s", "com/ziplinegames/moai/Moai" );
+        ZLLogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find java class %s", "com/moaisdk/core/Moai" );
     }
     else {
 
@@ -157,7 +157,7 @@ int MOAIAppAndroid::_openURL ( lua_State* L ) {
 
 	if ( moai == NULL ) {
 	
-		ZLLogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find java class %s", "com/ziplinegames/moai/Moai" );
+		ZLLogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find java class %s", "com/moaisdk/core/Moai" );
 
     }
     else {
@@ -204,7 +204,7 @@ int	MOAIAppAndroid::_sendMail ( lua_State* L ) {
     jclass moai = env->FindClass ( "com/moaisdk/core/Moai" );
     if ( moai == NULL ) {
 
-		ZLLogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find java class %s", "com/ziplinegames/moai/Moai" );
+		ZLLogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find java class %s", "com/moaisdk/core/Moai" );
 
     }
     else {
@@ -251,7 +251,7 @@ int MOAIAppAndroid::_share ( lua_State* L ) {
 	jclass moai = env->FindClass ( "com/moaisdk/core/Moai" );
     if ( moai == NULL ) {
 
-		ZLLogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find java class %s", "com/ziplinegames/moai/Moai" );
+		ZLLogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find java class %s", "com/moaisdk/core/Moai" );
     }
     else {
 
