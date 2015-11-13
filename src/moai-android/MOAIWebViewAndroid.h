@@ -5,7 +5,6 @@
 #define MOAIWEBVIEWANDROID_H
 
 #include <moai-core/headers.h>
-#include <moai-android/JniUtils.h>
 
 //================================================================//
 // MOAIWebViewAndroid
