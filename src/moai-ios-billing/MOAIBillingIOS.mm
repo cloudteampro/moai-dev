@@ -81,6 +81,7 @@ int MOAIBillingIOS::_finishTransaction ( lua_State *L ) {
 	
 	@in		string 	sku				The SKU to purchase.
 	@opt	number 	quantity		Default value is 1.
+	@opt	string	username		Optional username
 	@out	nil
 */
 int MOAIBillingIOS::_requestPaymentForProduct ( lua_State* L ) {
@@ -88,7 +89,8 @@ int MOAIBillingIOS::_requestPaymentForProduct ( lua_State* L ) {
 	MOAILuaState state ( L );
 	
 	cc8* identifier = state.GetValue < cc8* >( 1, "" );
-	int quantity = state.GetValue < int >( 2, 1 );
+	int quantity	= state.GetValue < int >( 2, 1 );
+	cc8* username	= state.GetValue < cc8* >( 3, 0 );
 	
 	if ( quantity ) {
 		
@@ -96,6 +98,12 @@ int MOAIBillingIOS::_requestPaymentForProduct ( lua_State* L ) {
 		// Create MOAILuaObject wrapper for SKProduct?
 		SKMutablePayment* payment = [ SKMutablePayment paymentWithProductIdentifier:[ NSString stringWithUTF8String:identifier ]];
 		payment.quantity = quantity;
+		
+		if ( username ) {
+			if ([ payment respondsToSelector:@selector ( setApplicationUsername: )]) {
+				payment.applicationUsername = [ NSString stringWithUTF8String:username ];
+			}
+		}
 		[[ SKPaymentQueue defaultQueue ] addPayment:payment ];
 	}
 	
@@ -338,8 +346,16 @@ void MOAIBillingIOS::PushPaymentTransaction ( MOAILuaState& state, SKPaymentTran
 		state.Push ( "payment" );
 		lua_newtable ( state );
 		
-		state.SetField ( -1, "productIdentifier", [ transaction.payment.productIdentifier UTF8String ]);
-		state.SetField ( -1, "quantity", ( int )transaction.payment.quantity );
+		SKPayment* payment = transaction.payment;
+		
+		state.SetField ( -1, "productIdentifier", [ payment.productIdentifier UTF8String ]);
+		state.SetField ( -1, "quantity", ( int )payment.quantity );
+
+		if ([ payment respondsToSelector:@selector ( setApplicationUsername: )]) {
+			if ( payment.applicationUsername ) {
+				state.SetField ( -1, "applicationUsername", [ payment.applicationUsername UTF8String ]);
+			}
+		}
 		
 		lua_settable ( state, -3 );
 	}
