@@ -23,7 +23,7 @@ add_subdirectory(moai-android-google-push)
 add_subdirectory(moai-android-tapjoy)
 add_subdirectory(moai-android-twitter)
 add_subdirectory(moai-android-vungle)
-add_subdirectory(moai-android-unityads)
+add_subdirectory(moai-android-unity-ads)
 
 android_module("moai-android" "" "core")
 
