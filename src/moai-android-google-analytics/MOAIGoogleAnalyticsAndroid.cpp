@@ -8,7 +8,7 @@
 
 #include <jni.h>
 
-#include <moai-android/moaiext-jni.h>
+#include <moai-android/JniUtils.h>
 #include <moai-android-google-analytics/MOAIGoogleAnalyticsAndroid.h>
 
 extern JavaVM* jvm;
@@ -25,34 +25,26 @@ int MOAIGoogleAnalyticsAndroid::_logEvent ( lua_State* L ) {
 
 	MOAILuaState state ( L );
 	
-	cc8* eventCategory = lua_tostring ( state, 1 );
-
-	cc8* eventAction = lua_tostring ( state, 2 );
-
-	cc8* eventLabel = lua_tostring ( state, 3 );
-
-	int eventValue = lua_tointeger ( state, 4 );
-	
 	JNI_GET_ENV ( jvm, env );
 	
-	JNI_GET_JSTRING ( eventCategory, jeventCategory );
+	jstring jeventCategory = JNI_GET_JSTRING ( lua_tostring ( state, 1 ));
+	jstring jeventAction = JNI_GET_JSTRING ( lua_tostring ( state, 2 ));
+	jstring jeventLabel = JNI_GET_JSTRING ( lua_tostring ( state, 3 ));
 
-	JNI_GET_JSTRING ( eventAction, jeventAction );
+	int eventValue = lua_tointeger ( state, 4 );
 
-	JNI_GET_JSTRING ( eventLabel, jeventLabel );
-
-	jclass ga = env->FindClass ( "com/ziplinegames/moai/MoaiGoogleAnalytics" );
+	jclass ga = env->FindClass ( "com/moaisdk/googleanalytics/MoaiGoogleAnalytics" );
 	if ( ga == NULL ) {
 	
-		ZLLog::LogF ( ZLLog::CONSOLE, "MOAIGoogleAnalyticsAndroid: Unable to find java class %s", "com/ziplinegames/moai/MoaiGoogleAnalytics" );
+		ZLLogF ( ZLLog::CONSOLE, "MOAIGoogleAnalyticsAndroid: Unable to find java class %s", "com/moaisdk/googleanalytics/MoaiGoogleAnalytics" );
 	} else {
 	
 		jmethodID logEvent = env->GetStaticMethodID ( ga, "logEvent", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;I)V" );
 		if ( logEvent == NULL ) {
 	
-			ZLLog::LogF ( ZLLog::CONSOLE, "MOAIGoogleAnalyticsAndroid: Unable to find static java method %s", "logEvent" );
+			ZLLogF ( ZLLog::CONSOLE, "MOAIGoogleAnalyticsAndroid: Unable to find static java method %s", "logEvent" );
 		} else {
-			ZLLog::LogF ( ZLLog::CONSOLE, "MOAIGoogleAnalyticsAndroid: calling google analytics event action = %s", eventAction );
+			ZLLogF ( ZLLog::CONSOLE, "MOAIGoogleAnalyticsAndroid: calling google analytics event action = %s", lua_tostring ( state, 2 ) );
 			env->CallStaticVoidMethod ( ga, logEvent, jeventCategory, jeventAction, jeventLabel, eventValue );		
 		}
 	}

@@ -1,4 +1,4 @@
-package com.ziplinegames.moai;
+package com.moaisdk.googlecloudmessaing;
 
 import org.json.JSONException;
 import org.json.JSONObject;

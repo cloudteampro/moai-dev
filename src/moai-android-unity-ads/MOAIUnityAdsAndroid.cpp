@@ -10,7 +10,7 @@
 #include <jni.h>
 
 #include <moai-android/JniUtils.h>
-#include <moai-android-flurry-ads/MOAIFlurryAdsAndroid.h>
+#include <moai-android-unity-ads/MOAIUnityAdsAndroid.h>
 
 extern JavaVM* jvm;
 
@@ -25,10 +25,10 @@ extern JavaVM* jvm;
 	@in		string	adSpace			FlurryAds ad type (Interstitials, banners, videos).
 	@out 	nil
 */
-int MOAIFlurryAdsAndroid::_init ( lua_State* L ) {
-	MOAI_JAVA_LUA_SETUP ( MOAIFlurryAdsAndroid, "" )
+int MOAIUnityAdsAndroid::_init ( lua_State* L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIUnityAdsAndroid, "" )
 
-	ZLLogF ( ZLLog::CONSOLE, "MOAIFlurryAdsAndroid::_init\n" );
+	ZLLogF ( ZLLog::CONSOLE, "MOAIUnityAdsAndroid::_init\n" );
 	jstring jadspace = self->GetJString ( lua_tostring ( state, 1 ));
 	self->CallStaticVoidMethod ( self->mJava_Init, jadspace );
 	return 0;
@@ -39,8 +39,8 @@ int MOAIFlurryAdsAndroid::_init ( lua_State* L ) {
 
 	@out 	boolean
 */
-int MOAIFlurryAdsAndroid::_hasCachedAd ( lua_State *L ) {
-	MOAI_JAVA_LUA_SETUP ( MOAIFlurryAdsAndroid, "" )
+int MOAIUnityAdsAndroid::_hasCachedAd ( lua_State *L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIUnityAdsAndroid, "" )
 
 	lua_pushboolean ( state, self->CallStaticBooleanMethod ( self->mJava_HasCachedAd ));
 	return 1;
@@ -52,8 +52,8 @@ int MOAIFlurryAdsAndroid::_hasCachedAd ( lua_State *L ) {
 	
 	@out 	nil
 */
-int MOAIFlurryAdsAndroid::_loadAd ( lua_State* L ) {
-	MOAI_JAVA_LUA_SETUP ( MOAIFlurryAdsAndroid, "" )
+int MOAIUnityAdsAndroid::_loadAd ( lua_State* L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIUnityAdsAndroid, "" )
 	
 	self->CallStaticVoidMethod ( self->mJava_LoadAd );
 }
@@ -64,8 +64,8 @@ int MOAIFlurryAdsAndroid::_loadAd ( lua_State* L ) {
 	
 	@out 	nil
 */
-int MOAIFlurryAdsAndroid::_showAd ( lua_State* L ) {
-	MOAI_JAVA_LUA_SETUP ( MOAIFlurryAdsAndroid, "" )
+int MOAIUnityAdsAndroid::_showAd ( lua_State* L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIUnityAdsAndroid, "" )
 	
 	self->CallStaticVoidMethod ( self->mJava_ShowAd );
 	return 0;
@@ -77,21 +77,21 @@ int MOAIFlurryAdsAndroid::_showAd ( lua_State* L ) {
 	
 	@out 	nil
 */
-int MOAIFlurryAdsAndroid::_setAdSpace ( lua_State* L ) {
-	MOAI_JAVA_LUA_SETUP ( MOAIFlurryAdsAndroid, "" )
+int MOAIUnityAdsAndroid::_setAdSpace ( lua_State* L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIUnityAdsAndroid, "" )
 
-	ZLLogF ( ZLLog::CONSOLE, "MOAIFlurryAdsAndroid::_init\n" );
+	ZLLogF ( ZLLog::CONSOLE, "MOAIUnityAdsAndroid::_init\n" );
 	jstring jadspace = self->GetJString ( lua_tostring ( state, 1 ));
 	self->CallStaticVoidMethod ( self->mJava_SetAdSpace, jadspace );
 	return 0;
 }
 
 //================================================================//
-// MOAIFlurryAdsAndroid
+// MOAIUnityAdsAndroid
 //================================================================//
 
 //----------------------------------------------------------------//
-MOAIFlurryAdsAndroid::MOAIFlurryAdsAndroid () {
+MOAIUnityAdsAndroid::MOAIUnityAdsAndroid () {
 
 	RTTI_SINGLE ( MOAILuaObject )
 
@@ -105,22 +105,22 @@ MOAIFlurryAdsAndroid::MOAIFlurryAdsAndroid () {
 }
 
 //----------------------------------------------------------------//
-MOAIFlurryAdsAndroid::~MOAIFlurryAdsAndroid () {
+MOAIUnityAdsAndroid::~MOAIUnityAdsAndroid () {
 
 }
 
 //----------------------------------------------------------------//
-void MOAIFlurryAdsAndroid::RegisterLuaClass ( MOAILuaState& state ) {
+void MOAIUnityAdsAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 
 	state.SetField ( -1, "AD_LOAD_FAILED",		( u32 )AD_LOAD_FAILED );
 	state.SetField ( -1, "AD_DISMISSED", 		( u32 )AD_DISMISSED );
 	state.SetField ( -1, "AD_WILL_SHOW", 		( u32 )AD_WILL_SHOW );
 
 	luaL_Reg regTable [] = {
-		{ "getListener",		&MOAIGlobalEventSource::_getListener < MOAIFlurryAdsAndroid > },
+		{ "getListener",		&MOAIGlobalEventSource::_getListener < MOAIUnityAdsAndroid > },
 		{ "init",				_init },
 		{ "loadAd",				_loadAd },
-		{ "setListener",		&MOAIGlobalEventSource::_setListener < MOAIFlurryAdsAndroid > },
+		{ "setListener",		&MOAIGlobalEventSource::_setListener < MOAIUnityAdsAndroid > },
 		{ "showAd",				_showAd },
 		{ "hasCachedAd",		_hasCachedAd },
 		{ "setAdSpace",			_setAdSpace },
@@ -135,8 +135,8 @@ void MOAIFlurryAdsAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 //================================================================//
 
 //----------------------------------------------------------------//
-extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_flurryads_MoaiFlurryAds_AKUInvokeListener ( JNIEnv* env, jclass obj, jint eventID ) {
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_unityads_MoaiUnityAds_AKUInvokeListener ( JNIEnv* env, jclass obj, jint eventID ) {
 
-	ZLLogF ( ZLLog::CONSOLE, "Java_com_moaisdk_flurryads_MoaiFlurryAds_AKUInvokeListener\n" );
-	MOAIFlurryAdsAndroid::Get ().InvokeListener (( u32 )eventID );
+	ZLLogF ( ZLLog::CONSOLE, "Java_com_moaisdk_unityads_MoaiUnityAds_AKUInvokeListener\n" );
+	MOAIUnityAdsAndroid::Get ().InvokeListener (( u32 )eventID );
 }

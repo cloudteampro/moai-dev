@@ -4,7 +4,7 @@
 // http://cloudteam.pro
 //----------------------------------------------------------------//
 
-package com.ziplinegames.moai;
+package com.moaisdk.flurryads;
 
 import android.app.Activity;
 import android.widget.FrameLayout;

@@ -1,4 +1,4 @@
-package com.ziplinegames.moai;
+package com.moaisdk.googlecloudmessaging;
 
 import android.content.Context;
 

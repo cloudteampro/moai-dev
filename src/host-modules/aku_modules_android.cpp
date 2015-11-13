@@ -34,9 +34,25 @@ void AKUModulesAndroidAppFinalize () {
 	#if AKU_WITH_ANDROID_FLURRY
 		AKUAndroidFlurryAppFinalize ();
 	#endif
+
+	#if AKU_WITH_ANDROID_FLURRY_ADS
+		AKUAndroidFlurryAdsAppFinalize ();
+	#endif
+	
+	#if AKU_WITH_ANDROID_GOOGLE_ANALYTICS
+		AKUAndroidGoogleAnalyticsAppFinalize ();
+	#endif
 	
 	#if AKU_WITH_ANDROID_GOOGLE_PLAY_SERVICES
 		AKUAndroidGooglePlayServicesAppFinalize ();
+	#endif
+	
+	#if AKU_WITH_ANDROID_GOOGLE_CLOUD_MESSAGING
+		AKUAndroidGoogleCloudMessagingAppFinalize ();
+	#endif
+
+	#if AKU_WITH_ANDROID_GOOGLE_PLAY_SERVICES_GAMES
+		AKUAndroidGooglePlayServicesGamesAppFinalize ();
 	#endif
 	
 	#if AKU_WITH_ANDROID_TAPJOY
@@ -49,6 +65,10 @@ void AKUModulesAndroidAppFinalize () {
 	
 	#if AKU_WITH_ANDROID_VUNGLE
 		AKUAndroidVungleAppFinalize ();
+	#endif
+
+	#if AKU_WITH_ANDROID_UNITY_ADS
+		AKUAndroidUnityAdsAppFinalize ();
 	#endif
 }
 
@@ -78,9 +98,25 @@ void AKUModulesAndroidAppInitialize () {
 	#if AKU_WITH_ANDROID_FLURRY
 		AKUAndroidFlurryAppInitialize ();
 	#endif
+
+	#if AKU_WITH_ANDROID_FLURRY_ADS
+		AKUAndroidFlurryAdsAppInitialize ();
+	#endif
 	
+	#if AKU_WITH_ANDROID_GOOGLE_ANALYTICS
+		AKUAndroidGoogleAnalyticsAppInitialize ();
+	#endif
+
+	#if AKU_WITH_ANDROID_GOOGLE_CLOUD_MESSAGING
+		AKUAndroidGoogleCloudMessagingAppInitialize ();
+	#endif
+
 	#if AKU_WITH_ANDROID_GOOGLE_PLAY_SERVICES
 		AKUAndroidGooglePlayServicesAppInitialize ();
+	#endif
+
+	#if AKU_WITH_ANDROID_GOOGLE_PLAY_SERVICES_GAMES
+		AKUAndroidGooglePlayServicesGamesAppInitialize ();
 	#endif
 	
 	#if AKU_WITH_ANDROID_TAPJOY
@@ -93,6 +129,10 @@ void AKUModulesAndroidAppInitialize () {
 	
 	#if AKU_WITH_ANDROID_VUNGLE
 		AKUAndroidVungleAppInitialize ();
+	#endif
+
+	#if AKU_WITH_ANDROID_UNITY_ADS
+		AKUAndroidUnityAdsAppInitialize ();
 	#endif
 }
 
@@ -122,9 +162,25 @@ void AKUModulesAndroidContextInitialize () {
 	#if AKU_WITH_ANDROID_FLURRY
 		AKUAndroidFlurryContextInitialize ();
 	#endif
+
+	#if AKU_WITH_ANDROID_FLURRY_ADS
+		AKUAndroidFlurryAdsContextInitialize ();
+	#endif
 	
+	#if AKU_WITH_ANDROID_GOOGLE_ANALYTICS
+		AKUAndroidGoogleAnalyticsContextInitialize ();
+	#endif
+
 	#if AKU_WITH_ANDROID_GOOGLE_PLAY_SERVICES
 		AKUAndroidGooglePlayServicesContextInitialize ();
+	#endif
+	
+	#if AKU_WITH_ANDROID_GOOGLE_CLOUD_MESSAGING
+		AKUAndroidGoogleCloudMessagingContextInitialize ();
+	#endif
+	
+	#if AKU_WITH_ANDROID_GOOGLE_PLAY_SERVICES_GAMES
+		AKUAndroidGooglePlayServicesGamesContextInitialize ();
 	#endif
 	
 	#if AKU_WITH_ANDROID_TAPJOY
@@ -137,6 +193,10 @@ void AKUModulesAndroidContextInitialize () {
 
 	#if AKU_WITH_ANDROID_VUNGLE
         AKUAndroidVungleContextInitialize ();
+    #endif
+
+	#if AKU_WITH_ANDROID_UNITY_ADS
+        AKUAndroidUnityAdsContextInitialize ();
     #endif
 }
 

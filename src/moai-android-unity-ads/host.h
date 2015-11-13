@@ -4,13 +4,13 @@
 // http://getmoai.com
 //----------------------------------------------------------------//
 
-#ifndef AKU_ANDROID_GOOGLE_ANALYTICS_HOST_H
-#define AKU_ANDROID_GOOGLE_ANALYTICS_HOST_H
+#ifndef AKU_ANDROID_UNITYADS_HOST_H
+#define AKU_ANDROID_UNITYADS_HOST_H
 
 #include <moai-core/host.h>
 
-AKU_API void	AKUAndroidGoogleAnalyticsAppFinalize			();
-AKU_API void	AKUAndroidGoogleAnalyticsAppInitialize			();
-AKU_API void	AKUAndroidGoogleAnalyticsContextInitialize		();
+AKU_API void	AKUAndroidUnityAdsAppFinalize			();
+AKU_API void	AKUAndroidUnityAdsAppInitialize			();
+AKU_API void	AKUAndroidUnityAdsContextInitialize		();
 
 #endif

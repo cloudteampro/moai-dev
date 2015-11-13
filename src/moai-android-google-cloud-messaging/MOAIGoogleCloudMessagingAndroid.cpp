@@ -9,7 +9,7 @@
 #include "moai-core/pch.h"
 #include "moai-sim/pch.h"
 
-#include <moai-android/moaiext-jni.h>
+#include <moai-android/JniUtils.h>
 #include <moai-android-google-cloud-messaging/MOAIGoogleCloudMessagingAndroid.h>
 
 #include <jansson.h>
@@ -168,8 +168,8 @@ jobject MOAIGoogleCloudMessagingAndroid::_luaReadMap( lua_State * L, int idx ) {
 				cc8* value = _luaParseTable ( state, -1 );
 				if ( value ) {
 
-					JNI_GET_JSTRING ( value, jvalue );
-					JNI_GET_JSTRING ( key, jkey );
+					jstring jvalue = JNI_GET_JSTRING ( value );
+					jstring jkey = JNI_GET_JSTRING ( key );
 
 					env->CallObjectMethod( hashMap, put, jkey, jvalue );
 					
@@ -210,16 +210,16 @@ int MOAIGoogleCloudMessagingAndroid::_register ( lua_State* L ) {
 	
 	JNI_GET_ENV ( jvm, env );
 	
-	jclass googleCloudMessaging = env->FindClass ( "com/ziplinegames/moai/MoaiGoogleCloudMessaging" );
+	jclass googleCloudMessaging = env->FindClass ( "com/moaisdk/googlecloudmessaging/MoaiGoogleCloudMessaging" );
     if ( googleCloudMessaging == NULL ) {
 	
-		ZLLog::LogF ( ZLLog::CONSOLE, "MoaiGoogleCloudMessaging: Unable to find java class %s", "com/ziplinegames/moai/MoaiGoogleCloudMessaging" );
+		ZLLogF ( ZLLog::CONSOLE, "MoaiGoogleCloudMessaging: Unable to find java class %s", "com/moaisdk/googlecloudmessaging/MoaiGoogleCloudMessaging" );
     } else {
 	
     	jmethodID _register = env->GetStaticMethodID ( googleCloudMessaging, "register", "()V" );
    		if ( _register == NULL ) {
 	
-			ZLLog::LogF ( ZLLog::CONSOLE, "MoaiGoogleCloudMessaging: Unable to find static java method %s", "register" );
+			ZLLogF ( ZLLog::CONSOLE, "MoaiGoogleCloudMessaging: Unable to find static java method %s", "register" );
 		} else {
 	
 			env->CallStaticVoidMethod ( googleCloudMessaging, _register );		
@@ -241,16 +241,16 @@ int MOAIGoogleCloudMessagingAndroid::_unregister ( lua_State* L ) {
 	
 	JNI_GET_ENV ( jvm, env );
 	
-	jclass googleCloudMessaging = env->FindClass ( "com/ziplinegames/moai/MoaiGoogleCloudMessaging" );
+	jclass googleCloudMessaging = env->FindClass ( "com/moaisdk/googlecloudmessaging/MoaiGoogleCloudMessaging" );
     if ( googleCloudMessaging == NULL ) {
 	
-		ZLLog::LogF ( ZLLog::CONSOLE, "MoaiGoogleCloudMessaging: Unable to find java class %s", "com/ziplinegames/moai/MoaiGoogleCloudMessaging" );
+		ZLLogF ( ZLLog::CONSOLE, "MoaiGoogleCloudMessaging: Unable to find java class %s", "com/moaisdk/googlecloudmessaging/MoaiGoogleCloudMessaging" );
     } else {
 	
     	jmethodID _unregister = env->GetStaticMethodID ( googleCloudMessaging, "unregister", "()V" );
    		if ( _unregister == NULL ) {
 	
-			ZLLog::LogF ( ZLLog::CONSOLE, "MoaiGoogleCloudMessaging: Unable to find static java method %s", "unregister" );
+			ZLLogF ( ZLLog::CONSOLE, "MoaiGoogleCloudMessaging: Unable to find static java method %s", "unregister" );
 		} else {
 	
 			env->CallStaticVoidMethod ( googleCloudMessaging, _unregister );		
@@ -272,16 +272,16 @@ int MOAIGoogleCloudMessagingAndroid::_getToken ( lua_State* L ) {
 
 	JNI_GET_ENV ( jvm, env );
 	
-	jclass googleCloudMessaging = env->FindClass ( "com/ziplinegames/moai/MoaiGoogleCloudMessaging" ); 
+	jclass googleCloudMessaging = env->FindClass ( "com/moaisdk/googlecloudmessaging/MoaiGoogleCloudMessaging" ); 
     if ( googleCloudMessaging == NULL ) {
 
-		ZLLog::LogF ( ZLLog::CONSOLE, "MoaiGoogleCloudMessaging: Unable to find java class %s", "com/ziplinegames/moai/MoaiGoogleCloudMessaging" );
+		ZLLogF ( ZLLog::CONSOLE, "MoaiGoogleCloudMessaging: Unable to find java class %s", "com/moaisdk/googlecloudmessaging/MoaiGoogleCloudMessaging" );
     } else {
 
     	jmethodID getToken = env->GetStaticMethodID ( googleCloudMessaging, "getToken", "()Ljava/lang/String;" );
     	if ( getToken == NULL ) {
 
-			ZLLog::LogF ( ZLLog::CONSOLE, "MoaiGoogleCloudMessaging: Unable to find static java method %s", "getToken" );
+			ZLLogF ( ZLLog::CONSOLE, "MoaiGoogleCloudMessaging: Unable to find static java method %s", "getToken" );
     	} else {
 
     		jstring jtoken = ( jstring )env->CallStaticObjectMethod ( googleCloudMessaging, getToken );	
@@ -314,16 +314,16 @@ int MOAIGoogleCloudMessagingAndroid::_getLastPush ( lua_State* L ) {
 
 	JNI_GET_ENV ( jvm, env );
 	
-	jclass googleCloudMessaging = env->FindClass ( "com/ziplinegames/moai/MoaiGoogleCloudMessaging" ); 
+	jclass googleCloudMessaging = env->FindClass ( "com/moaisdk/googlecloudmessaging/MoaiGoogleCloudMessaging" ); 
     if ( googleCloudMessaging == NULL ) {
 
-		ZLLog::LogF ( ZLLog::CONSOLE, "MoaiGoogleCloudMessaging: Unable to find java class %s", "com/ziplinegames/moai/MoaiGoogleCloudMessaging" );
+		ZLLogF ( ZLLog::CONSOLE, "MoaiGoogleCloudMessaging: Unable to find java class %s", "com/moaisdk/googlecloudmessaging/MoaiGoogleCloudMessaging" );
     } else {
 
     	jmethodID getLastPush = env->GetStaticMethodID ( googleCloudMessaging, "getLastPush", "()Ljava/lang/String;" );
     	if ( getLastPush == NULL ) {
 
-			ZLLog::LogF ( ZLLog::CONSOLE, "MoaiGoogleCloudMessaging: Unable to find static java method %s", "getLastPush" );
+			ZLLogF ( ZLLog::CONSOLE, "MoaiGoogleCloudMessaging: Unable to find static java method %s", "getLastPush" );
     	} else {
 
     		jstring jjpush = ( jstring )env->CallStaticObjectMethod ( googleCloudMessaging, getLastPush );	
@@ -364,16 +364,16 @@ int MOAIGoogleCloudMessagingAndroid::_removeLastPush ( lua_State* L ) {
 	
 	JNI_GET_ENV ( jvm, env );
 	
-	jclass googleCloudMessaging = env->FindClass ( "com/ziplinegames/moai/MoaiGoogleCloudMessaging" );
+	jclass googleCloudMessaging = env->FindClass ( "com/moaisdk/googlecloudmessaging/MoaiGoogleCloudMessaging" );
     if ( googleCloudMessaging == NULL ) {
 	
-		ZLLog::LogF ( ZLLog::CONSOLE, "MoaiGoogleCloudMessaging: Unable to find java class %s", "com/ziplinegames/moai/MoaiGoogleCloudMessaging" );
+		ZLLogF ( ZLLog::CONSOLE, "MoaiGoogleCloudMessaging: Unable to find java class %s", "com/moaisdk/googlecloudmessaging/MoaiGoogleCloudMessaging" );
     } else {
 	
     	jmethodID removeLastPush = env->GetStaticMethodID ( googleCloudMessaging, "removeLastPush", "()V" );
    		if ( removeLastPush == NULL ) {
 	
-			ZLLog::LogF ( ZLLog::CONSOLE, "MoaiGoogleCloudMessaging: Unable to find static java method %s", "removeLastPush" );
+			ZLLogF ( ZLLog::CONSOLE, "MoaiGoogleCloudMessaging: Unable to find static java method %s", "removeLastPush" );
 		} else {
 	
 			env->CallStaticVoidMethod ( googleCloudMessaging, removeLastPush );		
@@ -507,7 +507,7 @@ void MOAIGoogleCloudMessagingAndroid::NotifyError ( cc8* result ) {
 //================================================================//
 
 //----------------------------------------------------------------//
-extern "C" void Java_com_ziplinegames_moai_MoaiGoogleCloudMessaging_AKUNotifyRegistered ( JNIEnv* env, jclass obj, jstring jresult ) { 
+extern "C" void Java_com_moaisdk_googlecloudmessaging_MoaiGoogleCloudMessaging_AKUNotifyRegistered ( JNIEnv* env, jclass obj, jstring jresult ) { 
 
 	JNI_GET_CSTRING ( jresult, result );
 	
@@ -517,7 +517,7 @@ extern "C" void Java_com_ziplinegames_moai_MoaiGoogleCloudMessaging_AKUNotifyReg
 }
 
 //----------------------------------------------------------------//
-extern "C" void Java_com_ziplinegames_moai_MoaiGoogleCloudMessaging_AKUNotifyUnregistered ( JNIEnv* env, jclass obj, jstring jresult ) { 
+extern "C" void Java_com_moaisdk_googlecloudmessaging_MoaiGoogleCloudMessaging_AKUNotifyUnregistered ( JNIEnv* env, jclass obj, jstring jresult ) { 
 
 	JNI_GET_CSTRING ( jresult, result );
 	
@@ -527,7 +527,7 @@ extern "C" void Java_com_ziplinegames_moai_MoaiGoogleCloudMessaging_AKUNotifyUnr
 }
 
 //----------------------------------------------------------------//
-extern "C" void Java_com_ziplinegames_moai_MoaiGoogleCloudMessaging_AKUNotifyMessage ( JNIEnv* env, jclass obj, jstring jresult ) { 
+extern "C" void Java_com_moaisdk_googlecloudmessaging_MoaiGoogleCloudMessaging_AKUNotifyMessage ( JNIEnv* env, jclass obj, jstring jresult ) { 
 
 	JNI_GET_CSTRING ( jresult, result );
 	
@@ -537,7 +537,7 @@ extern "C" void Java_com_ziplinegames_moai_MoaiGoogleCloudMessaging_AKUNotifyMes
 }
 
 //----------------------------------------------------------------//
-extern "C" void Java_com_ziplinegames_moai_MoaiGoogleCloudMessaging_AKUNotifyError ( JNIEnv* env, jclass obj, jstring jerror ) { 
+extern "C" void Java_com_moaisdk_googlecloudmessaging_MoaiGoogleCloudMessaging_AKUNotifyError ( JNIEnv* env, jclass obj, jstring jerror ) { 
 
 	JNI_GET_CSTRING ( jerror, error );
 	

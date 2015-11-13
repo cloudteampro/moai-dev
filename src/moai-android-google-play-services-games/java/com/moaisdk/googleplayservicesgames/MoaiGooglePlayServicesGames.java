@@ -3,7 +3,7 @@
 // All Rights Reserved. 
 //----------------------------------------------------------------//
 
-package com.ziplinegames.moai;
+package com.moaisdk.googleplayservicesgames;
 
 import com.google.android.gms.games.Games;
 

@@ -187,7 +187,7 @@ MOAIWebViewAndroid::MOAIWebViewAndroid () {
 
 	RTTI_SINGLE ( MOAILuaObject )
 
-	this->SetClass ( "com/ziplinegames/moai/MoaiWebView" );
+	this->SetClass ( "com/moaisdk/core/MoaiWebView" );
 
 	this->mJava_CanGoBack			= this->GetStaticMethod ( "canGoBack", "()Z" );
 	this->mJava_CanGoForward		= this->GetStaticMethod ( "canGoForward", "()Z" );
