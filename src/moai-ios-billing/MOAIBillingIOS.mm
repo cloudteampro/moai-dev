@@ -351,7 +351,7 @@ void MOAIBillingIOS::PushPaymentTransaction ( MOAILuaState& state, SKPaymentTran
 		state.SetField ( -1, "productIdentifier", [ payment.productIdentifier UTF8String ]);
 		state.SetField ( -1, "quantity", ( int )payment.quantity );
 
-		if ([ payment respondsToSelector:@selector ( setApplicationUsername: )]) {
+		if ([ payment respondsToSelector:@selector ( applicationUsername )]) {
 			if ( payment.applicationUsername ) {
 				state.SetField ( -1, "applicationUsername", [ payment.applicationUsername UTF8String ]);
 			}
