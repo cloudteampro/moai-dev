@@ -347,6 +347,8 @@ int MOAIFacebookIOS::_login ( lua_State* L ) {
 	[ login logInWithReadPermissions:paramsArray fromViewController:rootVC handler:^( FBSDKLoginManagerLoginResult *result, NSError *error ) {
 	
 		if ( error ) {
+			// clear old token and profile. In case user have switched profiles
+			[ login logOut ];
 			self->SessionDidNotLogin ();
 		}
 		else if ( result.isCancelled ) {

@@ -51,8 +51,6 @@ void AKUInitializeIOSAudioSession () {
 		usingBlock:^( NSNotification *notification ) {
 	 
 			bool began = [[ notification.userInfo valueForKey:AVAudioSessionInterruptionTypeKey ] intValue ] == AVAudioSessionInterruptionTypeBegan;
-			NSLog ( @"Interruption %@", began ? @"Began" : @"Ended" );
-			
 			if ( !began ) {
 				[[ AVAudioSession sharedInstance ] setActive:TRUE error:nil ];
 			}
