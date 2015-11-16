@@ -453,7 +453,7 @@ MOAIFacebookAndroid::MOAIFacebookAndroid () {
 	this->mJava_PostToFeed					= this->GetStaticMethod ( "postToFeed", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V" );
 	this->mJava_RequestPublishPermissions	= this->GetStaticMethod ( "requestPublishPermissions", "([Ljava/lang/String;)V" );
 	this->mJava_RequestReadPermissions		= this->GetStaticMethod ( "requestReadPermissions", "([Ljava/lang/String;)V" );
-	this->mJava_SendGameRequest				= this->GetStaticMethod ( "sendGameRequest", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;I)V" );
+	this->mJava_SendGameRequest				= this->GetStaticMethod ( "sendGameRequest", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;I)Z" );
 	this->mJava_SessionValid				= this->GetStaticMethod ( "sessionValid", "()Z" );
 	this->mJava_ShowInviteDialog			= this->GetStaticMethod ( "showInviteDialog", "(Ljava/lang/String;Ljava/lang/String;)V" );
 
@@ -509,17 +509,18 @@ void MOAIFacebookAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 	RegisterStringConstant ( state, mJava_AppEventsConstants, "EVENT_VIEWED_CONTENT",			"EVENT_NAME_VIEWED_CONTENT" );
 
 	// Analytics predefined event parameters names
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_CONTENT_ID",				"EVENT_PARAM_NAME_CONTENT_ID" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_CONTENT_TYPE",			"EVENT_PARAM_NAME_CONTENT_TYPE" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_CURRENCY",				"EVENT_PARAM_NAME_CURRENCY" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_DESCRIPTION",				"EVENT_PARAM_NAME_DESCRIPTION" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_LEVEL",					"EVENT_PARAM_NAME_LEVEL" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_MAX_RATING_VALUE",		"EVENT_PARAM_NAME_MAX_RATING_VALUE" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_NUM_ITEMS",				"EVENT_PARAM_NAME_NUM_ITEMS" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_PAYMENT_INFO_AVAILABLE",	"EVENT_PARAM_NAME_PAYMENT_INFO_AVAILABLE" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_REGISTRATION_METHOD",		"EVENT_PARAM_NAME_REGISTRATION_METHOD" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_SEARCH_STRING",			"EVENT_PARAM_NAME_SEARCH_STRING" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_SUCCESS",					"EVENT_PARAM_NAME_SUCCESS" );
+	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_CONTENT_ID",				"EVENT_PARAM_CONTENT_ID" );
+	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_CONTENT_TYPE",			"EVENT_PARAM_CONTENT_TYPE" );
+	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_CURRENCY",				"EVENT_PARAM_CURRENCY" );
+	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_DESCRIPTION",				"EVENT_PARAM_DESCRIPTION" );
+	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_LEVEL",					"EVENT_PARAM_LEVEL" );
+	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_MAX_RATING_VALUE",		"EVENT_PARAM_MAX_RATING_VALUE" );
+	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_NUM_ITEMS",				"EVENT_PARAM_NUM_ITEMS" );
+	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_PAYMENT_INFO_AVAILABLE",	"EVENT_PARAM_PAYMENT_INFO_AVAILABLE" );
+	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_REGISTRATION_METHOD",		"EVENT_PARAM_REGISTRATION_METHOD" );
+	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_SEARCH_STRING",			"EVENT_PARAM_SEARCH_STRING" );
+	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_SUCCESS",					"EVENT_PARAM_SUCCESS" );
+	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_SOURCE_APPLICATION",		"EVENT_PARAM_SOURCE_APPLICATION" );
 
 	// Analytics predefined event parameters values
 	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_VALUE_NO",						"EVENT_PARAM_VALUE_NO" );

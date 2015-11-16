@@ -35,8 +35,24 @@
 	#include <moai-android-flurry/host.h>
 #endif
 
+#if AKU_WITH_ANDROID_FLURRY_ADS
+	#include <moai-android-flurry-ads/host.h>
+#endif
+
+#if AKU_WITH_ANDROID_GOOGLE_ANALYTICS
+	#include <moai-android-google-analytics/host.h>
+#endif
+
+#if AKU_WITH_ANDROID_GOOGLE_CLOUD_MESSAGING
+	#include <moai-android-google-cloud-messaging/host.h>
+#endif
+
 #if AKU_WITH_ANDROID_GOOGLE_PLAY_SERVICES
 	#include <moai-android-google-play-services/host.h>
+#endif
+
+#if AKU_WITH_ANDROID_GOOGLE_PLAY_SERVICES_GAMES
+	#include <moai-android-google-play-services-games/host.h>
 #endif
 
 #if AKU_WITH_ANDROID_NOTIFICATIONS
@@ -63,6 +79,9 @@
 	#include <moai-android-vungle/host.h>
 #endif
 
+#if AKU_WITH_ANDROID_UNITY_ADS
+	#include <moai-android-unity-ads/host.h>
+#endif
 
 
 //----------------------------------------------------------------//

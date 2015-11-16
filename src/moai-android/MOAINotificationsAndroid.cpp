@@ -35,10 +35,10 @@ int MOAINotificationsAndroid::_cancelLocalNotification ( lua_State* L ) {
 	
 	MOAIJString jmessage = JNI_GET_JSTRING ( message );
 
-	jclass push = env->FindClass ( "com/ziplinegames/moai/Moai" );
+	jclass push = env->FindClass ( "com/moaisdk/core/Moai" );
 	if ( push == NULL ) {
 
-		ZLLogF ( ZLLog::CONSOLE, "MOAINotificationsAndroid: Unable to find java class %s", "com/ziplinegames/moai/Moai" );
+		ZLLogF ( ZLLog::CONSOLE, "MOAINotificationsAndroid: Unable to find java class %s", "com/moaisdk/core/Moai" );
 	} else {
 
 		jmethodID removeLocalNotification = env->GetStaticMethodID ( push, "removeLocalNotification", "(ILjava/lang/String;)V" );
@@ -171,7 +171,7 @@ int MOAINotificationsAndroid::_localNotificationInSeconds ( lua_State* L ) {
 	jclass moai = env->FindClass ( "com/moaisdk/core/Moai" );
 	if ( moai == NULL ) {
 
-		ZLLogF ( ZLLog::CONSOLE, "MOAINotificationsAndroid: Unable to find java class %s", "com/ziplinegames/moai/Moai" );
+		ZLLogF ( ZLLog::CONSOLE, "MOAINotificationsAndroid: Unable to find java class %s", "com/moaisdk/core/Moai" );
 	}
 	else {
 
@@ -209,7 +209,7 @@ int MOAINotificationsAndroid::_registerForRemoteNotifications ( lua_State* L ) {
 	jclass push = env->FindClass ( "com/moaisdk/core/MoaiGooglePush" );
 	if ( push == NULL ) {
 
-		ZLLogF ( ZLLog::CONSOLE, "MOAINotificationsAndroid: Unable to find java class %s", "com/ziplinegames/moai/MoaiGooglePush" );
+		ZLLogF ( ZLLog::CONSOLE, "MOAINotificationsAndroid: Unable to find java class %s", "com/moaisdk/core/MoaiGooglePush" );
 	}
 	else {
 
@@ -267,7 +267,7 @@ int MOAINotificationsAndroid::_unregisterForRemoteNotifications ( lua_State* L )
 	jclass push = env->FindClass ( "com/moaisdk/core/MoaiGooglePush" );
 	if ( push == NULL ) {
 
-		ZLLogF ( ZLLog::CONSOLE, "MOAINotificationsAndroid: Unable to find java class %s", "com/ziplinegames/moai/MoaiGooglePush" );
+		ZLLogF ( ZLLog::CONSOLE, "MOAINotificationsAndroid: Unable to find java class %s", "com/moaisdk/core/MoaiGooglePush" );
 	}
 	else {
 

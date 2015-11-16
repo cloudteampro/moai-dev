@@ -26,6 +26,7 @@ void AKUAndroidContextInitialize () {
 	MOAIKeyboardAndroid::Affirm ();
 	MOAIBillingAndroid::Affirm ();
 	MOAINotificationsAndroid::Affirm ();
+	MOAIWebViewAndroid::Affirm ();
 
 	REGISTER_LUA_CLASS ( MOAIAppAndroid );
 	REGISTER_LUA_CLASS ( MOAIBrowserAndroid );
@@ -34,4 +35,5 @@ void AKUAndroidContextInitialize () {
 	REGISTER_LUA_CLASS ( MOAIKeyboardAndroid );
 	REGISTER_LUA_CLASS ( MOAIBillingAndroid );
 	REGISTER_LUA_CLASS ( MOAINotificationsAndroid );
+	REGISTER_LUA_CLASS ( MOAIWebViewAndroid );
 }

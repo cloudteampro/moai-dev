@@ -1,0 +1,11 @@
+		
+		<!-- Google Cloud Messaging -->
+		<receiver android:name="com.ziplinegames.moai.MoaiGoogleCloudMessagingReceiver" android:permission="com.google.android.c2dm.permission.SEND" >
+	    	<intent-filter>
+	        	<action android:name="com.google.android.c2dm.intent.RECEIVE" />
+           		<action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+            	<category android:name="@PACKAGE@" />
+        	</intent-filter>
+    	</receiver>
+    	<service android:name="com.ziplinegames.moai.MoaiGoogleCloudMessagingIntentService" android:enabled="true"/>
+    	
