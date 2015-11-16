@@ -83,4 +83,13 @@ public class MoaiFlurry {
 			FlurryAgent.logEvent ( eventId, timed );
 		}
 	}
+
+	//----------------------------------------------------------------//	
+	public static void setAppVersion ( String version ) {
+
+		MoaiLog.i ( "MoaiFlurry setAppVersion: "+version );
+		if ( version != null ) {
+			FlurryAgent.setVersionName ( version );
+		}
+	}
 }
