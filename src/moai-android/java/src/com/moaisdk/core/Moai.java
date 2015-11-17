@@ -227,7 +227,7 @@ public class Moai {
 		}
 		
 		@Override
-		public int hashCode() {
+		public int hashCode () {
 			return message.hashCode () + seconds;
 		}
 	}
@@ -350,11 +350,14 @@ public class Moai {
 			}
 
 			String appVersion;
+			String appVersionCode;
 			try {
 				appVersion = sActivity.getPackageManager ().getPackageInfo ( appId, 0 ).versionName;
+				appVersionCode = sActivity.getPackageManager ().getPackageInfo ( appId, 0 ).versionCode + "";
 			}
 			catch ( Exception e ) {
 				appVersion = "UNKNOWN";
+				appVersionCode = "0";
 			}
 
 			String udid	= Secure.getString ( sActivity.getContentResolver (), Secure.ANDROID_ID );
@@ -362,7 +365,7 @@ public class Moai {
 				udid = "UNKNOWN";
 			}
 
-			AKUSetDeviceProperties ( appName, appId, appVersion, Build.CPU_ABI, Build.BRAND, Build.DEVICE, Build.MANUFACTURER, Build.MODEL, Build.PRODUCT, Runtime.getRuntime ().availableProcessors (), "Android", Build.VERSION.RELEASE, udid );
+			AKUSetDeviceProperties ( appName, appId, appVersionName, appVersionCode, Build.CPU_ABI, Build.BRAND, Build.DEVICE, Build.MANUFACTURER, Build.MODEL, Build.PRODUCT, Runtime.getRuntime ().availableProcessors (), "Android", Build.VERSION.RELEASE, udid );
 			AKUSetDeviceLocale ( Locale.getDefault ().getLanguage (), Locale.getDefault ().getCountry ());
 		}
 	}
@@ -687,6 +690,13 @@ public class Moai {
 		intent.setData ( Uri.parse( url ));
 		sActivity.startActivity ( intent );
 	}
+
+	//----------------------------------------------------------------//
+	public static void quitApp () {
+		
+		sActivity.finish ();
+	}
+
 
 	//----------------------------------------------------------------//
 	public static void removeLocalNotification ( int seconds, String message ) {
