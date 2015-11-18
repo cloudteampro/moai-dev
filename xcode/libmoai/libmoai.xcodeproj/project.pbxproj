@@ -20274,7 +20274,7 @@
 					"\"../../3rdparty/sfmt-1.4\"",
 					"\"../../3rdparty/libUAirship-3.0.1/Airship/Common\"",
 					"\"../../3rdparty/libUAirship-3.0.1/Airship/Push\"",
-					"\"../../3rdparty/Flurry-iOS-5.0.0/Flurry\"",
+					"\"../../3rdparty/Flurry-iOS-7.3.0/Flurry\"",
 					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -21600,7 +21600,7 @@
 					"\"../../3rdparty/sfmt-1.4\"",
 					"\"../../3rdparty/libUAirship-3.0.1/Airship/Common\"",
 					"\"../../3rdparty/libUAirship-3.0.1/Airship/Push\"",
-					"\"../../3rdparty/Flurry-iOS-5.0.0/Flurry\"",
+					"\"../../3rdparty/Flurry-iOS-7.3.0/Flurry\"",
 					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -27128,7 +27128,7 @@
 					"\"../../3rdparty/sfmt-1.4\"",
 					"\"../../3rdparty/libUAirship-3.0.1/Airship/Common\"",
 					"\"../../3rdparty/libUAirship-3.0.1/Airship/Push\"",
-					"\"../../3rdparty/Flurry-iOS-5.0.0/Flurry\"",
+					"\"../../3rdparty/Flurry-iOS-7.3.0/Flurry\"",
 					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -27556,7 +27556,7 @@
 					"\"../../3rdparty/sfmt-1.4\"",
 					"\"../../3rdparty/libUAirship-3.0.1/Airship/Common\"",
 					"\"../../3rdparty/libUAirship-3.0.1/Airship/Push\"",
-					"\"../../3rdparty/Flurry-iOS-5.0.0/Flurry\"",
+					"\"../../3rdparty/Flurry-iOS-7.3.0/Flurry\"",
 					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;

@@ -51,8 +51,8 @@ IOS = {
 	[ 'lib/ios' ]									= true,
 
 	-- 3rdparty
-	[ '3rdparty/Flurry-iOS-5.0.0/Flurry/Flurry.h' ] 			= 'include/Flurry/Flurry.h',
-	[ '3rdparty/Flurry-iOS-5.0.0/Flurry/libFlurry_5.0.0.a' ] 	= 'lib/ios/libFlurry_5.0.0.a',
+	[ '3rdparty/Flurry-iOS-7.3.0/Flurry/Flurry.h' ] 			= 'include/Flurry/Flurry.h',
+	[ '3rdparty/Flurry-iOS-7.3.0/Flurry/libFlurry_7.3.0.a' ] 	= 'lib/ios/libFlurry_7.3.0.a',
 
 	[ '3rdparty/facebook-ios-sdk-4.7/Bolts.framework' ]			= 'lib/ios/Bolts.framework',
 	[ '3rdparty/facebook-ios-sdk-4.7/FBSDKCoreKit.framework' ]	= 'lib/ios/FBSDKCoreKit.framework',
