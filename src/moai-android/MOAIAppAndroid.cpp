@@ -16,18 +16,33 @@ extern JavaVM* jvm;
 //================================================================//
 
 //----------------------------------------------------------------//
+int MOAIAppAndroid::_exit ( lua_State* L ) {
+    MOAILuaState state ( L );
+
+    JNI_GET_ENV ( jvm, env );
+
+    jclass t_class = env->FindClass ( "com/moaisdk/core/Moai" );
+    jmethodID t_method = env->GetStaticMethodID ( t_class, "quitApp", "()V" );
+
+    if ( t_class != NULL && t_method ) {
+        env->CallStaticVoidMethod ( t_class, t_method );
+    }
+    return 0;
+}
+
+//----------------------------------------------------------------//
 // TODO: doxygen
-int MOAIAppAndroid::_getPictureCode( lua_State* L ) {
-	MOAILuaState state( L );
-	MOAIAppAndroid::Get().PushPictureCode( state );
+int MOAIAppAndroid::_getPictureCode ( lua_State* L ) {
+	MOAILuaState state ( L );
+	MOAIAppAndroid::Get ().PushPictureCode ( state );
 	return 1;
 }
 
 //----------------------------------------------------------------//
 // TODO: doxygen
-int MOAIAppAndroid::_getPicturePath( lua_State* L ) {
-	MOAILuaState state( L );
-	MOAIAppAndroid::Get().PushPicturePath( state );
+int MOAIAppAndroid::_getPicturePath ( lua_State* L ) {
+	MOAILuaState state ( L );
+	MOAIAppAndroid::Get ().PushPicturePath ( state );
 	return 1;
 }
 
@@ -339,6 +354,7 @@ void MOAIAppAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "EVENT_MEMORY_WARNING",	( u32 )EVENT_MEMORY_WARNING );
 
 	luaL_Reg regTable [] = {
+        { "exit",                   _exit },
         { "getPictureCode",			_getPictureCode },
         { "getPicturePath",			_getPicturePath },
 		{ "getListener",			&MOAIGlobalEventSource::_getListener < MOAIAppAndroid > },
