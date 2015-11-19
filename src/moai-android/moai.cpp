@@ -356,7 +356,7 @@
 
 		environment.SetValue ( MOAI_ENV_appDisplayName,		appName );
 		environment.SetValue ( MOAI_ENV_appID,				appId );
-		environment.SetValue ( MOAI_ENV_appVersion,			appVersion );
+		environment.SetValue ( MOAI_ENV_appVersion,			appVersionName );
 		environment.SetValue ( MOAI_ENV_buildVersion,		appVersionCode );
 		environment.SetValue ( MOAI_ENV_cpuabi,				abi );
 		environment.SetValue ( MOAI_ENV_devBrand,			devBrand );
@@ -371,7 +371,7 @@
 
 		JNI_RELEASE_CSTRING ( jappName, appName );
 		JNI_RELEASE_CSTRING ( jappId, appId );
-		JNI_RELEASE_CSTRING ( jappVersion, appVersion );
+		JNI_RELEASE_CSTRING ( jappVersionName, appVersionName );
 		JNI_RELEASE_CSTRING ( jappVersionCode, appVersionCode );
 		JNI_RELEASE_CSTRING ( jabi, abi );
 		JNI_RELEASE_CSTRING ( jdevBrand, devBrand );

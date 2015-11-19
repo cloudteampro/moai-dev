@@ -15,7 +15,7 @@ extern JavaVM* jvm;
 jobject JniUtils::BundleFromLua ( lua_State* L, int index ) {
 	MOAILuaState state ( L );
 
-	jclass clazz = this->Env ()->FindClass ( "android.os.Bundle" );
+	jclass clazz = this->Env ()->FindClass ( "android/os/Bundle" );
 	jobject bundle = this->Env ()->NewObject ( clazz, this->Env ()->GetMethodID ( clazz, "<init>", "()V" ));
 	jmethodID put = this->Env ()->GetMethodID ( clazz, "putString", "(Ljava/lang/String;Ljava/lang/String;)V" );
 

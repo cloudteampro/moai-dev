@@ -118,7 +118,7 @@ void MOAIFlurryAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "setUserID",			_setUserID },
 		
 		// compat with MOAIFlurryIOS interface
-		{ "startSesstion",		_init },
+		{ "startSession",		_init },
 		{ NULL, NULL }
 	};
 
