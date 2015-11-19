@@ -32,7 +32,7 @@ jobject JniUtils::BundleFromLua ( lua_State* L, int index ) {
 				MOAIJString jkey = this->GetJString ( key );
 				MOAIJString jvalue = this->GetJString ( value );
 
-				this->Env ()->CallObjectMethod( bundle, put, ( jstring )jkey, ( jstring )jvalue );
+				this->Env ()->CallVoidMethod ( bundle, put, ( jstring )jkey, ( jstring )jvalue );
 			}
 		}
 		// removes 'value'; keeps 'key' for next iteration
@@ -322,6 +322,8 @@ void JniUtils::JsonToLua ( lua_State* L, json_t* json ) {
 		case JSON_NULL:
 			lua_pushlightuserdata ( L, 0 );
 			break;
+		default:
+			lua_pushnil ( L );
 	};
 }
 
@@ -329,10 +331,13 @@ void JniUtils::JsonToLua ( lua_State* L, json_t* json ) {
 void JniUtils::JsonToLua ( lua_State* L, cc8* jsonString ) {
 
 	json_error_t error;
-	json_t *json = json_loads ( jsonString, 0, &error );
+	json_t* json = json_loads ( jsonString, 0, &error );
 	if ( json ) {
 		this->JsonToLua ( L, json );
 		json_decref ( json );
+	}
+	else {
+		lua_pushnil ( L );
 	}
 }
 

@@ -21,7 +21,8 @@ import com.flurry.android.FlurryAgent;
 //================================================================//
 public class MoaiFlurry {
 
-	private static Activity sActivity = null;
+	private static Activity sActivity 		= null;
+	private static boolean 	sInitialized 	= false;
 
 	//----------------------------------------------------------------//
 	public static void onCreate ( Activity activity ) {
@@ -30,9 +31,21 @@ public class MoaiFlurry {
 	}
 
 	//----------------------------------------------------------------//
+	public static void onStart () {
+		MoaiLog.i ( "MoaiFlurry: onStart" );
+
+		if ( sInitialized ) {
+			FlurryAgent.onStartSession ( sActivity );
+		}	
+	}	
+
+	//----------------------------------------------------------------//
 	public static void onStop () {
 		MoaiLog.i ( "MoaiFlurry: onStop" );
-		FlurryAgent.onEndSession ( sActivity );
+
+		if ( sInitialized ) {
+			FlurryAgent.onEndSession ( sActivity );
+		}
 	}
 
 	//================================================================//
@@ -60,9 +73,9 @@ public class MoaiFlurry {
 	//----------------------------------------------------------------//
 	public static void init ( String apiKey ) {
 		
-		MoaiLog.i ( String.format ( "MoaiFlurry: init %s", apiKey ));
-		
-		FlurryAgent.onStartSession ( sActivity, apiKey );
+		FlurryAgent.init ( sActivity, apiKey );
+		FlurryAgent.onStartSession ( sActivity );
+		sInitialized = true;
 	}
 	
 	//----------------------------------------------------------------//
@@ -72,11 +85,7 @@ public class MoaiFlurry {
 		
 		if ( parameters != null ) {
 			MoaiLog.i ( String.format ( "MoaiFlurry: logEvent with parameters" ));
-			
-			//for ( Map.Entry < String, String > entry : parameters.entrySet ()) {
-			//    MoaiLog.i ( String.format ( "%s: %s", entry.getKey (), entry.getValue ()));
-			//}
-			
+						
 			FlurryAgent.logEvent ( eventId, parameters, timed );
 		}
 		else {

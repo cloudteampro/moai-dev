@@ -553,6 +553,14 @@ void MOAIFacebookAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 //================================================================//
 
 //----------------------------------------------------------------//
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_facebook_MoaiFacebook_AKUClearCallbackRef ( JNIEnv* env, jclass obj, jint ref ) {
+	
+	if ( MOAIFacebookAndroid::IsValid ()) {
+		MOAIFacebookAndroid::Get ().ClearCallbackRef ( ref );
+	}
+}
+
+//----------------------------------------------------------------//
 extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_facebook_MoaiFacebook_AKUNotifyFacebookLoginDismissed ( JNIEnv* env, jclass obj ) {
 
 	if ( MOAIFacebookAndroid::IsValid ()) {
