@@ -212,30 +212,32 @@ public class MoaiFacebook {
 
 			GraphRequest.Callback callback = new GraphRequest.Callback () {
 				private int mRef;
-				private boolean mOneshot;
+				private boolean mExecuted;
 
 				@Override
 				public void onCompleted ( GraphResponse response ) {
-					if ( !mOneshot ) return;
+					if ( mExecuted ) return;
 
-					FacebookRequestError error = response.getError ();
-					if ( error != null ) {
+					synchronized ( Moai.sAkuLock ) {
+						FacebookRequestError error = response.getError ();
+						if ( error != null ) {
 
-						AKUNotifyGraphRequestFailed ( error.toString (), mRef );
-						AKUClearCallbackRef ( mRef );
+							AKUNotifyGraphRequestFailed ( error.toString (), mRef );
+							AKUClearCallbackRef ( mRef );
+						}
+						else {
+
+							AKUNotifyGraphRequestSuccess ( response.getJSONObject ().toString (), mRef );
+							AKUClearCallbackRef ( mRef );
+						}
 					}
-					else {
 
-						AKUNotifyGraphRequestSuccess ( response.getJSONObject ().toString (), mRef );
-						AKUClearCallbackRef ( mRef );
-					}
-
-					mOneshot = false;
+					mExecuted = true;
 				}
 
 				private GraphRequest.Callback init ( int ref ) {
 					mRef = ref;
-					mOneshot = true;
+					mExecuted = false;
 					return this;
 				}
 			}.init ( callbackRef );

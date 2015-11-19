@@ -270,10 +270,14 @@ jstring JniUtils::GetStaticObjectField ( jclass clazz, jfieldID fieldId ) {
 //----------------------------------------------------------------//
 void JniUtils::JsonArrayToLua ( lua_State* L, json_t* json ) {
 	assert ( json->type == JSON_ARRAY );
+	
 	lua_newtable ( L );
-	int size = json_array_size ( json );
-	for ( int i = 0; i < size; ++i ) {
+	
+	u32 size = json_array_size ( json );
+	for ( u32 i = 0; i < size; ++i ) {
+	
 		json_t* value = json_array_get ( json, i );
+		
 		if ( value ) {
 			lua_pushnumber ( L, i + 1 );
 			this->JsonToLua ( L, value );
@@ -285,11 +289,15 @@ void JniUtils::JsonArrayToLua ( lua_State* L, json_t* json ) {
 //----------------------------------------------------------------//
 void JniUtils::JsonObjectToLua ( lua_State* L, json_t* json ) {
 	assert ( json->type == JSON_OBJECT );
+	
 	lua_newtable ( L );
+	
 	void* iter = json_object_iter ( json );
 	for ( ; iter; iter = json_object_iter_next ( json, iter )) {
+		
 		cc8* key = json_object_iter_key ( iter );
 		json_t* value = json_object_iter_value ( iter );
+
 		this->JsonToLua ( L, value );
 		lua_setfield ( L, -2, key );
 	}
@@ -331,7 +339,7 @@ void JniUtils::JsonToLua ( lua_State* L, json_t* json ) {
 void JniUtils::JsonToLua ( lua_State* L, cc8* jsonString ) {
 
 	json_error_t error;
-	json_t* json = json_loads ( jsonString, 0, &error );
+	json_t* json = json_loads ( jsonString, JSON_DISABLE_EOF_CHECK, &error );
 	if ( json ) {
 		this->JsonToLua ( L, json );
 		json_decref ( json );
