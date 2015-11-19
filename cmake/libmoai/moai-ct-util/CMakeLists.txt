@@ -29,4 +29,4 @@ target_link_libraries ( moai-ct-util moai-sim moai-core moai-util zlcore )
 set_target_properties(moai-ct-util PROPERTIES FOLDER Modules)
 
 install(TARGETS moai-ct-util EXPORT libmoai ARCHIVE DESTINATION lib)
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} DESTINATION include/moai-ct-util FILES_MATCHING PATTERN "*.h")
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} DESTINATION include/ct-util FILES_MATCHING PATTERN "*.h")

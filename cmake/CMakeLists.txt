@@ -16,6 +16,12 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake-modules")
 
 if (BUILD_ANDROID) 
   include(cmake-modules/platform-android.cmake)
+
+  # XXX: release with debug symbols
+  # copy all the release flags, but also add -g
+  set( CMAKE_CXX_FLAGS_RELWITHDEBINFO   "${ANDROID_CXX_FLAGS_RELEASE} ${CMAKE_CXX_FLAGS_RELEASE} -g" )
+  set( CMAKE_C_FLAGS_RELWITHDEBINFO     "${ANDROID_CXX_FLAGS_RELEASE} ${CMAKE_C_FLAGS_RELEASE} -g" )
+
 endif (BUILD_ANDROID)
 
 if (BUILD_IOS)

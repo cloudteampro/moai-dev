@@ -63,7 +63,7 @@ do
   cmake \
   -DBUILD_ANDROID=TRUE \
   -DCMAKE_TOOLCHAIN_FILE="$moai_root/cmake/hosts/host-android/android.toolchain.cmake" \
-  -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_BUILD_TYPE=RelWithDebInfo \
   -DMOAI_LUAJIT=False \
   -DANDROID_ABI=$ARCH \
   -DCMAKE_INSTALL_PREFIX=$libprefix/$ARCH \
