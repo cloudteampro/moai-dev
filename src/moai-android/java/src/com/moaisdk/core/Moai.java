@@ -126,7 +126,10 @@ public class Moai {
 		ACTIVITY_ON_PAUSE,
 		ACTIVITY_ON_RESUME,
 		ACTIVITY_ON_RESTART,
+		APP_OPENED_FROM_URL,
 		BACK_BUTTON_PRESSED,
+		EVENT_PICTURE_TAKEN,
+		EVENT_MEMORY_WARNING,
 		UNKNOWN;
 		
 		public static ListenerEvent valueOf ( int index ) {
