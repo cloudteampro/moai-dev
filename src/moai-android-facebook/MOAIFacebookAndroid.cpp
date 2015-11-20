@@ -278,7 +278,7 @@ int MOAIFacebookAndroid::_sendGameRequest ( lua_State* L ) {
 		ref = self->mRefs.Ref ( state, 3 );
 	}
 	
-	self->CallStaticBooleanMethod (
+	bool result = self->CallStaticBooleanMethod (
 		self->mJava_SendGameRequest,
 		( jstring )jmessage,
 		( jstring )jactionType,
@@ -289,7 +289,8 @@ int MOAIFacebookAndroid::_sendGameRequest ( lua_State* L ) {
 		ref
 	);
 
-	return 0;
+	lua_pushboolean ( state, result );
+	return 1;
 }
 
 //----------------------------------------------------------------//

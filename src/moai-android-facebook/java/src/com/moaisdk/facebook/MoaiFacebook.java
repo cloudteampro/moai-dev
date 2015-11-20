@@ -81,12 +81,12 @@ public class MoaiFacebook {
 	// Necessary to distinguish different callbacks
 	private static boolean				sRequestingPermissions		= false;
 
-	protected static native void	AKUNotifyFacebookLoginSuccess	();
-	protected static native void	AKUNotifyFacebookLoginDismissed	( String msg );
-	protected static native void	AKUNotifyFacebookLoginError 	( String exceptionMsg );
-	protected static native void	AKUGameRequestDialogDidComplete ( String requestId, String[] recipientsArr, int gameRequestCallbackRef );
-	protected static native void	AKUGameRequestDialogDidFail		( String msg, int gameRequestCallbackRef );
 	protected static native int		AKUClearCallbackRef				( int gameRequestCallbackRef );
+	protected static native void	AKUNotifyFacebookLoginDismissed	( String msg );
+	protected static native void	AKUNotifyFacebookLoginError		( String exceptionMsg );
+	protected static native void	AKUNotifyFacebookLoginSuccess	();
+	protected static native void	AKUNotifyGameRequestFailed		( String msg, int gameRequestCallbackRef );
+	protected static native void	AKUNotifyGameRequestSuccess		( String requestId, String[] recipientsArr, int gameRequestCallbackRef );
 	protected static native void	AKUNotifyGraphRequestFailed		( String error, int ref );
 	protected static native void	AKUNotifyGraphRequestSuccess	( String response, int ref );
 
@@ -126,30 +126,35 @@ public class MoaiFacebook {
 	private static FacebookCallback sGameRequestCallback = new FacebookCallback<GameRequestDialog.Result> () {
 		@Override
 		public void onSuccess ( GameRequestDialog.Result result ) {
+
+			List recipientsList = result.getRequestRecipients ();
+
+			String[] recipientsArr = new String [ recipientsList.size () ];
+			recipientsArr = ( String[] ) recipientsList.toArray ( recipientsArr );
+			
+			MoaiLog.i ( "MoaiFacebook request dialog onSuccess" );
 			synchronized ( Moai.sAkuLock ) {
-				
-				List recipientsList = result.getRequestRecipients ();
-
-				String[] recipientsArr = new String [ recipientsList.size () ];
-				recipientsArr = ( String[] ) recipientsList.toArray ( recipientsArr );
-
-				AKUGameRequestDialogDidComplete ( result.getRequestId (), recipientsArr, sGameRequestCallbackRef );
+				AKUNotifyGameRequestSuccess ( result.getRequestId (), recipientsArr, sGameRequestCallbackRef );
 				sGameRequestCallbackRef = AKUClearCallbackRef ( sGameRequestCallbackRef );
 			}
 		}
 
 		@Override
 		public void onCancel () {
+
+			MoaiLog.i ( "MoaiFacebook request dialog onCancel" );
 			synchronized ( Moai.sAkuLock ) {
-				AKUGameRequestDialogDidFail ( "cancel", sGameRequestCallbackRef );
+				AKUNotifyGameRequestFailed ( "cancel", sGameRequestCallbackRef );
 				sGameRequestCallbackRef = AKUClearCallbackRef ( sGameRequestCallbackRef );
 			}
 		}
 
 		@Override
 		public void onError ( FacebookException error ) {
+
+			MoaiLog.i ( "MoaiFacebook request dialog onError" + error.toString ());
 			synchronized ( Moai.sAkuLock ) {
-				AKUGameRequestDialogDidFail ( error.toString (), sGameRequestCallbackRef );
+				AKUNotifyGameRequestFailed ( error.toString (), sGameRequestCallbackRef );
 				sGameRequestCallbackRef = AKUClearCallbackRef ( sGameRequestCallbackRef );
 			}
 		}
@@ -329,11 +334,17 @@ public class MoaiFacebook {
 
 		GameRequestContent.Builder builder = new GameRequestContent.Builder ();
 
-		builder.setMessage 		( message );
-		builder.setObjectId 	( objectId );
-		builder.setRecipients 	( new ArrayList < String > ( Arrays.asList ( recipients )));
-		builder.setSuggestions 	( new ArrayList < String > ( Arrays.asList ( suggestions )));
+		builder.setMessage 	( message );
+		builder.setObjectId ( objectId );
+
+		if ( recipients != null ) {
+			builder.setRecipients 	( new ArrayList < String > ( Arrays.asList ( recipients )));
+		}
+		if ( suggestions != null ) {
+			builder.setSuggestions 	( new ArrayList < String > ( Arrays.asList ( suggestions )));
+		}
 		
+		// There is a FILTER_NONE enum value in C++ code, but in java it is replaced by null
 		try {
 			GameRequestContent.Filters filter = GameRequestContent.Filters.valueOf ( filters );
 			builder.setFilters ( filter );
@@ -350,7 +361,7 @@ public class MoaiFacebook {
 		// Here we remember the last Lua callback ref in class variable to be used later from FB dialog callback.
 		sGameRequestCallbackRef = ref;
 		sGameRequestDialog.show ( builder.build ());
-		return sGameRequestDialog.canShow();
+		return sGameRequestDialog.canShow ();
 	}
 
 	//----------------------------------------------------------------//

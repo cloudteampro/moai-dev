@@ -20,6 +20,7 @@ import android.provider.Settings.Secure;
 import android.util.DisplayMetrics;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.Runtime;
 import java.util.Calendar;
 import java.util.Locale;
@@ -143,21 +144,23 @@ public class Moai {
 	}
 
 	private static String [] sExternalClasses = {
-		"com.moaisdk.adcolony.MoaiAdColony",
-		"com.moaisdk.amazonbilling.MoaiAmazonBilling",
+		// "com.moaisdk.adcolony.MoaiAdColony",
+		// "com.moaisdk.amazonbilling.MoaiAmazonBilling",
 		"com.moaisdk.chartboost.MoaiChartBoost",
-		"com.moaisdk.crittercism.MoaiCrittercism",
+		// "com.moaisdk.crittercism.MoaiCrittercism",
 		"com.moaisdk.facebook.MoaiFacebook",
-		"com.moaisdk.fortumo.MoaiFortumo",
+		// "com.moaisdk.fortumo.MoaiFortumo",
 		"com.moaisdk.flurry.MoaiFlurry",
 		"com.moaisdk.googlebilling.MoaiGoogleBilling",
-		"com.moaisdk.googleplayservices.MoaiGooglePlayServices",
+		// "com.moaisdk.googleplayservices.MoaiGooglePlayServices",
+		"com.moaisdk.googleplayservicesgames.MoaiGooglePlayServicesGames",
 		"com.moaisdk.googlepush.MoaiGooglePush",
 		"com.moaisdk.core.MoaiKeyboard",
 		"com.moaisdk.core.MoaiMoviePlayer",
-		"com.moaisdk.tapjoy.MoaiTapjoy",
-		"com.moaisdk.twitter.MoaiTwitter",
-		"com.moaisdk.vungle.MoaiVungle",
+		"com.moaisdk.fmodstudio.MoaiFmodStudio",
+		// "com.moaisdk.tapjoy.MoaiTapjoy",
+		// "com.moaisdk.twitter.MoaiTwitter",
+		// "com.moaisdk.vungle.MoaiVungle",
 	};
 
 	private static Activity 				sActivity = null;
@@ -189,7 +192,7 @@ public class Moai {
 	protected static native void		AKUSetConnectionType 			( long connectionType );
 	protected static native void 		AKUSetContext 					( int contextId );
 	protected static native void		AKUSetDeviceLocale				( String langCode, String countryCode );
-	protected static native void 		AKUSetDeviceProperties 			( String appName, String appId, String appVersion, String abi, String devBrand, String devName, String devManufacturer, String devModel, String devProduct, int numProcessors, String osBrand, String osVersion, String udid );
+	protected static native void 		AKUSetDeviceProperties 			( String appName, String appId, String appVersion, String appVersionCode, String abi, String devBrand, String devName, String devManufacturer, String devModel, String devProduct, int numProcessors, String osBrand, String osVersion, String udid );
 	protected static native void 		AKUSetDocumentDirectory 		( String path );
 	protected static native void 		AKUSetInputConfigurationName	( String name );
 	protected static native void 		AKUSetInputDevice		 		( int deviceId, String name );
@@ -368,7 +371,7 @@ public class Moai {
 				udid = "UNKNOWN";
 			}
 
-			AKUSetDeviceProperties ( appName, appId, appVersionName, appVersionCode, Build.CPU_ABI, Build.BRAND, Build.DEVICE, Build.MANUFACTURER, Build.MODEL, Build.PRODUCT, Runtime.getRuntime ().availableProcessors (), "Android", Build.VERSION.RELEASE, udid );
+			AKUSetDeviceProperties ( appName, appId, appVersion, appVersionCode, Build.CPU_ABI, Build.BRAND, Build.DEVICE, Build.MANUFACTURER, Build.MODEL, Build.PRODUCT, Runtime.getRuntime ().availableProcessors (), "Android", Build.VERSION.RELEASE, udid );
 			AKUSetDeviceLocale ( Locale.getDefault ().getLanguage (), Locale.getDefault ().getCountry ());
 		}
 	}
@@ -597,8 +600,13 @@ public class Moai {
 				Method theMethod = theClass.getMethod ( methodName, parameterTypes );
 				result = theMethod.invoke ( theInstance, parameterValues );
 			}
-			catch ( Throwable e ) {
-				MoaiLog.i(">>> Moai.java(551): Failed to call " + methodName + " for " + theClass.getName());
+			catch ( NoSuchMethodException e ) {}
+			catch ( IllegalAccessException e ) {}
+			catch ( InvocationTargetException e ) {
+
+				StringWriter writer = new StringWriter ();
+				e.printStackTrace ( new PrintWriter ( writer ));
+				MoaiLog.i ( writer.toString ());
 			}
 		}
 		return result;

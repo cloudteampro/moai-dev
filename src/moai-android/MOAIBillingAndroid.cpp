@@ -1053,7 +1053,7 @@ extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_googlebilling_MoaiGoogleBilli
 	// result is json array: [data, signature]
 	JNI_GET_CSTRING ( jresult, result );
 
-	MOAIBillingAndroid::Get ().NotifyPurchaseResponseReceived ( MOAIBillingAndroid::MapGoogleResponseCode ( code ), result);
+	MOAIBillingAndroid::Get ().NotifyPurchaseResponseReceived ( MOAIBillingAndroid::MapGoogleResponseCode ( code ), result );
 
 	JNI_RELEASE_CSTRING ( jresult, result );
 }
