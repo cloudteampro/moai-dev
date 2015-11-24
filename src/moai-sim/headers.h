@@ -41,6 +41,7 @@
 #include <moai-sim/MOAIGfxDeviceBase.h>
 #include <moai-sim/MOAIGfxDeviceMtxCache.h>
 #include <moai-sim/MOAIGfxDeviceVertexWriter.h>
+#include <moai-sim/MOAIGfxPrimDeck2D.h>
 #include <moai-sim/MOAIGfxQuad2D.h>
 #include <moai-sim/MOAIGfxQuadDeck2D.h>
 #include <moai-sim/MOAIGfxQuadListDeck2D.h>
