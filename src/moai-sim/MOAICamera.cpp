@@ -31,7 +31,7 @@ int MOAICamera::_getFarPlane ( lua_State* L ) {
 /**	@lua	getFieldOfView
 	@text	Returns the camera's horizontal field of view.
 
-	@in		MOAICamera self
+	@in		MOAICamera	self
 	@out	number hfov
 */
 int MOAICamera::_getFieldOfView ( lua_State* L ) {
@@ -256,11 +256,13 @@ int MOAICamera::_setFarPlane ( lua_State* L ) {
 
 	@in		MOAICamera self
 	@opt	number hfow			Default value is 60.
+	@opt	boolean				treat fov as vertical instead of horizontal. Default is false
 	@out	nil
 */
 int MOAICamera::_setFieldOfView( lua_State* L ) {
 	MOAI_LUA_SETUP ( MOAICamera, "U" )
 	self->mFieldOfView = state.GetValue < float >( 2, DEFAULT_HFOV );
+	self->mVerticalFOV = state.GetValue < bool >( 3, false );
 	return 0;
 }
 
@@ -370,8 +372,16 @@ ZLMatrix4x4 MOAICamera::GetProjMtx ( const MOAIViewport& viewport ) const {
 		}
 		case CAMERA_TYPE_3D: {
 			
-			float xs = Cot (( this->mFieldOfView * ( float )D2R ) / 2.0f );
-			float ys = xs * viewport.GetAspect ();
+			float xs, ys;
+			
+			if ( this->mVerticalFOV ) {
+				ys = Cot (( this->mFieldOfView * ( float )D2R ) / 2.0f );
+				xs = ys * viewport.GetInvAspect ();
+			}
+			else {
+				xs = Cot (( this->mFieldOfView * ( float )D2R ) / 2.0f );
+				ys = xs * viewport.GetAspect ();
+			}
 			
 			xs *= viewScale.mX;
 			ys *= viewScale.mY;
@@ -484,7 +494,8 @@ MOAICamera::MOAICamera () :
 	mFieldOfView ( DEFAULT_HFOV ),
 	mNearPlane ( DEFAULT_NEAR_PLANE ),
 	mFarPlane ( DEFAULT_FAR_PLANE ),
-	mType ( CAMERA_TYPE_3D ) {
+	mType ( CAMERA_TYPE_3D ),
+	mVerticalFOV ( false ) {
 
 	RTTI_SINGLE ( MOAITransform )
 	
@@ -501,9 +512,9 @@ void MOAICamera::RegisterLuaClass ( MOAILuaState& state ) {
 	
 	state.SetField ( -1, "ATTR_FOV",			MOAICameraAttr::Pack ( ATTR_FOV ));
 	
-	state.SetField ( -1, "CAMERA_TYPE_3D",		( u32 )CAMERA_TYPE_3D );
-	state.SetField ( -1, "CAMERA_TYPE_ORTHO",	( u32 )CAMERA_TYPE_ORTHO );
-	state.SetField ( -1, "CAMERA_TYPE_WINDOW",	( u32 )CAMERA_TYPE_WINDOW );
+	state.SetField ( -1, "CAMERA_TYPE_3D",			( u32 )CAMERA_TYPE_3D );
+	state.SetField ( -1, "CAMERA_TYPE_ORTHO",		( u32 )CAMERA_TYPE_ORTHO );
+	state.SetField ( -1, "CAMERA_TYPE_WINDOW",		( u32 )CAMERA_TYPE_WINDOW );
 }
 
 //----------------------------------------------------------------//

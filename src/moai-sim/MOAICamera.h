@@ -23,7 +23,8 @@ private:
 	float			mFarPlane;
 
 	u32				mType;
-
+	bool			mVerticalFOV;
+	
 	//----------------------------------------------------------------//
 	static int		_getFarPlane			( lua_State* L );
 	static int		_getFieldOfView			( lua_State* L );
