@@ -48,14 +48,14 @@ public class MoaiGoogleBilling {
 	public static final String				PURCHASE_TYPE_SUBSCRIPTION = "subs";
 	
 	// Billing response codes
-    public static final int 				BILLING_RESPONSE_RESULT_OK = 0;
-    public static final int					BILLING_RESPONSE_RESULT_USER_CANCELED = 1;
-    public static final int 				BILLING_RESPONSE_RESULT_BILLING_UNAVAILABLE = 3;
-    public static final int 				BILLING_RESPONSE_RESULT_ITEM_UNAVAILABLE = 4;
-    public static final int 				BILLING_RESPONSE_RESULT_DEVELOPER_ERROR = 5;
-    public static final int 				BILLING_RESPONSE_RESULT_ERROR = 6;
-    public static final int 				BILLING_RESPONSE_RESULT_ITEM_ALREADY_OWNED = 7;
-    public static final int 				BILLING_RESPONSE_RESULT_ITEM_NOT_OWNED = 8;
+	public static final int 				BILLING_RESPONSE_RESULT_OK = 0;
+	public static final int					BILLING_RESPONSE_RESULT_USER_CANCELED = 1;
+	public static final int 				BILLING_RESPONSE_RESULT_BILLING_UNAVAILABLE = 3;
+	public static final int 				BILLING_RESPONSE_RESULT_ITEM_UNAVAILABLE = 4;
+	public static final int 				BILLING_RESPONSE_RESULT_DEVELOPER_ERROR = 5;
+	public static final int 				BILLING_RESPONSE_RESULT_ERROR = 6;
+	public static final int 				BILLING_RESPONSE_RESULT_ITEM_ALREADY_OWNED = 7;
+	public static final int 				BILLING_RESPONSE_RESULT_ITEM_NOT_OWNED = 8;
 
 	// AKU callbacks	
 	protected static native void 			AKUNotifyGoogleBillingSupported				( boolean supported );
@@ -95,7 +95,7 @@ public class MoaiGoogleBilling {
 				
 					// in app purchases
 					int response = sService.isBillingSupported ( 3, packageName, PURCHASE_TYPE_INAPP );
-	                if ( response == BILLING_RESPONSE_RESULT_OK ) {
+					if ( response == BILLING_RESPONSE_RESULT_OK ) {
 						MoaiLog.i ( "MoaiGoogleBilling : In-app supported" );
 						sInAppSupported = true;
 					} else {
@@ -105,23 +105,25 @@ public class MoaiGoogleBilling {
 				
 					// subscriptions
 					response = sService.isBillingSupported (3, packageName, PURCHASE_TYPE_SUBSCRIPTION );
-	                if ( response == BILLING_RESPONSE_RESULT_OK)  {
+					if ( response == BILLING_RESPONSE_RESULT_OK)  {
 						MoaiLog.i ( "MoaiGoogleBilling : Subscriptions supported" );
 						sSubscriptionSupported = true;
-	                }
-	                else {
+					}
+					else {
 						MoaiLog.i ( "MoaiGoogleBilling : Subscriptions not supported" );
 						sSubscriptionSupported = false;
-	                }
+					}
 	
 				} catch ( RemoteException e ) {
 					
-                    e.printStackTrace ();
-                }
+					e.printStackTrace ();
+				}
 			}
 		};
 		
-		sActivity.bindService ( new Intent ( "com.android.vending.billing.InAppBillingService.BIND" ), sServiceConn, Context.BIND_AUTO_CREATE );
+		Intent serviceIntent = new Intent ( "com.android.vending.billing.InAppBillingService.BIND" );
+		serviceIntent.setPackage ( "com.android.vending" );
+		sActivity.bindService ( serviceIntent, sServiceConn, Context.BIND_AUTO_CREATE );
 	}
 
 	//----------------------------------------------------------------//
@@ -137,35 +139,40 @@ public class MoaiGoogleBilling {
 	//----------------------------------------------------------------//
 	public static void onActivityResult ( int requestCode, int resultCode, Intent data ) {
 		
-        MoaiLog.i("Test java!");
-        
 		if ( resultCode == Activity.RESULT_OK ) {
 			
 			if ( requestCode == 1001 ) {
-                
+				
 				int responseCode = data.getIntExtra ( "RESPONSE_CODE", 0 );
-			    String purchaseData = data.getStringExtra ( "INAPP_PURCHASE_DATA" );
-			    String dataSignature = data.getStringExtra ( "INAPP_DATA_SIGNATURE" );
-                
+				String purchaseData = data.getStringExtra ( "INAPP_PURCHASE_DATA" );
+				String dataSignature = data.getStringExtra ( "INAPP_DATA_SIGNATURE" );
+				
+				JSONObject jsonPurchaseData;
+				try {
+					jsonPurchaseData = new JSONObject ( purchaseData );
+				} catch ( JSONException e ) {
+					e.printStackTrace ();
+					jsonPurchaseData = new JSONObject ();
+				}
+
 				ArrayList jsonData = new ArrayList ();
-				jsonData.add ( purchaseData );
+				jsonData.add ( jsonPurchaseData );
 				jsonData.add ( dataSignature );
 				JSONArray jsonArray = new JSONArray ( jsonData );
-                
-				synchronized ( Moai.sAkuLock ) {
-                    
+
+				synchronized ( Moai.sAkuLock ) {			
 					AKUNotifyGooglePurchaseResponseReceived ( responseCode, jsonArray.toString ());
 				}
 			}
 		} else {
 			
 			synchronized ( Moai.sAkuLock ) {
-                
+				
 				AKUNotifyGooglePurchaseResponseReceived ( BILLING_RESPONSE_RESULT_ERROR, null );
 			}
 		}
 	}
-    
+	
 	//================================================================//
 	// Google Billing (Android Market) JNI callback methods
 	//================================================================//
@@ -278,7 +285,7 @@ public class MoaiGoogleBilling {
 			
 		} catch ( Exception e ) {
 						
-            e.printStackTrace ();			
+			e.printStackTrace ();			
 		}
 		
 		return BILLING_RESPONSE_RESULT_ERROR;
@@ -312,7 +319,7 @@ public class MoaiGoogleBilling {
 						
 		} catch ( Exception e ) {
 			
-            e.printStackTrace ();
+			e.printStackTrace ();
 		}
 		
 		return "";
