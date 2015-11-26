@@ -144,9 +144,9 @@ int MOAIWebViewAndroid::_isLoading ( lua_State *L ) {
 int MOAIWebViewAndroid::_loadHTML ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIWebViewAndroid, "" )
 
-	jstring jhtml = self->GetJString ( lua_tostring ( state, 1 ));
+	MOAIJString jhtml = self->GetJString ( lua_tostring ( state, 1 ));
 	
-	self->CallStaticVoidMethod ( self->mJava_LoadHTML, jhtml );	
+	self->CallStaticVoidMethod ( self->mJava_LoadHTML, ( jstring )jhtml );
 	return 0;
 }
 
@@ -159,9 +159,9 @@ int MOAIWebViewAndroid::_loadHTML ( lua_State* L ) {
 int MOAIWebViewAndroid::_loadRequest ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIWebViewAndroid, "" )
 
-	jstring jurl = self->GetJString ( lua_tostring ( state, 1 ));
+	MOAIJString jurl = self->GetJString ( lua_tostring ( state, 1 ));
 	
-	self->CallStaticVoidMethod ( self->mJava_LoadRequest, jurl );	
+	self->CallStaticVoidMethod ( self->mJava_LoadRequest, ( jstring )jurl );
 	return 0;
 }
 
