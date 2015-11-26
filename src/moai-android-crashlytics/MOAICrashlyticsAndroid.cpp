@@ -64,10 +64,10 @@ void MOAICrashlyticsAndroid::Init () {
 	if ( !this->mCtx ) {
 		this->mCtx = crashlytics_init ();
 		if ( this->mCtx == 0 ) { 
-			MOAIPrint ( "\n\n\n\n\n" );
-			MOAIPrint ( "=====================================================\n" );
-			MOAIPrint ( "Crashlytics initialization error\n" );
-			MOAIPrint ( "\n\n\n\n\n" );
+			ZLLogF ( ZLLog::CONSOLE, "\n\n\n\n\n" );
+			ZLLogF ( ZLLog::CONSOLE, "=====================================================\n" );
+			ZLLogF ( ZLLog::CONSOLE, "Crashlytics initialization error\n" );
+			ZLLogF ( ZLLog::CONSOLE, "\n\n\n\n\n" );
 		}
 	}
 }
