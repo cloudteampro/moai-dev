@@ -23,32 +23,30 @@ class MOAIUnityAdsAndroid :
 	public JniUtils {
 private:
 	
+	jmethodID	mJava_CanShow;
 	jmethodID	mJava_Init;
-	jmethodID	mJava_LoadAd;
-	jmethodID	mJava_ShowAd;
-	jmethodID	mJava_HasCachedAd;
-	jmethodID	mJava_SetAdSpace;
+	jmethodID	mJava_Show;
 
 	//----------------------------------------------------------------//
-	static int	_init 								( lua_State* L );
-	static int	_loadAd			 					( lua_State* L );
-	static int	_showAd			 					( lua_State* L );
-	static int	_hasCachedAd		 				( lua_State* L );
-	static int	_setAdSpace			 				( lua_State* L );
+	static int  _canShow            ( lua_State* L );
+	static int  _init               ( lua_State* L );
+	static int  _show               ( lua_State* L );
 
 public:
-    
+	
 	DECL_LUA_SINGLETON ( MOAIUnityAdsAndroid );
 
 	enum {
-		AD_LOAD_FAILED,
-		AD_WILL_SHOW,
-		AD_DISMISSED,
+		ON_HIDE,
+		ON_SHOW,
+		VIDEO_COMPLETED,
+		VIDEO_STARTED,
 	};
 
 					MOAIUnityAdsAndroid				();
 					~MOAIUnityAdsAndroid			();
+	void			NotifyVideoCompleted			( cc8* reward, bool skipped );
 	void			RegisterLuaClass				( MOAILuaState& state );
 };
 
-#endif // MOAIFLURRYADS_H
+#endif // MOAIUNITYADSANDROID_H

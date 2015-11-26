@@ -7,151 +7,133 @@
 package com.moaisdk.unityads;
 
 import android.app.Activity;
-import android.widget.FrameLayout;
 
-// import com.flurry.android.FlurryAdListener;
-// import com.flurry.android.FlurryAdSize;
-// import com.flurry.android.FlurryAdType;
-// import com.flurry.android.FlurryAds;
+import com.moaisdk.core.*;
+
+import com.unity3d.ads.android.UnityAds;
+import com.unity3d.ads.android.IUnityAdsListener;
 
 //================================================================//
 // MoaiUnityAds
 //================================================================//
 public class MoaiUnityAds {
 
-	// public enum ListenerEvent {
-	// 	AD_LOAD_FAILED,
-	// 	AD_WILL_SHOW,
-	// 	AD_DISMISSED,
- //    }
+	public enum ListenerEvent {
+		ON_HIDE,
+		ON_SHOW,
+		VIDEO_COMPLETED,
+		VIDEO_STARTED,
+    }
 
-	// private static Activity 		sActivity 		= null;
-	// private static FrameLayout 		adLayout 		= null;
-	// private static String 			adSpace 		= "Takeover";
+	private static Activity 		sActivity 		= null;
 	
-	// protected static native void AKUInvokeListener ( int eventID );
+	protected static native void AKUInvokeListener 	( int eventID );
+	protected static native void AKUVideoCompleted 	( String rewardItemKey, boolean skipped );
 	
-	// //----------------------------------------------------------------//
-	// public static void onCreate ( Activity activity ) {
+	//----------------------------------------------------------------//
+	public static void onCreate ( Activity activity ) {
 		
-	// 	MoaiLog.i ( " MoaiFlurryAds onCreate " );
+		MoaiLog.i ( " MoaiUnityAds onCreate: UnityAds.changeActivity ( sActivity ) " );
 		
-	// 	sActivity = activity;
-	// }
+		sActivity = activity;
 
-	// //----------------------------------------------------------------//
-	// public static void onStart () {
-		
-	// 	MoaiLog.i ( " MoaiFlurryAds onStart " );
-		
-	// 	FlurryAds.setAdListener ( new FlurryAdListener () {
-
-	// 		public void onAdClicked ( String adSpace ) { }
-
-	// 		public void onAdClosed ( String adSpace ) {
-				
-	// 			synchronized ( Moai.sAkuLock ) {
-					
-	// 				MoaiLog.i ( " MoaiFlurryAds: Ad closed; space = "+adSpace );
-					
-	// 				MoaiFlurryAds.AKUInvokeListener ( ListenerEvent.AD_DISMISSED.ordinal ());
-	// 			}
-	// 		}
-
-	// 		public void onAdOpened ( String adSpace ) { }
-
-	// 		public void onApplicationExit ( String adSpace ) { }
-
-	// 		public void onRenderFailed ( String adSpace ) { }
-
-	// 		public void onRendered ( String adSpace ) {
-
-	// 			synchronized ( Moai.sAkuLock ) {
-					
-	// 				MoaiLog.i ( " MoaiFlurryAds: onRendered: space = "+adSpace );
-					
-	// 				MoaiFlurryAds.AKUInvokeListener ( ListenerEvent.AD_WILL_SHOW.ordinal ());
-	// 			}
-	// 		}
-
-	// 		public void onVideoCompleted ( String adSpace ) { 
-				
-	// 			synchronized ( Moai.sAkuLock ) {
-					
-	// 				MoaiLog.i ( " MoaiFlurryAds: onVideoCompleted: space = "+adSpace );
-					
-	// 				MoaiFlurryAds.AKUInvokeListener ( ListenerEvent.AD_DISMISSED.ordinal ());
-	// 			}
-	// 		}
-
-	// 		public boolean shouldDisplayAd ( String adSpace, FlurryAdType adType ) { return true; }
-
-	// 		public void spaceDidFailToReceiveAd ( String adSpace ) { 
-				
-	// 			synchronized ( Moai.sAkuLock ) {
-					
-	// 				MoaiLog.i ( " MoaiFlurryAds: spaceDidFailToReceiveAd: space = "+adSpace );
-	// 				MoaiFlurryAds.AKUInvokeListener ( ListenerEvent.AD_LOAD_FAILED.ordinal ());
-	// 			}
-	// 		}
-
-	// 		public void spaceDidReceiveAd ( String adSpace ) { }
-	// 	} );
-	// }
-
-	// //----------------------------------------------------------------//
-	// public static void onStop () {
-		
-	// 	//MoaiLog.i ( " MoaiFlurryAds onStop: removeAd ( sActivity, adSpace, adLayout ) " );
-		
- //        //FlurryAds.removeAd ( sActivity, adSpace, adLayout );
-	// }
+  		UnityAds.changeActivity ( sActivity );
+	}
 	
-	// //================================================================//
-	// // MoaiFlurryAds JNI callback methods
-	// //================================================================//
+	//================================================================//
+	// MoaiUnityAds JNI callback methods
+	//================================================================//
 
-	// //----------------------------------------------------------------//
-	// public static void init ( String difSpace ) {
+	//----------------------------------------------------------------//
+	public static boolean canShow ( String zone ) {
 
-	// 	MoaiLog.i ( " MoaiFlurryAds: init: space = "+difSpace );
-		
-	// 	adLayout = new FrameLayout ( sActivity );
-		
-	// 	if ( difSpace != null ) {
+		if ( zone != null ) {
+			try {
+				UnityAds.setZone ( zone );
+			} catch ( Exception e ) {
+				e.printStackTrace ();
+				return false;
+			}
+		}
 
-	// 		adSpace = difSpace;
-	// 	}
-		
-	// 	FlurryAds.initializeAds ( sActivity );
-	// }
+		return UnityAds.canShow ();
+	}
+
+	//----------------------------------------------------------------//
+	public static void init ( String gameID, boolean debug, boolean test ) {
+
+		MoaiLog.i ( " MoaiUnityAds: init with gameID" );
+
+		UnityAds.init (( Activity ) sActivity, gameID, new IUnityAdsListener () {
+
+			//================================================================//
+			// MoaiUnityAds callback methods
+			//================================================================//
+
+			public void onHide () {
+
+				synchronized ( Moai.sAkuLock ) {
+					MoaiUnityAds.AKUInvokeListener ( ListenerEvent.ON_HIDE.ordinal ());
+				}
+			}
+
+			public void onShow () {
+
+				synchronized ( Moai.sAkuLock ) {
+					MoaiUnityAds.AKUInvokeListener ( ListenerEvent.ON_SHOW.ordinal ());
+				}
+			}
+
+			public void onVideoStarted () {
+
+				synchronized ( Moai.sAkuLock ) {
+					
+					MoaiLog.i ( " MoaiUnityAds: onShow" );
+
+					MoaiUnityAds.AKUInvokeListener ( ListenerEvent.VIDEO_STARTED.ordinal ());
+				}
+			}
+
+			public void onVideoCompleted ( String rewardItemKey, boolean skipped ) {
+
+				synchronized ( Moai.sAkuLock ) {
+					
+					MoaiLog.i ( " MoaiUnityAds: onVideoCompleted: skipped" );
+					MoaiUnityAds.AKUVideoCompleted ( rewardItemKey, skipped );
+				}
+			}
+
+			public void onFetchCompleted () {}
+
+			public void onFetchFailed () {}
+		});
+
+		// Setting up debug mode with verbose print
+		if ( debug ) {
+			UnityAds.setDebugMode ( true );
+		}
+		if ( test ) {
+			UnityAds.setTestMode ( true );
+		}
+	}
 	
-	// //----------------------------------------------------------------//
-	// public static void loadAd () {
-		
-	// 	FlurryAds.fetchAd( sActivity, adSpace, adLayout, FlurryAdSize.FULLSCREEN );
-	// }
-	
-	// //----------------------------------------------------------------//
-	// public static void showAd () {
-		
-	// 	FlurryAds.displayAd ( sActivity, adSpace, adLayout );
-	// }
-	
-	// //----------------------------------------------------------------//
-	// public static boolean hasCachedAd () {
-		
-	// 	if ( FlurryAds.isAdReady ( adSpace ) ) {
-			
-	// 		return true;
-	// 	}
-		
-	// 	return false;
-	// }
-	
-	// //----------------------------------------------------------------//
-	// public static void setAdSpace ( String difSpace ) {
-		
-	// 	adSpace = difSpace;
-	// }
+	//----------------------------------------------------------------//
+	public static boolean show ( String zone ) {
+
+		MoaiLog.i ( "MoaiUnityAds show" );
+		MoaiLog.i ( zone );
+		if ( zone != null ) {
+
+			try {
+				UnityAds.setZone ( zone );
+			} catch ( Exception e ) {
+				e.printStackTrace ();
+				return false;
+			}
+		}
+		if ( UnityAds.canShow ()) {
+			return UnityAds.show ();
+		}
+		return false;
+	}
 }

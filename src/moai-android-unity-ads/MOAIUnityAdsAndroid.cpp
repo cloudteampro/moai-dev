@@ -19,72 +19,55 @@ extern JavaVM* jvm;
 //================================================================//
 
 //----------------------------------------------------------------//
-/**	@name	init
-	@text	Initialize FlurryAds.
-	
-	@in		string	adSpace			FlurryAds ad type (Interstitials, banners, videos).
-	@out 	nil
-*/
-int MOAIUnityAdsAndroid::_init ( lua_State* L ) {
-	MOAI_JAVA_LUA_SETUP ( MOAIUnityAdsAndroid, "" )
+/**	@name	canShow
+	@text	Check whether ad is ready to be shown
 
-	ZLLogF ( ZLLog::CONSOLE, "MOAIUnityAdsAndroid::_init\n" );
-	jstring jadspace = self->GetJString ( lua_tostring ( state, 1 ));
-	self->CallStaticVoidMethod ( self->mJava_Init, jadspace );
-	return 0;
-}
-
-//----------------------------------------------------------------//
-/**	@name	hasCachedAd
-
+	@opt 	zone
 	@out 	boolean
 */
-int MOAIUnityAdsAndroid::_hasCachedAd ( lua_State *L ) {
+int MOAIUnityAdsAndroid::_canShow ( lua_State *L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIUnityAdsAndroid, "" )
 
-	lua_pushboolean ( state, self->CallStaticBooleanMethod ( self->mJava_HasCachedAd ));
+	MOAIJString zone = self->GetJString ( state.GetValue < cc8* >( 1, 0 ));
+	lua_pushboolean ( state, self->CallStaticBooleanMethod ( self->mJava_CanShow, ( jstring )zone ));
 	return 1;
 }
 
 //----------------------------------------------------------------//
-/**	@name	loadAd
-	@text	Request that an ad be cached for later display.
+/** @name   init
+	@text   Initialize UnityAds.
 	
-	@out 	nil
+	@in     string  gameId      Your game id
+	@opt    boolean debug       Whether debug mode is active. Default if false
+	@opt    boolean test        Whether test mode is active. Default is false
+	@out    nil
 */
-int MOAIUnityAdsAndroid::_loadAd ( lua_State* L ) {
+int MOAIUnityAdsAndroid::_init ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIUnityAdsAndroid, "" )
-	
-	self->CallStaticVoidMethod ( self->mJava_LoadAd );
+
+	MOAIJString appID = self->GetJString ( state.GetValue < cc8* >( 1, "" ));
+	bool debug = state.GetValue < bool >( 2, false );
+	bool test  = state.GetValue < bool >( 3, false );
+
+	self->CallStaticVoidMethod ( self->mJava_Init, ( jstring )appID, debug, test );
+	return 0;
 }
 
 //----------------------------------------------------------------//
-/**	@name	showAd
+/**	@name	show
 	@text	Request an ad display if a cached ad is available.
 	
-	@out 	nil
+	@opt 	zone
+	@out 	boolean
 */
-int MOAIUnityAdsAndroid::_showAd ( lua_State* L ) {
+int MOAIUnityAdsAndroid::_show ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIUnityAdsAndroid, "" )
 	
-	self->CallStaticVoidMethod ( self->mJava_ShowAd );
-	return 0;
+	MOAIJString zone = self->GetJString ( state.GetValue < cc8* >( 1, 0 ));
+	lua_pushboolean ( state, self->CallStaticBooleanMethod ( self->mJava_Show, ( jstring )zone ));
+	return 1;
 }
 
-//----------------------------------------------------------------//
-/**	@name	setAdSpace
-	@text	Change ad displaying type like (Interstitials, banners, videos - look at docs for params ad space).
-	
-	@out 	nil
-*/
-int MOAIUnityAdsAndroid::_setAdSpace ( lua_State* L ) {
-	MOAI_JAVA_LUA_SETUP ( MOAIUnityAdsAndroid, "" )
-
-	ZLLogF ( ZLLog::CONSOLE, "MOAIUnityAdsAndroid::_init\n" );
-	jstring jadspace = self->GetJString ( lua_tostring ( state, 1 ));
-	self->CallStaticVoidMethod ( self->mJava_SetAdSpace, jadspace );
-	return 0;
-}
 
 //================================================================//
 // MOAIUnityAdsAndroid
@@ -95,13 +78,11 @@ MOAIUnityAdsAndroid::MOAIUnityAdsAndroid () {
 
 	RTTI_SINGLE ( MOAILuaObject )
 
-	this->SetClass ( "com/ziplinegames/moai/MoaiFlurryAds" );
+	this->SetClass ( "com/moaisdk/unityads/MoaiUnityAds" );
 	
-	this->mJava_Init			= this->GetStaticMethod ( "init", "(Ljava/lang/String;)V" );
-	this->mJava_HasCachedAd		= this->GetStaticMethod ( "hasCachedAd", "()Z" );
-	this->mJava_LoadAd			= this->GetStaticMethod ( "loadAd", "()V" );
-	this->mJava_ShowAd			= this->GetStaticMethod ( "showAd", "()V" );
-	this->mJava_SetAdSpace		= this->GetStaticMethod ( "setAdSpace", "(Ljava/lang/String;)V" );
+	this->mJava_Init			= this->GetStaticMethod ( "init", "(Ljava/lang/String;ZZ)V" );
+	this->mJava_CanShow			= this->GetStaticMethod ( "canShow", "(Ljava/lang/String;)Z" );
+	this->mJava_Show			= this->GetStaticMethod ( "show", "(Ljava/lang/String;)Z" );
 }
 
 //----------------------------------------------------------------//
@@ -110,20 +91,31 @@ MOAIUnityAdsAndroid::~MOAIUnityAdsAndroid () {
 }
 
 //----------------------------------------------------------------//
+void MOAIUnityAdsAndroid::NotifyVideoCompleted ( cc8* reward, bool skipped ) {
+	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
+	
+	if ( this->PushListener ( VIDEO_COMPLETED, state )) {
+		
+		state.Push ( reward );
+		state.Push ( skipped );
+		state.DebugCall ( 2, 0 );
+	}
+}
+
+//----------------------------------------------------------------//
 void MOAIUnityAdsAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 
-	state.SetField ( -1, "AD_LOAD_FAILED",		( u32 )AD_LOAD_FAILED );
-	state.SetField ( -1, "AD_DISMISSED", 		( u32 )AD_DISMISSED );
-	state.SetField ( -1, "AD_WILL_SHOW", 		( u32 )AD_WILL_SHOW );
+	state.SetField ( -1, "ON_HIDE",					( u32 )ON_HIDE );
+	state.SetField ( -1, "ON_SHOW",					( u32 )ON_SHOW );
+	state.SetField ( -1, "VIDEO_COMPLETED",			( u32 )VIDEO_COMPLETED );
+	state.SetField ( -1, "VIDEO_STARTED",			( u32 )VIDEO_STARTED );
 
 	luaL_Reg regTable [] = {
+		{ "canShow",			_canShow },
 		{ "getListener",		&MOAIGlobalEventSource::_getListener < MOAIUnityAdsAndroid > },
 		{ "init",				_init },
-		{ "loadAd",				_loadAd },
 		{ "setListener",		&MOAIGlobalEventSource::_setListener < MOAIUnityAdsAndroid > },
-		{ "showAd",				_showAd },
-		{ "hasCachedAd",		_hasCachedAd },
-		{ "setAdSpace",			_setAdSpace },
+		{ "show",				_show },
 		{ NULL, NULL }
 	};
 
@@ -131,7 +123,7 @@ void MOAIUnityAdsAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 }
 
 //================================================================//
-// FlurryAds JNI methods
+// MOAIUnityAdsAndroid JNI methods
 //================================================================//
 
 //----------------------------------------------------------------//
@@ -139,4 +131,14 @@ extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_unityads_MoaiUnityAds_AKUInvo
 
 	ZLLogF ( ZLLog::CONSOLE, "Java_com_moaisdk_unityads_MoaiUnityAds_AKUInvokeListener\n" );
 	MOAIUnityAdsAndroid::Get ().InvokeListener (( u32 )eventID );
+}
+
+//----------------------------------------------------------------//
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_unityads_MoaiUnityAds_AKUVideoCompleted ( JNIEnv* env, jclass obj, jstring jreward, jboolean skipped ) {
+
+	JNI_GET_CSTRING ( jreward, reward );
+
+	MOAIUnityAdsAndroid::Get ().NotifyVideoCompleted ( reward, skipped );
+
+	JNI_RELEASE_CSTRING ( jreward, reward );
 }
