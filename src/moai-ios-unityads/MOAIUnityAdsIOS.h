@@ -17,32 +17,32 @@
 // MOAIUnityAdsIOS
 //================================================================//
 class MOAIUnityAdsIOS :
-    public MOAIGlobalClass < MOAIUnityAdsIOS, MOAIGlobalEventSource > {
+	public MOAIGlobalClass < MOAIUnityAdsIOS, MOAIGlobalEventSource > {
 private:
-    
-    MOAIUnityAdsIOSDelegate*            mDelegate;
-    
-    //----------------------------------------------------------------//
-    static int  _canShow            ( lua_State* L );
-    static int  _init               ( lua_State* L );
-    static int  _show               ( lua_State* L );
-    
+	
+	MOAIUnityAdsIOSDelegate*		mDelegate;
+	
+	//----------------------------------------------------------------//
+	static int	_canShow			( lua_State* L );
+	static int	_init				( lua_State* L );
+	static int	_show				( lua_State* L );
+	
 public:
 
-    DECL_LUA_SINGLETON ( MOAIUnityAdsIOS );
-    
-    enum {
-        AD_WILL_SHOW,
-        AD_DID_SHOW,
-        AD_WILL_HIDE,
-        AD_DID_HIDE,
-        AD_COMPLETED,
-    };
-    
-            MOAIUnityAdsIOS             ();
-            ~MOAIUnityAdsIOS            ();
-    void    NotifyVideoCompleted        ( cc8* reward, bool skipped );
-    void    RegisterLuaClass            ( MOAILuaState& state );
+	DECL_LUA_SINGLETON ( MOAIUnityAdsIOS );
+	
+	enum {
+		AD_WILL_SHOW,
+		AD_DID_SHOW,
+		AD_WILL_HIDE,
+		AD_DID_HIDE,
+		AD_COMPLETED,
+	};
+	
+			MOAIUnityAdsIOS				();
+			~MOAIUnityAdsIOS			();
+	void	NotifyVideoCompleted		( cc8* reward, bool skipped );
+	void	RegisterLuaClass			( MOAILuaState& state );
 };
 
 //================================================================//
