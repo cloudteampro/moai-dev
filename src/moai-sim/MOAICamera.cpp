@@ -120,6 +120,19 @@ int MOAICamera::_getNearPlane ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+/**	@lua	getType
+	@text	Return current camera type.
+	
+	@out	number	typed
+*/
+int MOAICamera::_getType ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAICamera, "U" )
+	
+	state.Push ( self->mType );
+	return 1;
+}
+
+//----------------------------------------------------------------//
 /**	@lua	getViewVector
 	@text	Get the camera's normalized view vector (i.e. the Z axis).
 
@@ -527,6 +540,7 @@ void MOAICamera::RegisterLuaFuncs ( MOAILuaState& state ) {
 		{ "getFloorMove",		_getFloorMove },
 		{ "getFocalLength",		_getFocalLength },
 		{ "getNearPlane",		_getNearPlane },
+		{ "getType",			_getType },
 		{ "getViewVector",		_getViewVector },
 		{ "lookAt",				_lookAt },
 		{ "moveFieldOfView",	_moveFieldOfView },

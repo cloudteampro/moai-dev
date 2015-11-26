@@ -31,6 +31,7 @@ private:
 	static int		_getFloorMove			( lua_State* L );
 	static int		_getFocalLength			( lua_State* L );
 	static int		_getNearPlane			( lua_State* L );
+	static int		_getType				( lua_State* L );
 	static int		_getViewVector			( lua_State* L );
 	static int		_lookAt					( lua_State* L );
 	static int		_moveFieldOfView		( lua_State* L );
