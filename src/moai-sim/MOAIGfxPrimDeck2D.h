@@ -5,6 +5,7 @@
 #define	MOAIGFXPRIMDECK2D_H
 
 #include <moai-sim/MOAIStandardDeck.h>
+#include <moai-sim/MOAITransform.h>
 
 //================================================================//
 // ZLVertex
@@ -48,6 +49,7 @@ private:
 	ZLLeanArray	< ZLIndexedPrim >		mBatches;
 	
 	//----------------------------------------------------------------//
+	static int	_exportGeometry			( lua_State* L );
 	static int	_reserveIndices			( lua_State* L );
 	static int	_reservePrims			( lua_State* L );
 	static int	_reserveVertices		( lua_State* L );
@@ -66,6 +68,7 @@ public:
 	//----------------------------------------------------------------//
 	bool			Contains				( u32 idx, const ZLVec2D& vec );
 	void			DrawIndex				( u32 idx, MOAIMaterialBatch& materials, ZLVec3D offset, ZLVec3D scale );
+	u32				ExportGeometry			( u32 idx, MOAIVertexFormat& format, MOAIStream& vtxBuffer, MOAIStream& idxBuffer, u32 idxSize, MOAITransform* transform );
 	bool			Inside					( u32 idx, MOAIMaterialBatch& materials, u32 granularity, ZLVec3D vec, float pad );
 					MOAIGfxPrimDeck2D	();
 					~MOAIGfxPrimDeck2D	();

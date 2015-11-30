@@ -43,7 +43,7 @@ int MOAIIndexBuffer::_copyFromStream ( lua_State* L ) {
 	
 	// TODO: report trunctations!
 	
-	MOAIIndexBuffer* idxBuffer = state.GetLuaObject < MOAIIndexBuffer >( 2, true );
+	MOAIIndexBuffer* idxBuffer = state.GetLuaObject < MOAIIndexBuffer >( 2, false );
 	if ( idxBuffer ) {
 	
 		self->CopyFromStream ( *idxBuffer, idxBuffer->mIndexSize );

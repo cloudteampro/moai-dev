@@ -14,6 +14,40 @@
 
 //----------------------------------------------------------------//
 /**	@lua	
+	@text	Write deck index to MOAIVertexBuffer and MOAIIndexBuffer using supplied format.
+			Can apply optional MOAITransform to vertices.
+	
+	@in		MOAIGfxPrimDeck2D	self
+	@in		number				deck index to write
+	@in		MOAIVertexFormat	format
+	@in		MOAIVertexBuffer	vtxBuffer
+	@in		MOAIIndexBuffer		idxBuffer
+	@opt	numer				indexSize (default is 2)
+	@opt	MOAITransform		vtxTransform
+	@out	nil
+*/
+int MOAIGfxPrimDeck2D::_exportGeometry ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIGfxPrimDeck2D, "UN" )
+	
+	u32	idx = state.GetValue < u32 >( 2, 1 ) - 1;
+	
+	MOAIVertexFormat* format	= state.GetLuaObject < MOAIVertexFormat >( 3, true );
+	MOAIStream* vtxBuffer		= state.GetLuaObject < MOAIStream >( 4, false );
+	MOAIStream* idxBuffer		= state.GetLuaObject < MOAIStream >( 5, false );
+	u32	indexSize				= state.GetValue < u32 >( 6, 2 );
+	MOAITransform* transform	= state.GetLuaObject < MOAITransform >( 7, false );
+	
+	u32 total = 0;
+	if ( format && vtxBuffer && idxBuffer ) {
+		total = self->ExportGeometry ( idx, *format, *vtxBuffer, *idxBuffer, indexSize, transform );
+	}
+	
+	state.Push ( total );
+	return 1;
+}
+
+//----------------------------------------------------------------//
+/**	@lua	
 	@text	
 */
 int MOAIGfxPrimDeck2D::_reserveIndices ( lua_State* L ) {
@@ -170,6 +204,55 @@ void MOAIGfxPrimDeck2D::DrawIndex ( u32 idx, MOAIMaterialBatch& materials, ZLVec
 }
 
 //----------------------------------------------------------------//
+u32 MOAIGfxPrimDeck2D::ExportGeometry ( u32 idx, MOAIVertexFormat& format, MOAIStream& vtxBuffer, MOAIStream& idxBuffer, u32 idxSize, MOAITransform* transform ) {
+	
+	u32 size = this->mBatches.Size ();
+	if ( size && idx < size ) {
+		
+		ZLIndexedPrim& batch = this->mBatches [ idx ];
+		
+		u32 vtxBase = batch.mVtxBase;
+		u32 vtxTop 	= vtxBase + batch.mVtxCount;
+		
+		u32 idxBase = batch.mIdxBase;
+		u32 idxTop 	= idxBase + batch.mIdxCount;
+		
+		size_t vtxBufBase = vtxBuffer.GetCursor ();
+		size_t idxBufBase = idxBuffer.GetCursor ();
+		
+		for ( u32 i = vtxBase; i < vtxTop; ++i ) {
+			
+			ZLVertex& vtx = this->mVertices [ i ];
+			ZLVec3D pos ( vtx.mVtx.mX, vtx.mVtx.mY, 0.0f );
+			
+			if ( transform ) {
+				const ZLAffine3D& mtx = transform->GetLocalToWorldMtx ();
+				mtx.TransformVec ( pos );
+			}
+			
+			format.WriteAhead ( vtxBuffer );
+			format.WriteCoord ( vtxBuffer, pos.mX, pos.mY, pos.mZ, 1.0f );
+			format.WriteUV ( vtxBuffer, vtx.mUV.mX, vtx.mUV.mY, 0.0f );
+			format.SeekVertex ( vtxBuffer, vtxBufBase, 1 );
+		}
+		
+		u32 idxOffset = vtxBufBase / format.GetVertexSize ();
+		
+		for ( u32 i = idxBase; i < idxTop; ++i ) {
+			
+			if ( idxSize == 4 ) {
+				idxBuffer.Write < u32 >( this->mIndices [ i ] + idxOffset );
+			}
+			else {
+				idxBuffer.Write < u16 >(( u16 )( this->mIndices [ i ] + idxOffset ));
+			}
+		}
+		return idxTop - idxBase;
+	}
+	return 0;
+}
+
+//----------------------------------------------------------------//
 ZLBox MOAIGfxPrimDeck2D::GetItemBounds ( u32 idx ) {
 	
 	// TODO
@@ -213,6 +296,7 @@ void MOAIGfxPrimDeck2D::RegisterLuaFuncs ( MOAILuaState& state ) {
 	MOAIStandardDeck::RegisterLuaFuncs ( state );
 
 	luaL_Reg regTable [] = {
+		{ "exportGeometry",			_exportGeometry },
 		{ "reserveIndices",		 	_reserveIndices },
 		{ "reservePrims",		 	_reservePrims },
 		{ "reserveVertices",		_reserveVertices },
