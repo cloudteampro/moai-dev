@@ -204,7 +204,7 @@ void MOAIGfxPrimDeck2D::DrawIndex ( u32 idx, MOAIMaterialBatch& materials, ZLVec
 }
 
 //----------------------------------------------------------------//
-u32 MOAIGfxPrimDeck2D::ExportGeometry ( u32 idx, MOAIVertexFormat& format, MOAIStream& vtxBuffer, MOAIStream& idxBuffer, u32 idxSize, MOAITransform* transform ) {
+u32 MOAIGfxPrimDeck2D::ExportGeometry ( u32 idx, MOAIVertexFormat& format, MOAIStream& vtxStream, MOAIStream& idxStream, u32 idxSize, MOAITransform* transform ) {
 	
 	u32 size = this->mBatches.Size ();
 	if ( size && idx < size ) {
@@ -217,8 +217,8 @@ u32 MOAIGfxPrimDeck2D::ExportGeometry ( u32 idx, MOAIVertexFormat& format, MOAIS
 		u32 idxBase = batch.mIdxBase;
 		u32 idxTop 	= idxBase + batch.mIdxCount;
 		
-		size_t vtxBufBase = vtxBuffer.GetCursor ();
-		size_t idxBufBase = idxBuffer.GetCursor ();
+		size_t vtxStreamBase = vtxStream.GetCursor ();
+		size_t base = vtxStreamBase;
 		
 		for ( u32 i = vtxBase; i < vtxTop; ++i ) {
 			
@@ -230,21 +230,22 @@ u32 MOAIGfxPrimDeck2D::ExportGeometry ( u32 idx, MOAIVertexFormat& format, MOAIS
 				mtx.TransformVec ( pos );
 			}
 			
-			format.WriteAhead ( vtxBuffer );
-			format.WriteCoord ( vtxBuffer, pos.mX, pos.mY, pos.mZ, 1.0f );
-			format.WriteUV ( vtxBuffer, vtx.mUV.mX, vtx.mUV.mY, 0.0f );
-			format.SeekVertex ( vtxBuffer, vtxBufBase, 1 );
+			format.WriteAhead ( vtxStream );
+			format.WriteCoord ( vtxStream, pos.mX, pos.mY, pos.mZ, 1.0f );
+			format.WriteUV ( vtxStream, vtx.mUV.mX, vtx.mUV.mY, 0.0f );
+			format.WriteColor ( vtxStream, 0xffffffff );
+			base = format.SeekVertex ( vtxStream, base, 1 );
 		}
 		
-		u32 idxOffset = vtxBufBase / format.GetVertexSize ();
+		u32 idxOffset = vtxStreamBase / format.GetVertexSize ();
 		
 		for ( u32 i = idxBase; i < idxTop; ++i ) {
 			
 			if ( idxSize == 4 ) {
-				idxBuffer.Write < u32 >( this->mIndices [ i ] + idxOffset );
+				idxStream.Write < u32 >( this->mIndices [ i ] + idxOffset );
 			}
 			else {
-				idxBuffer.Write < u16 >(( u16 )( this->mIndices [ i ] + idxOffset ));
+				idxStream.Write < u16 >(( u16 )( this->mIndices [ i ] + idxOffset ));
 			}
 		}
 		return idxTop - idxBase;
