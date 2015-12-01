@@ -35,7 +35,7 @@ int MOAIGfxPrimDeck2D::_exportGeometry ( lua_State* L ) {
 	MOAIStream* vtxBuffer		= state.GetLuaObject < MOAIStream >( 4, false );
 	MOAIStream* idxBuffer		= state.GetLuaObject < MOAIStream >( 5, false );
 	u32	indexSize				= state.GetValue < u32 >( 6, 2 );
-	MOAITransform* transform	= state.GetLuaObject < MOAITransform >( 7, false );
+	MOAITransform* transform	= state.GetLuaObject < MOAITransform >( 7, true );
 	
 	u32 total = 0;
 	if ( format && vtxBuffer && idxBuffer ) {
@@ -227,7 +227,7 @@ u32 MOAIGfxPrimDeck2D::ExportGeometry ( u32 idx, MOAIVertexFormat& format, MOAIS
 			
 			if ( transform ) {
 				const ZLAffine3D& mtx = transform->GetLocalToWorldMtx ();
-				mtx.TransformVec ( pos );
+				mtx.Transform ( pos );
 			}
 			
 			format.WriteAhead ( vtxStream );
