@@ -353,10 +353,10 @@ void MOAIFacebookAndroid::GameRequestDialogDidComplete ( cc8* requestId, jobject
 		// create table for return result
 		lua_newtable ( state );
 
-		state.SetField ( -1, "requestId", requestId );
+		state.SetField ( -1, "request", requestId );
 
 		// push key and value
-		state.Push ( "recipients" );
+		state.Push ( "to" );
 		this->StringArrayToLua ( state, recipients );
 
 		// set key-value pair

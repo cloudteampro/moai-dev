@@ -683,6 +683,8 @@ public class Moai {
 		for ( int i = 0; i < keys.length; ++i ) {
 			intent.putExtra ( keys [ i ], values [ i ]);
 		}
+		intent.putExtra ( "message", message );
+		intent.putExtra ( "seconds", seconds+"" );
 
 		NotifUid uid = new NotifUid ( message, seconds );
 		PendingIntent sender = PendingIntent.getBroadcast ( sActivity, uid.hashCode (), intent, 0 );
