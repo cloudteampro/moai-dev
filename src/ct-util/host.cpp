@@ -3,6 +3,7 @@
 
 #include <ct-util/host.h>
 #include <ct-util/CTUtil.h>
+#include <ct-util/MOAIColorBlender.h>
 
 //================================================================//
 // CTUtil
@@ -22,6 +23,7 @@ void AKUCTUtilAppInitialize () {
 void AKUCTUtilContextInitialize () {
     
 	REGISTER_LUA_CLASS ( CTUtil )
+	REGISTER_LUA_CLASS ( MOAIColorBlender )
 }
 
 //----------------------------------------------------------------//
