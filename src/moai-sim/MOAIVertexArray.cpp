@@ -161,10 +161,10 @@ void MOAIVertexArray::OnGPUBind () {
 
 	u32 vao = 0;
 
-	if ( this->mUseVAOs && this->mNeedsFlush ) {
-	
+	if ( this->mUseVAOs ) {
+		
 		if ( !this->mVAOs.Size ()) return;
-	
+		
 		if ( this->mNeedsFlush ) {
 			this->mCurrentVAO = ( this->mCurrentVAO + 1 ) % this->mVAOs.Size ();
 		}

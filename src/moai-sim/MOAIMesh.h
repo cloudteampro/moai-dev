@@ -80,8 +80,6 @@ public:
 						~MOAIMesh					();
 	void				RegisterLuaClass			( MOAILuaState& state );
 	void				RegisterLuaFuncs			( MOAILuaState& state );
-	void				ReserveVAOs					( u32 total );
-	void				ReserveVertexBuffers		( u32 total );
 	void				SerializeIn					( MOAILuaState& state, MOAIDeserializer& serializer );
 	void				SerializeOut				( MOAILuaState& state, MOAISerializer& serializer );
 	void				SetBounds					( const ZLBox& bounds );

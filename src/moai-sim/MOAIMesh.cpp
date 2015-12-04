@@ -218,8 +218,6 @@ void MOAIMesh::RegisterLuaFuncs ( MOAILuaState& state ) {
 	MOAIVertexArray::RegisterLuaFuncs ( state );
 
 	luaL_Reg regTable [] = {
-		{ "reserveVAOs",				_reserveVAOs },
-		{ "reserveVertexBuffers",		_reserveVertexBuffers },
 		{ "setBounds",					_setBounds },
 		{ "setIndexBuffer",				_setIndexBuffer },
 		{ "setPenWidth",				_setPenWidth },
@@ -230,27 +228,6 @@ void MOAIMesh::RegisterLuaFuncs ( MOAILuaState& state ) {
 	};
 	
 	luaL_register ( state, 0, regTable );
-}
-
-//----------------------------------------------------------------//
-void MOAIMesh::ReserveVAOs ( u32 total ) {
-
-	if ( MOAIGfxResourceMgr::IsValid ()) {
-		for ( size_t i = 0; i < this->mVAOs.Size (); ++i ) {
-			MOAIGfxResourceMgr::Get ().PushDeleter ( MOAIGfxDeleter::DELETE_BUFFER, this->mVAOs [ i ]);
-		}
-	}
-	this->mVAOs.Init ( total );
-	this->mVAOs.Fill ( 0 );
-}
-
-//----------------------------------------------------------------//
-void MOAIMesh::ReserveVertexBuffers ( u32 total ) {
-
-	for ( size_t i = 0; i < this->mVertexBuffers.Size (); ++i ) {
-		this->mVertexBuffers [ i ].SetBufferAndFormat ( *this, 0, 0 );
-	}
-	this->mVertexBuffers.Init ( total );
 }
 
 //----------------------------------------------------------------//
