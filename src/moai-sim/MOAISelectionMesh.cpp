@@ -39,7 +39,7 @@ int MOAISelectionMesh::_clearSelection ( lua_State* L ) {
 
 	u32 set			= state.GetValue < u32 >( 2, 1 ) - 1;
 	
-	if ( state.CheckParams ( 3, "NN" )) {
+	if ( state.CheckParams ( 3, "NN", false )) {
 	
 		u32 base		= state.GetValue < u32 >( 3, 1 ) - 1;
 		u32 top			= state.GetValue < u32 >( 4, 1 ) - 1;
@@ -254,6 +254,14 @@ void MOAISelectionMesh::Clear () {
 
 //----------------------------------------------------------------//
 void MOAISelectionMesh::ClearSelection ( u32 set ) {
+
+	MOAISelectionSpan* cursor = this->mSpanListHead;
+	for ( ; cursor; cursor = cursor->mNextInMaster ) {
+		
+		if ( cursor->mSetID == set ) {
+			this->FreeSpan ( cursor );
+		}
+	}
 }
 
 //----------------------------------------------------------------//
