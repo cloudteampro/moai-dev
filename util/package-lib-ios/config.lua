@@ -40,6 +40,7 @@ IOS = {
 
 	[ 'src/moai-ios/host.h' ]						= 'include/moai-ios/host.h',
 	[ 'src/moai-ios-billing/host.h' ]				= 'include/moai-ios-billing/host.h',
+	[ 'src/moai-ios-chartboost/host.h' ]			= 'include/moai-ios-chartboost/host.h',
 	[ 'src/moai-ios-crashlytics/host.h' ]			= 'include/moai-ios-crashlytics/host.h',
 	[ 'src/moai-ios-facebook/host.h' ]				= 'include/moai-ios-facebook/host.h',
 	[ 'src/moai-ios-flurry/host.h' ]				= 'include/moai-ios-flurry/host.h',
@@ -59,6 +60,7 @@ IOS = {
 	[ '3rdparty/facebook-ios-sdk-4.7/FBSDKLoginKit.framework' ]	= 'lib/ios/FBSDKLoginKit.framework',
 	[ '3rdparty/facebook-ios-sdk-4.7/FBSDKShareKit.framework' ]	= 'lib/ios/FBSDKShareKit.framework',
 
+	[ '3rdparty/chartboost-6.1/Chartboost.framework' ]			= 'lib/ios/Chartboost.framework',
 	[ '3rdparty/crashlytics/Crashlytics.framework' ]			= 'lib/ios/Crashlytics.framework',
 	[ '3rdparty/crashlytics/Fabric.framework' ]					= 'lib/ios/Fabric.framework',
 
