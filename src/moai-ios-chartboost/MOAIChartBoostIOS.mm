@@ -164,6 +164,9 @@ void MOAIChartBoostIOS::RegisterLuaClass ( MOAILuaState& state ) {
 
 	state.SetField ( -1, "INTERSTITIAL_LOAD_FAILED",	( u32 )INTERSTITIAL_LOAD_FAILED );
 	state.SetField ( -1, "INTERSTITIAL_DISMISSED", 		( u32 )INTERSTITIAL_DISMISSED );
+	state.SetField ( -1, "REWARDED_VIDEO_DISMISSED",	( u32 )REWARDED_VIDEO_DISMISSED );
+	state.SetField ( -1, "REWARDED_VIDEO_WILL_START",	( u32 )REWARDED_VIDEO_WILL_START );
+	state.SetField ( -1, "REWARDED_VIDEO_COMPLETED",	( u32 )REWARDED_VIDEO_COMPLETED );
 
 	luaL_Reg regTable [] = {
 		{ "cacheInterstitial",		_cacheInterstitial },
