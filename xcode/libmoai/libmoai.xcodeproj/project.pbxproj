@@ -47,6 +47,7 @@
 			dependencies = (
 				CDBA1E321B1E442500DCDC75 /* PBXTargetDependency */,
 				CDBA1E361B1E442500DCDC75 /* PBXTargetDependency */,
+				201122181C185856007F0077 /* PBXTargetDependency */,
 				CDBA1E381B1E442500DCDC75 /* PBXTargetDependency */,
 				2010D6851BE380F6008AD676 /* PBXTargetDependency */,
 				CDBA1E421B1E442500DCDC75 /* PBXTargetDependency */,
@@ -4820,6 +4821,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = CD70C10F18441DD0005CEBC0;
 			remoteInfo = "libmoai-ios-flurry";
+		};
+		201122171C185856007F0077 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CDA4B7AF1808AC6D000129F9;
+			remoteInfo = "libmoai-ios-chartboost";
 		};
 		3E72B9A919F703FA00A9DE30 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -19741,6 +19749,11 @@
 			target = CD70C10F18441DD0005CEBC0 /* libmoai-ios-flurry */;
 			targetProxy = 2010D6841BE380F6008AD676 /* PBXContainerItemProxy */;
 		};
+		201122181C185856007F0077 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CDA4B7AF1808AC6D000129F9 /* libmoai-ios-chartboost */;
+			targetProxy = 201122171C185856007F0077 /* PBXContainerItemProxy */;
+		};
 		3E72B9AA19F703FA00A9DE30 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 03C2F6F3104DE130009A2D5D /* libmoai-ios */;
@@ -20182,6 +20195,7 @@
 					"../../3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
 					../../3rdparty/kontagent_ios_v1.5.6,
 					"../../3rdparty/adcolony-2.2.4",
+					"../../3rdparty/chartboost-6.1",
 				);
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
@@ -20278,7 +20292,6 @@
 					"\"../../3rdparty/zlib-1.2.3\"",
 					"\"../../3rdparty/ooid-0.99\"",
 					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
-					"\"../../3rdparty/chartboost-4.2\"",
 					"\"../../3rdparty/adcolonyiOS-1911/Library\"",
 					"\"../../3rdparty/mongoose\"",
 					"\"../../3rdparty/sdl2-2.0.0/include\"",
@@ -21509,6 +21522,7 @@
 					"../../3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
 					../../3rdparty/kontagent_ios_v1.5.6,
 					"../../3rdparty/adcolony-2.2.4",
+					"../../3rdparty/chartboost-6.1",
 				);
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
@@ -21604,7 +21618,6 @@
 					"\"../../3rdparty/zlib-1.2.3\"",
 					"\"../../3rdparty/ooid-0.99\"",
 					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
-					"\"../../3rdparty/chartboost-4.2\"",
 					"\"../../3rdparty/adcolonyiOS-1911/Library\"",
 					"\"../../3rdparty/mongoose\"",
 					"\"../../3rdparty/sdl2-2.0.0/include\"",
@@ -27036,6 +27049,7 @@
 					"../../3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
 					../../3rdparty/kontagent_ios_v1.5.6,
 					"../../3rdparty/adcolony-2.2.4",
+					"../../3rdparty/chartboost-6.1",
 				);
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
@@ -27132,7 +27146,6 @@
 					"\"../../3rdparty/zlib-1.2.3\"",
 					"\"../../3rdparty/ooid-0.99\"",
 					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
-					"\"../../3rdparty/chartboost-4.2\"",
 					"\"../../3rdparty/adcolonyiOS-1911/Library\"",
 					"\"../../3rdparty/mongoose\"",
 					"\"../../3rdparty/sdl2-2.0.0/include\"",
@@ -27464,6 +27477,7 @@
 					"../../3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
 					../../3rdparty/kontagent_ios_v1.5.6,
 					"../../3rdparty/adcolony-2.2.4",
+					"../../3rdparty/chartboost-6.1",
 				);
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
@@ -27560,7 +27574,6 @@
 					"\"../../3rdparty/zlib-1.2.3\"",
 					"\"../../3rdparty/ooid-0.99\"",
 					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
-					"\"../../3rdparty/chartboost-4.2\"",
 					"\"../../3rdparty/adcolonyiOS-1911/Library\"",
 					"\"../../3rdparty/mongoose\"",
 					"\"../../3rdparty/sdl2-2.0.0/include\"",
