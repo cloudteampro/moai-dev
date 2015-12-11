@@ -76,7 +76,7 @@ int MOAIUnityAdsAndroid::_show ( lua_State* L ) {
 //----------------------------------------------------------------//
 MOAIUnityAdsAndroid::MOAIUnityAdsAndroid () {
 
-	RTTI_SINGLE ( MOAILuaObject )
+	RTTI_SINGLE ( MOAIGlobalEventSource )
 
 	this->SetClass ( "com/moaisdk/unityads/MoaiUnityAds" );
 	
