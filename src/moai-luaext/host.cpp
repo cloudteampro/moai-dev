@@ -10,7 +10,6 @@ extern "C" {
 	//extern int luaopen_luacurl			( lua_State *L );
 	extern int luaopen_luasql_sqlite3	( lua_State *L );
 	extern int luapreload_fullluasocket ( lua_State *L );
-	extern int luaopen_cmsgpack			( lua_State *L );
 	extern int luaopen_cmsgpack_safe	( lua_State *L );
 }
 
@@ -44,7 +43,7 @@ void AKULuaExtContextInitialize () {
 	#endif
 	
 	#if MOAI_WITH_MSGPACK
-		luaopen_cmsgpack ( state );
+		luaopen_cmsgpack_safe ( state );
 	#endif
 	
 	luaopen_lfs ( state );
