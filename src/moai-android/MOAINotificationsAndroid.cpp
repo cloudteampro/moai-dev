@@ -445,7 +445,7 @@ extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_googlepush_MoaiGooglePushRece
 }
 
 //----------------------------------------------------------------//
-extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_googlepush_MoaiLocalNotificationReceiver_AKUNotifyLocalNotificationReceived ( JNIEnv* env, jclass obj, jobjectArray jkeys, jobjectArray jvalues ) {
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_core_MoaiLocalNotificationReceiver_AKUNotifyLocalNotificationReceived ( JNIEnv* env, jclass obj, jobjectArray jkeys, jobjectArray jvalues ) {
 	
 	if ( env->GetArrayLength ( jkeys ) != env->GetArrayLength ( jvalues )) return;
 
