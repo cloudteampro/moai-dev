@@ -7,10 +7,14 @@
 package com.moaisdk.core;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.Context;
 import android.graphics.Color;
+import android.net.MailTo;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.webkit.WebChromeClient;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
@@ -38,8 +42,34 @@ public class MoaiWebView {
         }
 
         //----------------------------------------------------------------//
+        @Override
         public boolean shouldOverrideUrlLoading ( WebView view, String url ) {
-            return false;
+
+            if ( url.startsWith ( "mailto:" )) {
+
+                if ( sActivity != null ) {
+                    MailTo mt = MailTo.parse ( url );
+                    Intent intent = sendMailIntent ( sActivity, mt.getTo (), mt.getSubject (), mt.getBody (), mt.getCc ());
+                    sActivity.startActivity ( intent );
+                    view.reload ();
+                    return true;
+                }
+            }
+            else {
+                view.loadUrl ( url );
+            }
+            return true;
+        }
+
+        //----------------------------------------------------------------//
+        private Intent sendMailIntent ( Context context, String address, String subject, String body, String cc ) {
+            Intent intent = new Intent ( Intent.ACTION_SEND );
+            intent.putExtra ( Intent.EXTRA_EMAIL, new String[] { address });
+            intent.putExtra ( Intent.EXTRA_TEXT, body );
+            intent.putExtra ( Intent.EXTRA_SUBJECT, subject );
+            intent.putExtra ( Intent.EXTRA_CC, cc );
+            intent.setType ( "message/rfc822" );
+            return intent;
         }
     }
 
@@ -51,14 +81,19 @@ public class MoaiWebView {
         RelativeLayout.LayoutParams rl = new RelativeLayout.LayoutParams ( RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT );
         webViewCont.setLayoutParams ( rl );
         webViewCont.setPadding( 20, 20, 20, 20 );
+        
         webView = new WebView ( sActivity );
         webView.setId ( 0X100 );
         webView.setScrollContainer ( false );
+
         android.widget.RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams ( RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT );
         params.addRule ( RelativeLayout.ALIGN_PARENT_BOTTOM );
+
+        // Very ugly
         Button b = new Button( sActivity );
         b.setId ( 0X101 );
         b.setText ( "X" );
+        b.setTextSize ( 24 );
         b.setBackgroundColor ( Color.TRANSPARENT );
         b.setLayoutParams ( new RelativeLayout.LayoutParams ( RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT ));
         b.setOnClickListener ( new View.OnClickListener() {
@@ -73,7 +108,9 @@ public class MoaiWebView {
         webViewCont.addView ( webView, params );
         webViewCont.addView ( b, paramsbut );
 
+        webView.setWebChromeClient ( new WebChromeClient ());
         webView.setWebViewClient ( new MoaiWebViewClient ());
+        webView.getSettings ().setJavaScriptEnabled ( true );
 
         LinearLayoutIMETrap con = MoaiKeyboard.getContainer ();
         con.addView ( webViewCont );
