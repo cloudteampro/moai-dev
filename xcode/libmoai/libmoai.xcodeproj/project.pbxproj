@@ -193,6 +193,8 @@
 		07658751145CD06900723A7D /* tlsf.h in Headers */ = {isa = PBXBuildFile; fileRef = 0765874C145CD06900723A7D /* tlsf.h */; };
 		07658752145CD06900723A7D /* tlsfbits.h in Headers */ = {isa = PBXBuildFile; fileRef = 0765874D145CD06900723A7D /* tlsfbits.h */; };
 		07658753145CD06900723A7D /* tlsfbits.h in Headers */ = {isa = PBXBuildFile; fileRef = 0765874D145CD06900723A7D /* tlsfbits.h */; };
+		207A50F91C1EFDB600D0FCDA /* lua_cmsgpack.c in Sources */ = {isa = PBXBuildFile; fileRef = 207A50F81C1EFDB600D0FCDA /* lua_cmsgpack.c */; };
+		207A50FA1C1EFDB600D0FCDA /* lua_cmsgpack.c in Sources */ = {isa = PBXBuildFile; fileRef = 207A50F81C1EFDB600D0FCDA /* lua_cmsgpack.c */; };
 		20A0B0291A5020740072F513 /* edtaa3func.c in Sources */ = {isa = PBXBuildFile; fileRef = 20A0B0271A5020740072F513 /* edtaa3func.c */; };
 		20A0B02A1A5020740072F513 /* edtaa3func.c in Sources */ = {isa = PBXBuildFile; fileRef = 20A0B0271A5020740072F513 /* edtaa3func.c */; };
 		20A0B02B1A5020740072F513 /* edtaa3func.h in Headers */ = {isa = PBXBuildFile; fileRef = 20A0B0281A5020740072F513 /* edtaa3func.h */; };
@@ -5494,6 +5496,7 @@
 		0795297C1447907100143A72 /* jquant2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = jquant2.c; sourceTree = "<group>"; };
 		0795297D1447907100143A72 /* jutils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = jutils.c; sourceTree = "<group>"; };
 		0795297E1447907100143A72 /* jversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jversion.h; sourceTree = "<group>"; };
+		207A50F81C1EFDB600D0FCDA /* lua_cmsgpack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lua_cmsgpack.c; path = "../../3rdparty/lua-cmsgpack/lua_cmsgpack.c"; sourceTree = "<group>"; };
 		20A0B0271A5020740072F513 /* edtaa3func.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = edtaa3func.c; path = ../../3rdparty/contrib/edtaa3func.c; sourceTree = "<group>"; };
 		20A0B0281A5020740072F513 /* edtaa3func.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = edtaa3func.h; path = ../../3rdparty/contrib/edtaa3func.h; sourceTree = "<group>"; };
 		20B070971C0498BF00F83147 /* MOAIGfxPrimDeck2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIGfxPrimDeck2D.cpp; sourceTree = "<group>"; };
@@ -8435,6 +8438,7 @@
 				CDD06BD21398824F00AB0420 /* luacrypto */,
 				CD218F8213A7FD18008337E7 /* luacurl */,
 				E9940D6414B7A217006465CC /* luafilesystem */,
+				207A50F71C1EFD8B00D0FCDA /* lua-msgpack */,
 				CDD06BD11398824600AB0420 /* luasocket */,
 				669C0566155DB5D500A5CE7F /* luasocket-embed */,
 				CD218F8313A7FD34008337E7 /* luasql */,
@@ -9058,6 +9062,14 @@
 			name = "jpeg-8c";
 			path = "../../3rdparty/jpeg-8c";
 			sourceTree = SOURCE_ROOT;
+		};
+		207A50F71C1EFD8B00D0FCDA /* lua-msgpack */ = {
+			isa = PBXGroup;
+			children = (
+				207A50F81C1EFDB600D0FCDA /* lua_cmsgpack.c */,
+			);
+			name = "lua-msgpack";
+			sourceTree = "<group>";
 		};
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
@@ -19057,6 +19069,7 @@
 				CDD491F417FA7C8C00525B77 /* luasocketscripts.c in Sources */,
 				CDD491F217FA7C8C00525B77 /* fullluasocket.c in Sources */,
 				CDECEE2818E0CD5F00546426 /* sqlite3.c in Sources */,
+				207A50F91C1EFDB600D0FCDA /* lua_cmsgpack.c in Sources */,
 				CDD06DB21398838D00AB0420 /* buffer.c in Sources */,
 				CDD06DB41398838D00AB0420 /* except.c in Sources */,
 				CDD06DB61398838D00AB0420 /* inet.c in Sources */,
@@ -19086,6 +19099,7 @@
 				CDD491F017FA7C8700525B77 /* luasocketscripts.c in Sources */,
 				CDD491EE17FA7C8700525B77 /* fullluasocket.c in Sources */,
 				CDECEE2D18E0CD6E00546426 /* sqlite3.c in Sources */,
+				207A50FA1C1EFDB600D0FCDA /* lua_cmsgpack.c in Sources */,
 				CDD06DD21398838D00AB0420 /* buffer.c in Sources */,
 				CDD06DD41398838D00AB0420 /* except.c in Sources */,
 				CDD06DD61398838D00AB0420 /* inet.c in Sources */,
