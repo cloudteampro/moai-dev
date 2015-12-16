@@ -6,5 +6,5 @@ add_subdirectory ( luasql )
 add_subdirectory ( luacurl )
 add_subdirectory ( luacrypto )
 add_subdirectory ( luasocket )
-  
+add_subdirectory ( luacmsgpack )  
 
