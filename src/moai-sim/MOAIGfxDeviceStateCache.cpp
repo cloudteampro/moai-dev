@@ -130,6 +130,7 @@ MOAIGfxDeviceStateCache::MOAIGfxDeviceStateCache () :
 	mDepthMask ( true ),
 	mBlendEnabled ( 0 ),
 	mPenWidth ( 1.0f ),
+	mScissorEnabled ( false ),
 	mShaderProgram ( 0 ),
 	mActiveTextures ( 0 ),
 	mCurrentFrameBuffer ( 0 ),
@@ -264,9 +265,18 @@ void MOAIGfxDeviceStateCache::SetPenWidth ( float penWidth ) {
 
 //----------------------------------------------------------------//
 void MOAIGfxDeviceStateCache::SetScissorRect () {
-
-	this->SetScissorRect ( this->mCurrentFrameBuffer->GetBufferRect ());
-	zglDisable ( ZGL_PIPELINE_SCISSOR );
+	
+	if ( this->mScissorEnabled ) {
+	
+		this->OnGfxStateWillChange ();
+		zglDisable ( ZGL_PIPELINE_SCISSOR );
+		
+		this->mScissorRect = this->mCurrentFrameBuffer->GetBufferRect ();
+		this->mViewRect.Clip ( this->mScissorRect );
+		this->mScissorEnabled = false;
+	}
+//	this->SetScissorRect ( this->mCurrentFrameBuffer->GetBufferRect ());
+//	zglDisable ( ZGL_PIPELINE_SCISSOR );
 }
 
 //----------------------------------------------------------------//
@@ -274,7 +284,7 @@ void MOAIGfxDeviceStateCache::SetScissorRect ( ZLRect rect ) {
 	
 	rect.Bless ();
 	this->mViewRect.Clip ( rect );
-
+	this->mScissorEnabled = true;
 	ZLRect& current = this->mScissorRect;
 	
 	if (	( current.mXMin != rect.mXMin ) ||

@@ -41,6 +41,7 @@ protected:
 	float									mPenWidth;
 
 	ZLRect									mScissorRect;
+	bool									mScissorEnabled;
 	MOAIShaderProgram*						mShaderProgram;
 	
 	ZLLeanArray < MOAISingleTexture* >		mTextureUnits;
