@@ -159,12 +159,16 @@ void MOAIChartBoostAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 //----------------------------------------------------------------//
 extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_chartboost_MoaiChartBoost_AKUInvokeListener ( JNIEnv* env, jclass obj, jint eventID ) {
 
-	ZLLog::LogF ( 1, ZLLog::CONSOLE, "Java_com_moaisdk_chartboost_MoaiChartBoost_AKUInvokeListener\n" );
-	MOAIChartBoostAndroid::Get ().InvokeListener (( u32 )eventID );
+	if ( MOAIChartBoostAndroid::IsValid ()) {
+		ZLLog::LogF ( 1, ZLLog::CONSOLE, "Java_com_moaisdk_chartboost_MoaiChartBoost_AKUInvokeListener\n" );
+		MOAIChartBoostAndroid::Get ().InvokeListener (( u32 )eventID );
+	}
 }
 
 //----------------------------------------------------------------//
 extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_chartboost_MoaiChartBoost_AKURewardedVideoCompleted ( JNIEnv* env, jclass obj, jint reward ) {
 
-	MOAIChartBoostAndroid::Get ().NotifyRewardedVideoCompleted ( reward );
+	if ( MOAIChartBoostAndroid::IsValid ()) {
+		MOAIChartBoostAndroid::Get ().NotifyRewardedVideoCompleted ( reward );
+	}
 }

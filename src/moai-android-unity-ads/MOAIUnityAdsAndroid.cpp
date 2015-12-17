@@ -129,16 +129,19 @@ void MOAIUnityAdsAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 //----------------------------------------------------------------//
 extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_unityads_MoaiUnityAds_AKUInvokeListener ( JNIEnv* env, jclass obj, jint eventID ) {
 
-	ZLLogF ( ZLLog::CONSOLE, "Java_com_moaisdk_unityads_MoaiUnityAds_AKUInvokeListener\n" );
-	MOAIUnityAdsAndroid::Get ().InvokeListener (( u32 )eventID );
+	if ( MOAIUnityAdsAndroid::IsValid ()) {
+		ZLLogF ( ZLLog::CONSOLE, "Java_com_moaisdk_unityads_MoaiUnityAds_AKUInvokeListener\n" );
+		MOAIUnityAdsAndroid::Get ().InvokeListener (( u32 )eventID );
+	}
 }
 
 //----------------------------------------------------------------//
 extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_unityads_MoaiUnityAds_AKUVideoCompleted ( JNIEnv* env, jclass obj, jstring jreward, jboolean skipped ) {
 
-	JNI_GET_CSTRING ( jreward, reward );
+	if ( MOAIUnityAdsAndroid::IsValid ()) {
 
-	MOAIUnityAdsAndroid::Get ().NotifyVideoCompleted ( reward, skipped );
-
-	JNI_RELEASE_CSTRING ( jreward, reward );
+		JNI_GET_CSTRING ( jreward, reward );
+		MOAIUnityAdsAndroid::Get ().NotifyVideoCompleted ( reward, skipped );
+		JNI_RELEASE_CSTRING ( jreward, reward );
+	}
 }
