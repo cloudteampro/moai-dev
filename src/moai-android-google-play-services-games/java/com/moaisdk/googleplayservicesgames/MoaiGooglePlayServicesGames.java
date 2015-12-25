@@ -5,7 +5,9 @@
 
 package com.moaisdk.googleplayservicesgames;
 
+import com.moaisdk.core.*;
 import com.google.android.gms.games.Games;
+import com.google.android.gms.games.Player;
 
 import com.google.example.games.basegameutils.GameHelper;
 import com.google.example.games.basegameutils.GameHelper.GameHelperListener;
@@ -103,6 +105,19 @@ public class MoaiGooglePlayServicesGames {
 		MoaiLog.i ( " -------------------------------------------------------- MoaiGooglePlayServicesGames: authenticatePlayer -------------------------------------------------------- " );
 		
 		sHelper.beginUserInitiatedSignIn ();
+	}
+
+	//----------------------------------------------------------------//
+	public static String getPlayerAlias () {
+
+		MoaiLog.i ( " -------------------------------------------------------- MoaiGooglePlayServicesGames: getPlayerId -------------------------------------------------------- " );
+		if ( sHelper.isSignedIn ()) {
+			Player player = Games.Players.getCurrentPlayer ( sHelper.getApiClient ());
+			if ( player != null ) {
+				return player.getDisplayName ();
+			}
+		}
+		return "";
 	}
 
 	//----------------------------------------------------------------//

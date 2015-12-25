@@ -64,6 +64,29 @@ int MOAIGooglePlayServicesGamesAndroid::_getAchievements ( lua_State* L ) {
 */
 int MOAIGooglePlayServicesGamesAndroid::_getPlayerAlias ( lua_State* L ) {
 	
+	JNI_GET_ENV ( jvm, env );
+	MOAILuaState state ( L );
+
+	jclass playserv = env->FindClass ( "com/moaisdk/googleplayservicesgames/MoaiGooglePlayServicesGames" );
+	if ( playserv == NULL ) {
+
+		ZLLogF ( ZLLog::CONSOLE, "MOAIGooglePlayServicesGamesAndroid: Unable to find java class %s", "com/moaisdk/googleplayservicesgames/MoaiGooglePlayServicesGames" );
+	} else {
+
+		jmethodID getPlayerAlias = env->GetStaticMethodID ( playserv, "getPlayerAlias", "()Ljava/lang/String;" );
+		if ( getPlayerAlias == NULL ) {
+
+			ZLLogF ( ZLLog::CONSOLE, "MOAIGooglePlayServicesGamesAndroid: Unable to find static java method %s", "getPlayerAlias" );
+		} else {
+			jstring jplayerAlias = ( jstring )env->CallStaticObjectMethod ( playserv, getPlayerAlias );
+
+			JNI_GET_CSTRING ( jplayerAlias, playerAlias );
+			lua_pushstring ( state, playerAlias );
+			JNI_RELEASE_CSTRING ( jplayerAlias, playerAlias );
+			return 1;
+		}
+	}
+
 	return 0;
 }
 
