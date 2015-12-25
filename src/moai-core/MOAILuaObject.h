@@ -35,6 +35,7 @@ protected:
 	static int				_getMemberTable		( lua_State* L );
 	static int				_getRefTable		( lua_State* L );
 	static int				_pin				( lua_State* L );
+	static int				_printTracking		( lua_State* L );
 	static int				_serializeIn		( lua_State* L );
 	static int				_serializeOut		( lua_State* L );
 	static int				_setFinalizer		( lua_State* L );
