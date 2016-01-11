@@ -44,7 +44,8 @@ public:
 		INTERSTITIAL_DISMISSED,
 		REWARDED_VIDEO_DISMISSED,
 		REWARDED_VIDEO_WILL_START,
-		REWARDED_VIDEO_COMPLETED
+		REWARDED_VIDEO_COMPLETED,
+		REWARDED_VIDEO_CACHED
 	};
 	
 	//----------------------------------------------------------------//

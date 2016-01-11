@@ -167,6 +167,7 @@ void MOAIChartBoostIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "REWARDED_VIDEO_DISMISSED",	( u32 )REWARDED_VIDEO_DISMISSED );
 	state.SetField ( -1, "REWARDED_VIDEO_WILL_START",	( u32 )REWARDED_VIDEO_WILL_START );
 	state.SetField ( -1, "REWARDED_VIDEO_COMPLETED",	( u32 )REWARDED_VIDEO_COMPLETED );
+	state.SetField ( -1, "REWARDED_VIDEO_CACHED",		( u32 )REWARDED_VIDEO_CACHED );
 
 	luaL_Reg regTable [] = {
 		{ "cacheInterstitial",		_cacheInterstitial },
@@ -220,6 +221,11 @@ void MOAIChartBoostIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	- ( BOOL ) shouldDisplayMoreApps:( CBLocation )location {
 		UNUSED ( location );
 		return NO;
+	}
+
+	- (void)didCacheRewardedVideo:( CBLocation )location {
+		UNUSED ( location );
+		MOAIChartBoostIOS::Get ().InvokeListener ( MOAIChartBoostIOS::REWARDED_VIDEO_CACHED );
 	}
 
 	//----------------------------------------------------------------//
