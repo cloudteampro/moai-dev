@@ -24,40 +24,31 @@ int MOAIGameCenterIOS::_authenticatePlayer ( lua_State* L ) {
 	
 	MOAILuaState state ( L );
 	
-	// Check for presence of GKLocalPlayer class.
-    BOOL localPlayerClassAvailable = ( NSClassFromString ( @"GKLocalPlayer" )) != nil;
-	
-	// The device must be running iOS 6.0 or later.
-    NSString *reqSysVer = @"6.0";
-    NSString *currSysVer = [[ UIDevice currentDevice ] systemVersion ];
-    BOOL osVersionSupported = ([ currSysVer compare:reqSysVer options:NSNumericSearch ] != NSOrderedAscending );
-    if ( localPlayerClassAvailable && osVersionSupported ) {
-
-		// If GameCenter is available, attempt to authenticate the local player
-		GKLocalPlayer* localPlayer = [ GKLocalPlayer localPlayer ];
-		[ localPlayer setAuthenticateHandler:^( UIViewController *viewcontroller, NSError *error ) {
+	GKLocalPlayer* localPlayer = [ GKLocalPlayer localPlayer ];
+	[ localPlayer setAuthenticateHandler:^( UIViewController *viewcontroller, NSError *error ) {
+		
+		if ( !MOAIGameCenterIOS::IsValid ()) return;
+		
+		if ( !error && viewcontroller ) {
 			
-			if ( !error && viewcontroller ) {
+			UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
+			UIViewController* rootVC = [ window rootViewController ];
+			[ rootVC presentViewController:viewcontroller animated:YES completion:nil ];
+		}
+		else {
+			if ([ error code ] == GKErrorNotSupported || [ error code ] == GKErrorGameUnrecognized ) {
 				
-				UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
-				UIViewController* rootVC = [ window rootViewController ];
-				[ rootVC presentViewController:viewcontroller animated:YES completion:nil ];
-			}
-			else {
-				if ([ error code ] == GKErrorNotSupported || [ error code ] == GKErrorGameUnrecognized ) {
-					
 //                    MOAILogF ( L, ZLLog::LOG_ERROR, [[ error description ] UTF8String ]);
-					MOAIGameCenterIOS::Get ().mIsGameCenterSupported = FALSE;
-				}
-				else if ([ GKLocalPlayer localPlayer ].isAuthenticated ) {
-					
-					MOAIGameCenterIOS::Get ().mLocalPlayer = localPlayer;
-					MOAIGameCenterIOS::Get ().mIsGameCenterSupported = TRUE;
-					MOAIGameCenterIOS::Get ().GetAchievements ();
-				}
+				MOAIGameCenterIOS::Get ().mIsGameCenterSupported = FALSE;
 			}
-		}];
-	}
+			else if ([ GKLocalPlayer localPlayer ].isAuthenticated ) {
+				
+				MOAIGameCenterIOS::Get ().mLocalPlayer = localPlayer;
+				MOAIGameCenterIOS::Get ().mIsGameCenterSupported = TRUE;
+				MOAIGameCenterIOS::Get ().GetAchievements ();
+			}
+		}
+	}];
 	
 	return 0;
 }
@@ -451,6 +442,8 @@ void MOAIGameCenterIOS::CallScoresCallback ( NSArray* scores ) {
 //----------------------------------------------------------------//
 void MOAIGameCenterIOS::CreateAchievementDictionary ( NSArray* achievements ) {
 	
+	[ mAchievementsDictionary removeAllObjects ];
+	
 	for ( GKAchievement* achievement in achievements ) {
 		[ mAchievementsDictionary setObject: achievement forKey: achievement.identifier ];
 	}
@@ -473,8 +466,8 @@ GKAchievement* MOAIGameCenterIOS::GetAchievementFromDictionary ( cc8* identifier
 void MOAIGameCenterIOS::GetAchievements () {
 	
 	[ GKAchievement loadAchievementsWithCompletionHandler:^( NSArray* achievements, NSError* error ) {
-		if ( error == nil ) {
-			CreateAchievementDictionary ( achievements );
+		if ( error == nil && MOAIGameCenterIOS::IsValid ()) {
+			MOAIGameCenterIOS::Get ().CreateAchievementDictionary ( achievements );
 		}
 	}];
 }
