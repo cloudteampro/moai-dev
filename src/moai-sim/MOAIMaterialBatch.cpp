@@ -97,7 +97,7 @@ int MOAIMaterialBatch::_getIndexBatchSize ( lua_State* L ) {
 int MOAIMaterialBatch::_getShader ( lua_State* L ) {
 	MOAI_LUA_SETUP ( MOAIMaterialBatch, "U" )
 	state.Push ( self->RawGetShader ( state.GetValue < u32 >( 2, 1 ) - 1 ));
-	return 0;
+	return 1;
 }
 
 //----------------------------------------------------------------//
@@ -355,6 +355,8 @@ MOAIMaterialBatch::MOAIMaterialBatch () :
 
 //----------------------------------------------------------------//
 MOAIMaterialBatch::~MOAIMaterialBatch () {
+	
+	this->Clear ();
 }
 
 //----------------------------------------------------------------//
