@@ -22,7 +22,7 @@ dofile ( '../lib/hero.lua' )
 dofile ( '../lib/mesh.lua' )
 dofile ( '../lib/walls.lua' )
 
---MOAIDebugLines.setStyle ( MOAIDebugLines.PROP_WORLD_BOUNDS, 1, 1, 1, 1 )
+MOAIDebugLines.setStyle ( MOAIDebugLines.PROP_WORLD_BOUNDS, 1, 1, 1, 1 )
 
 MOAISim.openWindow ( "test", 724, 512 )
 
