@@ -882,6 +882,10 @@ void MOAISpineSkeleton::OnDepNodeUpdate () {
 //----------------------------------------------------------------//
 u32 MOAISpineSkeleton::OnGetModelBounds ( ZLBox &bounds ) {
 	
+	if ( !this->mSkeleton ) {
+		return MOAIProp::BOUNDS_EMPTY;
+	}
+	
 	u32 size = mSkeleton->slotsCount;
 	
 	if ( size == 0) {
@@ -897,8 +901,8 @@ u32 MOAISpineSkeleton::OnGetModelBounds ( ZLBox &bounds ) {
 
 //----------------------------------------------------------------//
 void MOAISpineSkeleton::OnUpdate ( double step ) {
-	if ( mSkeleton ) {
-		spSkeleton_update ( mSkeleton, step );
+	if ( this->mSkeleton ) {
+		spSkeleton_update ( this->mSkeleton, step );
 		
 		if ( mAnimationState ) {
 			spAnimationState_update ( mAnimationState, step );
@@ -964,7 +968,8 @@ void MOAISpineSkeleton::RegisterLuaFuncs ( MOAILuaState& state ) {
 
 //----------------------------------------------------------------//
 void MOAISpineSkeleton::SetAnimation ( int trackId, cc8* name, bool loop ) {
-	spAnimation* anim = spSkeletonData_findAnimation ( mSkeleton->data, name );
+	
+	spAnimation* anim = spSkeletonData_findAnimation ( this->mSkeleton->data, name );
 	
 	if ( anim != 0 ) {
 		spAnimationState_setAnimation ( mAnimationState, trackId, anim, loop);
@@ -973,8 +978,9 @@ void MOAISpineSkeleton::SetAnimation ( int trackId, cc8* name, bool loop ) {
 
 //----------------------------------------------------------------//
 void MOAISpineSkeleton::SetMix ( cc8* fromName, cc8* toName, float duration ) {
-	spAnimation* fromAnim = spSkeletonData_findAnimation ( mSkeleton->data, fromName );
-	spAnimation* toAnim = spSkeletonData_findAnimation ( mSkeleton->data, toName );
+
+	spAnimation* fromAnim = spSkeletonData_findAnimation ( this->mSkeleton->data, fromName );
+	spAnimation* toAnim = spSkeletonData_findAnimation ( this->mSkeleton->data, toName );
 	
 	if ( fromAnim != 0 && toAnim != 0 ) {
 		spAnimationStateData_setMix ( mAnimationState->data, fromAnim, toAnim, duration );
@@ -1034,11 +1040,11 @@ void MOAISpineSkeleton::UpdateBounds () {
 //----------------------------------------------------------------//
 void MOAISpineSkeleton::UpdateSkeleton () {
 	
-	if ( !mSkeleton ) {
+	if ( !this->mSkeleton ) {
 		return;
 	}
 	
-	spSkeleton_updateWorldTransform ( mSkeleton );
+	spSkeleton_updateWorldTransform ( this->mSkeleton );
 }
 
 

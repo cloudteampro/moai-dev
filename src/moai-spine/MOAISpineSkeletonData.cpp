@@ -33,13 +33,12 @@ int MOAISpineSkeletonData::_load ( lua_State* L ) {
 	spSkeletonJson* json = spSkeletonJson_create ( self->mAtlas );
 	json->scale = scale;
 	self->mSkeletonData = spSkeletonJson_readSkeletonDataFile ( json, skeletonPath );
-	spSkeletonJson_dispose(json);
 	
 	if ( !self->mSkeletonData ) {
 		MOAILogF ( state, ZLLog::LOG_ERROR, MOAILogMessages::MOAI_FileOpenError_S, json->error );
-		return 0;
 	}
 	
+	spSkeletonJson_dispose(json);
 	return 0;
 }
 
