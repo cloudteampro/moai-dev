@@ -156,11 +156,13 @@ public class Moai {
 		"com.moaisdk.googleplayservicesgames.MoaiGooglePlayServicesGames",
 		"com.moaisdk.googlepush.MoaiGooglePush",
 		"com.moaisdk.core.MoaiKeyboard",
-		"com.moaisdk.core.MoaiMoviePlayer",
+		// "com.moaisdk.core.MoaiMoviePlayer",
 		"com.moaisdk.fmodstudio.MoaiFmodStudio",
 		// "com.moaisdk.tapjoy.MoaiTapjoy",
 		// "com.moaisdk.twitter.MoaiTwitter",
 		// "com.moaisdk.vungle.MoaiVungle",
+		"com.moaisdk.unityads.MoaiUnityAds",
+		"com.moaisdk.core.MoaiWebView",
 	};
 
 	private static Activity 				sActivity = null;
