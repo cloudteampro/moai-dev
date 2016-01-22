@@ -192,7 +192,7 @@ public class Moai {
 	protected static native void		AKUSetConnectionType 			( long connectionType );
 	protected static native void 		AKUSetContext 					( int contextId );
 	protected static native void		AKUSetDeviceLocale				( String langCode, String countryCode );
-	protected static native void 		AKUSetDeviceProperties 			( String appName, String appId, String appVersion, String appVersionCode, String abi, String devBrand, String devName, String devManufacturer, String devModel, String devProduct, int numProcessors, String osBrand, String osVersion, String udid );
+	protected static native void 		AKUSetDeviceProperties 			( String appName, String appId, String appVersion, String appVersionCode, String abi, String devBrand, String devName, String devManufacturer, String devModel, String devProduct, int numProcessors, String osBrand, String osVersion, String osBuild, String udid, int screenLayout );
 	protected static native void 		AKUSetDocumentDirectory 		( String path );
 	protected static native void 		AKUSetInputConfigurationName	( String name );
 	protected static native void 		AKUSetInputDevice		 		( int deviceId, String name );
@@ -371,7 +371,15 @@ public class Moai {
 				udid = "UNKNOWN";
 			}
 
-			AKUSetDeviceProperties ( appName, appId, appVersion, appVersionCode, Build.CPU_ABI, Build.BRAND, Build.DEVICE, Build.MANUFACTURER, Build.MODEL, Build.PRODUCT, Runtime.getRuntime ().availableProcessors (), "Android", Build.VERSION.RELEASE, udid );
+			int screenLayout;
+			try {
+				screenLayout = sActivity.getResources ().getConfiguration ().screenLayout;
+			}
+			catch ( Exception e ) {
+				screenLayout = 0;
+			}
+
+			AKUSetDeviceProperties ( appName, appId, appVersion, appVersionCode, Build.CPU_ABI, Build.BRAND, Build.DEVICE, Build.MANUFACTURER, Build.MODEL, Build.PRODUCT, Runtime.getRuntime ().availableProcessors (), "Android", Build.VERSION.RELEASE, Build.ID, udid, screenLayout );
 			AKUSetDeviceLocale ( Locale.getDefault ().getLanguage (), Locale.getDefault ().getCountry ());
 		}
 	}

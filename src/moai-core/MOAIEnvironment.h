@@ -32,6 +32,7 @@
 #define MOAI_ENV_numProcessors				"numProcessors"
 #define MOAI_ENV_osBrand					"osBrand"
 #define MOAI_ENV_osVersion					"osVersion"
+#define MOAI_ENV_osBuild					"osBuild"
 #define MOAI_ENV_resourceDirectory			"resourceDirectory"
 #define MOAI_ENV_screenDpi					"screenDpi"
 #define MOAI_ENV_systemLanguageCode			"systemLanguageCode"
@@ -42,6 +43,8 @@
 
 #define MOAI_ENV_iosIFA						"iosIFA"
 #define MOAI_ENV_iosIFV						"iosIFV"
+
+#define MOAI_ENV_androidScreenLayout		"androidScreenLayout"
 
 #define OS_BRAND_AMAZON			"Amazon"
 #define OS_BRAND_ANDROID 		"Android"

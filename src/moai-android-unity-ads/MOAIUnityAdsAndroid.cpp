@@ -68,6 +68,26 @@ int MOAIUnityAdsAndroid::_show ( lua_State* L ) {
 	return 1;
 }
 
+//----------------------------------------------------------------//
+/**	@name	show
+	@text	Request an ad display if a cached ad is available.
+	
+	@opt 	zone
+	@out 	boolean
+*/
+int MOAIUnityAdsAndroid::_getAdvertisingTrackingId ( lua_State* L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIUnityAdsAndroid, "" )
+	
+	JNI_GET_ENV( jvm, env );
+
+	MOAIJString jadId = ( jstring )self->CallStaticObjectMethod ( self->mJava_GetAdvertisingTrackingId );
+
+	JNI_GET_CSTRING( jadId, advertisingId );
+	state.Push ( advertisingId );
+	JNI_RELEASE_CSTRING( jadId, advertisingId );
+	return 1;
+}
+
 
 //================================================================//
 // MOAIUnityAdsAndroid
@@ -80,9 +100,10 @@ MOAIUnityAdsAndroid::MOAIUnityAdsAndroid () {
 
 	this->SetClass ( "com/moaisdk/unityads/MoaiUnityAds" );
 	
-	this->mJava_Init			= this->GetStaticMethod ( "init", "(Ljava/lang/String;ZZ)V" );
-	this->mJava_CanShow			= this->GetStaticMethod ( "canShow", "(Ljava/lang/String;)Z" );
-	this->mJava_Show			= this->GetStaticMethod ( "show", "(Ljava/lang/String;)Z" );
+	this->mJava_Init						= this->GetStaticMethod ( "init", "(Ljava/lang/String;ZZ)V" );
+	this->mJava_CanShow						= this->GetStaticMethod ( "canShow", "(Ljava/lang/String;)Z" );
+	this->mJava_Show						= this->GetStaticMethod ( "show", "(Ljava/lang/String;)Z" );
+	this->mJava_GetAdvertisingTrackingId	= this->GetStaticMethod ( "getAdvertisingTrackingId", "()Ljava/lang/String;" );
 }
 
 //----------------------------------------------------------------//
@@ -111,11 +132,12 @@ void MOAIUnityAdsAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "VIDEO_STARTED",			( u32 )VIDEO_STARTED );
 
 	luaL_Reg regTable [] = {
-		{ "canShow",			_canShow },
-		{ "getListener",		&MOAIGlobalEventSource::_getListener < MOAIUnityAdsAndroid > },
-		{ "init",				_init },
-		{ "setListener",		&MOAIGlobalEventSource::_setListener < MOAIUnityAdsAndroid > },
-		{ "show",				_show },
+		{ "canShow",						_canShow },
+		{ "getAdvertisingTrackingId",		_getAdvertisingTrackingId },
+		{ "getListener",					&MOAIGlobalEventSource::_getListener < MOAIUnityAdsAndroid > },
+		{ "init",							_init },
+		{ "setListener",					&MOAIGlobalEventSource::_setListener < MOAIUnityAdsAndroid > },
+		{ "show",							_show },
 		{ NULL, NULL }
 	};
 

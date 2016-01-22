@@ -10,8 +10,9 @@ import android.app.Activity;
 
 import com.moaisdk.core.*;
 
-import com.unity3d.ads.android.UnityAds;
+import com.unity3d.ads.android.data.UnityAdsDevice;
 import com.unity3d.ads.android.IUnityAdsListener;
+import com.unity3d.ads.android.UnityAds;
 
 //================================================================//
 // MoaiUnityAds
@@ -57,6 +58,22 @@ public class MoaiUnityAds {
 		}
 
 		return UnityAds.canShow ();
+	}
+
+	//----------------------------------------------------------------//
+	public static String getAdvertisingTrackingId () {
+
+		MoaiLog.i ( "MoaiUnityAds getAdvertisingTrackingId" );
+		String advertisingId;
+
+		try {
+			advertisingId = UnityAdsDevice.getAdvertisingTrackingId ();
+		} catch ( Exception e ) {
+			e.printStackTrace ();
+			return null;
+		}
+
+		return advertisingId;
 	}
 
 	//----------------------------------------------------------------//

@@ -26,11 +26,13 @@ private:
 	jmethodID	mJava_CanShow;
 	jmethodID	mJava_Init;
 	jmethodID	mJava_Show;
+	jmethodID	mJava_GetAdvertisingTrackingId;
 
 	//----------------------------------------------------------------//
-	static int  _canShow            ( lua_State* L );
-	static int  _init               ( lua_State* L );
-	static int  _show               ( lua_State* L );
+	static int	_canShow						( lua_State* L );
+	static int	_getAdvertisingTrackingId		( lua_State* L );
+	static int	_init							( lua_State* L );
+	static int	_show							( lua_State* L );
 
 public:
 	
