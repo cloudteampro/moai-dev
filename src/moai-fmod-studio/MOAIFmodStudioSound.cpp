@@ -22,37 +22,42 @@
 	
 		@in		MOAIFmodStudioSound self
 		@in		string filename			The path to the sound to load from file.
-		@in		boolean streaming		Whether the sound should be streamed from the data source, rather than preloaded.
-		@in		boolean	async			Whether the sound file should be loaded asynchronously.
+		@opt	boolean streaming		Whether the sound should be streamed from the data source, rather than preloaded.
+		@opt	boolean	async			Whether the sound file should be loaded asynchronously.
+		@opt	boolean	software		Enforce software decoder
+	
 		@out	nil
 
 	@overload
 
 		@in		MOAIFmodStudioSound self
-		@in		MOAIDataBuffer data		The MOAIDataBuffer that is storing sound data.  You must either provide a string or MOAIDataBuffer, but not both.
-		@in		boolean streaming		Whether the sound should be streamed from the data source, rather than preloaded.
+		@in		MOAIDataBuffer data		The MOAIDataBuffer that is storing sound data. You must either provide a string or MOAIDataBuffer, but not both.
+		@opt	boolean streaming		Whether the sound should be streamed from the data source, rather than preloaded.
+		@opt	boolean	software		Enforce software decoder
 		@out	nil
 */
 int MOAIFmodStudioSound::_load ( lua_State* L ) {
 	MOAI_LUA_SETUP ( MOAIFmodStudioSound, "U" )
 
-	bool streaming	= state.GetValue < bool >( 3, false );
-	bool async		= state.GetValue < bool >( 4, false );
-
 	if ( state.IsType( 2, LUA_TSTRING ) ) {
-
+		
 		cc8* filename	= state.GetValue < cc8* >( 2, "" );
-		memcpy( self->mFileName, filename, strlen ( filename ));
-		self->Load ( filename, streaming, async );
+		bool streaming	= state.GetValue < bool >( 3, false );
+		bool async		= state.GetValue < bool >( 4, false );
+		bool software	= state.GetValue < bool >( 5, false );
+		
+		self->Load ( filename, streaming, async, software );
 	}
 	else {
 		
 		MOAIDataBuffer* data = state.GetLuaObject < MOAIDataBuffer >( 2, true );
+		bool streaming	= state.GetValue < bool >( 3, false );
+		bool software	= state.GetValue < bool >( 4, false );
 		if ( data ) {
-			self->Load( *data, streaming );
+			self->Load ( *data, streaming );
 		}
 	}
-    self->mType = TYPE_UNSET;
+	self->mType = TYPE_UNSET;
 	return 0;
 }
 
@@ -76,8 +81,7 @@ int	MOAIFmodStudioSound::_loadBGM ( lua_State* L ) {
 	
 	if ( state.IsType( 2, LUA_TSTRING ) ) {
 
-		cc8* filename	= state.GetValue < cc8* >( 2, "" );
-		memcpy( self->mFileName, filename, strlen ( filename ));
+		cc8* filename = state.GetValue < cc8* >( 2, "" );
 		self->Load ( filename, true, false );
 	}
 	else {
@@ -87,7 +91,7 @@ int	MOAIFmodStudioSound::_loadBGM ( lua_State* L ) {
 			self->Load( *data, true );
 		}
 	}
-    self->mType = TYPE_BGM;
+	self->mType = TYPE_BGM;
 	return 0;
 }
 
@@ -111,7 +115,6 @@ int	MOAIFmodStudioSound::_loadSFX ( lua_State* L ) {
 	if ( state.IsType( 2, LUA_TSTRING ) ) {
 
 		cc8* filename	= state.GetValue < cc8* >( 2, "" );
-		memcpy( self->mFileName, filename, strlen ( filename ));
 		self->Load ( filename, false, true );
 	}
 	else {
@@ -120,7 +123,7 @@ int	MOAIFmodStudioSound::_loadSFX ( lua_State* L ) {
 			self->Load( *data, false );
 		}
 	}
-    self->mType = TYPE_SFX;
+	self->mType = TYPE_SFX;
 	return 0;
 }
 
@@ -150,13 +153,11 @@ MOAIFmodStudioSound::MOAIFmodStudioSound () :
 	mType ( TYPE_UNSET ) {
 
 	RTTI_SINGLE ( MOAILuaObject )
-
-	memset ( mFileName, 0, 128 );
 }
 
 //----------------------------------------------------------------//
 MOAIFmodStudioSound::~MOAIFmodStudioSound () {
-
+	
 	this->ReleaseSound ();
 }
 
@@ -193,8 +194,9 @@ void MOAIFmodStudioSound::Load ( MOAIDataBuffer& data, bool streaming ) {
 }
 
 //----------------------------------------------------------------//
-void MOAIFmodStudioSound::Load ( cc8* filename, bool streaming, bool async ) {
-
+void MOAIFmodStudioSound::Load ( cc8* filename, bool streaming, bool async, bool software ) {
+	
+	// TODO ??
 	async = false;
 	if ( this->mSound ) return;
 	
@@ -202,10 +204,7 @@ void MOAIFmodStudioSound::Load ( cc8* filename, bool streaming, bool async ) {
 	if ( !soundSys ) return;
 	
 	FMOD_MODE mode = 0;
-//	mode = streaming ? FMOD_CREATESTREAM : FMOD_CREATECOMPRESSEDSAMPLE;
-    
-    // FMOD_CREATESAMPLE is faster, use this.
-    mode = streaming ? FMOD_CREATESTREAM : FMOD_CREATESAMPLE;
+	mode = streaming ? FMOD_CREATESTREAM : FMOD_CREATESAMPLE;
 	mode |= async ? FMOD_NONBLOCKING : 0;
 	
 	FMOD_RESULT result;
@@ -216,8 +215,9 @@ void MOAIFmodStudioSound::Load ( cc8* filename, bool streaming, bool async ) {
 	info.cbsize = sizeof ( FMOD_CREATESOUNDEXINFO );
 	
 	#ifdef MOAI_OS_IPHONE
-    // Why??
-//		info.audioqueuepolicy = FMOD_AUDIOQUEUE_CODECPOLICY_SOFTWAREONLY;
+		if ( software ) {
+			info.audioqueuepolicy = FMOD_AUDIOQUEUE_CODECPOLICY_SOFTWAREONLY;
+		}
 	#endif
 
 	if ( streaming ) {
@@ -228,7 +228,7 @@ void MOAIFmodStudioSound::Load ( cc8* filename, bool streaming, bool async ) {
 	}
 	
 	if ( !MOAIFmodCheckError ( result )) return;
-    
+	
 	this->mSound = sound;
 }
 
@@ -238,8 +238,8 @@ void MOAIFmodStudioSound::ReleaseSound () {
 	if ( !this->mSound ) return;
 	
 	if ( MOAIFmodStudio::IsValid () && MOAIFmodStudio::Get ().GetSoundSys ()) {
-        FMOD_RESULT result = FMOD_Sound_Release ( this->mSound );
-        MOAIFmodCheckError ( result );
+		FMOD_RESULT result = FMOD_Sound_Release ( this->mSound );
+		MOAIFmodCheckError ( result );
 	}
 	this->mSound = 0;
 }

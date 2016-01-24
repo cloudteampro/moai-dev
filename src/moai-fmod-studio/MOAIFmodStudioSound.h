@@ -20,15 +20,14 @@ class MOAIFmodStudioSound :
 private:
 
 	FMOD_SOUND* mSound;
-	int mLoopCount;
-    u32 mType;
-	char mFileName[128];
+	int			mLoopCount;
+    u32			mType;
 
 	//----------------------------------------------------------------//
-	static int	_load				( lua_State* L );
-	static int	_loadBGM			( lua_State* L );
-	static int	_loadSFX			( lua_State* L );
-	static int	_release			( lua_State* L );
+	static int		_load				( lua_State* L );
+	static int		_loadBGM			( lua_State* L );
+	static int		_loadSFX			( lua_State* L );
+	static int		_release			( lua_State* L );
 
 public:
 
@@ -46,15 +45,13 @@ public:
 	DECL_LUA_FACTORY ( MOAIFmodStudioSound )
 
 	//----------------------------------------------------------------//
-				MOAIFmodStudioSound		();
-				~MOAIFmodStudioSound	();
-	char		*GetFileName			() { return mFileName; }
-	void		Load					( MOAIDataBuffer& data, bool streaming );
-	void		Load					( cc8* filename, bool streaming, bool async );
-	void		RegisterLuaClass		( MOAILuaState& state );
-	void		RegisterLuaFuncs		( MOAILuaState& state );
-	void		ReleaseSound			();
-	STLString	ToString				();
+					MOAIFmodStudioSound		();
+					~MOAIFmodStudioSound	();
+	void			Load					( MOAIDataBuffer& data, bool streaming );
+	void			Load					( cc8* filename, bool streaming, bool async, bool software = false );
+	void			RegisterLuaClass		( MOAILuaState& state );
+	void			RegisterLuaFuncs		( MOAILuaState& state );
+	void			ReleaseSound			();
 };
 
 #endif

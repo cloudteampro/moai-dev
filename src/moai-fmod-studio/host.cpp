@@ -2,6 +2,7 @@
 // http://getmoai.com
 
 #include <moai-fmod-studio/host.h>
+#include <moai-fmod-studio/MOAIFmodBeatDetector.h>
 #include <moai-fmod-studio/MOAIFmodStudio.h>
 #include <moai-fmod-studio/MOAIFmodStudioChannel.h>
 #include <moai-fmod-studio/MOAIFmodStudioSound.h>
@@ -35,6 +36,7 @@ void AKUFmodStudioContextInitialize () {
     
 	MOAIFmodStudio::Affirm ();
 	
+	REGISTER_LUA_CLASS ( MOAIFmodBeatDetector )
 	REGISTER_LUA_CLASS ( MOAIFmodStudio )
 	REGISTER_LUA_CLASS ( MOAIFmodStudioChannel )
 	REGISTER_LUA_CLASS ( MOAIFmodStudioSound )

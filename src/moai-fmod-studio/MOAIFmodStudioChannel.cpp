@@ -58,19 +58,19 @@ int MOAIFmodStudioChannel::_getVolume ( lua_State* L ) {
 
 //----------------------------------------------------------------//
 /**	@name	isPlaying
-    @text	Returns true if channel is playing.
+	@text	Returns true if channel is playing.
  
-    @in     MOAIFmodStudioChannel self
-    @out	boolean
+	@in     MOAIFmodStudioChannel self
+	@out	boolean
  */
 int MOAIFmodStudioChannel::_isPlaying ( lua_State* L ) {
 	
 	MOAI_LUA_SETUP ( MOAIFmodStudioChannel, "U" )
 	
 	bool isPlaying = self->IsPlaying ();
-    
-    state.Push ( isPlaying );
-    return 1;
+	
+	state.Push ( isPlaying );
+	return 1;
 }
 
 //----------------------------------------------------------------//
@@ -190,20 +190,20 @@ int MOAIFmodStudioChannel::_setPitch ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
-/**	@name	setReuse
-    @text	If set to true then channel won't stop previous playing sound and
-            will use a new fmod channel every time play is called.
+/**	@name	setReusable
+	@text	If set to true then channel won't stop previous playing sound and
+			will use a new fmod channel every time play is called.
 
-    @in		MOAIFmodStudioChannel self
-    @out	nil
+	@in		MOAIFmodStudioChannel self
+	@out	nil
 */
 int MOAIFmodStudioChannel::_setReusable ( lua_State *L ) {
-    MOAI_LUA_SETUP ( MOAIFmodStudioChannel, "UB" )
-    
-    bool reuse = state.GetValue < bool >( 2, true );
-    self->mReusable = reuse;
-    
-    return 0;
+	MOAI_LUA_SETUP ( MOAIFmodStudioChannel, "UB" )
+	
+	bool reuse = state.GetValue < bool >( 2, true );
+	self->mReusable = reuse;
+	
+	return 0;
 }
 
 //----------------------------------------------------------------//
@@ -322,16 +322,16 @@ float MOAIFmodStudioChannel::GetVolume () {
 
 //----------------------------------------------------------------//
 bool MOAIFmodStudioChannel::IsPlaying () {
-    
-    if ( this->mChannel ) {
-        
-        FMOD_BOOL playing = false;
-        FMOD_RESULT result = FMOD_Channel_IsPlaying ( this->mChannel, &playing );
-        if ( MOAIFmodCheckError ( result )) {
-            return ( bool ) playing;
-        }
-    }
-    return false;
+	
+	if ( this->mChannel ) {
+		
+		FMOD_BOOL playing = false;
+		FMOD_RESULT result = FMOD_Channel_IsPlaying ( this->mChannel, &playing );
+		if ( MOAIFmodCheckError ( result )) {
+			return ( bool ) playing;
+		}
+	}
+	return false;
 }
 
 //----------------------------------------------------------------//
@@ -357,64 +357,64 @@ MOAIFmodStudioChannel::~MOAIFmodStudioChannel () {
 void MOAIFmodStudioChannel::Play ( MOAIFmodStudioSound* sound, int loopCount ) {
 
 	if ( !this->mReusable ) {
-        this->Stop ();
-    }
+		this->Stop ();
+	}
 
 	this->mSound = sound;
 	if ( !sound ) return;
 	if ( !sound->mSound ) return;
 	
 	MOAIFmodStudio& system = MOAIFmodStudio::Get ();
-    
+	
 	FMOD_CHANNELGROUP* group = 0;
 	switch ( sound->GetType ()) {
-        case MOAIFmodStudioSound::TYPE_BGM:
-            group = system.GetBGMChannelGroup ();
-            break;
-            
-        case MOAIFmodStudioSound::TYPE_SFX:
-            group = system.GetSFXChannelGroup ();
-            break;
-            
-        default:
-            group = system.GetMainChannelGroup ();
-            break;
-    }
-    
-    FMOD_SYSTEM* soundSys = system.GetSoundSys ();
+		case MOAIFmodStudioSound::TYPE_BGM:
+			group = system.GetBGMChannelGroup ();
+			break;
+			
+		case MOAIFmodStudioSound::TYPE_SFX:
+			group = system.GetSFXChannelGroup ();
+			break;
+			
+		default:
+			group = system.GetMainChannelGroup ();
+			break;
+	}
+	
+	FMOD_SYSTEM* soundSys = system.GetSoundSys ();
 	if ( !soundSys ) return;
 	
 	FMOD_RESULT result;
 	FMOD_CHANNEL* channel = 0;
-    
-    result = FMOD_System_PlaySound ( soundSys, sound->mSound, group, true, &channel );
+	
+	result = FMOD_System_PlaySound ( soundSys, sound->mSound, group, true, &channel );
 	if ( !MOAIFmodCheckError ( result )) return;
 	
 	this->mChannel = channel;
 	result = FMOD_Channel_SetMode ( this->mChannel, FMOD_LOOP_NORMAL );
-    MOAIFmodCheckError ( result );
-    
+	MOAIFmodCheckError ( result );
+	
 	if ( mLooping ) {
 		result = FMOD_Channel_SetLoopCount ( this->mChannel, -1 );
-        MOAIFmodCheckError ( result );
+		MOAIFmodCheckError ( result );
 	}
 	else {
 		result = FMOD_Channel_SetLoopCount ( this->mChannel, loopCount );
-        MOAIFmodCheckError ( result );
+		MOAIFmodCheckError ( result );
 	}
 
 	
-    this->SetPan ( this->mPan );
-    this->SetPitch ( this->mPitch );
-    this->SetVolume ( this->mVolume );
+	this->SetPan ( this->mPan );
+	this->SetPitch ( this->mPitch );
+	this->SetVolume ( this->mVolume );
 	this->SetPaused ( this->mPaused );
 }
 
 //----------------------------------------------------------------//
 void MOAIFmodStudioChannel::RegisterLuaClass ( MOAILuaState& state ) {
 	
-    MOAINode::RegisterLuaClass ( state );
-    
+	MOAINode::RegisterLuaClass ( state );
+	
 	state.SetField ( -1, "ATTR_VOLUME", MOAIFmodStudioChannelAttr::Pack ( ATTR_VOLUME ));
 	state.SetField ( -1, "ATTR_PITCH", MOAIFmodStudioChannelAttr::Pack ( ATTR_PITCH ));
 	state.SetField ( -1, "ATTR_PAN", MOAIFmodStudioChannelAttr::Pack ( ATTR_PAN ));
@@ -423,8 +423,8 @@ void MOAIFmodStudioChannel::RegisterLuaClass ( MOAILuaState& state ) {
 //----------------------------------------------------------------//
 void MOAIFmodStudioChannel::RegisterLuaFuncs ( MOAILuaState& state ) {
 
-    MOAINode::RegisterLuaFuncs ( state );
-    
+	MOAINode::RegisterLuaFuncs ( state );
+	
 	luaL_Reg regTable [] = {
 		{ "getPan", 		_getPan },
 		{ "getPitch", 		_getPitch },
@@ -437,7 +437,7 @@ void MOAIFmodStudioChannel::RegisterLuaFuncs ( MOAILuaState& state ) {
 		{ "setLooping",		_setLooping },
 		{ "setPan", 		_setPan },
 		{ "setPitch", 		_setPitch },
-        { "setReusable",    _setReusable },
+		{ "setReusable",    _setReusable },
 		{ "setVolume",		_setVolume },
 		{ "stop",			_stop },
 		{ NULL, NULL }
@@ -452,7 +452,7 @@ void MOAIFmodStudioChannel::SetPaused ( bool paused ) {
 	this->mPaused = paused;
 	if ( !this->mChannel ) return;
 	FMOD_RESULT result = FMOD_Channel_SetPaused ( this->mChannel, this->mPaused );
-    MOAIFmodCheckError ( result );
+	MOAIFmodCheckError ( result );
 }
 
 //----------------------------------------------------------------//
@@ -461,7 +461,7 @@ void MOAIFmodStudioChannel::SetPan ( float pan ) {
 	this->mPan = pan;
 	if ( !this->mChannel ) return;
 	FMOD_RESULT result = FMOD_Channel_SetPan ( this->mChannel, this->mPan );
-    MOAIFmodCheckError ( result );
+	MOAIFmodCheckError ( result );
 }
 
 //----------------------------------------------------------------//
@@ -470,7 +470,7 @@ void MOAIFmodStudioChannel::SetPitch ( float pitch ) {
 	this->mPitch = pitch;
 	if ( !this->mChannel ) return;
 	FMOD_RESULT result = FMOD_Channel_SetPitch ( this->mChannel, this->mPitch );
-    MOAIFmodCheckError ( result );
+	MOAIFmodCheckError ( result );
 }
 
 //----------------------------------------------------------------//
@@ -479,7 +479,7 @@ void MOAIFmodStudioChannel::SetVolume ( float volume ) {
 	this->mVolume = volume;
 	if ( !this->mChannel ) return;
 	FMOD_RESULT result = FMOD_Channel_SetVolume ( this->mChannel, this->mVolume );
-    MOAIFmodCheckError ( result );
+	MOAIFmodCheckError ( result );
 }
 
 //----------------------------------------------------------------//
@@ -491,6 +491,6 @@ void MOAIFmodStudioChannel::Stop () {
 		MOAIFmodCheckError ( result );
 	}
 	
-    this->mChannel = 0;
+	this->mChannel = 0;
 }
 

@@ -20,24 +20,24 @@ class MOAIFmodStudio :
 	public MOAIGlobalClass < MOAIFmodStudio, MOAILuaObject > {
 private:
 
-	FMOD_SYSTEM* 		mSoundSys;
-	FMOD_CHANNELGROUP* 	mMainChannelGroup;
-	FMOD_CHANNELGROUP* 	mBGMChannelGroup;
-	FMOD_CHANNELGROUP* 	mSFXChannelGroup;
+	FMOD_SYSTEM*		mSoundSys;
+	FMOD_CHANNELGROUP*	mMainChannelGroup;
+	FMOD_CHANNELGROUP*	mBGMChannelGroup;
+	FMOD_CHANNELGROUP*	mSFXChannelGroup;
 
 	//----------------------------------------------------------------//
-	static int	_getMemoryStats			( lua_State* L );
-	static int  _getVolume				( lua_State* L );
-	static int  _getBGMVolume			( lua_State* L );
-	static int  _getSFXVolume			( lua_State* L );
-	static int	_init					( lua_State* L );
-	static int  _mute					( lua_State* L );
-	static int  _muteBGM				( lua_State* L );
-	static int  _muteSFX				( lua_State* L );
-	static int  _setVolume				( lua_State* L );
-	static int  _setBGMVolume			( lua_State* L );
-    static int  _setLogEnabled          ( lua_State* L );
-    static int  _setSFXVolume			( lua_State* L );
+	static int		_getMemoryStats		( lua_State* L );
+	static int		_getVolume			( lua_State* L );
+	static int		_getBGMVolume		( lua_State* L );
+	static int		_getSFXVolume		( lua_State* L );
+	static int		_init				( lua_State* L );
+	static int		_mute				( lua_State* L );
+	static int		_muteBGM			( lua_State* L );
+	static int		_muteSFX			( lua_State* L );
+	static int		_setVolume			( lua_State* L );
+	static int		_setBGMVolume		( lua_State* L );
+    static int		_setLogEnabled		( lua_State* L );
+    static int		_setSFXVolume		( lua_State* L );
 
 public:
 
@@ -61,7 +61,6 @@ public:
 	void			SetVolume			( float volume, FMOD_CHANNELGROUP* group );
 	void			Suspend				();
 	void			Update				();
-	STLString		ToString			();
 };
 
 #endif
