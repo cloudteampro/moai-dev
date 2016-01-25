@@ -17,17 +17,37 @@ extern JavaVM* jvm;
 
 //----------------------------------------------------------------//
 int MOAIAppAndroid::_exit ( lua_State* L ) {
-    MOAILuaState state ( L );
+	MOAILuaState state ( L );
 
-    JNI_GET_ENV ( jvm, env );
+	JNI_GET_ENV ( jvm, env );
 
-    jclass t_class = env->FindClass ( "com/moaisdk/core/Moai" );
-    jmethodID t_method = env->GetStaticMethodID ( t_class, "quitApp", "()V" );
+	jclass t_class = env->FindClass ( "com/moaisdk/core/Moai" );
+	jmethodID t_method = env->GetStaticMethodID ( t_class, "quitApp", "()V" );
 
-    if ( t_class != NULL && t_method ) {
-        env->CallStaticVoidMethod ( t_class, t_method );
-    }
-    return 0;
+	if ( t_class != NULL && t_method ) {
+		env->CallStaticVoidMethod ( t_class, t_method );
+	}
+	return 0;
+}
+
+//----------------------------------------------------------------//
+// TODO: doxygen
+// 
+// This method will try to fetch android advertising id settings.
+// It works only if built with google play services ads.
+// This is async method, after completion it puts values into MOAIEnvironment.androidAdvertisingId and MOAIEnvironment.androidLimitedAdTracking
+int MOAIAppAndroid::_fetchAdvertisingId ( lua_State* L ) {
+	MOAILuaState state ( L );
+	
+	JNI_GET_ENV ( jvm, env );
+	jclass t_class = env->FindClass ( "com/moaisdk/core/Moai" );
+	jmethodID t_method = env->GetStaticMethodID ( t_class, "fetchAdvertisingId", "()V" );
+
+	if ( t_class != NULL && t_method ) {
+		env->CallStaticVoidMethod ( t_class, t_method );
+	}
+
+	return 0;
 }
 
 //----------------------------------------------------------------//
@@ -60,18 +80,18 @@ int MOAIAppAndroid::_getUTCTime ( lua_State* L ) {
 
 	long outVal = 0;
 	jclass moai = env->FindClass ( "com/moaisdk/core/Moai" );
-    if ( moai == NULL ) {
+	if ( moai == NULL ) {
 
 		ZLLogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find java class %s", "com/ziplinegames/moai/Moai" );
 
-    } else {
+	} else {
 
-    	jmethodID getUTCTime = env->GetStaticMethodID ( moai, "getUTCTime", "()J" );
-    	if ( getUTCTime == NULL ) {
+		jmethodID getUTCTime = env->GetStaticMethodID ( moai, "getUTCTime", "()J" );
+		if ( getUTCTime == NULL ) {
 
 			ZLLogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find static java method %s", "getUTCTime" );
 
-    	} else {
+		} else {
 
 			outVal = env->CallStaticIntMethod ( moai, getUTCTime );
 		}
@@ -96,20 +116,20 @@ int MOAIAppAndroid::_getStatusBarHeight ( lua_State* L ) {
 
 	int outVal = 0;
 	jclass moai = env->FindClass ( "com/moaisdk/core/Moai" );
-    if ( moai == NULL ) {
+	if ( moai == NULL ) {
 
 		ZLLogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find java class %s", "com/moaisdk/core/Moai" );
 
-    }
-    else {
+	}
+	else {
 
-    	jmethodID getStatusBarHeight = env->GetStaticMethodID ( moai, "getStatusBarHeight", "()I" );
-    	if ( getStatusBarHeight == NULL ) {
+		jmethodID getStatusBarHeight = env->GetStaticMethodID ( moai, "getStatusBarHeight", "()I" );
+		if ( getStatusBarHeight == NULL ) {
 
 			ZLLogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find static java method %s", "getStatusBarHeight" );
 
-    	}
-    	else {
+		}
+		else {
 
 			outVal = env->CallStaticIntMethod ( moai, getStatusBarHeight );
 		}
@@ -122,36 +142,36 @@ int MOAIAppAndroid::_getStatusBarHeight ( lua_State* L ) {
 
 //----------------------------------------------------------------//
 /** @lua    getSystemUptime
-    @text   Returns device uptime in seconds. 
+	@text   Returns device uptime in seconds. 
 
-    @out    number uptime
+	@out    number uptime
 */
 int MOAIAppAndroid::_getSystemUptime ( lua_State* L ) {
 
-    MOAILuaState state ( L );
+	MOAILuaState state ( L );
 
-    JNI_GET_ENV ( jvm, env );
+	JNI_GET_ENV ( jvm, env );
 
-    long outVal = 0;
-    jclass moai = env->FindClass ( "com/moaisdk/core/Moai" );
-    if ( moai == NULL ) {
+	long outVal = 0;
+	jclass moai = env->FindClass ( "com/moaisdk/core/Moai" );
+	if ( moai == NULL ) {
 
-        ZLLogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find java class %s", "com/moaisdk/core/Moai" );
-    }
-    else {
+		ZLLogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find java class %s", "com/moaisdk/core/Moai" );
+	}
+	else {
 
-        jmethodID getSystemUptime = env->GetStaticMethodID ( moai, "getSystemUptime", "()J" );
-        if ( getSystemUptime == NULL ) {
+		jmethodID getSystemUptime = env->GetStaticMethodID ( moai, "getSystemUptime", "()J" );
+		if ( getSystemUptime == NULL ) {
 
-            ZLLogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find static java method %s", "getSystemUptime" );
-        } else {
+			ZLLogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find static java method %s", "getSystemUptime" );
+		} else {
 
-            outVal = env->CallStaticLongMethod ( moai, getSystemUptime );
-        }
-    }
+			outVal = env->CallStaticLongMethod ( moai, getSystemUptime );
+		}
+	}
 
-    lua_pushnumber ( L, outVal );
-    return 1;
+	lua_pushnumber ( L, outVal );
+	return 1;
 }
 
 //----------------------------------------------------------------//
@@ -174,16 +194,16 @@ int MOAIAppAndroid::_openURL ( lua_State* L ) {
 	
 		ZLLogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find java class %s", "com/moaisdk/core/Moai" );
 
-    }
-    else {
+	}
+	else {
 
-    	jmethodID openURL = env->GetStaticMethodID ( moai, "openURL", "(Ljava/lang/String;)V" );
+		jmethodID openURL = env->GetStaticMethodID ( moai, "openURL", "(Ljava/lang/String;)V" );
 
-    	if ( openURL == NULL ) {
+		if ( openURL == NULL ) {
 
 			ZLLogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find static java method %s", "openURL" );
-    	}
-    	else {
+		}
+		else {
 
 			ZLLogF ( ZLLog::CONSOLE, "MOAIAppAndroid: calling java openURL" );
 
@@ -196,41 +216,41 @@ int MOAIAppAndroid::_openURL ( lua_State* L ) {
 
 //----------------------------------------------------------------//
 /**	@lua	sendMail
-    @text Send a mail with the passed in default values
+	@text Send a mail with the passed in default values
 
-    @in	string recipient
-    @in	string subject
-    @in	string message
-    @out	nil
+	@in	string recipient
+	@in	string subject
+	@in	string message
+	@out	nil
 */
 int	MOAIAppAndroid::_sendMail ( lua_State* L ) {
-    MOAILuaState state ( L );
+	MOAILuaState state ( L );
 
 	cc8* recipient = state.GetValue < cc8* >( 1, "" );
 	cc8* subject = state.GetValue < cc8* >( 2, "" );
 	cc8* message = state.GetValue < cc8* >( 3, "" );
 
-    JNI_GET_ENV ( jvm, env );
+	JNI_GET_ENV ( jvm, env );
 
 	MOAIJString jrecipient = JNI_GET_JSTRING ( recipient );
 	MOAIJString jsubject = JNI_GET_JSTRING ( subject );
 	MOAIJString jmessage = JNI_GET_JSTRING ( message );
 
-    jclass moai = env->FindClass ( "com/moaisdk/core/Moai" );
-    if ( moai == NULL ) {
+	jclass moai = env->FindClass ( "com/moaisdk/core/Moai" );
+	if ( moai == NULL ) {
 
 		ZLLogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find java class %s", "com/moaisdk/core/Moai" );
 
-    }
-    else {
+	}
+	else {
 
-    	jmethodID sendMail = env->GetStaticMethodID ( moai, "sendMail", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V" );
-    	if ( sendMail == NULL ) {
+		jmethodID sendMail = env->GetStaticMethodID ( moai, "sendMail", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V" );
+		if ( sendMail == NULL ) {
 
 			ZLLogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find static java method %s", "sendMail" );
 
-    	}
-    	else {
+		}
+		else {
 
 			env->CallStaticVoidMethod ( moai, sendMail, ( jstring )jrecipient, ( jstring )jsubject, ( jstring )jmessage );
 		}
@@ -264,19 +284,19 @@ int MOAIAppAndroid::_share ( lua_State* L ) {
 	MOAIJString jtext = JNI_GET_JSTRING ( text );
 
 	jclass moai = env->FindClass ( "com/moaisdk/core/Moai" );
-    if ( moai == NULL ) {
+	if ( moai == NULL ) {
 
 		ZLLogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find java class %s", "com/moaisdk/core/Moai" );
-    }
-    else {
+	}
+	else {
 
-    	jmethodID share = env->GetStaticMethodID ( moai, "share", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V" );
-    	if ( share == NULL ) {
+		jmethodID share = env->GetStaticMethodID ( moai, "share", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V" );
+		if ( share == NULL ) {
 
 			ZLLogF ( ZLLog::CONSOLE, "MOAIAppAndroid: Unable to find static java method %s", "share" );
 
-    	}
-    	else {
+		}
+		else {
 
 			env->CallStaticVoidMethod ( moai, share, ( jstring )jprompt, ( jstring )jsubject, ( jstring )jtext );
 		}
@@ -288,21 +308,21 @@ int MOAIAppAndroid::_share ( lua_State* L ) {
 //----------------------------------------------------------------//
 // TODO: doxygen
 int MOAIAppAndroid::_takePicture( lua_State* L ) {
-    MOAILuaState state( L);
+	MOAILuaState state( L);
 
-    JNI_GET_ENV( jvm, env );
+	JNI_GET_ENV( jvm, env );
 
-    jclass      t_class;
-    jmethodID   t_mid;
+	jclass      t_class;
+	jmethodID   t_mid;
 
-    t_class = env->FindClass( "com/moaisdk/core/MoaiCamera" );
+	t_class = env->FindClass( "com/moaisdk/core/MoaiCamera" );
 	t_mid = env->GetStaticMethodID( t_class, "takePicture", "()V" );
 
-    if( t_class != NULL && t_mid != NULL ) {
-        	env->CallStaticVoidMethod( t_class, t_mid );
-    }
+	if( t_class != NULL && t_mid != NULL ) {
+			env->CallStaticVoidMethod( t_class, t_mid );
+	}
 
-    return 0;
+	return 0;
 }
 
 //================================================================//
@@ -354,18 +374,19 @@ void MOAIAppAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "EVENT_MEMORY_WARNING",	( u32 )EVENT_MEMORY_WARNING );
 
 	luaL_Reg regTable [] = {
-        { "exit",                   _exit },
-        { "getPictureCode",			_getPictureCode },
-        { "getPicturePath",			_getPicturePath },
+		{ "exit",                   _exit },
+		{ "fetchAdvertisingId",		_fetchAdvertisingId },
+		{ "getPictureCode",			_getPictureCode },
+		{ "getPicturePath",			_getPicturePath },
 		{ "getListener",			&MOAIGlobalEventSource::_getListener < MOAIAppAndroid > },
 		{ "getUTCTime",				_getUTCTime },
 		{ "getStatusBarHeight",		_getStatusBarHeight },
-        { "getSystemUptime",        _getSystemUptime },
+		{ "getSystemUptime",        _getSystemUptime },
 		{ "sendMail",				_sendMail },
 		{ "openURL",				_openURL },
 		{ "setListener",			&MOAIGlobalEventSource::_setListener < MOAIAppAndroid > },
 		{ "share",					_share },
-        { "takePicture",            _takePicture },
+		{ "takePicture",            _takePicture },
 		{ NULL, NULL }
 	};
 

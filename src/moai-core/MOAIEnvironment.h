@@ -44,8 +44,6 @@
 #define MOAI_ENV_iosIFA						"iosIFA"
 #define MOAI_ENV_iosIFV						"iosIFV"
 
-#define MOAI_ENV_androidScreenLayout		"androidScreenLayout"
-
 #define OS_BRAND_AMAZON			"Amazon"
 #define OS_BRAND_ANDROID 		"Android"
 #define OS_BRAND_IOS 			"iOS"

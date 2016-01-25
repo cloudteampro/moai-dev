@@ -230,6 +230,40 @@
 	}
 
 	//----------------------------------------------------------------//
+	extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_core_Moai_AKUEnvironmentSetBool ( JNIEnv* env, jclass obj, jstring jkey, jboolean jvalue ) {
+		
+		if ( !MOAIEnvironment::IsValid ()) return;
+
+		JNI_GET_CSTRING ( jkey, key );
+		MOAIEnvironment::Get ().SetValue ( key,	( bool )jvalue );
+		JNI_RELEASE_CSTRING ( jkey, key );
+	}
+
+	//----------------------------------------------------------------//
+	extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_core_Moai_AKUEnvironmentSetInt ( JNIEnv* env, jclass obj, jstring jkey, jint jvalue ) {
+		
+		if ( !MOAIEnvironment::IsValid ()) return;
+
+		JNI_GET_CSTRING ( jkey, key );
+		MOAIEnvironment::Get ().SetValue ( key,	( int )jvalue );
+		JNI_RELEASE_CSTRING ( jkey, key );
+	}
+
+	//----------------------------------------------------------------//
+	extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_core_Moai_AKUEnvironmentSetString ( JNIEnv* env, jclass obj, jstring jkey, jstring jvalue ) {
+		
+		if ( !MOAIEnvironment::IsValid ()) return;
+
+		JNI_GET_CSTRING ( jkey, key );
+		JNI_GET_CSTRING ( jvalue, value );
+		
+		MOAIEnvironment::Get ().SetValue ( key,	value );
+
+		JNI_RELEASE_CSTRING ( jkey, key );
+		JNI_RELEASE_CSTRING ( jvalue, value );
+	}
+
+	//----------------------------------------------------------------//
 	extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_core_Moai_AKUFinalize	( JNIEnv* env, jclass obj ) {
 
         AKUModulesAndroidAppFinalize ();

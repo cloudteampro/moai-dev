@@ -182,6 +182,9 @@ public class Moai {
 	protected static native void 		AKUEnqueueLocationEvent			( int deviceId, int sensorId, double longitude, double latitude, double altitude, float hAccuracy, float vAccuracy, float speed );
 	protected static native void 		AKUEnqueueCompassEvent			( int deviceId, int sensorId, float heading );
 	protected static native void 		AKUEnqueueTouchEvent 			( int deviceId, int sensorId, int touchId, boolean down, int x, int y, int tapCount );
+	protected static native void		AKUEnvironmentSetBool			( String key, boolean value );
+	protected static native void		AKUEnvironmentSetInt			( String key, int value );
+	protected static native void		AKUEnvironmentSetString			( String key, String value );
 	protected static native void 		AKUFinalize 					();
 	protected static native void		AKUModulesUpdate				();
 	protected static native void 		AKUMountVirtualDirectory 		( String virtualPath, String archive );
@@ -194,7 +197,7 @@ public class Moai {
 	protected static native void		AKUSetConnectionType 			( long connectionType );
 	protected static native void 		AKUSetContext 					( int contextId );
 	protected static native void		AKUSetDeviceLocale				( String langCode, String countryCode );
-	protected static native void 		AKUSetDeviceProperties 			( String appName, String appId, String appVersion, String appVersionCode, String abi, String devBrand, String devName, String devManufacturer, String devModel, String devProduct, int numProcessors, String osBrand, String osVersion, String osBuild, String udid, int screenLayout );
+	protected static native void 		AKUSetDeviceProperties 			( String appName, String appId, String appVersion, String appVersionCode, String abi, String devBrand, String devName, String devManufacturer, String devModel, String devProduct, int numProcessors, String osBrand, String osVersion, String osBuild, String udid );
 	protected static native void 		AKUSetDocumentDirectory 		( String path );
 	protected static native void 		AKUSetInputConfigurationName	( String name );
 	protected static native void 		AKUSetInputDevice		 		( int deviceId, String name );
@@ -381,7 +384,11 @@ public class Moai {
 				screenLayout = 0;
 			}
 
-			AKUSetDeviceProperties ( appName, appId, appVersion, appVersionCode, Build.CPU_ABI, Build.BRAND, Build.DEVICE, Build.MANUFACTURER, Build.MODEL, Build.PRODUCT, Runtime.getRuntime ().availableProcessors (), "Android", Build.VERSION.RELEASE, Build.ID, udid, screenLayout );
+			AKUSetDeviceProperties ( appName, appId, appVersion, appVersionCode, Build.CPU_ABI, Build.BRAND, Build.DEVICE, Build.MANUFACTURER, Build.MODEL, Build.PRODUCT, Runtime.getRuntime ().availableProcessors (), "Android", Build.VERSION.RELEASE, Build.ID, udid );
+
+			AKUEnvironmentSetInt ( "androidScreenLayout", screenLayout );
+			AKUEnvironmentSetString ( "androidBuildFingerprint", Build.FINGERPRINT );
+
 			AKUSetDeviceLocale ( Locale.getDefault ().getLanguage (), Locale.getDefault ().getCountry ());
 		}
 	}
@@ -625,6 +632,46 @@ public class Moai {
 	//================================================================//
 	// Miscellaneous JNI callback methods
 	//================================================================//
+
+	//----------------------------------------------------------------//
+	public static void fetchAdvertisingId () {
+
+		new Thread ( new Runnable () {
+			public void run () {
+				try {
+					Class < ? > GooglePlayServicesUtil = Class.forName ( "com.google.android.gms.common.GooglePlayServicesUtil" );
+					
+					Method isGooglePlayServicesAvailable = GooglePlayServicesUtil.getMethod ( "isGooglePlayServicesAvailable", Context.class );
+
+					if ( isGooglePlayServicesAvailable.invoke ( null, sActivity ).equals ( 0 )) { // ConnectionResult.SUCCESS
+						
+						Class < ? > AdvertisingClientId = Class.forName ( "com.google.android.gms.ads.identifier.AdvertisingIdClient" );
+						Method getAdvertisingIdInfo = AdvertisingClientId.getMethod ( "getAdvertisingIdInfo", Context.class );
+						Object advertisingTrackingInfo = getAdvertisingIdInfo.invoke ( null, sActivity );
+
+						Class < ? > Info = Class.forName ( "com.google.android.gms.ads.identifier.AdvertisingIdClient$Info" );
+						Method getId = Info.getMethod ( "getId" );
+						String advertisingIdentifier = ( String ) getId.invoke ( advertisingTrackingInfo );
+
+						Method isLimitAdTrackingEnabled = Info.getMethod ( "isLimitAdTrackingEnabled" );
+						Boolean limitedAdvertisingTracking = ( Boolean ) isLimitAdTrackingEnabled.invoke ( advertisingTrackingInfo );
+
+						MoaiLog.i ( "============ AdvertisingClientId " + advertisingIdentifier );
+
+						synchronized ( sAkuLock ) {
+							AKUEnvironmentSetString ( "androidAdvertisingId", advertisingIdentifier );
+							AKUEnvironmentSetBool ( "androidLimitedAdTracking", limitedAdvertisingTracking );
+						}
+
+					} else {
+						MoaiLog.i ( "Google Play Services not integrated, using fallback" );
+					}
+				} catch ( Exception e ) {
+					MoaiLog.i ( "Exception while trying to access Google Play Services " + e );
+				}
+			}
+		}).start ();
+	}
 
 	//----------------------------------------------------------------//
 	public static Activity getActivity () {
