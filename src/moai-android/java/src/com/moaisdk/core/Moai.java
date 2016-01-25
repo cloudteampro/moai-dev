@@ -656,8 +656,6 @@ public class Moai {
 						Method isLimitAdTrackingEnabled = Info.getMethod ( "isLimitAdTrackingEnabled" );
 						Boolean limitedAdvertisingTracking = ( Boolean ) isLimitAdTrackingEnabled.invoke ( advertisingTrackingInfo );
 
-						MoaiLog.i ( "============ AdvertisingClientId " + advertisingIdentifier );
-
 						synchronized ( sAkuLock ) {
 							AKUEnvironmentSetString ( "androidAdvertisingId", advertisingIdentifier );
 							AKUEnvironmentSetBool ( "androidLimitedAdTracking", limitedAdvertisingTracking );

@@ -370,7 +370,7 @@
 	}
 
 	//----------------------------------------------------------------//
-	extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_core_Moai_AKUSetDeviceProperties ( JNIEnv* env, jclass obj, jstring jappName, jstring jappId, jstring jappVersionName, jstring jappVersionCode, jstring jabi, jstring jdevBrand, jstring jdevName, jstring jdevManufacturer, jstring jdevModel, jstring jdevProduct, jint jnumProcessors, jstring josBrand, jstring josVersion, jstring josBuild, jstring judid, jint jscreenLayout ) {
+	extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_core_Moai_AKUSetDeviceProperties ( JNIEnv* env, jclass obj, jstring jappName, jstring jappId, jstring jappVersionName, jstring jappVersionCode, jstring jabi, jstring jdevBrand, jstring jdevName, jstring jdevManufacturer, jstring jdevModel, jstring jdevProduct, jint jnumProcessors, jstring josBrand, jstring josVersion, jstring josBuild, jstring judid ) {
 
 		JNI_GET_CSTRING ( jappName, appName );
 		JNI_GET_CSTRING ( jappId, appId );
@@ -399,12 +399,11 @@
 		environment.SetValue ( MOAI_ENV_devManufacturer,		devManufacturer );
 		environment.SetValue ( MOAI_ENV_devModel,				devModel );
 		environment.SetValue ( MOAI_ENV_devProduct,				devProduct );
-		environment.SetValue ( MOAI_ENV_numProcessors,			jnumProcessors );
+		environment.SetValue ( MOAI_ENV_numProcessors,			( int )jnumProcessors );
 		environment.SetValue ( MOAI_ENV_osBrand,				osBrand );
 		environment.SetValue ( MOAI_ENV_osVersion,				osVersion );
 		environment.SetValue ( MOAI_ENV_osBuild,				osBuild );
 		environment.SetValue ( MOAI_ENV_udid,					udid );
-		environment.SetValue ( MOAI_ENV_androidScreenLayout,	jscreenLayout );
 
 		JNI_RELEASE_CSTRING ( jappName, appName );
 		JNI_RELEASE_CSTRING ( jappId, appId );
