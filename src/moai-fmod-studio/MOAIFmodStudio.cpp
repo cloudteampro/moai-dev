@@ -143,6 +143,8 @@ int MOAIFmodStudio::_init ( lua_State* L ) {
 	MOAILuaState state ( L );
 	
 	u32 channels = state.GetValue < u32 >( 1, 100 );
+	
+	// TODO: sampling rate & buffer size
 	MOAIFmodStudio::Get ().OpenSoundSystem ( channels );
 
 	return 0;
@@ -294,7 +296,7 @@ void MOAIFmodStudio::OpenSoundSystem ( u32 channels ) {
 
 	result = FMOD_System_Create ( &this->mSoundSys ); // Create the main system object.
 	if ( !MOAIFmodCheckError ( result ) ) return;
-
+	
 	result = FMOD_System_Init ( this->mSoundSys, channels, FMOD_INIT_NORMAL, 0 );
 	if ( !MOAIFmodCheckError ( result ) ) return;
 	
@@ -310,21 +312,19 @@ void MOAIFmodStudio::OpenSoundSystem ( u32 channels ) {
 	result = FMOD_System_SetFileSystem ( this->mSoundSys, &fmodFileOpen, &fmodFileClose, &fmodFileRead, &fmodFileSeek, 0, 0, -1 );
 	MOAIFmodCheckError ( result );
 	
-	unsigned int blocksize;
-	int numblocks;
-	int samplerate;
-	float ms;
-	
-	FMOD_System_GetDSPBufferSize ( this->mSoundSys, &blocksize, &numblocks );
-	FMOD_System_GetSoftwareFormat(this->mSoundSys, &samplerate, 0, 0 );
-
-	ms = (float)blocksize * 1000.0f / (float)samplerate;
-	
-	printf ( "Sample rate            = %d\n", samplerate );
-	printf ( "Block size             = %d\n", blocksize );
-	printf ( "Mixer blocksize        = %.02f ms\n", ms );
-	printf ( "Mixer Total buffersize = %.02f ms\n", ms * numblocks );
-	printf ( "Mixer Average Latency  = %.02f ms\n", ms * (( float )numblocks - 1.5f ));
+//	unsigned int blocksize;
+//	int numblocks;
+//	int samplerate;
+//	float ms;
+//	
+//	FMOD_System_GetDSPBufferSize ( this->mSoundSys, &blocksize, &numblocks );
+//	FMOD_System_GetSoftwareFormat(this->mSoundSys, &samplerate, 0, 0 );
+//
+//	MOAILogF ( 0, ZLLog::LOG_REPORT, "Sample rate            = %d\n", samplerate );
+//	MOAILogF ( 0, ZLLog::LOG_REPORT, "Block size             = %d\n", blocksize );
+//	MOAILogF ( 0, ZLLog::LOG_REPORT, "Mixer blocksize        = %.02f ms\n", ms );
+//	MOAILogF ( 0, ZLLog::LOG_REPORT, "Mixer Total buffersize = %.02f ms\n", ms * numblocks );
+//	MOAILogF ( 0, ZLLog::LOG_REPORT, "Mixer Average Latency  = %.02f ms\n", ms * (( float )numblocks - 1.5f ));
 }
 
 //----------------------------------------------------------------//
