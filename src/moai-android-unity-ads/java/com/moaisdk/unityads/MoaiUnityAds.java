@@ -61,22 +61,6 @@ public class MoaiUnityAds {
 	}
 
 	//----------------------------------------------------------------//
-	public static String getAdvertisingTrackingId () {
-
-		MoaiLog.i ( "MoaiUnityAds getAdvertisingTrackingId" );
-		String advertisingId;
-
-		try {
-			advertisingId = UnityAdsDevice.getAdvertisingTrackingId ();
-		} catch ( Exception e ) {
-			e.printStackTrace ();
-			return null;
-		}
-
-		return advertisingId;
-	}
-
-	//----------------------------------------------------------------//
 	public static void init ( String gameID, boolean debug, boolean test ) {
 
 		MoaiLog.i ( " MoaiUnityAds: init with gameID" );
