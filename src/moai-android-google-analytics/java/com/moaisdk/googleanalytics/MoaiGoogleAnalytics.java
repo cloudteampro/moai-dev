@@ -6,6 +6,8 @@
 
 package com.ziplinegames.moai;
 
+import com.moaisdk.core.*;
+
 import android.app.Activity;
 
 import com.google.analytics.tracking.android.EasyTracker;
