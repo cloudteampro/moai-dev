@@ -53,7 +53,7 @@ int MOAIGooglePlayServicesGamesAndroid::_authenticatePlayer ( lua_State* L ) {
 	@out	table		achievements
 */
 int MOAIGooglePlayServicesGamesAndroid::_getAchievements ( lua_State* L ) {
-	
+
 	return 0;
 }
 
@@ -63,7 +63,7 @@ int MOAIGooglePlayServicesGamesAndroid::_getAchievements ( lua_State* L ) {
 	@out	string 		name
 */
 int MOAIGooglePlayServicesGamesAndroid::_getPlayerAlias ( lua_State* L ) {
-	
+
 	JNI_GET_ENV ( jvm, env );
 	MOAILuaState state ( L );
 
@@ -96,7 +96,7 @@ int MOAIGooglePlayServicesGamesAndroid::_getPlayerAlias ( lua_State* L ) {
 	@out	string 		name
 */
 int MOAIGooglePlayServicesGamesAndroid::_getPlayerId ( lua_State* L ) {
-	
+
 	JNI_GET_ENV ( jvm, env );
 	MOAILuaState state ( L );
 
@@ -129,7 +129,7 @@ int MOAIGooglePlayServicesGamesAndroid::_getPlayerId ( lua_State* L ) {
 	@out	table		scores
 */
 int MOAIGooglePlayServicesGamesAndroid::_getScores ( lua_State* L ) {
-	
+
 	return 0;
 }
 
@@ -342,13 +342,13 @@ int MOAIGooglePlayServicesGamesAndroid::_reportAchievementProgress ( lua_State* 
 	@out	nil
 */
 int MOAIGooglePlayServicesGamesAndroid::_setGetScoresCallback ( lua_State* L ) {
-	
+
 	return 0;
 }
 
 // //----------------------------------------------------------------//
 // /**	@name	showGameCenter
-// 	@text	
+// 	@text
 
 // 	@out	nil
 // */
@@ -434,9 +434,13 @@ void MOAIGooglePlayServicesGamesAndroid::RegisterLuaClass ( MOAILuaState& state 
 	state.SetField ( -1, "VIEW_ACHIEVEMENTS",		( u32 )VIEW_ACHIEVEMENTS );
 	state.SetField ( -1, "VIEW_CHALLENGES",			( u32 )VIEW_CHALLENGES );
 
+	state.SetField ( -1, "ON_SIGN_IN_SUCCEEDED",					( u32 )ON_SIGN_IN_SUCCEEDED );
+	state.SetField ( -1, "ON_SIGN_IN_FAILED",					( u32 )ON_SIGN_IN_FAILED );
+
 	luaL_Reg regTable [] = {
 		{ "authenticatePlayer", 				_authenticatePlayer },
 		{ "getAchievements",					_getAchievements },
+		{ "getListener",					&MOAIGlobalEventSource::_getListener < MOAIGooglePlayServicesGamesAndroid > },
 		{ "getPlayerAlias",						_getPlayerAlias },
 		{ "getPlayerId",						_getPlayerId },
 		{ "getScores",							_getScores },
@@ -446,6 +450,7 @@ void MOAIGooglePlayServicesGamesAndroid::RegisterLuaClass ( MOAILuaState& state 
 		{ "reportAchievementProgress",			_reportAchievementProgress },
 		{ "reportScore",						_reportScore },
 		{ "setGetScoresCallback",				_setGetScoresCallback },
+		{ "setListener",					&MOAIGlobalEventSource::_setListener < MOAIGooglePlayServicesGamesAndroid > },
 		{ "showDefaultAchievements",			_showDefaultAchievements },
 		{ "showLeaderboard",					_showLeaderboard },
 		// { "showGameCenter",						_showGameCenter },
@@ -456,6 +461,21 @@ void MOAIGooglePlayServicesGamesAndroid::RegisterLuaClass ( MOAILuaState& state 
 	luaL_register ( state, 0, regTable );
 }
 
+
+
+//================================================================//
+// MOAIUnityAdsAndroid JNI methods
+//================================================================//
+
+//----------------------------------------------------------------//
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_googleplayservicesgames_MoaiGooglePlayServicesGames_AKUInvokeListener ( JNIEnv* env, jclass obj, jint eventID ) {
+
+	if ( MOAIGooglePlayServicesGamesAndroid::IsValid ()) {
+
+		ZLLogF ( ZLLog::CONSOLE, "Java_com_moaisdk_googleplayservicesgames_MoaiGooglePlayServicesGames_AKUInvokeListener \n" );
+		MOAIGooglePlayServicesGamesAndroid::Get ().InvokeListener (( u32 )eventID );
+	}
+}
 // AKU Callbacks
 
 //	EMPTY

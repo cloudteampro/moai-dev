@@ -1,6 +1,6 @@
 //----------------------------------------------------------------//
 // Copyright (c) 2014 CloudTeam
-// All Rights Reserved. 
+// All Rights Reserved.
 // http://cloudteam.pro
 //----------------------------------------------------------------//
 
@@ -36,7 +36,7 @@ int MOAIUnityAdsAndroid::_canShow ( lua_State *L ) {
 //----------------------------------------------------------------//
 /** @name   init
 	@text   Initialize UnityAds.
-	
+
 	@in     string  gameId      Your game id
 	@opt    boolean debug       Whether debug mode is active. Default if false
 	@opt    boolean test        Whether test mode is active. Default is false
@@ -56,13 +56,13 @@ int MOAIUnityAdsAndroid::_init ( lua_State* L ) {
 //----------------------------------------------------------------//
 /**	@name	show
 	@text	Request an ad display if a cached ad is available.
-	
+
 	@opt 	zone
 	@out 	boolean
 */
 int MOAIUnityAdsAndroid::_show ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIUnityAdsAndroid, "" )
-	
+
 	MOAIJString zone = self->GetJString ( state.GetValue < cc8* >( 1, 0 ));
 	lua_pushboolean ( state, self->CallStaticBooleanMethod ( self->mJava_Show, ( jstring )zone ));
 	return 1;
@@ -79,7 +79,7 @@ MOAIUnityAdsAndroid::MOAIUnityAdsAndroid () {
 	RTTI_SINGLE ( MOAIGlobalEventSource )
 
 	this->SetClass ( "com/moaisdk/unityads/MoaiUnityAds" );
-	
+
 	this->mJava_Init						= this->GetStaticMethod ( "init", "(Ljava/lang/String;ZZ)V" );
 	this->mJava_CanShow						= this->GetStaticMethod ( "canShow", "(Ljava/lang/String;)Z" );
 	this->mJava_Show						= this->GetStaticMethod ( "show", "(Ljava/lang/String;)Z" );
@@ -93,9 +93,9 @@ MOAIUnityAdsAndroid::~MOAIUnityAdsAndroid () {
 //----------------------------------------------------------------//
 void MOAIUnityAdsAndroid::NotifyVideoCompleted ( cc8* reward, bool skipped ) {
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-	
+
 	if ( this->PushListener ( VIDEO_COMPLETED, state )) {
-		
+
 		state.Push ( reward );
 		state.Push ( skipped );
 		state.DebugCall ( 2, 0 );

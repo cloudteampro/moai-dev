@@ -16,7 +16,7 @@
 	@text	Wrapper for Google Play services.
 */
 class MOAIGooglePlayServicesGamesAndroid :
-	public MOAIGlobalClass < MOAIGooglePlayServicesGamesAndroid, MOAILuaObject >,
+	public MOAIGlobalClass < MOAIGooglePlayServicesGamesAndroid, MOAIGlobalEventSource >,
 	public JniUtils {
 private:
 
@@ -47,6 +47,11 @@ public:
 		VIEW_CHALLENGES,
 		TOTAL,
 	};
+
+	enum {
+		ON_SIGN_IN_SUCCEEDED,
+		ON_SIGN_IN_FAILED,
+  };
 
 	MOAILuaStrongRef		mListeners [ TOTAL ];
 
