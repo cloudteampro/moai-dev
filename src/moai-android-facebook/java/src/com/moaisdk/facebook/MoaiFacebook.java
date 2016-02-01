@@ -257,7 +257,7 @@ public class MoaiFacebook {
 
 		AccessToken token = AccessToken.getCurrentAccessToken ();
 
-		if ( !token.getToken ().isEmpty () && !token.isExpired () ) {
+		if ( token != null && !token.isExpired ()) {
 
 			Set < String > granted = ( Set < String >) token.getPermissions ();
 			for ( String p : granted ) {

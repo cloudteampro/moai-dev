@@ -26,6 +26,7 @@ private:
 	ZLLeanArray < MOAIFmodBeat > mBeats;
 	
 	FMOD_DSP*		mDsp;
+	FMOD_DSP*		mDelayDsp;
 	u32				mFftWindow;
 	
 	
@@ -65,6 +66,7 @@ public:
 	void			OnBeat					( int idx );
 	void			RegisterLuaClass		( MOAILuaState& L );
 	void			RegisterLuaFuncs		( MOAILuaState& L );
+	void			ReleaseDsp				();
 	void			SmoothFftBuffer			();
 	void			UpdateFFT				();
 	

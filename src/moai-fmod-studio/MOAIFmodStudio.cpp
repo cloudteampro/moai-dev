@@ -74,6 +74,38 @@ FMOD_RESULT F_CALLBACK fmodFileSeek ( void *handle, unsigned int pos, void *user
 //================================================================//
 
 //----------------------------------------------------------------//
+/**	@name	getBufferSize
+	@text	Returns buffer size and sample rate
+
+	@out	number bufferSize
+	@out	number bufferCount
+	@out	number sampleRate
+*/
+int MOAIFmodStudio::_getBufferSize ( lua_State *L ) {
+	MOAILuaState state ( L );
+
+	MOAIFmodStudio& system = MOAIFmodStudio::Get();
+	FMOD_SYSTEM* soundSys = system.mSoundSys;
+	
+	if ( !soundSys ) {
+		return 0;
+	}
+	
+	u32 blocksize;
+	int numblocks;
+	int samplerate;
+	
+	FMOD_System_GetDSPBufferSize ( soundSys, &blocksize, &numblocks );
+	FMOD_System_GetSoftwareFormat ( soundSys, &samplerate, 0, 0 );
+	
+	state.Push ( blocksize );
+	state.Push ( numblocks );
+	state.Push ( samplerate );
+	
+	return 3;
+}
+
+//----------------------------------------------------------------//
 /**	@name	getMemoryStats
 	@text	Get memory usage.
 
@@ -81,7 +113,7 @@ FMOD_RESULT F_CALLBACK fmodFileSeek ( void *handle, unsigned int pos, void *user
 	@out	number currentAlloc
 	@out	number maxAlloc
 */
-int	MOAIFmodStudio::_getMemoryStats( lua_State* L ) {
+int	MOAIFmodStudio::_getMemoryStats ( lua_State* L ) {
 	MOAILuaState state ( L );
 	
 	bool blocking = state.GetValue < bool >( 1, false );
@@ -311,26 +343,13 @@ void MOAIFmodStudio::OpenSoundSystem ( u32 channels ) {
 	
 	result = FMOD_System_SetFileSystem ( this->mSoundSys, &fmodFileOpen, &fmodFileClose, &fmodFileRead, &fmodFileSeek, 0, 0, -1 );
 	MOAIFmodCheckError ( result );
-	
-//	unsigned int blocksize;
-//	int numblocks;
-//	int samplerate;
-//	float ms;
-//	
-//	FMOD_System_GetDSPBufferSize ( this->mSoundSys, &blocksize, &numblocks );
-//	FMOD_System_GetSoftwareFormat(this->mSoundSys, &samplerate, 0, 0 );
-//
-//	MOAILogF ( 0, ZLLog::LOG_REPORT, "Sample rate            = %d\n", samplerate );
-//	MOAILogF ( 0, ZLLog::LOG_REPORT, "Block size             = %d\n", blocksize );
-//	MOAILogF ( 0, ZLLog::LOG_REPORT, "Mixer blocksize        = %.02f ms\n", ms );
-//	MOAILogF ( 0, ZLLog::LOG_REPORT, "Mixer Total buffersize = %.02f ms\n", ms * numblocks );
-//	MOAILogF ( 0, ZLLog::LOG_REPORT, "Mixer Average Latency  = %.02f ms\n", ms * (( float )numblocks - 1.5f ));
 }
 
 //----------------------------------------------------------------//
 void MOAIFmodStudio::RegisterLuaClass ( MOAILuaState& state ) {
 	
 	luaL_Reg regTable [] = {
+		{ "getBufferSize",		_getBufferSize },
 		{ "getMemoryStats",		_getMemoryStats },
 		{ "getVolume",			_getVolume },
 		{ "getBGMVolume",		_getBGMVolume },

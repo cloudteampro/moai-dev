@@ -41,26 +41,35 @@ int MOAIFmodBeatDetector::_attachToChannel ( lua_State* L ) {
 		return 0;
 	}
 	
+	self->ReleaseDsp ();
+	
+	// DSP_TAIL is executed first, insert FFT before built-in panner and fader.
+	// This way fft will work on raw sound data regardless of channel volume/pan/pitch values
 	FMOD_DSP* dsp;
 	MOAIFmodCheckError ( FMOD_System_CreateDSPByType ( soundSys, FMOD_DSP_TYPE_FFT, &dsp ));
-	MOAIFmodCheckError ( FMOD_Channel_AddDSP ( channel, FMOD_CHANNELCONTROL_DSP_HEAD, dsp ));
+	MOAIFmodCheckError ( FMOD_Channel_AddDSP ( channel, FMOD_CHANNELCONTROL_DSP_TAIL, dsp ));
 	
-	// Downmix to mono?
-//	MOAIFmodCheckError ( FMOD_DSP_SetChannelFormat ( dsp, 0, 1, FMOD_SPEAKERMODE_DEFAULT ));
-	
-//	if ( delay != 0.0f ) {
-//		FMOD_DSP* delayDsp;
-//		MOAIFmodCheckError ( FMOD_System_CreateDSPByType ( soundSys, FMOD_DSP_TYPE_DELAY, &delayDsp ));
-//		MOAIFmodCheckError ( FMOD_Channel_AddDSP ( channel, FMOD_CHANNELCONTROL_DSP_HEAD, delayDsp ));
-//		
-//		MOAIFmodCheckError ( FMOD_DSP_SetParameterFloat ( delayDsp, FMOD_DSP_DELAY_MAXDELAY, 1000 * delay ));
-//		MOAIFmodCheckError ( FMOD_DSP_SetParameterFloat ( delayDsp, FMOD_DSP_DELAY_CH0, 1000 * delay ));
-//		MOAIFmodCheckError ( FMOD_DSP_SetParameterFloat ( delayDsp, FMOD_DSP_DELAY_CH1, 1000 * delay ));
-//	}
+	if ( delay != 0.0f ) {
+		// DELAY should be added right after FFT, use index of the fft dsp it will be shifted to the next position.
+		int index;
+		FMOD_Channel_GetDSPIndex ( channel, dsp, &index );
+		
+		FMOD_DSP* delayDsp;
+		MOAIFmodCheckError ( FMOD_System_CreateDSPByType ( soundSys, FMOD_DSP_TYPE_DELAY, &delayDsp ));
+		MOAIFmodCheckError ( FMOD_Channel_AddDSP ( channel, index, delayDsp ));
+		
+		MOAIFmodCheckError ( FMOD_DSP_SetParameterFloat ( delayDsp, FMOD_DSP_DELAY_MAXDELAY, 1000 * delay ));
+		MOAIFmodCheckError ( FMOD_DSP_SetParameterFloat ( delayDsp, FMOD_DSP_DELAY_CH0, 1000 * delay ));
+		MOAIFmodCheckError ( FMOD_DSP_SetParameterFloat ( delayDsp, FMOD_DSP_DELAY_CH1, 1000 * delay ));
+		
+		self->mDelayDsp = delayDsp;
+		MOAIFmodCheckError ( FMOD_DSP_SetActive ( delayDsp, true ));
+		MOAIFmodCheckError ( FMOD_DSP_SetBypass ( delayDsp, true ));
+	}
 	
 	MOAIFmodCheckError ( FMOD_DSP_SetParameterInt ( dsp, FMOD_DSP_FFT_WINDOWTYPE, FMOD_DSP_FFT_WINDOW_TRIANGLE ));
 	MOAIFmodCheckError ( FMOD_DSP_SetParameterInt ( dsp, FMOD_DSP_FFT_WINDOWSIZE, self->mFftWindow ));
-	
+
 	// Activate, but bypass. DSP will not be processed, but all connections will work.
 	// Sound can still be heard, processing is controlled by action's start/stop methods.
 	MOAIFmodCheckError ( FMOD_DSP_SetActive ( dsp, true ));
@@ -146,6 +155,7 @@ bool MOAIFmodBeatDetector::IsDone () {
 //----------------------------------------------------------------//
 MOAIFmodBeatDetector::MOAIFmodBeatDetector () :
 	mDsp ( 0 ),
+	mDelayDsp ( 0 ),
 	mFftWindow ( DEFAULT_FFT_WINDOW ) {
 	
 	RTTI_BEGIN
@@ -157,11 +167,7 @@ MOAIFmodBeatDetector::MOAIFmodBeatDetector () :
 //----------------------------------------------------------------//
 MOAIFmodBeatDetector::~MOAIFmodBeatDetector () {
 	
-	if ( this->mDsp ) {
-		FMOD_DSP_SetActive ( this->mDsp, false );
-		FMOD_DSP_Release ( this->mDsp );
-		this->mDsp = 0;
-	}
+	this->ReleaseDsp ();
 }
 
 //----------------------------------------------------------------//
@@ -169,7 +175,7 @@ void MOAIFmodBeatDetector::OnBeat ( int idx ) {
 	
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 	if ( this->PushListenerAndSelf ( EVENT_BEAT, state )) {
-		state.Push ( idx );
+		state.Push ( idx + 1 );
 		state.DebugCall ( 2, 0 );
 	}
 }
@@ -180,6 +186,10 @@ void MOAIFmodBeatDetector::OnStart () {
 	if ( this->mDsp ) {
 		MOAIFmodCheckError ( FMOD_DSP_SetBypass ( this->mDsp, false ));
 	}
+	
+	if ( this->mDelayDsp ) {
+		MOAIFmodCheckError ( FMOD_DSP_SetBypass ( this->mDelayDsp, false ));
+	}
 }
 
 //----------------------------------------------------------------//
@@ -187,6 +197,10 @@ void MOAIFmodBeatDetector::OnStop () {
 	
 	if ( this->mDsp ) {
 		MOAIFmodCheckError ( FMOD_DSP_SetBypass ( this->mDsp, true ));
+	}
+	
+	if ( this->mDelayDsp ) {
+		MOAIFmodCheckError ( FMOD_DSP_SetBypass ( this->mDelayDsp, true ));
 	}
 }
 
@@ -218,6 +232,22 @@ void MOAIFmodBeatDetector::RegisterLuaFuncs ( MOAILuaState& state ) {
 	};
 
 	luaL_register ( state, 0, regTable );
+}
+
+//----------------------------------------------------------------//
+void MOAIFmodBeatDetector::ReleaseDsp () {
+	
+	if ( this->mDelayDsp ) {
+		FMOD_DSP_SetActive ( this->mDelayDsp, false );
+		FMOD_DSP_Release ( this->mDelayDsp );
+		this->mDelayDsp = 0;
+	}
+	
+	if ( this->mDsp ) {
+		FMOD_DSP_SetActive ( this->mDsp, false );
+		FMOD_DSP_Release ( this->mDsp );
+		this->mDsp = 0;
+	}
 }
 
 //----------------------------------------------------------------//

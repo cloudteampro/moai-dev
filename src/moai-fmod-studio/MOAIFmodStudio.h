@@ -26,6 +26,7 @@ private:
 	FMOD_CHANNELGROUP*	mSFXChannelGroup;
 
 	//----------------------------------------------------------------//
+	static int		_getBufferSize		( lua_State* L );
 	static int		_getMemoryStats		( lua_State* L );
 	static int		_getVolume			( lua_State* L );
 	static int		_getBGMVolume		( lua_State* L );
