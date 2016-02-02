@@ -51,7 +51,7 @@ public:
 	enum {
 		ON_SIGN_IN_SUCCEEDED,
 		ON_SIGN_IN_FAILED,
-  };
+	};
 
 	MOAILuaStrongRef		mListeners [ TOTAL ];
 

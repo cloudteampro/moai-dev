@@ -623,6 +623,42 @@ int MOAIBillingAndroid::_purchaseProductFortumo( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+/**	@lua	requestProductsAsync
+	@text	Gets the products from Google Play for the current app
+	
+	@in		table 	skus
+	@in	    number 	type
+	@out 	nil 	json result returned with the PRODUCT_REQUEST_RESPONSE event
+*/
+int MOAIBillingAndroid::_requestProductsAsync ( lua_State* L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIBillingAndroid, "" )
+
+	jobjectArray skus = NULL;
+	
+	if ( state.IsType ( 1, LUA_TTABLE )) {
+		skus = self->StringArrayFromLua ( L, 1 );
+	}
+
+	if ( skus == NULL ) {
+		// report error?
+		return 0;
+	}
+
+	int type = state.GetValue < int > ( 2, MOAIBillingAndroid::BILLINGV3_PRODUCT_INAPP );
+
+	jclass billing = self->GetClass ( "com/moaisdk/googlebilling/MoaiGoogleBilling" );
+	if ( billing ) {
+		
+		jmethodID requestProductsAsync = self->GetStaticMethod ( billing, "requestProductsAsync", "([Ljava/lang/String;I)V" );
+		if ( requestProductsAsync ) {
+			self->Env ()->CallStaticVoidMethod ( billing, requestProductsAsync, skus, type );
+		}
+	}
+
+	return 0;
+}
+
+//----------------------------------------------------------------//
 /**	@lua	requestProductsSync
 	@text	Gets the products from Google Play for the current app
 				
@@ -733,6 +769,7 @@ void MOAIBillingAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "PURCHASE_STATE_CHANGED",						( u32 )PURCHASE_STATE_CHANGED );
 	state.SetField ( -1, "RESTORE_RESPONSE_RECEIVED",					( u32 )RESTORE_RESPONSE_RECEIVED );
 	state.SetField ( -1, "USER_ID_DETERMINED",							( u32 )USER_ID_DETERMINED );
+	state.SetField ( -1, "PRODUCT_REQUEST_RESPONSE",					( u32 )PRODUCT_REQUEST_RESPONSE );
 
 	state.SetField ( -1, "BILLING_PROVIDER_GOOGLE",						( u32 )BILLING_PROVIDER_GOOGLE );
 	state.SetField ( -1, "BILLING_PROVIDER_AMAZON",						( u32 )BILLING_PROVIDER_AMAZON );
@@ -779,6 +816,7 @@ void MOAIBillingAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "getPurchasedProducts",	 		_getPurchasedProducts },
 		{ "purchaseProduct",	 			_purchaseProduct },
 		{ "purchaseProductFortumo", 		_purchaseProductFortumo },
+		{ "requestProductsAsync", 			_requestProductsAsync },
 		{ "requestProductsSync", 			_requestProductsSync },
 
 		{ NULL, NULL }
@@ -882,6 +920,21 @@ void MOAIBillingAndroid::NotifyBillingSupported ( bool supported ) {
 		MOAIScopedLuaState state = callback.GetSelf ();
 
 		lua_pushboolean ( state, supported );
+
+		state.DebugCall ( 1, 0 );
+	}
+}
+
+//----------------------------------------------------------------//
+void MOAIBillingAndroid::NotifyProductsInfoReceived ( cc8* result ) {
+
+	MOAILuaRef& callback = this->mListeners [ PRODUCT_REQUEST_RESPONSE ];
+
+	if ( callback ) {
+
+		MOAIScopedLuaState state = callback.GetSelf ();
+
+		lua_pushstring ( state, result );
 
 		state.DebugCall ( 1, 0 );
 	}
@@ -1048,12 +1101,22 @@ extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_googlebilling_MoaiGoogleBilli
 }
 
 //----------------------------------------------------------------//
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_googlebilling_MoaiGoogleBilling_AKUNotifyGoogleProductsInfoReceived ( JNIEnv* env, jclass obj, jstring jresult ) {
+
+	JNI_GET_CSTRING ( jresult, result );
+
+	MOAIBillingAndroid::Get ().NotifyProductsInfoReceived ( result );
+
+	JNI_RELEASE_CSTRING ( jresult, result );
+}
+
+//----------------------------------------------------------------//
 extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_googlebilling_MoaiGoogleBilling_AKUNotifyGooglePurchaseResponseReceived ( JNIEnv* env, jclass obj, jint code, jstring jresult ) {
 
 	// result is json array: [data, signature]
 	JNI_GET_CSTRING ( jresult, result );
 
-	MOAIBillingAndroid::Get ().NotifyPurchaseResponseReceived ( MOAIBillingAndroid::MapGoogleResponseCode ( code ), result );
+	MOAIBillingAndroid::Get ().NotifyPurchaseResponseReceived ( code, result );
 
 	JNI_RELEASE_CSTRING ( jresult, result );
 }

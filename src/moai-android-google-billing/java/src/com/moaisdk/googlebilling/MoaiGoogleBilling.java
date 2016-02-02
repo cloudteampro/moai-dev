@@ -19,6 +19,7 @@ import android.content.ServiceConnection;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -59,10 +60,56 @@ public class MoaiGoogleBilling {
 
 	// AKU callbacks	
 	protected static native void 			AKUNotifyGoogleBillingSupported				( boolean supported );
+	protected static native void 			AKUNotifyGoogleProductsInfoReceived			( String result );
 	protected static native void 			AKUNotifyGooglePurchaseResponseReceived		( int responseCode, String jsonInfo );
 	protected static native void 			AKUNotifyGooglePurchaseStateChanged			( int code, String jidentifier, String jorder, String jnotification, String jpayload );
 	protected static native void 			AKUNotifyGoogleRestoreResponseReceived		( int code );
 	
+
+	//----------------------------------------------------------------//
+	private static class RequestProductsTask extends AsyncTask < String, Void, String > {
+
+		private String mProductType;
+
+		public RequestProductsTask ( String type ) {
+			this.mProductType = type;
+		}
+
+		protected String doInBackground ( String... skus ) {
+
+			try {
+			
+				ArrayList skuList = new ArrayList ();
+				for ( String sku : skus ) {
+					skuList.add ( sku );
+				}
+			
+				Bundle querySkus = new Bundle ();
+				querySkus.putStringArrayList ( "ITEM_ID_LIST", skuList );
+				Bundle skuDetails = sService.getSkuDetails ( 3, sActivity.getPackageName (), this.mProductType, querySkus );
+
+				//convert to json string
+				if ( skuDetails.getInt ( "RESPONSE_CODE" ) == BILLING_RESPONSE_RESULT_OK ) {
+				
+					ArrayList responseList = skuDetails.getStringArrayList ( "DETAILS_LIST" );
+					JSONArray jsResponse = new JSONArray ( responseList );
+					return jsResponse.toString ();
+				}
+			
+			} catch ( Exception e ) {
+				e.printStackTrace ();
+			}
+			return "";
+		}
+
+		protected void onPostExecute ( String result ) {
+
+			synchronized ( Moai.sAkuLock ) {
+				MoaiGoogleBilling.AKUNotifyGoogleProductsInfoReceived ( result );
+			}
+		}
+	}
+
 	//----------------------------------------------------------------//
 	public static void onCreate ( Activity activity ) {
 		
@@ -102,7 +149,11 @@ public class MoaiGoogleBilling {
 						MoaiLog.i ( "MoaiGoogleBilling : In-app not supported" );
 						sInAppSupported = false;
 					}
-				
+					
+					synchronized ( Moai.sAkuLock ) {
+						AKUNotifyGoogleBillingSupported ( sInAppSupported );
+					}
+
 					// subscriptions
 					response = sService.isBillingSupported (3, packageName, PURCHASE_TYPE_SUBSCRIPTION );
 					if ( response == BILLING_RESPONSE_RESULT_OK)  {
@@ -139,38 +190,37 @@ public class MoaiGoogleBilling {
 	//----------------------------------------------------------------//
 	public static void onActivityResult ( int requestCode, int resultCode, Intent data ) {
 		
+		if ( requestCode != 1001 ) return;
+
 		if ( resultCode == Activity.RESULT_OK ) {
+
+			int responseCode = data.getIntExtra ( "RESPONSE_CODE", 0 );
+			String purchaseData = data.getStringExtra ( "INAPP_PURCHASE_DATA" );
+			String dataSignature = data.getStringExtra ( "INAPP_DATA_SIGNATURE" );
 			
-			if ( requestCode == 1001 ) {
-				
-				int responseCode = data.getIntExtra ( "RESPONSE_CODE", 0 );
-				String purchaseData = data.getStringExtra ( "INAPP_PURCHASE_DATA" );
-				String dataSignature = data.getStringExtra ( "INAPP_DATA_SIGNATURE" );
-				
-				JSONObject jsonPurchaseData;
-				try {
-					jsonPurchaseData = new JSONObject ( purchaseData );
-				} catch ( JSONException e ) {
-					e.printStackTrace ();
-					jsonPurchaseData = new JSONObject ();
-				}
-
-				ArrayList jsonData = new ArrayList ();
-				jsonData.add ( jsonPurchaseData );
-				jsonData.add ( dataSignature );
-				JSONArray jsonArray = new JSONArray ( jsonData );
-
-				synchronized ( Moai.sAkuLock ) {			
-					AKUNotifyGooglePurchaseResponseReceived ( responseCode, jsonArray.toString ());
-				}
+			JSONObject jsonPurchaseData;
+			try {
+				jsonPurchaseData = new JSONObject ( purchaseData );
+			} catch ( JSONException e ) {
+				e.printStackTrace ();
+				jsonPurchaseData = new JSONObject ();
 			}
-		} else {
-			
+
+			ArrayList jsonData = new ArrayList ();
+			jsonData.add ( jsonPurchaseData );
+			jsonData.add ( dataSignature );
+			JSONArray jsonArray = new JSONArray ( jsonData );
+
+			synchronized ( Moai.sAkuLock ) {			
+				AKUNotifyGooglePurchaseResponseReceived ( responseCode, jsonArray.toString ());
+			}
+		}
+		else {
 			synchronized ( Moai.sAkuLock ) {
-				
 				AKUNotifyGooglePurchaseResponseReceived ( BILLING_RESPONSE_RESULT_ERROR, null );
 			}
 		}
+
 	}
 	
 	//================================================================//
@@ -290,6 +340,15 @@ public class MoaiGoogleBilling {
 		
 		return BILLING_RESPONSE_RESULT_ERROR;
 	}
+
+	//----------------------------------------------------------------//
+	public static void requestProductsAsync ( String [] skus, int productType ) {
+
+		MoaiLog.i ( "MoaiGoogleBilling: requestProductsAsync" );
+
+		String type = ( productType == 0 ) ? PURCHASE_TYPE_INAPP : PURCHASE_TYPE_SUBSCRIPTION;
+		new RequestProductsTask ( type ).execute ( skus );
+	}
 	
 	//----------------------------------------------------------------//
 	public static String requestProductsSync ( String [] skus, int productType ) {
@@ -303,7 +362,7 @@ public class MoaiGoogleBilling {
 			
 				skuList.add ( sku );
 			}
-		
+			
 			Bundle querySkus = new Bundle ();
 			querySkus.putStringArrayList ( "ITEM_ID_LIST", skuList );
 			String type = ( productType == 0 ) ? PURCHASE_TYPE_INAPP : PURCHASE_TYPE_SUBSCRIPTION;
@@ -312,7 +371,7 @@ public class MoaiGoogleBilling {
 			//convert to json string
 			if ( skuDetails.getInt ( "RESPONSE_CODE" ) == BILLING_RESPONSE_RESULT_OK ) {
 			
-				ArrayList responseList = skuDetails.getStringArrayList ( "DETAILS_LIST" );				
+				ArrayList responseList = skuDetails.getStringArrayList ( "DETAILS_LIST" );
 				JSONArray jsResponse = new JSONArray ( responseList );
 				return jsResponse.toString ();
 			} 
@@ -324,4 +383,5 @@ public class MoaiGoogleBilling {
 		
 		return "";
 	}
+
 }
