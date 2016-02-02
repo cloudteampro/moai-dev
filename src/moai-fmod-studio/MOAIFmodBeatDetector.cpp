@@ -238,13 +238,11 @@ void MOAIFmodBeatDetector::RegisterLuaFuncs ( MOAILuaState& state ) {
 void MOAIFmodBeatDetector::ReleaseDsp () {
 	
 	if ( this->mDelayDsp ) {
-		FMOD_DSP_SetActive ( this->mDelayDsp, false );
 		FMOD_DSP_Release ( this->mDelayDsp );
 		this->mDelayDsp = 0;
 	}
 	
 	if ( this->mDsp ) {
-		FMOD_DSP_SetActive ( this->mDsp, false );
 		FMOD_DSP_Release ( this->mDsp );
 		this->mDsp = 0;
 	}
