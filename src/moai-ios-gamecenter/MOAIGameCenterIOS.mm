@@ -25,30 +25,43 @@ int MOAIGameCenterIOS::_authenticatePlayer ( lua_State* L ) {
 	MOAILuaState state ( L );
 	
 	GKLocalPlayer* localPlayer = [ GKLocalPlayer localPlayer ];
-	[ localPlayer setAuthenticateHandler:^( UIViewController *viewcontroller, NSError *error ) {
+
+	if ([ localPlayer isAuthenticated ]) {
+
+		MOAIGameCenterIOS::Get ().mLocalPlayer = localPlayer;
+		MOAIGameCenterIOS::Get ().mIsGameCenterSupported = TRUE;
+		MOAIGameCenterIOS::Get ().GetAchievements ();
+
+		MOAIGameCenterIOS::Get ().InvokeListener ( MOAIGameCenterIOS::SIGN_IN_SUCCESS );
+	}
+	else {
+		[ localPlayer setAuthenticateHandler:^( UIViewController *viewcontroller, NSError *error ) {
 		
-		if ( !MOAIGameCenterIOS::IsValid ()) return;
-		
-		if ( !error && viewcontroller ) {
+			if ( !MOAIGameCenterIOS::IsValid ()) return;
 			
-			UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
-			UIViewController* rootVC = [ window rootViewController ];
-			[ rootVC presentViewController:viewcontroller animated:YES completion:nil ];
-		}
-		else {
-			if ([ error code ] == GKErrorNotSupported || [ error code ] == GKErrorGameUnrecognized ) {
+			if ( !error && viewcontroller ) {
 				
-//                    MOAILogF ( L, ZLLog::LOG_ERROR, [[ error description ] UTF8String ]);
-				MOAIGameCenterIOS::Get ().mIsGameCenterSupported = FALSE;
+				UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
+				UIViewController* rootVC = [ window rootViewController ];
+				[ rootVC presentViewController:viewcontroller animated:YES completion:nil ];
 			}
-			else if ([ GKLocalPlayer localPlayer ].isAuthenticated ) {
-				
-				MOAIGameCenterIOS::Get ().mLocalPlayer = localPlayer;
-				MOAIGameCenterIOS::Get ().mIsGameCenterSupported = TRUE;
-				MOAIGameCenterIOS::Get ().GetAchievements ();
+			else {
+				if ([ error code ] == GKErrorNotSupported || [ error code ] == GKErrorGameUnrecognized ) {
+					
+					MOAIGameCenterIOS::Get ().mIsGameCenterSupported = FALSE;
+					MOAIGameCenterIOS::Get ().InvokeListener ( MOAIGameCenterIOS::SIGN_IN_FAIL );
+				}
+				else if ([ GKLocalPlayer localPlayer ].isAuthenticated ) {
+					
+					MOAIGameCenterIOS::Get ().mLocalPlayer = localPlayer;
+					MOAIGameCenterIOS::Get ().mIsGameCenterSupported = TRUE;
+					MOAIGameCenterIOS::Get ().GetAchievements ();
+
+					MOAIGameCenterIOS::Get ().InvokeListener ( MOAIGameCenterIOS::SIGN_IN_SUCCESS );
+				}
 			}
-		}
-	}];
+		}];
+	}
 	
 	return 0;
 }
@@ -354,7 +367,7 @@ int MOAIGameCenterIOS::_showGameCenter ( lua_State *L ) {
 MOAIGameCenterIOS::MOAIGameCenterIOS () :
 	mIsGameCenterSupported ( false ) {
 
-	RTTI_SINGLE ( MOAILuaObject )
+	RTTI_SINGLE ( MOAIGlobalEventSource )
 	
 	mLeaderboardDelegate	= [[ MOAIGameCenterIOSLeaderboardDelegate alloc ] init];
 	mAchievementDelegate	= [[ MOAIGameCenterIOSAchievementDelegate alloc ] init];
@@ -385,9 +398,13 @@ void MOAIGameCenterIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "VIEW_LEADERBOARDS",	( int )GKGameCenterViewControllerStateLeaderboards );
 	state.SetField ( -1, "VIEW_ACHIEVEMENTS",	( int )GKGameCenterViewControllerStateAchievements );
 	state.SetField ( -1, "VIEW_CHALLENGES",		( int )GKGameCenterViewControllerStateChallenges );
+
+	state.SetField ( -1, "SIGN_IN_SUCCESS",		( int )SIGN_IN_SUCCESS );
+	state.SetField ( -1, "SIGN_IN_FAIL",		( int )SIGN_IN_FAIL );
 	
 	luaL_Reg regTable [] = {
 		{ "authenticatePlayer",			_authenticatePlayer },
+		{ "getListener",				&MOAIGlobalEventSource::_getListener < MOAIGameCenterIOS > },
 		{ "getPlayerAlias",				_getPlayerAlias },
 		{ "getPlayerId",				_getPlayerId },
 		{ "getScores",					_getScores },
@@ -395,6 +412,7 @@ void MOAIGameCenterIOS::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "reportAchievementProgress",	_reportAchievementProgress },
 		{ "reportScore",				_reportScore },
 		{ "setGetScoresCallback",		_setGetScoresCallback },
+		{ "setListener",				&MOAIGlobalEventSource::_setListener < MOAIGameCenterIOS > },
 		{ "showDefaultAchievements",	_showDefaultAchievements },
 		{ "showDefaultLeaderboard",		_showDefaultLeaderboard },
 		{ "showGameCenter",				_showGameCenter },

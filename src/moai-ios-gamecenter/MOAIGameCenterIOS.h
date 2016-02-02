@@ -25,7 +25,7 @@
 	@const	PLAYERSCOPE_FRIENDS		Get leaderboard scores only for active player's friends.
 */
 class MOAIGameCenterIOS :
-	public MOAIGlobalClass < MOAIGameCenterIOS, MOAILuaObject > {
+	public MOAIGlobalClass < MOAIGameCenterIOS, MOAIGlobalEventSource > {
 private:
 
 	//----------------------------------------------------------------//
@@ -55,6 +55,11 @@ public:
 	enum {
 		PLAYERSCOPE_GLOBAL = 0,
 		PLAYERSCOPE_FRIENDS
+	};
+
+	enum {
+		SIGN_IN_SUCCESS,
+		SIGN_IN_FAIL,
 	};
 	
 	MOAILuaStrongRef						mGetScoresCallback;
