@@ -487,7 +487,7 @@ void MOAIFacebookAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 	// Game request action types
 	state.SetField ( -1, "ACTION_NONE", 				"ACTION_NONE" );
 	state.SetField ( -1, "ACTION_SEND", 				"SEND" );
-	state.SetField ( -1, "ACTION_ASK_FOR", 				"ASK_FOR" );
+	state.SetField ( -1, "ACTION_ASK_FOR", 				"ASKFOR" );
 	state.SetField ( -1, "ACTION_TURN", 				"TURN" );
 
 	// Game request filters
