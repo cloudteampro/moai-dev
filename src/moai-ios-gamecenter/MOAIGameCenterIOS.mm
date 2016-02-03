@@ -17,15 +17,18 @@
 			user to log in. This must be called before any other 
 			MOAIGameCenterIOS functions.
 			
-	@in		nil
+	@opt	bool silent		If set, then login prompt will not be shown and authentication will succeed
+							only if user is logged in GameCenter app. Default is false
 	@out	nil
 */
 int MOAIGameCenterIOS::_authenticatePlayer ( lua_State* L ) {
 	
 	MOAILuaState state ( L );
 	
+	bool silent = state.GetValue < bool >( 1, false );
+	
 	GKLocalPlayer* localPlayer = [ GKLocalPlayer localPlayer ];
-
+	
 	if ([ localPlayer isAuthenticated ]) {
 
 		MOAIGameCenterIOS::Get ().mLocalPlayer = localPlayer;
@@ -41,9 +44,11 @@ int MOAIGameCenterIOS::_authenticatePlayer ( lua_State* L ) {
 			
 			if ( !error && viewcontroller ) {
 				
-				UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
-				UIViewController* rootVC = [ window rootViewController ];
-				[ rootVC presentViewController:viewcontroller animated:YES completion:nil ];
+				if ( !silent ) {
+					UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
+					UIViewController* rootVC = [ window rootViewController ];
+					[ rootVC presentViewController:viewcontroller animated:YES completion:nil ];
+				}
 			}
 			else {
 				if ([ error code ] == GKErrorNotSupported || [ error code ] == GKErrorGameUnrecognized ) {
@@ -183,7 +188,7 @@ int MOAIGameCenterIOS::_isAuthenticated ( lua_State* L ) {
 int MOAIGameCenterIOS::_isSupported ( lua_State* L ) {
 	
 	MOAILuaState state ( L );
-
+	// TODO: deprecate?
 	lua_pushboolean ( state, MOAIGameCenterIOS::Get ().mIsGameCenterSupported );
 	
 	return 1;
@@ -408,6 +413,7 @@ void MOAIGameCenterIOS::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "getPlayerAlias",				_getPlayerAlias },
 		{ "getPlayerId",				_getPlayerId },
 		{ "getScores",					_getScores },
+		{ "isAuthenticated",			_isAuthenticated },
 		{ "isSupported",				_isSupported },
 		{ "reportAchievementProgress",	_reportAchievementProgress },
 		{ "reportScore",				_reportScore },
