@@ -204,7 +204,8 @@ void MOAINotificationsIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "LOCAL_NOTIFICATION_MESSAGE_RECEIVED", 		( u32 )LOCAL_NOTIFICATION_MESSAGE_RECEIVED );
 	state.SetField ( -1, "REMOTE_NOTIFICATION_REGISTRATION_COMPLETE", 	( u32 )REMOTE_NOTIFICATION_REGISTRATION_COMPLETE );
 	state.SetField ( -1, "REMOTE_NOTIFICATION_MESSAGE_RECEIVED", 		( u32 )REMOTE_NOTIFICATION_MESSAGE_RECEIVED );
-		
+	state.SetField ( -1, "NOTIFICATION_TYPES_REGISTERED",				( u32 )NOTIFICATION_TYPES_REGISTERED );
+	
 	state.SetField ( -1, "REMOTE_NOTIFICATION_RESULT_REGISTERED", 		( u32 )REMOTE_NOTIFICATION_RESULT_REGISTERED );
 	state.SetField ( -1, "REMOTE_NOTIFICATION_RESULT_UNREGISTERED", 	( u32 )REMOTE_NOTIFICATION_RESULT_UNREGISTERED );
 	state.SetField ( -1, "REMOTE_NOTIFICATION_RESULT_ERROR", 			( u32 )REMOTE_NOTIFICATION_RESULT_ERROR );
@@ -301,6 +302,19 @@ void MOAINotificationsIOS::NotifyRemoteRegistrationComplete ( NSData* deviceToke
 		}
 		
 		state.DebugCall ( 2, 0 );
+	}
+}
+
+//----------------------------------------------------------------//
+void MOAINotificationsIOS::NotifySettingsRegistrationComplete ( u32 types ) {
+	
+	MOAILuaRef& callback = this->mListeners [ NOTIFICATION_TYPES_REGISTERED ];
+	
+	if ( callback ) {
+		
+		MOAIScopedLuaState state = callback.GetSelf ();
+		state.Push ( types );
+		state.DebugCall ( 1, 0 );
 	}
 }
 

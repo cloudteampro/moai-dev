@@ -53,6 +53,7 @@ public:
 		LOCAL_NOTIFICATION_MESSAGE_RECEIVED,
 		REMOTE_NOTIFICATION_REGISTRATION_COMPLETE,
 		REMOTE_NOTIFICATION_MESSAGE_RECEIVED,
+		NOTIFICATION_TYPES_REGISTERED,
 		TOTAL
 	};
 
@@ -70,6 +71,7 @@ public:
 	void	NotifyLocalNotificationReceived     ( UILocalNotification* notification );
 	void	NotifyRemoteNotificationReceived	( NSDictionary* notification );
 	void	NotifyRemoteRegistrationComplete	( NSData* token, NSError *error );
+	void	NotifySettingsRegistrationComplete	( u32 types );
 	void	RegisterLuaClass					( MOAILuaState& state );
 };
 

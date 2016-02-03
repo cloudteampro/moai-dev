@@ -102,6 +102,12 @@ void AKUIosNotifyRemoteNotificationRegistrationComplete ( NSData* deviceToken, N
 }
 
 //----------------------------------------------------------------//
+void AKUIosNotifyUserNotificationSettingsRegistered ( UIUserNotificationSettings* settings ) {
+	
+	MOAINotificationsIOS::Get ().NotifySettingsRegistrationComplete ([ settings types ]);
+}
+
+//----------------------------------------------------------------//
 void AKUIosOpenUrl ( NSURL* url, NSString* sourceApplication ) {
 
 	MOAIAppIOS::Get ().OpenUrl ( url, sourceApplication );
