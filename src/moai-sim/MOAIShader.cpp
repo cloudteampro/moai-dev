@@ -84,7 +84,8 @@ void MOAIShader::BindUniforms () {
 		for ( u32 i = 0; i < nUniforms; ++i ) {
 			MOAIShaderUniform& uniform = program->mUniforms [ i ];
 			
-			if ( uniform.IsValid ()) {
+			// Skip globals, they are bound by GfxDevice
+			if ( uniform.IsValid () && !uniform.IsGlobal ()) {
 				//if ( uniform.SetValue ( this->mUniformBuffers [ i ], true )) {
 					uniform.SetValue ( this->mUniformBuffers [ i ], true );
 					if ( !flushed ) {

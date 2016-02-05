@@ -273,6 +273,7 @@ void MOAIShaderProgram::DeclareUniform ( u32 idx, cc8* name, u32 type ) {
 		MOAIShaderUniform& uniform = this->mUniforms [ idx ];
 		uniform.mName = name;
 		uniform.SetType ( type );
+		uniform.mGlobal = false;
 		
 		MOAIShaderUniformBuffer& uniformDefault = this->mUniformDefaults [ idx ];
 		uniformDefault.SetType ( type );
@@ -525,6 +526,11 @@ void MOAIShaderProgram::SetGlobal ( u32 idx, u32 uniformID, u32 globalID ) {
 
 	this->mGlobals [ idx ].mUniformID = uniformID;
 	this->mGlobals [ idx ].mGlobalID = globalID;
+	
+	if ( uniformID < this->mUniforms.Size ()) {
+		MOAIShaderUniform& uniform = this->mUniforms [ uniformID ];
+		uniform.mGlobal = true;
+	}
 }
 
 //----------------------------------------------------------------//

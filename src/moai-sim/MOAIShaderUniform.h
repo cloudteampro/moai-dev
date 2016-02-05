@@ -78,12 +78,17 @@ private:
 
 	STLString	mName;
 	u32			mAddr;			// this is resolved when linking the shader
-	u32			mGlobal;		// this may be used to select a global rendering value such as the pen color or world transform
+	bool		mGlobal;		// flag to indicate global usage
 
 public:
 
 	//----------------------------------------------------------------//
 	void		Bind				();
+	
+	//----------------------------------------------------------------//
+	inline bool IsGlobal () {
+		return this->mGlobal;
+	}
 	
 	//----------------------------------------------------------------//
 	inline bool IsValid () {
