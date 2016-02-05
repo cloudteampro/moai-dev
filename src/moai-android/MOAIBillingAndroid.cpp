@@ -1097,28 +1097,32 @@ extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_MoaiAmazonBilling_A
 //----------------------------------------------------------------//
 extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_googlebilling_MoaiGoogleBilling_AKUNotifyGoogleBillingSupported ( JNIEnv* env, jclass obj, jboolean supported ) {
 
-	MOAIBillingAndroid::Get ().NotifyBillingSupported ( supported );
+	if ( MOAIBillingAndroid::IsValid ()) {
+		MOAIBillingAndroid::Get ().NotifyBillingSupported ( supported );
+	}
 }
 
 //----------------------------------------------------------------//
 extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_googlebilling_MoaiGoogleBilling_AKUNotifyGoogleProductsInfoReceived ( JNIEnv* env, jclass obj, jstring jresult ) {
 
-	JNI_GET_CSTRING ( jresult, result );
+	if ( MOAIBillingAndroid::IsValid ()) {
 
-	MOAIBillingAndroid::Get ().NotifyProductsInfoReceived ( result );
-
-	JNI_RELEASE_CSTRING ( jresult, result );
+		JNI_GET_CSTRING ( jresult, result );
+		MOAIBillingAndroid::Get ().NotifyProductsInfoReceived ( result );
+		JNI_RELEASE_CSTRING ( jresult, result );
+	}
 }
 
 //----------------------------------------------------------------//
 extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_googlebilling_MoaiGoogleBilling_AKUNotifyGooglePurchaseResponseReceived ( JNIEnv* env, jclass obj, jint code, jstring jresult ) {
 
-	// result is json array: [data, signature]
-	JNI_GET_CSTRING ( jresult, result );
+	if ( MOAIBillingAndroid::IsValid ()) {
 
-	MOAIBillingAndroid::Get ().NotifyPurchaseResponseReceived ( code, result );
-
-	JNI_RELEASE_CSTRING ( jresult, result );
+		// result is json array: [data, signature]
+		JNI_GET_CSTRING ( jresult, result );
+		MOAIBillingAndroid::Get ().NotifyPurchaseResponseReceived ( code, result );
+		JNI_RELEASE_CSTRING ( jresult, result );
+	}
 }
 
 //----------------------------------------------------------------//
