@@ -190,6 +190,37 @@ int MOAISpineSkeleton::_getBone ( lua_State *L ) {
 }
 
 //----------------------------------------------------------------//
+/**	@name	getBoneTransform
+	@text	Return bone transform values in local skeleton space
+
+	@in		MOAISpineSkeleton self
+	@in		string	skeleton bone name
+	@out	number	x
+	@out	number	x
+	@out	number	rot
+	@out	number	scaleX
+	@out	number	scaleY
+*/
+int MOAISpineSkeleton::_getBoneTransform ( lua_State *L ) {
+	MOAI_LUA_SETUP ( MOAISpineSkeleton, "US" );
+	
+	cc8* boneName = state.GetValue < cc8* >( 2, 0 );
+	
+	spBone* bone = spSkeleton_findBone ( self->mSkeleton, boneName );
+	if ( !bone ) {
+		return 0;
+	}
+	
+	state.Push ( bone->worldX );
+	state.Push ( bone->worldY );
+	state.Push ( bone->worldRotation );
+	state.Push ( bone->worldScaleX );
+	state.Push ( bone->worldScaleY );
+	
+	return 5;
+}
+
+//----------------------------------------------------------------//
 /**	@name	getDuration
 	@text   Returns animation duration
  
@@ -945,6 +976,7 @@ void MOAISpineSkeleton::RegisterLuaFuncs ( MOAILuaState& state ) {
 		{ "clearTrack", 			_clearTrack },
 		{ "getAttachmentVertices",	_getAttachmentVertices },
 		{ "getBone",				_getBone },
+		{ "getBoneTransform",		_getBoneTransform },
 		{ "getDuration",            _getDuration },
 		{ "getSlot",				_getSlot },
 		{ "init", 					_init },

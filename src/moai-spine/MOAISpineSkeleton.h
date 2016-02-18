@@ -44,6 +44,7 @@ private:
 	static int		_clearTrack				( lua_State* L );
 	static int		_getAttachmentVertices	( lua_State* L );
 	static int		_getBone				( lua_State* L );
+	static int		_getBoneTransform		( lua_State* L );
     static int      _getDuration            ( lua_State* L );
 	static int		_getSlot				( lua_State* L );
 	static int		_init					( lua_State* L );
