@@ -6,21 +6,30 @@
 
 #include <moai-core/headers.h>
 #include <moai-android-crashlytics/crashlytics_ndk.h>
+#include <moai-android/JniUtils.h>
 
 //================================================================//
 // MOAICrashlyticsAndroid
 //================================================================//
 class MOAICrashlyticsAndroid :
-	public MOAIGlobalClass < MOAICrashlyticsAndroid, MOAILuaObject > {
+	public MOAIGlobalClass < MOAICrashlyticsAndroid, MOAILuaObject >,
+	JniUtils {
 private:
 
+	jmethodID					mJava_Init;
+	jmethodID					mJava_ReportTraceback;
 	crashlytics_context_t*		mCtx;
 
 	//----------------------------------------------------------------//
-	static int _init			( lua_State* L );
-	static int _log				( lua_State* L );
-	static int _set 			( lua_State* L );
-	static int _setUser			( lua_State* L );
+	static int	_init				( lua_State* L );
+	static int	_log				( lua_State* L );
+	static int	_reportTraceback	( lua_State* L );
+	static int	_setBool			( lua_State* L );
+	static int	_setFloat			( lua_State* L );
+	static int	_setInt				( lua_State* L );
+	static int	_setString			( lua_State* L );
+	static int	_setUser			( lua_State* L );
+
 
 public:
 
