@@ -220,11 +220,9 @@ void MOAISpineBone::RegisterLuaFuncs ( MOAILuaState& state ) {
 //----------------------------------------------------------------//
 void MOAISpineBone::SetAsRootBone ( MOAITransform* rootTransform ) {
 	this->mRootTransform = rootTransform;
-	this->ScheduleUpdate ();
 }
 
 //----------------------------------------------------------------//
 void MOAISpineBone::SetBone ( spBone *bone ) {
 	mBone = bone;
-	this->ScheduleUpdate ();
 }
