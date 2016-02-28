@@ -30,7 +30,7 @@ int MOAIFacebookAndroid::_graphRequest ( lua_State* L ) {
 
 	MOAIJString jmethod = self->GetJString ( state.GetValue < cc8* >( 1, "GET" ) );
 	MOAIJString jpath = self->GetJString ( state.GetValue < cc8* >( 2, "" ) );
-	jobject jbundle;
+	jobject jbundle = NULL;
 
 	if ( state.IsType ( 3, LUA_TTABLE ) ) {
 		jbundle = self->BundleFromLua( L, 3 );
