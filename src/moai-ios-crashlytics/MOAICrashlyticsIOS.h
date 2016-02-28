@@ -20,6 +20,8 @@ private:
 	//----------------------------------------------------------------//
 	static int	_init 				( lua_State* L );
 	static int	_forceException		( lua_State* L );
+	static int	_log				( lua_State* L );
+	static int	_reportTraceback	( lua_State* L );
 	static int  _setBool			( lua_State* L );
 	static int  _setFloat			( lua_State* L );
 	static int  _setInt				( lua_State* L );

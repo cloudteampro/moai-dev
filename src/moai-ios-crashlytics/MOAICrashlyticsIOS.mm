@@ -37,7 +37,7 @@ int MOAICrashlyticsIOS::_init ( lua_State* L ) {
  	
  	@in 	
 	@out	nil 
- */
+*/
 int	MOAICrashlyticsIOS::_forceException ( lua_State* L ) {
 	MOAILuaState state ( L );
 	
@@ -45,6 +45,73 @@ int	MOAICrashlyticsIOS::_forceException ( lua_State* L ) {
 	return 0;
 }
 
+//----------------------------------------------------------------//
+/** @lua	log
+	@text	Write string to Crashlytics log. It will be associated with the crash
+	
+	@in		string	log
+	@out	nil
+*/
+int MOAICrashlyticsIOS::_log ( lua_State* L ) {
+	
+	cc8* str = lua_tostring ( L, 1 );
+	if ( str ) {
+		CLSLog ( @"%s", str );
+	}
+	return 0;
+}
+
+//----------------------------------------------------------------//
+/** @lua	reportTraceback
+	@text	Report lua traceback to crashlytics site
+	
+	@in		string	error
+	@in		table	stacktrace
+	@out	nil
+*/
+int MOAICrashlyticsIOS::_reportTraceback ( lua_State* L ) {
+	MOAILuaState state ( L );
+	
+	cc8* error = state.GetValue < cc8* >( 1, "" );
+	NSMutableArray* stackTrace = [[[ NSMutableArray alloc ] init ] autorelease ];
+	
+	if ( state.IsType ( 2, LUA_TTABLE )) {
+		
+		int itr = state.PushTableItr ( 2 );
+		while ( state.TableItrNext ( itr )) {
+			
+			if ( state.IsType ( -1, LUA_TTABLE )) {
+				
+				cc8* filename = state.GetField < cc8* >( -1, "file", "?" );
+				cc8* funcname = state.GetField < cc8* >( -1, "func", "?" );
+				int line = state.GetField < int >( -1, "line", 0 );
+				
+				CLSStackFrame* frame = [ CLSStackFrame stackFrame ];
+				
+				NSDictionary *bundleInfo = [[ NSBundle mainBundle ] infoDictionary ];
+
+				frame.library = [ bundleInfo objectForKey:@"CFBundleDisplayName" ];
+				frame.fileName = [ NSString stringWithUTF8String:filename ];
+				frame.symbol = [ NSString stringWithUTF8String:funcname ];
+				frame.lineNumber = line;
+				
+				[ stackTrace addObject:frame ];
+			}
+		}
+	}
+	
+	[[ Crashlytics sharedInstance ] recordCustomExceptionName:[ NSString stringWithUTF8String:error ] reason:@"Lua" frameArray:stackTrace ];
+	return 0;
+}
+
+//----------------------------------------------------------------//
+/**	@lua	setBool
+	@text	Set a bool value for a string key. Custom data will be available with crash info on Crashlytics site
+	
+	@in		string	key
+	@in		bool	value
+	@out	nil
+*/
 int MOAICrashlyticsIOS::_setBool ( lua_State* L ) {
 	MOAILuaState state ( L );
 	
@@ -58,6 +125,14 @@ int MOAICrashlyticsIOS::_setBool ( lua_State* L ) {
 	return 0;
 }
 
+//----------------------------------------------------------------//
+/**	@lua	setFloat
+	@text	Set a float value for a string key. Custom data will be available with crash info on Crashlytics site
+	
+	@in		string	key
+	@in		number	value
+	@out	nil
+*/
 int MOAICrashlyticsIOS::_setFloat ( lua_State* L ) {
 	MOAILuaState state ( L );
 	
@@ -71,6 +146,14 @@ int MOAICrashlyticsIOS::_setFloat ( lua_State* L ) {
 	return 0;
 }
 
+//----------------------------------------------------------------//
+/**	@lua	setInt
+	@text	Set an int value for a string key. Custom data will be available with crash info on Crashlytics site
+	
+	@in		string	key
+	@in		number	value
+	@out	nil
+*/
 int MOAICrashlyticsIOS::_setInt ( lua_State* L ) {
 	MOAILuaState state ( L );
 	
@@ -84,6 +167,14 @@ int MOAICrashlyticsIOS::_setInt ( lua_State* L ) {
 	return 0;
 }
 
+//----------------------------------------------------------------//
+/**	@lua	setString
+	@text	Set an string value for a string key. Custom data will be available with crash info on Crashlytics site
+	
+	@in		string	key
+	@in		string	value
+	@out	nil
+*/
 int MOAICrashlyticsIOS::_setString ( lua_State* L ) {
 	MOAILuaState state ( L );
 	
@@ -150,6 +241,8 @@ void MOAICrashlyticsIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	luaL_Reg regTable[] = {
 		{ "init",				_init },
 		{ "forceException",		_forceException },
+		{ "log",				_log },
+		{ "reportTraceback",	_reportTraceback },
 		{ "setBool",			_setBool },
 		{ "setFloat",			_setFloat },
 		{ "setInt",				_setInt },
