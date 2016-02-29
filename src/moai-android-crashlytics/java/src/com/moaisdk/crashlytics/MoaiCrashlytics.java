@@ -9,6 +9,11 @@ package com.moaisdk.crashlytics;
 import com.moaisdk.core.MoaiLog;
 
 import android.app.Activity;
+import android.os.Bundle;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.lang.StackTraceElement;
 
 import io.fabric.sdk.android.Fabric;
 import com.crashlytics.android.Crashlytics;
@@ -16,12 +21,20 @@ import com.crashlytics.android.ndk.CrashlyticsNdk;
 
 @SuppressWarnings("unused")
 
+
 //================================================================//
 // MoaiCrashlytics
 //================================================================//
 public class MoaiCrashlytics {
 
 	private static Activity sActivity = null;
+
+	//----------------------------------------------------------------//
+	public static class LuaException extends Exception {
+    	public LuaException ( String message ) {
+        	super ( message );
+    	}
+	}
 
 	//----------------------------------------------------------------//
 	public static void onCreate ( Activity activity ) {
@@ -50,17 +63,21 @@ public class MoaiCrashlytics {
 			
 			Bundle frame = stackFrames [ i ];
 
-			String file = frame.getString ( "file" );
-			String func = frame.getString ( "func" );
-			int line = frame.getInt ( "line" );
+			String file = frame.getString ( "file", "?" );
+			String func = frame.getString ( "func", "?" );
+			int line = frame.getInt ( "line", 0 );
 
-			// Using filename as class name
-			StackTraceElement element = StackTraceElement ( file, func, file, line );
+			// class name is just Lua
+			StackTraceElement element = new StackTraceElement ( "Lua", func, file, line );
 			frames [ i ] = element;
 		}
 		
-		Exception luaCrash = new Exception ( error );
+		LuaException luaCrash = new LuaException ( error );
 		luaCrash.setStackTrace ( frames );
 		Crashlytics.logException ( luaCrash );
+
+		StringWriter writer = new StringWriter ();
+		luaCrash.printStackTrace ( new PrintWriter ( writer ));
+		MoaiLog.i ( writer.toString ());
 	}
 }

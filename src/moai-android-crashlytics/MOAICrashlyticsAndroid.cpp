@@ -74,7 +74,7 @@ int MOAICrashlyticsAndroid::_reportTraceback ( lua_State* L ) {
 
 				env->CallVoidMethod ( bundle, putStr, ( jstring )jkeyFile, ( jstring )jfile );
 				env->CallVoidMethod ( bundle, putStr, ( jstring )jkeyFunc, ( jstring )jfunc );
-				env->CallVoidMethod ( bundle, putInt, ( jstring )jkeyFunc, line );
+				env->CallVoidMethod ( bundle, putInt, ( jstring )jkeyLine, line );
 
 				env->SetObjectArrayElement ( stackTrace, i, bundle );
 			}
@@ -197,9 +197,9 @@ MOAICrashlyticsAndroid::MOAICrashlyticsAndroid ():
 
 	RTTI_SINGLE ( MOAILuaObject )
 	
-	this->SetClass ( "com/moaisdk/facebook/MoaiFacebook" );
-	this->mJava_Init = this->GetStaticMethod ( "Init", "()V" );
-	this->mJava_ReportTraceback = this->GetStaticMethod ( "ReportTraceback", "(Ljava/lang/String;[Landroid/os/Bundle;)V" );
+	this->SetClass ( "com/moaisdk/crashlytics/MoaiCrashlytics" );
+	this->mJava_Init = this->GetStaticMethod ( "init", "()V" );
+	this->mJava_ReportTraceback = this->GetStaticMethod ( "reportTraceback", "(Ljava/lang/String;[Landroid/os/Bundle;)V" );
 	
 }
 
