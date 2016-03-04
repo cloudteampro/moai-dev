@@ -46,7 +46,7 @@ int MOAICrashlyticsAndroid::_reportTraceback ( lua_State* L ) {
 	if ( state.IsType ( 2, LUA_TTABLE ) ) {
 
 		JNIEnv*	env = self->Env ();
-		
+
 		jclass clazz = env->FindClass ( "android/os/Bundle" );
 		jmethodID init = env->GetMethodID ( clazz, "<init>", "()V" );
 		jmethodID putStr = env->GetMethodID ( clazz, "putString", "(Ljava/lang/String;Ljava/lang/String;)V" );
@@ -77,6 +77,7 @@ int MOAICrashlyticsAndroid::_reportTraceback ( lua_State* L ) {
 				env->CallVoidMethod ( bundle, putInt, ( jstring )jkeyLine, line );
 
 				env->SetObjectArrayElement ( stackTrace, i, bundle );
+				env->DeleteLocalRef ( bundle );
 			}
 		}
 		
