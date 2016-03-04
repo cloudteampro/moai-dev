@@ -12,15 +12,16 @@
 //----------------------------------------------------------------//
 void MOAIDataIOTask::Execute () {
 
-	if ( this->mAction == LOAD_ACTION ) { 
-		this->mData->Load ( this->mFilename );
+	if ( this->mAction == LOAD_ACTION ) {
+		bool result = this->mData->Load ( this->mFilename );
 		
 		if ( this->mInflateOnTaskThread ) {
-			this->mData->Inflate ( this->mWindowBits );
+			result = result && this->mData->Inflate ( this->mWindowBits );
 		}
+		this->mResult = result;
 	}
 	else if ( this->mAction == SAVE_ACTION ) {
-		this->mData->Save ( this->mFilename );
+		this->mResult = this->mData->Save ( this->mFilename );
 	}
 }
 
@@ -30,6 +31,7 @@ void MOAIDataIOTask::Init ( cc8* filename, MOAIDataBuffer& target, u32 action ) 
 	this->mFilename = filename;
 	this->mData.Set ( *this, &target );
 	this->mAction = action;
+	this->mResult = false;
 }
 
 //----------------------------------------------------------------//
@@ -59,7 +61,8 @@ void MOAIDataIOTask::Publish () {
 		MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 		if ( this->mOnFinish.PushRef ( state )) {
 			this->mData->PushLuaUserdata ( state );
-			state.DebugCall ( 1, 0 );
+			state.Push ( this->mResult );
+			state.DebugCall ( 2, 0 );
 		}
 	}
 }

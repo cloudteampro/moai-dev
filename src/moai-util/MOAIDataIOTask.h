@@ -22,6 +22,7 @@ private:
 	
 	bool									mInflateOnLoad;
 	bool									mInflateOnTaskThread;
+	bool									mResult;
 	int										mWindowBits;
 
 	//----------------------------------------------------------------//
