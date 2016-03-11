@@ -414,7 +414,19 @@ int MOAIDraw::_drawEllipse ( lua_State* L ) {
 //----------------------------------------------------------------//
 // TODO: doxygen
 int MOAIDraw::_drawGrid ( lua_State* L ) {
-	UNUSED ( L );
+	
+	MOAILuaState state ( L );
+	
+	ZLRect rect;
+	
+	rect.mXMin	= state.GetValue < float >( 1, 0.0f );
+	rect.mYMin	= state.GetValue < float >( 2, 0.0f );
+	rect.mXMax	= state.GetValue < float >( 3, 0.0f );
+	rect.mYMax	= state.GetValue < float >( 4, 0.0f );
+	float nx	= state.GetValue < float >( 5, 0.0f );
+	float ny	= state.GetValue < float >( 6, 0.0f );
+	
+	MOAIDraw::DrawGrid ( rect, nx, ny );
 	return 0;
 }
 
@@ -1356,7 +1368,7 @@ void MOAIDraw::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "drawCircle",				_drawCircle },
 		{ "drawElements",			_drawElements },
 		{ "drawEllipse",			_drawEllipse },
-		//{ "drawGrid",				_drawGrid }, // TODO
+		{ "drawGrid",				_drawGrid },
 		{ "drawLine",				_drawLine },
 		{ "drawPoints",				_drawPoints },
 		{ "drawRay",				_drawRay },
