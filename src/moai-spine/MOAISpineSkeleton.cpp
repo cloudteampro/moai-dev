@@ -740,7 +740,8 @@ void MOAISpineSkeleton::Draw ( int subPrimID, float lod ) {
 
 			switch ( blendMode ) {
 				case SP_BLEND_MODE_ADDITIVE:
-					blend.SetBlend ( MOAIBlendMode::BLEND_ADD );
+					blend.SetBlend ( ZGL_BLEND_FACTOR_ONE, ZGL_BLEND_FACTOR_ONE );
+//					blend.SetBlend ( MOAIBlendMode::BLEND_ADD );
 					break;
 				case SP_BLEND_MODE_MULTIPLY:
 					blend.SetBlend ( MOAIBlendMode::BLEND_MULTIPLY );
