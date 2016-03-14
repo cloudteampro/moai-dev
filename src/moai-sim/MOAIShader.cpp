@@ -86,14 +86,14 @@ void MOAIShader::BindUniforms () {
 			
 			// Skip globals, they are bound by GfxDevice
 			if ( uniform.IsValid () && !uniform.IsGlobal ()) {
-				//if ( uniform.SetValue ( this->mUniformBuffers [ i ], true )) {
-					uniform.SetValue ( this->mUniformBuffers [ i ], true );
+			
+				if ( uniform.SetValue ( this->mUniformBuffers [ i ], true )) {
 					if ( !flushed ) {
 						gfxDevice.FlushBufferedPrims ();
 						flushed = true;
 					}
 					uniform.Bind (); // TODO: maybe should be handled by the state cache
-				//}
+				}
 			}
 		}
 	}
