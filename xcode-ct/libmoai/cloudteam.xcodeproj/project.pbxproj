@@ -217,6 +217,10 @@
 		20DA0A141BDE94050070C61F /* Slot.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09DF1BDE94050070C61F /* Slot.c */; };
 		20DA0A151BDE94050070C61F /* SlotData.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09E01BDE94050070C61F /* SlotData.c */; };
 		20DA0A161BDE94050070C61F /* SlotData.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09E01BDE94050070C61F /* SlotData.c */; };
+		7A05C4231C97074200759015 /* CTHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A1C9D851C96E01900B00C3F /* CTHelper.h */; };
+		7A05C4241C97074300759015 /* CTHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A1C9D851C96E01900B00C3F /* CTHelper.h */; };
+		7A1C9D861C96E01900B00C3F /* CTHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A1C9D841C96E01900B00C3F /* CTHelper.cpp */; };
+		7A1C9D871C96E01900B00C3F /* CTHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A1C9D841C96E01900B00C3F /* CTHelper.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -802,6 +806,8 @@
 		20DA09DE1BDE94050070C61F /* SkinnedMeshAttachment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SkinnedMeshAttachment.c; sourceTree = "<group>"; };
 		20DA09DF1BDE94050070C61F /* Slot.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Slot.c; sourceTree = "<group>"; };
 		20DA09E01BDE94050070C61F /* SlotData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SlotData.c; sourceTree = "<group>"; };
+		7A1C9D841C96E01900B00C3F /* CTHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CTHelper.cpp; sourceTree = "<group>"; };
+		7A1C9D851C96E01900B00C3F /* CTHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTHelper.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -964,6 +970,8 @@
 		206BA0451BDE92D60021D349 /* ct-util */ = {
 			isa = PBXGroup;
 			children = (
+				7A1C9D841C96E01900B00C3F /* CTHelper.cpp */,
+				7A1C9D851C96E01900B00C3F /* CTHelper.h */,
 				20B070DB1C10804D00F83147 /* MOAIColorBlender.cpp */,
 				20B070DC1C10804D00F83147 /* MOAIColorBlender.h */,
 				206BA0461BDE92D60021D349 /* CTUtil.cpp */,
@@ -1274,6 +1282,7 @@
 				20B070DF1C10804D00F83147 /* MOAIColorBlender.h in Headers */,
 				206BA0501BDE92D60021D349 /* host.h in Headers */,
 				206BA04C1BDE92D60021D349 /* CTUtil.h in Headers */,
+				7A05C4241C97074300759015 /* CTHelper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1284,6 +1293,7 @@
 				20B070E01C10804D00F83147 /* MOAIColorBlender.h in Headers */,
 				206BA0511BDE92D60021D349 /* host.h in Headers */,
 				206BA04D1BDE92D60021D349 /* CTUtil.h in Headers */,
+				7A05C4231C97074200759015 /* CTHelper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2024,6 +2034,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A1C9D861C96E01900B00C3F /* CTHelper.cpp in Sources */,
 				206BA04A1BDE92D60021D349 /* CTUtil.cpp in Sources */,
 				20B070DD1C10804D00F83147 /* MOAIColorBlender.cpp in Sources */,
 				206BA04E1BDE92D60021D349 /* host.cpp in Sources */,
@@ -2034,6 +2045,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A1C9D871C96E01900B00C3F /* CTHelper.cpp in Sources */,
 				206BA04B1BDE92D60021D349 /* CTUtil.cpp in Sources */,
 				20B070DE1C10804D00F83147 /* MOAIColorBlender.cpp in Sources */,
 				206BA04F1BDE92D60021D349 /* host.cpp in Sources */,
