@@ -17,12 +17,16 @@ class CTHelper :
 private:
 
 	//----------------------------------------------------------------//
+	static int 	_stepSim            		( lua_State* L );
 	static int	_setBufferSize				( lua_State* L );
  	static int	_renderFrameBuffer			( lua_State* L );
 
 public:
 
 	DECL_LUA_SINGLETON ( CTHelper )
+
+	//
+	void stepSim( double step );
 
 	//----------------------------------------------------------------//
 					CTHelper		();
