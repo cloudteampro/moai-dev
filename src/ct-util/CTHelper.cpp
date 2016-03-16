@@ -11,42 +11,32 @@
 
 //----------------------------------------------------------------//
 int CTHelper::_setBufferSize ( lua_State *L ) {
-	MOAI_LUA_SETUP ( CTHelper, "NN" )
+	MOAILuaState state (L);
+
+	if ( !state.CheckParams ( 1, "NN" )) return 0;
 
 	u32 width = state.GetValue < u32 > ( 1, 0 );
-	u32 height = state.GetValue < u32 > ( 2, 0 );
+	u32 height = state.GetValue < u32 > ( 2, 0) ;
 
 	MOAIGfxDevice::Get ().SetBufferSize ( width, height );
-
+	
 	return 0;
 }
 
 //----------------------------------------------------------------//
 int CTHelper::_renderFrameBuffer ( lua_State *L ) {
-	MOAI_LUA_SETUP ( CTHelper, "U" )
+	MOAILuaState state (L);
 
-	// MOAIFrameBufferRenderCommand* command = state.GetLuaObject < MOAIFrameBufferRenderCommand >( -1, false );
+	if ( !state.CheckParams ( 1, "U" )) return 0;
 
-	// if ( command ) {
+	MOAIFrameBuffer* frameBuffer = state.GetLuaObject < MOAIFrameBuffer >( 1, false );
 
-	// 	if ( command->IsEnabled() && command->GetFrameBuffer() ) {
+	if (frameBuffer) {
+		zglBegin();
+		frameBuffer->Render();
+		zglEnd();
+	}
 
-	// 		zglBegin();
-	// 		command->Render();
-	// 		zglEnd();
-	// 	}
-	// } else {
-
-		MOAIFrameBuffer* frameBuffer = state.GetLuaObject < MOAIFrameBuffer >( -1, false );
-
-		if ( frameBuffer ) {
-
-			zglBegin();
-			// frameBuffer->Render ( NULL );
-			frameBuffer->Render ();
-			zglEnd();
-		}
-	// }
 	return 0;
 }
 
