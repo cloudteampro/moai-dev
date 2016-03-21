@@ -20,6 +20,7 @@ private:
 	bool 	mRelaunchScheduled;
 
 	//----------------------------------------------------------------//
+	static int	_dumpTransform				( lua_State* L );
 	static int	_scheduleRelaunch			( lua_State* L );
 
 public:
