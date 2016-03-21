@@ -37,6 +37,17 @@ int MOAICollisionWorld::_processOverlaps ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+int MOAICollisionWorld::_removeProp ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAICollisionWorld, "U" )
+
+	MOAICollisionProp* prop = state.GetLuaObject < MOAICollisionProp >( 2, true );
+	if ( prop ) {
+		self->RemoveProp ( *prop );
+	}
+	return 0;
+}
+
+//----------------------------------------------------------------//
 // TODO: doxygen
 int MOAICollisionWorld::_setCallback ( lua_State* L ) {
 	MOAI_LUA_SETUP ( MOAICollisionWorld, "U" )
@@ -454,6 +465,7 @@ void MOAICollisionWorld::RegisterLuaFuncs ( MOAILuaState& state ) {
 	luaL_Reg regTable [] = {
 		{ "insertProp",			_insertProp },
 		{ "processOverlaps",	_processOverlaps },
+		{ "removeProp",			_removeProp },
 		{ "setCallback",		_setCallback },
 		{ "setPartition",		_setPartition },
 		{ NULL, NULL }
