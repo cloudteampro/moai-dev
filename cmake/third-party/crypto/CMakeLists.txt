@@ -2,7 +2,7 @@ cmake_minimum_required ( VERSION 2.8.5 )
 project ( crypto )
 
 
-  set ( OPENSSL_ROOT "${MOAI_ROOT}/3rdparty/openssl-1.0.0m")
+  set ( OPENSSL_ROOT "${MOAI_ROOT}/3rdparty/openssl-1.0.1s")
   set ( CMAKE_CURRENT_SOURCE_DIR "${OPENSSL_ROOT}/crypto/" )
   
   #set ( CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -DOPENSSL_NO_ASM" )
@@ -15,6 +15,7 @@ project ( crypto )
     "${OPENSSL_ROOT}/include/"
     "${OPENSSL_ROOT}/crypto/asn1/"
     "${OPENSSL_ROOT}/crypto/evp/"
+    "${OPENSSL_ROOT}/crypto/modes/"
     "${OPENSSL_ROOT}" 
    )
 
