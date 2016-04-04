@@ -33,7 +33,7 @@ extern "C" {
 # define OPENSSL_NO_SCTP
 #endif
 #ifndef OPENSSL_NO_SSL2
-// # define OPENSSL_NO_SSL2
+# define OPENSSL_NO_SSL2
 #endif
 #ifndef OPENSSL_NO_STORE
 # define OPENSSL_NO_STORE
