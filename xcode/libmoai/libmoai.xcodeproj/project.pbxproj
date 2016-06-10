@@ -203,6 +203,10 @@
 		20B0709A1C0498BF00F83147 /* MOAIGfxPrimDeck2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 20B070971C0498BF00F83147 /* MOAIGfxPrimDeck2D.cpp */; };
 		20B0709B1C0498BF00F83147 /* MOAIGfxPrimDeck2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 20B070981C0498BF00F83147 /* MOAIGfxPrimDeck2D.h */; };
 		20B0709C1C0498BF00F83147 /* MOAIGfxPrimDeck2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 20B070981C0498BF00F83147 /* MOAIGfxPrimDeck2D.h */; };
+		20FD8C481D0AFE40006587F8 /* MOAITransformArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 20FD8C461D0AFE40006587F8 /* MOAITransformArray.cpp */; };
+		20FD8C491D0AFE40006587F8 /* MOAITransformArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 20FD8C461D0AFE40006587F8 /* MOAITransformArray.cpp */; };
+		20FD8C4A1D0AFE40006587F8 /* MOAITransformArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 20FD8C471D0AFE40006587F8 /* MOAITransformArray.h */; };
+		20FD8C4B1D0AFE40006587F8 /* MOAITransformArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 20FD8C471D0AFE40006587F8 /* MOAITransformArray.h */; };
 		663704171612813D002D0D27 /* moai_whirlpool.h in Headers */ = {isa = PBXBuildFile; fileRef = 663704111612812C002D0D27 /* moai_whirlpool.h */; };
 		663704191612813E002D0D27 /* moai_whirlpool.h in Headers */ = {isa = PBXBuildFile; fileRef = 663704111612812C002D0D27 /* moai_whirlpool.h */; };
 		66E345461614CA710021FC4B /* moai_whirlpool.c in Sources */ = {isa = PBXBuildFile; fileRef = 66E345451614CA710021FC4B /* moai_whirlpool.c */; };
@@ -5501,6 +5505,8 @@
 		20A0B0281A5020740072F513 /* edtaa3func.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = edtaa3func.h; path = ../../3rdparty/contrib/edtaa3func.h; sourceTree = "<group>"; };
 		20B070971C0498BF00F83147 /* MOAIGfxPrimDeck2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIGfxPrimDeck2D.cpp; sourceTree = "<group>"; };
 		20B070981C0498BF00F83147 /* MOAIGfxPrimDeck2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIGfxPrimDeck2D.h; sourceTree = "<group>"; };
+		20FD8C461D0AFE40006587F8 /* MOAITransformArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAITransformArray.cpp; sourceTree = "<group>"; };
+		20FD8C471D0AFE40006587F8 /* MOAITransformArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAITransformArray.h; sourceTree = "<group>"; };
 		43BA2E5A17733267007DCDF0 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSON.h; path = "../../3rdparty/playhaven-ios-1.13.1/JSON/JSON.h"; sourceTree = "<group>"; };
 		43BA2E5B17733267007DCDF0 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBJsonBase.h; path = "../../3rdparty/playhaven-ios-1.13.1/JSON/SBJsonBase.h"; sourceTree = "<group>"; };
 		43BA2E5C17733267007DCDF0 /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBJsonBase.m; path = "../../3rdparty/playhaven-ios-1.13.1/JSON/SBJsonBase.m"; sourceTree = "<group>"; };
@@ -12545,6 +12551,8 @@
 				CD69AB0517FA6C7E0053E028 /* MOAIPinTransform.h */,
 				89BE7012173AD0CB00DFE837 /* MOAITransform.cpp */,
 				89BE7013173AD0CB00DFE837 /* MOAITransform.h */,
+				20FD8C461D0AFE40006587F8 /* MOAITransformArray.cpp */,
+				20FD8C471D0AFE40006587F8 /* MOAITransformArray.h */,
 				89BE7014173AD0CB00DFE837 /* MOAITransform2D.cpp */,
 				89BE7015173AD0CB00DFE837 /* MOAITransform2D.h */,
 				89BE7016173AD0CB00DFE837 /* MOAITransformBase.cpp */,
@@ -13586,6 +13594,7 @@
 				CD4C3DFC180A63BB00C02381 /* MOAIBlendMode.h in Headers */,
 				CD4C3E25180A63BB00C02381 /* MOAIFontReader.h in Headers */,
 				CD4C3EDC180A63BB00C02381 /* MOAITouchSensor.h in Headers */,
+				20FD8C4A1D0AFE40006587F8 /* MOAITransformArray.h in Headers */,
 				CD2BA7981B2A16B00010C399 /* MOAIGfxDeviceMtxCache.h in Headers */,
 				CD4C3E5F180A63BB00C02381 /* MOAILocationSensor.h in Headers */,
 				CD4C3E27180A63BB00C02381 /* MOAIFrameBuffer.h in Headers */,
@@ -13723,6 +13732,7 @@
 				CD4C4129180A63C200C02381 /* MOAIVertexFormatMgr.h in Headers */,
 				CD4C403C180A63C200C02381 /* MOAICameraFitter2D.h in Headers */,
 				CD4C40CC180A63C200C02381 /* MOAIProfilerEntry.h in Headers */,
+				20FD8C4B1D0AFE40006587F8 /* MOAITransformArray.h in Headers */,
 				CD4C40BE180A63C200C02381 /* MOAIPathGraph.h in Headers */,
 				CD4C40E1180A63C200C02381 /* MOAIRenderMgr.h in Headers */,
 				CD4C40A0180A63C200C02381 /* MOAIParticleDistanceEmitter.h in Headers */,
@@ -16962,6 +16972,7 @@
 				CD73A60C188F0AEC00DFACDB /* MOAIGraphicsProp2D.cpp in Sources */,
 				CD4C3EA1180A63BB00C02381 /* MOAIProfilerReportBox.cpp in Sources */,
 				CD4C3E26180A63BB00C02381 /* MOAIFrameBuffer.cpp in Sources */,
+				20FD8C481D0AFE40006587F8 /* MOAITransformArray.cpp in Sources */,
 				CD4C3E07180A63BB00C02381 /* MOAICameraAnchor2D.cpp in Sources */,
 				CD4C3E75180A63BB00C02381 /* MOAIParticlePlugin.cpp in Sources */,
 				CD4C3E6D180A63BB00C02381 /* MOAIParticleDistanceEmitter.cpp in Sources */,
@@ -17134,6 +17145,7 @@
 				CD73A601188F0AD200DFACDB /* MOAICollisionWorld.cpp in Sources */,
 				CD4C405C180A63C200C02381 /* MOAIFreeTypeFontReader.cpp in Sources */,
 				CD73A60D188F0AEC00DFACDB /* MOAIGraphicsProp2D.cpp in Sources */,
+				20FD8C491D0AFE40006587F8 /* MOAITransformArray.cpp in Sources */,
 				CD4C404D180A63C200C02381 /* MOAIEaseDriver.cpp in Sources */,
 				CD4C40FD180A63C200C02381 /* MOAITextDesigner.cpp in Sources */,
 				CD4C40F7180A63C200C02381 /* MOAISurfaceSampler2D.cpp in Sources */,

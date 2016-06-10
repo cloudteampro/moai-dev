@@ -4,6 +4,8 @@
 #include "pch.h"
 #include <moai-sim/MOAIColor.h>
 #include <moai-sim/MOAIShaderUniform.h>
+#include <moai-sim/MOAITransformArray.h>
+#include <moai-sim/MOAITransform.h>
 
 //================================================================//
 // MOAIShaderUniformBuffer
@@ -115,6 +117,9 @@ void MOAIShaderUniformBuffer::GetValue ( MOAIAttrOp& attrOp ) {
 		case UNIFORM_MATRIX_F4: {
 			// TODO:
 		}
+		case UNIFORM_MATRIX_F4_ARRAY: {
+			// TODO:
+		}
 		case UNIFORM_VECTOR_F4: {
 			// TODO:
 		}
@@ -157,6 +162,12 @@ void MOAIShaderUniformBuffer::SetType ( u32 type ) {
 		case UNIFORM_VECTOR_F4: {
 		
 			this->mBuffer.Resize ( 4 * sizeof ( float ), 0 );
+			break;
+		}
+		
+		case UNIFORM_MATRIX_F4_ARRAY: {
+			
+			this->mBuffer.Resize ( 0 );
 			break;
 		}
 	};
@@ -378,6 +389,33 @@ bool MOAIShaderUniformBuffer::SetValue ( const MOAIShaderUniformBuffer& uniformB
 	if ( this->mType == UNIFORM_FLOAT ) return this->SetValue ( uniformBuffer.mFloat );
 	if (( this->mType == UNIFORM_INDEX ) || ( this->mType == UNIFORM_INT )) return this->SetValue ( uniformBuffer.mInt );
 	return this->SetBuffer ( uniformBuffer.mBuffer, this->mBuffer.Size (), check );
+}
+
+//----------------------------------------------------------------//
+bool MOAIShaderUniformBuffer::SetValue ( MOAITransformArray* transforms, bool check ) {
+	
+	// TODO: check for data staying the same. memcmp will be too costly?
+	// Maybe cache buffer in MOAITransformArray?
+	
+	if ( !transforms ) {
+		this->mBuffer.Clear ();
+	}
+	else {
+		u32 size = transforms->Size ();
+		this->mBuffer.Grow ( 16 * size * sizeof ( float ));
+		
+		for ( u32 i = 0; i < size; ++i ) {
+			
+			float* m = ( float* )this->mBuffer.Data () + 16 * i;
+			const ZLAffine3D mtx = transforms->GetTransform ( i )->GetLocalToWorldMtx ();
+			
+			ZLMatrix4x4* out = ( ZLMatrix4x4* )m;
+			out->Init ( mtx );
+			out->Prepend ( transforms->GetInvBindPose ( i ));
+		}
+	}
+	
+	return true;
 }
 
 //================================================================//

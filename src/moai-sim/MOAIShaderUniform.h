@@ -9,6 +9,7 @@
 
 class MOAIColor;
 class MOAITransformBase;
+class MOAITransformArray;
 
 #define		OPENGL_PREPROC		"#define LOWP\n #define MEDP\n"
 #define		OPENGL_ES_PREPROC	"#define LOWP lowp\n #define MEDP mediump\n"
@@ -46,6 +47,7 @@ public:
 		UNIFORM_MATRIX_F3,
 		UNIFORM_MATRIX_F4,
 		UNIFORM_VECTOR_F4,
+		UNIFORM_MATRIX_F4_ARRAY,
 	};
 
 	GET ( u32, Type, mType )
@@ -64,6 +66,7 @@ public:
 	bool		SetValue			( const ZLMatrix4x4& value, bool check );
 	bool    	SetValue          	( const ZLMatrix3x3& value, bool check );
 	bool		SetValue			( const MOAIShaderUniformBuffer& uniformBuffer, bool check );
+	bool		SetValue			( MOAITransformArray* value, bool check );
 };
 
 //================================================================//
