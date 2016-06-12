@@ -117,7 +117,7 @@ void MOAIShaderUniformBuffer::GetValue ( MOAIAttrOp& attrOp ) {
 		case UNIFORM_MATRIX_F4: {
 			// TODO:
 		}
-		case UNIFORM_MATRIX_F4_ARRAY: {
+		case UNIFORM_VECTOR_F4_ARRAY: {
 			// TODO:
 		}
 		case UNIFORM_VECTOR_F4: {
@@ -165,7 +165,7 @@ void MOAIShaderUniformBuffer::SetType ( u32 type ) {
 			break;
 		}
 		
-		case UNIFORM_MATRIX_F4_ARRAY: {
+		case UNIFORM_VECTOR_F4_ARRAY: {
 			
 			this->mBuffer.Resize ( 0 );
 			break;
@@ -218,6 +218,14 @@ bool MOAIShaderUniformBuffer::SetValue ( const MOAIAttrOp& attrOp, bool check ) 
 		}
 		case MOAIAttrOp::ATTR_TYPE_VECTOR: {
 			// TODO:
+			break;
+		}
+		case MOAIAttrOp::ATTR_TYPE_VARIANT: {
+			if ( this->mType == UNIFORM_VECTOR_F4_ARRAY ) {
+				MOAITransformArray* buffer = attrOp.GetValue < MOAITransformArray* >( 0 );
+				return this->SetValue ( buffer, check );
+			}
+			break;
 		}
 	}
 	return false;
@@ -388,34 +396,25 @@ bool MOAIShaderUniformBuffer::SetValue ( const MOAIShaderUniformBuffer& uniformB
 
 	if ( this->mType == UNIFORM_FLOAT ) return this->SetValue ( uniformBuffer.mFloat );
 	if (( this->mType == UNIFORM_INDEX ) || ( this->mType == UNIFORM_INT )) return this->SetValue ( uniformBuffer.mInt );
+
+	if ( this->mType == UNIFORM_VECTOR_F4_ARRAY ) {
+		this->mInt = uniformBuffer.mInt;
+		this->mBuffer.Grow ( uniformBuffer.mBuffer.Size ());
+	}
+	
 	return this->SetBuffer ( uniformBuffer.mBuffer, this->mBuffer.Size (), check );
 }
 
 //----------------------------------------------------------------//
 bool MOAIShaderUniformBuffer::SetValue ( MOAITransformArray* transforms, bool check ) {
 	
-	// TODO: check for data staying the same. memcmp will be too costly?
-	// Maybe cache buffer in MOAITransformArray?
+	u32 size = transforms->Size ();
+	this->mBuffer.Grow ( 12 * size * sizeof ( float ));
 	
-	if ( !transforms ) {
-		this->mBuffer.Clear ();
-	}
-	else {
-		u32 size = transforms->Size ();
-		this->mBuffer.Grow ( 16 * size * sizeof ( float ));
-		
-		for ( u32 i = 0; i < size; ++i ) {
-			
-			float* m = ( float* )this->mBuffer.Data () + 16 * i;
-			const ZLAffine3D mtx = transforms->GetTransform ( i )->GetLocalToWorldMtx ();
-			
-			ZLMatrix4x4* out = ( ZLMatrix4x4* )m;
-			out->Init ( mtx );
-			out->Prepend ( transforms->GetInvBindPose ( i ));
-		}
-	}
+	// TODO: check that sending more or less values than defined in vertex shader is fine
+	this->mInt = size * 3;
 	
-	return true;
+	return this->SetBuffer ( transforms->GetBuffer (), 12 * size * sizeof ( float ), check );
 }
 
 //================================================================//
@@ -451,6 +450,10 @@ void MOAIShaderUniform::Bind () {
 
 		case UNIFORM_VECTOR_F4:
 			zglUniform4fv ( this->mAddr, 1, ( float* )this->mBuffer.Data ());
+			break;
+		
+		case UNIFORM_VECTOR_F4_ARRAY:
+			zglUniform4fv ( this->mAddr, this->mInt, ( float* )this->mBuffer.Data ());
 			break;
 	}
 }

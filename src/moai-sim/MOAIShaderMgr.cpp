@@ -24,6 +24,8 @@
 #include <moai-sim/shaders/MOAILineShader3D-vsh.h>
 #include <moai-sim/shaders/MOAIMeshShader-fsh.h>
 #include <moai-sim/shaders/MOAIMeshShader-vsh.h>
+#include <moai-sim/shaders/MOAISkinnedMeshShader-fsh.h>
+#include <moai-sim/shaders/MOAISkinnedMeshShader-vsh.h>
 
 //================================================================//
 // local
@@ -210,6 +212,26 @@ MOAIShaderProgram* MOAIShaderMgr::GetProgram ( u32 shaderID ) {
 					program->SetGlobal ( 1, 1, MOAIShaderProgram::GLOBAL_PEN_COLOR );
 					
 					break;
+					
+				case SKINNED_MESH_SHADER:
+					
+					program->SetSource ( _skinnedMeshShaderVSH, _skinnedMeshShaderFSH );
+					program->SetVertexAttribute ( 0, "position" );
+					program->SetVertexAttribute ( 1, "uv" );
+					program->SetVertexAttribute ( 2, "boneWeight" );
+					program->SetVertexAttribute ( 3, "boneIndex" );
+					program->SetVertexAttribute ( 4, "color" );
+					
+					program->ReserveUniforms ( 3 );
+					program->DeclareUniform ( 0, "transform", MOAIShaderUniform::UNIFORM_MATRIX_F4 );
+					program->DeclareUniform ( 1, "ucolor", MOAIShaderUniform::UNIFORM_VECTOR_F4 );
+					program->DeclareUniform ( 2, "palette", MOAIShaderUniform::UNIFORM_VECTOR_F4_ARRAY );
+					
+					program->ReserveGlobals ( 2 );
+					program->SetGlobal ( 0, 0, MOAIShaderProgram::GLOBAL_WORLD_VIEW_PROJ );
+					program->SetGlobal ( 1, 1, MOAIShaderProgram::GLOBAL_PEN_COLOR );
+					
+					break;
 			}
 			
 			this->mPrograms [ shaderID ] = program;
@@ -284,6 +306,7 @@ void MOAIShaderMgr::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "LINE_SHADER",				( u32 )LINE_SHADER );
 	state.SetField ( -1, "LINE_SHADER_3D",			( u32 )LINE_SHADER_3D );
 	state.SetField ( -1, "MESH_SHADER",				( u32 )MESH_SHADER );
+	state.SetField ( -1, "SKINNED_MESH_SHADER",		( u32 )SKINNED_MESH_SHADER );
 	
 	luaL_Reg regTable [] = {
 		{ "getProgram",				_getProgram },

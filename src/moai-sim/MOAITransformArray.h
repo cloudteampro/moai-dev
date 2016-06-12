@@ -21,6 +21,8 @@ private:
 	ZLLeanArray < MOAITransform* >				mTransforms;
 	ZLLeanArray < ZLMatrix4x4 >					mInvBindPose;
 	
+	ZLLeanArray < float >						mBuffer;
+	
 	//----------------------------------------------------------------//
 	static int		_getTransform				( lua_State* L );
 	static int		_reserve					( lua_State* L );
@@ -31,10 +33,19 @@ private:
 	
 public:
 	
+	DECL_ATTR_HELPER ( MOAITransformArray )
 	DECL_LUA_FACTORY ( MOAITransformArray )
 	
+	enum {
+		ATTR_BUFFER_TRAIT,
+		
+		TOTAL_ATTR
+	};
+	
 	//----------------------------------------------------------------//
+	bool			ApplyAttrOp					( u32 attrID, MOAIAttrOp& attrOp, u32 op );
 	void			Clear						();
+	void*			GetBuffer					();
 	ZLMatrix4x4&	GetInvBindPose				( u32 idx );
 	MOAITransform*	GetTransform				( u32 idx );
 					MOAITransformArray			();

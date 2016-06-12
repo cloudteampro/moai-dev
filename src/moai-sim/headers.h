@@ -128,6 +128,7 @@
 #include <moai-sim/MOAITimer.h>
 #include <moai-sim/MOAITouchSensor.h>
 #include <moai-sim/MOAITransform.h>
+#include <moai-sim/MOAITransformArray.h>
 #include <moai-sim/MOAITransformBase.h>
 #include <moai-sim/MOAIVecPathGraph.h>
 #include <moai-sim/MOAIVectorCombo.h>
