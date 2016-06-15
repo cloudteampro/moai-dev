@@ -130,6 +130,8 @@ MOAITransformArray::MOAITransformArray () {
 
 //----------------------------------------------------------------//
 MOAITransformArray::~MOAITransformArray () {
+	
+	this->Clear ();
 }
 
 //----------------------------------------------------------------//
