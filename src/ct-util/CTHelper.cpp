@@ -59,6 +59,33 @@ int CTHelper::_renderFrameBuffer ( lua_State *L ) {
 	return 0;
 }
 
+//----------------------------------------------------------------//
+int CTHelper::_setWorldLoc( lua_State *L ){
+	MOAILuaState state (L);
+
+	if ( !state.CheckParams ( 1, "UN" )) return 0;
+
+	MOAITransform* dst = state.GetLuaObject< MOAITransform >(1, true);
+	float x = state.GetValue< float >( 2, 0.0f );
+	float y = state.GetValue< float >( 3, 0.0f );
+	float z = state.GetValue< float >( 4, 0.0f );
+
+	ZLVec3D loc;
+	loc.Init( x, y, z );		
+	const ZLAffine3D* inherit = dst->GetLinkedValue < ZLAffine3D* >( PACK_ATTR ( MOAITransformBase, MOAITransformBase::INHERIT_TRANSFORM ), 0 );
+
+	if( inherit ) {
+
+		ZLAffine3D inverse;
+		inverse.Inverse( *inherit ); 
+		inverse.Transform( loc );
+	}
+	dst->SetLoc( loc );	
+	dst->ScheduleUpdate();
+
+	return 0;
+}
+
 //================================================================//
 // CTHelper
 //================================================================//
@@ -86,6 +113,7 @@ void CTHelper::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "stepSim",             	_stepSim },
 		{ "setBufferSize",			_setBufferSize },
 		{ "renderFrameBuffer",		_renderFrameBuffer },
+		{ "setWorldLoc",			_setWorldLoc },
 		{ NULL, NULL }
 	};
 	
