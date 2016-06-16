@@ -23,6 +23,7 @@ private:
 	//----------------------------------------------------------------//
 	static int		_getValueAtTime		( lua_State* L );
 	static int		_setKey				( lua_State* L );
+	static int		_setKeyQuat			( lua_State* L );
 
 	//----------------------------------------------------------------//
 	ZLQuaternion	GetCurveDelta		() const;
@@ -45,6 +46,7 @@ public:
 	void			RegisterLuaFuncs		( MOAILuaState& state );
 	void			ReserveSamples			( u32 total );
 	void			SetSample				( u32 id, float x, float y, float z );
+	void			SetSample				( u32 id, float s, float x, float y, float z );
 };
 
 #endif
