@@ -79,7 +79,6 @@ int MOAITransformArray::_setTransform ( lua_State* L ) {
 		transform->ForceUpdate ();
 		invBindPose.Init ( transform->GetLocalToWorldMtx ());
 		invBindPose.Inverse ();
-		invBindPose.Transpose ();
 	}
 
 	self->SetTransform ( idx, transform, invBindPose );
