@@ -17,6 +17,8 @@
 #include <moai-sim/MOAIBlendMode.h>
 #include <moai-sim/MOAIBoundsDeck.h>
 //#include <moai-sim/MOAIBspBuilder2D.h>
+#include <moai-sim/MOAIBone.h>
+#include <moai-sim/MOAIBoneArray.h>
 #include <moai-sim/MOAIButtonSensor.h>
 #include <moai-sim/MOAICamera.h>
 #include <moai-sim/MOAICameraAnchor2D.h>
@@ -128,7 +130,6 @@
 #include <moai-sim/MOAITimer.h>
 #include <moai-sim/MOAITouchSensor.h>
 #include <moai-sim/MOAITransform.h>
-#include <moai-sim/MOAITransformArray.h>
 #include <moai-sim/MOAITransformBase.h>
 #include <moai-sim/MOAIVecPathGraph.h>
 #include <moai-sim/MOAIVectorCombo.h>

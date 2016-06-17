@@ -1,43 +1,41 @@
 // Copyright (c) 2010-2011 Zipline Games, Inc. All Rights Reserved.
 // http://getmoai.com
 
-#ifndef	MOAITRANSFORMARRAY_H
-#define	MOAITRANSFORMARRAY_H
+#ifndef	MOAIBONEARRAY_H
+#define	MOAIBONEARRAY_H
 
 #include <moai-sim/MOAINode.h>
 
-class MOAITransform;
+class MOAIBone;
 
 //================================================================//
-// MOAITransformArray
+// MOAIBoneArray
 //================================================================//
-/**	@name	MOAITransformArray
-	@text	Array of transforms (for instance, a set of Bones in a skeletal animation).
+/**	@name	MOAIBoneArray
+	@text	Array of MOAIBone for binding to skinning shader
 */
-class MOAITransformArray :
+class MOAIBoneArray :
 public virtual MOAINode {
 private:
 	
-	ZLLeanArray < MOAITransform* >				mTransforms;
-	ZLLeanArray < ZLMatrix4x4 >					mInvBindPose;
-	
-	ZLLeanArray < float >						mBuffer;
+	ZLLeanArray < MOAIBone* >					mBones;
+	ZLLeanArray < ZLVec4D >						mBuffer;
 	
 	//----------------------------------------------------------------//
-	static int		_getTransform				( lua_State* L );
+	static int		_getBone					( lua_State* L );
 	static int		_reserve					( lua_State* L );
-	static int		_setTransform				( lua_State* L );
+	static int		_setBone					( lua_State* L );
 
 	//----------------------------------------------------------------//
 	void			OnDepNodeUpdate				();
 	
 public:
 	
-	DECL_ATTR_HELPER ( MOAITransformArray )
-	DECL_LUA_FACTORY ( MOAITransformArray )
+	DECL_ATTR_HELPER ( MOAIBoneArray )
+	DECL_LUA_FACTORY ( MOAIBoneArray )
 	
 	enum {
-		ATTR_BUFFER_TRAIT,
+		ATTR_VEC4_ARRAY,
 		
 		TOTAL_ATTR
 	};
@@ -47,13 +45,13 @@ public:
 	void			Clear						();
 	void*			GetBuffer					();
 	ZLMatrix4x4&	GetInvBindPose				( u32 idx );
-	MOAITransform*	GetTransform				( u32 idx );
-					MOAITransformArray			();
-					~MOAITransformArray			();
+	MOAIBone*		GetBone						( u32 idx );
+					MOAIBoneArray				();
+					~MOAIBoneArray				();
 	void			RegisterLuaClass			( MOAILuaState& state );
 	void			RegisterLuaFuncs			( MOAILuaState& state );
 	void			Reserve						( u32 total );
-	void			SetTransform				( u32 idx, MOAITransform* transform, ZLMatrix4x4& invBindPose );
+	void			SetBone						( u32 idx, MOAIBone* bone );
 	void			SerializeIn					( MOAILuaState& state, MOAIDeserializer& serializer );
 	void			SerializeOut				( MOAILuaState& state, MOAISerializer& serializer );
 	u32				Size						();

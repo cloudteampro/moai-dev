@@ -66,7 +66,7 @@ public:
 	bool		SetValue			( const ZLMatrix4x4& value, bool check );
 	bool    	SetValue          	( const ZLMatrix3x3& value, bool check );
 	bool		SetValue			( const MOAIShaderUniformBuffer& uniformBuffer, bool check );
-	bool		SetValue			( MOAITransformArray* value, bool check );
+	bool		SetValue			( ZLLeanArray < ZLVec4D >& value, bool check );
 };
 
 //================================================================//

@@ -4,7 +4,6 @@
 #include "pch.h"
 #include <moai-sim/MOAIColor.h>
 #include <moai-sim/MOAIShaderUniform.h>
-#include <moai-sim/MOAITransformArray.h>
 #include <moai-sim/MOAITransform.h>
 
 //================================================================//
@@ -222,8 +221,8 @@ bool MOAIShaderUniformBuffer::SetValue ( const MOAIAttrOp& attrOp, bool check ) 
 		}
 		case MOAIAttrOp::ATTR_TYPE_VARIANT: {
 			if ( this->mType == UNIFORM_VECTOR_F4_ARRAY ) {
-				MOAITransformArray* buffer = attrOp.GetValue < MOAITransformArray* >( 0 );
-				return this->SetValue ( buffer, check );
+				ZLLeanArray < ZLVec4D > *buffer = attrOp.GetValue < ZLLeanArray<ZLVec4D>* >( 0 );
+				return this->SetValue ( *buffer, check );
 			}
 			break;
 		}
@@ -406,15 +405,14 @@ bool MOAIShaderUniformBuffer::SetValue ( const MOAIShaderUniformBuffer& uniformB
 }
 
 //----------------------------------------------------------------//
-bool MOAIShaderUniformBuffer::SetValue ( MOAITransformArray* transforms, bool check ) {
+bool MOAIShaderUniformBuffer::SetValue ( ZLLeanArray < ZLVec4D >& array, bool check ) {
 	
-	u32 size = transforms->Size ();
-	this->mBuffer.Grow ( 12 * size * sizeof ( float ));
+	this->mBuffer.Grow ( array.BufferSize ());
 	
 	// TODO: check that sending more or less values than defined in vertex shader is fine
-	this->mInt = size * 3;
+	this->mInt = array.Size ();
 	
-	return this->SetBuffer ( transforms->GetBuffer (), 12 * size * sizeof ( float ), check );
+	return this->SetBuffer ( array.Data (), array.BufferSize (), check );
 }
 
 //================================================================//
