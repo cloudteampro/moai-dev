@@ -34,6 +34,12 @@ public:
 	//----------------------------------------------------------------//
 					MOAIGfxDeviceBase			();
 	virtual			~MOAIGfxDeviceBase			();
+	
+	
+	//----------------------------------------------------------------//
+	inline void	IncrementDrawCount () {
+		this->mDrawCount++;
+	}
 };
 
 #endif
