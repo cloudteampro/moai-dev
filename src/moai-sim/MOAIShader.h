@@ -20,6 +20,7 @@ protected:
 	ZLLeanArray < MOAIShaderUniformBuffer >		mUniformBuffers;
 
 	//----------------------------------------------------------------//
+	static int		_getProgram				( lua_State* L );
 	static int		_setProgram				( lua_State* L );
 
 public:
