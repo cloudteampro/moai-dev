@@ -42,6 +42,7 @@ private:
 	static int		_addAnimation			( lua_State* L );
 	static int		_clearAllTracks			( lua_State* L );
 	static int		_clearTrack				( lua_State* L );
+	static int		_getAnimations			( lua_State* L );
 	static int		_getAttachmentVertices	( lua_State* L );
 	static int		_getBone				( lua_State* L );
 	static int		_getBoneTransform		( lua_State* L );
