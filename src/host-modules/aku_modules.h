@@ -91,6 +91,10 @@
 	#include <moai-spine/host.h>
 #endif
 
+#if AKU_WITH_SPINE_V3
+	#include <moai-spine-v3/host.h>
+#endif
+
 #if AKU_WITH_UNTZ
 	#include <moai-untz/host.h>
 #endif

@@ -3,8 +3,8 @@
 
 #include "pch.h"
 #include <spine/extension.h>
-#include <moai-spine/host.h>
-#include <moai-spine/headers.h>
+#include <moai-spine-v3/host.h>
+#include <moai-spine-v3/headers.h>
 
 //================================================================//
 // aku-util
@@ -109,7 +109,7 @@ void AKUSpineContextInitialize () {
 	}
 
 	REGISTER_LUA_CLASS ( MOAISpine )
-	REGISTER_LUA_CLASS ( MOAISpineBone )
+//	REGISTER_LUA_CLASS ( MOAISpineBone )
 	REGISTER_LUA_CLASS ( MOAISpineSkeleton )
 	REGISTER_LUA_CLASS ( MOAISpineSkeletonData )
 	REGISTER_LUA_CLASS ( MOAISpineSlot )

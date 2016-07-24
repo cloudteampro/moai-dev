@@ -2,7 +2,7 @@
 // http://getmoai.com
 
 #include "pch.h"
-#include <moai-spine/MOAISpine.h>
+#include <moai-spine-v3/MOAISpine.h>
 
 //================================================================//
 // lua

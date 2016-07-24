@@ -16,6 +16,7 @@
 				20993E8E1BDE94A4009D7CED /* PBXTargetDependency */,
 				206B9D3D1BDE49020021D349 /* PBXTargetDependency */,
 				206B9CF81BDABB1B0021D349 /* PBXTargetDependency */,
+				20541DCC1D44B61C004F3772 /* PBXTargetDependency */,
 				206B9CFA1BDABB1B0021D349 /* PBXTargetDependency */,
 			);
 			name = build_all_osx;
@@ -32,6 +33,7 @@
 				2010D68A1BE38397008AD676 /* PBXTargetDependency */,
 				206B9D3B1BDE48FD0021D349 /* PBXTargetDependency */,
 				206B9D041BDABB2E0021D349 /* PBXTargetDependency */,
+				20541E081D44B62A004F3772 /* PBXTargetDependency */,
 				206B9D061BDABB2E0021D349 /* PBXTargetDependency */,
 				2090B6B01BEBA4A80057A676 /* PBXTargetDependency */,
 			);
@@ -402,6 +404,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2049B9471CAA8C8B005B83B3;
 			remoteInfo = "libmoai-ios-adtoapp";
+		};
+		20541DCB1D44B61C004F3772 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 20F75D1C1D3FD31F0050B737;
+			remoteInfo = "libmoai-osx-spine-v3";
+		};
+		20541E071D44B62A004F3772 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 20F75C941D3FD31B0050B737;
+			remoteInfo = "libmoai-ios-spine-v3";
 		};
 		206B9CF71BDABB1B0021D349 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -987,8 +1003,8 @@
 		20DA09DE1BDE94050070C61F /* SkinnedMeshAttachment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SkinnedMeshAttachment.c; sourceTree = "<group>"; };
 		20DA09DF1BDE94050070C61F /* Slot.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Slot.c; sourceTree = "<group>"; };
 		20DA09E01BDE94050070C61F /* SlotData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SlotData.c; sourceTree = "<group>"; };
-		20F75CE11D3FD31B0050B737 /* liblibmoai-ios-spine-v3.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "liblibmoai-ios-spine-v3.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		20F75D691D3FD31F0050B737 /* liblibmoai-osx-spine-v3.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "liblibmoai-osx-spine-v3.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		20F75CE11D3FD31B0050B737 /* libmoai-ios-spine-v3.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios-spine-v3.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		20F75D691D3FD31F0050B737 /* libmoai-osx-spine-v3.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-osx-spine-v3.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		20F75D731D3FD3630050B737 /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		20F75D741D3FD3630050B737 /* AnimationState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationState.h; sourceTree = "<group>"; };
 		20F75D751D3FD3630050B737 /* AnimationStateData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationStateData.h; sourceTree = "<group>"; };
@@ -1189,8 +1205,8 @@
 				203DA5871BDF92C700EC109A /* libmoai-ios-crashlytics.a */,
 				2090B66B1BEBA40A0057A676 /* libmoai-ios-unityads.a */,
 				2049B9541CAA8C8B005B83B3 /* libmoai_ios_adtoapp.a */,
-				20F75CE11D3FD31B0050B737 /* liblibmoai-ios-spine-v3.a */,
-				20F75D691D3FD31F0050B737 /* liblibmoai-osx-spine-v3.a */,
+				20F75CE11D3FD31B0050B737 /* libmoai-ios-spine-v3.a */,
+				20F75D691D3FD31F0050B737 /* libmoai-osx-spine-v3.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2020,7 +2036,7 @@
 			);
 			name = "libmoai-ios-spine-v3";
 			productName = OpenUSLS;
-			productReference = 20F75CE11D3FD31B0050B737 /* liblibmoai-ios-spine-v3.a */;
+			productReference = 20F75CE11D3FD31B0050B737 /* libmoai-ios-spine-v3.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		20F75D1C1D3FD31F0050B737 /* libmoai-osx-spine-v3 */ = {
@@ -2037,7 +2053,7 @@
 			);
 			name = "libmoai-osx-spine-v3";
 			productName = OpenUSLS;
-			productReference = 20F75D691D3FD31F0050B737 /* liblibmoai-osx-spine-v3.a */;
+			productReference = 20F75D691D3FD31F0050B737 /* libmoai-osx-spine-v3.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -2770,6 +2786,16 @@
 			isa = PBXTargetDependency;
 			target = 2049B9471CAA8C8B005B83B3 /* libmoai-ios-adtoapp */;
 			targetProxy = 2049B9651CAA8CF1005B83B3 /* PBXContainerItemProxy */;
+		};
+		20541DCC1D44B61C004F3772 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 20F75D1C1D3FD31F0050B737 /* libmoai-osx-spine-v3 */;
+			targetProxy = 20541DCB1D44B61C004F3772 /* PBXContainerItemProxy */;
+		};
+		20541E081D44B62A004F3772 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 20F75C941D3FD31B0050B737 /* libmoai-ios-spine-v3 */;
+			targetProxy = 20541E071D44B62A004F3772 /* PBXContainerItemProxy */;
 		};
 		206B9CF81BDABB1B0021D349 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -4363,7 +4389,7 @@
 					"$(inherited)",
 					"\"../../3rdparty/spine_v3-c/include\"",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "moai-ios-spine-v3";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
 			};
@@ -4397,7 +4423,7 @@
 					"$(inherited)",
 					"\"../../3rdparty/spine_v3-c/include\"",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "moai-ios-spine-v3";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
 			};
@@ -4431,7 +4457,7 @@
 					"$(inherited)",
 					"\"../../3rdparty/spine_v3-c/include\"",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "moai-ios-spine-v3";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
 			};
@@ -4465,7 +4491,7 @@
 					"$(inherited)",
 					"\"../../3rdparty/spine_v3-c/include\"",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "moai-ios-spine-v3";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
 			};
@@ -4506,7 +4532,7 @@
 					"$(inherited)",
 					"\"../../3rdparty/spine_v3-c/include\"",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "moai-osx-spine-v3";
 				SDKROOT = macosx;
 				WARNING_CFLAGS = "-w";
 			};
@@ -4547,7 +4573,7 @@
 					"$(inherited)",
 					"\"../../3rdparty/spine_v3-c/include\"",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "moai-osx-spine-v3";
 				SDKROOT = macosx;
 				WARNING_CFLAGS = "-w";
 			};
@@ -4588,7 +4614,7 @@
 					"$(inherited)",
 					"\"../../3rdparty/spine_v3-c/include\"",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "moai-osx-spine-v3";
 				SDKROOT = macosx;
 				WARNING_CFLAGS = "-w";
 			};
@@ -4629,7 +4655,7 @@
 					"$(inherited)",
 					"\"../../3rdparty/spine_v3-c/include\"",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "moai-osx-spine-v3";
 				SDKROOT = macosx;
 				WARNING_CFLAGS = "-w";
 			};

@@ -51,6 +51,7 @@ add_subdirectory ( sfmt )
 add_subdirectory ( sqlite3 )
 
 add_subdirectory ( spine )
+add_subdirectory ( spine-v3 )
 
 add_subdirectory ( ssl )
 add_subdirectory ( tess )
