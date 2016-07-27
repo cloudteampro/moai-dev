@@ -280,6 +280,8 @@ int MOAIFacebookAndroid::_sendGameRequest ( lua_State* L ) {
 	
 	bool result = self->CallStaticBooleanMethod (
 		self->mJava_SendGameRequest,
+		( jstring )jdata,
+		( jstring )jtitle,
 		( jstring )jmessage,
 		( jstring )jactionType,
 		( jstring )jobjectID,
@@ -454,7 +456,7 @@ MOAIFacebookAndroid::MOAIFacebookAndroid () {
 	this->mJava_PostToFeed					= this->GetStaticMethod ( "postToFeed", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V" );
 	this->mJava_RequestPublishPermissions	= this->GetStaticMethod ( "requestPublishPermissions", "([Ljava/lang/String;)V" );
 	this->mJava_RequestReadPermissions		= this->GetStaticMethod ( "requestReadPermissions", "([Ljava/lang/String;)V" );
-	this->mJava_SendGameRequest				= this->GetStaticMethod ( "sendGameRequest", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;I)Z" );
+	this->mJava_SendGameRequest				= this->GetStaticMethod ( "sendGameRequest", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;I)Z" );
 	this->mJava_SessionValid				= this->GetStaticMethod ( "sessionValid", "()Z" );
 	this->mJava_ShowInviteDialog			= this->GetStaticMethod ( "showInviteDialog", "(Ljava/lang/String;Ljava/lang/String;)V" );
 
