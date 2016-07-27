@@ -124,6 +124,16 @@ int MOAIShaderProgram::_declareUniformSampler ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+int MOAIShaderProgram::_getSource ( lua_State *L ) {
+	MOAI_LUA_SETUP ( MOAIShaderProgram, "U" )
+	
+	state.Push ( self->mVertexShaderSource.c_str ());
+	state.Push ( self->mFragmentShaderSource.c_str ());
+	
+	return 2;
+}
+
+//----------------------------------------------------------------//
 /**	@lua	load
 	@text	Load a shader program.
 
@@ -498,6 +508,7 @@ void MOAIShaderProgram::RegisterLuaFuncs ( MOAILuaState& state ) {
 		{ "declareUniformFloat",		_declareUniformFloat },
 		{ "declareUniformInt",			_declareUniformInt },
 		{ "declareUniformSampler",		_declareUniformSampler },
+		{ "getSource",					_getSource },
 		{ "load",						_load },
 		{ "reserveGlobals",				_reserveGlobals },
 		{ "reserveUniforms",			_reserveUniforms },

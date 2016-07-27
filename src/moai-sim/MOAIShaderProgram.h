@@ -73,6 +73,7 @@ protected:
 	static int		_declareUniformFloat		( lua_State* L );
 	static int		_declareUniformInt			( lua_State* L );
 	static int		_declareUniformSampler		( lua_State* L );
+	static int		_getSource					( lua_State* L );
 	static int		_load						( lua_State* L );
 	static int		_reserveGlobals				( lua_State* L );
 	static int		_reserveUniforms			( lua_State* L );

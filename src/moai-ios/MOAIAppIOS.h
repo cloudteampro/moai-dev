@@ -59,6 +59,7 @@ private:
 	static int		_getResourcePathInBundle		( lua_State* L );
 	static int		_getSystemUptime				( lua_State* L );
 	static int		_getUTCTime						( lua_State* L );
+	static int		_openSettings					( lua_State* L );
 	static int		_openURL						( lua_State* L );
 	static int		_openURLWithParams				( lua_State* L );
 	static int		_sendMail						( lua_State* L );

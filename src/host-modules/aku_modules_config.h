@@ -77,6 +77,10 @@
 		#define AKU_WITH_SPINE 0
 	#endif
 
+	#ifndef AKU_WITH_SPINE_V3
+		#define AKU_WITH_SPINE_V3 0
+	#endif
+
 	#ifndef AKU_WITH_UNTZ
 		#define AKU_WITH_UNTZ 1
 	#endif

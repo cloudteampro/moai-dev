@@ -265,6 +265,24 @@ int MOAIAppIOS::_getUTCTime ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+/**	@lua	openSettings
+	@text	Open your app's section in the iOS Settings app. Works on iOS 8 and later
+	
+	@out	nil
+*/
+int MOAIAppIOS::_openSettings ( lua_State *L ) {
+	MOAILuaState state ( L );
+	
+	BOOL canOpenSettings = ( &UIApplicationOpenSettingsURLString != NULL );
+	if ( canOpenSettings ) {
+		NSURL *url = [ NSURL URLWithString:UIApplicationOpenSettingsURLString ];
+		[[ UIApplication sharedApplication ] openURL:url ];
+	}
+	
+	return 0;
+}
+
+//----------------------------------------------------------------//
 /**	@lua	openURL
 	@text	Open the native device web browser at the specified URL.
  
@@ -524,6 +542,7 @@ void MOAIAppIOS::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "getResourcePathInBundle",	_getResourcePathInBundle },
 		{ "getSystemUptime",			_getSystemUptime },
 		{ "getUTCTime",					_getUTCTime },
+		{ "openSettings",				_openSettings },
 		{ "openURL",					_openURL },
 		{ "openURLWithParams",			_openURLWithParams },
 		{ "sendMail",					_sendMail },

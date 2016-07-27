@@ -163,6 +163,7 @@ public:
 	template < typename TYPE > TYPE						GetValue			( int idx, TYPE value );
 	template < typename TYPE > ZLMetaVec2D < TYPE >		GetVec2D			( int idx, TYPE value = 0 );
 	template < typename TYPE > ZLMetaVec3D < TYPE >		GetVec3D			( int idx, TYPE value = 0 );
+	template < typename TYPE > ZLMetaVec4D < TYPE >		GetVec4D			( int idx, TYPE value = 0 );
 	template < typename TYPE > TYPE						PopValue			( TYPE value );
 	template < typename TYPE > void						Push				( ZLMetaRect < TYPE >& rect );
 	template < typename TYPE > void						ReadArray			( int size, TYPE* values, TYPE value );

@@ -4,6 +4,7 @@
 #include "pch.h"
 #include <moai-sim/MOAIColor.h>
 #include <moai-sim/MOAIShaderUniform.h>
+#include <moai-sim/MOAITransform.h>
 
 //================================================================//
 // MOAIShaderUniformBuffer
@@ -115,6 +116,9 @@ void MOAIShaderUniformBuffer::GetValue ( MOAIAttrOp& attrOp ) {
 		case UNIFORM_MATRIX_F4: {
 			// TODO:
 		}
+		case UNIFORM_VECTOR_F4_ARRAY: {
+			// TODO:
+		}
 		case UNIFORM_VECTOR_F4: {
 			// TODO:
 		}
@@ -157,6 +161,12 @@ void MOAIShaderUniformBuffer::SetType ( u32 type ) {
 		case UNIFORM_VECTOR_F4: {
 		
 			this->mBuffer.Resize ( 4 * sizeof ( float ), 0 );
+			break;
+		}
+		
+		case UNIFORM_VECTOR_F4_ARRAY: {
+			
+			this->mBuffer.Resize ( 0 );
 			break;
 		}
 	};
@@ -207,6 +217,14 @@ bool MOAIShaderUniformBuffer::SetValue ( const MOAIAttrOp& attrOp, bool check ) 
 		}
 		case MOAIAttrOp::ATTR_TYPE_VECTOR: {
 			// TODO:
+			break;
+		}
+		case MOAIAttrOp::ATTR_TYPE_VARIANT: {
+			if ( this->mType == UNIFORM_VECTOR_F4_ARRAY ) {
+				ZLLeanArray < ZLVec4D > *buffer = attrOp.GetValue < ZLLeanArray<ZLVec4D>* >( 0 );
+				return this->SetValue ( *buffer, check );
+			}
+			break;
 		}
 	}
 	return false;
@@ -377,7 +395,24 @@ bool MOAIShaderUniformBuffer::SetValue ( const MOAIShaderUniformBuffer& uniformB
 
 	if ( this->mType == UNIFORM_FLOAT ) return this->SetValue ( uniformBuffer.mFloat );
 	if (( this->mType == UNIFORM_INDEX ) || ( this->mType == UNIFORM_INT )) return this->SetValue ( uniformBuffer.mInt );
+
+	if ( this->mType == UNIFORM_VECTOR_F4_ARRAY ) {
+		this->mInt = uniformBuffer.mInt;
+		this->mBuffer.Grow ( uniformBuffer.mBuffer.Size ());
+	}
+	
 	return this->SetBuffer ( uniformBuffer.mBuffer, this->mBuffer.Size (), check );
+}
+
+//----------------------------------------------------------------//
+bool MOAIShaderUniformBuffer::SetValue ( ZLLeanArray < ZLVec4D >& array, bool check ) {
+	
+	this->mBuffer.Grow ( array.BufferSize ());
+	
+	// TODO: check that sending more or less values than defined in vertex shader is fine
+	this->mInt = array.Size ();
+	
+	return this->SetBuffer ( array.Data (), array.BufferSize (), check );
 }
 
 //================================================================//
@@ -413,6 +448,10 @@ void MOAIShaderUniform::Bind () {
 
 		case UNIFORM_VECTOR_F4:
 			zglUniform4fv ( this->mAddr, 1, ( float* )this->mBuffer.Data ());
+			break;
+		
+		case UNIFORM_VECTOR_F4_ARRAY:
+			zglUniform4fv ( this->mAddr, this->mInt, ( float* )this->mBuffer.Data ());
 			break;
 	}
 }

@@ -95,6 +95,9 @@ int MOAISpineSkeleton::_clearTrack ( lua_State *L ) {
 }
 
 //----------------------------------------------------------------//
+
+
+//----------------------------------------------------------------//
 /**	@name	getAttachmentVertices
 	@text	Return all attachment vertices in MOAISkeleton coordinate space.
 	
@@ -159,6 +162,32 @@ int MOAISpineSkeleton::_getAttachmentVertices ( lua_State *L ) {
 	
 	lua_newtable ( L );
 	state.WriteArray < float >( self->mVertices.GetTop(), self->mVertices );
+	
+	return 1;
+}
+
+//----------------------------------------------------------------//
+/**	@name	getAnimations
+	@text	Return array of animations names
+	
+	@in		MOAISpineSkeleton self
+	@out	table	animations
+*/
+int MOAISpineSkeleton::_getAnimations ( lua_State *L ) {
+	MOAI_LUA_SETUP ( MOAISpineSkeleton, "U" );
+	
+	if ( !self->mSkeleton ) {
+		MOAILogF ( state, ZLLog::LOG_ERROR, "MOAISpineSkeleton not initialized \n" );
+		return 0;
+	}
+
+	lua_newtable ( state );
+	
+	spSkeletonData *data = self->mSkeleton->data;
+	for ( u32 i = 0; i < data->animationsCount; ++i ) {
+		cc8 *name = data->animations [ i ]->name;
+		state.SetFieldByIndex ( -1, i + 1, name );
+	}
 	
 	return 1;
 }
@@ -975,6 +1004,7 @@ void MOAISpineSkeleton::RegisterLuaFuncs ( MOAILuaState& state ) {
 		{ "addAnimation", 			_addAnimation },
 		{ "clearAllTracks", 		_clearAllTracks },
 		{ "clearTrack", 			_clearTrack },
+		{ "getAnimations",			_getAnimations },
 		{ "getAttachmentVertices",	_getAttachmentVertices },
 		{ "getBone",				_getBone },
 		{ "getBoneTransform",		_getBoneTransform },

@@ -117,6 +117,13 @@
 			remoteGlobalIDString = 206B9B081BDAB53F0021D349;
 			remoteInfo = "libmoai-osx-fmod-studio";
 		};
+		20FD8C591D12C1DD006587F8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20662B371C539EE4004D0132 /* cloudteam.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2049B9541CAA8C8B005B83B3;
+			remoteInfo = "libmoai-ios-adtoapp";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -234,6 +241,7 @@
 		20662B381C539EE4004D0132 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				20FD8C5A1D12C1DD006587F8 /* libmoai_ios_adtoapp.a */,
 				20662B461C539EE6004D0132 /* libmoai-ios-crashlytics.a */,
 				20662B481C539EE6004D0132 /* libmoai-ios-ct-util.a */,
 				20662B4A1C539EE6004D0132 /* libmoai-ios-fmod-studio.a */,
@@ -442,6 +450,13 @@
 			fileType = archive.ar;
 			path = "libmoai-osx-ct-util.a";
 			remoteRef = 20662B531C539EE6004D0132 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		20FD8C5A1D12C1DD006587F8 /* libmoai_ios_adtoapp.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libmoai_ios_adtoapp.a;
+			remoteRef = 20FD8C591D12C1DD006587F8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

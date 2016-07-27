@@ -15,6 +15,18 @@
 
 //----------------------------------------------------------------//
 // TODO: doxygen
+int MOAIShader::_getProgram ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIShader, "U" )
+	
+	if ( self->mProgram ) {
+		self->mProgram->PushLuaUserdata ( state );
+		return 1;
+	}
+	return 0;
+}
+
+//----------------------------------------------------------------//
+// TODO: doxygen
 int MOAIShader::_setProgram ( lua_State* L ) {
 	MOAI_LUA_SETUP ( MOAIShader, "U" )
 	
@@ -125,6 +137,7 @@ void MOAIShader::RegisterLuaFuncs ( MOAILuaState& state ) {
 	MOAINode::RegisterLuaFuncs ( state );
 
 	luaL_Reg regTable [] = {
+		{ "getProgram",					_getProgram },
 		{ "setProgram",					_setProgram },
 		{ NULL, NULL }
 	};

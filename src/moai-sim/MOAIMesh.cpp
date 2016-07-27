@@ -156,6 +156,7 @@ void MOAIMesh::DrawIndex ( u32 idx, MOAIMeshSpan* span, MOAIMaterialBatch& mater
 						indexSizeInBytes == 2 ? ZGL_TYPE_UNSIGNED_SHORT : ZGL_TYPE_UNSIGNED_INT,
 						( const void* )(( size_t )this->mIndexBuffer->GetAddress () + ( span->mBase * indexSizeInBytes ))
 					);
+					gfxDevice.IncrementDrawCount ();
 				}
 				gfxDevice.BindIndexBuffer ();
 			}
@@ -163,6 +164,7 @@ void MOAIMesh::DrawIndex ( u32 idx, MOAIMeshSpan* span, MOAIMaterialBatch& mater
 		else {
 			for ( ; span; span = span->mNext ) {
 				zglDrawArrays ( this->mPrimType, span->mBase, span->mTop - span->mBase );
+				gfxDevice.IncrementDrawCount ();
 			}
 		}
 		gfxDevice.BindVertexArray ();

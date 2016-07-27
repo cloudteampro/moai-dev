@@ -119,6 +119,7 @@ public:
 		
 		ATTR_ROTATE_QUAT,
 		ATTR_TRANSLATE,
+		ATTR_SCALE,
 		
 		TOTAL_ATTR,
 	};
