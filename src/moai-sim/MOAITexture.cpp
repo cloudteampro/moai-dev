@@ -104,7 +104,7 @@ bool MOAITexture::Init ( MOAILuaState& state, int idx ) {
 
 	u32 transform = MOAITexture::DEFAULT_TRANSFORM;
 	cc8* debugName = 0;
-	int debugNameIdx = 1;
+	int debugNameIdx = idx + 1;
 	
 	if ( state.IsType ( idx + 1, LUA_TNUMBER )) {
 		transform = state.GetValue < u32 >( idx + 1, MOAITexture::DEFAULT_TRANSFORM );
