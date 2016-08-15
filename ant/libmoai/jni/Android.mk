@@ -5,16 +5,16 @@
 #================================================================#
 
 	LOCAL_PATH := $(call my-dir)
-	
+
 	include $(CLEAR_VARS)
-	
+
 	MOAI_SDK_HOME	:= $(abspath ../../../)
 	MY_ARM_MODE		:= arm
 	MY_ARM_ARCH		:= armeabi-v7a arm64-v8a x86
 
 	MY_LOCAL_CFLAGS		:=
 	MY_INCLUDES			:=
-	
+
 	MOAI_MODULES	:= $(abspath ../../../util/ant-libmoai/)
 
 	#----------------------------------------------------------------#
@@ -71,13 +71,13 @@
 	#--------------------------------------------------------------#
 	# ADCOLONY
 
-	MY_HEADER_SEARCH_PATHS += 
+	MY_HEADER_SEARCH_PATHS +=
 	MY_INCLUDES += $(MOAI_SDK_HOME)/util/ant-libmoai/modules/moai-adcolony.mk
 
 	#--------------------------------------------------------------#
 	# ANDROID
 
-	MY_HEADER_SEARCH_PATHS += 
+	MY_HEADER_SEARCH_PATHS +=
 	MY_INCLUDES += $(MOAI_SDK_HOME)/util/ant-libmoai/modules/moai-android.mk
 
 	#--------------------------------------------------------------#
@@ -97,7 +97,7 @@
 	#--------------------------------------------------------------#
 	# CHARTBOOST
 
-	MY_HEADER_SEARCH_PATHS += 
+	MY_HEADER_SEARCH_PATHS +=
 	MY_INCLUDES += $(MOAI_SDK_HOME)/util/ant-libmoai/modules/moai-chartboost.mk
 
 	#--------------------------------------------------------------#
@@ -117,19 +117,19 @@
 	#--------------------------------------------------------------#
 	# FACEBOOK
 
-	MY_HEADER_SEARCH_PATHS += 
+	MY_HEADER_SEARCH_PATHS +=
 	MY_INCLUDES += $(MOAI_SDK_HOME)/util/ant-libmoai/modules/moai-facebook.mk
 
 	#--------------------------------------------------------------#
 	# FLURRY
 
-	MY_HEADER_SEARCH_PATHS += 
+	MY_HEADER_SEARCH_PATHS +=
 	MY_INCLUDES += $(MOAI_SDK_HOME)/util/ant-libmoai/modules/moai-flurry.mk
 
 	#--------------------------------------------------------------#
 	# GOOGLE_PLAY_SERVICES
 
-	MY_HEADER_SEARCH_PATHS += 
+	MY_HEADER_SEARCH_PATHS +=
 	MY_INCLUDES += $(MOAI_SDK_HOME)/util/ant-libmoai/modules/moai-google-play-services.mk
 
 	#--------------------------------------------------------------#
@@ -162,7 +162,7 @@
 	#--------------------------------------------------------------#
 	# IMAGE_PNG
 
-	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/lpng140
+	MY_HEADER_SEARCH_PATHS += $(MOAI_SDK_HOME)/3rdparty/lpng1419
 	MY_INCLUDES += $(MOAI_SDK_HOME)/util/ant-libmoai/modules/3rdparty-png.mk
 	MY_INCLUDES += $(MOAI_SDK_HOME)/util/ant-libmoai/modules/moai-image-png.mk
 
@@ -209,13 +209,13 @@
 	#--------------------------------------------------------------#
 	# TAPJOY
 
-	MY_HEADER_SEARCH_PATHS += 
+	MY_HEADER_SEARCH_PATHS +=
 	MY_INCLUDES += $(MOAI_SDK_HOME)/util/ant-libmoai/modules/moai-tapjoy.mk
 
 	#--------------------------------------------------------------#
 	# TWITTER
 
-	MY_HEADER_SEARCH_PATHS += 
+	MY_HEADER_SEARCH_PATHS +=
 	MY_INCLUDES += $(MOAI_SDK_HOME)/util/ant-libmoai/modules/moai-twitter.mk
 
 	#--------------------------------------------------------------#
@@ -236,7 +236,7 @@
 	#--------------------------------------------------------------#
 	# VUNGLE
 
-	MY_HEADER_SEARCH_PATHS += 
+	MY_HEADER_SEARCH_PATHS +=
 	MY_INCLUDES += $(MOAI_SDK_HOME)/util/ant-libmoai/modules/moai-vungle.mk
 
 
