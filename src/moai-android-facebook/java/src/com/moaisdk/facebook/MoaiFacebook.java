@@ -116,11 +116,11 @@ public class MoaiFacebook {
 		public void onError ( FacebookException exception ) {
 
 			MoaiLog.i ( "MoaiFacebook onError" );
-			// logout partially logged in sessions
-			LoginManager.getInstance ().logOut ();
-
 			synchronized ( Moai.sAkuLock ) {
 				AKUNotifyFacebookLoginError ( exception.toString ());
+
+				// logout partially logged in sessions
+				LoginManager.getInstance ().logOut ();
 			}
 		}
 	};
@@ -177,6 +177,8 @@ public class MoaiFacebook {
 
 		sActivity = activity;
 		FacebookSdk.sdkInitialize ( sActivity );
+
+        AppEventsLogger.activateApp ( sActivity );
 
 		sLogger = AppEventsLogger.newLogger ( sActivity );
 		sCallbackManager = CallbackManager.Factory.create ();
@@ -260,7 +262,7 @@ public class MoaiFacebook {
 
 		AccessToken token = AccessToken.getCurrentAccessToken ();
 
-		if ( token != null && !token.isExpired ()) {
+		if ( !token.getToken ().isEmpty () && !token.isExpired () ) {
 
 			Set < String > granted = ( Set < String >) token.getPermissions ();
 			for ( String p : granted ) {
@@ -321,26 +323,24 @@ public class MoaiFacebook {
 	//----------------------------------------------------------------//
 	public static void requestPublishPermissions ( String [] permissions ) {
 
-		if ( permissions != null ) {
-			sRequestingPermissions = true;
-			LoginManager.getInstance ().logInWithPublishPermissions ( sActivity, Arrays.asList ( permissions ) );
-		}
+		sRequestingPermissions = true;
+		LoginManager.getInstance ().logInWithPublishPermissions ( sActivity, Arrays.asList ( permissions ) );
 	}
 
 	//----------------------------------------------------------------//
 	public static void requestReadPermissions ( String [] permissions ) {
 
-		if ( permissions != null ) {
-			sRequestingPermissions = true;
-			LoginManager.getInstance ().logInWithReadPermissions ( sActivity, Arrays.asList ( permissions ) );
-		}
+		sRequestingPermissions = true;
+		LoginManager.getInstance ().logInWithReadPermissions ( sActivity, Arrays.asList ( permissions ) );
 	}
 
 	//----------------------------------------------------------------//
-	public static boolean sendGameRequest ( String message, String actionType, String objectId, String filters, String [] recipients, String [] suggestions, int ref ) {
+	public static boolean sendGameRequest ( String data, String title, String message, String actionType, String objectId, String filters, String [] recipients, String [] suggestions, int ref ) {
 
 		GameRequestContent.Builder builder = new GameRequestContent.Builder ();
 
+		builder.setTitle ( title );
+		builder.setData ( data );
 		builder.setMessage 	( message );
 		builder.setObjectId ( objectId );
 
