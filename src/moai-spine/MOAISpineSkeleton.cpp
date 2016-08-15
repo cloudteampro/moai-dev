@@ -691,13 +691,15 @@ void MOAISpineSkeleton::Draw ( int subPrimID, float lod ) {
 	MOAIQuadBrush brush;
 	brush.BindVertexFormat ( gfxDevice );
 	
-	MOAITexture* texture;
+	MOAITextureBase* texture = this->mMaterialBatch ? this->mMaterialBatch->RawGetTexture ( 0 ) : 0;
+	MOAITextureBase* textureFallback;
+	
 	float	r, g, b, a;
 	float*	uvs = 0;
 	int*	triangles = 0;
 	int		trianglesCount = 0;
 	int		blendMode = -1;
-
+	
 	for ( u32 i = 0; i < mSkeleton->slotsCount; ++i ) {
 		
 		spSlot* slot = mSkeleton->drawOrder [ i ];
@@ -708,7 +710,7 @@ void MOAISpineSkeleton::Draw ( int subPrimID, float lod ) {
 		switch ( slot->attachment->type ) {
 			case SP_ATTACHMENT_REGION: {
 				spRegionAttachment *attachment = ( spRegionAttachment* ) slot->attachment;
-				texture = ( MOAITexture* )(( spAtlasRegion* ) attachment->rendererObject )->page->rendererObject;
+				textureFallback = ( MOAITextureBase* )(( spAtlasRegion* ) attachment->rendererObject )->page->rendererObject;
 				uvs = attachment->uvs;
 				trianglesCount = 0;
 
@@ -724,7 +726,7 @@ void MOAISpineSkeleton::Draw ( int subPrimID, float lod ) {
 				
 			case SP_ATTACHMENT_MESH: {
 				spMeshAttachment *attachment = ( spMeshAttachment* ) slot->attachment;
-				texture = ( MOAITexture* )(( spAtlasRegion* ) attachment->rendererObject )->page->rendererObject;
+				textureFallback = ( MOAITextureBase* )(( spAtlasRegion* ) attachment->rendererObject )->page->rendererObject;
 				uvs = attachment->uvs;
 				triangles = attachment->triangles;
 				trianglesCount = attachment->trianglesCount;
@@ -741,7 +743,7 @@ void MOAISpineSkeleton::Draw ( int subPrimID, float lod ) {
 				
 			case SP_ATTACHMENT_SKINNED_MESH: {
 				spSkinnedMeshAttachment *attachment = ( spSkinnedMeshAttachment* ) slot->attachment;
-				texture = ( MOAITexture* )(( spAtlasRegion* ) attachment->rendererObject )->page->rendererObject;
+				textureFallback = ( MOAITextureBase* )(( spAtlasRegion* ) attachment->rendererObject )->page->rendererObject;
 				uvs = attachment->uvs;
 				triangles = attachment->triangles;
 				trianglesCount = attachment->trianglesCount;
@@ -760,7 +762,7 @@ void MOAISpineSkeleton::Draw ( int subPrimID, float lod ) {
 				continue;
 		}
 		
-		gfxDevice.SetTexture ( texture );
+		gfxDevice.SetTexture ( texture ? texture : textureFallback );
 		
 		if ( blendMode != slot->data->blendMode ) {
 
