@@ -116,11 +116,12 @@ public class MoaiFacebook {
 		public void onError ( FacebookException exception ) {
 
 			MoaiLog.i ( "MoaiFacebook onError" );
+			
+			// logout partially logged in sessions
+			LoginManager.getInstance ().logOut ();
+
 			synchronized ( Moai.sAkuLock ) {
 				AKUNotifyFacebookLoginError ( exception.toString ());
-
-				// logout partially logged in sessions
-				LoginManager.getInstance ().logOut ();
 			}
 		}
 	};
@@ -177,8 +178,6 @@ public class MoaiFacebook {
 
 		sActivity = activity;
 		FacebookSdk.sdkInitialize ( sActivity );
-
-        AppEventsLogger.activateApp ( sActivity );
 
 		sLogger = AppEventsLogger.newLogger ( sActivity );
 		sCallbackManager = CallbackManager.Factory.create ();
@@ -262,7 +261,7 @@ public class MoaiFacebook {
 
 		AccessToken token = AccessToken.getCurrentAccessToken ();
 
-		if ( !token.getToken ().isEmpty () && !token.isExpired () ) {
+		if ( token != null && !token.isExpired ()) {
 
 			Set < String > granted = ( Set < String >) token.getPermissions ();
 			for ( String p : granted ) {
@@ -323,15 +322,19 @@ public class MoaiFacebook {
 	//----------------------------------------------------------------//
 	public static void requestPublishPermissions ( String [] permissions ) {
 
-		sRequestingPermissions = true;
-		LoginManager.getInstance ().logInWithPublishPermissions ( sActivity, Arrays.asList ( permissions ) );
+		if ( permissions != null ) {
+			sRequestingPermissions = true;
+			LoginManager.getInstance ().logInWithPublishPermissions ( sActivity, Arrays.asList ( permissions ) );
+		}
 	}
 
 	//----------------------------------------------------------------//
 	public static void requestReadPermissions ( String [] permissions ) {
 
-		sRequestingPermissions = true;
-		LoginManager.getInstance ().logInWithReadPermissions ( sActivity, Arrays.asList ( permissions ) );
+		if ( permissions != null ) {
+			sRequestingPermissions = true;
+			LoginManager.getInstance ().logInWithReadPermissions ( sActivity, Arrays.asList ( permissions ) );
+		}
 	}
 
 	//----------------------------------------------------------------//
