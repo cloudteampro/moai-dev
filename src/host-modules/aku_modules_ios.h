@@ -47,6 +47,10 @@
 	#include <moai-ios-kontagent/host.h>
 #endif
 
+#if AKU_WITH_IOS_MAIL_DIALOG
+	#include <moai-ios-mail-dialog/host.h>
+#endif
+
 #if AKU_WITH_IOS_MIXPANEL
 	#include <moai-ios-mixpanel/host.h>
 #endif
@@ -69,6 +73,10 @@
 
 #if AKU_WITH_IOS_URBAN_AIRSHIP
 	#include <moai-ios-urban-airship/host.h>
+#endif
+
+#if AKU_WITH_IOS_VIBRATOR
+	#include <moai-ios-vibrator/host.h>
 #endif
 
 #if AKU_WITH_IOS_VUNGLE

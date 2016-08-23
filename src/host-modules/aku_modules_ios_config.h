@@ -37,6 +37,10 @@
 		#define AKU_WITH_IOS_GAMECENTER 0
 	#endif
 
+	#ifndef AKU_WITH_IOS_MAIL_DIALOG
+		#define AKU_WITH_IOS_MAIL_DIALOG 0
+	#endif
+
 	#ifndef AKU_WITH_IOS_MIXPANEL
 		#define AKU_WITH_IOS_MIXPANEL 0
 	#endif
@@ -63,6 +67,10 @@
 
 	#ifndef AKU_WITH_IOS_URBAN_AIRSHIP
 		#define AKU_WITH_IOS_URBAN_AIRSHIP 0
+	#endif
+
+	#ifndef AKU_WITH_IOS_VIBRATOR
+		#define AKU_WITH_IOS_VIBRATOR 0
 	#endif
 
 	#ifndef AKU_WITH_IOS_VUNGLE

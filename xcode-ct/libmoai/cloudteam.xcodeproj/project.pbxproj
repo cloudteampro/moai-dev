@@ -34,8 +34,10 @@
 				206B9D3B1BDE48FD0021D349 /* PBXTargetDependency */,
 				206B9D041BDABB2E0021D349 /* PBXTargetDependency */,
 				20541E081D44B62A004F3772 /* PBXTargetDependency */,
+				204715141D6C6BC2009608EA /* PBXTargetDependency */,
 				206B9D061BDABB2E0021D349 /* PBXTargetDependency */,
 				2090B6B01BEBA4A80057A676 /* PBXTargetDependency */,
+				204715121D6C6BC2009608EA /* PBXTargetDependency */,
 			);
 			name = build_all_ios;
 			productName = build_all_ios;
@@ -47,6 +49,14 @@
 		203DA5C81BDF933C00EC109A /* host.mm in Sources */ = {isa = PBXBuildFile; fileRef = 203DA5C41BDF933C00EC109A /* host.mm */; };
 		203DA5C91BDF933C00EC109A /* MOAICrashlyticsIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 203DA5C51BDF933C00EC109A /* MOAICrashlyticsIOS.h */; };
 		203DA5CA1BDF933C00EC109A /* MOAICrashlyticsIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 203DA5C61BDF933C00EC109A /* MOAICrashlyticsIOS.mm */; };
+		204715041D6C6B8B009608EA /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 204715001D6C6B8B009608EA /* host.h */; };
+		204715051D6C6B8B009608EA /* host.mm in Sources */ = {isa = PBXBuildFile; fileRef = 204715011D6C6B8B009608EA /* host.mm */; };
+		204715061D6C6B8B009608EA /* MOAIMailDialogIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 204715021D6C6B8B009608EA /* MOAIMailDialogIOS.h */; };
+		204715071D6C6B8B009608EA /* MOAIMailDialogIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 204715031D6C6B8B009608EA /* MOAIMailDialogIOS.mm */; };
+		2047150D1D6C6BA6009608EA /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 204715091D6C6BA6009608EA /* host.h */; };
+		2047150E1D6C6BA6009608EA /* host.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2047150A1D6C6BA6009608EA /* host.mm */; };
+		2047150F1D6C6BA6009608EA /* MOAIVibratorIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 2047150B1D6C6BA6009608EA /* MOAIVibratorIOS.h */; };
+		204715101D6C6BA6009608EA /* MOAIVibratorIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2047150C1D6C6BA6009608EA /* MOAIVibratorIOS.mm */; };
 		2049B9611CAA8CD6005B83B3 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 2049B95D1CAA8CD6005B83B3 /* host.h */; };
 		2049B9621CAA8CD6005B83B3 /* host.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2049B95E1CAA8CD6005B83B3 /* host.mm */; };
 		2049B9631CAA8CD6005B83B3 /* MOAIAdToAppIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 2049B95F1CAA8CD6005B83B3 /* MOAIAdToAppIOS.h */; };
@@ -397,6 +407,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 203DA5761BDF92C700EC109A;
 			remoteInfo = "libmoai-ios-crashlytics";
+		};
+		204715111D6C6BC2009608EA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 204714AC1D6C6A59009608EA;
+			remoteInfo = "libmoai-ios-vibrator";
+		};
+		204715131D6C6BC2009608EA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 204714F41D6C6B30009608EA;
+			remoteInfo = "libmoai-ios-mail-dialog";
 		};
 		2049B9651CAA8CF1005B83B3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -896,6 +920,16 @@
 		203DA5C41BDF933C00EC109A /* host.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = host.mm; sourceTree = "<group>"; };
 		203DA5C51BDF933C00EC109A /* MOAICrashlyticsIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAICrashlyticsIOS.h; sourceTree = "<group>"; };
 		203DA5C61BDF933C00EC109A /* MOAICrashlyticsIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MOAICrashlyticsIOS.mm; sourceTree = "<group>"; };
+		204714B91D6C6A59009608EA /* libmoai-ios-vibrator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios-vibrator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		204714FD1D6C6B30009608EA /* libmoai-ios-mail-dialog.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios-mail-dialog.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		204715001D6C6B8B009608EA /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = host.h; sourceTree = "<group>"; };
+		204715011D6C6B8B009608EA /* host.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = host.mm; sourceTree = "<group>"; };
+		204715021D6C6B8B009608EA /* MOAIMailDialogIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIMailDialogIOS.h; sourceTree = "<group>"; };
+		204715031D6C6B8B009608EA /* MOAIMailDialogIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MOAIMailDialogIOS.mm; sourceTree = "<group>"; };
+		204715091D6C6BA6009608EA /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = host.h; sourceTree = "<group>"; };
+		2047150A1D6C6BA6009608EA /* host.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = host.mm; sourceTree = "<group>"; };
+		2047150B1D6C6BA6009608EA /* MOAIVibratorIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIVibratorIOS.h; sourceTree = "<group>"; };
+		2047150C1D6C6BA6009608EA /* MOAIVibratorIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MOAIVibratorIOS.mm; sourceTree = "<group>"; };
 		2049B9541CAA8C8B005B83B3 /* libmoai_ios_adtoapp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmoai_ios_adtoapp.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2049B95D1CAA8CD6005B83B3 /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = host.h; path = "moai-ios-adtoapp/host.h"; sourceTree = "<group>"; };
 		2049B95E1CAA8CD6005B83B3 /* host.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = host.mm; path = "moai-ios-adtoapp/host.mm"; sourceTree = "<group>"; };
@@ -1095,6 +1129,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		204714B31D6C6A59009608EA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		204714F71D6C6B30009608EA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2049B94E1CAA8C8B005B83B3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1184,7 +1232,9 @@
 				206BA0451BDE92D60021D349 /* ct-util */,
 				2049B90C1CAA8C35005B83B3 /* moai-ios-adtoapp */,
 				203DA5C21BDF933C00EC109A /* moai-ios-crashlytics */,
+				204714FF1D6C6B8B009608EA /* moai-ios-mail-dialog */,
 				2090B6A61BEBA4830057A676 /* moai-ios-unityads */,
+				204715081D6C6BA6009608EA /* moai-ios-vibrator */,
 				206BA02C1BDE92CF0021D349 /* moai-fmod-studio */,
 				206B9FFE1BDE92C40021D349 /* moai-spine */,
 				20F75E361D3FD5B00050B737 /* moai-spine-v3 */,
@@ -1207,6 +1257,8 @@
 				2049B9541CAA8C8B005B83B3 /* libmoai_ios_adtoapp.a */,
 				20F75CE11D3FD31B0050B737 /* libmoai-ios-spine-v3.a */,
 				20F75D691D3FD31F0050B737 /* libmoai-osx-spine-v3.a */,
+				204714B91D6C6A59009608EA /* libmoai-ios-vibrator.a */,
+				204714FD1D6C6B30009608EA /* libmoai-ios-mail-dialog.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1220,6 +1272,28 @@
 				203DA5C61BDF933C00EC109A /* MOAICrashlyticsIOS.mm */,
 			);
 			path = "moai-ios-crashlytics";
+			sourceTree = "<group>";
+		};
+		204714FF1D6C6B8B009608EA /* moai-ios-mail-dialog */ = {
+			isa = PBXGroup;
+			children = (
+				204715001D6C6B8B009608EA /* host.h */,
+				204715011D6C6B8B009608EA /* host.mm */,
+				204715021D6C6B8B009608EA /* MOAIMailDialogIOS.h */,
+				204715031D6C6B8B009608EA /* MOAIMailDialogIOS.mm */,
+			);
+			path = "moai-ios-mail-dialog";
+			sourceTree = "<group>";
+		};
+		204715081D6C6BA6009608EA /* moai-ios-vibrator */ = {
+			isa = PBXGroup;
+			children = (
+				204715091D6C6BA6009608EA /* host.h */,
+				2047150A1D6C6BA6009608EA /* host.mm */,
+				2047150B1D6C6BA6009608EA /* MOAIVibratorIOS.h */,
+				2047150C1D6C6BA6009608EA /* MOAIVibratorIOS.mm */,
+			);
+			path = "moai-ios-vibrator";
 			sourceTree = "<group>";
 		};
 		2049B90C1CAA8C35005B83B3 /* moai-ios-adtoapp */ = {
@@ -1620,6 +1694,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		204714AD1D6C6A59009608EA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2047150D1D6C6BA6009608EA /* host.h in Headers */,
+				2047150F1D6C6BA6009608EA /* MOAIVibratorIOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		204714F51D6C6B30009608EA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				204715041D6C6B8B009608EA /* host.h in Headers */,
+				204715061D6C6B8B009608EA /* MOAIMailDialogIOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2049B9481CAA8C8B005B83B3 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -1886,6 +1978,40 @@
 			productReference = 203DA5871BDF92C700EC109A /* libmoai-ios-crashlytics.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		204714AC1D6C6A59009608EA /* libmoai-ios-vibrator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 204714B41D6C6A59009608EA /* Build configuration list for PBXNativeTarget "libmoai-ios-vibrator" */;
+			buildPhases = (
+				204714AD1D6C6A59009608EA /* Headers */,
+				204714B01D6C6A59009608EA /* Sources */,
+				204714B31D6C6A59009608EA /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "libmoai-ios-vibrator";
+			productName = OpenUSLS;
+			productReference = 204714B91D6C6A59009608EA /* libmoai-ios-vibrator.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		204714F41D6C6B30009608EA /* libmoai-ios-mail-dialog */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 204714F81D6C6B30009608EA /* Build configuration list for PBXNativeTarget "libmoai-ios-mail-dialog" */;
+			buildPhases = (
+				204714F51D6C6B30009608EA /* Headers */,
+				204714F61D6C6B30009608EA /* Sources */,
+				204714F71D6C6B30009608EA /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "libmoai-ios-mail-dialog";
+			productName = OpenUSLS;
+			productReference = 204714FD1D6C6B30009608EA /* libmoai-ios-mail-dialog.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		2049B9471CAA8C8B005B83B3 /* libmoai-ios-adtoapp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2049B94F1CAA8C8B005B83B3 /* Build configuration list for PBXNativeTarget "libmoai-ios-adtoapp" */;
@@ -2112,6 +2238,8 @@
 				206B9AC61BDAB5000021D349 /* libmoai-ios-spine */,
 				20F75C941D3FD31B0050B737 /* libmoai-ios-spine-v3 */,
 				2090B6561BEBA40A0057A676 /* libmoai-ios-unityads */,
+				204714AC1D6C6A59009608EA /* libmoai-ios-vibrator */,
+				204714F41D6C6B30009608EA /* libmoai-ios-mail-dialog */,
 				206B9B081BDAB53F0021D349 /* libmoai-osx-fmod-studio */,
 				206B9ABC1BDAB4F60021D349 /* libmoai-osx-spine */,
 				20F75D1C1D3FD31F0050B737 /* libmoai-osx-spine-v3 */,
@@ -2539,6 +2667,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		204714B01D6C6A59009608EA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				204715101D6C6BA6009608EA /* MOAIVibratorIOS.mm in Sources */,
+				2047150E1D6C6BA6009608EA /* host.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		204714F61D6C6B30009608EA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				204715071D6C6B8B009608EA /* MOAIMailDialogIOS.mm in Sources */,
+				204715051D6C6B8B009608EA /* host.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2049B94B1CAA8C8B005B83B3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2781,6 +2927,16 @@
 			isa = PBXTargetDependency;
 			target = 203DA5761BDF92C700EC109A /* libmoai-ios-crashlytics */;
 			targetProxy = 2010D6891BE38397008AD676 /* PBXContainerItemProxy */;
+		};
+		204715121D6C6BC2009608EA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 204714AC1D6C6A59009608EA /* libmoai-ios-vibrator */;
+			targetProxy = 204715111D6C6BC2009608EA /* PBXContainerItemProxy */;
+		};
+		204715141D6C6BC2009608EA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 204714F41D6C6B30009608EA /* libmoai-ios-mail-dialog */;
+			targetProxy = 204715131D6C6BC2009608EA /* PBXContainerItemProxy */;
 		};
 		2049B9661CAA8CF1005B83B3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3112,6 +3268,286 @@
 					"$(FMOD_IOS_SDK_ROOT)/api/inc",
 				);
 				PRODUCT_NAME = "moai-ios-crashlytics";
+				SDKROOT = iphoneos;
+				WARNING_CFLAGS = "-w";
+			};
+			name = Distribution;
+		};
+		204714B51D6C6A59009608EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/crashlytics;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+				);
+				PRODUCT_NAME = "moai-ios-vibrator";
+				SDKROOT = iphoneos;
+				WARNING_CFLAGS = "-w";
+			};
+			name = Debug;
+		};
+		204714B61D6C6A59009608EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/crashlytics;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+				);
+				PRODUCT_NAME = "moai-ios-vibrator";
+				SDKROOT = iphoneos;
+				WARNING_CFLAGS = "-w";
+			};
+			name = Release;
+		};
+		204714B71D6C6A59009608EA /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/crashlytics;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+				);
+				PRODUCT_NAME = "moai-ios-vibrator";
+				SDKROOT = iphoneos;
+				WARNING_CFLAGS = "-w";
+			};
+			name = AdHoc;
+		};
+		204714B81D6C6A59009608EA /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/crashlytics;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+				);
+				PRODUCT_NAME = "moai-ios-vibrator";
+				SDKROOT = iphoneos;
+				WARNING_CFLAGS = "-w";
+			};
+			name = Distribution;
+		};
+		204714F91D6C6B30009608EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/crashlytics;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+				);
+				PRODUCT_NAME = "moai-ios-mail-dialog";
+				SDKROOT = iphoneos;
+				WARNING_CFLAGS = "-w";
+			};
+			name = Debug;
+		};
+		204714FA1D6C6B30009608EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/crashlytics;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+				);
+				PRODUCT_NAME = "moai-ios-mail-dialog";
+				SDKROOT = iphoneos;
+				WARNING_CFLAGS = "-w";
+			};
+			name = Release;
+		};
+		204714FB1D6C6B30009608EA /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/crashlytics;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+				);
+				PRODUCT_NAME = "moai-ios-mail-dialog";
+				SDKROOT = iphoneos;
+				WARNING_CFLAGS = "-w";
+			};
+			name = AdHoc;
+		};
+		204714FC1D6C6B30009608EA /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/crashlytics;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+				);
+				PRODUCT_NAME = "moai-ios-mail-dialog";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-w";
 			};
@@ -5066,6 +5502,28 @@
 				203DA5841BDF92C700EC109A /* Release */,
 				203DA5851BDF92C700EC109A /* AdHoc */,
 				203DA5861BDF92C700EC109A /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		204714B41D6C6A59009608EA /* Build configuration list for PBXNativeTarget "libmoai-ios-vibrator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				204714B51D6C6A59009608EA /* Debug */,
+				204714B61D6C6A59009608EA /* Release */,
+				204714B71D6C6A59009608EA /* AdHoc */,
+				204714B81D6C6A59009608EA /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		204714F81D6C6B30009608EA /* Build configuration list for PBXNativeTarget "libmoai-ios-mail-dialog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				204714F91D6C6B30009608EA /* Debug */,
+				204714FA1D6C6B30009608EA /* Release */,
+				204714FB1D6C6B30009608EA /* AdHoc */,
+				204714FC1D6C6B30009608EA /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

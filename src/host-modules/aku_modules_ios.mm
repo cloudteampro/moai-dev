@@ -228,6 +228,10 @@ void AKUModulesIosContextInitialize () {
 	#if AKU_WITH_IOS_KONTAGENT
 		AKUIosKontagentContextInitialize ();
 	#endif
+
+	#if AKU_WITH_IOS_MAIL_DIALOG
+		AKUIosMailDialogContextInitialize ();
+	#endif
 	
 	#if AKU_WITH_IOS_MIXPANEL
 		AKUIosMixpanelContextInitialize ();
@@ -251,6 +255,10 @@ void AKUModulesIosContextInitialize () {
 	
 	#if AKU_WITH_IOS_URBAN_AIRSHIP
 		AKUIosUrbanAirshipContextInitialize ();
+	#endif
+
+	#if AKU_WITH_IOS_VIBRATOR
+		AKUIosVibratorContextInitialize ();
 	#endif
 
 	#if AKU_WITH_IOS_VUNGLE

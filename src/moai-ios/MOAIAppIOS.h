@@ -5,7 +5,6 @@
 #define	MOAIAPPIOS_H
 
 #import <Foundation/Foundation.h>
-#import <MessageUI/MFMailComposeViewController.h>
 #import <UIKit/UIKit.h>
 
 #import <moai-core/host.h>
@@ -47,7 +46,6 @@ private:
 
 	MOAILuaStrongRef			mOnTakeCameraCallback;
 	MOAITakeCameraListener*		mTakeCameraListener;
-	MOAIMailComposeDelegate*	mMailDelegate;
 	UIPopoverController*		mImagePickerPopover;
 	
 	//----------------------------------------------------------------//
@@ -62,9 +60,7 @@ private:
 	static int		_openSettings					( lua_State* L );
 	static int		_openURL						( lua_State* L );
 	static int		_openURLWithParams				( lua_State* L );
-	static int		_sendMail						( lua_State* L );
 	static int		_takeCamera						( lua_State* L );
-	static int		_vibrate						( lua_State* L );
 	
 	//----------------------------------------------------------------//
 	void			RegisterNotificationListeners	();
@@ -109,13 +105,5 @@ public:
 
 	static void			callTakeCameraLuaCallback				( NSString* imagePath );
 };
-
-//================================================================//
-// MOAIMailComposeDelegate
-//================================================================//
-@interface MOAIMailComposeDelegate : NSObject < MFMailComposeViewControllerDelegate > {
-@private
-}
-@end
 
 #endif

@@ -3,8 +3,6 @@
 
 #include "pch.h"
 
-#import <AudioToolbox/AudioToolbox.h>
-
 #import <moai-apple/NSData+MOAILib.h>
 #import <moai-apple/NSDate+MOAILib.h>
 #import <moai-apple/NSDictionary+MOAILib.h>
@@ -344,44 +342,6 @@ int MOAIAppIOS::_openURLWithParams ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
-/**	@lua	sendMail
- @text	Send a mail with the passed in default values
- 
- @in	string recipient
- @in	string subject
- @in	string message
- @out	nil
- */
-int MOAIAppIOS::_sendMail ( lua_State* L ) {
-	
-	MOAILuaState state ( L );
-	
-	cc8* recipient = state.GetValue < cc8* >( 1, "" );
-	cc8* subject = state.GetValue < cc8* >( 2, "" );
-	cc8* message = state.GetValue < cc8* >( 3, "" );
-	
-	MFMailComposeViewController* controller = [[ MFMailComposeViewController alloc ] init ];
-	controller.mailComposeDelegate = MOAIAppIOS::Get ().mMailDelegate;
-	
-	NSArray* to = [ NSArray arrayWithObject:[ NSString  stringWithUTF8String:recipient ]];
-	
-	[ controller setToRecipients:to ];
-	[ controller setSubject:[ NSString stringWithUTF8String:subject ]];
-	[ controller setMessageBody:[ NSString stringWithUTF8String:message ] isHTML:NO ]; 
-	
-	if ( controller ) {
-				
-		UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
-		UIViewController* rootVC = [ window rootViewController ];	
-		[ rootVC presentViewController:controller animated:YES completion:nil];
-	}
-	
-	[controller release];
-	
-	return 1;
-}
-
-//----------------------------------------------------------------//
 /** @lua _takeCamera
 	@text Allows to pick a photo from the CameraRoll or from the Camera
 	@in function	callback
@@ -432,21 +392,6 @@ int MOAIAppIOS::_takeCamera( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
-/**	@lua	vibrate
-	@text	Make the phone vibrate. Does nothing if vibration is unsupported by device.
- 
-	@out	nil
-*/
-int MOAIAppIOS::_vibrate ( lua_State *L ) {
-	UNUSED ( L );
-	
-    //TODO: put this somewhere other than moai-ios - this is the only call that introduces a dependency on audio
-	// should be in untz or something
-	//AudioServicesPlaySystemSound ( kSystemSoundID_Vibrate );
-	return 0;
-}
-
-
 void MOAIAppIOS::callTakeCameraLuaCallback (NSString *imagePath) {
 	MOAILuaRef& callback = MOAIAppIOS::Get ().mOnTakeCameraCallback;
 	MOAIScopedLuaState state = callback.GetSelf ();
@@ -482,7 +427,6 @@ MOAIAppIOS::MOAIAppIOS () {
 
 	RTTI_SINGLE ( MOAIGlobalEventSource )
 
-	this->mMailDelegate = [[ MOAIMailComposeDelegate alloc ] init ];
 	this->mTakeCameraListener = [[ MOAITakeCameraListener alloc ] init ];
 	
 	this->RegisterNotificationListeners ();
@@ -493,7 +437,6 @@ MOAIAppIOS::~MOAIAppIOS () {
 
 	this->RemoveNotificationListeners ();
 
-	[ this->mMailDelegate release ];
 	[ this->mTakeCameraListener release];
 }
 
@@ -545,10 +488,8 @@ void MOAIAppIOS::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "openSettings",				_openSettings },
 		{ "openURL",					_openURL },
 		{ "openURLWithParams",			_openURLWithParams },
-		{ "sendMail",					_sendMail },
 		{ "setListener",				&MOAIGlobalEventSource::_setListener < MOAIAppIOS > },
 		{ "takeCamera",					_takeCamera },
-		{ "vibrate",					_vibrate },
 		{ NULL, NULL }
 	};
 
@@ -610,27 +551,3 @@ void MOAIAppIOS::RemoveNotificationListeners () {
 	this->mNotificationObservers.clear ();
 }
 
-//================================================================//
-// MOAIMailComposeDelegate
-//================================================================//
-@implementation MOAIMailComposeDelegate
-
-//================================================================//
-#pragma mark -
-#pragma mark Protocol MOAIMailComposeDelegate
-//================================================================//
-
--( void ) mailComposeController:( MFMailComposeViewController* )controller didFinishWithResult:( MFMailComposeResult )result error:( NSError* )error {
-	UNUSED ( controller );
-	UNUSED ( result );
-	UNUSED ( error );
-
-	UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
-	UIViewController* rootVC = [ window rootViewController ];
-
-	if ( rootVC ) {
-		[ rootVC dismissViewControllerAnimated:YES completion:nil ];
-	}
-}
-
-@end

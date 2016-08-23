@@ -605,6 +605,15 @@ MOAIProp2D			= MOAIGraphicsProp2D
 MOAIStreamReader	= MOAIStreamAdapter
 MOAIStreamWriter	= MOAIStreamAdapter
 
+if MOAIAppIOS and MOAIMailDialogIOS then
+	MOAIAppIOS.sendMail = MOAIMailDialogIOS.sendMail
+end
+
+if MOAIAppIOS and MOAIVibratorIOS then
+	MOAIAppIOS.vibrate = MOAIVibratorIOS.vibrate
+end
+
+
 --============================================================--
 -- Cross Platform
 --============================================================--
