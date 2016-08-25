@@ -34,6 +34,7 @@
 				206B9D3B1BDE48FD0021D349 /* PBXTargetDependency */,
 				206B9D041BDABB2E0021D349 /* PBXTargetDependency */,
 				20541E081D44B62A004F3772 /* PBXTargetDependency */,
+				20E2D83B1D6DC0FC000408D2 /* PBXTargetDependency */,
 				204715141D6C6BC2009608EA /* PBXTargetDependency */,
 				206B9D061BDABB2E0021D349 /* PBXTargetDependency */,
 				2090B6B01BEBA4A80057A676 /* PBXTargetDependency */,
@@ -238,6 +239,10 @@
 		20DA0A141BDE94050070C61F /* Slot.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09DF1BDE94050070C61F /* Slot.c */; };
 		20DA0A151BDE94050070C61F /* SlotData.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09E01BDE94050070C61F /* SlotData.c */; };
 		20DA0A161BDE94050070C61F /* SlotData.c in Sources */ = {isa = PBXBuildFile; fileRef = 20DA09E01BDE94050070C61F /* SlotData.c */; };
+		20E2D8361D6DC0DD000408D2 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 20E2D8321D6DC0DD000408D2 /* host.h */; };
+		20E2D8371D6DC0DD000408D2 /* host.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20E2D8331D6DC0DD000408D2 /* host.mm */; };
+		20E2D8381D6DC0DD000408D2 /* MOAIMessagesIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 20E2D8341D6DC0DD000408D2 /* MOAIMessagesIOS.h */; };
+		20E2D8391D6DC0DD000408D2 /* MOAIMessagesIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20E2D8351D6DC0DD000408D2 /* MOAIMessagesIOS.mm */; };
 		20F75DB61D3FD3630050B737 /* Animation.h in Headers */ = {isa = PBXBuildFile; fileRef = 20F75D731D3FD3630050B737 /* Animation.h */; };
 		20F75DB71D3FD3630050B737 /* Animation.h in Headers */ = {isa = PBXBuildFile; fileRef = 20F75D731D3FD3630050B737 /* Animation.h */; };
 		20F75DB81D3FD3630050B737 /* AnimationState.h in Headers */ = {isa = PBXBuildFile; fileRef = 20F75D741D3FD3630050B737 /* AnimationState.h */; };
@@ -912,6 +917,13 @@
 			remoteGlobalIDString = CD6D752517EE415D00964415;
 			remoteInfo = "libmoai-osx-zl-vfs";
 		};
+		20E2D83A1D6DC0FC000408D2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 20E2D7E91D6DC0A4000408D2;
+			remoteInfo = "libmoai-ios-messages";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -1037,6 +1049,11 @@
 		20DA09DE1BDE94050070C61F /* SkinnedMeshAttachment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SkinnedMeshAttachment.c; sourceTree = "<group>"; };
 		20DA09DF1BDE94050070C61F /* Slot.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Slot.c; sourceTree = "<group>"; };
 		20DA09E01BDE94050070C61F /* SlotData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SlotData.c; sourceTree = "<group>"; };
+		20E2D7F61D6DC0A5000408D2 /* libmoai-ios-mesages.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios-mesages.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		20E2D8321D6DC0DD000408D2 /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = host.h; sourceTree = "<group>"; };
+		20E2D8331D6DC0DD000408D2 /* host.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = host.mm; sourceTree = "<group>"; };
+		20E2D8341D6DC0DD000408D2 /* MOAIMessagesIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIMessagesIOS.h; sourceTree = "<group>"; };
+		20E2D8351D6DC0DD000408D2 /* MOAIMessagesIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MOAIMessagesIOS.mm; sourceTree = "<group>"; };
 		20F75CE11D3FD31B0050B737 /* libmoai-ios-spine-v3.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios-spine-v3.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		20F75D691D3FD31F0050B737 /* libmoai-osx-spine-v3.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-osx-spine-v3.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		20F75D731D3FD3630050B737 /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
@@ -1199,6 +1216,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		20E2D7F01D6DC0A4000408D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		20F75CDB1D3FD31B0050B737 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1233,6 +1257,7 @@
 				2049B90C1CAA8C35005B83B3 /* moai-ios-adtoapp */,
 				203DA5C21BDF933C00EC109A /* moai-ios-crashlytics */,
 				204714FF1D6C6B8B009608EA /* moai-ios-mail-dialog */,
+				20E2D8311D6DC0DD000408D2 /* moai-ios-messages */,
 				2090B6A61BEBA4830057A676 /* moai-ios-unityads */,
 				204715081D6C6BA6009608EA /* moai-ios-vibrator */,
 				206BA02C1BDE92CF0021D349 /* moai-fmod-studio */,
@@ -1259,6 +1284,7 @@
 				20F75D691D3FD31F0050B737 /* libmoai-osx-spine-v3.a */,
 				204714B91D6C6A59009608EA /* libmoai-ios-vibrator.a */,
 				204714FD1D6C6B30009608EA /* libmoai-ios-mail-dialog.a */,
+				20E2D7F61D6DC0A5000408D2 /* libmoai-ios-mesages.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1543,6 +1569,17 @@
 				20DA09E01BDE94050070C61F /* SlotData.c */,
 			);
 			path = spine;
+			sourceTree = "<group>";
+		};
+		20E2D8311D6DC0DD000408D2 /* moai-ios-messages */ = {
+			isa = PBXGroup;
+			children = (
+				20E2D8321D6DC0DD000408D2 /* host.h */,
+				20E2D8331D6DC0DD000408D2 /* host.mm */,
+				20E2D8341D6DC0DD000408D2 /* MOAIMessagesIOS.h */,
+				20E2D8351D6DC0DD000408D2 /* MOAIMessagesIOS.mm */,
+			);
+			path = "moai-ios-messages";
 			sourceTree = "<group>";
 		};
 		20F75D6A1D3FD3630050B737 /* spine_v3-c */ = {
@@ -1864,6 +1901,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		20E2D7EA1D6DC0A4000408D2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20E2D8381D6DC0DD000408D2 /* MOAIMessagesIOS.h in Headers */,
+				20E2D8361D6DC0DD000408D2 /* host.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		20F75C951D3FD31B0050B737 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -2148,6 +2194,23 @@
 			productReference = 2090B66B1BEBA40A0057A676 /* libmoai-ios-unityads.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		20E2D7E91D6DC0A4000408D2 /* libmoai-ios-messages */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 20E2D7F11D6DC0A4000408D2 /* Build configuration list for PBXNativeTarget "libmoai-ios-messages" */;
+			buildPhases = (
+				20E2D7EA1D6DC0A4000408D2 /* Headers */,
+				20E2D7ED1D6DC0A4000408D2 /* Sources */,
+				20E2D7F01D6DC0A4000408D2 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "libmoai-ios-messages";
+			productName = OpenUSLS;
+			productReference = 20E2D7F61D6DC0A5000408D2 /* libmoai-ios-mesages.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		20F75C941D3FD31B0050B737 /* libmoai-ios-spine-v3 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 20F75CDC1D3FD31B0050B737 /* Build configuration list for PBXNativeTarget "libmoai-ios-spine-v3" */;
@@ -2235,6 +2298,7 @@
 				203DA5761BDF92C700EC109A /* libmoai-ios-crashlytics */,
 				206B9D091BDE37C80021D349 /* libmoai-ios-ct-util */,
 				206B9AFE1BDAB53D0021D349 /* libmoai-ios-fmod-studio */,
+				20E2D7E91D6DC0A4000408D2 /* libmoai-ios-messages */,
 				206B9AC61BDAB5000021D349 /* libmoai-ios-spine */,
 				20F75C941D3FD31B0050B737 /* libmoai-ios-spine-v3 */,
 				2090B6561BEBA40A0057A676 /* libmoai-ios-unityads */,
@@ -2830,6 +2894,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		20E2D7ED1D6DC0A4000408D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20E2D8371D6DC0DD000408D2 /* host.mm in Sources */,
+				20E2D8391D6DC0DD000408D2 /* MOAIMessagesIOS.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		20F75CB91D3FD31B0050B737 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2997,6 +3070,11 @@
 			isa = PBXTargetDependency;
 			name = "libmoai-ios-all";
 			targetProxy = 20993ECB1BDE94AA009D7CED /* PBXContainerItemProxy */;
+		};
+		20E2D83B1D6DC0FC000408D2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 20E2D7E91D6DC0A4000408D2 /* libmoai-ios-messages */;
+			targetProxy = 20E2D83A1D6DC0FC000408D2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -4797,6 +4875,146 @@
 			};
 			name = Distribution;
 		};
+		20E2D7F21D6DC0A4000408D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/crashlytics;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+				);
+				PRODUCT_NAME = "moai-ios-mesages";
+				SDKROOT = iphoneos;
+				WARNING_CFLAGS = "-w";
+			};
+			name = Debug;
+		};
+		20E2D7F31D6DC0A4000408D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/crashlytics;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+				);
+				PRODUCT_NAME = "moai-ios-mesages";
+				SDKROOT = iphoneos;
+				WARNING_CFLAGS = "-w";
+			};
+			name = Release;
+		};
+		20E2D7F41D6DC0A4000408D2 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/crashlytics;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+				);
+				PRODUCT_NAME = "moai-ios-mesages";
+				SDKROOT = iphoneos;
+				WARNING_CFLAGS = "-w";
+			};
+			name = AdHoc;
+		};
+		20E2D7F51D6DC0A4000408D2 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/crashlytics;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+				);
+				PRODUCT_NAME = "moai-ios-mesages";
+				SDKROOT = iphoneos;
+				WARNING_CFLAGS = "-w";
+			};
+			name = Distribution;
+		};
 		20F75CDD1D3FD31B0050B737 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -5634,6 +5852,17 @@
 				2090B6681BEBA40A0057A676 /* Release */,
 				2090B6691BEBA40A0057A676 /* AdHoc */,
 				2090B66A1BEBA40A0057A676 /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		20E2D7F11D6DC0A4000408D2 /* Build configuration list for PBXNativeTarget "libmoai-ios-messages" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				20E2D7F21D6DC0A4000408D2 /* Debug */,
+				20E2D7F31D6DC0A4000408D2 /* Release */,
+				20E2D7F41D6DC0A4000408D2 /* AdHoc */,
+				20E2D7F51D6DC0A4000408D2 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

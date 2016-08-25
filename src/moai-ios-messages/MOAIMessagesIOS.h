@@ -8,6 +8,7 @@
 #define MOAIMESSAGESIOS_H
 
 #include <moai-core/headers.h>
+#include <Messages/Messages.h>
 
 //================================================================//
 // MOAIMessagesIOS
@@ -20,9 +21,9 @@ private:
 
 	//----------------------------------------------------------------//
 	static int	_dissmiss					( lua_State* L );
-	static int	_getLocalUser				( lua_State* L );
+	static int	_getLocalParticipant		( lua_State* L );
 	static int	_getPresentationStyle		( lua_State* L );
-	static int	_getRemoteUsers				( lua_State* L );
+	static int	_getRemoteParticipants		( lua_State* L );
 	static int	_getSelectedMessage			( lua_State* L );
 	static int	_insertAttachment			( lua_State* L );
 	static int	_insertMessage				( lua_State* L );
@@ -31,13 +32,13 @@ private:
 	static int	_requestPresentation		( lua_State* L );
 
 	//----------------------------------------------------------------//
-	MSMessage* 	GetMessage					( MOAILuaState& state, int index );
 	void		PushMessage					( MOAILuaState& state, MSMessage* message );
+	void		SetViewController			( MSMessagesAppViewController* vc );
 
 public:
 
 	DECL_LUA_SINGLETON ( MOAIMessagesIOS );
-	
+
 	enum {
 		EXTENSION_ACTIVATED,
 		EXTENSION_DEACTIVATED,
@@ -55,7 +56,7 @@ public:
 			MOAIMessagesIOS					();
 			~MOAIMessagesIOS				();
 
-	void	NotifyActivated					();
+	void	NotifyActivated					( MSMessagesAppViewController* vc );
 	void	NotifyDeactivated				();
 	void	NotifyMessageSelected			( MSMessage* message );
 	void	NotifyMessageReceived			( MSMessage* message );
