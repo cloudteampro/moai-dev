@@ -7,11 +7,10 @@
 //
 
 #import <Messages/Messages.h>
-#import "MOAIMessagesView.h"
+#import <GLKit/GLKit.h>
 
 @interface MessagesViewController : MSMessagesAppViewController {
 	
-	MOAIMessagesView* mMoaiView;
 }
 
 @end

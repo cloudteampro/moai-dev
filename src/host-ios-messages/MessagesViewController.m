@@ -7,9 +7,11 @@
 //
 
 #import "MessagesViewController.h"
+#import "MOAIMessagesExtension.h"
 
-@interface MOAIMessagesView ()
--( void ) onUpdateAnim;
+@interface MessagesViewController () {
+	MOAIMessagesExtension* mMoaiApp;
+}
 @end
 
 
@@ -22,21 +24,12 @@
 -( void ) viewDidLoad {
 	[ super viewDidLoad ];
 	
-	// Do any additional setup after loading the view.
-	mMoaiView = [[ MOAIMessagesView alloc ] init ];
-
-	mMoaiView.userInteractionEnabled = YES;
-	mMoaiView.multipleTouchEnabled = YES;
-	mMoaiView.alpha = 1.0f;
-	mMoaiView.opaque = YES;
-	
-	[ mMoaiView moaiInit ];
+	mMoaiApp = [[ MOAIMessagesExtension alloc ] init ];
+	[ mMoaiApp moaiInit:self.view.bounds ];
 	
 	NSString* root = [[[ NSBundle mainBundle ] resourcePath ] stringByAppendingPathComponent:@"lua" ];
-	[ mMoaiView setWorkingDirectory:root ];
-	[ mMoaiView run:@"main.lua" ];
-	
-	self.view = mMoaiView;
+	[ mMoaiApp setWorkingDirectory:root ];
+	[ mMoaiApp run:@"main.lua" ];
 }
 
 -( void ) didReceiveMemoryWarning {
@@ -51,8 +44,8 @@
 	// This will happen when the extension is about to present UI.
 	
 	// Use this method to configure the extension and restore previously stored state.
-	[ mMoaiView pause:NO ];
-	[ MOAIMessagesView didBecomeActive:self withConversation:conversation ];
+	[ MOAIMessagesExtension didBecomeActive:self withConversation:conversation ];
+	[ self presentViewController:[ mMoaiApp viewController ] animated:NO completion:nil];
 }
 
 -( void ) willResignActiveWithConversation: ( MSConversation* ) conversation {
@@ -63,8 +56,8 @@
 	// Use this method to release shared resources, save user data, invalidate timers,
 	// and store enough state information to restore your extension to its current state
 	// in case it is terminated later.
-	[ mMoaiView pause:YES ];
-	[ MOAIMessagesView willResignActive ];
+	[ MOAIMessagesExtension willResignActive ];
+	[ self dismissViewControllerAnimated:NO completion:nil];
 }
 
 -( void ) didReceiveMessage: ( MSMessage* ) message conversation: ( MSConversation* ) conversation {
@@ -72,45 +65,39 @@
 	// extension on a remote device.
 	
 	// Use this method to trigger UI updates in response to the message.
-	[ MOAIMessagesView didReceiveMessage:message ];
+	[ MOAIMessagesExtension didReceiveMessage:message ];
 }
 
 -( void ) didSelectMessage:( MSMessage* ) message conversation:( MSConversation* )conversation {
-	[ MOAIMessagesView didSelectMessage:message ];
+	[ MOAIMessagesExtension didSelectMessage:message ];
 }
 
 -( void ) didStartSendingMessage: ( MSMessage* ) message conversation: ( MSConversation* ) conversation {
 	// Called when the user taps the send button.
-	[ MOAIMessagesView didStartSendingMessage:message ];
+	[ MOAIMessagesExtension didStartSendingMessage:message ];
 }
 
 -( void ) didCancelSendingMessage: ( MSMessage* ) message conversation: ( MSConversation* ) conversation {
 	// Called when the user deletes the message without sending it.
 	
 	// Use this to clean up state related to the deleted message.
-	[ MOAIMessagesView didCancelSendingMessage:message ];
+	[ MOAIMessagesExtension didCancelSendingMessage:message ];
 }
 
 -( void ) willTransitionToPresentationStyle: ( MSMessagesAppPresentationStyle ) presentationStyle {
 	// Called before the extension transitions to a new presentation style.
 	
 	// Use this method to prepare for the change in presentation style.
-	[ MOAIMessagesView willTransitionToPresentationStyle:presentationStyle ];
-	
-	// Invoking OpenGL commands while messages view is animating causes huge slow downs and spontaneous hangs.
-	// Here we skip one frame so the game can render after viewport changes
-	[ mMoaiView pauseRender:YES ];
-	if ( presentationStyle == MSMessagesAppPresentationStyleExpanded ) {
-		[ mMoaiView scheduleRedrawOnSizeChange ];
-	}
+	[ MOAIMessagesExtension willTransitionToPresentationStyle:presentationStyle ];
+	//[ mMoaiApp pause:YES ];
 }
 
 -( void ) didTransitionToPresentationStyle: ( MSMessagesAppPresentationStyle ) presentationStyle {
 	// Called after the extension transitions to a new presentation style.
 	
 	// Use this method to finalize any behaviors associated with the change in presentation style.
-	[ MOAIMessagesView didTransitionToPresentationStyle:presentationStyle ];
-	[ mMoaiView pauseRender:NO ];
+	[ MOAIMessagesExtension didTransitionToPresentationStyle:presentationStyle ];
+	//[ mMoaiApp pause:NO ];
 }
 
 @end
