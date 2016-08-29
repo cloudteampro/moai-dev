@@ -34,6 +34,7 @@ void AKUIosContextInitialize () {
 	REGISTER_LUA_CLASS ( MOAIDialogIOS )
 	REGISTER_LUA_CLASS ( MOAIKeyboardIOS )
 	REGISTER_LUA_CLASS ( MOAINotificationsIOS )
+	REGISTER_LUA_CLASS ( MOAIUserDefaultsIOS )
 	REGISTER_LUA_CLASS ( MOAIWebViewIOS )
 
 	// Device properties

@@ -193,6 +193,8 @@
 		07658751145CD06900723A7D /* tlsf.h in Headers */ = {isa = PBXBuildFile; fileRef = 0765874C145CD06900723A7D /* tlsf.h */; };
 		07658752145CD06900723A7D /* tlsfbits.h in Headers */ = {isa = PBXBuildFile; fileRef = 0765874D145CD06900723A7D /* tlsfbits.h */; };
 		07658753145CD06900723A7D /* tlsfbits.h in Headers */ = {isa = PBXBuildFile; fileRef = 0765874D145CD06900723A7D /* tlsfbits.h */; };
+		2020FACC1D746029004A73C8 /* MOAIUserDefaultsIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 2020FACA1D746029004A73C8 /* MOAIUserDefaultsIOS.h */; };
+		2020FACD1D746029004A73C8 /* MOAIUserDefaultsIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2020FACB1D746029004A73C8 /* MOAIUserDefaultsIOS.mm */; };
 		207A50F91C1EFDB600D0FCDA /* lua_cmsgpack.c in Sources */ = {isa = PBXBuildFile; fileRef = 207A50F81C1EFDB600D0FCDA /* lua_cmsgpack.c */; };
 		207A50FA1C1EFDB600D0FCDA /* lua_cmsgpack.c in Sources */ = {isa = PBXBuildFile; fileRef = 207A50F81C1EFDB600D0FCDA /* lua_cmsgpack.c */; };
 		209A81391D0C3BBD00B81161 /* MOAISkinnedMeshShader-fsh.h in Headers */ = {isa = PBXBuildFile; fileRef = 209A81371D0C3BBD00B81161 /* MOAISkinnedMeshShader-fsh.h */; };
@@ -5506,6 +5508,8 @@
 		0795297C1447907100143A72 /* jquant2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = jquant2.c; sourceTree = "<group>"; };
 		0795297D1447907100143A72 /* jutils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = jutils.c; sourceTree = "<group>"; };
 		0795297E1447907100143A72 /* jversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jversion.h; sourceTree = "<group>"; };
+		2020FACA1D746029004A73C8 /* MOAIUserDefaultsIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MOAIUserDefaultsIOS.h; path = "moai-ios/MOAIUserDefaultsIOS.h"; sourceTree = "<group>"; };
+		2020FACB1D746029004A73C8 /* MOAIUserDefaultsIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MOAIUserDefaultsIOS.mm; path = "moai-ios/MOAIUserDefaultsIOS.mm"; sourceTree = "<group>"; };
 		207A50F81C1EFDB600D0FCDA /* lua_cmsgpack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lua_cmsgpack.c; path = "../../3rdparty/lua-cmsgpack/lua_cmsgpack.c"; sourceTree = "<group>"; };
 		209A81371D0C3BBD00B81161 /* MOAISkinnedMeshShader-fsh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MOAISkinnedMeshShader-fsh.h"; path = "shaders/MOAISkinnedMeshShader-fsh.h"; sourceTree = "<group>"; };
 		209A81381D0C3BBD00B81161 /* MOAISkinnedMeshShader-vsh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MOAISkinnedMeshShader-vsh.h"; path = "shaders/MOAISkinnedMeshShader-vsh.h"; sourceTree = "<group>"; };
@@ -10315,6 +10319,8 @@
 				CD2B7C3F17FA56A100EBA2DB /* MOAINotificationsIOS.mm */,
 				CD8215FA195A322D00603EA1 /* MOAITakeCameraListener.h */,
 				CD8215FB195A322D00603EA1 /* MOAITakeCameraListener.mm */,
+				2020FACA1D746029004A73C8 /* MOAIUserDefaultsIOS.h */,
+				2020FACB1D746029004A73C8 /* MOAIUserDefaultsIOS.mm */,
 				CD2B7C4817FA56A100EBA2DB /* MOAIWebViewController.h */,
 				CD2B7C4917FA56A100EBA2DB /* MOAIWebViewController.mm */,
 				CD2B7C4A17FA56A100EBA2DB /* MOAIWebViewIOS.h */,
@@ -13436,6 +13442,7 @@
 				89BE6B24173975E500DFE837 /* MOAILuaObject.h in Headers */,
 				CD1975F81A8037D9006E3917 /* MOAIKeyCode.h in Headers */,
 				89BE6B28173975E500DFE837 /* MOAILuaRef.h in Headers */,
+				2020FACC1D746029004A73C8 /* MOAIUserDefaultsIOS.h in Headers */,
 				89BE6B2C173975E500DFE837 /* MOAILuaRuntime.h in Headers */,
 				CD323B0A1A80445400E2FEBB /* MOAIKeyCodeEnum.h in Headers */,
 				CD1844DF1A6269AB00FCCCE0 /* MOAINotificationsIOS.h in Headers */,
@@ -16925,6 +16932,7 @@
 				89BE6D041739A42500DFE837 /* MOAIDataBufferStream.cpp in Sources */,
 				89BE6D081739A42500DFE837 /* MOAIDataIOTask.cpp in Sources */,
 				89BE6D0C1739A42500DFE837 /* MOAIFileStream.cpp in Sources */,
+				2020FACD1D746029004A73C8 /* MOAIUserDefaultsIOS.mm in Sources */,
 				89BE6D101739A42500DFE837 /* MOAIFileSystem.cpp in Sources */,
 				89BE6D141739A42500DFE837 /* MOAIHashWriter.cpp in Sources */,
 				89BE6D181739A42500DFE837 /* MOAIJsonParser.cpp in Sources */,

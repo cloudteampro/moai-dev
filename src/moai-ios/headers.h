@@ -10,6 +10,7 @@
 #import <moai-ios/MOAIDialogIOS.h>
 #import <moai-ios/MOAIKeyboardIOS.h>
 #import <moai-ios/MOAINotificationsIOS.h>
+#import <moai-ios/MOAIUserDefaultsIOS.h>
 #import <moai-ios/MOAIWebViewController.h>
 #import <moai-ios/MOAIWebViewIOS.h>
 

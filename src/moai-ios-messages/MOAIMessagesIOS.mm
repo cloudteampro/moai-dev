@@ -150,7 +150,7 @@ int MOAIMessagesIOS::_insertMessage ( lua_State* L ) {
 		
 		MSSession* session = update ? [[ conversation selectedMessage ] session ] : nil;
 		if ( !session ) {
-			session = [[ MSSession alloc ] init ];
+			session = [[[ MSSession alloc ] init ] autorelease ];
 		}
 		MSMessage* message = [[ MSMessage alloc ] initWithSession:session];
 		
@@ -165,6 +165,9 @@ int MOAIMessagesIOS::_insertMessage ( lua_State* L ) {
 				NSLog ( @"Error inserting message: %@", [ error localizedDescription ]);
 			}
 		}];
+		
+		[ layout release ];
+		[ message release ];
 	}
 
 	return 0;
