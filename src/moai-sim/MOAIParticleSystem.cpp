@@ -341,9 +341,10 @@ int MOAIParticleSystem::_surge ( lua_State* L ) {
 	float y		= state.GetValue < float >( 4, 0.0f );
 	float dx	= state.GetValue < float >( 5, 0.0f );
 	float dy	= state.GetValue < float >( 6, 0.0f );
+	u32 stateId	= state.GetValue < u32 >( 7, 1 ) - 1;
 	
 	for ( u32 i = 0; i < n; ++i ) {
-		self->PushParticle ( x, y, dx, dy );
+		self->PushParticle ( x, y, dx, dy, stateId );
 	}
 
 	return 0;
