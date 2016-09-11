@@ -122,6 +122,10 @@
 		20BCC1CA1C5636AE00206C5F /* MOAIFmodBeatDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = 20BCC1C71C5636AE00206C5F /* MOAIFmodBeatDetector.h */; };
 		20BCC1CB1C5636AE00206C5F /* MOAIFmodBeatDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = 20BCC1C71C5636AE00206C5F /* MOAIFmodBeatDetector.h */; };
 		20C0F7AA1BF0C2C8009CAA4F /* host-ios.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20C0F7A91BF0C2C8009CAA4F /* host-ios.mm */; };
+		20D42A8F1D82CD1A00D0B90A /* CTPerrySQLite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 20D42A8D1D82CD1A00D0B90A /* CTPerrySQLite.cpp */; };
+		20D42A901D82CD1A00D0B90A /* CTPerrySQLite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 20D42A8D1D82CD1A00D0B90A /* CTPerrySQLite.cpp */; };
+		20D42A911D82CD1A00D0B90A /* CTPerrySQLite.h in Headers */ = {isa = PBXBuildFile; fileRef = 20D42A8E1D82CD1A00D0B90A /* CTPerrySQLite.h */; };
+		20D42A921D82CD1A00D0B90A /* CTPerrySQLite.h in Headers */ = {isa = PBXBuildFile; fileRef = 20D42A8E1D82CD1A00D0B90A /* CTPerrySQLite.h */; };
 		20DA09901BDE93FE0070C61F /* Animation.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09761BDE93FE0070C61F /* Animation.h */; };
 		20DA09911BDE93FE0070C61F /* Animation.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09761BDE93FE0070C61F /* Animation.h */; };
 		20DA09921BDE93FE0070C61F /* AnimationState.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DA09771BDE93FE0070C61F /* AnimationState.h */; };
@@ -949,6 +953,8 @@
 		20BCC1C71C5636AE00206C5F /* MOAIFmodBeatDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIFmodBeatDetector.h; sourceTree = "<group>"; };
 		20C0F7A91BF0C2C8009CAA4F /* host-ios.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "host-ios.mm"; sourceTree = "<group>"; };
 		20C0F7E51BF0C2E6009CAA4F /* host-ios.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "host-ios.h"; sourceTree = "<group>"; };
+		20D42A8D1D82CD1A00D0B90A /* CTPerrySQLite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CTPerrySQLite.cpp; sourceTree = "<group>"; };
+		20D42A8E1D82CD1A00D0B90A /* CTPerrySQLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTPerrySQLite.h; sourceTree = "<group>"; };
 		20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libmoai.xcodeproj; path = ../../xcode/libmoai/libmoai.xcodeproj; sourceTree = "<group>"; };
 		20DA09761BDE93FE0070C61F /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		20DA09771BDE93FE0070C61F /* AnimationState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationState.h; sourceTree = "<group>"; };
@@ -1302,8 +1308,10 @@
 				7A1C9D851C96E01900B00C3F /* CTHelper.h */,
 				20B070DB1C10804D00F83147 /* MOAIColorBlender.cpp */,
 				20B070DC1C10804D00F83147 /* MOAIColorBlender.h */,
-				206BA0461BDE92D60021D349 /* CTUtil.cpp */,
 				206BA0471BDE92D60021D349 /* CTUtil.h */,
+				206BA0461BDE92D60021D349 /* CTUtil.cpp */,
+				20D42A8D1D82CD1A00D0B90A /* CTPerrySQLite.cpp */,
+				20D42A8E1D82CD1A00D0B90A /* CTPerrySQLite.h */,
 				206BA0481BDE92D60021D349 /* host.cpp */,
 				206BA0491BDE92D60021D349 /* host.h */,
 			);
@@ -1747,6 +1755,7 @@
 			files = (
 				20B070DF1C10804D00F83147 /* MOAIColorBlender.h in Headers */,
 				206BA0501BDE92D60021D349 /* host.h in Headers */,
+				20D42A911D82CD1A00D0B90A /* CTPerrySQLite.h in Headers */,
 				206BA04C1BDE92D60021D349 /* CTUtil.h in Headers */,
 				7A05C4241C97074300759015 /* CTHelper.h in Headers */,
 			);
@@ -1758,6 +1767,7 @@
 			files = (
 				20B070E01C10804D00F83147 /* MOAIColorBlender.h in Headers */,
 				206BA0511BDE92D60021D349 /* host.h in Headers */,
+				20D42A921D82CD1A00D0B90A /* CTPerrySQLite.h in Headers */,
 				206BA04D1BDE92D60021D349 /* CTUtil.h in Headers */,
 				7A05C4231C97074200759015 /* CTHelper.h in Headers */,
 			);
@@ -2660,6 +2670,7 @@
 				7A1C9D861C96E01900B00C3F /* CTHelper.cpp in Sources */,
 				206BA04A1BDE92D60021D349 /* CTUtil.cpp in Sources */,
 				20B070DD1C10804D00F83147 /* MOAIColorBlender.cpp in Sources */,
+				20D42A8F1D82CD1A00D0B90A /* CTPerrySQLite.cpp in Sources */,
 				206BA04E1BDE92D60021D349 /* host.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2671,6 +2682,7 @@
 				7A1C9D871C96E01900B00C3F /* CTHelper.cpp in Sources */,
 				206BA04B1BDE92D60021D349 /* CTUtil.cpp in Sources */,
 				20B070DE1C10804D00F83147 /* MOAIColorBlender.cpp in Sources */,
+				20D42A901D82CD1A00D0B90A /* CTPerrySQLite.cpp in Sources */,
 				206BA04F1BDE92D60021D349 /* host.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2958,6 +2970,7 @@
 					"\"../../3rdparty/Flurry-iOS-5.0.0/Flurry\"",
 					"\"../../3rdparty/fmod-studio/headers\"",
 					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
+					"\"../../3rdparty/sqlite-3.14.1/\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = (
@@ -4773,6 +4786,7 @@
 					"\"../../3rdparty/Flurry-iOS-5.0.0/Flurry\"",
 					"\"../../3rdparty/fmod-studio/headers\"",
 					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
+					"\"../../3rdparty/sqlite-3.14.1/\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
@@ -4905,6 +4919,7 @@
 					"\"../../3rdparty/Flurry-iOS-5.0.0/Flurry\"",
 					"\"../../3rdparty/fmod-studio/headers\"",
 					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
+					"\"../../3rdparty/sqlite-3.14.1/\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = (
@@ -5037,6 +5052,7 @@
 					"\"../../3rdparty/Flurry-iOS-5.0.0/Flurry\"",
 					"\"../../3rdparty/fmod-studio/headers\"",
 					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
+					"\"../../3rdparty/sqlite-3.14.1/\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = (
