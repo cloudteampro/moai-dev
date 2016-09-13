@@ -104,6 +104,7 @@ int	CTPerrySQLite::_set ( lua_State* L ) {
 	
 	cc8* key = state.GetValue < cc8* >( 2, 0 );
 	
+	bool success = false;
 	if ( state.IsType ( 3, LUA_TSTRING )) {
 		
 		size_t size;
@@ -117,7 +118,7 @@ int	CTPerrySQLite::_set ( lua_State* L ) {
 		if ( result == SQLITE_OK ) {
 			sqlite3_bind_text ( stmt, 1, key, -1, SQLITE_TRANSIENT );
 			sqlite3_bind_blob ( stmt, 2, data, size, SQLITE_TRANSIENT );
-			sqlite3_step ( stmt );
+			success = SQLITE_DONE == sqlite3_step ( stmt );
 		}
 		sqlite3_finalize ( stmt );
 	}
@@ -129,12 +130,13 @@ int	CTPerrySQLite::_set ( lua_State* L ) {
 		result = sqlite3_prepare_v2 ( self->mConnection, sql, -1, &stmt, NULL );
 		if ( result == SQLITE_OK ) {
 			sqlite3_bind_text ( stmt, 1, key, -1, SQLITE_TRANSIENT );
-			sqlite3_step ( stmt );
+			success = SQLITE_DONE == sqlite3_step ( stmt );
 		}
 		sqlite3_finalize ( stmt );
 	}
 	
-	return 0;
+	state.Push ( success );
+	return 1;
 }
 
 //----------------------------------------------------------------//
@@ -175,11 +177,12 @@ int	CTPerrySQLite::_setBatch ( lua_State* L ) {
 		sqlite3_bind_blob ( stmt, index++, data, size, SQLITE_TRANSIENT );
 	}
 	
-	sqlite3_step ( stmt );
+	bool success = SQLITE_DONE == sqlite3_step ( stmt );
 	sqlite3_finalize ( stmt );
 	sqlite3_wal_checkpoint ( self->mConnection, NULL );
 	
-	return 0;
+	state.Push ( success );
+	return 1;
 }
 
 
@@ -289,14 +292,18 @@ int	CTPerrySQLiteLogger::_setErrorHandler ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
-static int ReportError ( void* unused, int error, cc8* message ) {
+static void ReportError ( void* unused, int error, cc8* message ) {
 	
 	if ( error == SQLITE_OK ) return;
 	
 	// Early exit on malloc error. Pushing error message to Lua most likely will attempt to allocate more memory
 	if ( error == SQLITE_NOMEM ) return;
 	
-	if ( CTPerrySQLiteLogger::IsValid () && MOAILuaRuntime::IsValid ()) {
+	// Some hosts may call AppInitialize multiple times during lifetime (actually, that's improper behavior, but it works fine).
+	// This can lead to sqlite3_config call on intialized sqlite3 library that will log SQLITE_MISUSE error.
+	//
+	// Don't even try to make a Lua callback if there is 0 contexts
+	if ( AKUCountContexts () > 0 && CTPerrySQLiteLogger::IsValid () && MOAILuaRuntime::IsValid ()) {
 		
 		MOAILuaStrongRef& errorHandler = CTPerrySQLiteLogger::Get ().GetErrorHandler ();
 		if ( errorHandler ) {

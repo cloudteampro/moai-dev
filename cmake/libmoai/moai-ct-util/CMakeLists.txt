@@ -25,7 +25,7 @@ target_include_directories (moai-ct-util PUBLIC
     "$<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include>"
 )
 
-target_link_libraries ( moai-ct-util moai-sim moai-core moai-util zlcore )
+target_link_libraries ( moai-ct-util moai-sim moai-core moai-util zlcore sqlite3 )
 set_target_properties(moai-ct-util PROPERTIES FOLDER Modules)
 
 install(TARGETS moai-ct-util EXPORT libmoai ARCHIVE DESTINATION lib)
