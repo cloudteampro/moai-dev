@@ -184,7 +184,7 @@ void MOAIGfxPrimDeck2D::DrawIndex ( u32 idx, MOAIMaterialBatch& materials, ZLVec
 		u32 idxBase = batch.mIdxBase;
 		u32 idxTop 	= idxBase + batch.mIdxCount;
 
-		gfxDevice.BeginPrimIndexed ( ZGL_PRIM_TRIANGLES, ( u32 )( batch.mVtxCount ), batch.mIdxCount / 3 );
+		gfxDevice.BeginPrimIndexed ( ZGL_PRIM_TRIANGLES, ( u32 )( batch.mVtxCount ), batch.mIdxCount );
 
 		for ( u32 i = vtxBase; i < vtxTop; ++i ) {
 			
