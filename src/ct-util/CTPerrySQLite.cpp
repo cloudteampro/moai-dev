@@ -249,14 +249,11 @@ int CTPerrySQLite::Open ( cc8* path ) {
 
 //----------------------------------------------------------------//
 void CTPerrySQLite::RegisterLuaClass ( MOAILuaState& state ) {
-	
-	MOAILuaObject::RegisterLuaClass ( state );
+	UNUSED ( state );
 }
 
 //----------------------------------------------------------------//
 void CTPerrySQLite::RegisterLuaFuncs ( MOAILuaState& state ) {
-
-	MOAILuaObject::RegisterLuaClass ( state );
 
 	luaL_Reg regTable [] = {
 		{ "close",						_close },
