@@ -377,16 +377,16 @@ public:
 	template < typename PARAM_TYPE >
 	void GetCenter ( ZLMetaVec2D < PARAM_TYPE >& center ) const {
 
-		center.mX = ( PARAM_TYPE )this->mXMin + (( PARAM_TYPE )( this->mXMax - this->mXMin ) / 2 );
-		center.mY = ( PARAM_TYPE )this->mYMin + (( PARAM_TYPE )( this->mYMax - this->mYMin ) / 2 );
+		center.mX = ( PARAM_TYPE )this->mXMin + (( PARAM_TYPE )( this->mXMax - this->mXMin ) / 2.f );
+		center.mY = ( PARAM_TYPE )this->mYMin + (( PARAM_TYPE )( this->mYMax - this->mYMin ) / 2.f );
 	}
 
 	//----------------------------------------------------------------//
 	template < typename PARAM_TYPE >
 	void GetCenter ( ZLMetaVec3D < PARAM_TYPE >& center ) const {
 
-		center.mX = ( PARAM_TYPE )this->mXMin + (( PARAM_TYPE )( this->mXMax - this->mXMin ) / 2 );
-		center.mY = ( PARAM_TYPE )this->mYMin + (( PARAM_TYPE )( this->mYMax - this->mYMin ) / 2 );
+		center.mX = ( PARAM_TYPE )this->mXMin + (( PARAM_TYPE )( this->mXMax - this->mXMin ) / 2.f );
+		center.mY = ( PARAM_TYPE )this->mYMin + (( PARAM_TYPE )( this->mYMax - this->mYMin ) / 2.f );
 		center.mZ = 0;
 	}
 

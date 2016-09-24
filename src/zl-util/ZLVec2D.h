@@ -151,7 +151,7 @@ public:
 		TYPE x = this->mX - point.mX;
 		TYPE y = this->mY - point.mY;
 
-		return sqrtf (( x * x ) + ( y * y ));
+		return Sqrt (( x * x ) + ( y * y ));
 	}
 	
 	//----------------------------------------------------------------//
@@ -221,12 +221,12 @@ public:
 	
 	//----------------------------------------------------------------//
 	// |V|
-	float Length () {
-		return sqrtf (( mX * mX ) + ( mY * mY ));
+	TYPE Length () {
+		return Sqrt (( mX * mX ) + ( mY * mY ));
 	}
 	
 	//----------------------------------------------------------------//
-	float LengthSquared () const {
+	TYPE LengthSquared () const {
 		return ( mX * mX ) + ( mY * mY );
 	}
 	
@@ -385,7 +385,7 @@ public:
 	//----------------------------------------------------------------//
 	void Rotate90Anticlockwise () {
 	
-		float temp = this->mX;
+		TYPE temp = this->mX;
 		this->mX = this->mY;
 		this->mY = -temp;
 	}
@@ -393,7 +393,7 @@ public:
 	//----------------------------------------------------------------//
 	void Rotate90Clockwise () {
 	
-		float temp = this->mX;
+		TYPE temp = this->mX;
 		this->mX = -this->mY;
 		this->mY = temp;
 	}
@@ -414,7 +414,7 @@ public:
 	
 	//----------------------------------------------------------------//
 	// length, V / |V| * TYPE
-	float SetLength ( float length ) {
+	TYPE SetLength ( TYPE length ) {
 
 		TYPE scale;
 		scale = this->Length () / length;
