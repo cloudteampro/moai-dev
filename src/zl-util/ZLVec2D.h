@@ -221,7 +221,7 @@ public:
 	
 	//----------------------------------------------------------------//
 	// |V|
-	TYPE Length () {
+	TYPE Length () const {
 		return Sqrt (( mX * mX ) + ( mY * mY ));
 	}
 	
@@ -416,11 +416,11 @@ public:
 	// length, V / |V| * TYPE
 	TYPE SetLength ( TYPE length ) {
 
-		TYPE scale;
-		scale = this->Length () / length;
+		TYPE norm;
+		norm = this->Length ();
 
-		this->mX = this->mX / scale;
-		this->mY = this->mY / scale;
+		this->mX = this->mX / norm * length;
+		this->mY = this->mY / norm * length;
 
 		return length;
 	}
