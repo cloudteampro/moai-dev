@@ -45,10 +45,10 @@ private:
 	typedef STLList < id >::iterator NotificationObserverIt;
 	STLList < id >	mNotificationObservers;
 
-	MOAILuaStrongRef			mOnTakeCameraCallback;
-	MOAITakeCameraListener*		mTakeCameraListener;
+	// MOAILuaStrongRef			mOnTakeCameraCallback;
+	// MOAITakeCameraListener*		mTakeCameraListener;
 	MOAIMailComposeDelegate*	mMailDelegate;
-	UIPopoverController*		mImagePickerPopover;
+	// UIPopoverController*		mImagePickerPopover;
 	
 	//----------------------------------------------------------------//
 	static int		_canOpenURL						( lua_State* L );
@@ -107,7 +107,7 @@ public:
 	void				OpenUrl									( NSURL* url, NSString* sourceApplication );
 	void				RegisterLuaClass						( MOAILuaState& state );
 
-	static void			callTakeCameraLuaCallback				( NSString* imagePath );
+	// static void			callTakeCameraLuaCallback				( NSString* imagePath );
 };
 
 //================================================================//
