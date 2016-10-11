@@ -40,8 +40,6 @@ int MOAILuaObject::_gc ( lua_State* L ) {
 		if ( MOAILuaRuntime::Get ().mReportGC ) {
 			printf ( "GC %s <%p>\n", self->TypeName (), self );
 		}
-		
-		self->mUserdata.Clear ();
 	}
 	
 	if ( self->GetRefCount () == 0 ) {
@@ -234,8 +232,6 @@ void MOAILuaObject::BindToLua ( MOAILuaState& state ) {
 	this->mUserdata.SetRef ( state, -1 );
 	assert ( !lua_isnil ( state, -1 ));
 	
-	this->mCollected = false;
-	
 	// NOTE: we have to do this *after* mUserdata has been initialized as LuaRetain calls PushLuaUserdata
 	// which in turn calls BindToLua if there is no mUserdata...
 	if ( type->IsSingleton ()) {
@@ -369,7 +365,7 @@ void MOAILuaObject::LuaRetain ( MOAILuaObject* object ) {
 
 //----------------------------------------------------------------//
 MOAILuaObject::MOAILuaObject ():
-	mCollected ( true ) {
+	mCollected ( false ) {
 	RTTI_SINGLE ( RTTIBase )
 	
 	if ( MOAILuaRuntime::IsValid ()) {
@@ -483,10 +479,7 @@ void MOAILuaObject::PushLuaClassTable ( MOAILuaState& state ) {
 
 //----------------------------------------------------------------//
 bool MOAILuaObject::PushLuaUserdata ( MOAILuaState& state ) {
-	
-	MOAILuaWeakRef& ref = this->mUserdata;
-	
-	
+
 	if ( !this->mUserdata ) {
 		this->BindToLua ( state );
 		return true;
