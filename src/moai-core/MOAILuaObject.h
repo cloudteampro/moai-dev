@@ -23,8 +23,9 @@ class MOAILuaObject :
 private:
 
 	bool					mCollected;
-	MOAILuaWeakRef			mUserdata;			// ref to userdata (weak)
-	MOAILuaStrongRef		mFinalizer;			// ref to finalizer (strong)
+	u32						mActiveUserdataCount;
+	MOAILuaWeakRef			mUserdata;		// ref to userdata (weak)
+	MOAILuaStrongRef		mFinalizer;		// ref to finalizer (strong)
 
 protected:
 
@@ -35,7 +36,6 @@ protected:
 	static int				_getMemberTable		( lua_State* L );
 	static int				_getRefTable		( lua_State* L );
 	static int				_pin				( lua_State* L );
-	static int				_printTracking		( lua_State* L );
 	static int				_serializeIn		( lua_State* L );
 	static int				_serializeOut		( lua_State* L );
 	static int				_setFinalizer		( lua_State* L );
@@ -69,7 +69,9 @@ public:
 	bool					IsBound						();
 	static bool				IsMoaiUserdata				( MOAILuaState& state, int idx );
 	bool					IsSingleton					();
+	void					LuaRelease					();
 	void					LuaRelease					( MOAILuaObject* object );
+	void					LuaRetain					();
 	void					LuaRetain					( MOAILuaObject* object );
 							MOAILuaObject				();
 	virtual					~MOAILuaObject				();
