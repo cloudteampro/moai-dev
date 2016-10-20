@@ -156,7 +156,7 @@ public:
 	GET ( ZLVec3D, BoundsMin, mWorldBounds.mMin )
 
 	//----------------------------------------------------------------//
-	void							AddToSortBuffer			( MOAIPartitionResultBuffer& buffer, u32 key = 0 );
+	virtual void					AddToSortBuffer			( MOAIPartitionResultBuffer& buffer, u32 key = 0 );
 	bool							ApplyAttrOp				( u32 attrID, MOAIAttrOp& attrOp, u32 op );
 	void							GetGridBoundsInView		( MOAICellCoord& c0, MOAICellCoord& c1 ); // TODO: this shoudln't be here
 	u32								GetModelBounds			( ZLBox& bounds );
