@@ -34,7 +34,7 @@ private:
 	// attractor coefficients
 	float		mRadius;
 	float		mPull;
-		
+	
 	MOAIParticleTurbulenceSampler	mTurbulence;
 
 	//----------------------------------------------------------------//

@@ -196,10 +196,8 @@ void MOAIParticleForce::Eval ( const ZLVec3D& loc, float mass, ZLVec3D& accelera
 		}
 		case TURBULENCE: {
 			
-			ZLVec3D scale = this->mLocalToWorldMtx.GetScale ();
-			
-			ZLVec2D point ( loc.mX + origin.mX, loc.mY + origin.mY );
-			point.Scale ( 1.0f / scale.mX, 1.0f / scale.mY );
+			ZLVec2D point ( loc.mX, loc.mY );
+			this->mWorldToLocalMtx.Transform ( point );
 			
 			force.Init ( this->mTurbulence.Eval ( point ));
 			force.Scale ( this->mPull );
