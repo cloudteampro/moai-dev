@@ -4,6 +4,7 @@
 #include "pch.h"
 #include <moai-sim/MOAIParticle.h>
 #include <moai-sim/MOAIParticleForce.h>
+#include <moai-sim/MOAIImage.h>
 
 //================================================================//
 // local
@@ -87,9 +88,37 @@ int MOAIParticleForce::_initRadial ( lua_State* L ) {
 
 	self->mShape = RADIAL;
 	self->mPull = state.GetValue < float >( 2, 0.0f );
-
+	
 	self->ScheduleUpdate ();
+	
+	return 0;
+}
 
+//----------------------------------------------------------------//
+/**	@lua	initTurbulence
+	@text	Turbulence field based on noise MOAIImage. Use force:setScl() to control field size.
+	
+	@in		MOAIParticleForce self
+	@in		MOAIImage	noise image (only square)
+	@in		number		magnitude
+	@in		bool		wrap. Set to true for endless turbulence field.
+	@out	nil
+*/
+int MOAIParticleForce::_initTurbulence ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIParticleForce, "UUN" )
+	
+	MOAIImage* image = state.GetLuaObject < MOAIImage >( 2, true );
+	if ( !image ) {
+		return 0;
+	}
+	
+	self->mShape = TURBULENCE;
+	self->mPull = state.GetValue < float >( 3, 0.0f );
+	
+	bool wrap = state.GetValue < bool >( 4, false );
+	self->mTurbulence.GenerateFromImage ( *image, wrap );
+	self->ScheduleUpdate ();
+	
 	return 0;
 }
 
@@ -165,6 +194,17 @@ void MOAIParticleForce::Eval ( const ZLVec3D& loc, float mass, ZLVec3D& accelera
 			
 			break;
 		}
+		case TURBULENCE: {
+			
+			ZLVec3D scale = this->mLocalToWorldMtx.GetScale ();
+			
+			ZLVec2D point ( loc.mX + origin.mX, loc.mY + origin.mY );
+			point.Scale ( 1.0f / scale.mX, 1.0f / scale.mY );
+			
+			force.Init ( this->mTurbulence.Eval ( point ));
+			force.Scale ( this->mPull );
+			break;
+		}
 	}
 	
 	switch ( this->mType ) {
@@ -236,6 +276,7 @@ void MOAIParticleForce::RegisterLuaFuncs ( MOAILuaState& state ) {
 		{ "initBasin",			_initBasin },
 		{ "initLinear",			_initLinear },
 		{ "initRadial",			_initRadial },
+		{ "initTurbulence",		_initTurbulence },
 		{ "setType",			_setType },
 		{ NULL, NULL }
 	};

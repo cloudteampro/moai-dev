@@ -193,6 +193,10 @@
 		07658751145CD06900723A7D /* tlsf.h in Headers */ = {isa = PBXBuildFile; fileRef = 0765874C145CD06900723A7D /* tlsf.h */; };
 		07658752145CD06900723A7D /* tlsfbits.h in Headers */ = {isa = PBXBuildFile; fileRef = 0765874D145CD06900723A7D /* tlsfbits.h */; };
 		07658753145CD06900723A7D /* tlsfbits.h in Headers */ = {isa = PBXBuildFile; fileRef = 0765874D145CD06900723A7D /* tlsfbits.h */; };
+		20242C391DD36A2600E042BF /* MOAIParticleTurbulenceSampler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 20242C371DD36A2600E042BF /* MOAIParticleTurbulenceSampler.cpp */; };
+		20242C3A1DD36A2600E042BF /* MOAIParticleTurbulenceSampler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 20242C371DD36A2600E042BF /* MOAIParticleTurbulenceSampler.cpp */; };
+		20242C3B1DD36A2600E042BF /* MOAIParticleTurbulenceSampler.h in Headers */ = {isa = PBXBuildFile; fileRef = 20242C381DD36A2600E042BF /* MOAIParticleTurbulenceSampler.h */; };
+		20242C3C1DD36A2600E042BF /* MOAIParticleTurbulenceSampler.h in Headers */ = {isa = PBXBuildFile; fileRef = 20242C381DD36A2600E042BF /* MOAIParticleTurbulenceSampler.h */; };
 		207A50F91C1EFDB600D0FCDA /* lua_cmsgpack.c in Sources */ = {isa = PBXBuildFile; fileRef = 207A50F81C1EFDB600D0FCDA /* lua_cmsgpack.c */; };
 		207A50FA1C1EFDB600D0FCDA /* lua_cmsgpack.c in Sources */ = {isa = PBXBuildFile; fileRef = 207A50F81C1EFDB600D0FCDA /* lua_cmsgpack.c */; };
 		209A81391D0C3BBD00B81161 /* MOAISkinnedMeshShader-fsh.h in Headers */ = {isa = PBXBuildFile; fileRef = 209A81371D0C3BBD00B81161 /* MOAISkinnedMeshShader-fsh.h */; };
@@ -5504,6 +5508,8 @@
 		0795297C1447907100143A72 /* jquant2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = jquant2.c; sourceTree = "<group>"; };
 		0795297D1447907100143A72 /* jutils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = jutils.c; sourceTree = "<group>"; };
 		0795297E1447907100143A72 /* jversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jversion.h; sourceTree = "<group>"; };
+		20242C371DD36A2600E042BF /* MOAIParticleTurbulenceSampler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIParticleTurbulenceSampler.cpp; sourceTree = "<group>"; };
+		20242C381DD36A2600E042BF /* MOAIParticleTurbulenceSampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIParticleTurbulenceSampler.h; sourceTree = "<group>"; };
 		207A50F81C1EFDB600D0FCDA /* lua_cmsgpack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lua_cmsgpack.c; path = "../../3rdparty/lua-cmsgpack/lua_cmsgpack.c"; sourceTree = "<group>"; };
 		209A81371D0C3BBD00B81161 /* MOAISkinnedMeshShader-fsh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MOAISkinnedMeshShader-fsh.h"; path = "shaders/MOAISkinnedMeshShader-fsh.h"; sourceTree = "<group>"; };
 		209A81381D0C3BBD00B81161 /* MOAISkinnedMeshShader-vsh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MOAISkinnedMeshShader-vsh.h"; path = "shaders/MOAISkinnedMeshShader-vsh.h"; sourceTree = "<group>"; };
@@ -12485,6 +12491,8 @@
 				89BE6FB3173AD0CA00DFE837 /* MOAIParticleSystem.h */,
 				89BE6FB4173AD0CA00DFE837 /* MOAIParticleTimedEmitter.cpp */,
 				89BE6FB5173AD0CA00DFE837 /* MOAIParticleTimedEmitter.h */,
+				20242C371DD36A2600E042BF /* MOAIParticleTurbulenceSampler.cpp */,
+				20242C381DD36A2600E042BF /* MOAIParticleTurbulenceSampler.h */,
 			);
 			name = particles;
 			sourceTree = "<group>";
@@ -13657,6 +13665,7 @@
 				CD4C3E4D180A63BB00C02381 /* MOAIImageTexture.h in Headers */,
 				CDC5203C18A17EB700BCC12F /* MOAIShaderUniform.h in Headers */,
 				CD4C3E1A180A63BB00C02381 /* MOAIDraw.h in Headers */,
+				20242C3B1DD36A2600E042BF /* MOAIParticleTurbulenceSampler.h in Headers */,
 				CD4C3E67180A63BB00C02381 /* MOAINode.h in Headers */,
 				CD4C3E8C180A63BB00C02381 /* MOAIPathGraph.h in Headers */,
 				CD4C3EF7180A63BB00C02381 /* MOAIVertexFormatMgr.h in Headers */,
@@ -13711,6 +13720,7 @@
 				CD4C406D180A63C200C02381 /* MOAIGlyphCache.h in Headers */,
 				CD9140981A0D6022002CC335 /* MOAIActionTree.h in Headers */,
 				CD4C40C0180A63C200C02381 /* MOAIPathTerrainDeck.h in Headers */,
+				20242C3C1DD36A2600E042BF /* MOAIParticleTurbulenceSampler.h in Headers */,
 				CD4C4040180A63C200C02381 /* MOAIColor.h in Headers */,
 				CD4C40C2180A63C200C02381 /* MOAIPinTransform.h in Headers */,
 				CD4C4034180A63C200C02381 /* MOAIButtonSensor.h in Headers */,
@@ -17004,6 +17014,7 @@
 				CD4C3DF9180A63BB00C02381 /* MOAIBitmapFontReader.cpp in Sources */,
 				CD4C3E0F180A63BB00C02381 /* MOAICompassSensor.cpp in Sources */,
 				CD4C3E4C180A63BB00C02381 /* MOAIImageTexture.cpp in Sources */,
+				20242C391DD36A2600E042BF /* MOAIParticleTurbulenceSampler.cpp in Sources */,
 				CD4C3EBF180A63BB00C02381 /* MOAIStaticGlyphCache.cpp in Sources */,
 				CD4C3EDF180A63BB00C02381 /* MOAITransform2D.cpp in Sources */,
 				CD4C3ECB180A63BB00C02381 /* MOAITextDesigner.cpp in Sources */,
@@ -17178,6 +17189,7 @@
 				CD4C4090180A63C200C02381 /* MOAILocationSensor.cpp in Sources */,
 				CD4C404F180A63C200C02381 /* MOAIEaseType.cpp in Sources */,
 				CD4C40F1180A63C200C02381 /* MOAIStaticGlyphCache.cpp in Sources */,
+				20242C3A1DD36A2600E042BF /* MOAIParticleTurbulenceSampler.cpp in Sources */,
 				CD4C410D180A63C200C02381 /* MOAITouchSensor.cpp in Sources */,
 				CD2BA79D1B2A20A80010C399 /* MOAIGfxDeviceBase.cpp in Sources */,
 				CD4C4053180A63C200C02381 /* MOAIFont.cpp in Sources */,

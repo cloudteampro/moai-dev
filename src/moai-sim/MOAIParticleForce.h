@@ -5,6 +5,7 @@
 #define	MOAIPARTICLEFORCE_H
 
 #include <moai-sim/MOAITransform.h>
+#include <moai-sim/MOAIParticleTurbulenceSampler.h>
 
 class MOAIParticle;
 class MOAIParticleSystem;
@@ -33,12 +34,15 @@ private:
 	// attractor coefficients
 	float		mRadius;
 	float		mPull;
+		
+	MOAIParticleTurbulenceSampler	mTurbulence;
 
 	//----------------------------------------------------------------//
 	static int		_initAttractor			( lua_State* L );
 	static int		_initBasin				( lua_State* L );
 	static int		_initLinear				( lua_State* L );
 	static int		_initRadial				( lua_State* L );
+	static int		_initTurbulence			( lua_State* L );
 	static int		_setType				( lua_State* L );
 	
 	//----------------------------------------------------------------//
@@ -50,6 +54,7 @@ public:
 		BASIN,
 		LINEAR,
 		RADIAL,
+		TURBULENCE,
 	};
 	
 	enum {
