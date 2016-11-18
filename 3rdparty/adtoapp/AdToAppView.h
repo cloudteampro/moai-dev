@@ -32,7 +32,7 @@
 /**
  Called if AdToApp view has successfully displayed an ad.
  */
--(void)adToAppViewDidDisplayAd:(AdToAppView*)adToAppView;
+-(void)adToAppViewDidDisplayAd:(AdToAppView*)adToAppView providerId:(int)providerId;
 
 /**
  Called if AdToApp view has failed to displayed an ad.
@@ -44,7 +44,7 @@
 /**
  Called when the user clicks on the displayed ad.
  */
--(void)adToAppViewOnClick:(AdToAppView*)view;
+-(void)adToAppViewOnClick:(AdToAppView*)view providerId:(int)providerId;
 
 @end
 

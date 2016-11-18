@@ -219,15 +219,15 @@ void MOAIAdToAppIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	#pragma mark Protocol MOAIAdToAppDelegate
 	//================================================================//
 
-	- ( void ) onAdWillAppear: ( NSString* ) adType {
+	- ( void ) onAdWillAppear: ( NSString* )adType providerId: ( int )providerId {
 		MOAIAdToAppIOS::Get ().NotifyAdAppear ([ adType UTF8String ]);
 	}
 
-	- ( void ) onAdDidDisappear: ( NSString* ) adType {
+	- ( void ) onAdDidDisappear: ( NSString* ) adType providerId: ( int )providerId {
 		MOAIAdToAppIOS::Get ().NotifyAdDisappear ([ adType UTF8String ]);
 	}
 
-	- ( void ) onReward: ( int ) reward currency: ( NSString* ) gameCurrency {
+	- ( void ) onReward: ( int ) reward currency: ( NSString* ) gameCurrency providerId: ( int )providerId {
 		MOAIAdToAppIOS::Get ().NotifyAdReward ( reward, [ gameCurrency UTF8String ]);
 	}
 

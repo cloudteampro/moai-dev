@@ -6,7 +6,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define ADTOAPPSDK_VERSION (@"46.2")
+#define ADTOAPPSDK_VERSION (@"47.15")
 
 #define ADTOAPP_IMAGE_INTERSTITIAL (@"Image")
 #define ADTOAPP_VIDEO_INTERSTITIAL (@"Video")
@@ -14,6 +14,32 @@
 
 #define ADTOAPP_REWARDED_INTERSTITIAL (@"Rewarded")
 #define ADTOAPP_BANNER (@"Banner")
+
+/** ADS PROVIDERS **/
+#define ADTOAPP_PROVIDER_ADCOLONY_IDT       (1)
+#define ADTOAPP_PROVIDER_SMAATO_IDT         (3)
+#define ADTOAPP_PROVIDER_STARTAPP_IDT       (5)
+#define ADTOAPP_PROVIDER_INMOBI_IDT         (6)
+#define ADTOAPP_PROVIDER_GOOGLEADMOBS_IDT   (7)
+#define ADTOAPP_PROVIDER_APPLOVIN_IDT       (8)
+#define ADTOAPP_PROVIDER_REVMOB_IDT         (11)
+#define ADTOAPP_PROVIDER_AMAZON_IDT         (16)
+#define ADTOAPP_PROVIDER_VUNGLE_IDT         (17)
+#define ADTOAPP_PROVIDER_MYTARGET_IDT       (21)
+#define ADTOAPP_PROVIDER_UNITY_IDT          (22)
+#define ADTOAPP_PROVIDER_AVOCARROT_IDT      (23)
+#define ADTOAPP_PROVIDER_NATIVEX_IDT        (24)
+#define ADTOAPP_PROVIDER_TAPSENSE_IDT       (25)
+#define ADTOAPP_PROVIDER_YANDEX_IDT         (26)
+#define ADTOAPP_PROVIDER_SUPERSONIC_IDT     (27)
+#define ADTOAPP_PROVIDER_WOOBI_IDT          (28)
+#define ADTOAPP_PROVIDER_INSTREAMATIC_IDT   (29)
+#define ADTOAPP_PROVIDER_INHOUSE_IDT        (30)
+#define ADTOAPP_PROVIDER_FACEBOOK_IDT       (31)
+#define ADTOAPP_PROVIDER_FLURRY_IDT         (32)
+
+#define ADTOAPP_PROVIDER_TEST_IDT           (32767)
+/***/
 
 @class UIViewController;
 
@@ -25,24 +51,24 @@
 /**
  Called right before appearance of an ad on the screen.
  */
--(void)onAdWillAppear:(NSString*)adType;
+-(void)onAdWillAppear:(NSString*)adType providerId:(int)providerId;
 
 /**
  Called immediately after disappearance of an ad from the screen.
  */
--(void)onAdDidDisappear:(NSString*)adType;
+-(void)onAdDidDisappear:(NSString*)adType providerId:(int)providerId;
 
 @optional
 
 /**
  Called if the user has viewed an ad and receives a reward
  */
--(void)onReward:(int)reward currency:(NSString*)gameCurrency;
+-(void)onReward:(int)reward currency:(NSString*)gameCurrency providerId:(int)providerId;
 
 /**
  Tells the delegate when the user clicks on fullscreen ad.
  */
--(void)onAdClicked:(NSString*)adType;
+-(void)onAdClicked:(NSString*)adType providerId:(int)providerId;
 
 /**
  Called right before appearance of fullscreen ad on the screen. Return YES if you want to display ad. Otherwise, return NO.
@@ -113,5 +139,10 @@
 /** Hides the displayed interstitial ad if it is supported by the current provider. Can only be called from the main thread.
  */
 +(BOOL)hideInterstitial;
+
+/** Currency and value which will be returned by the onReward:currency: delegate method.
+ */
++(NSString*)rewardedCurrency;
++(int)rewardedValue;
 
 @end
