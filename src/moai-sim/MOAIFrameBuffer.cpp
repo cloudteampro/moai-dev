@@ -376,13 +376,18 @@ MOAIFrameBuffer::~MOAIFrameBuffer () {
 void MOAIFrameBuffer::RegisterLuaClass ( MOAILuaState& state ) {
 
 	MOAIClearableView::RegisterLuaClass ( state );
+	MOAIInstanceEventSource::RegisterLuaClass ( state );
+	
+	state.SetField ( -1, "EVENT_PRE_RENDER",		( u32 )EVENT_PRE_RENDER );
+	state.SetField ( -1, "EVENT_POST_RENDER",		( u32 )EVENT_POST_RENDER );
 }
 
 //----------------------------------------------------------------//
 void MOAIFrameBuffer::RegisterLuaFuncs ( MOAILuaState& state ) {
 
 	MOAIClearableView::RegisterLuaFuncs ( state );
-
+	MOAIInstanceEventSource::RegisterLuaFuncs ( state );
+	
 	luaL_Reg regTable [] = {
 		{ "getGrabbedImage",			_getGrabbedImage },
 		{ "grabNextFrame",				_grabNextFrame },
@@ -398,10 +403,12 @@ void MOAIFrameBuffer::RegisterLuaFuncs ( MOAILuaState& state ) {
 
 //----------------------------------------------------------------//
 void MOAIFrameBuffer::Render () {
-
+	
+	this->InvokeListener ( EVENT_PRE_RENDER );
+	
 	MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get ();
 	this->mLastDrawCount = gfxDevice.GetDrawCount ();
-
+	
 	gfxDevice.BindFrameBuffer ( this );
 	
 	//disable scissor rect for clear
@@ -414,14 +421,14 @@ void MOAIFrameBuffer::Render () {
 		this->RenderTable ( state, -1 );
 		state.Pop ( 1 );
 	}
-
+	
 	gfxDevice.FlushBufferedPrims ();
 
 	if ( this->mGrabNextFrame ) {
 
 		this->GrabImage ( this->mFrameImage );
 		this->mGrabNextFrame = false;
-
+		
 		if ( this->mOnFrameFinish ) {
 			MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 			if ( this->mOnFrameFinish.PushRef ( state )) {
@@ -433,6 +440,8 @@ void MOAIFrameBuffer::Render () {
 	
 	this->mRenderCounter++;
 	this->mLastDrawCount = gfxDevice.GetDrawCount () - this->mLastDrawCount;
+	
+	this->InvokeListener ( EVENT_POST_RENDER );
 }
 
 //----------------------------------------------------------------//

@@ -55,7 +55,8 @@ public:
 			indexed from 1.
 */
 class MOAIFrameBuffer :
-	public MOAIClearableView {
+	public MOAIClearableView,
+	public virtual MOAIInstanceEventSource {
 protected:
 	
 	friend class MOAIGfxDevice;
@@ -90,6 +91,12 @@ protected:
 
 public:
 	
+	enum {
+		EVENT_PRE_RENDER,
+		EVENT_POST_RENDER,
+		TOTAL_EVENTS,
+	};
+		
 	DECL_LUA_FACTORY ( MOAIFrameBuffer )
 	
 	GET			( u32, BufferWidth, mBufferWidth )

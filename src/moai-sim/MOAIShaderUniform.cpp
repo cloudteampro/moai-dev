@@ -119,6 +119,9 @@ void MOAIShaderUniformBuffer::GetValue ( MOAIAttrOp& attrOp ) {
 		case UNIFORM_VECTOR_F4_ARRAY: {
 			// TODO:
 		}
+		case UNIFORM_VECTOR_F3: {
+			// TODO:
+		}
 		case UNIFORM_VECTOR_F4: {
 			// TODO:
 		}
@@ -155,6 +158,12 @@ void MOAIShaderUniformBuffer::SetType ( u32 type ) {
 		case UNIFORM_MATRIX_F4: {
 		
 			this->mBuffer.Resize ( 16 * sizeof ( float ), 0 );
+			break;
+		}
+		
+		case UNIFORM_VECTOR_F3: {
+			
+			this->mBuffer.Resize ( 3 * sizeof ( float ), 0 );
 			break;
 		}
 		
@@ -216,7 +225,9 @@ bool MOAIShaderUniformBuffer::SetValue ( const MOAIAttrOp& attrOp, bool check ) 
 			break;
 		}
 		case MOAIAttrOp::ATTR_TYPE_VECTOR: {
-			// TODO:
+			ZLVec3D vec;
+			vec = attrOp.GetValue < ZLVec3D >( vec );
+			return this->SetValue ( vec, check );
 			break;
 		}
 		case MOAIAttrOp::ATTR_TYPE_VARIANT: {
@@ -391,6 +402,18 @@ bool MOAIShaderUniformBuffer::SetValue ( const ZLMatrix3x3& value, bool check ) 
 }
 
 //----------------------------------------------------------------//
+bool MOAIShaderUniformBuffer::SetValue ( const ZLVec3D& value, bool check ) {
+
+	float m [ 3 ];
+	
+	m [ 0 ]		= value.mX;
+	m [ 1 ]		= value.mY;
+	m [ 2 ]		= value.mZ;
+	
+	return this->SetBuffer ( m, sizeof ( m ), check );
+}
+
+//----------------------------------------------------------------//
 bool MOAIShaderUniformBuffer::SetValue ( const MOAIShaderUniformBuffer& uniformBuffer, bool check ) {
 
 	if ( this->mType == UNIFORM_FLOAT ) return this->SetValue ( uniformBuffer.mFloat );
@@ -444,6 +467,10 @@ void MOAIShaderUniform::Bind () {
 
 		case UNIFORM_MATRIX_F4:
 			zglUniformMatrix4fv ( this->mAddr, 1, false, ( float* )this->mBuffer.Data ());
+			break;
+		
+		case UNIFORM_VECTOR_F3:
+			zglUniform3fv ( this->mAddr, 1, ( float* )this->mBuffer.Data ());
 			break;
 
 		case UNIFORM_VECTOR_F4:

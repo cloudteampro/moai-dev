@@ -46,6 +46,7 @@ public:
 		UNIFORM_INT,
 		UNIFORM_MATRIX_F3,
 		UNIFORM_MATRIX_F4,
+		UNIFORM_VECTOR_F3,
 		UNIFORM_VECTOR_F4,
 		UNIFORM_VECTOR_F4_ARRAY,
 	};
@@ -65,6 +66,7 @@ public:
 	bool		SetValue			( const ZLAffine3D& value, bool check );
 	bool		SetValue			( const ZLMatrix4x4& value, bool check );
 	bool    	SetValue          	( const ZLMatrix3x3& value, bool check );
+	bool		SetValue			( const ZLVec3D& value, bool check );
 	bool		SetValue			( const MOAIShaderUniformBuffer& uniformBuffer, bool check );
 	bool		SetValue			( ZLLeanArray < ZLVec4D >& value, bool check );
 };

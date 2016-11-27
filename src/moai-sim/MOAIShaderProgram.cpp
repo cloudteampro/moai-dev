@@ -483,6 +483,7 @@ void MOAIShaderProgram::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "UNIFORM_INT",							( u32 )MOAIShaderUniform::UNIFORM_INT );
 	state.SetField ( -1, "UNIFORM_MATRIX_F3",					( u32 )MOAIShaderUniform::UNIFORM_MATRIX_F3 );
 	state.SetField ( -1, "UNIFORM_MATRIX_F4",					( u32 )MOAIShaderUniform::UNIFORM_MATRIX_F4 );
+	state.SetField ( -1, "UNIFORM_VECTOR_F3",					( u32 )MOAIShaderUniform::UNIFORM_VECTOR_F3 );
 	state.SetField ( -1, "UNIFORM_VECTOR_F4",					( u32 )MOAIShaderUniform::UNIFORM_VECTOR_F4 );
 	
 	state.SetField ( -1, "GLOBAL_NONE",							( u32 )GLOBAL_NONE );
