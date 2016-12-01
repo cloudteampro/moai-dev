@@ -31,6 +31,8 @@ public:
 	
 	DECL_LUA_FACTORY ( MOAISpineSkeletonData )
 	
+	GET ( spSekeletonData*, SkeletonData, mSkeletonData )
+	
 	//----------------------------------------------------------------//
 					MOAISpineSkeletonData		();
 					~MOAISpineSkeletonData		();
