@@ -88,7 +88,7 @@ public:
 					MOAISpineSkeleton		();
 					~MOAISpineSkeleton		();
 	
-	void			OnAnimationEvent		( int trackIndex, spEventType type, spEvent* event, int loopCount );
+	void			OnAnimationEvent		( int trackIndex, spEventType type, spEvent* event );
 	void			RegisterLuaClass		( MOAILuaState& state );
 	void			RegisterLuaFuncs		( MOAILuaState& state );
 	void			SetAnimation			( int trackId, cc8* name, bool loop );

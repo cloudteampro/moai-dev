@@ -148,14 +148,14 @@ void MOAISpineBone::OnDepNodeUpdate () {
 		// spine now uses proper scale inheritance, so some things can be done differently
 		// (maybe drop that bone hierarchy thingy alltogether)
 		mLocalToWorldMtx.ScRoTr (
-			mBone->scaleX,
-			mBone->scaleY,
+			mBone->ascaleX,
+			mBone->ascaleY,
 			1.0f,
 			0.0f,
 			0.0f,
-			( mBone->appliedRotation ) * ( float )D2R,
-			mBone->x,
-			mBone->y,
+			( mBone->arotation ) * ( float )D2R,
+			mBone->ax,
+			mBone->ay,
 			0.0f
 		);
 		

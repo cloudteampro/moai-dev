@@ -10,8 +10,8 @@
 //================================================================//
 // Spine event listener
 //================================================================//
-static void callback (spAnimationState* state, int trackIndex, spEventType type, spEvent* event, int loopCount) {
-	((MOAISpineSkeleton*) state->rendererObject )->OnAnimationEvent ( trackIndex, type, event, loopCount );
+static void callback ( spAnimationState* state, spEventType type, spTrackEntry* entry, spEvent* event ) {
+	(( MOAISpineSkeleton* )state->rendererObject )->OnAnimationEvent ( entry->trackIndex, type, event );
 }
 
 //================================================================//
@@ -561,7 +561,7 @@ int MOAISpineSkeleton::_setTime ( lua_State *L ) {
 	
 	spTrackEntry* trackEntry = spAnimationState_getCurrent ( self->mAnimationState, trackId );
 	if ( trackEntry ) {
-		trackEntry->time = time;
+		trackEntry->trackTime = time;
 	}
 	return 0;
 }
@@ -808,7 +808,7 @@ MOAISpineSkeleton::~MOAISpineSkeleton () {
 }
 
 //----------------------------------------------------------------//
-void MOAISpineSkeleton::OnAnimationEvent ( int trackIndex, spEventType type, spEvent* event, int loopCount ) {
+void MOAISpineSkeleton::OnAnimationEvent ( int trackIndex, spEventType type, spEvent* event ) {
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 	switch ( type ) {
 		case SP_ANIMATION_START:
@@ -828,8 +828,7 @@ void MOAISpineSkeleton::OnAnimationEvent ( int trackIndex, spEventType type, spE
 		case SP_ANIMATION_COMPLETE:
 			if ( this->PushListenerAndSelf ( EVENT_ANIMATION_COMPLETE, state) ) {
 				state.Push ( trackIndex );
-				state.Push ( loopCount );
-				state.DebugCall ( 3, 0 );
+				state.DebugCall ( 2, 0 );
 			}
 			break;
 			

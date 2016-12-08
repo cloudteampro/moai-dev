@@ -942,6 +942,9 @@
 		206BA0471BDE92D60021D349 /* CTUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTUtil.h; sourceTree = "<group>"; };
 		206BA0481BDE92D60021D349 /* host.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = host.cpp; sourceTree = "<group>"; };
 		206BA0491BDE92D60021D349 /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = host.h; sourceTree = "<group>"; };
+		208CEC781DF9A08700C5D096 /* SkeletonBinary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkeletonBinary.h; sourceTree = "<group>"; };
+		208CECB31DF9A0A000C5D096 /* kvec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kvec.h; sourceTree = "<group>"; };
+		208CECB41DF9A0A000C5D096 /* SkeletonBinary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SkeletonBinary.c; sourceTree = "<group>"; };
 		2090B66B1BEBA40A0057A676 /* libmoai-ios-unityads.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios-unityads.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2090B6A71BEBA4830057A676 /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = host.h; sourceTree = "<group>"; };
 		2090B6A81BEBA4830057A676 /* host.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = host.mm; sourceTree = "<group>"; };
@@ -1523,6 +1526,7 @@
 				20F75D871D3FD3630050B737 /* Skeleton.h */,
 				20F75D881D3FD3630050B737 /* SkeletonBounds.h */,
 				20F75D891D3FD3630050B737 /* SkeletonData.h */,
+				208CEC781DF9A08700C5D096 /* SkeletonBinary.h */,
 				20F75D8A1D3FD3630050B737 /* SkeletonJson.h */,
 				20F75D8B1D3FD3630050B737 /* Skin.h */,
 				20F75D8C1D3FD3630050B737 /* Slot.h */,
@@ -1563,12 +1567,14 @@
 				20F75DA41D3FD3630050B737 /* IkConstraintData.c */,
 				20F75DA51D3FD3630050B737 /* Json.c */,
 				20F75DA61D3FD3630050B737 /* Json.h */,
+				208CECB31DF9A0A000C5D096 /* kvec.h */,
 				20F75DA71D3FD3630050B737 /* MeshAttachment.c */,
 				20F75DA81D3FD3630050B737 /* PathAttachment.c */,
 				20F75DA91D3FD3630050B737 /* PathConstraint.c */,
 				20F75DAA1D3FD3630050B737 /* PathConstraintData.c */,
 				20F75DAB1D3FD3630050B737 /* RegionAttachment.c */,
 				20F75DAC1D3FD3630050B737 /* Skeleton.c */,
+				208CECB41DF9A0A000C5D096 /* SkeletonBinary.c */,
 				20F75DAD1D3FD3630050B737 /* SkeletonBounds.c */,
 				20F75DAE1D3FD3630050B737 /* SkeletonData.c */,
 				20F75DAF1D3FD3630050B737 /* SkeletonJson.c */,
