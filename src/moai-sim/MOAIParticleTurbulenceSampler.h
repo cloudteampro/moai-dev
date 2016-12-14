@@ -18,16 +18,16 @@ private:
 	bool			mWrap;
 
 	//----------------------------------------------------------------//
-	float		GetLuma							( MOAIImage& image, int x, int y );
+	float			GetLuma							( MOAIImage& image, int x, int y );
 
 public:
 	
 	//----------------------------------------------------------------//
-	void		Clear							();
-	ZLVec2D		Eval							( const ZLVec2D& loc );
-	void		GenerateFromImage				( MOAIImage& image, bool wrap );
-				MOAIParticleTurbulenceSampler	();
-				~MOAIParticleTurbulenceSampler	();
+	void			Clear							();
+	ZLVec2D			Eval							( const ZLVec2D& loc );
+	void			GenerateFromImage				( MOAIImage& image, bool wrap );
+					MOAIParticleTurbulenceSampler	();
+					~MOAIParticleTurbulenceSampler	();
 };
 
 #endif

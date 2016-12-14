@@ -28,7 +28,7 @@ private:
 	u32			mType;
 	ZLVec3D		mVec;
 
-	ZLVec3D		mWorldLoc;	
+	ZLVec3D		mWorldLoc;
 	ZLVec3D		mWorldVec;
 
 	// attractor coefficients
