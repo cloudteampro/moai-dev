@@ -3000,6 +3000,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
+				STRIP_STYLE = all;
 				VALIDATE_PRODUCT = YES;
 				WARNING_CFLAGS = (
 					"-Wall",
@@ -3012,6 +3013,7 @@
 		203DA5831BDF92C700EC109A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/crashlytics;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
@@ -3040,6 +3042,9 @@
 				);
 				PRODUCT_NAME = "moai-ios-crashlytics";
 				SDKROOT = iphoneos;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 				WARNING_CFLAGS = "-w";
 			};
 			name = Debug;
@@ -3047,6 +3052,7 @@
 		203DA5841BDF92C700EC109A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/crashlytics;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
@@ -3075,6 +3081,7 @@
 				);
 				PRODUCT_NAME = "moai-ios-crashlytics";
 				SDKROOT = iphoneos;
+				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
 			};
 			name = Release;
@@ -3082,6 +3089,7 @@
 		203DA5851BDF92C700EC109A /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/crashlytics;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
@@ -3110,6 +3118,9 @@
 				);
 				PRODUCT_NAME = "moai-ios-crashlytics";
 				SDKROOT = iphoneos;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 				WARNING_CFLAGS = "-w";
 			};
 			name = AdHoc;
@@ -3117,6 +3128,7 @@
 		203DA5861BDF92C700EC109A /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/crashlytics;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
@@ -3145,6 +3157,7 @@
 				);
 				PRODUCT_NAME = "moai-ios-crashlytics";
 				SDKROOT = iphoneos;
+				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
 			};
 			name = Distribution;
@@ -3152,6 +3165,7 @@
 		2049B9501CAA8C8B005B83B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/crashlytics;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
@@ -3180,6 +3194,9 @@
 				);
 				PRODUCT_NAME = moai_ios_adtoapp;
 				SDKROOT = iphoneos;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 				WARNING_CFLAGS = "-w";
 			};
 			name = Debug;
@@ -3187,6 +3204,7 @@
 		2049B9511CAA8C8B005B83B3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/crashlytics;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
@@ -3215,6 +3233,7 @@
 				);
 				PRODUCT_NAME = moai_ios_adtoapp;
 				SDKROOT = iphoneos;
+				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
 			};
 			name = Release;
@@ -3222,6 +3241,7 @@
 		2049B9521CAA8C8B005B83B3 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/crashlytics;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
@@ -3250,6 +3270,9 @@
 				);
 				PRODUCT_NAME = moai_ios_adtoapp;
 				SDKROOT = iphoneos;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 				WARNING_CFLAGS = "-w";
 			};
 			name = AdHoc;
@@ -3257,6 +3280,7 @@
 		2049B9531CAA8C8B005B83B3 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/crashlytics;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
@@ -3285,6 +3309,7 @@
 				);
 				PRODUCT_NAME = moai_ios_adtoapp;
 				SDKROOT = iphoneos;
+				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
 			};
 			name = Distribution;
@@ -3293,6 +3318,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -3325,6 +3351,9 @@
 				);
 				PRODUCT_NAME = "moai-osx-spine";
 				SDKROOT = macosx;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 				WARNING_CFLAGS = "-w";
 			};
 			name = Debug;
@@ -3333,6 +3362,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -3365,6 +3395,7 @@
 				);
 				PRODUCT_NAME = "moai-osx-spine";
 				SDKROOT = macosx;
+				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
 			};
 			name = Release;
@@ -3373,6 +3404,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -3405,6 +3437,9 @@
 				);
 				PRODUCT_NAME = "moai-osx-spine";
 				SDKROOT = macosx;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 				WARNING_CFLAGS = "-w";
 			};
 			name = AdHoc;
@@ -3413,6 +3448,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -3445,6 +3481,7 @@
 				);
 				PRODUCT_NAME = "moai-osx-spine";
 				SDKROOT = macosx;
+				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
 			};
 			name = Distribution;
@@ -3452,6 +3489,7 @@
 		206B9ACB1BDAB5000021D349 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -3479,6 +3517,9 @@
 				);
 				PRODUCT_NAME = "moai-ios-spine";
 				SDKROOT = iphoneos;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 				WARNING_CFLAGS = "-w";
 			};
 			name = Debug;
@@ -3486,6 +3527,7 @@
 		206B9ACC1BDAB5000021D349 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -3513,6 +3555,7 @@
 				);
 				PRODUCT_NAME = "moai-ios-spine";
 				SDKROOT = iphoneos;
+				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
 			};
 			name = Release;
@@ -3520,6 +3563,7 @@
 		206B9ACD1BDAB5000021D349 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -3547,6 +3591,9 @@
 				);
 				PRODUCT_NAME = "moai-ios-spine";
 				SDKROOT = iphoneos;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 				WARNING_CFLAGS = "-w";
 			};
 			name = AdHoc;
@@ -3554,6 +3601,7 @@
 		206B9ACE1BDAB5000021D349 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -3581,6 +3629,7 @@
 				);
 				PRODUCT_NAME = "moai-ios-spine";
 				SDKROOT = iphoneos;
+				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
 			};
 			name = Distribution;
@@ -3588,6 +3637,7 @@
 		206B9B031BDAB53D0021D349 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -3615,6 +3665,9 @@
 				);
 				PRODUCT_NAME = "moai-ios-fmod-studio";
 				SDKROOT = iphoneos;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 				WARNING_CFLAGS = "-w";
 			};
 			name = Debug;
@@ -3622,6 +3675,7 @@
 		206B9B041BDAB53D0021D349 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -3649,6 +3703,7 @@
 				);
 				PRODUCT_NAME = "moai-ios-fmod-studio";
 				SDKROOT = iphoneos;
+				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
 			};
 			name = Release;
@@ -3656,6 +3711,7 @@
 		206B9B051BDAB53D0021D349 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -3683,6 +3739,9 @@
 				);
 				PRODUCT_NAME = "moai-ios-fmod-studio";
 				SDKROOT = iphoneos;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 				WARNING_CFLAGS = "-w";
 			};
 			name = AdHoc;
@@ -3690,6 +3749,7 @@
 		206B9B061BDAB53D0021D349 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -3717,6 +3777,7 @@
 				);
 				PRODUCT_NAME = "moai-ios-fmod-studio";
 				SDKROOT = iphoneos;
+				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
 			};
 			name = Distribution;
@@ -3725,6 +3786,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -3757,6 +3819,9 @@
 				);
 				PRODUCT_NAME = "moai-osx-fmod-studio";
 				SDKROOT = macosx;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 				WARNING_CFLAGS = "-w";
 			};
 			name = Debug;
@@ -3765,6 +3830,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -3797,6 +3863,7 @@
 				);
 				PRODUCT_NAME = "moai-osx-fmod-studio";
 				SDKROOT = macosx;
+				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
 			};
 			name = Release;
@@ -3805,6 +3872,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -3837,6 +3905,9 @@
 				);
 				PRODUCT_NAME = "moai-osx-fmod-studio";
 				SDKROOT = macosx;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 				WARNING_CFLAGS = "-w";
 			};
 			name = AdHoc;
@@ -3845,6 +3916,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -3877,6 +3949,7 @@
 				);
 				PRODUCT_NAME = "moai-osx-fmod-studio";
 				SDKROOT = macosx;
+				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
 			};
 			name = Distribution;
@@ -3884,36 +3957,54 @@
 		206B9CF31BDABA590021D349 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 			};
 			name = Debug;
 		};
 		206B9CF41BDABA590021D349 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SEPARATE_STRIP = YES;
+				STRIP_STYLE = debugging;
 			};
 			name = Release;
 		};
 		206B9CF51BDABA590021D349 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 			};
 			name = AdHoc;
 		};
 		206B9CF61BDABA590021D349 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SEPARATE_STRIP = YES;
+				STRIP_STYLE = debugging;
 			};
 			name = Distribution;
 		};
 		206B9CFF1BDABB250021D349 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 			};
 			name = Debug;
@@ -3921,8 +4012,11 @@
 		206B9D001BDABB250021D349 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SEPARATE_STRIP = YES;
+				STRIP_STYLE = debugging;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 			};
 			name = Release;
@@ -3930,8 +4024,12 @@
 		206B9D011BDABB250021D349 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 			};
 			name = AdHoc;
@@ -3939,8 +4037,11 @@
 		206B9D021BDABB250021D349 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SEPARATE_STRIP = YES;
+				STRIP_STYLE = debugging;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 			};
 			name = Distribution;
@@ -3948,6 +4049,7 @@
 		206B9D161BDE37C80021D349 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -3975,6 +4077,9 @@
 				);
 				PRODUCT_NAME = "moai-ios-ct-util";
 				SDKROOT = iphoneos;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 				WARNING_CFLAGS = "-w";
 			};
 			name = Debug;
@@ -3982,6 +4087,7 @@
 		206B9D171BDE37C80021D349 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -4009,6 +4115,7 @@
 				);
 				PRODUCT_NAME = "moai-ios-ct-util";
 				SDKROOT = iphoneos;
+				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
 			};
 			name = Release;
@@ -4016,6 +4123,7 @@
 		206B9D181BDE37C80021D349 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -4043,6 +4151,9 @@
 				);
 				PRODUCT_NAME = "moai-ios-ct-util";
 				SDKROOT = iphoneos;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 				WARNING_CFLAGS = "-w";
 			};
 			name = AdHoc;
@@ -4050,6 +4161,7 @@
 		206B9D191BDE37C80021D349 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -4077,6 +4189,7 @@
 				);
 				PRODUCT_NAME = "moai-ios-ct-util";
 				SDKROOT = iphoneos;
+				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
 			};
 			name = Distribution;
@@ -4085,6 +4198,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -4117,6 +4231,9 @@
 				);
 				PRODUCT_NAME = "moai-osx-ct-util";
 				SDKROOT = macosx;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 				WARNING_CFLAGS = "-w";
 			};
 			name = Debug;
@@ -4125,6 +4242,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -4157,6 +4275,7 @@
 				);
 				PRODUCT_NAME = "moai-osx-ct-util";
 				SDKROOT = macosx;
+				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
 			};
 			name = Release;
@@ -4165,6 +4284,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -4197,6 +4317,9 @@
 				);
 				PRODUCT_NAME = "moai-osx-ct-util";
 				SDKROOT = macosx;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 				WARNING_CFLAGS = "-w";
 			};
 			name = AdHoc;
@@ -4205,6 +4328,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -4237,6 +4361,7 @@
 				);
 				PRODUCT_NAME = "moai-osx-ct-util";
 				SDKROOT = macosx;
+				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
 			};
 			name = Distribution;
@@ -4244,6 +4369,7 @@
 		2090B6671BEBA40A0057A676 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/unity-ads";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
@@ -4272,6 +4398,9 @@
 				);
 				PRODUCT_NAME = "moai-ios-unityads";
 				SDKROOT = iphoneos;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 				WARNING_CFLAGS = "-w";
 			};
 			name = Debug;
@@ -4279,6 +4408,7 @@
 		2090B6681BEBA40A0057A676 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/unity-ads";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
@@ -4307,6 +4437,7 @@
 				);
 				PRODUCT_NAME = "moai-ios-unityads";
 				SDKROOT = iphoneos;
+				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
 			};
 			name = Release;
@@ -4314,6 +4445,7 @@
 		2090B6691BEBA40A0057A676 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/unity-ads";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
@@ -4342,6 +4474,9 @@
 				);
 				PRODUCT_NAME = "moai-ios-unityads";
 				SDKROOT = iphoneos;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 				WARNING_CFLAGS = "-w";
 			};
 			name = AdHoc;
@@ -4349,6 +4484,7 @@
 		2090B66A1BEBA40A0057A676 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/unity-ads";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
@@ -4377,6 +4513,7 @@
 				);
 				PRODUCT_NAME = "moai-ios-unityads";
 				SDKROOT = iphoneos;
+				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
 			};
 			name = Distribution;
@@ -4384,6 +4521,7 @@
 		20F75CDD1D3FD31B0050B737 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -4411,6 +4549,9 @@
 				);
 				PRODUCT_NAME = "moai-ios-spine-v3";
 				SDKROOT = iphoneos;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 				WARNING_CFLAGS = "-w";
 			};
 			name = Debug;
@@ -4418,6 +4559,7 @@
 		20F75CDE1D3FD31B0050B737 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -4445,6 +4587,7 @@
 				);
 				PRODUCT_NAME = "moai-ios-spine-v3";
 				SDKROOT = iphoneos;
+				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
 			};
 			name = Release;
@@ -4452,6 +4595,7 @@
 		20F75CDF1D3FD31B0050B737 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -4479,6 +4623,9 @@
 				);
 				PRODUCT_NAME = "moai-ios-spine-v3";
 				SDKROOT = iphoneos;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 				WARNING_CFLAGS = "-w";
 			};
 			name = AdHoc;
@@ -4486,6 +4633,7 @@
 		20F75CE01D3FD31B0050B737 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -4513,6 +4661,7 @@
 				);
 				PRODUCT_NAME = "moai-ios-spine-v3";
 				SDKROOT = iphoneos;
+				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
 			};
 			name = Distribution;
@@ -4521,6 +4670,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -4553,6 +4703,9 @@
 				);
 				PRODUCT_NAME = "moai-osx-spine-v3";
 				SDKROOT = macosx;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 				WARNING_CFLAGS = "-w";
 			};
 			name = Debug;
@@ -4561,6 +4714,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -4593,6 +4747,7 @@
 				);
 				PRODUCT_NAME = "moai-osx-spine-v3";
 				SDKROOT = macosx;
+				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
 			};
 			name = Release;
@@ -4601,6 +4756,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -4633,6 +4789,9 @@
 				);
 				PRODUCT_NAME = "moai-osx-spine-v3";
 				SDKROOT = macosx;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 				WARNING_CFLAGS = "-w";
 			};
 			name = AdHoc;
@@ -4641,6 +4800,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -4673,6 +4833,7 @@
 				);
 				PRODUCT_NAME = "moai-osx-spine-v3";
 				SDKROOT = macosx;
+				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
 			};
 			name = Distribution;
@@ -4814,6 +4975,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
+				STRIP_STYLE = all;
 				VALIDATE_PRODUCT = YES;
 				WARNING_CFLAGS = (
 					"-Wall",
@@ -4960,6 +5122,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
+				STRIP_STYLE = all;
 				VALIDATE_PRODUCT = YES;
 				WARNING_CFLAGS = (
 					"-Wall",
@@ -5106,6 +5269,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
+				STRIP_STYLE = all;
 				VALIDATE_PRODUCT = YES;
 				WARNING_CFLAGS = (
 					"-Wall",
