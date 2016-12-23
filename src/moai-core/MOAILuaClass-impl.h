@@ -64,6 +64,12 @@ MOAILuaFactoryClass < TYPE >& MOAILuaFactoryClass < TYPE >::Get () {
 
 //----------------------------------------------------------------//
 template < typename TYPE >
+u32 MOAILuaFactoryClass < TYPE >::GetTypeID () {
+	return ZLTypeID < TYPE >::GetID ();
+}
+
+//----------------------------------------------------------------//
+template < typename TYPE >
 MOAILuaFactoryClass < TYPE >::MOAILuaFactoryClass () {
 	this->mIsSingleton = false;
 }
@@ -117,6 +123,12 @@ int MOAILuaSingletonClass < TYPE >::_getTypeID ( lua_State* L ) {
 template < typename TYPE >
 MOAILuaSingletonClass < TYPE >& MOAILuaSingletonClass < TYPE >::Get () {
 	return *MOAIGlobalsMgr::Get ()->AffirmGlobal < MOAILuaSingletonClass >();
+}
+
+//----------------------------------------------------------------//
+template < typename TYPE >
+u32 MOAILuaSingletonClass < TYPE >::GetTypeID () {
+	return ZLTypeID < TYPE >::GetID ();
 }
 
 //----------------------------------------------------------------//

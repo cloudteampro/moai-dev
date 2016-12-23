@@ -60,6 +60,7 @@ public:
 
 	//----------------------------------------------------------------//
 	virtual MOAILuaObject*	GetSingleton			();
+	virtual u32				GetTypeID				() = 0;
 	bool					IsSingleton				();
 	virtual void			Register				() = 0;
 							MOAILuaClass			();
@@ -86,6 +87,7 @@ public:
 	
 	//----------------------------------------------------------------//
 	static MOAILuaFactoryClass&		Get						();
+	u32								GetTypeID				();
 									MOAILuaFactoryClass		();
 	void							Register				();
 };
@@ -111,6 +113,7 @@ public:
 	//----------------------------------------------------------------//
 	static MOAILuaSingletonClass&	Get						();
 	MOAILuaObject*					GetSingleton			();
+	u32								GetTypeID				();
 									MOAILuaSingletonClass	();
 	void							Register				();
 
