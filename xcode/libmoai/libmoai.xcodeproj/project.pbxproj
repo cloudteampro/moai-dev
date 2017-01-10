@@ -5647,8 +5647,6 @@
 		7A9C05161E24283B00264308 /* SDL_config_winrt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_config_winrt.h; path = "../../3rdparty/sdl2-2.0.5/include/SDL_config_winrt.h"; sourceTree = "<group>"; };
 		7A9C05171E24283B00264308 /* SDL_config_wiz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_config_wiz.h; path = "../../3rdparty/sdl2-2.0.5/include/SDL_config_wiz.h"; sourceTree = "<group>"; };
 		7A9C05181E24283B00264308 /* SDL_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_config.h; path = "../../3rdparty/sdl2-2.0.5/include/SDL_config.h"; sourceTree = "<group>"; };
-		7A9C05191E24283B00264308 /* SDL_config.h.cmake */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SDL_config.h.cmake; path = "../../3rdparty/sdl2-2.0.5/include/SDL_config.h.cmake"; sourceTree = "<group>"; };
-		7A9C051A1E24283B00264308 /* SDL_config.h.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SDL_config.h.in; path = "../../3rdparty/sdl2-2.0.5/include/SDL_config.h.in"; sourceTree = "<group>"; };
 		7A9C051B1E24283B00264308 /* SDL_copying.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_copying.h; path = "../../3rdparty/sdl2-2.0.5/include/SDL_copying.h"; sourceTree = "<group>"; };
 		7A9C051C1E24283B00264308 /* SDL_cpuinfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_cpuinfo.h; path = "../../3rdparty/sdl2-2.0.5/include/SDL_cpuinfo.h"; sourceTree = "<group>"; };
 		7A9C051D1E24283B00264308 /* SDL_egl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL_egl.h; path = "../../3rdparty/sdl2-2.0.5/include/SDL_egl.h"; sourceTree = "<group>"; };
@@ -12330,8 +12328,6 @@
 				7A9C05161E24283B00264308 /* SDL_config_winrt.h */,
 				7A9C05171E24283B00264308 /* SDL_config_wiz.h */,
 				7A9C05181E24283B00264308 /* SDL_config.h */,
-				7A9C05191E24283B00264308 /* SDL_config.h.cmake */,
-				7A9C051A1E24283B00264308 /* SDL_config.h.in */,
 				7A9C051B1E24283B00264308 /* SDL_copying.h */,
 				7A9C051C1E24283B00264308 /* SDL_cpuinfo.h */,
 				7A9C051D1E24283B00264308 /* SDL_egl.h */,

@@ -6,6 +6,7 @@
 #include <string.h>
 
 #include <moai-core/host.h>
+#include <zl-util/ZLLeanArray.h>
 #include <host-modules/aku_modules.h>
 
 #ifdef MOAI_OS_WINDOWS
@@ -21,7 +22,10 @@
 
 #include "SDLHost.h"
 #include "SDLJoystick.h"
+#include "SDLGameController.h"
 #include "SDLKeyCodeMapping.h"
+
+#define MAX_GAME_CONTROLLERS 4
 
 #ifdef __APPLE__
 #include <CoreFoundation/CoreFoundation.h>
@@ -279,8 +283,6 @@ void SetScreenDpi() {
 
 }
 
-#define MAX_CONTROLLERS 4
-
 //----------------------------------------------------------------//
 void MainLoop () {
 
@@ -306,25 +308,20 @@ void MainLoop () {
 
 	SDL_GameControllerAddMappingsFromFile("gamecontrollerdb.txt");
 
-	SDL_GameController *ControllerHandles[MAX_CONTROLLERS];
+	ZLLeanArray < GameController > gameControllers;
+	gameControllers.Init ( MAX_GAME_CONTROLLERS );
 
-    int MaxJoysticks = SDL_NumJoysticks();
-
-	int cIndex = 0;
-	for(int i=0; i < MaxJoysticks; ++i)
+	int gcIndex = 0;
+	for ( int i = 0; i < SDL_NumJoysticks(); ++i )
 	{
 	    if (!SDL_IsGameController(i))
-	    {
 	        continue;
-	    }
 
-	    if (cIndex >= MAX_CONTROLLERS)
-	    {
+	    if (gcIndex >= MAX_GAME_CONTROLLERS)
 	        break;
-	    }
 
-	    ControllerHandles[cIndex] = SDL_GameControllerOpen( i );
-	    cIndex++;
+	    gameControllers[ i ].Open( i );
+	    gcIndex++;
 	}
 
 	Uint32 lastFrame = SDL_GetTicks();
@@ -414,17 +411,63 @@ void MainLoop () {
 					// break;
 
 				case SDL_CONTROLLERDEVICEADDED:
-					printf("controller added %d\n", sdlEvent.cdevice.which);
+					{
+						printf("controller added %d\n", sdlEvent.cdevice.which);
+						int id = sdlEvent.cdevice.which;
+						
+						if( SDL_IsGameController( id ) ) {
+							for (int i = 0; i < MAX_GAME_CONTROLLERS; ++i)
+							{
+								if (!gameControllers[i].isOpen())
+								{
+									gameControllers[i].Open( id );
+									break;
+								}
+							}
+					    }
+					}
 					break;
 				case SDL_CONTROLLERDEVICEREMOVED:
-					printf("controller removed %d\n", sdlEvent.cdevice.which);
+					{
+						printf("controller removed %d\n", sdlEvent.cdevice.which);
+						int id = sdlEvent.cdevice.which;
+						for (int i = 0; i < MAX_GAME_CONTROLLERS; ++i)
+						{
+							if (gameControllers[i].isMe( id ))
+							{
+								gameControllers[i].Close();
+								break;
+							}
+						}
+					}
 					break;
 				case SDL_CONTROLLERBUTTONDOWN:
 				case SDL_CONTROLLERBUTTONUP:
-					printf("controller button which:%d button:%d state:%d\n", sdlEvent.cbutton.which, sdlEvent.cbutton.button, sdlEvent.cbutton.state);
+					{
+						int id = sdlEvent.cbutton.which;
+						for (int i = 0; i < MAX_GAME_CONTROLLERS; ++i)
+						{
+							if (gameControllers[i].isMe( id ))
+							{
+								printf("%d controller button which:%d button:%d state:%d\n", i, sdlEvent.cbutton.which, sdlEvent.cbutton.button, sdlEvent.cbutton.state);
+								break;
+							}
+						}
+					}
+					
 					break;
 				case SDL_CONTROLLERAXISMOTION:
-					printf("controller axis which:%d axis:%d value:%d\n", sdlEvent.caxis.which, sdlEvent.caxis.axis, sdlEvent.caxis.value);
+					{
+						int id = sdlEvent.cbutton.which;
+						for (int i = 0; i < MAX_GAME_CONTROLLERS; ++i)
+						{
+							if (gameControllers[i].isMe( id ))
+							{
+								printf("%d controller axis which:%d axis:%d value:%d\n", i, sdlEvent.caxis.which, sdlEvent.caxis.axis, sdlEvent.caxis.value);
+								break;
+							}
+						}
+					}
 					break;
 
 				case SDL_MOUSEMOTION:
