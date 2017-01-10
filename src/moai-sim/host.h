@@ -62,6 +62,7 @@ AKU_API void			AKUSetInputDeviceButton			( int deviceID, int sensorID, char cons
 AKU_API void			AKUSetInputDeviceCompass		( int deviceID, int sensorID, char const* name );
 AKU_API void			AKUSetInputDeviceKeyboard		( int deviceID, int sensorID, char const* name );
 AKU_API void			AKUSetInputDeviceJoystick		( int deviceID, int sensorID, char const* name );
+AKU_API void			AKUSetInputDeviceAxis			( int deviceID, int sensorID, char const* name );
 AKU_API void			AKUSetInputDeviceLevel			( int deviceID, int sensorID, char const* name );
 AKU_API void			AKUSetInputDeviceLocation		( int deviceID, int sensorID, char const* name );
 AKU_API void			AKUSetInputDevicePointer		( int deviceID, int sensorID, char const* name );
