@@ -61,49 +61,47 @@ namespace InputSensorID {
 
 namespace InputControllerSensorID {
 	enum {
-	    BUTTON_A,
-	    BUTTON_B,
-	    BUTTON_X,
-	    BUTTON_Y,
-	    BUTTON_BACK,
-	    BUTTON_GUIDE,
-	    BUTTON_START,
-	    BUTTON_LEFTSTICK,
-	    BUTTON_RIGHTSTICK,
-	    BUTTON_LEFTSHOULDER,
-	    BUTTON_RIGHTSHOULDER,
-	    BUTTON_UP,
-	    BUTTON_DOWN,
-	    BUTTON_LEFT,
-	    BUTTON_RIGHT,
-		TOTAL_BUTTON,
+		BUTTON_A = 0,
+		BUTTON_B,
+		BUTTON_X,
+		BUTTON_Y,
+		BUTTON_BACK,
+		BUTTON_GUIDE,
+		BUTTON_START,
+		BUTTON_LEFTSTICK,
+		BUTTON_RIGHTSTICK,
+		BUTTON_LEFTSHOULDER,
+		BUTTON_RIGHTSHOULDER,
+		BUTTON_UP,
+		BUTTON_DOWN,
+		BUTTON_LEFT,
+		BUTTON_RIGHT,
 		AXIS_LEFT,
-	    AXIS_RIGHT,
-	    AXIS_TRIGGER,
-	    TOTAL,
+		AXIS_RIGHT,
+		AXIS_TRIGGER,
+		TOTAL,
 	};
 }
 
 const char* CONTROLLER_EVENT_NAMES[] = {
-	"a",
-    "b",
-    "x",
-    "y",
-    "back",
-    "guide",
-    "start",
-    "leftStick",
-    "rightStick",
-    "leftShoulder",
-    "rightShoulder",
-    "up",
-    "down",
-    "left",
-    "right",
-    "",
-	"axisLeft",
-    "axisRight",
-    "axisTrigger", // left - x, right - y
+		"a",
+		"b",
+		"x",
+		"y",
+		"back",
+		"guide",
+		"start",
+		"leftStick",
+		"rightStick",
+		"leftShoulder",
+		"rightShoulder",
+		"up",
+		"down",
+		"left",
+		"right",
+		"axisLeft",
+		"axisRight",
+		"axisTrigger", // left - x, right - y
 };
 
 static SDL_Window* sWindow = 0;
@@ -240,32 +238,32 @@ void Init ( int argc, char** argv ) {
 	AKUSetInputDeviceWheel			( InputDeviceID::DEVICE, InputSensorID::MOUSE_WHEEL,	"mouseWheel" );
 	// AKUSetInputDeviceJoystick       ( InputDeviceID::DEVICE, InputSensorID::JOYSTICK,	    "joystick" );
 
-	AKUReserveInputDeviceSensors	( InputDeviceID::GAMEPAD1, InputControllerSensorID::TOTAL - 1 );
-	for ( int i = 0; i < InputControllerSensorID::TOTAL_BUTTON; ++i )
+	AKUReserveInputDeviceSensors	( InputDeviceID::GAMEPAD1, InputControllerSensorID::TOTAL );
+	for ( int i = 0; i <= InputControllerSensorID::BUTTON_RIGHT; ++i )
 		AKUSetInputDeviceButton		( InputDeviceID::GAMEPAD1, i, CONTROLLER_EVENT_NAMES[i] );
-	for ( int i = InputControllerSensorID::TOTAL_BUTTON + 1; i < InputControllerSensorID::TOTAL; ++i )
-		AKUSetInputDeviceJoystick	( InputDeviceID::GAMEPAD1, i - 1, CONTROLLER_EVENT_NAMES[i] );
+	for ( int i = InputControllerSensorID::AXIS_LEFT; i < InputControllerSensorID::TOTAL; ++i )
+		AKUSetInputDeviceJoystick	( InputDeviceID::GAMEPAD1, i, CONTROLLER_EVENT_NAMES[i] );
 	AKUSetInputDeviceActive			( InputDeviceID::GAMEPAD1, false );
 
-	AKUReserveInputDeviceSensors	( InputDeviceID::GAMEPAD2, InputControllerSensorID::TOTAL - 1 );
-	for ( int i = 0; i < InputControllerSensorID::TOTAL_BUTTON; ++i )
+	AKUReserveInputDeviceSensors	( InputDeviceID::GAMEPAD2, InputControllerSensorID::TOTAL );
+	for ( int i = 0; i <= InputControllerSensorID::BUTTON_RIGHT; ++i )
 		AKUSetInputDeviceButton		( InputDeviceID::GAMEPAD2, i, CONTROLLER_EVENT_NAMES[i] );
-	for ( int i = InputControllerSensorID::TOTAL_BUTTON + 1; i < InputControllerSensorID::TOTAL; ++i )
-		AKUSetInputDeviceJoystick	( InputDeviceID::GAMEPAD2, i - 1, CONTROLLER_EVENT_NAMES[i] );
+	for ( int i = InputControllerSensorID::AXIS_LEFT; i < InputControllerSensorID::TOTAL; ++i )
+		AKUSetInputDeviceJoystick	( InputDeviceID::GAMEPAD2, i, CONTROLLER_EVENT_NAMES[i] );
 	AKUSetInputDeviceActive			( InputDeviceID::GAMEPAD2, false );
 
-	AKUReserveInputDeviceSensors	( InputDeviceID::GAMEPAD3, InputControllerSensorID::TOTAL - 1 );
-	for ( int i = 0; i < InputControllerSensorID::TOTAL_BUTTON; ++i )
+	AKUReserveInputDeviceSensors	( InputDeviceID::GAMEPAD3, InputControllerSensorID::TOTAL );
+	for ( int i = 0; i <= InputControllerSensorID::BUTTON_RIGHT; ++i )
 		AKUSetInputDeviceButton		( InputDeviceID::GAMEPAD3, i, CONTROLLER_EVENT_NAMES[i] );
-	for ( int i = InputControllerSensorID::TOTAL_BUTTON + 1; i < InputControllerSensorID::TOTAL; ++i )
-		AKUSetInputDeviceJoystick	( InputDeviceID::GAMEPAD3, i - 1, CONTROLLER_EVENT_NAMES[i] );
+	for ( int i = InputControllerSensorID::AXIS_LEFT; i < InputControllerSensorID::TOTAL; ++i )
+		AKUSetInputDeviceJoystick	( InputDeviceID::GAMEPAD3, i, CONTROLLER_EVENT_NAMES[i] );
 	AKUSetInputDeviceActive			( InputDeviceID::GAMEPAD3, false );
 
-	AKUReserveInputDeviceSensors	( InputDeviceID::GAMEPAD4, InputControllerSensorID::TOTAL - 1 );
-	for ( int i = 0; i < InputControllerSensorID::TOTAL_BUTTON; ++i )
+	AKUReserveInputDeviceSensors	( InputDeviceID::GAMEPAD4, InputControllerSensorID::TOTAL );
+	for ( int i = 0; i <= InputControllerSensorID::BUTTON_RIGHT; ++i )
 		AKUSetInputDeviceButton		( InputDeviceID::GAMEPAD4, i, CONTROLLER_EVENT_NAMES[i] );
-	for ( int i = InputControllerSensorID::TOTAL_BUTTON + 1; i < InputControllerSensorID::TOTAL; ++i )
-		AKUSetInputDeviceJoystick	( InputDeviceID::GAMEPAD4, i - 1, CONTROLLER_EVENT_NAMES[i] );
+	for ( int i = InputControllerSensorID::AXIS_LEFT; i < InputControllerSensorID::TOTAL; ++i )
+		AKUSetInputDeviceJoystick	( InputDeviceID::GAMEPAD4, i, CONTROLLER_EVENT_NAMES[i] );
 	AKUSetInputDeviceActive			( InputDeviceID::GAMEPAD4, false );
 
 	AKUSetFunc_EnterFullscreenMode ( _AKUEnterFullscreenModeFunc );
@@ -551,7 +549,7 @@ void MainLoop () {
 							if (gameControllers[i].isMe( id ))
 							{
 								const GameController::AXIS_MOTION & axis = gameControllers[i].getAxis( sdlEvent );
-								int sensorID = InputControllerSensorID::TOTAL_BUTTON + axis.id;
+								int sensorID = InputControllerSensorID::AXIS_LEFT + axis.id;
 								AKUEnqueueJoystickEvent ( InputDeviceID::GAMEPAD1 + i, sensorID, axis.x, axis.y );
 								break;
 							}

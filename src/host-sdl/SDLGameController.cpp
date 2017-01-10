@@ -87,9 +87,9 @@ const GameController::AXIS_MOTION & GameController::getAxis( const SDL_Event & e
 {
     float value = 0.0f;
 
-    if( event.caxis.value > JOYSTICK_DEAD_ZONE or event.caxis.value < -JOYSTICK_DEAD_ZONE )
+    if( event.caxis.value > JOYSTICK_DEAD_ZONE || event.caxis.value < -JOYSTICK_DEAD_ZONE )
     {
-        value = (float) event.caxis.value / (float) JOYSTICK_AXIS_MAX;    
+        value = (float) event.caxis.value / (float) JOYSTICK_AXIS_MAX; 
     }
 
     if (event.caxis.axis == 0)
