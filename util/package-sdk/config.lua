@@ -2,9 +2,9 @@ COMMON = {
 	
 	[ '3rdparty/LICENSE' ]							= true,
 
-	[ '3rdparty/sdl2-2.0.0/COPYING.txt' ]			= true,
-	[ '3rdparty/sdl2-2.0.0/CREDITS.txt' ]			= true,
-	[ '3rdparty/sdl2-2.0.0/include' ]				= true,
+	[ '3rdparty/sdl2-2.0.5/COPYING.txt' ]			= true,
+	[ '3rdparty/sdl2-2.0.5/CREDITS.txt' ]			= true,
+	[ '3rdparty/sdl2-2.0.5/include' ]				= true,
 
 	[ 'src/host-modules' ]							= true,
 	[ 'src/host-sdl' ]								= true,

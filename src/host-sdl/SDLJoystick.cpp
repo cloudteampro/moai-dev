@@ -17,7 +17,7 @@ Joystick::~Joystick() {
 
 
 bool Joystick::Open() {
-        
+
     sdl_joystick = SDL_JoystickOpen(index);
 
     if ( sdl_joystick == NULL ) {

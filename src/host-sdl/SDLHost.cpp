@@ -279,25 +279,52 @@ void SetScreenDpi() {
 
 }
 
+#define MAX_CONTROLLERS 4
+
 //----------------------------------------------------------------//
 void MainLoop () {
 
-	// TODO: array's of Joysticks
-	Joystick * joystick0 = NULL;
+	// // TODO: array's of Joysticks
+	// Joystick * joystick0 = NULL;
 
-	if ( SDL_NumJoysticks() < 1 ) {
+	// if ( SDL_NumJoysticks() < 1 ) {
 		
-		std::cerr << "No Joysticks connected." << std::endl;
+	// 	std::cerr << "No Joysticks connected." << std::endl;
 
-	} else {
+	// } else {
 		
-		joystick0 = new Joystick(0); // 0 == first joystick of system.
+	// 	joystick0 = new Joystick(0); // 0 == first joystick of system.
 
-		if ( joystick0->isOpen() || !joystick0->Open() )
-		{
-			delete joystick0;
-			joystick0 = NULL;
-		}
+	// 	printf("new joystick")
+
+	// 	if ( joystick0->isOpen() || !joystick0->Open() )
+	// 	{
+	// 		delete joystick0;
+	// 		joystick0 = NULL;
+	// 	}
+	// }
+
+	SDL_GameControllerAddMappingsFromFile("gamecontrollerdb.txt");
+
+	SDL_GameController *ControllerHandles[MAX_CONTROLLERS];
+
+    int MaxJoysticks = SDL_NumJoysticks();
+
+	int cIndex = 0;
+	for(int i=0; i < MaxJoysticks; ++i)
+	{
+	    if (!SDL_IsGameController(i))
+	    {
+	        continue;
+	    }
+
+	    if (cIndex >= MAX_CONTROLLERS)
+	    {
+	        break;
+	    }
+
+	    ControllerHandles[cIndex] = SDL_GameControllerOpen( i );
+	    cIndex++;
 	}
 
 	Uint32 lastFrame = SDL_GetTicks();
@@ -377,15 +404,27 @@ void MainLoop () {
 					 * SDL_JOYDEVICEADDED	joystick connected
 					 * SDL_JOYDEVICEREMOVED	joystick disconnected
 					 * */
-				case SDL_JOYAXISMOTION:
-						
+
+				// case SDL_JOYAXISMOTION:
 						//TODO: array's of Joysticks
+						// if ( sdlEvent.jaxis.which == 0 /* what joystick? */  && joystick0 != NULL ) {
+      //                       const Joystick::AXIS_MOTION & axis = joystick0->HandleAxisMotion(sdlEvent);
+					 //        AKUEnqueueJoystickEvent ( InputDeviceID::DEVICE, InputSensorID::JOYSTICK, axis.x, axis.y );
+						// }
+					// break;
 
-						if ( sdlEvent.jaxis.which == 0 /* what joystick? */  && joystick0 != NULL ) {
-
-                            const Joystick::AXIS_MOTION & axis = joystick0->HandleAxisMotion(sdlEvent);
-					        AKUEnqueueJoystickEvent ( InputDeviceID::DEVICE, InputSensorID::JOYSTICK, axis.x, axis.y );
-						}
+				case SDL_CONTROLLERDEVICEADDED:
+					printf("controller added %d\n", sdlEvent.cdevice.which);
+					break;
+				case SDL_CONTROLLERDEVICEREMOVED:
+					printf("controller removed %d\n", sdlEvent.cdevice.which);
+					break;
+				case SDL_CONTROLLERBUTTONDOWN:
+				case SDL_CONTROLLERBUTTONUP:
+					printf("controller button which:%d button:%d state:%d\n", sdlEvent.cbutton.which, sdlEvent.cbutton.button, sdlEvent.cbutton.state);
+					break;
+				case SDL_CONTROLLERAXISMOTION:
+					printf("controller axis which:%d axis:%d value:%d\n", sdlEvent.caxis.which, sdlEvent.caxis.axis, sdlEvent.caxis.value);
 					break;
 
 				case SDL_MOUSEMOTION:

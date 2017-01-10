@@ -15,6 +15,7 @@
 		0300CF94140DC65100ABCC5B /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0300CF93140DC65100ABCC5B /* AudioUnit.framework */; };
 		4C623B6415246B10008E4436 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C623B6315246B10008E4436 /* Foundation.framework */; };
 		4C623B6615246B25008E4436 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C623B6515246B25008E4436 /* CoreServices.framework */; };
+		7A3667201E24C9C600DAB3D7 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A36671F1E24C9C600DAB3D7 /* CoreVideo.framework */; };
 		CD096FD218E0FFE300A36EDD /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD096FD118E0FFE300A36EDD /* libstdc++.dylib */; };
 		CD1845BD1A626F0300FCCCE0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1845BC1A626F0300FCCCE0 /* SystemConfiguration.framework */; };
 		CD323B071A8040CB00E2FEBB /* SDLJoystick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD323B031A8040CB00E2FEBB /* SDLJoystick.cpp */; };
@@ -610,6 +611,7 @@
 		4C623B6315246B10008E4436 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		4C623B6515246B25008E4436 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		66D9680B14047B7100017919 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = ../../../../../../../usr/lib/libz.dylib; sourceTree = "<group>"; };
+		7A36671F1E24C9C600DAB3D7 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		CD096FD118E0FFE300A36EDD /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		CD1845BC1A626F0300FCCCE0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CD323B031A8040CB00E2FEBB /* SDLJoystick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SDLJoystick.cpp; path = "../../src/host-sdl/SDLJoystick.cpp"; sourceTree = "<group>"; };
@@ -680,6 +682,7 @@
 				0300CF67140DC53C00ABCC5B /* Carbon.framework in Frameworks */,
 				CD795EF217F08E4B006AEB47 /* Cocoa.framework in Frameworks */,
 				CD795EF417F08F4E006AEB47 /* CoreAudio.framework in Frameworks */,
+				7A3667201E24C9C600DAB3D7 /* CoreVideo.framework in Frameworks */,
 				0300CF66140DC53C00ABCC5B /* CoreFoundation.framework in Frameworks */,
 				4C623B6615246B25008E4436 /* CoreServices.framework in Frameworks */,
 				CD795EF617F08F86006AEB47 /* ForceFeedback.framework in Frameworks */,
@@ -716,6 +719,7 @@
 		CD2FDE8613542E9F00B814DF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7A36671F1E24C9C600DAB3D7 /* CoreVideo.framework */,
 				CDFD8FA11AD8653C0003F415 /* libmoai-osx-3rdparty-core.a */,
 				CDFD8FA21AD8653C0003F415 /* libmoai-osx-3rdparty-crypto.a */,
 				CDFD8FA31AD8653C0003F415 /* libmoai-osx-3rdparty-sdl.a */,
@@ -1539,7 +1543,7 @@
 					"\"../../src\"",
 					"\"../../src/config\"",
 					"\"../../src/config-default\"",
-					"\"../../3rdparty/sdl2-2.0.0/include\"",
+					"\"../../3rdparty/sdl2-2.0.5/include\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				SDKROOT = macosx;
@@ -1598,7 +1602,7 @@
 					"\"../../src\"",
 					"\"../../src/config\"",
 					"\"../../src/config-default\"",
-					"\"../../3rdparty/sdl2-2.0.0/include\"",
+					"\"../../3rdparty/sdl2-2.0.5/include\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				ONLY_ACTIVE_ARCH = YES;
