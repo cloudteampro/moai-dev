@@ -1,127 +1,120 @@
 
 #include "SDLGameController.h"
 
+//----------------------------------------------------------------//
+GameController::GameController () :
+    mIndex ( 0 ),
+    mJoyId ( 0 ),
+    mGameController ( NULL ),
+    mJoystick ( NULL ) {
 
-GameController::GameController() :
-    index(0),
-    jID(0),
-    sdl_gamecontroller(NULL),
-    sdl_joystick(NULL)
-{
-    left_axis_motion.id = 0;
-    right_axis_motion.id = 1;
-    trigger_axis_motion.id = 2;
+    mLeftAxis.id = 0;
+    mRightAxis.id = 1;
+    mTriggerAxis.id = 2;
 }
 
+//----------------------------------------------------------------//
+GameController::~GameController () {
+}
 
-GameController::~GameController()
-{ }
+//----------------------------------------------------------------//
+bool GameController::Open ( const int idx ) {
 
-bool GameController::Open(const int idx)
-{
-    index = idx;
+    mIndex = idx;
 
-    sdl_gamecontroller = SDL_GameControllerOpen( index );
+    mGameController = SDL_GameControllerOpen ( mIndex );
 
-    if ( sdl_gamecontroller ) {
+    if ( mGameController ) {
 
-        sdl_joystick = SDL_GameControllerGetJoystick( sdl_gamecontroller );
+        mJoystick = SDL_GameControllerGetJoystick ( mGameController );
 
-        if ( sdl_joystick == NULL ) {
+        if ( mJoystick == NULL ) {
             std::cerr << "Unable to open joystick" << std::endl;
             return false;
         }
 
-        jID = SDL_JoystickInstanceID( sdl_joystick );
-
-        // std::cerr << "Open game controller " << index << " for joystick " << jID << std::endl;
+        mJoyId = SDL_JoystickInstanceID ( mJoystick );
 
         return true;
     }
-    else
-    {
+    else {
         std::cerr << "Unable to open game controller" << std::endl;
     }
 
     return false;
 }
 
-void GameController::Close() {
+//----------------------------------------------------------------//
+void GameController::Close () {
 
-    if ( sdl_gamecontroller ) {
+    if ( mGameController ) {
 
-        // std::cerr << "Close game controller " << index << " for joystick " << jID << std::endl;
+        SDL_GameControllerClose ( mGameController );
 
-        SDL_GameControllerClose(sdl_gamecontroller);
+        mGameController = NULL;
+        mJoystick = NULL;
 
-        sdl_gamecontroller = NULL;
-        sdl_joystick = NULL;
+        mIndex = -1;
+        mJoyId = -1;
 
-        index = -1;
-        jID = -1;
-
-        left_axis_motion.x = 0.0f;
-        left_axis_motion.y = 0.0f;
-        right_axis_motion.x = 0.0f;
-        right_axis_motion.y = 0.0f;
-        trigger_axis_motion.x = 0.0f;
-        trigger_axis_motion.y = 0.0f;
+        mLeftAxis.x = 0.0f;
+        mLeftAxis.y = 0.0f;
+        mRightAxis.x = 0.0f;
+        mRightAxis.y = 0.0f;
+        mTriggerAxis.x = 0.0f;
+        mTriggerAxis.y = 0.0f;
     }
 }
 
-bool GameController::isOpen() const {
+//----------------------------------------------------------------//
+bool GameController::isOpen () const {
 
-    if ( NULL != sdl_gamecontroller && NULL != sdl_joystick ) {
+    if ( NULL != mGameController && NULL != mJoystick ) {
         return true;
     }
 
     return false;
 }
 
-bool GameController::isMe(const int id)
-{
-    return isOpen() && id == (int)jID;
+//----------------------------------------------------------------//
+bool GameController::isMe ( const int id ) {
+    
+    return isOpen() && id == ( int ) mJoyId;
 }
 
-const GameController::AXIS_MOTION GameController::getAxis( const SDL_Event & event )
-{
+//----------------------------------------------------------------//
+const GameController::AXIS GameController::getAxis ( const SDL_Event & event ) {
+
     float value = 0.0f;
 
-    if( event.caxis.value > JOYSTICK_DEAD_ZONE || event.caxis.value < -JOYSTICK_DEAD_ZONE )
-    {
-        value = (float) event.caxis.value / (float) JOYSTICK_AXIS_MAX; 
+    if ( event.caxis.value > JOYSTICK_DEAD_ZONE || event.caxis.value < -JOYSTICK_DEAD_ZONE ) {
+        value = ( float ) event.caxis.value / ( float ) JOYSTICK_AXIS_MAX; 
     }
 
-    if (event.caxis.axis == 0)
-    {
-        left_axis_motion.x = value;
-        return left_axis_motion;
+    if ( event.caxis.axis == 0 ) {
+        mLeftAxis.x = value;
+        return mLeftAxis;
     }
-    else if (event.caxis.axis == 1)
-    {
-        left_axis_motion.y = value;
-        return left_axis_motion;
+    else if ( event.caxis.axis == 1 ) {
+        mLeftAxis.y = value;
+        return mLeftAxis;
     }
-    else if (event.caxis.axis == 2)
-    {
-        right_axis_motion.x = value;
-        return right_axis_motion;
+    else if ( event.caxis.axis == 2 ) {
+        mRightAxis.x = value;
+        return mRightAxis;
     }
-    else if (event.caxis.axis == 3)
-    {
-        right_axis_motion.y = value;
-        return right_axis_motion;
+    else if ( event.caxis.axis == 3 ) {
+        mRightAxis.y = value;
+        return mRightAxis;
     }
-    else if (event.caxis.axis == 4)
-    {
-        trigger_axis_motion.x = value;
-        return trigger_axis_motion;
+    else if ( event.caxis.axis == 4 ) {
+        mTriggerAxis.x = value;
+        return mTriggerAxis;
     }
-    else if (event.caxis.axis == 5)
-    {
-        trigger_axis_motion.y = value;
-        return trigger_axis_motion;
+    else if ( event.caxis.axis == 5 ) {
+        mTriggerAxis.y = value;
+        return mTriggerAxis;
     }
 
-    return left_axis_motion;
+    return mLeftAxis;
 }

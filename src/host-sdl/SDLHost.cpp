@@ -21,7 +21,6 @@
 #include <SDL.h>
 
 #include "SDLHost.h"
-#include "SDLJoystick.h"
 #include "SDLGameController.h"
 #include "SDLKeyCodeMapping.h"
 
@@ -53,7 +52,7 @@ namespace InputSensorID {
 		MOUSE_MIDDLE,
 		MOUSE_RIGHT,
 		MOUSE_WHEEL,
-		// JOYSTICK,
+//		JOYSTICK,
 //		TOUCH,
 		TOTAL,
 	};
@@ -223,51 +222,59 @@ void Init ( int argc, char** argv ) {
     SetScreenDpi();
 
 	AKUReserveInputDevices			( InputDeviceID::TOTAL );
-	AKUSetInputDevice				( InputDeviceID::DEVICE, "device" );
-	AKUSetInputDevice				( InputDeviceID::GAMEPAD1, "gamepad1" );
-	AKUSetInputDevice				( InputDeviceID::GAMEPAD2, "gamepad2" );
-	AKUSetInputDevice				( InputDeviceID::GAMEPAD3, "gamepad3" );
-	AKUSetInputDevice				( InputDeviceID::GAMEPAD4, "gamepad4" );
+	AKUSetInputDevice				( InputDeviceID::DEVICE, 	"device" );
+	AKUSetInputDevice				( InputDeviceID::GAMEPAD1, 	"gamepad1" );
+	AKUSetInputDevice				( InputDeviceID::GAMEPAD2, 	"gamepad2" );
+	AKUSetInputDevice				( InputDeviceID::GAMEPAD3, 	"gamepad3" );
+	AKUSetInputDevice				( InputDeviceID::GAMEPAD4, 	"gamepad4" );
 
-	AKUReserveInputDeviceSensors	( InputDeviceID::DEVICE, InputSensorID::TOTAL );
-	AKUSetInputDeviceKeyboard		( InputDeviceID::DEVICE, InputSensorID::KEYBOARD,		"keyboard" );
-	AKUSetInputDevicePointer		( InputDeviceID::DEVICE, InputSensorID::POINTER,		"pointer" );
-	AKUSetInputDeviceButton			( InputDeviceID::DEVICE, InputSensorID::MOUSE_LEFT,		"mouseLeft" );
-	AKUSetInputDeviceButton			( InputDeviceID::DEVICE, InputSensorID::MOUSE_MIDDLE,	"mouseMiddle" );
-	AKUSetInputDeviceButton			( InputDeviceID::DEVICE, InputSensorID::MOUSE_RIGHT,	"mouseRight" );
-	AKUSetInputDeviceWheel			( InputDeviceID::DEVICE, InputSensorID::MOUSE_WHEEL,	"mouseWheel" );
+	AKUReserveInputDeviceSensors	( InputDeviceID::DEVICE, 	InputSensorID::TOTAL );
+	AKUSetInputDeviceKeyboard		( InputDeviceID::DEVICE, 	InputSensorID::KEYBOARD,	"keyboard" );
+	AKUSetInputDevicePointer		( InputDeviceID::DEVICE, 	InputSensorID::POINTER,		"pointer" );
+	AKUSetInputDeviceButton			( InputDeviceID::DEVICE, 	InputSensorID::MOUSE_LEFT,	"mouseLeft" );
+	AKUSetInputDeviceButton			( InputDeviceID::DEVICE, 	InputSensorID::MOUSE_MIDDLE,"mouseMiddle" );
+	AKUSetInputDeviceButton			( InputDeviceID::DEVICE, 	InputSensorID::MOUSE_RIGHT,	"mouseRight" );
+	AKUSetInputDeviceWheel			( InputDeviceID::DEVICE, 	InputSensorID::MOUSE_WHEEL,	"mouseWheel" );
 	// AKUSetInputDeviceJoystick       ( InputDeviceID::DEVICE, InputSensorID::JOYSTICK,	    "joystick" );
 
-	AKUReserveInputDeviceSensors	( InputDeviceID::GAMEPAD1, InputControllerSensorID::TOTAL );
-	for ( int i = 0; i <= InputControllerSensorID::BUTTON_RIGHT; ++i )
-		AKUSetInputDeviceButton		( InputDeviceID::GAMEPAD1, i, CONTROLLER_EVENT_NAMES[i] );
-	for ( int i = InputControllerSensorID::AXIS_LEFT; i < InputControllerSensorID::TOTAL; ++i )
-		AKUSetInputDeviceJoystick	( InputDeviceID::GAMEPAD1, i, CONTROLLER_EVENT_NAMES[i] );
-	AKUSetInputDeviceActive			( InputDeviceID::GAMEPAD1, false );
+	AKUReserveInputDeviceSensors	( InputDeviceID::GAMEPAD1, 	InputControllerSensorID::TOTAL );
+	for ( int i = 0; i <= InputControllerSensorID::BUTTON_RIGHT; ++i ) {
+		AKUSetInputDeviceButton		( InputDeviceID::GAMEPAD1, 	i,	CONTROLLER_EVENT_NAMES [ i ] );
+	}
+	for ( int i = InputControllerSensorID::AXIS_LEFT; i < InputControllerSensorID::TOTAL; ++i ) {
+		AKUSetInputDeviceJoystick	( InputDeviceID::GAMEPAD1, 	i,	CONTROLLER_EVENT_NAMES [ i ] );
+	}
+	AKUSetInputDeviceActive			( InputDeviceID::GAMEPAD1, 	false );
 
-	AKUReserveInputDeviceSensors	( InputDeviceID::GAMEPAD2, InputControllerSensorID::TOTAL );
-	for ( int i = 0; i <= InputControllerSensorID::BUTTON_RIGHT; ++i )
-		AKUSetInputDeviceButton		( InputDeviceID::GAMEPAD2, i, CONTROLLER_EVENT_NAMES[i] );
-	for ( int i = InputControllerSensorID::AXIS_LEFT; i < InputControllerSensorID::TOTAL; ++i )
-		AKUSetInputDeviceJoystick	( InputDeviceID::GAMEPAD2, i, CONTROLLER_EVENT_NAMES[i] );
-	AKUSetInputDeviceActive			( InputDeviceID::GAMEPAD2, false );
+	AKUReserveInputDeviceSensors	( InputDeviceID::GAMEPAD2, 	InputControllerSensorID::TOTAL );
+	for ( int i = 0; i <= InputControllerSensorID::BUTTON_RIGHT; ++i ) {
+		AKUSetInputDeviceButton		( InputDeviceID::GAMEPAD2, 	i, 	CONTROLLER_EVENT_NAMES [ i ] );
+	}
+	for ( int i = InputControllerSensorID::AXIS_LEFT; i < InputControllerSensorID::TOTAL; ++i ) {
+		AKUSetInputDeviceJoystick	( InputDeviceID::GAMEPAD2, 	i, 	CONTROLLER_EVENT_NAMES [ i ] );
+	}
+	AKUSetInputDeviceActive			( InputDeviceID::GAMEPAD2, 	false );
 
 	AKUReserveInputDeviceSensors	( InputDeviceID::GAMEPAD3, InputControllerSensorID::TOTAL );
-	for ( int i = 0; i <= InputControllerSensorID::BUTTON_RIGHT; ++i )
-		AKUSetInputDeviceButton		( InputDeviceID::GAMEPAD3, i, CONTROLLER_EVENT_NAMES[i] );
-	for ( int i = InputControllerSensorID::AXIS_LEFT; i < InputControllerSensorID::TOTAL; ++i )
-		AKUSetInputDeviceJoystick	( InputDeviceID::GAMEPAD3, i, CONTROLLER_EVENT_NAMES[i] );
-	AKUSetInputDeviceActive			( InputDeviceID::GAMEPAD3, false );
+	for ( int i = 0; i <= InputControllerSensorID::BUTTON_RIGHT; ++i ) {
+		AKUSetInputDeviceButton		( InputDeviceID::GAMEPAD3, 	i, 	CONTROLLER_EVENT_NAMES [ i ] );
+	}
+	for ( int i = InputControllerSensorID::AXIS_LEFT; i < InputControllerSensorID::TOTAL; ++i ) {
+		AKUSetInputDeviceJoystick	( InputDeviceID::GAMEPAD3, 	i, 	CONTROLLER_EVENT_NAMES [ i ] );
+	}
+	AKUSetInputDeviceActive			( InputDeviceID::GAMEPAD3, 	false );
 
 	AKUReserveInputDeviceSensors	( InputDeviceID::GAMEPAD4, InputControllerSensorID::TOTAL );
-	for ( int i = 0; i <= InputControllerSensorID::BUTTON_RIGHT; ++i )
-		AKUSetInputDeviceButton		( InputDeviceID::GAMEPAD4, i, CONTROLLER_EVENT_NAMES[i] );
-	for ( int i = InputControllerSensorID::AXIS_LEFT; i < InputControllerSensorID::TOTAL; ++i )
-		AKUSetInputDeviceJoystick	( InputDeviceID::GAMEPAD4, i, CONTROLLER_EVENT_NAMES[i] );
-	AKUSetInputDeviceActive			( InputDeviceID::GAMEPAD4, false );
+	for ( int i = 0; i <= InputControllerSensorID::BUTTON_RIGHT; ++i ) {
+		AKUSetInputDeviceButton		( InputDeviceID::GAMEPAD4, i, 	CONTROLLER_EVENT_NAMES [ i ] );
+	}
+	for ( int i = InputControllerSensorID::AXIS_LEFT; i < InputControllerSensorID::TOTAL; ++i ) {
+		AKUSetInputDeviceJoystick	( InputDeviceID::GAMEPAD4, 	i, 	CONTROLLER_EVENT_NAMES [ i ] );
+	}
+	AKUSetInputDeviceActive			( InputDeviceID::GAMEPAD4, 	false );
 
-	AKUSetFunc_EnterFullscreenMode ( _AKUEnterFullscreenModeFunc );
-	AKUSetFunc_ExitFullscreenMode ( _AKUExitFullscreenModeFunc );
+	AKUSetFunc_EnterFullscreenMode 	( _AKUEnterFullscreenModeFunc );
+	AKUSetFunc_ExitFullscreenMode 	( _AKUExitFullscreenModeFunc );
 
 	AKUSetFunc_ShowCursor ( _AKUShowCursor );
 	AKUSetFunc_HideCursor ( _AKUHideCursor );
@@ -282,7 +289,8 @@ void Init ( int argc, char** argv ) {
 			if (bref == NULL || CFBundleGetIdentifier(bref) == NULL) {
 	AKUModulesParseArgs ( argc, argv );
 	
-			} else {
+			} 
+			else {
 			
 					CFURLRef bundleurl = CFBundleCopyResourcesDirectoryURL(bref);
 					assert(bundleurl != NULL);
@@ -367,46 +375,24 @@ void SetScreenDpi() {
 //----------------------------------------------------------------//
 void MainLoop () {
 
-	// // TODO: array's of Joysticks
-	// Joystick * joystick0 = NULL;
-
-	// if ( SDL_NumJoysticks() < 1 ) {
-		
-	// 	std::cerr << "No Joysticks connected." << std::endl;
-
-	// } else {
-		
-	// 	joystick0 = new Joystick(0); // 0 == first joystick of system.
-
-	// 	printf("new joystick")
-
-	// 	if ( joystick0->isOpen() || !joystick0->Open() )
-	// 	{
-	// 		delete joystick0;
-	// 		joystick0 = NULL;
-	// 	}
-	// }
-
-	SDL_GameControllerAddMappingsFromFile("gamecontrollerdb.txt");
+	SDL_GameControllerAddMappingsFromFile ( "gamecontrollerdb.txt" );
 
 	ZLLeanArray < GameController > gameControllers;
 	gameControllers.Init ( MAX_GAME_CONTROLLERS );
 
 	int gcIndex = 0;
-	for ( int i = 0; i < SDL_NumJoysticks(); ++i )
-	{
-	    if ( !SDL_IsGameController( i ) )
-	        continue;
+	for ( int i = 0; i < SDL_NumJoysticks (); ++i ) {
 
-	    if ( gcIndex >= MAX_GAME_CONTROLLERS )
-	        break;
+	    if ( !SDL_IsGameController ( i )) continue;
 
-	    gameControllers[ i ].Open( i );
-	    AKUSetInputDeviceActive( InputDeviceID::GAMEPAD1 + i, true );
+	    if ( gcIndex >= MAX_GAME_CONTROLLERS ) break;
+
+	    gameControllers [ i ].Open ( i );
+	    AKUSetInputDeviceActive ( InputDeviceID::GAMEPAD1 + i, true );
 	    gcIndex++;
 	}
 
-	Uint32 lastFrame = SDL_GetTicks();
+	Uint32 lastFrame = SDL_GetTicks ();
 	
 	bool running = true;
 	while ( running ) {
@@ -484,78 +470,74 @@ void MainLoop () {
 					 * SDL_JOYDEVICEREMOVED	joystick disconnected
 					 * */
 
-				// case SDL_JOYAXISMOTION:
-						//TODO: array's of Joysticks
-						// if ( sdlEvent.jaxis.which == 0 /* what joystick? */  && joystick0 != NULL ) {
-      //                       const Joystick::AXIS_MOTION & axis = joystick0->HandleAxisMotion(sdlEvent);
-					 //        AKUEnqueueJoystickEvent ( InputDeviceID::DEVICE, InputSensorID::JOYSTICK, axis.x, axis.y );
-						// }
-					// break;
+				case SDL_CONTROLLERDEVICEADDED: {
 
-				case SDL_CONTROLLERDEVICEADDED:
-					{
-						// printf("controller added %d\n", sdlEvent.cdevice.which);
-						int id = sdlEvent.cdevice.which;
-						if( SDL_IsGameController( id ) ) {
-							for (int i = 0; i < MAX_GAME_CONTROLLERS; ++i)
-							{
-								if (!gameControllers[i].isOpen())
-								{
-									gameControllers[i].Open( id );
-									AKUSetInputDeviceActive( InputDeviceID::GAMEPAD1 + i, true );
-									printf("MOAI: Controller added %d (%d)\n", i, id);
-									break;
-								}
-							}
-					    }
-					}
-					break;
-				case SDL_CONTROLLERDEVICEREMOVED:
-					{
-						// printf("controller removed %d\n", sdlEvent.cdevice.which);
-						int id = sdlEvent.cdevice.which;
-						for (int i = 0; i < MAX_GAME_CONTROLLERS; ++i)
-						{
-							if (gameControllers[i].isMe( id ))
-							{
-								AKUSetInputDeviceActive( InputDeviceID::GAMEPAD1 + i, false );
-								gameControllers[i].Close();
-								printf("MOAI: Controller removed %d (%d)\n", i, id);
+					int id = sdlEvent.cdevice.which;
+
+					if( SDL_IsGameController ( id ) ) {
+
+						for ( int i = 0; i < MAX_GAME_CONTROLLERS; ++i ) {
+
+							if ( !gameControllers [ i ].isOpen ()) {
+
+								gameControllers [ i ].Open ( id );
+								AKUSetInputDeviceActive ( InputDeviceID::GAMEPAD1 + i, true );
+								printf ( "MOAI: Controller added %d (%d)\n", i, id );
 								break;
 							}
 						}
-					}
-					break;
-				case SDL_CONTROLLERBUTTONDOWN:
-				case SDL_CONTROLLERBUTTONUP:
-					{
-						int id = sdlEvent.cbutton.which;
-						for (int i = 0; i < MAX_GAME_CONTROLLERS; ++i)
-						{
-							if (gameControllers[i].isMe( id ))
-							{
-								AKUEnqueueButtonEvent ( InputDeviceID::GAMEPAD1 + i, sdlEvent.cbutton.button, ( sdlEvent.cbutton.state == 1 ));
-								break;
-							}
-						}
-					}
+				    }
+				    break;
+				}
 					
-					break;
-				case SDL_CONTROLLERAXISMOTION:
-					{
-						int id = sdlEvent.caxis.which;
-						for (int i = 0; i < MAX_GAME_CONTROLLERS; ++i)
-						{
-							if (gameControllers[i].isMe( id ))
-							{
-								const GameController::AXIS_MOTION axis = gameControllers[i].getAxis( sdlEvent );
-								int sensorID = InputControllerSensorID::AXIS_LEFT + axis.id;
-								AKUEnqueueJoystickEvent ( InputDeviceID::GAMEPAD1 + i, sensorID, axis.x, axis.y );
-								break;
-							}
+				case SDL_CONTROLLERDEVICEREMOVED: {
+
+					int id = sdlEvent.cdevice.which;
+
+					for ( int i = 0; i < MAX_GAME_CONTROLLERS; ++i ) {
+
+						if (gameControllers [ i ].isMe ( id )) {
+
+							AKUSetInputDeviceActive ( InputDeviceID::GAMEPAD1 + i, false );
+							gameControllers [ i ].Close ();
+							printf ( "MOAI: Controller removed %d (%d)\n", i, id );
+							break;
 						}
 					}
 					break;
+				}
+					
+				case SDL_CONTROLLERBUTTONDOWN:
+				case SDL_CONTROLLERBUTTONUP: {
+
+					int id = sdlEvent.cbutton.which;
+
+					for ( int i = 0; i < MAX_GAME_CONTROLLERS; ++i ) {
+
+						if ( gameControllers [ i ].isMe ( id )) {
+
+							AKUEnqueueButtonEvent ( InputDeviceID::GAMEPAD1 + i, sdlEvent.cbutton.button, ( sdlEvent.cbutton.state == 1 ));
+							break;
+						}
+					}
+					break;
+				}
+					
+				case SDL_CONTROLLERAXISMOTION: {
+					int id = sdlEvent.caxis.which;
+
+					for ( int i = 0; i < MAX_GAME_CONTROLLERS; ++i ) {
+
+						if ( gameControllers [ i ].isMe ( id )) {
+
+							const GameController::AXIS axis = gameControllers [ i ].getAxis ( sdlEvent );
+							int sensorID = InputControllerSensorID::AXIS_LEFT + axis.id;
+							AKUEnqueueJoystickEvent ( InputDeviceID::GAMEPAD1 + i, sensorID, axis.x, axis.y );
+							break;
+						}
+					}
+					break;
+				}
 
 				case SDL_MOUSEMOTION:
 				
