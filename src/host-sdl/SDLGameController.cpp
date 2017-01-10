@@ -83,7 +83,7 @@ bool GameController::isMe(const int id)
     return isOpen() && id == (int)jID;
 }
 
-const GameController::AXIS_MOTION & GameController::getAxis( const SDL_Event & event )
+const GameController::AXIS_MOTION GameController::getAxis( const SDL_Event & event )
 {
     float value = 0.0f;
 

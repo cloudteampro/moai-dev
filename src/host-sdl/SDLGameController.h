@@ -31,7 +31,7 @@ class GameController
         bool isOpen() const;
         bool isMe(const int id);
 
-        const AXIS_MOTION & getAxis( const SDL_Event & event );
+        const AXIS_MOTION getAxis( const SDL_Event & event );
 
     private:
 

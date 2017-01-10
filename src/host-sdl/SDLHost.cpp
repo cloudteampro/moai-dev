@@ -548,7 +548,7 @@ void MainLoop () {
 						{
 							if (gameControllers[i].isMe( id ))
 							{
-								const GameController::AXIS_MOTION & axis = gameControllers[i].getAxis( sdlEvent );
+								const GameController::AXIS_MOTION axis = gameControllers[i].getAxis( sdlEvent );
 								int sensorID = InputControllerSensorID::AXIS_LEFT + axis.id;
 								AKUEnqueueJoystickEvent ( InputDeviceID::GAMEPAD1 + i, sensorID, axis.x, axis.y );
 								break;
