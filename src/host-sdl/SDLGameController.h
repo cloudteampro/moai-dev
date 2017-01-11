@@ -39,6 +39,7 @@ class GameController {
 
     public:
 
+        //----------------------------------------------------------------//
         explicit        GameController      ();
                         ~GameController     ();
                         GameController      ( const GameController& ) = delete;
