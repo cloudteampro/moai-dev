@@ -456,7 +456,7 @@ void MainLoop () {
 							const int32_t y = sdlEvent.wheel.y; 
 
 							//XXX: x or y ?
-							AKUEnqueueWheelEvent ( InputDeviceID::DEVICE, InputSensorID::MOUSE_WHEEL, y );
+							AKUEnqueueWheelEvent ( InputDeviceID::DEVICE, InputSensorID::MOUSE_WHEEL, ( float )y );
 						}
 					break;
 

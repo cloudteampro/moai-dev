@@ -1,10 +1,12 @@
 // Copyright (c) 2010-2011 Zipline Games, Inc. All Rights Reserved.
 // http://getmoai.com
 
-#ifndef MOAI_WITH_LUAJIT
 #include "pch.h"
-#include <lundump.h>
 #include <moai-util/MOAILuaUtil.h>
+
+SUPPRESS_EMPTY_FILE_WARNING
+
+#include <lundump.h>
 
 //================================================================//
 // MOAILuaHeader
@@ -208,7 +210,7 @@ void MOAILuaUtil::ConvertFunction ( const MOAILuaHeader& srcFormat, const MOAILu
 	s64 nInstructions = this->ConvertInt ( srcFormat, dstFormat, srcStream, dstStream ); // size of instruction list
 	
 	if ( srcFormat.mSizeOfInstruction == dstFormat.mSizeOfInstruction ) {
-		dstStream.WriteStream ( srcStream, nInstructions * srcFormat.mSizeOfInstruction );
+		dstStream.WriteStream ( srcStream, ( size_t )( nInstructions * srcFormat.mSizeOfInstruction ));
 	}
 	else {
 		for	( s64 i = 0; i < nInstructions; ++i ) {
@@ -292,5 +294,3 @@ void MOAILuaUtil::RegisterLuaClass ( MOAILuaState& state ) {
 void MOAILuaUtil::RegisterLuaFuncs ( MOAILuaState& state ) {
 	UNUSED ( state );
 }
-
-#endif 

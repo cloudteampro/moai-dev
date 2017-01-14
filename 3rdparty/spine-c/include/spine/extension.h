@@ -57,7 +57,9 @@
 /* Allocates a new char[], assigns it to TO, and copies FROM to it. Can be used on const types. */
 #define MALLOC_STR(TO,FROM) strcpy(CONST_CAST(char*, TO) = (char*)MALLOC(char, strlen(FROM) + 1), FROM)
 
-#define PI 3.1415926535897932385f
+#ifndef PI
+	#define PI 3.1415926535897932385f
+#endif
 #define DEG_RAD (PI / 180)
 #define RAD_DEG (180 / PI)
 

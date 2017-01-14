@@ -35,10 +35,13 @@ extern jmp_buf*				zl_set_assert_jmp_buf		( jmp_buf* env );
 #undef __assert
 #undef assert
 
-#if (defined(NDEBUG) && !defined(MOAI_KEEP_ASSERT))
-	#define __assert(x) (( void )0 )
-	#define assert(x) (( void )0 )
+#ifdef NDEBUG
+    //for vs2015 currently break command line build
+    //#define __assert(x) (( void )sizeof ( x ))
+    //#define assert(x) (( void )sizeof ( x ))
+    #define __assert(x) (( void ) 0 )
+	#define assert(x) (( void ) 0 )
 #else
-	#define __assert zl_assert
-	#define assert zl_assert
+    #define __assert zl_assert
+    #define assert zl_assert
 #endif

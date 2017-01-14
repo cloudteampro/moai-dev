@@ -139,7 +139,7 @@ static
 void read_n_values(float *array, TiXmlAttribute *attribute, int max, int *registers, int &size) {
 	for (int i = 0; i < max; ++i) {
 		if (attribute) {
-			array[i] = atof(attribute->Value());
+			array[i] = ( float )atof ( attribute->Value ());
 			if (array[i] != 0) {
 				if (registers) {
 					registers[i] = size++;
@@ -373,7 +373,7 @@ void  MOAIParticlePexPlugin::OnInit ( float* particle, float* registers)
 	if(mEmitterType == EMITTER_GRAVITY)
 	{
 		// for gravity emitters, use mAngle as a modifier on the angle computed from dy and dx.
-		angleStartDeg = (atan2f ( particle[MOAIParticle::PARTICLE_DY], particle[MOAIParticle::PARTICLE_DX] ) * R2D ) + mAngle;
+		angleStartDeg = ( float )( atan2f ( particle[MOAIParticle::PARTICLE_DY], particle[MOAIParticle::PARTICLE_DX] ) * R2D ) + mAngle;
 	}
 	else
 	{

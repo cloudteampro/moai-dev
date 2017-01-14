@@ -20,7 +20,7 @@ void MOAIDynamicGlyphCachePage::AffirmCanvas ( MOAIDynamicGlyphCache& owner, MOA
 	if ( !this->mImageTexture ) {
 		
 		this->mImageTexture = new MOAIImageTexture ();
-		this->mImageTexture->Init ( MAX_TEXTURE_SIZE, this->mRows.mSize, owner.mColorFormat, MOAIImage::TRUECOLOR );
+		this->mImageTexture->Init ( MAX_TEXTURE_SIZE, ( u32 )this->mRows.mSize, owner.mColorFormat, MOAIImage::TRUECOLOR );
 		this->mImageTexture->SetDebugName ( font.GetFilename ());
 		this->mImageTexture->SetFilter ( font.GetMinFilter (), font.GetMagFilter ());
 		this->mImageTexture->ClearBitmap ();
@@ -30,7 +30,7 @@ void MOAIDynamicGlyphCachePage::AffirmCanvas ( MOAIDynamicGlyphCache& owner, MOA
 	else if ( this->mImageTexture->MOAIImage::GetHeight () < this->mRows.mSize ) {
 		
 		ZLIntRect rect;
-		rect.Init ( 0, 0, MAX_TEXTURE_SIZE, this->mRows.mSize );
+		rect.Init ( 0, 0, MAX_TEXTURE_SIZE, ( int )this->mRows.mSize );
 		this->mImageTexture->ResizeCanvas ( *this->mImageTexture, rect );
 		this->mImageTexture->UpdateRegion ();
 	}
@@ -39,8 +39,8 @@ void MOAIDynamicGlyphCachePage::AffirmCanvas ( MOAIDynamicGlyphCache& owner, MOA
 //----------------------------------------------------------------//
 MOAIDynamicGlyphCachePage::GlyphSpan* MOAIDynamicGlyphCachePage::Alloc ( MOAIDynamicGlyphCache& owner, MOAIFont& font, MOAIGlyph& glyph ) {
 	
-	u32 width = ( u32 )glyph.mWidth + ( owner.mPadding.mXMax - owner.mPadding.mXMin );
-	u32 height = ( u32 )glyph.mHeight + ( owner.mPadding.mYMax - owner.mPadding.mYMin );
+	u32 width = ( u32 )(glyph.mWidth + ( owner.mPadding.mXMax - owner.mPadding.mXMin ));
+	u32 height = ( u32 )(glyph.mHeight + ( owner.mPadding.mYMax - owner.mPadding.mYMin ));
 	
 	RowSpan* rowIt = this->mRows.mHead;
 	RowSpan* bestRowIt = 0;
@@ -92,7 +92,7 @@ MOAIDynamicGlyphCachePage::GlyphSpan* MOAIDynamicGlyphCachePage::Alloc ( MOAIDyn
 	
 	GlyphSpan* glyphSpan = bestRowIt->mData.Alloc ( width );
 	if ( glyphSpan ) {
-		glyph.SetSourceLoc ( glyphSpan->mBase - owner.mPadding.mXMin, bestRowIt->mBase - owner.mPadding.mYMin);
+		glyph.SetSourceLoc (( u32 )(glyphSpan->mBase - ( size_t )owner.mPadding.mXMin), ( u32 )(bestRowIt->mBase - ( size_t )owner.mPadding.mYMin));
 	}
 	
 	this->AffirmCanvas ( owner, font );

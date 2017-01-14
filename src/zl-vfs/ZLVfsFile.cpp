@@ -343,7 +343,7 @@ int ZLVfsFile::TryLock () {
 		return ftrylockfile(this->mPtr.mFile);
 	#endif
 	}
-	
+	return 1;
 }
 
 //----------------------------------------------------------------//
@@ -356,7 +356,7 @@ void ZLVfsFile::Unlock () {
 			olp.Offset = 0;
 			olp.OffsetHigh = 0;
 			olp.hEvent = 0;
-			BOOL res = UnlockFileEx((HANDLE)_get_osfhandle(_fileno(this->mPtr.mFile)),  0, 0, 0, &olp);
+			UnlockFileEx(( HANDLE )_get_osfhandle( _fileno( this->mPtr.mFile )),  0, 0, 0, &olp );
 		#else
 			funlockfile ( this->mPtr.mFile );
 		#endif

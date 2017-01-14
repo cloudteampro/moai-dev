@@ -4,8 +4,10 @@
 #ifndef	ZLMATHCONSTS_H
 #define	ZLMATHCONSTS_H
 
+#ifndef PI
+	#define PI		M_PI
+#endif
 
-#define PI			M_PI
 #define TWOPI		( M_PI * 2 )
 #define HALFPI		M_PI_2
 #define FORTPI		M_PI_4

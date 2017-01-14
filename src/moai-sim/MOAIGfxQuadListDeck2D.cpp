@@ -450,12 +450,12 @@ ZLBox MOAIGfxQuadListDeck2D::GetItemBounds ( u32 idx ) {
 bool MOAIGfxQuadListDeck2D::Inside ( u32 idx, MOAIMaterialBatch& materials, u32 granularity, ZLVec3D vec, float pad ) {
 	UNUSED ( pad );
 
-	u32 size = this->mSprites.Size ();
+	u32 size = ( u32 )this->mSprites.Size ();
 	if ( size ) {
 	
 		idx = ( idx - 1 ) % size;
 		
-		ZLRect rect;
+		//ZLRect rect;
 		USSprite& sprite = this->mSprites [ idx ];
 		
 		for ( u32 i	 = 0; i < sprite.mTotalPairs; ++i ) {
