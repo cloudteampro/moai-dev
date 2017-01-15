@@ -13,6 +13,8 @@
 		0300CF68140DC53C00ABCC5B /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CC7B0613DF7F0F00F2DEDE /* IOKit.framework */; };
 		0300CF7B140DC61000ABCC5B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0300CF7A140DC61000ABCC5B /* AudioToolbox.framework */; };
 		0300CF94140DC65100ABCC5B /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0300CF93140DC65100ABCC5B /* AudioUnit.framework */; };
+		200159311E2A47BD00C4B645 /* SDLGameController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2001592F1E2A47BD00C4B645 /* SDLGameController.cpp */; };
+		200159331E2A515000C4B645 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 200159321E2A515000C4B645 /* CoreVideo.framework */; };
 		20662B551C53A016004D0132 /* libmoai-osx-fmod-studio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20662B501C539EE6004D0132 /* libmoai-osx-fmod-studio.a */; };
 		20662B5C1C53A033004D0132 /* libmoai-osx-image-jpg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20662B581C53A033004D0132 /* libmoai-osx-image-jpg.a */; };
 		20662B5D1C53A033004D0132 /* libmoai-osx-image-png.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20662B591C53A033004D0132 /* libmoai-osx-image-png.a */; };
@@ -145,6 +147,9 @@
 		07CC7AF913DF7E9B00F2DEDE /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
 		07CC7AFF13DF7EF200F2DEDE /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		07CC7B0613DF7F0F00F2DEDE /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
+		2001592F1E2A47BD00C4B645 /* SDLGameController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SDLGameController.cpp; path = "../../src/host-sdl/SDLGameController.cpp"; sourceTree = "<group>"; };
+		200159301E2A47BD00C4B645 /* SDLGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDLGameController.h; path = "../../src/host-sdl/SDLGameController.h"; sourceTree = "<group>"; };
+		200159321E2A515000C4B645 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		20662B371C539EE4004D0132 /* cloudteam.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cloudteam.xcodeproj; path = ../libmoai/cloudteam.xcodeproj; sourceTree = "<group>"; };
 		20662B581C53A033004D0132 /* libmoai-osx-image-jpg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmoai-osx-image-jpg.a"; path = "../../xcode/libmoai/build/Debug/libmoai-osx-image-jpg.a"; sourceTree = "<group>"; };
 		20662B591C53A033004D0132 /* libmoai-osx-image-png.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmoai-osx-image-png.a"; path = "../../xcode/libmoai/build/Debug/libmoai-osx-image-png.a"; sourceTree = "<group>"; };
@@ -195,6 +200,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				200159331E2A515000C4B645 /* CoreVideo.framework in Frameworks */,
 				20662B611C53A139004D0132 /* libfmod.dylib in Frameworks */,
 				20662B5C1C53A033004D0132 /* libmoai-osx-image-jpg.a in Frameworks */,
 				20662B5D1C53A033004D0132 /* libmoai-osx-image-png.a in Frameworks */,
@@ -278,6 +284,7 @@
 		CD2FDE8613542E9F00B814DF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				200159321E2A515000C4B645 /* CoreVideo.framework */,
 				20662B601C53A139004D0132 /* libfmod.dylib */,
 				20662B581C53A033004D0132 /* libmoai-osx-image-jpg.a */,
 				20662B591C53A033004D0132 /* libmoai-osx-image-png.a */,
@@ -328,6 +335,8 @@
 				CDA633191A390CFB00F3995F /* aku_modules_util.h */,
 				CDA6331A1A390CFB00F3995F /* aku_modules.cpp */,
 				CDA6331B1A390CFB00F3995F /* aku_modules.h */,
+				2001592F1E2A47BD00C4B645 /* SDLGameController.cpp */,
+				200159301E2A47BD00C4B645 /* SDLGameController.h */,
 				CDA633101A390CE000F3995F /* SDLHost.cpp */,
 				CDA633111A390CE000F3995F /* SDLHost.h */,
 				CDA633121A390CE000F3995F /* SDLHostMain.cpp */,
@@ -505,6 +514,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD323B081A8040CB00E2FEBB /* SDLKeyCodeMapping.cpp in Sources */,
+				200159311E2A47BD00C4B645 /* SDLGameController.cpp in Sources */,
 				CDA633151A390CE000F3995F /* SDLHostMain.cpp in Sources */,
 				CDA6331D1A390CFB00F3995F /* aku_modules.cpp in Sources */,
 				CDA633141A390CE000F3995F /* SDLHost.cpp in Sources */,
@@ -533,6 +543,7 @@
 					"$(inherited)",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/MoaiSample-cqdbxugpyrgpwegimkiivzlhrioj/Build/Products/Debug",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -546,6 +557,7 @@
 					"$(inherited)",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/MoaiSample-cqdbxugpyrgpwegimkiivzlhrioj/Build/Products/Debug",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -596,10 +608,9 @@
 					"\"../../src\"",
 					"\"../../src/config\"",
 					"\"../../src/config-default\"",
-					"\"../../3rdparty/sdl2-2.0.0/include\"",
+					"\"../../3rdparty/sdl2-2.0.5/include\"",
 				);
 				LIBRARY_SEARCH_PATHS = "\"../../3rdparty/fmod-studio/lib/osx\"";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				WARNING_CFLAGS = "-Wall";
@@ -657,10 +668,9 @@
 					"\"../../src\"",
 					"\"../../src/config\"",
 					"\"../../src/config-default\"",
-					"\"../../3rdparty/sdl2-2.0.0/include\"",
+					"\"../../3rdparty/sdl2-2.0.5/include\"",
 				);
 				LIBRARY_SEARCH_PATHS = "\"../../3rdparty/fmod-studio/lib/osx\"";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
