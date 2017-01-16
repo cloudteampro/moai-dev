@@ -1,8 +1,6 @@
 // Copyright (c) 2010-2011 Zipline Games, Inc. All Rights Reserved.
 // http://getmoai.com
 
-#include "pch.h"
-
 #include <moai-image-png/MOAIImageFormatPng.h>
 
 #include <png.h>
@@ -51,9 +49,7 @@ bool MOAIImageFormatPng::CheckHeader ( const void* buffer ) {
 
 //----------------------------------------------------------------//
 bool MOAIImageFormatPng::CreateTexture ( MOAISingleTexture& texture, const void* data, size_t size ) {
-#ifndef MOAI_COMPILER_MSVC
 	UNUSED ( texture );
-#endif
 	UNUSED ( data );
 	UNUSED ( size );
 	

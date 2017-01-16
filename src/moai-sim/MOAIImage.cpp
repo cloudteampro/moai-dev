@@ -1212,13 +1212,13 @@ void MOAIImage::Blur () {
 	int x1, y1;
 	
 	// coefficients of 1D gaussian kernel with sigma = 1
-	float coeffs [] = { 0.0545, 0.2442, 0.4026, 0.2442, 0.0545 };
+	float coeffs [] = { 0.0545f, 0.2442f, 0.4026f, 0.2442f, 0.0545f };
 //    float coeffs [] = { 0.006, 0.061, 0.242, 0.383, 0.242, 0.061, 0.006 };
 	int r = 2;
 	
 	// along y - direction
-	for ( int y = 0; y < this->mHeight; y++ ) {
-		for ( int x = 0; x < this->mWidth; x++ ) {
+	for ( int y = 0; y < ( int )this->mHeight; y++ ) {
+		for ( int x = 0; x < ( int )this->mWidth; x++ ) {
 			sum.SetRGBA ( 0 );
 			for ( int i = -r; i <= r; i++ ) {
 				y1 = reflect ( this->mHeight, y - i );
@@ -1234,8 +1234,8 @@ void MOAIImage::Blur () {
 	}
 	
 	// along x - direction
-	for ( int y = 0; y < this->mHeight; y++ ) {
-		for ( int x = 0; x < this->mWidth; x++ ) {
+	for ( int y = 0; y < ( int )this->mHeight; y++ ) {
+		for ( int x = 0; x < ( int )this->mWidth; x++ ) {
 			sum.SetRGBA ( 0 );
 			for ( int i = -r; i <= r; i++ ) {
 				x1 = reflect ( this->mWidth, x - i );
@@ -1505,8 +1505,6 @@ void MOAIImage::CopyRect ( const MOAIImage& image, ZLIntRect srcRect, ZLIntRect 
 
 	if (( this->mPixelFormat != TRUECOLOR ) && ( image.mPixelFormat != TRUECOLOR )) return; // TODO: warn about this case
 
-	float scale;
-
 	bool xFlip = srcRect.IsXFlipped () != destRect.IsXFlipped ();
 	bool yFlip = srcRect.IsYFlipped () != destRect.IsYFlipped ();
 
@@ -1533,8 +1531,8 @@ void MOAIImage::CopyRect ( const MOAIImage& image, ZLIntRect srcRect, ZLIntRect 
 	if ( !srcRect.Overlap ( srcBounds )) return;
 	if ( !destRect.Overlap ( destBounds )) return;
 	
-	ZLVec2D srcToDest ( srcRect.Width () / destRect.Width (), srcRect.Height () / destRect.Height ());
-	ZLVec2D destToSrc ( 1.0 / srcToDest.mX, 1.0 / srcToDest.mY );
+	ZLVec2D srcToDest (( float )(srcRect.Width () / destRect.Width ()), ( float )(srcRect.Height () / destRect.Height ()));
+	ZLVec2D destToSrc ( 1.0f / srcToDest.mX, 1.0f / srcToDest.mY );
 	
 	ZLIntRect srcClipA = srcRect;
 	ZLIntRect srcClipB = srcRect;
@@ -1675,8 +1673,8 @@ void MOAIImage::CopyRect ( const MOAIImage& image, ZLIntRect srcRect, ZLIntRect 
 		for ( int y = 0; y < destHeight; ++y ) {
 			for ( int x = 0; x < destWidth; ++x ) {
 				
-				float xPixel = floorf ( xSrcOrigin + (( float )x * xSrcStep ) + 0.5f );
-				float yPixel = floorf ( ySrcOrigin + (( float )y * ySrcStep ) + 0.5f );
+				u32 xPixel = ( u32 )floorf ( xSrcOrigin + (( float )x * xSrcStep ) + 0.5f );
+				u32 yPixel = ( u32 )floorf ( ySrcOrigin + (( float )y * ySrcStep ) + 0.5f );
 				
 				u32 pixel = srcImage.GetPixel ( xPixel, yPixel );
 				this->SetPixel ( xPixel, yPixel, pixel );
@@ -1937,8 +1935,8 @@ void MOAIImage::FillEllipse ( int centerX, int centerY, int xRad, int yRad, u32 
 	s64 dy = xRad * xRad;
 	
 	while ( stopX >= stopY ) {
-		this->DrawLine ( x0 - x, y0 + y, x0 + x, y0 + y, color );
-		this->DrawLine ( x0 - x, y0 - y, x0 + x, y0 - y, color );
+		this->DrawLine (( int )( x0 - x ), ( int )( y0 + y ), ( int )( x0 + x ), ( int )( y0 + y ), color );
+		this->DrawLine (( int )( x0 - x ), ( int )( y0 - y ), ( int )( x0 + x ), ( int )( y0 - y ), color );
 		
 		y++;
 		stopY += aa2;
@@ -1962,8 +1960,8 @@ void MOAIImage::FillEllipse ( int centerX, int centerY, int xRad, int yRad, u32 
 	stopY = aa2 * yRad;
 	while ( stopX <= stopY ) {
 		
-		this->DrawLine ( x0 - x, y0 + y, x0 + x, y0 + y, color );
-		this->DrawLine ( x0 - x, y0 - y, x0 + x, y0 - y, color );
+		this->DrawLine ((int )( x0 - x ), ( int )( y0 + y ), ( int )( x0 + x ), ( int )( y0 + y ), color );
+		this->DrawLine (( int )( x0 - x ), ( int )( y0 - y ), ( int )( x0 + x ), ( int )( y0 - y ), color );
 		x++;
 		stopX += bb2;
 		err += dx;
@@ -2017,12 +2015,12 @@ void MOAIImage::GammaCorrection ( const MOAIImage& image, float gamma ) {
 
 //----------------------------------------------------------------//
 void MOAIImage::GenerateOutlineFromSDF ( ZLIntRect rect, float distMin, float distMax, float r, float g, float b, float a ) {
-	u32 width = rect.Width () + 1;
-	u32 height = rect.Height () + 1;
+	int width = rect.Width () + 1;
+	int height = rect.Height () + 1;
 	
 	for ( int y = 0; y < height; ++y ) {
 		for ( int x = 0; x < width; ++x ) {
-			u32 color = this->GetColor ( x + rect.mXMin, y + rect.mYMin );
+			u32 color = ( u32 )( this->GetColor ( x + rect.mXMin, y + rect.mYMin ));
 			ZLColorVec colorVec;
 			colorVec.SetRGBA ( color );
 			
@@ -2117,7 +2115,7 @@ void MOAIImage::GenerateSDF ( ZLIntRect rect ) {
 	for( int y = 0; y < height; y++ ) {
 		for ( int x = 0; x < width; x++ ) {
 			
-			float scaledDistVal = gridDistance [ y ][ x ];
+			float scaledDistVal = ( float )gridDistance [ y ][ x ];
 			scaledDistVal = ( scaledDistVal + 30 ) / range;
 			ZLColorVec colorVec;
 			colorVec.Set ( 0, 0, 0, scaledDistVal );
@@ -2141,8 +2139,8 @@ void MOAIImage::GenerateSDF ( ZLIntRect rect ) {
 //----------------------------------------------------------------//
 void MOAIImage::GenerateSDFAA ( ZLIntRect rect, float sizeInPixels ) {
 	
-	int width = rect.Width ();
-	int height = rect.Height ();
+	u32 width = ( u32 )rect.Width ();
+	u32 height = ( u32 )rect.Height ();
 	
 	short* xdist	= ( short* ) malloc ( width * height * sizeof ( short ));
 	short* ydist	= ( short* ) malloc ( width * height * sizeof ( short ));
@@ -2192,7 +2190,7 @@ void MOAIImage::GenerateSDFAA ( ZLIntRect rect, float sizeInPixels ) {
 			
 			u32 i = y * width + x;
 			
-			float dist = outside [ i ] - inside [ i ]; // distance in pixels
+			float dist = ( float )( outside [ i ] - inside [ i ] ); // distance in pixels
 			
 			dist = ( 1.0f - ( dist / sizeInPixels )) * 0.5f; // normalize
 			dist = MAX ( 0.0f, MIN ( dist, 1.0f )); // clamp
@@ -2377,11 +2375,7 @@ u32 MOAIImage::GetColor ( u32 x, u32 y ) const {
 	if ( this->mPixelFormat == TRUECOLOR ) {
 		return ZLColor::ConvertToRGBA ( this->GetPixel ( x, y ), this->mColorFormat );
 	}
-	else {
-		return this->GetPaletteColor ( this->GetPixel ( x, y ));
-	}
-
-	return 0;	
+	return this->GetPaletteColor ( this->GetPixel ( x, y ));
 }
 
 //----------------------------------------------------------------//
@@ -2856,7 +2850,7 @@ void MOAIImage::ResizeCanvas ( const MOAIImage& image, ZLIntRect rect ) {
 		
 		u32 bitDepth = this->GetPixelDepthInBits ();
 		
-		u32 srcRowSize = image.GetRowSize ();
+		// u32 srcRowSize = image.GetRowSize ();
 		u32 srcRowXOff = srcRect.mXMin < 0 ? -srcRect.mXMin : 0;
 		
 		for ( int y = 0; y < height; ++y ) {

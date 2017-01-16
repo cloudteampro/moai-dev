@@ -14,6 +14,10 @@
 
 #define TESS_PRECISION 10000
 
+#ifdef MOAI_COMPILER_MSVC
+	#pragma warning ( disable : 4611 )
+#endif
+
 //================================================================//
 // SafeTesselator
 //================================================================//
@@ -21,9 +25,9 @@
 const ZLVec3D SafeTesselator::sNormal = ZLVec3D ( 0.0f, 0.0f, 1.0f );
 
 //----------------------------------------------------------------//
-void SafeTesselator::AddContour ( int size, const void* vertices, int stride, int numVertices ) {
+void SafeTesselator::AddContour ( int size, const void* vertices, int stride, size_t numVertices ) {
 	
-	tessAddContour ( this->mTess, size, vertices, sizeof ( TESSreal ) * size, numVertices );
+	tessAddContour ( this->mTess, size, vertices, stride, ( int )numVertices );
 }
 
 //----------------------------------------------------------------//

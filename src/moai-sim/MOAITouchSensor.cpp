@@ -8,6 +8,14 @@
 const float MOAITouchSensor::DEFAULT_TAPTIME = 0.6f;
 const float MOAITouchSensor::DEFAULT_TAPMARGIN = 50.0f;
 
+//#define MOAI_TOUCH_SENSOR_DEBUG_LOG
+
+#ifdef MOAI_TOUCH_SENSOR_DEBUG_LOG
+	#define DEBUG_LOG(format,...) ZLLog ( format, ##__VA_ARGS__ )
+#else
+	#define DEBUG_LOG
+#endif
+
 //================================================================//
 // lua
 //================================================================//
@@ -84,7 +92,7 @@ int MOAITouchSensor::_getCenterLoc ( lua_State* L ) {
 	u32 count = self->mTop;
 	if ( count == 0 ) return 0;
 	
-	ZLVec2D loc;
+	ZLVec2D loc ( 0.0f, 0.0f );
 	
 	for ( u32 i = 0; i < count; ++i ) {
 		u32 touchID = self->mActiveStack [ i ];

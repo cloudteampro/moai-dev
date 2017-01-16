@@ -143,10 +143,12 @@ void MOAIBone::RegisterLuaFuncs ( MOAILuaState& state ) {
 
 //----------------------------------------------------------------//
 void MOAIBone::SerializeIn ( MOAILuaState& state, MOAIDeserializer& serializer ) {
+	UNUSED ( state );
 	UNUSED ( serializer );
 }
 
 //----------------------------------------------------------------//
 void MOAIBone::SerializeOut ( MOAILuaState& state, MOAISerializer& serializer ) {
+	UNUSED ( state );
 	UNUSED ( serializer );
 }

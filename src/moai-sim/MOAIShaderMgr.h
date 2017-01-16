@@ -39,8 +39,9 @@ public:
 		MESH_SHADER,
 		SKINNED_MESH_SHADER,
 		TOTAL_SHADERS,
-		UNKNOWN_SHADER			= 0xffffffff,
 	};
+
+	static const u32 UNKNOWN_SHADER			= 0xffffffff;
 
 private:
 	

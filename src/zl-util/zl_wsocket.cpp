@@ -23,7 +23,10 @@
 // modifications Copyright (c) 2014 Zipline Games, Inc. All Rights Reserved.
 // http://getmoai.com
 
+#include "pch.h"
+
 SUPPRESS_EMPTY_FILE_WARNING
+
 #ifdef _WIN32
 
 /*=========================================================================*\
@@ -37,7 +40,7 @@ SUPPRESS_EMPTY_FILE_WARNING
 \*=========================================================================*/
 #include <string.h>
 
-#include "zl_socket.h"
+#include <zl-util/zl_socket.h>
 #include <zl-util/ZLDeviceTime.h>
 
 /* WinSock doesn't have a strerror... */
@@ -180,11 +183,11 @@ int zl_socket_connect(zl_socket* ps, zl_sockaddr *addr, socklen_t len, double tm
     /* we wait until something happens */
     err = zl_socket_waitfd(ps, WAITFD_C, tm);
     if (err == IO_CLOSED) {
-        int len = sizeof(err);
+        int errlen = sizeof(err);
         /* give windows time to set the error (yes, disgusting) */
         Sleep(10);
         /* find out why we failed */
-        getsockopt(*ps, SOL_SOCKET, SO_ERROR, (char *)&err, &len); 
+        getsockopt(*ps, SOL_SOCKET, SO_ERROR, (char *)&err, &errlen); 
         /* we KNOW there was an error. if 'why' is 0, we will return
         * "unknown error", but it's not really our fault */
         return err > 0? err: IO_UNKNOWN; 
@@ -236,7 +239,7 @@ int zl_socket_accept(zl_socket* ps, zl_socket* pa, zl_sockaddr *addr, socklen_t 
         if ((err = zl_socket_waitfd(ps, WAITFD_R, tm)) != IO_DONE) return err;
     } 
     /* can't reach here */
-    return IO_UNKNOWN; 
+    //return IO_UNKNOWN; 
 }
 
 /*-------------------------------------------------------------------------*\
@@ -269,7 +272,7 @@ int zl_socket_send(zl_socket* ps, const char *data, size_t count,
         if ((err = zl_socket_waitfd(ps, WAITFD_W, tm)) != IO_DONE) return err;
     } 
     /* can't reach here */
-    return IO_UNKNOWN;
+    //return IO_UNKNOWN;
 }
 
 /*-------------------------------------------------------------------------*\
@@ -291,7 +294,7 @@ int zl_socket_sendto(zl_socket* ps, const char *data, size_t count, size_t *sent
         if (err != WSAEWOULDBLOCK) return err;
         if ((err = zl_socket_waitfd(ps, WAITFD_W, tm)) != IO_DONE) return err;
     } 
-    return IO_UNKNOWN;
+    //return IO_UNKNOWN;
 }
 
 /*-------------------------------------------------------------------------*\
@@ -312,7 +315,7 @@ int zl_socket_recv(zl_socket* ps, char *data, size_t count, size_t *got, double 
         if (err != WSAEWOULDBLOCK) return err;
         if ((err = zl_socket_waitfd(ps, WAITFD_R, tm)) != IO_DONE) return err;
     }
-    return IO_UNKNOWN;
+    //return IO_UNKNOWN;
 }
 
 /*-------------------------------------------------------------------------*\
@@ -334,7 +337,7 @@ int zl_socket_recvfrom(zl_socket* ps, char *data, size_t count, size_t *got,
         if (err != WSAEWOULDBLOCK) return err;
         if ((err = zl_socket_waitfd(ps, WAITFD_R, tm)) != IO_DONE) return err;
     }
-    return IO_UNKNOWN;
+    //return IO_UNKNOWN;
 }
 
 

@@ -97,7 +97,7 @@ int MOAIInputMgr::_suspendEvents ( lua_State* L ) {
 //----------------------------------------------------------------//
 u8 MOAIInputMgr::AddDevice ( cc8* name  ) {
 
-	u8 id = this->mDevices.GetTop ();
+	u8 id = ( u8 )this->mDevices.GetTop ();
 	
 	this->mDevices.Push ();
 	this->SetDevice ( id, name );
@@ -360,7 +360,7 @@ void MOAIInputMgr::SuspendEvents ( bool suspend ) {
 //----------------------------------------------------------------//
 void MOAIInputMgr::Update ( double timestep ) {
 
-	ZLStream* eventStream = this;
+	//ZLStream* eventStream = this;
 
 	if ( this->mPlayback ) {
 		if ( this->mRecorder ) {

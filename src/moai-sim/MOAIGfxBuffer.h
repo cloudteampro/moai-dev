@@ -61,7 +61,7 @@ protected:
 	static int				_scheduleFlush			( lua_State* L );
 	
 	//----------------------------------------------------------------//
-	void					BindVertexFormat		( MOAIVertexFormat* format );
+	//void					BindVertexFormat		( MOAIVertexFormat* format );
 	u32						GetLoadingPolicy		();
 	bool					OnCPUCreate				();
 	void					OnCPUDestroy			();

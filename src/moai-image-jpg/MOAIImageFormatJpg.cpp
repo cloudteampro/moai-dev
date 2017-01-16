@@ -1,8 +1,6 @@
 // Copyright (c) 2010-2011 Zipline Games, Inc. All Rights Reserved.
 // http://getmoai.com
 
-#include "pch.h"
-
 #include <moai-image-jpg/MOAIImageFormatJpg.h>
 
 extern "C" {
@@ -49,7 +47,7 @@ static void _jpgSkipInputData ( j_decompress_ptr cinfo, long num_bytes ) {
 		src->pub.next_input_byte = ( JOCTET* )(( size_t )src->pub.next_input_byte + num_bytes );
 	}
 	else {
-		src->stream->Seek ( num_bytes - src->pub.bytes_in_buffer, SEEK_CUR );
+		src->stream->Seek (( long )( num_bytes - src->pub.bytes_in_buffer), SEEK_CUR );
 		src->pub.bytes_in_buffer = src->stream->ReadBytes ( src->buffer, JPG_BUFFER_SIZE );
 		src->pub.next_input_byte = ( JOCTET* )src->buffer;
 	}
@@ -98,9 +96,8 @@ bool MOAIImageFormatJpg::CheckHeader ( const void* buffer ) {
 
 //----------------------------------------------------------------//
 bool MOAIImageFormatJpg::CreateTexture ( MOAISingleTexture& texture, const void* data, size_t size ) {
-#ifndef MOAI_COMPILER_MSVC
+
 	UNUSED ( texture );
-#endif
 	UNUSED ( data );
 	UNUSED ( size );
 	
