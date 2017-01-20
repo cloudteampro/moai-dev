@@ -48,7 +48,7 @@ using namespace std;
 //================================================================//
 typedef struct ZLTlsfPool {
 
-	tlsf_pool	mPool;
+	tlsf_t		mPool;
 	void*		mBuffer;
 
 } ZLTlsfPool;
@@ -356,7 +356,7 @@ ZL_TLSF_POOL* zl_tlsf_create_pool ( size_t bytes ) {
 	ZLTlsfPool* pool = ( ZLTlsfPool* )malloc ( sizeof ( ZLTlsfPool ));
 	
 	pool->mBuffer = malloc ( bytes );
-	pool->mPool = tlsf_create ( pool->mBuffer, bytes );
+	pool->mPool = tlsf_create_with_pool ( pool->mBuffer, bytes );
 	
 	return ( ZL_TLSF_POOL* )pool;
 }

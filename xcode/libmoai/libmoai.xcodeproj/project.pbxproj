@@ -191,8 +191,6 @@
 		0765874F145CD06900723A7D /* tlsf.c in Sources */ = {isa = PBXBuildFile; fileRef = 0765874B145CD06900723A7D /* tlsf.c */; };
 		07658750145CD06900723A7D /* tlsf.h in Headers */ = {isa = PBXBuildFile; fileRef = 0765874C145CD06900723A7D /* tlsf.h */; };
 		07658751145CD06900723A7D /* tlsf.h in Headers */ = {isa = PBXBuildFile; fileRef = 0765874C145CD06900723A7D /* tlsf.h */; };
-		07658752145CD06900723A7D /* tlsfbits.h in Headers */ = {isa = PBXBuildFile; fileRef = 0765874D145CD06900723A7D /* tlsfbits.h */; };
-		07658753145CD06900723A7D /* tlsfbits.h in Headers */ = {isa = PBXBuildFile; fileRef = 0765874D145CD06900723A7D /* tlsfbits.h */; };
 		20242C391DD36A2600E042BF /* MOAIParticleTurbulenceSampler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 20242C371DD36A2600E042BF /* MOAIParticleTurbulenceSampler.cpp */; };
 		20242C3A1DD36A2600E042BF /* MOAIParticleTurbulenceSampler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 20242C371DD36A2600E042BF /* MOAIParticleTurbulenceSampler.cpp */; };
 		20242C3B1DD36A2600E042BF /* MOAIParticleTurbulenceSampler.h in Headers */ = {isa = PBXBuildFile; fileRef = 20242C381DD36A2600E042BF /* MOAIParticleTurbulenceSampler.h */; };
@@ -1282,7 +1280,6 @@
 		CD32B40419F9EDD10059D019 /* lzio.h in Headers */ = {isa = PBXBuildFile; fileRef = CD490073141AB6EC00913D80 /* lzio.h */; };
 		CD32B40C19F9EDD10059D019 /* SFMT.h in Headers */ = {isa = PBXBuildFile; fileRef = 8942AFFF1731BB90009E233E /* SFMT.h */; };
 		CD32B40F19F9EDD10059D019 /* tlsf.h in Headers */ = {isa = PBXBuildFile; fileRef = 0765874C145CD06900723A7D /* tlsf.h */; };
-		CD32B41019F9EDD10059D019 /* tlsfbits.h in Headers */ = {isa = PBXBuildFile; fileRef = 0765874D145CD06900723A7D /* tlsfbits.h */; };
 		CD32B41119F9EDD10059D019 /* mesh.h in Headers */ = {isa = PBXBuildFile; fileRef = CD69AB3017FA6CF90053E028 /* mesh.h */; };
 		CD32B41219F9EDD10059D019 /* SFMT-params2281.h in Headers */ = {isa = PBXBuildFile; fileRef = 8942AFF51731BB90009E233E /* SFMT-params2281.h */; };
 		CD32B41319F9EDD10059D019 /* tess.h in Headers */ = {isa = PBXBuildFile; fileRef = CD69AB3617FA6CF90053E028 /* tess.h */; };
@@ -5450,9 +5447,8 @@
 		0324E2BB1356485F000ADC60 /* libmoai-osx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-osx.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0379C5961333ECD800E89DDC /* libmoai-ios-3rdparty-core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios-3rdparty-core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		03C2F6F4104DE130009A2D5D /* libmoai-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0765874B145CD06900723A7D /* tlsf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tlsf.c; path = "../../3rdparty/tlsf-2.0/tlsf.c"; sourceTree = "<group>"; };
-		0765874C145CD06900723A7D /* tlsf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tlsf.h; path = "../../3rdparty/tlsf-2.0/tlsf.h"; sourceTree = "<group>"; };
-		0765874D145CD06900723A7D /* tlsfbits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tlsfbits.h; path = "../../3rdparty/tlsf-2.0/tlsfbits.h"; sourceTree = "<group>"; };
+		0765874B145CD06900723A7D /* tlsf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tlsf.c; sourceTree = "<group>"; };
+		0765874C145CD06900723A7D /* tlsf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tlsf.h; sourceTree = "<group>"; };
 		079529311447907100143A72 /* jaricom.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = jaricom.c; sourceTree = "<group>"; };
 		079529321447907100143A72 /* jcapimin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = jcapimin.c; sourceTree = "<group>"; };
 		079529331447907100143A72 /* jcapistd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = jcapistd.c; sourceTree = "<group>"; };
@@ -9015,9 +9011,9 @@
 			children = (
 				0765874B145CD06900723A7D /* tlsf.c */,
 				0765874C145CD06900723A7D /* tlsf.h */,
-				0765874D145CD06900723A7D /* tlsfbits.h */,
 			);
 			name = tlsf;
+			path = "../../3rdparty/tlsf-3.1";
 			sourceTree = "<group>";
 		};
 		0795291A1447907100143A72 /* jpeg-8c */ = {
@@ -13214,7 +13210,6 @@
 				CDD48B5D17FA794B00525B77 /* SFMT.h in Headers */,
 				07658751145CD06900723A7D /* tlsf.h in Headers */,
 				CD73D00F1BA3FFB800BB50C3 /* hashtable.h in Headers */,
-				07658753145CD06900723A7D /* tlsfbits.h in Headers */,
 				CDCDD01E1A23F233008779B5 /* nametab.h in Headers */,
 				CD69AB4617FA6CF90053E028 /* mesh.h in Headers */,
 				CDD48B5317FA794B00525B77 /* SFMT-params2281.h in Headers */,
@@ -13391,7 +13386,6 @@
 				CD73D00E1BA3FFB800BB50C3 /* hashtable.h in Headers */,
 				CDCDD01D1A23F233008779B5 /* nametab.h in Headers */,
 				07658750145CD06900723A7D /* tlsf.h in Headers */,
-				07658752145CD06900723A7D /* tlsfbits.h in Headers */,
 				CDD48B7A17FA794E00525B77 /* SFMT-sse2.h in Headers */,
 				CDCDD0211A23F233008779B5 /* winconfig.h in Headers */,
 				CDD48B7817FA794E00525B77 /* SFMT-params132049.h in Headers */,
@@ -14601,7 +14595,6 @@
 				CD32B40F19F9EDD10059D019 /* tlsf.h in Headers */,
 				CD32B52319F9EE3F0059D019 /* default_cursor.h in Headers */,
 				CD32B54C19F9EED00059D019 /* SDL_shaders_gl.h in Headers */,
-				CD32B41019F9EDD10059D019 /* tlsfbits.h in Headers */,
 				CD32B4FC19F9EE180059D019 /* SDL_power.h in Headers */,
 				CD32B41119F9EDD10059D019 /* mesh.h in Headers */,
 				CD32B4E719F9EE180059D019 /* SDL_error.h in Headers */,
@@ -20344,7 +20337,7 @@
 					"\"../../3rdparty/untz/src\"",
 					"\"../../3rdparty/libvorbis-1.3.2/lib\"",
 					"\"../../3rdparty/libvorbis-1.3.2/include\"",
-					"\"../../3rdparty/tlsf-2.0\"",
+					"\"../../3rdparty/tlsf-3.1\"",
 					"\"../../3rdparty/zlib-1.2.3\"",
 					"\"../../3rdparty/ooid-0.99\"",
 					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
@@ -21671,7 +21664,7 @@
 					"\"../../3rdparty/untz/src\"",
 					"\"../../3rdparty/libvorbis-1.3.2/lib\"",
 					"\"../../3rdparty/libvorbis-1.3.2/include\"",
-					"\"../../3rdparty/tlsf-2.0\"",
+					"\"../../3rdparty/tlsf-3.1\"",
 					"\"../../3rdparty/zlib-1.2.3\"",
 					"\"../../3rdparty/ooid-0.99\"",
 					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
@@ -27153,7 +27146,7 @@
 					"\"../../3rdparty/untz/src\"",
 					"\"../../3rdparty/libvorbis-1.3.2/lib\"",
 					"\"../../3rdparty/libvorbis-1.3.2/include\"",
-					"\"../../3rdparty/tlsf-2.0\"",
+					"\"../../3rdparty/tlsf-3.1\"",
 					"\"../../3rdparty/zlib-1.2.3\"",
 					"\"../../3rdparty/ooid-0.99\"",
 					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
@@ -27588,7 +27581,7 @@
 					"\"../../3rdparty/untz/src\"",
 					"\"../../3rdparty/libvorbis-1.3.2/lib\"",
 					"\"../../3rdparty/libvorbis-1.3.2/include\"",
-					"\"../../3rdparty/tlsf-2.0\"",
+					"\"../../3rdparty/tlsf-3.1\"",
 					"\"../../3rdparty/zlib-1.2.3\"",
 					"\"../../3rdparty/ooid-0.99\"",
 					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",

@@ -1,10 +1,10 @@
 cmake_minimum_required ( VERSION 2.8.5 )
 project ( tlsf )
 
-set ( CMAKE_CURRENT_SOURCE_DIR "${MOAI_ROOT}/3rdparty/tlsf-2.0/" )
+set ( CMAKE_CURRENT_SOURCE_DIR "${MOAI_ROOT}/3rdparty/tlsf-3.1/" )
 
 set ( TLSF_INCLUDES
-  "${MOAI_ROOT}/3rdparty/tlsf-2.0/"
+  "${MOAI_ROOT}/3rdparty/tlsf-3.1/"
 )
 
 file ( GLOB TLSF_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/*.c" )
