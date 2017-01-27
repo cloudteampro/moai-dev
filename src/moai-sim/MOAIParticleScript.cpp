@@ -716,6 +716,7 @@ void MOAIParticleScript::PushSprite ( MOAIParticleSystem& system, float* registe
 
 	sprite.mXLoc		= registers [ SPRITE_X_LOC ];
 	sprite.mYLoc		= registers [ SPRITE_Y_LOC ];
+	sprite.mZLoc		= registers [ SPRITE_Z_LOC ];
 	
 	sprite.mZRot		= registers [ SPRITE_ROT ];
 	
@@ -740,11 +741,14 @@ void MOAIParticleScript::RegisterLuaClass ( MOAILuaState& state ) {
 
 	state.SetField ( -1, "PARTICLE_X",			Pack64 ( MOAIParticle::PARTICLE_X, PARAM_TYPE_PARTICLE_REG ));
 	state.SetField ( -1, "PARTICLE_Y",			Pack64 ( MOAIParticle::PARTICLE_Y, PARAM_TYPE_PARTICLE_REG ));
+	state.SetField ( -1, "PARTICLE_Z",			Pack64 ( MOAIParticle::PARTICLE_Z, PARAM_TYPE_PARTICLE_REG ));
 	state.SetField ( -1, "PARTICLE_DX",			Pack64 ( MOAIParticle::PARTICLE_DX, PARAM_TYPE_PARTICLE_REG ));
 	state.SetField ( -1, "PARTICLE_DY",			Pack64 ( MOAIParticle::PARTICLE_DY, PARAM_TYPE_PARTICLE_REG ));
+	state.SetField ( -1, "PARTICLE_DZ",			Pack64 ( MOAIParticle::PARTICLE_DZ, PARAM_TYPE_PARTICLE_REG ));
 
 	state.SetField ( -1, "SPRITE_X_LOC",		Pack64 ( SPRITE_X_LOC, PARAM_TYPE_SPRITE_REG ));
 	state.SetField ( -1, "SPRITE_Y_LOC",		Pack64 ( SPRITE_Y_LOC, PARAM_TYPE_SPRITE_REG ));
+	state.SetField ( -1, "SPRITE_Z_LOC",		Pack64 ( SPRITE_Z_LOC, PARAM_TYPE_SPRITE_REG ));
 	state.SetField ( -1, "SPRITE_ROT",			Pack64 ( SPRITE_ROT, PARAM_TYPE_SPRITE_REG ));
 	state.SetField ( -1, "SPRITE_X_SCL",		Pack64 ( SPRITE_X_SCL, PARAM_TYPE_SPRITE_REG ));
 	state.SetField ( -1, "SPRITE_Y_SCL",		Pack64 ( SPRITE_Y_SCL, PARAM_TYPE_SPRITE_REG ));
@@ -805,6 +809,7 @@ void MOAIParticleScript::ResetRegisters ( float* spriteRegisters, float* particl
 
 	spriteRegisters [ SPRITE_X_LOC ]		= particleRegisters [ MOAIParticle::PARTICLE_X ];
 	spriteRegisters [ SPRITE_Y_LOC ]		= particleRegisters [ MOAIParticle::PARTICLE_Y ];
+	spriteRegisters [ SPRITE_Z_LOC ]		= particleRegisters [ MOAIParticle::PARTICLE_Z ];
 	spriteRegisters [ SPRITE_ROT ]			= 0.0f;
 	spriteRegisters [ SPRITE_X_SCL ]		= 1.0f;
 	spriteRegisters [ SPRITE_Y_SCL ]		= 1.0f;

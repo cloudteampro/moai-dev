@@ -9,6 +9,8 @@
 #include <moai-sim/MOAIParticleState.h>
 #include <moai-sim/MOAIParticleSystem.h>
 #include <moai-sim/MOAITextureBase.h>
+#include <moai-sim/MOAIRenderMgr.h>
+#include <moai-sim/MOAICamera.h>
 
 class MOAIDataBuffer;
 
@@ -396,6 +398,18 @@ void MOAIParticleSystem::Draw ( int subPrimID, float lod ) {
 		total = maxSprites;
 	}
 	
+	ZLAffine3D billboardMtx;
+	u32 billboard = this->mBillboard;
+	// TODO: support another billboard types
+	if ( this->mBillboard == BILLBOARD_NORMAL ) {
+		
+		MOAIRenderMgr& renderMgr = MOAIRenderMgr::Get ();
+		MOAICamera* camera = renderMgr.GetCamera ();
+		
+		u32 billboard = camera ? this->mBillboard : BILLBOARD_NONE;
+		billboardMtx.Init ( camera->GetBillboardMtx ());
+	}
+	
 	for ( u32 i = 0; i < total; ++i ) {
 
 		u32 idx;
@@ -409,10 +423,14 @@ void MOAIParticleSystem::Draw ( int subPrimID, float lod ) {
 		AKUParticleSprite& sprite = this->mSprites [ idx ];
 		gfxDevice.SetPenColor ( sprite.mRed, sprite.mGreen, sprite.mBlue, sprite.mAlpha );
 		
-		spriteMtx.ScRoTr ( sprite.mXScl, sprite.mYScl, 1.0f, 0.0f, 0.0f, sprite.mZRot * ( float )D2R, sprite.mXLoc, sprite.mYLoc, 0.0f );
+		spriteMtx.ScRoTr ( sprite.mXScl, sprite.mYScl, 1.0f, 0.0f, 0.0f, sprite.mZRot * ( float )D2R, sprite.mXLoc, sprite.mYLoc, sprite.mZLoc );
 		
 		drawingMtx = this->GetLocalToWorldMtx ();
 		drawingMtx.Prepend ( spriteMtx );
+		
+		if ( billboard == BILLBOARD_NORMAL ) {
+			drawingMtx.Prepend ( billboardMtx );
+		}
 		
 		gfxDevice.SetVertexTransform ( MOAIGfxDevice::VTX_WORLD_TRANSFORM, drawingMtx );
 		
@@ -550,11 +568,17 @@ bool MOAIParticleSystem::PushParticle ( float x, float y ) {
 //----------------------------------------------------------------//
 bool MOAIParticleSystem::PushParticle ( float x, float y, float dx, float dy ) {
 	
-	return this->PushParticle ( x, y, dx, dy, 0 );
+	return this->PushParticle ( x, y, 0.0f, dx, dy, 0.0f, 0 );
 }
 
 //----------------------------------------------------------------//
 bool MOAIParticleSystem::PushParticle ( float x, float y, float dx, float dy, u32 stateIdx ) {
+	
+	return this->PushParticle ( x, y, 0.0f, dx, dy, 0.0f, stateIdx );
+}
+
+//----------------------------------------------------------------//
+bool MOAIParticleSystem::PushParticle ( float x, float y, float z, float dx, float dy, float dz, u32 stateIdx ) {
 	
 	if (( !this->mFree ) && this->mCapParticles ) {
 		return false;
@@ -580,8 +604,11 @@ bool MOAIParticleSystem::PushParticle ( float x, float y, float dx, float dy, u3
 		
 		r [ MOAIParticle::PARTICLE_X ] = x;
 		r [ MOAIParticle::PARTICLE_Y ] = y;
+		r [ MOAIParticle::PARTICLE_Z ] = z;
+		
 		r [ MOAIParticle::PARTICLE_DX ] = dx;
 		r [ MOAIParticle::PARTICLE_DY ] = dy;
+		r [ MOAIParticle::PARTICLE_DZ ] = dz;
 		
 		for ( u32 i = MOAIParticle::TOTAL_PARTICLE_REG; i < this->mParticleSize; ++i ) {
 			r [ i ] = 0.0f;
@@ -612,7 +639,7 @@ bool MOAIParticleSystem::PushSprite ( const AKUParticleSprite& sprite ) {
 		// TODO: need to take rotation into account
 		ZLBox bounds = this->mDeck->GetBounds ( MOAIDeckRemapper::Remap ( this->mRemapper, sprite.mGfxID ));
 		
-		ZLVec3D offset ( sprite.mXLoc, sprite.mYLoc, 0.0f );
+		ZLVec3D offset ( sprite.mXLoc, sprite.mYLoc, sprite.mZLoc );
 		ZLVec3D scale ( sprite.mXScl, sprite.mYScl, 0.0f );
 		
 		bounds.Scale ( scale );

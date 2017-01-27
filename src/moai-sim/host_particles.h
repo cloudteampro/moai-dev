@@ -17,6 +17,7 @@ public:
 	
 	float		mXLoc;
 	float		mYLoc;
+	float		mZLoc;
 	float		mZRot;
 	float		mXScl;
 	float		mYScl;

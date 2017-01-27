@@ -29,6 +29,38 @@ int MOAIParticleEmitter::_setAngle ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+/**	@lua	setBounds
+	@text	Set the shape and dimensions of the emitter.
+	
+	@in		MOAIParticleEmitter self
+	@in		number xMin
+	@in		number yMin
+	@in		number zMin
+	@in		number xMax
+	@in		number yMax
+	@in		number zMax
+	@out	nil
+*/
+int MOAIParticleEmitter::_setBounds ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIParticleEmitter, "UNNNNNN" )
+	
+	ZLBox box;
+	box.mMin.mX = state.GetValue < float >( 2, 0.0f );
+	box.mMin.mY = state.GetValue < float >( 3, 0.0f );
+	box.mMin.mZ = state.GetValue < float >( 4, 0.0f );
+	box.mMax.mX = state.GetValue < float >( 5, 0.0f );
+	box.mMax.mY = state.GetValue < float >( 6, 0.0f );
+	box.mMax.mZ = state.GetValue < float >( 7, 0.0f );
+	
+	box.Bless ();
+	
+	self->SetBox ( box );
+	self->SetShapeID ( RECT );
+	
+	return 0;
+}
+
+//----------------------------------------------------------------//
 /**	@lua	setEmission
 	@text	Set the size of each emission.
 	
@@ -132,7 +164,9 @@ int MOAIParticleEmitter::_setRect ( lua_State* L ) {
 	
 	rect.Bless ();
 	
-	self->SetRect ( rect );
+	ZLBox box;
+	box.Init ( rect );
+	self->SetBox ( box );
 	self->SetShapeID ( RECT );
 	
 	return 0;
@@ -216,9 +250,9 @@ void MOAIParticleEmitter::GetRandomParticle ( ZLVec3D& loc, ZLVec3D& vec ) {
 
 		case RECT:
 		
-			loc.mX = ZLFloat::Rand ( this->mRect.mXMin, this->mRect.mXMax );
-			loc.mY = ZLFloat::Rand ( this->mRect.mYMin, this->mRect.mYMax );
-			loc.mZ = 0.0f;
+			loc.mX = ZLFloat::Rand ( this->mBox.mMin.mX, this->mBox.mMax.mX );
+			loc.mY = ZLFloat::Rand ( this->mBox.mMin.mY, this->mBox.mMax.mY );
+			loc.mZ = ZLFloat::Rand ( this->mBox.mMin.mZ, this->mBox.mMax.mZ );
 			break;
 	}
 	
@@ -294,7 +328,7 @@ void MOAIParticleEmitter::OnDepNodeUpdate () {
 			if ( this->MaskParticle ( loc )) {
 			
 				this->mLocalToWorldMtx.TransformVec ( vec );
-				this->mSystem->PushParticle ( loc.mX, loc.mY, vec.mX, vec.mY, this->mParticleState );
+				this->mSystem->PushParticle ( loc.mX, loc.mY, loc.mZ, vec.mX, vec.mY, vec.mZ, this->mParticleState );
 			}
 		}
 	}
@@ -317,6 +351,7 @@ void MOAIParticleEmitter::RegisterLuaFuncs ( MOAILuaState& state ) {
 	
 	luaL_Reg regTable [] = {
 		{ "setAngle",			_setAngle },
+		{ "setBounds",			_setBounds },
 		{ "setEmission",		_setEmission },
 		{ "setMagnitude",		_setMagnitude },
 		{ "setMask",			_setMask },
