@@ -24,7 +24,7 @@ public:
 	
 	//----------------------------------------------------------------//
 	void			Clear							();
-	ZLVec2D			Eval							( const ZLVec2D& loc );
+	ZLVec3D			Eval							( const ZLVec3D& loc );
 	void			GenerateFromImage				( MOAIImage& image, bool wrap );
 					MOAIParticleTurbulenceSampler	();
 					~MOAIParticleTurbulenceSampler	();

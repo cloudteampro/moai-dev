@@ -164,6 +164,7 @@ void MOAIParticleForce::Eval ( const ZLVec3D& loc, float mass, ZLVec3D& accelera
 				
 				force.mX = vec.mX * dist;
 				force.mY = vec.mY * dist;
+				force.mZ = vec.mZ * dist;
 			}
 			break;
 		}
@@ -178,6 +179,7 @@ void MOAIParticleForce::Eval ( const ZLVec3D& loc, float mass, ZLVec3D& accelera
 			
 			force.mX = vec.mX * dist;
 			force.mY = vec.mY * dist;
+			force.mZ = vec.mZ * dist;
 			
 			break;
 		}
@@ -196,7 +198,7 @@ void MOAIParticleForce::Eval ( const ZLVec3D& loc, float mass, ZLVec3D& accelera
 		}
 		case TURBULENCE: {
 			
-			ZLVec2D point ( loc.mX, loc.mY );
+			ZLVec3D point ( loc.mX, loc.mY, loc.mZ );
 			this->mWorldToLocalMtx.Transform ( point );
 			
 			force.Init ( this->mTurbulence.Eval ( point ));

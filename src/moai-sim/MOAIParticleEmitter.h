@@ -22,7 +22,7 @@ class MOAIParticleEmitter :
 protected:
 
 	u32		mShapeID;
-	ZLRect	mRect;
+	ZLBox	mBox;
 	
 	float	mInnerRadius;
 	float	mOuterRadius;
@@ -45,6 +45,7 @@ protected:
 
 	//----------------------------------------------------------------//
 	static int		_setAngle				( lua_State* L );
+	static int		_setBounds				( lua_State* L );
 	static int		_setEmission			( lua_State* L );
 	static int		_setMagnitude			( lua_State* L );
 	static int		_setMask				( lua_State* L );
@@ -70,7 +71,7 @@ public:
 	
 	DECL_LUA_FACTORY ( MOAIParticleEmitter )
 
-	SET ( ZLRect, Rect, mRect )
+	SET ( ZLBox, Box, mBox )
 	SET ( u32, ShapeID, mShapeID )
 
 	//----------------------------------------------------------------//

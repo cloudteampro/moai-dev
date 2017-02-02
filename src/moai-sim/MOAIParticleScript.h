@@ -49,6 +49,7 @@ private:
 	enum {
 		SPRITE_X_LOC,
 		SPRITE_Y_LOC,
+		SPRITE_Z_LOC,
 		SPRITE_ROT,
 		SPRITE_X_SCL,
 		SPRITE_Y_SCL,

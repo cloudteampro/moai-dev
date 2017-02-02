@@ -48,7 +48,7 @@ float MOAIParticleTurbulenceSampler::GetLuma ( MOAIImage& image, int x, int y ) 
 }
 
 //----------------------------------------------------------------//
-ZLVec2D MOAIParticleTurbulenceSampler::Eval ( const ZLVec2D& loc ) {
+ZLVec3D MOAIParticleTurbulenceSampler::Eval ( const ZLVec3D& loc ) {
 	
 	int i = ZLFloat::Round ( loc.mX );
 	int j = ZLFloat::Round ( loc.mY );
@@ -62,10 +62,12 @@ ZLVec2D MOAIParticleTurbulenceSampler::Eval ( const ZLVec2D& loc ) {
 	}
 	
 	if ( i < 0 || j < 0 || i > this->mSize || j > this->mSize ) {
-		return ZLVec2D ( 0.f, 0.f );
+		return ZLVec3D ( 0.f, 0.f, 0.f );
 	}
 	
-	return this->mVectorField [ j * this->mSize + i ];
+	ZLVec3D result;
+	result.Init ( this->mVectorField [ j * this->mSize + i ]);
+	return result;
 }
 
 //----------------------------------------------------------------//
