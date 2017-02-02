@@ -16,8 +16,11 @@ class MOAIMatrix :
 protected:
 
 	//----------------------------------------------------------------//
+	static int			_append						( lua_State* L );
 	static int			_getMatrix					( lua_State* L );
+	static int			_prepend					( lua_State* L );
 	static int			_setMatrix					( lua_State* L );
+	static int			_setScRoTr					( lua_State* L );
 
 	//----------------------------------------------------------------//
 	virtual void		BuildLocalToWorldMtx		( ZLAffine3D& localToWorldMtx );
