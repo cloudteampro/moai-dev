@@ -273,6 +273,16 @@ int MOAIHttpTaskBase::_performSync ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+/**	@lua	reset
+*/
+int MOAIHttpTaskBase::_reset ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIHttpTaskBase, "U" )
+	
+	self->Reset ();
+	return 0;
+}
+
+//----------------------------------------------------------------//
 /**	@lua	setBody
 	@text	Sets the body for a POST or PUT.
 
@@ -636,6 +646,7 @@ void MOAIHttpTaskBase::RegisterLuaFuncs ( MOAILuaState& state ) {
 		{ "parseXml",			_parseXml },
 		{ "performAsync",		_performAsync },
 		{ "performSync",		_performSync },
+		{ "reset",				_reset },
 		{ "setCallback",		_setCallback },
 		{ "setCookieDst",		_setCookieDst },
 		{ "setCookieSrc",		_setCookieSrc },

@@ -56,6 +56,7 @@ protected:
 	static int		_parseXml			( lua_State* L );
 	static int		_performAsync		( lua_State* L );
 	static int		_performSync		( lua_State* L );
+	static int		_reset				( lua_State* L );
 	static int		_setBody			( lua_State* L );
 	static int		_setCallback		( lua_State* L );
 	static int		_setCookieSrc		( lua_State* L );
