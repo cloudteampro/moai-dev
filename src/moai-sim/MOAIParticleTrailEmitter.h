@@ -1,3 +1,0 @@
-
-
-// smae as MOAIParticleDistanceEmitter, but 
