@@ -13,10 +13,7 @@ You can work in Lua or C++, and Moai SDK runs on multiple platforms including iO
 ## Download
 Please clone the source in the following way.
 
-    git clone https://github.com/moai/moai-dev.git
-    cd moai-dev
-    git submodule init
-    git submodule update
+    git clone https://github.com/moai/moai-dev.git --recursive
 
 ## Setup
 Tools needed to build the MOAI SDK.
@@ -30,7 +27,7 @@ Tools needed to build the MOAI SDK.
 * [Ant 1.9](http://ant.apache.org/)
 * [CMake 2.8.11](http://www.cmake.org/)
 * [Ruby 1.9](http://www.ruby-lang.org/)
-* [Visual Studio 2010](http://www.visualstudio.com/) (Windows only)
+* [Visual Studio 2015 Community](https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx) (Windows only)
 * [XCode 4 or 5](https://itunes.apple.com/app/xcode/id497799835?mt=12) (Mac only)
 * [MinGW64 TCC](http://tdm-gcc.tdragon.net/) (Windows only, needed for android luajit support or can build mingw version of moai)
 * [Emscripten](https://github.com/kripken/emscripten)
@@ -64,8 +61,7 @@ Please set the following environment variables.
 
 ### Windows
 
-	set MOAI_BIN=<install_path>\moai-dev\release\win32\host-sdl\bin
-	set MOAI_CONFIG=<install_path>\moai-dev\samples\config
+	set MOAI_BIN=%MOAI_SDK_HOME%\bin\win32\
 
 ## Build Hosts
 Please build according to the following procedure.
@@ -73,7 +69,9 @@ Please build according to the following procedure.
 ### Windows Host
 
 	cd moai-dev
-	.\bin\build-win.bat
+	cd bin
+	env-win
+	build-windows
 	
 ### OSX Host
 
@@ -129,8 +127,6 @@ Please build according to the following procedure.
 ## Create IDE Projects
  
 ### Visual Studio
-Execute `create-projects-win.bat` in `moai-dev\bin`.
-By default, this creates a Visual Studio 2012 solution in `moai-dev\cmake\projects\vs2012`. To generate project files for a different version of Visual Studio, specify your desired version (`vs2008`, `vs2010`, `vs2012`, or `vs2013`) as a command-line argument.
 
 ### iOS
     ./bin/create-projects-ios.sh

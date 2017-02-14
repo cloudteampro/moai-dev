@@ -21,6 +21,9 @@ xcodebuild -derivedDataPath build -configuration Release -workspace moai.xcworks
 
 #---------------------------------------------------------------
 # build osx static
-xcodebuild -derivedDataPath build -configuration Release -workspace moai.xcworkspace -scheme moai-osx-static || exit 1
+echo
+echo "osx-static build:"
+echo " skipped"
+# xcodebuild -derivedDataPath build -configuration Release -workspace moai.xcworkspace -scheme moai-osx-static || exit 1
 
 popd > /dev/null

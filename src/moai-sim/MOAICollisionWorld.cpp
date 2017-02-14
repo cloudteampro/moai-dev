@@ -489,7 +489,7 @@ void MOAICollisionWorld::RemoveProp ( MOAICollisionProp& prop ) {
 //----------------------------------------------------------------//
 void MOAICollisionWorld::Render () {
 
-	MOAIDebugLines& debugLines = MOAIDebugLines::Get ();
+	//MOAIDebugLines& debugLines = MOAIDebugLines::Get ();
 	MOAIDraw& draw = MOAIDraw::Get ();
 	UNUSED ( draw ); // mystery warning in vs2008
 

@@ -202,8 +202,8 @@ void MOAIDraw::EndDrawString () {
 	// Get the context data
 	assert( g_CurrentTextDrawContext );
 	
-	MOAIFont& font = *g_CurrentTextDrawContext->mFont;
-	float scale = g_CurrentTextDrawContext->mScale;
+	// MOAIFont& font = *g_CurrentTextDrawContext->mFont;
+	//float scale = g_CurrentTextDrawContext->mScale;
 	float shadowOffsetX = g_CurrentTextDrawContext->mShadowOffsetX;
 	float shadowOffsetY = g_CurrentTextDrawContext->mShadowOffsetY;
 
@@ -229,14 +229,14 @@ void MOAIDraw::EndDrawString () {
 			offsetY = 0;
 		}
 
-		STLList < GlyphPlacement >::const_iterator it;
-		for ( it = g_CurrentTextDrawContext->mGlyphs.begin (); it != g_CurrentTextDrawContext->mGlyphs.end (); ++it ) {
+		//STLList < GlyphPlacement >::const_iterator it;
+		//for ( it = g_CurrentTextDrawContext->mGlyphs.begin (); it != g_CurrentTextDrawContext->mGlyphs.end (); ++it ) {
 
-			const GlyphPlacement& glyphPlacement = *it;
-			MOAIGlyph* glyph = glyphPlacement.glyph;
-			MOAISingleTexture* glyphTexture = font.GetGlyphTexture ( *glyph );
+			//const GlyphPlacement& glyphPlacement = *it;
+			//MOAIGlyph* glyph = glyphPlacement.glyph;
+			//MOAISingleTexture* glyphTexture = font.GetGlyphTexture ( *glyph );
 			//glyph->Draw ( *glyphTexture, glyphPlacement.x + offsetX, glyphPlacement.y + offsetY, scale, scale );
-		}
+		//}
 	}
 
 	// Restore render state
@@ -414,7 +414,7 @@ int MOAIDraw::_drawEllipse ( lua_State* L ) {
 //----------------------------------------------------------------//
 // TODO: doxygen
 int MOAIDraw::_drawGrid ( lua_State* L ) {
-	
+
 	MOAILuaState state ( L );
 	
 	ZLRect rect;
@@ -426,7 +426,7 @@ int MOAIDraw::_drawGrid ( lua_State* L ) {
 	float nx	= state.GetValue < float >( 5, 0.0f );
 	float ny	= state.GetValue < float >( 6, 0.0f );
 	
-	MOAIDraw::DrawGrid ( rect, nx, ny );
+	MOAIDraw::DrawGrid ( rect, ( u32 )nx, ( u32 )ny );
 	return 0;
 }
 
@@ -882,6 +882,11 @@ void MOAIDraw::DrawBezierCurve ( const ZLCubicBezier2D& bezier ) {
 //----------------------------------------------------------------//
 void MOAIDraw::DrawElements ( MOAIGfxBuffer* vtxBuffer, MOAIVertexFormat* vtxFormat, u32 count ) {
 	
+	// TODO: fix this?
+
+	UNUSED ( vtxBuffer );
+	UNUSED ( vtxFormat );
+	UNUSED ( count );
 //	MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get ();
 //	
 //	MOAIGfxDevice::Get ().UnbindBufferedDrawing ();

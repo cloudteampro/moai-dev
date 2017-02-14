@@ -184,7 +184,7 @@ int MOAISpineSkeleton::_getAnimations ( lua_State *L ) {
 	lua_newtable ( state );
 	
 	spSkeletonData *data = self->mSkeleton->data;
-	for ( u32 i = 0; i < data->animationsCount; ++i ) {
+	for ( u32 i = 0; i < ( u32 )data->animationsCount; ++i ) {
 		cc8 *name = data->animations [ i ]->name;
 		state.SetFieldByIndex ( -1, i + 1, name );
 	}
@@ -399,7 +399,7 @@ int MOAISpineSkeleton::_setAttachment ( lua_State* L ) {
 		state.Push ( false );
 		return 1;
 	}
-	state.Push (( bool ) spSkeleton_setAttachment ( self->mSkeleton, slotName, attachmentName ));
+	state.Push ( spSkeleton_setAttachment ( self->mSkeleton, slotName, attachmentName ) != 0 );
 	return 1;
 }
 
@@ -477,7 +477,7 @@ int MOAISpineSkeleton::_setMix ( lua_State *L ) {
 	
 	cc8* fromName = state.GetValue < cc8* >( 2, "" );
 	cc8* toName   = state.GetValue < cc8* >( 3, "" );
-	float duration  = state.GetValue < float >( 4, 0.1 );
+	float duration  = state.GetValue < float >( 4, 0.1f );
 	
 	if ( !self->mSkeleton || !self->mAnimationState ) {
 		MOAILogF ( state, ZLLog::LOG_ERROR, "MOAISpineSkeleton not initialized (ensure that initAnimationState was called) \n" );
@@ -700,7 +700,7 @@ void MOAISpineSkeleton::Draw ( int subPrimID, float lod ) {
 	int		trianglesCount = 0;
 	int		blendMode = -1;
 	
-	for ( u32 i = 0; i < mSkeleton->slotsCount; ++i ) {
+	for ( u32 i = 0; i < ( u32 )mSkeleton->slotsCount; ++i ) {
 		
 		spSlot* slot = mSkeleton->drawOrder [ i ];
 		if ( !slot->attachment ) {
@@ -803,14 +803,14 @@ void MOAISpineSkeleton::Draw ( int subPrimID, float lod ) {
 			
 			gfxDevice.BeginPrimIndexed ( ZGL_PRIM_TRIANGLES, ( u32 )( vtxTop / 2 ), trianglesCount );
 
-			for ( u32 i = 0; i < vtxTop; i += 2 ) {
-				gfxDevice.WriteVtx ( mVertices [ i ], mVertices [ i + 1 ], 0 );
-				gfxDevice.WriteUV ( uvs [ i ], uvs [ i + 1 ] );
+			for ( u32 j = 0; j < vtxTop; j += 2 ) {
+				gfxDevice.WriteVtx ( mVertices [ j ], mVertices [ j + 1 ], 0 );
+				gfxDevice.WriteUV ( uvs [ j ], uvs [ j + 1 ] );
 				gfxDevice.WriteFinalColor4b ();
 			}
 
-			for ( u32 i = 0; i < trianglesCount; ++i ) {
-				gfxDevice.WriteIndex ( triangles [ i ]);
+			for ( u32 j = 0; j < ( u32 )trianglesCount; ++j ) {
+				gfxDevice.WriteIndex (( u16 )triangles [ j ]);
 			}
 
 			gfxDevice.EndPrimIndexed ();
@@ -965,10 +965,10 @@ u32 MOAISpineSkeleton::OnGetModelBounds ( ZLBox &bounds ) {
 //----------------------------------------------------------------//
 void MOAISpineSkeleton::OnUpdate ( double step ) {
 	if ( this->mSkeleton ) {
-		spSkeleton_update ( this->mSkeleton, step );
+		spSkeleton_update ( this->mSkeleton, ( float )step );
 		
 		if ( mAnimationState ) {
-			spAnimationState_update ( mAnimationState, step );
+			spAnimationState_update ( mAnimationState, ( float )step );
 			spAnimationState_apply ( mAnimationState, mSkeleton );
 		}
 		
@@ -1056,7 +1056,7 @@ void MOAISpineSkeleton::SetMix ( cc8* fromName, cc8* toName, float duration ) {
 void MOAISpineSkeleton::UpdateBounds () {
 
 	mSkeletonBounds.Init ( FLT_MAX, -FLT_MAX, -FLT_MAX, FLT_MAX, 0.f, 0.f );
-	for ( u32 i = 0; i < mSkeleton->slotsCount; ++i ) {
+	for ( u32 i = 0; i < ( u32 )mSkeleton->slotsCount; ++i ) {
 		spSlot* slot = mSkeleton->drawOrder [ i ];
 		if ( !slot->attachment ) {
 			continue;
@@ -1096,8 +1096,8 @@ void MOAISpineSkeleton::UpdateBounds () {
 				break;
 		}
 		
-		for ( u32 i = 0; i < mVertices.GetTop (); i += 2 ) {
-			mSkeletonBounds.Grow ( ZLVec3D ( mVertices [ i ], mVertices [ i + 1 ], 0.0f ));
+		for ( u32 j = 0; j < mVertices.GetTop (); j += 2 ) {
+			mSkeletonBounds.Grow ( ZLVec3D ( mVertices [ j ], mVertices [ j + 1 ], 0.0f ));
 		}
 	}
 }

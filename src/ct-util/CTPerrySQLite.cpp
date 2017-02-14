@@ -156,7 +156,7 @@ int	CTPerrySQLite::_setBatch ( lua_State* L ) {
 	query.append ( ";" );
 	
 	sqlite3_stmt* stmt = 0;
-	int result = sqlite3_prepare_v2 ( self->mConnection, query, -1, &stmt, NULL );
+	//int result = sqlite3_prepare_v2 ( self->mConnection, query, -1, &stmt, NULL );
 	
 	if ( !stmt ) return 0;
 	
@@ -192,6 +192,11 @@ int	CTPerrySQLite::_setBatch ( lua_State* L ) {
 
 //----------------------------------------------------------------//
 static int AffirmCallback ( void* unused, int columnCount, char **text, char **name ) {
+	UNUSED ( unused );
+	UNUSED ( columnCount );
+	UNUSED ( text );
+	UNUSED ( name );
+
 	return 0;
 }
 
@@ -282,6 +287,8 @@ void CTPerrySQLite::RegisterLuaFuncs ( MOAILuaState& state ) {
 	@out	nil
 **/
 int	CTPerrySQLiteLogger::_setErrorHandler ( lua_State* L ) {
+	UNUSED ( L );
+
 	MOAI_LUA_SETUP_SINGLE ( CTPerrySQLiteLogger, "" )
 	
 	self->GetErrorHandler ().SetRef ( state, 1 );
@@ -290,6 +297,8 @@ int	CTPerrySQLiteLogger::_setErrorHandler ( lua_State* L ) {
 
 //----------------------------------------------------------------//
 static void ReportError ( void* unused, int error, cc8* message ) {
+
+	UNUSED ( unused );
 	
 	if ( error == SQLITE_OK ) return;
 	

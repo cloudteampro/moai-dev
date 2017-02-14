@@ -38,6 +38,23 @@
 //----------------------------------------------------------------//
 int main ( int argc, char** argv ) {
 
+#ifdef _DEBUG
+	printf ( "DEBUG BUILD\n" );
+#elif WIN32
+	bool console = false;
+
+	// if ( argc > 1 ) {
+	// 	if ( strcasecmp ( argv [ argc - 1 ], "-console" ) == 0 ) {
+	// 		console = true;
+	// 		argc = argc - 1;
+	// 	}
+	// }
+
+	if ( !console ) {
+		FreeConsole ();
+	}
+#endif
+
 	SDLHost ( argc, argv );
     return 0;
 }

@@ -116,8 +116,8 @@ int MOAIGfxBuffer::_scheduleFlush ( lua_State* L ) {
 //================================================================//
 
 //----------------------------------------------------------------//
-void MOAIGfxBuffer::BindVertexFormat ( MOAIVertexFormat* format ) {
-}
+//void MOAIGfxBuffer::BindVertexFormat ( MOAIVertexFormat* format ) {
+//}
 
 //----------------------------------------------------------------//
 void MOAIGfxBuffer::Clear () {
@@ -344,6 +344,7 @@ void MOAIGfxBuffer::ScheduleFlush () {
 
 //----------------------------------------------------------------//
 void MOAIGfxBuffer::SerializeIn ( MOAILuaState& state, MOAIDeserializer& serializer ) {
+	UNUSED ( serializer );
 
 	u32 totalVBOs		= state.GetField < u32 >( -1, "mTotalVBOs", 0 );
 	u32 size			= state.GetField < u32 >( -1, "mSize", 0 );
@@ -357,6 +358,7 @@ void MOAIGfxBuffer::SerializeIn ( MOAILuaState& state, MOAIDeserializer& seriali
 		STLString zipString = lua_tostring ( state, -1 );
 		size_t unzipLen = zipString.zip_inflate ( this->mData, size );
 		assert ( unzipLen == size ); // TODO: fail gracefully
+		UNUSED ( unzipLen ); // TODO: this *should* be handled by the zl assert redefine
 		
 		this->Seek ( size, SEEK_SET );
 	}
@@ -368,6 +370,7 @@ void MOAIGfxBuffer::SerializeIn ( MOAILuaState& state, MOAIDeserializer& seriali
 
 //----------------------------------------------------------------//
 void MOAIGfxBuffer::SerializeOut ( MOAILuaState& state, MOAISerializer& serializer ) {
+	UNUSED ( serializer );
 
 	u32 size = ( u32 )this->GetLength ();
 

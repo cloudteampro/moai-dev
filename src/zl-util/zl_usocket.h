@@ -26,6 +26,7 @@
 #ifndef ZL_USOCKET_H
 #define ZL_USOCKET_H
 
+#ifndef _WIN32
 #include <errno.h>
 #include <unistd.h>
 #include <fcntl.h>
@@ -42,4 +43,5 @@ typedef int zl_socket;
 
 #define SOCKET_INVALID ( -1 )
 
+#endif
 #endif

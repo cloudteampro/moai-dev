@@ -204,10 +204,6 @@ void Init ( int argc, char** argv ) {
 	SDL_Init ( SDL_INIT_EVERYTHING );
 	PrintMoaiVersion ();
 
-	#ifdef _DEBUG
-		printf ( "DEBUG BUILD\n" );
-	#endif
-
 	AKUAppInitialize ();
 	AKUModulesAppInitialize ();
 
@@ -375,6 +371,8 @@ void SetScreenDpi() {
 //----------------------------------------------------------------//
 void MainLoop () {
 
+	SDL_InitSubSystem ( SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER ); // for win32 correct joystick work
+
 	SDL_GameControllerAddMappingsFromFile ( "gamecontrollerdb.txt" );
 
 	ZLLeanArray < GameController > gameControllers;
@@ -456,7 +454,7 @@ void MainLoop () {
 							const int32_t y = sdlEvent.wheel.y; 
 
 							//XXX: x or y ?
-							AKUEnqueueWheelEvent ( InputDeviceID::DEVICE, InputSensorID::MOUSE_WHEEL, y );
+							AKUEnqueueWheelEvent ( InputDeviceID::DEVICE, InputSensorID::MOUSE_WHEEL, ( float )y );
 						}
 					break;
 

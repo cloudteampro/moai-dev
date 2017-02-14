@@ -154,7 +154,8 @@ ZLBox MOAIGfxPrimDeck2D::ComputeMaxBounds () {
 
 //----------------------------------------------------------------//
 bool MOAIGfxPrimDeck2D::Contains ( u32 idx, const ZLVec2D& vec ) {
-
+	UNUSED ( idx );
+	UNUSED ( vec );
 	// TODO
 	return false;
 }
@@ -196,7 +197,7 @@ void MOAIGfxPrimDeck2D::DrawIndex ( u32 idx, MOAIMaterialBatch& materials, ZLVec
 
 		for ( u32 i = idxBase; i < idxTop; ++i ) {
 
-			gfxDevice.WriteIndex ( this->mIndices [ i ]);
+			gfxDevice.WriteIndex (( u16 )this->mIndices [ i ]);
 		}
 
 		gfxDevice.EndPrimIndexed ();
@@ -255,7 +256,7 @@ u32 MOAIGfxPrimDeck2D::ExportGeometry ( u32 idx, MOAIVertexFormat& format, MOAIS
 
 //----------------------------------------------------------------//
 ZLBox MOAIGfxPrimDeck2D::GetItemBounds ( u32 idx ) {
-	
+	UNUSED ( idx );
 	// TODO
 	ZLBox bounds;
 
@@ -265,6 +266,10 @@ ZLBox MOAIGfxPrimDeck2D::GetItemBounds ( u32 idx ) {
 
 //----------------------------------------------------------------//
 bool MOAIGfxPrimDeck2D::Inside ( u32 idx, MOAIMaterialBatch& materials, u32 granularity, ZLVec3D vec, float pad ) {
+	UNUSED ( idx );
+	UNUSED ( materials );
+	UNUSED ( granularity );
+	UNUSED ( vec );
 	UNUSED ( pad );
 
 	// TODO
