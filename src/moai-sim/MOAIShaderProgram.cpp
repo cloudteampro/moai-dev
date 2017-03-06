@@ -496,6 +496,7 @@ void MOAIShaderProgram::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "GLOBAL_WORLD_VIEW",					( u32 )GLOBAL_WORLD_VIEW );
 	state.SetField ( -1, "GLOBAL_WORLD_VIEW_INVERSE",			( u32 )GLOBAL_WORLD_VIEW_INVERSE );
 	state.SetField ( -1, "GLOBAL_WORLD_VIEW_PROJ",				( u32 )GLOBAL_WORLD_VIEW_PROJ );
+	state.SetField ( -1, "GLOBAL_NORMAL",						( u32 )GLOBAL_NORMAL );
 }
 
 //----------------------------------------------------------------//
@@ -669,6 +670,22 @@ void MOAIShaderProgram::UpdateGlobals () {
 				mtx.Append ( proj );
 				
 				if ( uniform.SetValue ( mtx, true )) {
+					uniform.Bind ();
+				}
+				break;
+			}
+			case GLOBAL_NORMAL: {
+				
+				ZLMatrix4x4 mtx = world;
+				mtx.Append ( view );
+//				mtx.Append ( proj );
+				
+				ZLMatrix3x3 finalMtx;
+				finalMtx.Init ( mtx );
+				finalMtx.Inverse ();
+				finalMtx.Transpose ();
+				
+				if ( uniform.SetValue ( finalMtx, true )) {
 					uniform.Bind ();
 				}
 				break;

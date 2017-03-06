@@ -111,6 +111,7 @@ public:
 		GLOBAL_WORLD_VIEW,
 		GLOBAL_WORLD_VIEW_INVERSE,
 		GLOBAL_WORLD_VIEW_PROJ,
+		GLOBAL_NORMAL,
 	};
 
 	//----------------------------------------------------------------//
