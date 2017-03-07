@@ -667,8 +667,9 @@ void MOAISpineSkeleton::ClearTrack ( int trackId ) {
 }
 
 //----------------------------------------------------------------//
-void MOAISpineSkeleton::Draw ( int subPrimID, float lod ) {
+void MOAISpineSkeleton::Draw ( int subPrimID, float lod, MOAIMaterialBatch* materialsOverride ) {
 	UNUSED ( subPrimID );
+	UNUSED ( materialsOverride );
 	
 	if ( !this->IsVisible ( lod )) return;
 	if ( !this->mSkeleton ) return;

@@ -559,7 +559,7 @@ bool MOAIGraphicsProp::ApplyAttrOp ( u32 attrID, MOAIAttrOp& attrOp, u32 op ) {
 }
 
 //----------------------------------------------------------------//
-void MOAIGraphicsProp::Draw ( int subPrimID, float lod ) {
+void MOAIGraphicsProp::Draw ( int subPrimID, float lod, MOAIMaterialBatch* materialsOverride ) {
 	UNUSED ( subPrimID );
 
 	if ( !this->IsVisible ( lod )) return;
@@ -570,7 +570,7 @@ void MOAIGraphicsProp::Draw ( int subPrimID, float lod ) {
 	this->LoadVertexTransform ();
 	this->LoadUVTransform ();
 	
-	MOAIMaterialBatch& materials = this->mDeck->ResolveMaterialBatch ( this->mMaterialBatch );
+	MOAIMaterialBatch& materials = materialsOverride ? *materialsOverride : this->mDeck->ResolveMaterialBatch ( this->mMaterialBatch );
 	
 	if ( this->mGrid ) {
 	

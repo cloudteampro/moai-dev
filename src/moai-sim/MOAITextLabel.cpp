@@ -766,8 +766,9 @@ void MOAITextLabel::BuildLocalToWorldMtx ( ZLAffine3D& localToWorldMtx ) {
 }
 
 //----------------------------------------------------------------//
-void MOAITextLabel::Draw ( int subPrimID, float lod ) {
+void MOAITextLabel::Draw ( int subPrimID, float lod, MOAIMaterialBatch* materialsOverride ) {
 	UNUSED ( subPrimID );
+	UNUSED ( materialsOverride );
 	
 	if ( !this->IsVisible ( lod )) return;
 	if ( this->IsClear ()) return;

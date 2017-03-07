@@ -340,9 +340,10 @@ int MOAIProfilerReportBox::_disableProfiling ( lua_State* L ) {
 //================================================================//
 
 //----------------------------------------------------------------//
-void MOAIProfilerReportBox::Draw ( int subPrimID, float lod ) {
+void MOAIProfilerReportBox::Draw ( int subPrimID, float lod, MOAIMaterialBatch* materialsOverride ) {
 	UNUSED ( subPrimID );
 	UNUSED ( lod );
+	UNUSED ( materialsOverride );
 	
 	if ( !mFont ) return;
 	

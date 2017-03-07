@@ -373,8 +373,9 @@ void MOAIParticleSystem::ClearQueue () {
 }
 
 //----------------------------------------------------------------//
-void MOAIParticleSystem::Draw ( int subPrimID, float lod ) {
+void MOAIParticleSystem::Draw ( int subPrimID, float lod, MOAIMaterialBatch* materialsOverride ) {
 	UNUSED ( subPrimID );
+	UNUSED ( materialsOverride );
 
 	if ( !this->IsVisible ( lod )) return;
 	if ( !this->mDeck ) return;

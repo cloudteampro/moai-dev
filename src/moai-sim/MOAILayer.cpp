@@ -742,9 +742,10 @@ void MOAILayer::AffirmPartition () {
 #include <moai-sim/MOAIVertexFormatMgr.h>
 
 //----------------------------------------------------------------//
-void MOAILayer::Draw ( int subPrimID, float lod  ) {
+void MOAILayer::Draw ( int subPrimID, float lod, MOAIMaterialBatch* materialsOverride ) {
 	UNUSED ( subPrimID );
 	UNUSED ( lod );
+	UNUSED ( materialsOverride );
     
    	if ( !this->IsVisible ()) return;
 	if ( !this->mViewport ) return;
@@ -844,19 +845,20 @@ void MOAILayer::Draw ( int subPrimID, float lod  ) {
 void MOAILayer::DrawProps ( MOAIPartitionResultBuffer& buffer, float lod ) {
 
 	u32 totalResults = buffer.GetTotalResults ();
-
+	MOAIMaterialBatch* materials = this->mMaterialBatch;
+	
 	if ( this->mLODMode == LOD_FROM_PROP_SORT_Z ) {
 		for ( u32 i = 0; i < totalResults; ++i ) {
 			MOAIPartitionResult* result = buffer.GetResultUnsafe ( i );
 			MOAIGraphicsProp* graphicsProp = result->mProp->AsType < MOAIGraphicsProp >();
-			graphicsProp->Draw ( result->mSubPrimID, result->mLoc.mZ * lod );
+			graphicsProp->Draw ( result->mSubPrimID, result->mLoc.mZ * lod, materials );
 		}
 	}
 	else {
 		for ( u32 i = 0; i < totalResults; ++i ) {
 			MOAIPartitionResult* result = buffer.GetResultUnsafe ( i );
 			MOAIGraphicsProp* graphicsProp = result->mProp->AsType < MOAIGraphicsProp >();
-			graphicsProp->Draw ( result->mSubPrimID, lod );
+			graphicsProp->Draw ( result->mSubPrimID, lod, materials );
 		}
 	}
 }
@@ -1065,7 +1067,7 @@ void MOAILayer::RegisterLuaFuncs ( MOAILuaState& state ) {
 //----------------------------------------------------------------//
 void MOAILayer::Render () {
 	
-	this->Draw ( MOAIProp::NO_SUBPRIM_ID, 0.0f );
+	this->Draw ( MOAIProp::NO_SUBPRIM_ID, 0.0f, 0 );
 }
 
 //----------------------------------------------------------------//

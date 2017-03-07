@@ -85,7 +85,7 @@ public:
 	void			AffirmBoneHierarchy		( spBone* bone );
 	void			ClearAllTracks			();
 	void			ClearTrack				( int trackId );
-	void			Draw					( int subPrimID, float lod );
+	void			Draw					( int subPrimID, float lod, MOAIMaterialBatch* materialsOverride = 0 );
 	void			DrawDebug				( int subPrimID, float lod );
 	void			Init					( spSkeletonData* skeletonData );
 	void			InitAnimationState		( spAnimationStateData* animData );
