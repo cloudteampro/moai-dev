@@ -164,6 +164,26 @@ int MOAIColor::_setColor ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+int MOAIColor::_setHSV ( lua_State *L ) {
+	MOAI_LUA_SETUP ( MOAIColor, "U" )
+	
+	float h = state.GetValue < float >( 2, 0.f );
+	float s = state.GetValue < float >( 3, 1.f );
+	float v = state.GetValue < float >( 4, 1.f );
+	float a = state.GetValue < float >( 5, 1.f );
+	
+	ZLColorVec color;
+	color.FromHSV ( h, s, v );
+	color.mA = a;
+	if ( !color.Compare ( *self )) {
+		self->Set ( color.mR, color.mG, color.mB, color.mA );
+		self->ScheduleUpdate ();
+	}
+	
+	return 0;
+}
+
+//----------------------------------------------------------------//
 /**	@lua	setParent
 	@text	This method has been deprecated. Use MOAINode setAttrLink instead.
 	
@@ -305,6 +325,7 @@ void MOAIColor::RegisterLuaFuncs ( MOAILuaState& state ) {
 		{ "moveColor",				_moveColor },
 		{ "seekColor",				_seekColor },
 		{ "setColor",				_setColor },
+		{ "setHSV",					_setHSV },
 		{ "setParent",				_setParent },
 		{ NULL, NULL }
 	};
