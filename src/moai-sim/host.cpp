@@ -100,6 +100,7 @@ void AKUSimContextInitialize () {
 	REGISTER_LUA_CLASS ( MOAIParticleCallbackPlugin )
 	REGISTER_LUA_CLASS ( MOAIParticleDistanceEmitter )
 	REGISTER_LUA_CLASS ( MOAIParticleForce )
+	REGISTER_LUA_CLASS ( MOAIParticleRibbonSystem )
 	REGISTER_LUA_CLASS ( MOAIParticleScript )
 	REGISTER_LUA_CLASS ( MOAIParticleState )
 	REGISTER_LUA_CLASS ( MOAIParticleSystem )

@@ -22,6 +22,12 @@ class MOAIParticleState;
 class MOAIParticleSystem :
 	public MOAIGraphicsProp,
 	public MOAIAction {
+protected:
+
+	ZLLeanArray < AKUParticleSprite >	mSprites;
+	u32									mSpriteTop;
+	u32									mDrawOrder;
+
 private:
 
 	ZLLeanArray < MOAIParticleState* >	mStates;
@@ -35,10 +41,6 @@ private:
 	MOAIParticle*						mHead;
 	MOAIParticle*						mTail;
 	MOAIParticle*						mFree;
-	
-	ZLLeanArray < AKUParticleSprite >	mSprites;
-	u32									mSpriteTop;
-	u32									mDrawOrder;
 	
 	bool								mComputeBounds;
 	ZLBox								mParticleBounds;

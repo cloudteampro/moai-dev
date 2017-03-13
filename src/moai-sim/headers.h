@@ -83,6 +83,7 @@
 #include <moai-sim/MOAIParticleForce.h>
 #include <moai-sim/MOAIParticlePexPlugin.h>
 #include <moai-sim/MOAIParticlePlugin.h>
+#include <moai-sim/MOAIParticleRibbonSystem.h>
 #include <moai-sim/MOAIParticleScript.h>
 #include <moai-sim/MOAIParticleState.h>
 #include <moai-sim/MOAIParticleSystem.h>
