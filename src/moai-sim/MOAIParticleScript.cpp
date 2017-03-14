@@ -367,6 +367,35 @@ int MOAIParticleScript::_mul ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+/**	@lua	noise
+	@text	r0 = perlin ( v0, v1 )
+	
+	@in		MOAIParticleScript self
+	@in		number r0
+	@in		number v0
+	@in		number v1
+	@out	nil
+ */
+int MOAIParticleScript::_noise ( lua_State* L ) {
+	IMPL_LUA_PARTICLE_OP ( NOISE, "RVV" )
+}
+
+//----------------------------------------------------------------//
+/**	@lua	noise3D
+	@text	r0 = perlin3D ( v0, v1, v2 )
+	
+	@in		MOAIParticleScript self
+	@in		number r0
+	@in		number v0
+	@in		number v1
+	@in		number v2
+	@out	nil
+ */
+int MOAIParticleScript::_noise3D ( lua_State* L ) {
+	IMPL_LUA_PARTICLE_OP ( NOISE_3D, "RVVV" )
+}
+
+//----------------------------------------------------------------//
 /**	@lua	norm
 	@text	<p>r0 = v0 / |v|</p>
 			<p>r1 = v1 / |v|</p>
@@ -783,6 +812,8 @@ void MOAIParticleScript::RegisterLuaFuncs ( MOAILuaState& state ) {
 		{ "ease",				_ease },
 		{ "easeDelta",			_easeDelta },
 		{ "mul",				_mul },
+		{ "noise",				_noise },
+		{ "noise3D",			_noise3D },
 		{ "norm",				_norm },
 		{ "rand",				_rand },
 		{ "randInt",			_randInt },
@@ -979,6 +1010,29 @@ void MOAIParticleScript::Run ( MOAIParticleSystem& system, MOAIParticle& particl
 				
 				if ( r0 ) {
 					*r0 = v0 * v1;
+				}
+				break;
+			
+			case NOISE:
+				
+				READ_ADDR ( r0, bytecode );
+				READ_VALUE ( v0, bytecode );
+				READ_VALUE ( v1, bytecode );
+				
+				if ( r0 ) {
+					*r0 = this->mNoise.GetValueFractal ( v0, v1 );
+				}
+				break;
+			
+			case NOISE_3D:
+				
+				READ_ADDR ( r0, bytecode );
+				READ_VALUE ( v0, bytecode );
+				READ_VALUE ( v1, bytecode );
+				READ_VALUE ( v2, bytecode );
+				
+				if ( r0 ) {
+					*r0 = this->mNoise.GetValueFractal ( v0, v1, v2 );
 				}
 				break;
 			

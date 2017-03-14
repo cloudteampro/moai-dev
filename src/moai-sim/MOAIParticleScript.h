@@ -4,6 +4,8 @@
 #ifndef	MOAIPARTICLESCRIPT_H
 #define	MOAIPARTICLESCRIPT_H
 
+#include <contrib/FastNoise.h>
+
 class MOAIParticle;
 class MOAIParticleState;
 class MOAIParticleSystem;
@@ -74,6 +76,8 @@ private:
 		EASE,
 		EASE_DELTA,
 		MUL,
+		NOISE,
+		NOISE_3D,
 		NORM,
 		RAND,
 		RAND_INT,
@@ -114,6 +118,8 @@ private:
 	
 	ZLLeanArray < u8 > mBytecode;
 
+	FastNoise	mNoise;
+	
 	bool	mCompiled;
 	float	mLiveRegisters [ LIVE_REG_COUNT ]; // TODO: OK to let user reserve these?
 
@@ -128,6 +134,8 @@ private:
 	static int		_ease				( lua_State* L );
 	static int		_easeDelta			( lua_State* L );
 	static int		_mul				( lua_State* L );
+	static int		_noise				( lua_State* L );
+	static int		_noise3D			( lua_State* L );
 	static int		_norm				( lua_State* L );
 	static int		_packConst			( lua_State* L );
 	static int		_packLiveReg		( lua_State* L );

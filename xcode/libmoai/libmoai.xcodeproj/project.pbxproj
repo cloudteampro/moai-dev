@@ -211,6 +211,10 @@
 		20C6DF021E76D239005E2D37 /* MOAIParticleRibbonSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 20C6DEFE1E76D239005E2D37 /* MOAIParticleRibbonSystem.h */; };
 		20C6DF041E76D6D3005E2D37 /* MOAIParticleRibbonSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 20C6DEFD1E76D239005E2D37 /* MOAIParticleRibbonSystem.cpp */; };
 		20C6DF051E76D6D6005E2D37 /* MOAIParticleRibbonSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 20C6DEFD1E76D239005E2D37 /* MOAIParticleRibbonSystem.cpp */; };
+		20C6DF081E7812A7005E2D37 /* FastNoise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 20C6DF061E7812A7005E2D37 /* FastNoise.cpp */; };
+		20C6DF091E7812A7005E2D37 /* FastNoise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 20C6DF061E7812A7005E2D37 /* FastNoise.cpp */; };
+		20C6DF0A1E7812A7005E2D37 /* FastNoise.h in Headers */ = {isa = PBXBuildFile; fileRef = 20C6DF071E7812A7005E2D37 /* FastNoise.h */; };
+		20C6DF0B1E7812A7005E2D37 /* FastNoise.h in Headers */ = {isa = PBXBuildFile; fileRef = 20C6DF071E7812A7005E2D37 /* FastNoise.h */; };
 		20FD8C481D0AFE40006587F8 /* MOAIBoneArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 20FD8C461D0AFE40006587F8 /* MOAIBoneArray.cpp */; };
 		20FD8C491D0AFE40006587F8 /* MOAIBoneArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 20FD8C461D0AFE40006587F8 /* MOAIBoneArray.cpp */; };
 		20FD8C4A1D0AFE40006587F8 /* MOAIBoneArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 20FD8C471D0AFE40006587F8 /* MOAIBoneArray.h */; };
@@ -5519,6 +5523,8 @@
 		20B070981C0498BF00F83147 /* MOAIGfxPrimDeck2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIGfxPrimDeck2D.h; sourceTree = "<group>"; };
 		20C6DEFD1E76D239005E2D37 /* MOAIParticleRibbonSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIParticleRibbonSystem.cpp; sourceTree = "<group>"; };
 		20C6DEFE1E76D239005E2D37 /* MOAIParticleRibbonSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIParticleRibbonSystem.h; sourceTree = "<group>"; };
+		20C6DF061E7812A7005E2D37 /* FastNoise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FastNoise.cpp; path = ../../3rdparty/contrib/FastNoise.cpp; sourceTree = "<group>"; };
+		20C6DF071E7812A7005E2D37 /* FastNoise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FastNoise.h; path = ../../3rdparty/contrib/FastNoise.h; sourceTree = "<group>"; };
 		20FD8C461D0AFE40006587F8 /* MOAIBoneArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIBoneArray.cpp; sourceTree = "<group>"; };
 		20FD8C471D0AFE40006587F8 /* MOAIBoneArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIBoneArray.h; sourceTree = "<group>"; };
 		20FD8C5C1D142E7F006587F8 /* MOAIBone.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIBone.cpp; sourceTree = "<group>"; };
@@ -8569,6 +8575,8 @@
 				03240A7813564CAF000ADC60 /* moai_utf8.h */,
 				20A0B0271A5020740072F513 /* edtaa3func.c */,
 				20A0B0281A5020740072F513 /* edtaa3func.h */,
+				20C6DF061E7812A7005E2D37 /* FastNoise.cpp */,
+				20C6DF071E7812A7005E2D37 /* FastNoise.h */,
 				66E345451614CA710021FC4B /* moai_whirlpool.c */,
 				663704111612812C002D0D27 /* moai_whirlpool.h */,
 			);
@@ -13172,6 +13180,7 @@
 				CDCDD0121A23F233008779B5 /* expat_external.h in Headers */,
 				03240CD713564CB0000ADC60 /* ftheader.h in Headers */,
 				CD73D0271BA3FFB800BB50C3 /* utf.h in Headers */,
+				20C6DF0B1E7812A7005E2D37 /* FastNoise.h in Headers */,
 				03240CD813564CB0000ADC60 /* ftmodule.h in Headers */,
 				03240CD913564CB0000ADC60 /* ftoption.h in Headers */,
 				03240CDA13564CB0000ADC60 /* ftstdlib.h in Headers */,
@@ -13344,6 +13353,7 @@
 				CD73D0261BA3FFB800BB50C3 /* utf.h in Headers */,
 				03240EF413564CB0000ADC60 /* tinyxml.h in Headers */,
 				CD80F63F135BBCFF006B0683 /* MOAIIso8601DateFormatter.h in Headers */,
+				20C6DF0A1E7812A7005E2D37 /* FastNoise.h in Headers */,
 				CD69AB3D17FA6CF90053E028 /* dict.h in Headers */,
 				CD69AB4917FA6CF90053E028 /* priorityq.h in Headers */,
 				CDD48B7917FA794E00525B77 /* SFMT-params216091.h in Headers */,
@@ -16612,6 +16622,7 @@
 				03240CE613564CB0000ADC60 /* pcf.c in Sources */,
 				03240CE713564CB0000ADC60 /* pfr.c in Sources */,
 				03240CE813564CB0000ADC60 /* psaux.c in Sources */,
+				20C6DF091E7812A7005E2D37 /* FastNoise.cpp in Sources */,
 				CD73D0091BA3FFB800BB50C3 /* error.c in Sources */,
 				03240CE913564CB0000ADC60 /* pshinter.c in Sources */,
 				03240CEA13564CB0000ADC60 /* psmodule.c in Sources */,
@@ -16860,6 +16871,7 @@
 				CD490093141AB6EC00913D80 /* loslib.c in Sources */,
 				CD490094141AB6EC00913D80 /* lparser.c in Sources */,
 				CD490096141AB6EC00913D80 /* lstate.c in Sources */,
+				20C6DF081E7812A7005E2D37 /* FastNoise.cpp in Sources */,
 				CD490098141AB6EC00913D80 /* lstring.c in Sources */,
 				CD49009A141AB6EC00913D80 /* lstrlib.c in Sources */,
 				CD49009B141AB6EC00913D80 /* ltable.c in Sources */,
