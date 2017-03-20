@@ -92,6 +92,7 @@
 #include <moai-sim/MOAIPartitionLevel.h>
 #include <moai-sim/MOAIPartitionResultBuffer.h>
 #include <moai-sim/MOAIPartitionResultMgr.h>
+#include <moai-sim/MOAIPath.h>
 #include <moai-sim/MOAIPathFinder.h>
 #include <moai-sim/MOAIPathTerrainDeck.h>
 #include <moai-sim/MOAIPinTransform.h>
