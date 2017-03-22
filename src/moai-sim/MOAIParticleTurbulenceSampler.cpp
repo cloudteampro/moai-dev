@@ -50,10 +50,14 @@ float MOAIParticleTurbulenceSampler::GetLuma ( MOAIImage& image, int x, int y ) 
 //----------------------------------------------------------------//
 ZLVec3D MOAIParticleTurbulenceSampler::Eval ( const ZLVec3D& loc ) {
 	
+	if ( this->mSize == 0 ) {
+		return ZLVec3D ( 0.f, 0.f, 0.f );
+	}
+	
 	int i = ZLFloat::Round ( loc.mX );
 	int j = ZLFloat::Round ( loc.mY );
 	
-	if ( this->mWrap && this->mSize != 0 ) {
+	if ( this->mWrap ) {
 		i = i % this->mSize;
 		if ( i < 0 ) i += this->mSize;
 
