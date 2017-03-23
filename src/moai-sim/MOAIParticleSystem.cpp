@@ -119,16 +119,33 @@ int  MOAIParticleSystem::_isIdle( lua_State* L ) {
 int MOAIParticleSystem::_pushParticle ( lua_State* L ) {
 	MOAI_LUA_SETUP ( MOAIParticleSystem, "U" )
 
-	float x = state.GetValue < float >( 2, 0.0f );
-	float y = state.GetValue < float >( 3, 0.0f );
+	if ( state.IsType ( 7, LUA_TNUMBER )) {
+		float x = state.GetValue < float >( 2, 0.0f );
+		float y = state.GetValue < float >( 3, 0.0f );
+		float z = state.GetValue < float >( 4, 0.0f );
+		
+		float dx = state.GetValue < float >( 5, 0.0f );
+		float dy = state.GetValue < float >( 6, 0.0f );
+		float dz = state.GetValue < float >( 7, 0.0f );
+		
+		u32 stateIdx = state.GetValue < u32 >( 8, 1 ) - 1;
+		
+		bool result = self->PushParticle ( x, y, z, dx, dy, dz, stateIdx );
+		lua_pushboolean ( state, result );
+	}
+	else {
+		float x = state.GetValue < float >( 2, 0.0f );
+		float y = state.GetValue < float >( 3, 0.0f );
+		
+		float dx = state.GetValue < float >( 4, 0.0f );
+		float dy = state.GetValue < float >( 5, 0.0f );
+		
+		u32 stateIdx = state.GetValue < u32 >( 6, 1 ) - 1;
+		
+		bool result = self->PushParticle ( x, y, dx, dy, stateIdx );
+		lua_pushboolean ( state, result );
+	}
 	
-	float dx = state.GetValue < float >( 4, 0.0f );
-	float dy = state.GetValue < float >( 5, 0.0f );
-
-	u32 stateIdx = state.GetValue < u32 >( 6, 1 ) - 1;
-
-	bool result = self->PushParticle ( x, y, dx, dy, stateIdx );
-	lua_pushboolean ( state, result );
 	return 1;
 }
 
