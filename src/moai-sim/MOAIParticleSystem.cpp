@@ -418,14 +418,19 @@ void MOAIParticleSystem::Draw ( int subPrimID, float lod, MOAIMaterialBatch* mat
 	
 	ZLAffine3D billboardMtx;
 	u32 billboard = this->mBillboard;
-	// TODO: support another billboard types
+	// TODO: support another billboard modes
 	if ( this->mBillboard == BILLBOARD_NORMAL ) {
 		
 		MOAIRenderMgr& renderMgr = MOAIRenderMgr::Get ();
 		MOAICamera* camera = renderMgr.GetCamera ();
 		
 		u32 billboard = camera ? this->mBillboard : BILLBOARD_NONE;
-		billboardMtx.Init ( camera->GetBillboardMtx ());
+		if ( camera ) {
+			billboardMtx = camera->GetLocalToWorldMtx ();
+			billboardMtx.m [ ZLAffine3D::C3_R0 ] = 0.0f;
+			billboardMtx.m [ ZLAffine3D::C3_R1 ] = 0.0f;
+			billboardMtx.m [ ZLAffine3D::C3_R2 ] = 0.0f;
+		}
 	}
 	
 	for ( u32 i = 0; i < total; ++i ) {
@@ -437,17 +442,32 @@ void MOAIParticleSystem::Draw ( int subPrimID, float lod, MOAIMaterialBatch* mat
 		else {
 			idx = ( base + ( total - 1 - i )) % maxSprites;
 		}
-				
+		
 		AKUParticleSprite& sprite = this->mSprites [ idx ];
 		gfxDevice.SetPenColor ( sprite.mRed, sprite.mGreen, sprite.mBlue, sprite.mAlpha );
 		
-		spriteMtx.ScRoTr ( sprite.mXScl, sprite.mYScl, 1.0f, 0.0f, 0.0f, sprite.mZRot * ( float )D2R, sprite.mXLoc, sprite.mYLoc, sprite.mZLoc );
-		
 		drawingMtx = this->GetLocalToWorldMtx ();
+		spriteMtx.ScRoTr ( sprite.mXScl, sprite.mYScl, 1.0f, 0.0f, 0.0f, sprite.mZRot * ( float )D2R, sprite.mXLoc, sprite.mYLoc, sprite.mZLoc );
 		drawingMtx.Prepend ( spriteMtx );
 		
 		if ( billboard == BILLBOARD_NORMAL ) {
-			drawingMtx.Prepend ( billboardMtx );
+			
+			ZLVec3D worldLoc;
+			worldLoc.mX = drawingMtx.m [ ZLAffine3D::C3_R0 ];
+			worldLoc.mY = drawingMtx.m [ ZLAffine3D::C3_R1 ];
+			worldLoc.mZ = drawingMtx.m [ ZLAffine3D::C3_R2 ];
+			
+			drawingMtx.m [ ZLAffine3D::C3_R0 ] = 0.0f;
+			drawingMtx.m [ ZLAffine3D::C3_R1 ] = 0.0f;
+			drawingMtx.m [ ZLAffine3D::C3_R2 ] = 0.0f;
+			
+			// orient to camera
+			drawingMtx.Append ( billboardMtx );
+			
+			// restore world loc
+			drawingMtx.m [ ZLAffine3D::C3_R0 ] = worldLoc.mX;
+			drawingMtx.m [ ZLAffine3D::C3_R1 ] = worldLoc.mY;
+			drawingMtx.m [ ZLAffine3D::C3_R2 ] = worldLoc.mZ;
 		}
 		
 		gfxDevice.SetVertexTransform ( MOAIGfxDevice::VTX_WORLD_TRANSFORM, drawingMtx );

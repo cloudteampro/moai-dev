@@ -32,14 +32,34 @@
 class FastNoise
 {
 public:
-	FastNoise(int seed = 1337) { SetSeed(seed); CalculateFractalBounding(); };
-	~FastNoise() { delete m_cellularNoiseLookup; }
 
 	enum NoiseType { Value, ValueFractal, Perlin, PerlinFractal, Simplex, SimplexFractal, Cellular, WhiteNoise, Cubic, CubicFractal };
 	enum Interp { Linear, Hermite, Quintic };
 	enum FractalType { FBM, Billow, RigidMulti };
 	enum CellularDistanceFunction { Euclidean, Manhattan, Natural };
 	enum CellularReturnType { CellValue, NoiseLookup, Distance, Distance2, Distance2Add, Distance2Sub, Distance2Mul, Distance2Div };
+
+	FastNoise(int seed = 1337) :
+	
+		m_frequency ( 0.01f ),
+		m_interp ( Quintic ),
+		m_noiseType ( Simplex ),
+	
+		m_octaves ( 3 ),
+		m_lacunarity ( 2.0f ),
+		m_gain ( 0.5f ),
+		m_fractalType ( FBM ),
+		
+		m_cellularDistanceFunction ( Euclidean ),
+		m_cellularReturnType ( CellValue ),
+		m_cellularNoiseLookup ( 0 ),
+	
+		m_gradientPerturbAmp ( 1.0f / 0.45f ) {
+
+		SetSeed(seed);
+		CalculateFractalBounding();
+	};
+	~FastNoise() { delete m_cellularNoiseLookup; }
 
 	// Returns seed used for all noise types
 	void SetSeed(int seed);
@@ -154,17 +174,24 @@ protected:
 	unsigned char m_perm[512];
 	unsigned char m_perm12[512];
 
-	int m_seed = 1337;
-	float m_frequency = 0.01f;
-	Interp m_interp = Quintic;
-	NoiseType m_noiseType = Simplex;
+	int m_seed;
+	float m_frequency;
+	Interp m_interp;
+	NoiseType m_noiseType;
 
-	int m_octaves = 3;
-	float m_lacunarity = 2.0f;
-	float m_gain = 0.5f;
-	FractalType m_fractalType = FBM;
+	int m_octaves;
+	float m_lacunarity;
+	float m_gain;
+	FractalType m_fractalType;
 
 	float m_fractalBounding;
+	
+	CellularDistanceFunction m_cellularDistanceFunction;
+	CellularReturnType m_cellularReturnType;
+	FastNoise* m_cellularNoiseLookup;
+	
+	float m_gradientPerturbAmp;
+	
 	void CalculateFractalBounding()
 	{
 		float amp = m_gain;
@@ -176,12 +203,6 @@ protected:
 		}
 		m_fractalBounding = 1.0f / ampFractal;
 	}
-
-	CellularDistanceFunction m_cellularDistanceFunction = Euclidean;
-	CellularReturnType m_cellularReturnType = CellValue;
-	FastNoise* m_cellularNoiseLookup = nullptr;
-
-	float m_gradientPerturbAmp = 1.0f / 0.45f;
 
 	//2D
 	float SingleValueFractalFBM(float x, float y);
