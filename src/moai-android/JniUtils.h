@@ -8,6 +8,7 @@
 #include "moai-sim/pch.h"
 
 #include <jni.h>
+#include <jansson.h>
 #include <moai-android/MOAIJString.h>
 
 //================================================================//

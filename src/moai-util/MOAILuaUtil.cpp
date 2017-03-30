@@ -1,6 +1,7 @@
 // Copyright (c) 2010-2011 Zipline Games, Inc. All Rights Reserved.
 // http://getmoai.com
 
+#ifndef MOAI_WITH_LUAJIT //can't convert luajit bytecode
 #include "pch.h"
 #include <moai-util/MOAILuaUtil.h>
 
@@ -294,3 +295,5 @@ void MOAILuaUtil::RegisterLuaClass ( MOAILuaState& state ) {
 void MOAILuaUtil::RegisterLuaFuncs ( MOAILuaState& state ) {
 	UNUSED ( state );
 }
+
+#endif
