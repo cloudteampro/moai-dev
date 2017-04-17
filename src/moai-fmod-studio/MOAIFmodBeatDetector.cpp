@@ -9,6 +9,7 @@
 #include <fmod_dsp.h>
 #include <fmod_dsp_effects.h>
 
+const float MOAIFmodBeatDetector::HISTORY_FILTER = 0.02f;
 
 //================================================================//
 // local

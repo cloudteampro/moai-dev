@@ -49,6 +49,7 @@ include(cmake-modules/platform-common.cmake)
 include(cmake-modules/module-setup.cmake)
 
 add_subdirectory(libmoai)
+add_subdirectory("../../hosts/android/cmake" "doba")
 
 #install target so we can use a prebuilt one next time
 install(EXPORT libmoai DESTINATION cmake )
