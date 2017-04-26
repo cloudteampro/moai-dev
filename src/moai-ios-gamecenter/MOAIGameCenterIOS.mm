@@ -49,6 +49,10 @@ int MOAIGameCenterIOS::_authenticatePlayer ( lua_State* L ) {
 					UIViewController* rootVC = [ window rootViewController ];
 					[ rootVC presentViewController:viewcontroller animated:YES completion:nil ];
 				}
+				else {
+					MOAIGameCenterIOS::Get ().mIsGameCenterSupported = FALSE;
+					MOAIGameCenterIOS::Get ().InvokeListener ( MOAIGameCenterIOS::SIGN_IN_FAIL );
+				}
 			}
 			else {
 				if ([ error code ] == GKErrorNotSupported || [ error code ] == GKErrorGameUnrecognized ) {

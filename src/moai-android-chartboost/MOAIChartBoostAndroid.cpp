@@ -96,7 +96,7 @@ int	MOAIChartBoostAndroid::_showRewardedVideo ( lua_State* L ) {
 MOAIChartBoostAndroid::MOAIChartBoostAndroid () {
 
 	RTTI_SINGLE ( MOAIGlobalEventSource )
-	 
+	
 	this->SetClass ( "com/moaisdk/chartboost/MoaiChartBoost" );
 
 	this->mJava_CacheInterstitial		= this->GetStaticMethod ( "cacheInterstitial", "(Ljava/lang/String;)V" );
