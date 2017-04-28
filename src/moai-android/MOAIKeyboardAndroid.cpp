@@ -118,6 +118,10 @@ int MOAIKeyboardAndroid::_showPhoneKeyboard( lua_State* L ) {
     return _showKeyboardHelper( "showPhoneKeyboard" );
 }
 
+int MOAIKeyboardAndroid::_showASCIIKeyboard( lua_State* L ) {
+    return _showKeyboardHelper( "showASCIIKeyboard" );
+}
+
 int MOAIKeyboardAndroid::_showKeyboardHelper( const char* j_func ) {
     JNI_GET_ENV ( jvm, env );
 
@@ -223,6 +227,7 @@ void MOAIKeyboardAndroid::RegisterLuaClass ( MOAILuaState& state ) {
         { "showNumberKeyboard",     _showNumberKeyboard },
         { "showDateTimeKeyboard",   _showDateTimeKeyboard },
         { "showPhoneKeyboard",      _showPhoneKeyboard },
+        { "showASCIIKeyboard",      _showASCIIKeyboard },
 
         { "hideKeyboard",   _hideKeyboard },
 		{ "setText",      _setText },

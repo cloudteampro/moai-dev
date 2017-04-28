@@ -34,6 +34,7 @@ private:
 	static int _showNumberKeyboard   ( lua_State* L );
 	static int _showDateTimeKeyboard ( lua_State* L );
 	static int _showPhoneKeyboard    ( lua_State* L );
+	static int _showASCIIKeyboard	 ( lua_State* L );
 
 	static int _hideKeyboard         ( lua_State* L );
 	static int _setListener          ( lua_State* L );
