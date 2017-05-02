@@ -317,7 +317,7 @@ public:
 	//----------------------------------------------------------------//
 	void Quantize ( TYPE decimalPlace ) {
 
-		TYPE reciprocal = 1 / decimalPlace;
+		TYPE reciprocal = 1.0f / decimalPlace;
 		
 		this->mX = (( s32 )this->mX * reciprocal ) * decimalPlace;
 		this->mY = (( s32 )this->mY * reciprocal ) * decimalPlace;
