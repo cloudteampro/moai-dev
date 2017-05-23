@@ -47,7 +47,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "YES"
-      customWorkingDirectory = "/Users/vavius/moai/frameworks/moai-framework/samples/particles"
+      customWorkingDirectory = "/Users/vavius/moai/frameworks/moai-framework/samples"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
@@ -64,7 +64,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "space3d.lua"
+            argument = "imgui_test.lua"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

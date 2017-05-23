@@ -18,109 +18,12 @@
 * 3. This notice may not be removed or altered from any source distribution.
 **/
 
-#include "libimgui/imgui.h"
-#include "libimgui/imgui_dock.h"
-#include "imgui_impl.h"
-#include "wrap_imgui_impl.h"
+#include <libimgui/imgui.h>
+#include <libimgui/imgui_dock.h>
+#include <moai-imgui/wrap_imgui_impl.h>
 
 #include <vector>
 #include <cstring>
-
-/*
-** Love implentation functions
-*/
-static bool g_inited = false;
-static int	g_textures[250]; // Should be enough
-
-static int w_ShutDown(lua_State *L)
-{
-	ShutDown();
-	return 0;
-}
-
-static int w_NewFrame(lua_State *L)
-{
-	if (!g_inited)
-	{
-		Init(L);
-		g_inited = true;
-	}
-	NewFrame();
-	return 0;
-}
-
-// Inputs
-
-static int w_MouseMoved(lua_State *L)
-{
-	int x = (int)luaL_checknumber(L, 1);
-	int y = (int)luaL_checknumber(L, 2);
-	MouseMoved(x, y);
-	return 0;
-}
-
-static int w_MousePressed(lua_State *L)
-{
-	int button = (int)luaL_checknumber(L, 1);
-	MousePressed(button);
-	return 0;
-}
-
-static int w_MouseReleased(lua_State *L)
-{
-	int button = (int)luaL_checknumber(L, 1);
-	MouseReleased(button);
-	return 0;
-}
-
-static int w_WheelMoved(lua_State *L)
-{
-	int y = (int)luaL_checknumber(L, 1);
-	WheelMoved(y);
-	return 0;
-}
-
-static int w_KeyPressed(lua_State *L)
-{
-	size_t size;
-	const char *key = luaL_checklstring(L, 1, &size);
-	KeyPressed(key);
-	return 0;
-}
-
-static int w_KeyReleased(lua_State *L)
-{
-	size_t size;
-	const char *key = luaL_checklstring(L, 1, &size);
-	KeyReleased(key);
-	return 0;
-}
-
-static int w_TextInput(lua_State *L)
-{
-	size_t size;
-	const char *text = luaL_checklstring(L, 1, &size);
-	TextInput(text);
-	return 0;
-}
-
-static int w_GetWantCaptureMouse(lua_State *L)
-{
-	lua_pushboolean(L, GetWantCaptureMouse());
-	return 1;
-}
-
-static int w_GetWantCaptureKeyboard(lua_State *L)
-{
-	lua_pushboolean(L, GetWantCaptureKeyboard());
-	return 1;
-}
-
-static int w_GetWantTextInput(lua_State *L)
-{
-	lua_pushboolean(L, GetWantTextInput());
-	return 1;
-}
 
 /*
 ** Custom bindings
@@ -150,16 +53,11 @@ static int impl_##name(lua_State *L) { \
   int stackval = 0;
 
 #define TEXTURE_ARG(name) \
-	lua_getglobal(L, "imgui"); \
-	lua_pushvalue(L, arg++); \
-	lua_setfield(L, -2, "textureID"); \
-	luaL_dostring(L, "imgui.textures = imgui.textures or {}\
-					  table.insert(imgui.textures, imgui.textureID)\
-					  return #imgui.textures"); \
-	lua_pop(L, 1); \
-	int index = luaL_checkint(L, 0);\
-	g_textures[index - 1] = index; \
-	void *name = &g_textures[index - 1]; \
+	void* name = 0; \
+	if ( lua_type ( L, arg ) == LUA_TUSERDATA ) { \
+		name = *( void ** )lua_touserdata ( L, arg ); \
+	} \
+	arg++;
 
 #define OPTIONAL_LABEL_ARG(name, value) \
   const char* name; \
@@ -804,18 +702,18 @@ static const struct luaL_Reg imguilib[] = {
   { "BeginChild", w_BeginChild },
 
   // Implementation
-  { "ShutDown", w_ShutDown },
-  { "NewFrame", w_NewFrame },
-  { "MouseMoved", w_MouseMoved },
-  { "MousePressed", w_MousePressed },
-  { "MouseReleased", w_MouseReleased },
-  { "WheelMoved", w_WheelMoved },
-  { "KeyPressed", w_KeyPressed },
-  { "KeyReleased", w_KeyReleased },
-  { "TextInput", w_TextInput },
-  { "GetWantCaptureKeyboard", w_GetWantCaptureKeyboard },
-  { "GetWantCaptureMouse", w_GetWantCaptureMouse },
-  { "GetWantTextInput", w_GetWantTextInput },
+//  { "ShutDown", w_ShutDown },
+//  { "NewFrame", w_NewFrame },
+//  { "MouseMoved", w_MouseMoved },
+//  { "MousePressed", w_MousePressed },
+//  { "MouseReleased", w_MouseReleased },
+//  { "WheelMoved", w_WheelMoved },
+//  { "KeyPressed", w_KeyPressed },
+//  { "KeyReleased", w_KeyReleased },
+//  { "TextInput", w_TextInput },
+//  { "GetWantCaptureKeyboard", w_GetWantCaptureKeyboard },
+//  { "GetWantCaptureMouse", w_GetWantCaptureMouse },
+//  { "GetWantTextInput", w_GetWantTextInput },
   { NULL, NULL }
 };
 
@@ -828,7 +726,7 @@ extern "C" {
   lua_pushnumber(L, val); \
   lua_settable(L, -3);
 
-extern "C" LOVE_IMGUI_EXPORT int luaopen_imgui(lua_State *L)
+extern "C" int luaopen_imgui(lua_State *L)
 {
 	// Enums not handled by iterator yet
 	lua_newtable(L);

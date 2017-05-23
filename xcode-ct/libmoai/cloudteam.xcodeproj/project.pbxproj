@@ -64,11 +64,8 @@
 		202B5F611ED317A100DCA766 /* stb_rect_pack.h in Headers */ = {isa = PBXBuildFile; fileRef = 202B5F561ED317A100DCA766 /* stb_rect_pack.h */; };
 		202B5F621ED317A100DCA766 /* stb_textedit.h in Headers */ = {isa = PBXBuildFile; fileRef = 202B5F571ED317A100DCA766 /* stb_textedit.h */; };
 		202B5F631ED317A100DCA766 /* stb_truetype.h in Headers */ = {isa = PBXBuildFile; fileRef = 202B5F581ED317A100DCA766 /* stb_truetype.h */; };
-		202B5F681ED317DB00DCA766 /* headers.h in Headers */ = {isa = PBXBuildFile; fileRef = 202B5F651ED317DB00DCA766 /* headers.h */; };
 		202B5F691ED317DB00DCA766 /* host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 202B5F661ED317DB00DCA766 /* host.cpp */; };
 		202B5F6A1ED317DB00DCA766 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 202B5F671ED317DB00DCA766 /* host.h */; };
-		202B5F7F1ED3184000DCA766 /* imgui_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 202B5F771ED3184000DCA766 /* imgui_impl.cpp */; };
-		202B5F801ED3184000DCA766 /* imgui_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 202B5F781ED3184000DCA766 /* imgui_impl.h */; };
 		202B5F811ED3184000DCA766 /* imgui_iterator_dock.h in Headers */ = {isa = PBXBuildFile; fileRef = 202B5F791ED3184000DCA766 /* imgui_iterator_dock.h */; };
 		202B5F821ED3184000DCA766 /* imgui_iterator.h in Headers */ = {isa = PBXBuildFile; fileRef = 202B5F7A1ED3184000DCA766 /* imgui_iterator.h */; };
 		202B5F831ED3184000DCA766 /* MOAIImGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 202B5F7B1ED3184000DCA766 /* MOAIImGui.cpp */; };
@@ -79,6 +76,8 @@
 		203DA5C81BDF933C00EC109A /* host.mm in Sources */ = {isa = PBXBuildFile; fileRef = 203DA5C41BDF933C00EC109A /* host.mm */; };
 		203DA5C91BDF933C00EC109A /* MOAICrashlyticsIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 203DA5C51BDF933C00EC109A /* MOAICrashlyticsIOS.h */; };
 		203DA5CA1BDF933C00EC109A /* MOAICrashlyticsIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 203DA5C61BDF933C00EC109A /* MOAICrashlyticsIOS.mm */; };
+		20473F721ED4931C0094E16C /* pch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 20473F701ED4931C0094E16C /* pch.cpp */; };
+		20473F731ED4931C0094E16C /* pch.h in Headers */ = {isa = PBXBuildFile; fileRef = 20473F711ED4931C0094E16C /* pch.h */; };
 		2049B9611CAA8CD6005B83B3 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 2049B95D1CAA8CD6005B83B3 /* host.h */; };
 		2049B9621CAA8CD6005B83B3 /* host.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2049B95E1CAA8CD6005B83B3 /* host.mm */; };
 		2049B9631CAA8CD6005B83B3 /* MOAIAdToAppIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 2049B95F1CAA8CD6005B83B3 /* MOAIAdToAppIOS.h */; };
@@ -939,11 +938,8 @@
 		202B5F561ED317A100DCA766 /* stb_rect_pack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_rect_pack.h; sourceTree = "<group>"; };
 		202B5F571ED317A100DCA766 /* stb_textedit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_textedit.h; sourceTree = "<group>"; };
 		202B5F581ED317A100DCA766 /* stb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_truetype.h; sourceTree = "<group>"; };
-		202B5F651ED317DB00DCA766 /* headers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = headers.h; path = "moai-imgui/headers.h"; sourceTree = "<group>"; };
 		202B5F661ED317DB00DCA766 /* host.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = host.cpp; path = "moai-imgui/host.cpp"; sourceTree = "<group>"; };
 		202B5F671ED317DB00DCA766 /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = host.h; path = "moai-imgui/host.h"; sourceTree = "<group>"; };
-		202B5F771ED3184000DCA766 /* imgui_impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = imgui_impl.cpp; path = "moai-imgui/imgui_impl.cpp"; sourceTree = "<group>"; };
-		202B5F781ED3184000DCA766 /* imgui_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imgui_impl.h; path = "moai-imgui/imgui_impl.h"; sourceTree = "<group>"; };
 		202B5F791ED3184000DCA766 /* imgui_iterator_dock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imgui_iterator_dock.h; path = "moai-imgui/imgui_iterator_dock.h"; sourceTree = "<group>"; };
 		202B5F7A1ED3184000DCA766 /* imgui_iterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imgui_iterator.h; path = "moai-imgui/imgui_iterator.h"; sourceTree = "<group>"; };
 		202B5F7B1ED3184000DCA766 /* MOAIImGui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MOAIImGui.cpp; path = "moai-imgui/MOAIImGui.cpp"; sourceTree = "<group>"; };
@@ -955,6 +951,8 @@
 		203DA5C41BDF933C00EC109A /* host.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = host.mm; sourceTree = "<group>"; };
 		203DA5C51BDF933C00EC109A /* MOAICrashlyticsIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAICrashlyticsIOS.h; sourceTree = "<group>"; };
 		203DA5C61BDF933C00EC109A /* MOAICrashlyticsIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MOAICrashlyticsIOS.mm; sourceTree = "<group>"; };
+		20473F701ED4931C0094E16C /* pch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pch.cpp; path = "moai-imgui/pch.cpp"; sourceTree = "<group>"; };
+		20473F711ED4931C0094E16C /* pch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pch.h; path = "moai-imgui/pch.h"; sourceTree = "<group>"; };
 		2049B9541CAA8C8B005B83B3 /* libmoai_ios_adtoapp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmoai_ios_adtoapp.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2049B95D1CAA8CD6005B83B3 /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = host.h; path = "moai-ios-adtoapp/host.h"; sourceTree = "<group>"; };
 		2049B95E1CAA8CD6005B83B3 /* host.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = host.mm; path = "moai-ios-adtoapp/host.mm"; sourceTree = "<group>"; };
@@ -1304,17 +1302,16 @@
 		202B5F641ED317A800DCA766 /* moai-imgui */ = {
 			isa = PBXGroup;
 			children = (
-				202B5F771ED3184000DCA766 /* imgui_impl.cpp */,
-				202B5F781ED3184000DCA766 /* imgui_impl.h */,
 				202B5F791ED3184000DCA766 /* imgui_iterator_dock.h */,
 				202B5F7A1ED3184000DCA766 /* imgui_iterator.h */,
 				202B5F7B1ED3184000DCA766 /* MOAIImGui.cpp */,
 				202B5F7C1ED3184000DCA766 /* MOAIImGui.h */,
 				202B5F7D1ED3184000DCA766 /* wrap_imgui_impl.cpp */,
 				202B5F7E1ED3184000DCA766 /* wrap_imgui_impl.h */,
-				202B5F651ED317DB00DCA766 /* headers.h */,
 				202B5F661ED317DB00DCA766 /* host.cpp */,
 				202B5F671ED317DB00DCA766 /* host.h */,
+				20473F701ED4931C0094E16C /* pch.cpp */,
+				20473F711ED4931C0094E16C /* pch.h */,
 			);
 			name = "moai-imgui";
 			sourceTree = "<group>";
@@ -1726,10 +1723,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				202B5F6A1ED317DB00DCA766 /* host.h in Headers */,
-				202B5F801ED3184000DCA766 /* imgui_impl.h in Headers */,
 				202B5F011ED311E800DCA766 /* MOAIColorBlender.h in Headers */,
 				202B5F021ED311E800DCA766 /* host.h in Headers */,
 				202B5F621ED317A100DCA766 /* stb_textedit.h in Headers */,
+				20473F731ED4931C0094E16C /* pch.h in Headers */,
 				202B5F031ED311E800DCA766 /* CTPerrySQLite.h in Headers */,
 				202B5F5B1ED317A100DCA766 /* imgui.h in Headers */,
 				202B5F821ED3184000DCA766 /* imgui_iterator.h in Headers */,
@@ -1737,7 +1734,6 @@
 				202B5F631ED317A100DCA766 /* stb_truetype.h in Headers */,
 				202B5F861ED3184000DCA766 /* wrap_imgui_impl.h in Headers */,
 				202B5F611ED317A100DCA766 /* stb_rect_pack.h in Headers */,
-				202B5F681ED317DB00DCA766 /* headers.h in Headers */,
 				202B5F841ED3184000DCA766 /* MOAIImGui.h in Headers */,
 				202B5F601ED317A100DCA766 /* imgui_internal.h in Headers */,
 				202B5F5E1ED317A100DCA766 /* imgui_dock.h in Headers */,
@@ -2693,10 +2689,10 @@
 				202B5F071ED311E800DCA766 /* CTHelper.cpp in Sources */,
 				202B5F081ED311E800DCA766 /* CTUtil.cpp in Sources */,
 				202B5F5D1ED317A100DCA766 /* imgui_dock.cpp in Sources */,
+				20473F721ED4931C0094E16C /* pch.cpp in Sources */,
 				202B5F691ED317DB00DCA766 /* host.cpp in Sources */,
 				202B5F5F1ED317A100DCA766 /* imgui_draw.cpp in Sources */,
 				202B5F091ED311E800DCA766 /* MOAIColorBlender.cpp in Sources */,
-				202B5F7F1ED3184000DCA766 /* imgui_impl.cpp in Sources */,
 				202B5F831ED3184000DCA766 /* MOAIImGui.cpp in Sources */,
 				202B5F0A1ED311E800DCA766 /* CTPerrySQLite.cpp in Sources */,
 				202B5F851ED3184000DCA766 /* wrap_imgui_impl.cpp in Sources */,

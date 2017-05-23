@@ -26,10 +26,4 @@ extern "C" {
 #include <lauxlib.h>
 }
 
-#ifdef WIN32
-#	define LOVE_IMGUI_EXPORT __declspec(dllexport)
-#else
-#	define LOVE_IMGUI_EXPORT
-#endif
-
-extern "C" LOVE_IMGUI_EXPORT int loveopen_imgui(lua_State *L);
+extern "C" int luaopen_imgui ( lua_State *L );

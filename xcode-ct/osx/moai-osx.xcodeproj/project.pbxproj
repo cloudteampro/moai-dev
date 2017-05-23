@@ -13,6 +13,7 @@
 		0300CF68140DC53C00ABCC5B /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CC7B0613DF7F0F00F2DEDE /* IOKit.framework */; };
 		0300CF7B140DC61000ABCC5B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0300CF7A140DC61000ABCC5B /* AudioToolbox.framework */; };
 		0300CF94140DC65100ABCC5B /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0300CF93140DC65100ABCC5B /* AudioUnit.framework */; };
+		20473FBD1ED495CB0094E16C /* libmoai-osx-imgui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20473FBC1ED495CB0094E16C /* libmoai-osx-imgui.a */; };
 		20662B551C53A016004D0132 /* libmoai-osx-fmod-studio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20662B501C539EE6004D0132 /* libmoai-osx-fmod-studio.a */; };
 		20662B5C1C53A033004D0132 /* libmoai-osx-image-jpg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20662B581C53A033004D0132 /* libmoai-osx-image-jpg.a */; };
 		20662B5D1C53A033004D0132 /* libmoai-osx-image-png.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20662B591C53A033004D0132 /* libmoai-osx-image-png.a */; };
@@ -52,6 +53,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		20473FBB1ED495CB0094E16C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20662B371C539EE4004D0132 /* cloudteam.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 202B5F121ED311E800DCA766;
+			remoteInfo = "libmoai-osx-imgui";
+		};
 		20662B451C539EE6004D0132 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 20662B371C539EE4004D0132 /* cloudteam.xcodeproj */;
@@ -203,6 +211,7 @@
 				20662B5D1C53A033004D0132 /* libmoai-osx-image-png.a in Frameworks */,
 				20662B5E1C53A033004D0132 /* libmoai-osx-image-pvr.a in Frameworks */,
 				20662B5F1C53A033004D0132 /* libmoai-osx-image-webp.a in Frameworks */,
+				20473FBD1ED495CB0094E16C /* libmoai-osx-imgui.a in Frameworks */,
 				20662B551C53A016004D0132 /* libmoai-osx-fmod-studio.a in Frameworks */,
 				CDFD8FB11AD8653C0003F415 /* libmoai-osx-3rdparty-core.a in Frameworks */,
 				CDFD8FB21AD8653C0003F415 /* libmoai-osx-3rdparty-crypto.a in Frameworks */,
@@ -262,6 +271,7 @@
 				20662B521C539EE6004D0132 /* libmoai-osx-spine.a */,
 				20EF1B3A1D8574C80016A902 /* libmoai-osx-spine-v3.a */,
 				20662B541C539EE6004D0132 /* libmoai-osx-ct-util.a */,
+				20473FBC1ED495CB0094E16C /* libmoai-osx-imgui.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -408,6 +418,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		20473FBC1ED495CB0094E16C /* libmoai-osx-imgui.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libmoai-osx-imgui.a";
+			remoteRef = 20473FBB1ED495CB0094E16C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		20662B461C539EE6004D0132 /* libmoai-ios-crashlytics.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
