@@ -304,9 +304,9 @@ void MOAIImGuiRenderable::Render () {
 	
 	gfxDevice.ResetState ();
 	renderMgr.SetViewport ( imgui.mViewport );
-
-	zglClearColor ( 0.5, 0.5, 1, 1 );
-	zglClear ( ZGL_CLEAR_COLOR_BUFFER_BIT );
+	
+	ZLRect viewRect = *imgui.mViewport;
+	gfxDevice.SetViewRect ( viewRect );
 	
 	ZLMatrix4x4 proj = imgui.mViewport->GetProjMtx ();
 	gfxDevice.SetVertexTransform ( MOAIGfxDevice::VTX_WORLD_TRANSFORM );
@@ -351,7 +351,7 @@ void MOAIImGuiRenderable::Render () {
 			scissorRect.Init ( cmd.ClipRect.x, cmd.ClipRect.y, cmd.ClipRect.z, cmd.ClipRect.w );
 			
 			gfxDevice.SetTexture (( MOAITexture* )cmd.TextureId );
-//			gfxDevice.SetScissorRect ( scissorRect );
+			gfxDevice.SetScissorRect ( scissorRect );
 			
 			zglDrawElements (
 				ZGL_PRIM_TRIANGLES,
@@ -362,5 +362,8 @@ void MOAIImGuiRenderable::Render () {
 			gfxDevice.IncrementDrawCount ();
 			idxHead += cmd.ElemCount;
 		}
+		
+		gfxDevice.BindVertexBuffer ();
+		gfxDevice.BindVertexFormat ();
 	}
 }
