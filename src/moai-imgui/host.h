@@ -10,5 +10,6 @@
 #include <moai-core/host.h>
 
 AKU_API void	AKUImGuiContextInitialize   ();
+AKU_API int		AKUImGuiGetDesiredCursor	();
 
 #endif

@@ -14,6 +14,7 @@
 int MOAIImGui::_endFrame ( lua_State* L ) {
 	MOAI_LUA_SETUP_SINGLE ( MOAIImGui, "" )
 	
+	self->mDesiredCursor = ImGui::GetMouseCursor ();
 	ImGui::Render ();
 	return 0;
 }
@@ -73,7 +74,7 @@ int MOAIImGui::_init ( lua_State* L ) {
 	
 	cc8* iniPath = state.GetValue < cc8* >( 1, "imgui.ini" );
 
-	ImGuiIO& io = ImGui::GetIO();
+	ImGuiIO& io = ImGui::GetIO ();
 
 	// Create the texture object
 	unsigned char* pixels;
@@ -216,8 +217,9 @@ int MOAIImGui::_setWheelDelta ( lua_State* L ) {
 //================================================================//
 
 //----------------------------------------------------------------//
-MOAIImGui::MOAIImGui () {
-	RTTI_SINGLE ( MOAIRenderable )
+MOAIImGui::MOAIImGui () :
+	mDesiredCursor ( ImGuiMouseCursor_Arrow ) {
+	RTTI_SINGLE ( MOAILuaObject )
 }
 
 //----------------------------------------------------------------//
@@ -275,6 +277,14 @@ void MOAIImGuiVtxBuffer::SetData ( void *data, u32 length ) {
 	this->SetBuffer (( const void* )data, length, length );
 	this->mData = data;
 }
+
+//----------------------------------------------------------------//
+MOAIImGuiVtxBuffer::MOAIImGuiVtxBuffer () {
+	RTTI_BEGIN
+		RTTI_EXTEND ( MOAIVertexBuffer )
+	RTTI_END
+}
+
 
 //================================================================//
 // MOAIImGuiRenderable

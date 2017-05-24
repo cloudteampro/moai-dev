@@ -13,6 +13,7 @@
 		0300CF68140DC53C00ABCC5B /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CC7B0613DF7F0F00F2DEDE /* IOKit.framework */; };
 		0300CF7B140DC61000ABCC5B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0300CF7A140DC61000ABCC5B /* AudioToolbox.framework */; };
 		0300CF94140DC65100ABCC5B /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0300CF93140DC65100ABCC5B /* AudioUnit.framework */; };
+		202B5F8E1ED5B02C00DCA766 /* SDLImGuiHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 202B5F8C1ED5B02C00DCA766 /* SDLImGuiHelper.cpp */; };
 		20473FBD1ED495CB0094E16C /* libmoai-osx-imgui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20473FBC1ED495CB0094E16C /* libmoai-osx-imgui.a */; };
 		20662B551C53A016004D0132 /* libmoai-osx-fmod-studio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20662B501C539EE6004D0132 /* libmoai-osx-fmod-studio.a */; };
 		20662B5C1C53A033004D0132 /* libmoai-osx-image-jpg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20662B581C53A033004D0132 /* libmoai-osx-image-jpg.a */; };
@@ -154,6 +155,8 @@
 		07CC7AF913DF7E9B00F2DEDE /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
 		07CC7AFF13DF7EF200F2DEDE /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		07CC7B0613DF7F0F00F2DEDE /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
+		202B5F8C1ED5B02C00DCA766 /* SDLImGuiHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SDLImGuiHelper.cpp; path = "../../src/host-sdl/SDLImGuiHelper.cpp"; sourceTree = "<group>"; };
+		202B5F8D1ED5B02C00DCA766 /* SDLImGuiHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDLImGuiHelper.h; path = "../../src/host-sdl/SDLImGuiHelper.h"; sourceTree = "<group>"; };
 		20662B371C539EE4004D0132 /* cloudteam.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cloudteam.xcodeproj; path = ../libmoai/cloudteam.xcodeproj; sourceTree = "<group>"; };
 		20662B581C53A033004D0132 /* libmoai-osx-image-jpg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmoai-osx-image-jpg.a"; path = "../../xcode/libmoai/build/Debug/libmoai-osx-image-jpg.a"; sourceTree = "<group>"; };
 		20662B591C53A033004D0132 /* libmoai-osx-image-png.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmoai-osx-image-png.a"; path = "../../xcode/libmoai/build/Debug/libmoai-osx-image-png.a"; sourceTree = "<group>"; };
@@ -344,6 +347,8 @@
 				CDA633101A390CE000F3995F /* SDLHost.cpp */,
 				CDA633111A390CE000F3995F /* SDLHost.h */,
 				CDA633121A390CE000F3995F /* SDLHostMain.cpp */,
+				202B5F8C1ED5B02C00DCA766 /* SDLImGuiHelper.cpp */,
+				202B5F8D1ED5B02C00DCA766 /* SDLImGuiHelper.h */,
 				CD323B031A8040CB00E2FEBB /* SDLJoystick.cpp */,
 				CD323B041A8040CB00E2FEBB /* SDLJoystick.h */,
 				CD323B051A8040CB00E2FEBB /* SDLKeyCodeMapping.cpp */,
@@ -529,6 +534,7 @@
 				CD323B071A8040CB00E2FEBB /* SDLJoystick.cpp in Sources */,
 				CD323B081A8040CB00E2FEBB /* SDLKeyCodeMapping.cpp in Sources */,
 				CDA633151A390CE000F3995F /* SDLHostMain.cpp in Sources */,
+				202B5F8E1ED5B02C00DCA766 /* SDLImGuiHelper.cpp in Sources */,
 				CDA6331D1A390CFB00F3995F /* aku_modules.cpp in Sources */,
 				CDA633141A390CE000F3995F /* SDLHost.cpp in Sources */,
 				CDA6331C1A390CFB00F3995F /* aku_modules_util.cpp in Sources */,
@@ -620,6 +626,7 @@
 					"\"../../src/config\"",
 					"\"../../src/config-default\"",
 					"\"../../3rdparty/sdl2-2.0.0/include\"",
+					"\"../../3rdparty\"",
 				);
 				LIBRARY_SEARCH_PATHS = "\"../../3rdparty/fmod-studio/lib/osx\"";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -681,6 +688,7 @@
 					"\"../../src/config\"",
 					"\"../../src/config-default\"",
 					"\"../../3rdparty/sdl2-2.0.0/include\"",
+					"\"../../3rdparty\"",
 				);
 				LIBRARY_SEARCH_PATHS = "\"../../3rdparty/fmod-studio/lib/osx\"";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;

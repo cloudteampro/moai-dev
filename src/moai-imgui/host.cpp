@@ -15,3 +15,12 @@ void AKUImGuiContextInitialize () {
 	REGISTER_LUA_CLASS ( MOAIImGui )
 	REGISTER_LUA_CLASS ( MOAIImGuiRenderable )
 }
+
+//----------------------------------------------------------------//
+int AKUImGuiGetDesiredCursor () {
+	
+	if ( MOAIImGui::IsValid ()) {
+		return MOAIImGui::Get ().GetDesiredCursor ();
+	}
+	return 0;
+}

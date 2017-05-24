@@ -28,6 +28,8 @@
 #include <limits.h>
 #endif
 
+#include "SDLImGuiHelper.h"
+
 #define UNUSED(p) (( void )p)
 
 namespace InputDeviceID {
@@ -162,6 +164,9 @@ void Init ( int argc, char** argv ) {
 	AKUCreateContext ();
 	AKUModulesContextInitialize ();
 	AKUModulesRunLuaAPIWrapper ();
+	
+	// for now this one is here
+	SDLImGuiContextInitialize ();
 
 	AKUSetInputConfigurationName ( "SDL" );
 
@@ -428,6 +433,7 @@ void MainLoop () {
 		}//end_while
 		
 		AKUModulesUpdate ();
+		SDLImGuiUpdate ();
 		
 		AKURender ();
 		SDL_GL_SwapWindow ( sWindow );

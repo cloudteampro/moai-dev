@@ -12,7 +12,8 @@
 class MOAIImGuiVtxBuffer:
 	public MOAIVertexBuffer {
 public:
-	void			SetData			( void* data, u32 length );
+					MOAIImGuiVtxBuffer	();
+	void			SetData				( void* data, u32 length );
 };
 
 //================================================================//
@@ -24,11 +25,12 @@ class MOAIImGui :
 	public MOAIGlobalClass < MOAIImGui, MOAILuaObject > {
 private:
 	friend class MOAIImGuiRenderable;
-	
+
 	MOAILuaSharedPtr < MOAITexture >		mTexture;
 	MOAILuaSharedPtr < MOAIViewport >		mViewport;
 	MOAILuaSharedPtr < MOAIVertexFormat >	mVtxFormat;
 	MOAILuaSharedPtr < MOAIImGuiVtxBuffer >	mVtxBuffer;
+	ImGuiMouseCursor						mDesiredCursor;
 
 	//----------------------------------------------------------------//
 	static int			_endFrame					( lua_State* L );
@@ -47,6 +49,8 @@ private:
 public:
 	
 	DECL_LUA_SINGLETON ( MOAIImGui )
+	
+	GET ( ImGuiMouseCursor, DesiredCursor, mDesiredCursor )
 
 	//----------------------------------------------------------------//
 	void				InitTexture					( int width, int height, u8* pixels );
