@@ -11,6 +11,13 @@
 // lua
 //================================================================//
 
+int MOAIImGui::_endFrame ( lua_State* L ) {
+	MOAI_LUA_SETUP_SINGLE ( MOAIImGui, "" )
+	
+	ImGui::Render ();
+	return 0;
+}
+
 //----------------------------------------------------------------//
 int MOAIImGui::_getBounds ( lua_State* L ) {
 	MOAI_LUA_SETUP_SINGLE ( MOAIImGui, "" )
@@ -101,11 +108,34 @@ int MOAIImGui::_init ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
-int MOAIImGui::_keyDown ( lua_State* L ) {
+int MOAIImGui::_newFrame ( lua_State* L ) {
+	MOAI_LUA_SETUP_SINGLE ( MOAIImGui, "" )
+	
+	MOAIGfxDevice& device = MOAIGfxDevice::Get ();
+	
+	float w = state.GetValue < float >( 1, device.GetWidth ());
+	float h = state.GetValue < float >( 2, device.GetHeight ());
+	float dt = state.GetValue < float >( 3, 1.0f / 60.f );
+	
+	self->mViewport->Init ( 0.f, 0.f, w, h );
+	self->mViewport->SetScale ( w, -h );
+	
+	ImGuiIO& io = ImGui::GetIO ();
+	
+	io.DisplaySize = ImVec2 ( w, h );
+	io.DisplayFramebufferScale = ImVec2 ( 1.0f, 1.0f );
+	io.DeltaTime = dt;
+	
+	ImGui::NewFrame ();
+	return 0;
+}
+
+//----------------------------------------------------------------//
+int MOAIImGui::_setKeyDown ( lua_State* L ) {
 	MOAI_LUA_SETUP_SINGLE ( MOAIImGui, "" )
 	
 	u32 key = state.GetValue < u32 >( 1, 0 );
-	bool down = state.GetValue < u32 >( 2, false );
+	bool down = state.GetValue < bool >( 2, false );
 	
 	ImGuiIO& io = ImGui::GetIO();
 	
@@ -133,7 +163,7 @@ int MOAIImGui::_keyDown ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
-int MOAIImGui::_textInput ( lua_State* L ) {
+int MOAIImGui::_setTextInput ( lua_State* L ) {
 	MOAI_LUA_SETUP_SINGLE ( MOAIImGui, "" )
 	
 	cc8* str = state.GetValue < cc8* >( 1, 0 );
@@ -145,7 +175,7 @@ int MOAIImGui::_textInput ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
-int MOAIImGui::_mouseMoved ( lua_State* L ) {
+int MOAIImGui::_setMouseMoved ( lua_State* L ) {
 	MOAI_LUA_SETUP_SINGLE ( MOAIImGui, "" )
 
 	float x = state.GetValue < float >( 1, -1 );
@@ -156,7 +186,7 @@ int MOAIImGui::_mouseMoved ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
-int MOAIImGui::_mouseDown ( lua_State* L ) {
+int MOAIImGui::_setMouseDown ( lua_State* L ) {
 	MOAI_LUA_SETUP_SINGLE ( MOAIImGui, "" )
 
 	u32 button = state.GetValue < u32 >( 1, 0 );
@@ -169,36 +199,14 @@ int MOAIImGui::_mouseDown ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
-int MOAIImGui::_newFrame ( lua_State* L ) {
-	MOAI_LUA_SETUP_SINGLE ( MOAIImGui, "" )
-
-	MOAIGfxDevice& device = MOAIGfxDevice::Get ();
-
-	float w = state.GetValue < float >( 1, device.GetWidth ());
-	float h = state.GetValue < float >( 2, device.GetHeight ());
-	float dt = state.GetValue < float >( 3, 1.0f / 60.f );
-	
-	self->mViewport->Init ( 0.f, 0.f, w, h );
-	self->mViewport->SetScale ( w, -h );
-
-	ImGuiIO& io = ImGui::GetIO ();
-
-	io.DisplaySize = ImVec2 ( w, h );
-	io.DisplayFramebufferScale = ImVec2 ( 1.0f, 1.0f );
-	io.DeltaTime = dt;
-
-	ImGui::NewFrame ();
-	
-	ImGui::ShowTestWindow ();
-	
-	return 0;
-}
-
-//----------------------------------------------------------------//
-int MOAIImGui::_wheelMoved ( lua_State* L ) {
+int MOAIImGui::_setWheelDelta ( lua_State* L ) {
 	MOAI_LUA_SETUP_SINGLE ( MOAIImGui, "" )
 	
-	ImGui::GetIO ().MouseWheel = state.GetValue < float >( 1, 0.f );
+	float delta = state.GetValue < float >( 1, 0.f );
+	if ( delta > 1 ) {
+		MOAILogF ( 0, ZLLog::LOG_REPORT, "%f\n", delta);
+	}
+	ImGui::GetIO ().MouseWheel = delta;
 	return 0;
 }
 
@@ -224,17 +232,18 @@ MOAIImGui::~MOAIImGui () {
 void MOAIImGui::RegisterLuaClass ( MOAILuaState& state ) {
 
 	luaL_Reg regTable [] = {
+		{ "endFrame",					_endFrame },
 		{ "getBounds",					_getBounds },
 		{ "getWantCaptureMouse",		_getWantCaptureMouse },
 		{ "getWantCaptureKeyboard",		_getWantCaptureKeyboard },
 		{ "getWantTextInput",			_getWantTextInput },
 		{ "init",						_init },
-		{ "keyDown",					_keyDown },
-		{ "textInput",					_textInput },
-		{ "mouseDown",					_mouseDown },
-		{ "mouseMoved",					_mouseMoved },
 		{ "newFrame",					_newFrame },
-		{ "wheelMoved",					_wheelMoved },
+		{ "setKeyDown",					_setKeyDown },
+		{ "setTextInput",				_setTextInput },
+		{ "setMouseDown",				_setMouseDown },
+		{ "setMouseMoved",				_setMouseMoved },
+		{ "setWheelDelta",				_setWheelDelta },
 		{ NULL, NULL }
 	};
 
@@ -248,13 +257,8 @@ void MOAIImGui::RegisterLuaClass ( MOAILuaState& state ) {
 //----------------------------------------------------------------//
 void MOAIImGui::InitTexture ( int width, int height, u8 *pixels ) {
 	
-	// too much data copying, isn't it?
 	MOAIImage* img = new MOAIImage ();
 	img->Init ( pixels, width, height, ZLColor::RGBA_8888 );
-	
-	ZLFileStream stream;
-	stream.OpenWrite ( "font.png" );
-	bool result = img->Write ( stream, "png" );
 	
 	MOAITexture* texture = new MOAITexture ();
 	texture->Init ( *img, "imgui_font_tex", true );
@@ -294,10 +298,8 @@ void MOAIImGuiRenderable::Render () {
 	MOAIImGui& imgui = MOAIImGui::Get ();
 	if ( !imgui.mVtxBuffer ) return;
 	
-	ImGui::Render ();
 	ImDrawData* draw = ImGui::GetDrawData ();
-	
-	if ( !draw->Valid ) return;
+	if ( !draw ) return;
 	
 	MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get ();
 	MOAIRenderMgr& renderMgr = MOAIRenderMgr::Get ();
@@ -350,6 +352,7 @@ void MOAIImGuiRenderable::Render () {
 			
 			scissorRect.Init ( cmd.ClipRect.x, cmd.ClipRect.y, cmd.ClipRect.z, cmd.ClipRect.w );
 			
+			// TODO: custom textures may need premultiplied alpha blending
 			gfxDevice.SetTexture (( MOAITexture* )cmd.TextureId );
 			gfxDevice.SetScissorRect ( scissorRect );
 			
