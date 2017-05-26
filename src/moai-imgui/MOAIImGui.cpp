@@ -204,9 +204,6 @@ int MOAIImGui::_setWheelDelta ( lua_State* L ) {
 	MOAI_LUA_SETUP_SINGLE ( MOAIImGui, "" )
 	
 	float delta = state.GetValue < float >( 1, 0.f );
-	if ( delta > 1 ) {
-		MOAILogF ( 0, ZLLog::LOG_REPORT, "%f\n", delta);
-	}
 	ImGui::GetIO ().MouseWheel = delta;
 	return 0;
 }
