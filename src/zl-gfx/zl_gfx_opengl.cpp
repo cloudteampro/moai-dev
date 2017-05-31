@@ -265,6 +265,14 @@ GLenum _remapEnum ( u32 zglEnum ) {
 		case ZGL_PIXEL_FORMAT_ALPHA:						return GL_ALPHA;
 		case ZGL_PIXEL_FORMAT_LUMINANCE:					return GL_LUMINANCE;
 		case ZGL_PIXEL_FORMAT_LUMINANCE_ALPHA:				return GL_LUMINANCE_ALPHA;
+		
+		// Depth16 and stencil_index8 are required by OGL ES 2.0 spec.
+		case ZGL_PIXEL_FORMAT_DEPTH_COMPONENT16:			return GL_DEPTH_COMPONENT16;
+		case ZGL_PIXEL_FORMAT_STENCIL_INDEX8:				return GL_STENCIL_INDEX8;
+		
+		#if !defined ( MOAI_OS_NACL ) && !defined ( MOAI_OS_IPHONE ) && !defined ( MOAI_OS_BLACKBERRY ) && !defined ( MOAI_OS_ANDROID ) && !defined ( MOAI_OS_HTML )
+			case ZGL_PIXEL_FORMAT_DEPTH_COMPONENT24:		return GL_DEPTH_COMPONENT24;
+		#endif
 
 		#if !defined ( MOAI_OS_NACL ) && !defined ( MOAI_OS_IPHONE ) && !defined ( MOAI_OS_BLACKBERRY ) && !defined ( MOAI_OS_ANDROID ) && !defined ( MOAI_OS_HTML )
 			case ZGL_PIXEL_FORMAT_RED:						return GL_RED;
