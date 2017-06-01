@@ -7,6 +7,13 @@
 #include <moai-imgui/MOAIImGui.h>
 #include <moai-imgui/wrap_imgui_impl.h>
 
+#ifdef MOAI_OS_WINDOWS
+	#define NOC_FILE_DIALOG_IMPLEMENTATION
+	#define NOC_FILE_DIALOG_WIN32
+#endif
+#include <moai-imgui/noc_file_dialog.h>
+
+
 //================================================================//
 // lua
 //================================================================//
@@ -132,6 +139,42 @@ int MOAIImGui::_newFrame ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+/**	@lua	openFileDialog
+	@text	Native file dialog
+	
+	@opt	number	flags. Bitwise combination of MOAIImGui.FILE_DIALOG_OPEN, MOAIImGui.FILE_DIALOG_SAVE
+					MOAIImGui.FILE_DIALOG_DIR, MOAIImGui.FILE_DIALOG_CONFIRM
+	@opt	string	Filter list.
+					A list of strings separated by '\0' of the form:
+						"name1 reg1 name2 reg2 ..."
+					The last value is followed by two '\0'.
+					For example, to filter png and jpeg files, you can use:
+						"png\0*.png\0jpeg\0*.jpeg\0"
+					You can also separate patterns with ';':
+						"jpeg\0*.jpg;*.jpeg\0"
+	@opt	string	Default directory path to use
+	@opt	string	Default file name to use
+	
+	@out	string	User selected file name. nil if canceled
+*/
+int MOAIImGui::_openFileDialog ( lua_State *L ) {
+	MOAI_LUA_SETUP_SINGLE ( MOAIImGui, "" )
+	
+	u32 flags	= state.GetValue < u32 >( 1, NOC_FILE_DIALOG_OPEN );
+	cc8* filter = state.GetValue < cc8* >( 2, 0 );
+	cc8* dir	= state.GetValue < cc8* >( 3, 0 );
+	cc8* name	= state.GetValue < cc8* >( 4, 0 );
+	
+	cc8* result = noc_file_dialog_open ( flags, filter, dir, name );
+	if ( result ) {
+		state.Push ( result );
+		return 1;
+	}
+	
+	return 0;
+}
+
+//----------------------------------------------------------------//
 int MOAIImGui::_setKeyDown ( lua_State* L ) {
 	MOAI_LUA_SETUP_SINGLE ( MOAIImGui, "" )
 	
@@ -229,7 +272,12 @@ MOAIImGui::~MOAIImGui () {
 
 //----------------------------------------------------------------//
 void MOAIImGui::RegisterLuaClass ( MOAILuaState& state ) {
-
+	
+	state.SetField ( -1, "FILE_DIALOG_OPEN",			( u32 )NOC_FILE_DIALOG_OPEN );
+	state.SetField ( -1, "FILE_DIALOG_SAVE",			( u32 )NOC_FILE_DIALOG_SAVE );
+	state.SetField ( -1, "FILE_DIALOG_DIR",				( u32 )NOC_FILE_DIALOG_DIR );
+	state.SetField ( -1, "FILE_DIALOG_CONFIRM",			( u32 )NOC_FILE_DIALOG_OVERWRITE_CONFIRMATION );
+	
 	luaL_Reg regTable [] = {
 		{ "endFrame",					_endFrame },
 		{ "getBounds",					_getBounds },
@@ -238,6 +286,7 @@ void MOAIImGui::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "getWantTextInput",			_getWantTextInput },
 		{ "init",						_init },
 		{ "newFrame",					_newFrame },
+		{ "openFileDialog",				_openFileDialog },
 		{ "setKeyDown",					_setKeyDown },
 		{ "setTextInput",				_setTextInput },
 		{ "setMouseDown",				_setMouseDown },

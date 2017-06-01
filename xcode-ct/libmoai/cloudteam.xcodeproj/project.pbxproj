@@ -43,6 +43,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		200BB14F1EE0814F00D8D889 /* noc_file_dialog.h in Headers */ = {isa = PBXBuildFile; fileRef = 200BB14E1EE0814F00D8D889 /* noc_file_dialog.h */; };
+		200BB18B1EE0873100D8D889 /* noc_file_dialog_osx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 200BB18A1EE0873100D8D889 /* noc_file_dialog_osx.mm */; };
 		202B5F011ED311E800DCA766 /* MOAIColorBlender.h in Headers */ = {isa = PBXBuildFile; fileRef = 20B070DC1C10804D00F83147 /* MOAIColorBlender.h */; };
 		202B5F021ED311E800DCA766 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 206BA0491BDE92D60021D349 /* host.h */; };
 		202B5F031ED311E800DCA766 /* CTPerrySQLite.h in Headers */ = {isa = PBXBuildFile; fileRef = 20D42A8E1D82CD1A00D0B90A /* CTPerrySQLite.h */; };
@@ -926,6 +928,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		200BB14E1EE0814F00D8D889 /* noc_file_dialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = noc_file_dialog.h; path = "moai-imgui/noc_file_dialog.h"; sourceTree = "<group>"; };
+		200BB18A1EE0873100D8D889 /* noc_file_dialog_osx.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = noc_file_dialog_osx.mm; path = "moai-imgui/noc_file_dialog_osx.mm"; sourceTree = "<group>"; };
 		202B5F121ED311E800DCA766 /* libmoai-osx-imgui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-osx-imgui.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		202B5F4E1ED317A100DCA766 /* imconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imconfig.h; sourceTree = "<group>"; };
 		202B5F4F1ED317A100DCA766 /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
@@ -1306,6 +1310,8 @@
 				202B5F7A1ED3184000DCA766 /* imgui_iterator.h */,
 				202B5F7B1ED3184000DCA766 /* MOAIImGui.cpp */,
 				202B5F7C1ED3184000DCA766 /* MOAIImGui.h */,
+				200BB14E1EE0814F00D8D889 /* noc_file_dialog.h */,
+				200BB18A1EE0873100D8D889 /* noc_file_dialog_osx.mm */,
 				202B5F7D1ED3184000DCA766 /* wrap_imgui_impl.cpp */,
 				202B5F7E1ED3184000DCA766 /* wrap_imgui_impl.h */,
 				202B5F661ED317DB00DCA766 /* host.cpp */,
@@ -1737,6 +1743,7 @@
 				202B5F841ED3184000DCA766 /* MOAIImGui.h in Headers */,
 				202B5F601ED317A100DCA766 /* imgui_internal.h in Headers */,
 				202B5F5E1ED317A100DCA766 /* imgui_dock.h in Headers */,
+				200BB14F1EE0814F00D8D889 /* noc_file_dialog.h in Headers */,
 				202B5F591ED317A100DCA766 /* imconfig.h in Headers */,
 				202B5F051ED311E800DCA766 /* CTHelper.h in Headers */,
 				202B5F811ED3184000DCA766 /* imgui_iterator_dock.h in Headers */,
@@ -2689,6 +2696,7 @@
 				202B5F071ED311E800DCA766 /* CTHelper.cpp in Sources */,
 				202B5F081ED311E800DCA766 /* CTUtil.cpp in Sources */,
 				202B5F5D1ED317A100DCA766 /* imgui_dock.cpp in Sources */,
+				200BB18B1EE0873100D8D889 /* noc_file_dialog_osx.mm in Sources */,
 				20473F721ED4931C0094E16C /* pch.cpp in Sources */,
 				202B5F691ED317DB00DCA766 /* host.cpp in Sources */,
 				202B5F5F1ED317A100DCA766 /* imgui_draw.cpp in Sources */,

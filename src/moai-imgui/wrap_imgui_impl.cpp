@@ -18,6 +18,8 @@
 * 3. This notice may not be removed or altered from any source distribution.
 **/
 
+#include "pch.h"
+
 #include <libimgui/imgui.h>
 #include <libimgui/imgui_dock.h>
 #include <moai-imgui/wrap_imgui_impl.h>
@@ -52,12 +54,9 @@ static int impl_##name(lua_State *L) { \
   int arg = 1; \
   int stackval = 0;
 
-#define TEXTURE_ARG(name) \
-	void* name = 0; \
-	if ( lua_type ( L, arg ) == LUA_TUSERDATA ) { \
-		name = *( void ** )lua_touserdata ( L, arg ); \
-	} \
-	arg++;
+#define TEXTURE_ARG(name)		\
+	MOAILuaState state ( L );	\
+	void* name = ( void* )MOAITexture::AffirmTexture ( state, arg++ );
 
 #define OPTIONAL_LABEL_ARG(name, value) \
   const char* name; \

@@ -40,6 +40,7 @@ private:
 	static int			_getWantTextInput			( lua_State* L );
 	static int			_init						( lua_State* L );
 	static int			_newFrame					( lua_State* L );
+	static int			_openFileDialog				( lua_State* L );
 	static int			_setKeyDown					( lua_State* L );
 	static int			_setTextInput				( lua_State* L );
 	static int			_setMouseDown				( lua_State* L );
