@@ -74,6 +74,7 @@
 		202B5F841ED3184000DCA766 /* MOAIImGui.h in Headers */ = {isa = PBXBuildFile; fileRef = 202B5F7C1ED3184000DCA766 /* MOAIImGui.h */; };
 		202B5F851ED3184000DCA766 /* wrap_imgui_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 202B5F7D1ED3184000DCA766 /* wrap_imgui_impl.cpp */; };
 		202B5F861ED3184000DCA766 /* wrap_imgui_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 202B5F7E1ED3184000DCA766 /* wrap_imgui_impl.h */; };
+		202B5F9E1EE5930600DCA766 /* fts_fuzzy_match.h in Headers */ = {isa = PBXBuildFile; fileRef = 202B5F9D1EE5930600DCA766 /* fts_fuzzy_match.h */; };
 		203DA5C71BDF933C00EC109A /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 203DA5C31BDF933C00EC109A /* host.h */; };
 		203DA5C81BDF933C00EC109A /* host.mm in Sources */ = {isa = PBXBuildFile; fileRef = 203DA5C41BDF933C00EC109A /* host.mm */; };
 		203DA5C91BDF933C00EC109A /* MOAICrashlyticsIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 203DA5C51BDF933C00EC109A /* MOAICrashlyticsIOS.h */; };
@@ -950,6 +951,7 @@
 		202B5F7C1ED3184000DCA766 /* MOAIImGui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MOAIImGui.h; path = "moai-imgui/MOAIImGui.h"; sourceTree = "<group>"; };
 		202B5F7D1ED3184000DCA766 /* wrap_imgui_impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wrap_imgui_impl.cpp; path = "moai-imgui/wrap_imgui_impl.cpp"; sourceTree = "<group>"; };
 		202B5F7E1ED3184000DCA766 /* wrap_imgui_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wrap_imgui_impl.h; path = "moai-imgui/wrap_imgui_impl.h"; sourceTree = "<group>"; };
+		202B5F9D1EE5930600DCA766 /* fts_fuzzy_match.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fts_fuzzy_match.h; path = "moai-imgui/fts_fuzzy_match.h"; sourceTree = "<group>"; };
 		203DA5871BDF92C700EC109A /* libmoai-ios-crashlytics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios-crashlytics.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		203DA5C31BDF933C00EC109A /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = host.h; sourceTree = "<group>"; };
 		203DA5C41BDF933C00EC109A /* host.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = host.mm; sourceTree = "<group>"; };
@@ -1306,6 +1308,7 @@
 		202B5F641ED317A800DCA766 /* moai-imgui */ = {
 			isa = PBXGroup;
 			children = (
+				202B5F9D1EE5930600DCA766 /* fts_fuzzy_match.h */,
 				202B5F791ED3184000DCA766 /* imgui_iterator_dock.h */,
 				202B5F7A1ED3184000DCA766 /* imgui_iterator.h */,
 				202B5F7B1ED3184000DCA766 /* MOAIImGui.cpp */,
@@ -1747,6 +1750,7 @@
 				202B5F591ED317A100DCA766 /* imconfig.h in Headers */,
 				202B5F051ED311E800DCA766 /* CTHelper.h in Headers */,
 				202B5F811ED3184000DCA766 /* imgui_iterator_dock.h in Headers */,
+				202B5F9E1EE5930600DCA766 /* fts_fuzzy_match.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

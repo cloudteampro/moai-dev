@@ -38,6 +38,7 @@ private:
 	static int			_getWantCaptureMouse		( lua_State* L );
 	static int			_getWantCaptureKeyboard		( lua_State* L );
 	static int			_getWantTextInput			( lua_State* L );
+	static int			_fuzzyMatch					( lua_State* L );
 	static int			_init						( lua_State* L );
 	static int			_newFrame					( lua_State* L );
 	static int			_openFileDialog				( lua_State* L );
@@ -46,7 +47,7 @@ private:
 	static int			_setMouseDown				( lua_State* L );
 	static int			_setMouseMoved				( lua_State* L );
 	static int			_setWheelDelta				( lua_State* L );
-
+	
 public:
 	
 	DECL_LUA_SINGLETON ( MOAIImGui )

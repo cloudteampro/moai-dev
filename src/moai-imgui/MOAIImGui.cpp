@@ -13,6 +13,17 @@
 #endif
 #include <moai-imgui/noc_file_dialog.h>
 
+#define FTS_FUZZY_MATCH_IMPLEMENTATION
+#include <moai-imgui/fts_fuzzy_match.h>
+
+//================================================================//
+// MOAIFuzzySearchResult
+//================================================================//
+class MOAIFuzzySearchResult :
+	public ZLRadixKey32Base {
+public:
+	cc8*	mData;
+};
 
 //================================================================//
 // lua
@@ -52,6 +63,62 @@ int MOAIImGui::_getWantTextInput ( lua_State* L ) {
 	MOAI_LUA_SETUP_SINGLE ( MOAIImGui, "" )
 	
 	return 0;
+}
+
+//----------------------------------------------------------------//
+/**	@lua	fuzzyMatch
+	@text	Perform fuzzy match and sort like Sublime Text does.
+
+	@in		table	Table of strings to search matches in
+	@in		string	Pattern
+	@opt	number	Results limit
+
+	@out	table	Subset of input table sorted by match score.
+*/
+int MOAIImGui::_fuzzyMatch ( lua_State* L ) {
+	MOAI_LUA_SETUP_SINGLE ( MOAIImGui, "TS" )
+
+	cc8* pattern = state.GetValue < cc8* >( 2, "" );
+
+	u32 size = state.GetTableSize ( 1 );
+	cc8** inputArray = new cc8* [ size ];
+	for ( u32 i = 0; i < size; ++i ) {
+		inputArray [ i ] = state.GetField < cc8* >( 1, i + 1, "" );
+	}
+
+	// resizing ZLLeanArray is costly operation: memory alloc + copy old values
+	// so keeping this large enough
+	u32 chunkSize = 128;
+	ZLLeanArray < MOAIFuzzySearchResult > resultBuffer;
+	if ( size < chunkSize ) {
+		resultBuffer.Resize ( size );
+	}
+
+	u32 total = 0;
+	for ( u32 i = 0; i < size; ++i ) {
+
+		int score = 0;
+		cc8* str = inputArray [ i ];
+		if ( fts::fuzzy_match ( pattern, inputArray [ i ], score )) {
+			if ( total >= resultBuffer.Size ()) {
+				resultBuffer.Grow ( total + 1, chunkSize );
+			}
+
+			resultBuffer [ total ].mKey = 0 - score; // sort descending
+			resultBuffer [ total ].mData = inputArray [ i ];
+			total++;
+		}
+	}
+
+	delete [] inputArray;
+
+	RadixSort32 < MOAIFuzzySearchResult >( resultBuffer.Data (), total );
+	lua_newtable ( L );
+	
+	for ( u32 i = 0; i < total; ++i ) {
+		state.SetFieldByIndex < cc8* >( -1, i + 1, resultBuffer [ i ].mData );
+	}
+	return 1;
 }
 
 //----------------------------------------------------------------//
@@ -280,6 +347,7 @@ void MOAIImGui::RegisterLuaClass ( MOAILuaState& state ) {
 	
 	luaL_Reg regTable [] = {
 		{ "endFrame",					_endFrame },
+		{ "fuzzyMatch",					_fuzzyMatch },
 		{ "getBounds",					_getBounds },
 		{ "getWantCaptureMouse",		_getWantCaptureMouse },
 		{ "getWantCaptureKeyboard",		_getWantCaptureKeyboard },
