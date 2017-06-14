@@ -363,6 +363,7 @@ MOAIFrameBuffer::MOAIFrameBuffer () :
 	
 	RTTI_BEGIN
 		RTTI_EXTEND ( MOAIClearableView )
+		RTTI_EXTEND ( MOAIInstanceEventSource )
 	RTTI_END
 }
 

@@ -23,6 +23,17 @@ int MOAIViewport::_getFrame ( lua_State* L ) {
 
 //----------------------------------------------------------------//
 // TODO: doxygen
+int MOAIViewport::_getScale ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIViewport, "U" )
+	
+	state.Push ( self->mScale.mX );
+	state.Push ( self->mScale.mY );
+	
+	return 2;
+}
+
+//----------------------------------------------------------------//
+// TODO: doxygen
 int MOAIViewport::_getSize ( lua_State* L ) {
 	MOAI_LUA_SETUP ( MOAIViewport, "U" )
 	
@@ -399,6 +410,7 @@ void MOAIViewport::RegisterLuaFuncs ( MOAILuaState& state ) {
 
 	luaL_Reg regTable [] = {
 		{ "getFrame",		_getFrame },
+		{ "getScale",		_getScale },
 		{ "getSize",		_getSize },
 		{ "setOffset",		_setOffset },
 		{ "setRotation",	_setRotation },
