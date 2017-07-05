@@ -91,6 +91,23 @@ end
 
 MOAIInputMgr.device.mouseRight:setCallback ( onMouseRightEvent )
 
+----------------------------------------------------------------
+-- mouse right button events
+
+function onMouseWheelEvent ( delta )
+	printf ( "mouse wheel: %d\n", delta )
+end
+
+MOAIInputMgr.device.mouseWheel:setCallback ( onMouseWheelEvent )
+
+----------------------------------------------------------------
+-- mouse right button events
+
+function onMouseWheelHorizontalEvent ( delta )
+	printf ( "mouse wheel horizontal: %d\n", delta )
+end
+
+MOAIInputMgr.device.mouseWheelHorizontal:setCallback ( onMouseWheelHorizontalEvent )
 
 ----------------------------------------------------------------
 -- joystick events

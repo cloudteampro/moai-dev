@@ -145,10 +145,15 @@ int MOAIGfxPrimDeck2D::_setVertex ( lua_State* L ) {
 //----------------------------------------------------------------//
 ZLBox MOAIGfxPrimDeck2D::ComputeMaxBounds () {
 
-	// TODO
-	ZLBox bounds;
-	bounds.Init ( 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f );
+	ZLRect rect;
+	rect.Init ( 0.0f, 0.0f, 0.0f, 0.0f );
 
+	for ( u32 i = 0; i < this->mVertices.Size (); ++i ) {
+		rect.Grow ( this->mVertices [ i ].mVtx );
+	}
+
+	ZLBox bounds;
+	bounds.Init ( rect.mXMin, rect.mYMax, rect.mXMax, rect.mYMin, 0.0f, 0.0f );
 	return bounds;
 }
 
@@ -190,7 +195,7 @@ void MOAIGfxPrimDeck2D::DrawIndex ( u32 idx, MOAIMaterialBatch& materials, ZLVec
 		for ( u32 i = vtxBase; i < vtxTop; ++i ) {
 			
 			ZLVertex& vtx = this->mVertices [ i ];
-			gfxDevice.WriteVtx ( vtx.mVtx );
+			gfxDevice.WriteVtx ( vtx.mVtx.mX * scale.mX + offset.mX, vtx.mVtx.mY * scale.mY + offset.mY );
 			gfxDevice.WriteUV ( vtx.mUV );
 			gfxDevice.WriteFinalColor4b ();	
 		}
@@ -256,10 +261,27 @@ u32 MOAIGfxPrimDeck2D::ExportGeometry ( u32 idx, MOAIVertexFormat& format, MOAIS
 
 //----------------------------------------------------------------//
 ZLBox MOAIGfxPrimDeck2D::GetItemBounds ( u32 idx ) {
-	UNUSED ( idx );
-	// TODO
-	ZLBox bounds;
 
+	ZLBox bounds;
+	
+	u32 size = this->mBatches.Size ();
+	if ( size ) {
+	
+		idx = ( idx - 1 ) % size;
+		ZLIndexedPrim& batch = this->mBatches [ idx ];
+		
+		u32 vtxBase = batch.mVtxBase;
+		u32 vtxTop 	= vtxBase + batch.mVtxCount;
+
+		ZLVec2D& vBase = this->mVertices [ vtxBase ].mVtx;
+
+		bounds.Init ( ZLVec3D ( vBase.mX, vBase.mY, 0.f ) );
+		for ( u32 i = vtxBase; i < vtxTop; ++i ) {
+			ZLVec2D& v = this->mVertices [ i ].mVtx;
+			bounds.Grow ( ZLVec3D ( v.mX, v.mY, 0.f ));
+		}
+		return bounds;
+	}
 	bounds.Init ( 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f );
 	return bounds;
 }

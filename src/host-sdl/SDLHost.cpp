@@ -52,6 +52,7 @@ namespace InputSensorID {
 		MOUSE_MIDDLE,
 		MOUSE_RIGHT,
 		MOUSE_WHEEL,
+		MOUSE_WHEEL_HORIZONTAL,
 //		JOYSTICK,
 //		TOUCH,
 		TOTAL,
@@ -216,7 +217,6 @@ void Init ( int argc, char** argv ) {
 	SetScreenSize( SDL_GetDesktopDisplayMode );
 
     SetScreenDpi();
-
 	AKUReserveInputDevices			( InputDeviceID::TOTAL );
 	AKUSetInputDevice				( InputDeviceID::DEVICE, 	"device" );
 	AKUSetInputDevice				( InputDeviceID::GAMEPAD1, 	"gamepad1" );
@@ -231,6 +231,7 @@ void Init ( int argc, char** argv ) {
 	AKUSetInputDeviceButton			( InputDeviceID::DEVICE, 	InputSensorID::MOUSE_MIDDLE,"mouseMiddle" );
 	AKUSetInputDeviceButton			( InputDeviceID::DEVICE, 	InputSensorID::MOUSE_RIGHT,	"mouseRight" );
 	AKUSetInputDeviceWheel			( InputDeviceID::DEVICE, 	InputSensorID::MOUSE_WHEEL,	"mouseWheel" );
+	AKUSetInputDeviceWheelHorizontal( InputDeviceID::DEVICE, 	InputSensorID::MOUSE_WHEEL_HORIZONTAL,	"mouseWheelHorizontal" );
 	// AKUSetInputDeviceJoystick       ( InputDeviceID::DEVICE, InputSensorID::JOYSTICK,	    "joystick" );
 
 	AKUReserveInputDeviceSensors	( InputDeviceID::GAMEPAD1, 	InputControllerSensorID::TOTAL );
@@ -450,11 +451,14 @@ void MainLoop () {
 				case SDL_MOUSEWHEEL: 
 
 						if ( sdlEvent.wheel.which != SDL_TOUCH_MOUSEID ) {
-                            //const int32_t x = sdlEvent.wheel.x;
-							const int32_t y = sdlEvent.wheel.y; 
+							const int32_t delta = sdlEvent.wheel.y;
+                            const int32_t deltaHorizontal = sdlEvent.wheel.x;
 
-							//XXX: x or y ?
-							AKUEnqueueWheelEvent ( InputDeviceID::DEVICE, InputSensorID::MOUSE_WHEEL, ( float )y );
+							//y - the amount scrolled vertically, positive away from the user and negative toward the user
+							AKUEnqueueWheelEvent ( InputDeviceID::DEVICE, InputSensorID::MOUSE_WHEEL, ( float )delta );
+
+							//x - the amount scrolled horizontally, positive to the right and negative to the left
+							AKUEnqueueWheelHorizontalEvent ( InputDeviceID::DEVICE, InputSensorID::MOUSE_WHEEL_HORIZONTAL, ( float )deltaHorizontal );
 						}
 					break;
 

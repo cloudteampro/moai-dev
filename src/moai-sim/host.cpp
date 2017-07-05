@@ -252,6 +252,12 @@ void AKUEnqueueWheelEvent ( int deviceID, int sensorID, float value ) {
 }
 
 //----------------------------------------------------------------//
+void AKUEnqueueWheelHorizontalEvent ( int deviceID, int sensorID, float value ) {
+
+	MOAIWheelSensor::EnqueueWheelEvent (( u8 )deviceID, ( u8 )sensorID, value );
+}
+
+//----------------------------------------------------------------//
 double AKUGetSimStep () {
 
 	return MOAISim::Get ().GetStep ();
@@ -402,6 +408,12 @@ void AKUSetInputDeviceVector ( int deviceID, int sensorID, char const* name ) {
 
 //----------------------------------------------------------------//
 void AKUSetInputDeviceWheel ( int deviceID, int sensorID, char const* name ) {
+
+	MOAIInputMgr::Get ().SetSensor < MOAIWheelSensor >(( u8 )deviceID, ( u8 )sensorID, name );
+}
+
+//----------------------------------------------------------------//
+void AKUSetInputDeviceWheelHorizontal ( int deviceID, int sensorID, char const* name ) {
 
 	MOAIInputMgr::Get ().SetSensor < MOAIWheelSensor >(( u8 )deviceID, ( u8 )sensorID, name );
 }
