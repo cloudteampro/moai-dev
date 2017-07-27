@@ -310,6 +310,26 @@ int MOAISpineSkeleton::_getSlot ( lua_State *L ) {
 }
 
 //----------------------------------------------------------------//
+/**	@name	getTimeScale
+	@text	Returns animation time scale
+
+	@in		MOAISpineSkeleton self
+	@out	number	timeScale
+ */
+int MOAISpineSkeleton::_getTimeScale ( lua_State *L ) {
+	MOAI_LUA_SETUP ( MOAISpineSkeleton, "U" );
+	
+	if ( !self->mSkeleton || !self->mAnimationState ) {
+		MOAILogF ( state, ZLLog::LOG_ERROR, "MOAISpineSkeleton not initialized (ensure that initAnimationState was called) \n" );
+		return 0;
+	}
+	
+	state.Push ( self->mAnimationState->timeScale );
+	
+	return 1;
+}
+
+//----------------------------------------------------------------//
 /**	@name	init
 
 	@in		MOAISpineSkeleton self
@@ -594,6 +614,27 @@ int MOAISpineSkeleton::_setTime ( lua_State *L ) {
 	if ( trackEntry ) {
 		trackEntry->time = time;
 	}
+	return 0;
+}
+
+//----------------------------------------------------------------//
+/**	@name	setTimeScale
+	
+	@in		MOAISpineSkeleton self
+	@in     number  scale
+	@out	nil
+*/
+int MOAISpineSkeleton::_setTimeScale ( lua_State *L ) {
+	MOAI_LUA_SETUP ( MOAISpineSkeleton, "UN" );
+	
+	float timeScale = state.GetValue < float >( 2, 1.0f );
+	
+	if ( !self->mSkeleton || !self->mAnimationState ) {
+		MOAILogF ( state, ZLLog::LOG_ERROR, "MOAISpineSkeleton not initialized \n" );
+		return 0;
+	}
+
+	self->mAnimationState->timeScale = timeScale;
 	return 0;
 }
 
@@ -1012,6 +1053,7 @@ void MOAISpineSkeleton::RegisterLuaFuncs ( MOAILuaState& state ) {
 		{ "getBoneTransform",		_getBoneTransform },
 		{ "getDuration",            _getDuration },
 		{ "getSlot",				_getSlot },
+		{ "getTimeScale",			_getTimeScale },
 		{ "init", 					_init },
 		{ "initAnimationState", 	_initAnimationState },
 		{ "setAnimation", 			_setAnimation },
@@ -1024,6 +1066,7 @@ void MOAISpineSkeleton::RegisterLuaFuncs ( MOAILuaState& state ) {
 		{ "setSlotsToSetupPose", 	_setSlotsToSetupPose },
 		{ "setSlotColor",			_setSlotColor },
 		{ "setTime",                _setTime },
+		{ "setTimeScale",			_setTimeScale },
 		{ "setToSetupPose", 		_setToSetupPose },
 		{ NULL, NULL }
 	};

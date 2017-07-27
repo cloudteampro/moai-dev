@@ -44,6 +44,7 @@ private:
 	static int		_getBoneTransform		( lua_State* L );
     static int      _getDuration            ( lua_State* L );
 	static int		_getSlot				( lua_State* L );
+	static int		_getTimeScale			( lua_State* L );
 	static int		_init					( lua_State* L );
 	static int		_initAnimationState		( lua_State* L );
 	static int		_setAnimation			( lua_State* L );
@@ -56,6 +57,7 @@ private:
 	static int		_setSlotsToSetupPose	( lua_State* L );
 	static int		_setSlotColor			( lua_State* L );
 	static int		_setTime				( lua_State* L );
+	static int		_setTimeScale			( lua_State* L );
 	static int		_setToSetupPose			( lua_State* L );
         
 protected:
