@@ -135,6 +135,10 @@ void AKUModulesAppInitialize () {
 		AKUAppleAppInitialize ();
 	#endif
 
+	#if AKU_WITH_ASSIMP
+		AKUAssimpContextInitialize ();
+	#endif
+
     #if AKU_WITH_AUDIO_SAMPLER
 		AKUAudioSamplerAppInitialize ();
 	#endif
@@ -175,6 +179,10 @@ void AKUModulesAppInitialize () {
 		AKUHttpServerAppInitialize ();
 	#endif
 
+	#if AKU_WITH_IMGUI
+		AKUImGuiContextInitialize ();
+	#endif
+
 	#if AKU_WITH_LUAEXT
 		AKULuaExtAppInitialize ();
 	#endif
@@ -188,10 +196,6 @@ void AKUModulesAppInitialize () {
 	#endif
 
 	#if AKU_WITH_SPINE
-		AKUSpineAppInitialize ();
-	#endif
-
-	#if AKU_WITH_SPINE_V3
 		AKUSpineAppInitialize ();
 	#endif
 

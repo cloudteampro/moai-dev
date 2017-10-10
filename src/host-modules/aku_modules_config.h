@@ -5,6 +5,10 @@
 		#define AKU_WITH_APPLE 0
 	#endif
 
+	#ifndef AKU_WITH_ASSIMP
+		#define AKU_WITH_ASSIMP 0
+	#endif
+
 	#ifndef AKU_WITH_BOX2D
 		#define AKU_WITH_BOX2D 1
 	#endif
@@ -56,6 +60,10 @@
 	#ifndef AKU_WITH_IMAGE_WEBP
 		#define AKU_WITH_IMAGE_WEBP 1
 	#endif
+	
+	#ifndef AKU_WITH_IMGUI
+		#define AKU_WITH_IMGUI 0
+	#endif
 
 	#ifndef AKU_WITH_LUAEXT
 		#define AKU_WITH_LUAEXT 1
@@ -75,10 +83,6 @@
 
 	#ifndef AKU_WITH_SPINE
 		#define AKU_WITH_SPINE 0
-	#endif
-
-	#ifndef AKU_WITH_SPINE_V3
-		#define AKU_WITH_SPINE_V3 0
 	#endif
 
 	#ifndef AKU_WITH_UNTZ
