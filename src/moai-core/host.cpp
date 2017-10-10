@@ -451,7 +451,7 @@ void AKUSetFunc_ErrorTraceback ( AKUErrorTracebackFunc func ) {
 //----------------------------------------------------------------//
 void AKUSetLogLevel ( int logLevel ) {
 
-	ZLLog::SetLogLevel ( logLevel );
+	ZLLog::Get ().SetLogLevel ( logLevel );
 }
 
 //----------------------------------------------------------------//

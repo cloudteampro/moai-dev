@@ -22,7 +22,7 @@ public:
 		TOTAL_FORMATS,
 	};
 
-	static const u32 UNKNOWN_FORMAT			= 0xffffffff;
+	static const u32 UNKNOWN_FORMAT = 0xffffffff;
 
 private:
 	

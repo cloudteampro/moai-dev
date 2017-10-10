@@ -232,7 +232,7 @@ void MOAIAssimpUtil::PushNode ( lua_State* L, const aiNode* node ) {
 					state.Push ( *( bool* )value.mData );
 					break;
 					
-				case AI_INT:
+				case AI_INT32:
 					state.Push ( *( int* )value.mData );
 					break;
 					

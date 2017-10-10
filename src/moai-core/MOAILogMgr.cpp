@@ -151,7 +151,7 @@ int MOAILogMgr::_setLogLevel ( lua_State* L ) {
 	MOAILuaState state ( L );
 
 	u32 level = state.GetValue < u32 >( 1, ZLLog::LOG_NONE );
-	ZLLog::SetLogLevel ( level );
+	ZLLog::Get ().SetLogLevel ( level );
 
 	return 0;
 }
@@ -183,7 +183,7 @@ void MOAILogMgr::CloseFile () {
 	if ( this->mFile ) {
 		fclose ( this->mFile );
 		this->mFile = 0;
-		ZLLog::SetRedirect ( 0 );
+		ZLLog::Get ().SetRedirect ( 0 );
 	}
 }
 
@@ -222,7 +222,7 @@ void MOAILogMgr::LogV ( lua_State *L, u32 level, u32 messageID, va_list args ) {
 //----------------------------------------------------------------//
 void MOAILogMgr::LogV ( lua_State *L, u32 level, cc8* message, va_list args ) {
 
-	if ( ZLLog::IsEnabled ( level )) {
+	if ( ZLLog::Get ().IsEnabled ( level )) {
 
 		if ( L ) {
 			ZLLogF ( ZLLog::CONSOLE, "----------------------------------------------------------------\n" );
@@ -275,7 +275,7 @@ void MOAILogMgr::OpenFile ( cc8* filename ) {
 	FILE* file = fopen ( filename, "w" );
 	if ( file ) {
 		this->mFile = file;
-		ZLLog::SetRedirect ( file );
+		ZLLog::Get ().SetRedirect ( file );
 	}
 }
 
