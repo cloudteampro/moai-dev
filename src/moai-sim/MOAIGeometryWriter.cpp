@@ -434,7 +434,7 @@ void MOAIGeometryWriter::ApplyColor ( const MOAIVertexFormat& format, ZLStream& 
 	
 		format.SeekVertex ( stream, base, i );
 
-		ZLVec3D coord = format.ReadCoord ( stream );
+		ZLVec3D coord = format.ReadCoord ( stream, 0 );
 		ZLVec2D point ( coord.mX, coord.mY );
 
 		if ( region.PointInside ( point, pad )) {
@@ -470,7 +470,7 @@ void MOAIGeometryWriter::ApplyLightFromImage ( const MOAIVertexFormat& format, Z
 	
 		if ( gradient ) {
 			
-			ZLVec3D coord = format.ReadCoord ( stream );
+			ZLVec3D coord = format.ReadCoord ( stream, 0 );
 			float dist = ZLDist::VecToPlane ( coord, plane );
 			
 			if ( dist <= 0.0f ) {
@@ -484,7 +484,7 @@ void MOAIGeometryWriter::ApplyLightFromImage ( const MOAIVertexFormat& format, Z
 			}
 		}
 		
-		ZLVec3D normal = format.ReadNormal ( stream );
+		ZLVec3D normal = format.ReadNormal ( stream, 0 );
 
 		ZLVec2D hVec ( normal.mX, normal.mY );
 		hVec.Norm ();
@@ -518,7 +518,7 @@ void MOAIGeometryWriter::ApplyLinearGradient ( const MOAIVertexFormat& format, Z
 	
 		format.SeekVertex ( stream, base, i );
 	
-		ZLVec3D coord = format.ReadCoord ( stream );
+		ZLVec3D coord = format.ReadCoord ( stream, 0 );
 		float dist = ZLDist::VecToPlane ( coord, plane );
 		
 		ZLColorVec color;
@@ -560,7 +560,7 @@ MOAIMesh* MOAIGeometryWriter::GetMesh ( const MOAIVertexFormat& format, ZLStream
 	mesh->SetTotalElements ( totalElements );
 	
 	ZLBox bounds;
-	format.ComputeBounds ( bounds, vtxBuffer->GetReadBuffer (), vtxBuffer->GetSize ());
+	format.ComputeBounds ( bounds, vtxBuffer->GetBuffer ()->GetConstData (), vtxBuffer->GetSize ());
 	
 	mesh->SetBounds ( bounds );
 	
@@ -742,13 +742,13 @@ void MOAIGeometryWriter::SnapCoords ( const MOAIVertexFormat& format, ZLStream& 
 		
 		format.SeekVertex ( stream, base, i );
 		
-		ZLVec4D coord = format.ReadCoord ( stream );
+		ZLVec4D coord = format.ReadCoord ( stream, 0 );
 		
 		coord.mX = xSnap == 0.0f ? coord.mX : floorf (( coord.mX / xSnap ) + 0.5f ) * xSnap;
 		coord.mY = ySnap == 0.0f ? coord.mY : floorf (( coord.mY / ySnap ) + 0.5f ) * ySnap;
 		coord.mZ = zSnap == 0.0f ? coord.mZ : floorf (( coord.mZ / zSnap ) + 0.5f ) * zSnap;
 		
-		format.WriteCoord ( stream, coord.mX, coord.mY, coord.mZ, coord.mW );
+		format.WriteCoord ( stream, 0, coord.mX, coord.mY, coord.mZ, coord.mW );
 	}
 	stream.Seek ( base, SEEK_SET );
 }
@@ -798,7 +798,7 @@ void MOAIGeometryWriter::WriteColor ( const MOAIVertexFormat& format, ZLStream& 
 	if ( mode != COLOR_OVERWRITE ) {
 	
 		ZLColorVec srcColor = dstColor;
-		ZLColorVec orgColor = format.ReadColor( stream );
+		ZLColorVec orgColor = format.ReadColor( stream, 0 );
 	
 		dstColor = orgColor;
 
@@ -822,7 +822,7 @@ void MOAIGeometryWriter::WriteColor ( const MOAIVertexFormat& format, ZLStream& 
 
 		dstColor.Lerp ( ZLInterpolate::kLinear, orgColor, dstColor, a );
 	}
-	format.WriteColor ( stream, dstColor.mR, dstColor.mG, dstColor.mB, dstColor.mA );
+	format.WriteColor ( stream, 0, dstColor.mR, dstColor.mG, dstColor.mB, dstColor.mA );
 }
 
 //----------------------------------------------------------------//
@@ -874,7 +874,7 @@ void MOAIGeometryWriter::WriteVertex ( const MOAIVertexFormat& format, ZLStream&
 
 	size_t base = stream.GetCursor ();
 	format.WriteAhead ( stream );
-	format.WriteCoord ( stream, coord.mX, coord.mY, coord.mZ, 1.0f );
-	format.WriteNormal ( stream, normal.mX, normal.mY, normal.mZ );
+	format.WriteCoord ( stream, 0, coord.mX, coord.mY, coord.mZ, 1.0f );
+	format.WriteNormal ( stream, 0, normal.mX, normal.mY, normal.mZ );
 	format.SeekVertex ( stream, base, 1 );
 }

@@ -2,7 +2,8 @@
 // http://getmoai.com
 
 #include "pch.h"
-#include <moai-sim/MOAIGfxMgr.h>
+// #include <moai-sim/MOAIGfxMgr.h>
+#include <moai-sim/MOAIGfxDevice.h>
 #include <moai-sim/MOAIVertexFormat.h>
 #include <moai-sim/MOAIVertexFormatMgr.h>
 
@@ -204,20 +205,28 @@ MOAIVertexFormat* MOAIVertexFormat::AffirmVertexFormat ( MOAILuaState& state, in
 }
 
 //----------------------------------------------------------------//
-void MOAIVertexFormat::Bind ( ZLSharedConstBuffer* buffer, bool copyBuffer ) const {
+void MOAIVertexFormat::Bind ( ZLSharedConstBuffer* buffer ) const {
+// void MOAIVertexFormat::Bind ( ZLSharedConstBuffer* buffer, bool copyBuffer ) const {
+	// ZLGfx& gfx = MOAIGfxMgr::GetDrawingAPI ();
 
-	ZLGfx& gfx = MOAIGfxMgr::GetDrawingAPI ();
+	// if ( copyBuffer ) {
+	// 	buffer = gfx.CopyBuffer ( buffer );
+	// }
 
-	if ( copyBuffer ) {
-		buffer = gfx.CopyBuffer ( buffer );
-	}
+	// for ( u32 i = 0; i < this->mTotalAttributes; ++i ) {
+		
+	// 	const MOAIVertexAttribute& attr = this->mAttributes [ i ];
+		
+	// 	gfx.EnableVertexAttribArray ( attr.mIndex );
+	// 	gfx.VertexAttribPointer ( attr.mIndex, attr.mSize, attr.mType, attr.mNormalized, this->mVertexSize, buffer, attr.mOffset );
+	// }
 
 	for ( u32 i = 0; i < this->mTotalAttributes; ++i ) {
 		
 		const MOAIVertexAttribute& attr = this->mAttributes [ i ];
 		
-		gfx.EnableVertexAttribArray ( attr.mIndex );
-		gfx.VertexAttribPointer ( attr.mIndex, attr.mSize, attr.mType, attr.mNormalized, this->mVertexSize, buffer, attr.mOffset );
+		zglVertexAttribPointer ( attr.mIndex, attr.mSize, attr.mType, attr.mNormalized, this->mVertexSize, ( const void* )(( size_t )buffer + attr.mOffset ));
+		zglEnableVertexAttribArray ( attr.mIndex );
 	}
 }
 
@@ -824,10 +833,16 @@ void MOAIVertexFormat::SerializeOut ( MOAILuaState& state, MOAISerializer& seria
 //----------------------------------------------------------------//
 void MOAIVertexFormat::Unbind () const {
 
+	// for ( u32 i = 0; i < this->mTotalAttributes; ++i ) {
+		
+	// 	MOAIVertexAttribute& attr = this->mAttributes [ i ];
+	// 	MOAIGfxMgr::GetDrawingAPI ().DisableVertexAttribArray ( attr.mIndex );
+	// }
+
 	for ( u32 i = 0; i < this->mTotalAttributes; ++i ) {
 		
 		MOAIVertexAttribute& attr = this->mAttributes [ i ];
-		MOAIGfxMgr::GetDrawingAPI ().DisableVertexAttribArray ( attr.mIndex );
+		zglDisableVertexAttribArray ( attr.mIndex );
 	}
 }
 

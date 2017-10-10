@@ -128,19 +128,16 @@ public:
 	
 	//----------------------------------------------------------------//
 	inline void WriteFinalColor4b () {
-		
 		this->mVtxBuffer.WriteUnsafe < u32 >( this->mFinalColor32 );
 	}
 	
 	//----------------------------------------------------------------//
 	inline void WriteFinalColor4f () {
-		
 		this->mVtxBuffer.WriteUnsafe < ZLColorVec >( this->mFinalColor );
 	}
 		
 	//----------------------------------------------------------------//
 	inline void WriteIndex ( u16 index ) {
-		
 		this->mIdxBuffer.WriteUnsafe < u16 >( this->mIndexBase + index );
 	}
 	
@@ -213,7 +210,6 @@ public:
 		vtx.mY = y;
 		vtx.mZ = z;
 		vtx.mW = w;
-		
 		this->mVtxBuffer.WriteUnsafe < ZLVec4D >( vtx );
 	}
 };

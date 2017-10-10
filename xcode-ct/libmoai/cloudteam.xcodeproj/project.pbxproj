@@ -14,12 +14,12 @@
 			);
 			dependencies = (
 				20993E8E1BDE94A4009D7CED /* PBXTargetDependency */,
+				206B9CFA1BDABB1B0021D349 /* PBXTargetDependency */,
+				206B9D3D1BDE49020021D349 /* PBXTargetDependency */,
+				7A00DE2E1F8BDD4200D672E5 /* PBXTargetDependency */,
+				7A00DE301F8BDD4700D672E5 /* PBXTargetDependency */,
 				7A00DE321F8BDD4C00D672E5 /* PBXTargetDependency */,
 				7A00E6D31F8CECCD00D672E5 /* PBXTargetDependency */,
-				206B9D3D1BDE49020021D349 /* PBXTargetDependency */,
-				7A00DE301F8BDD4700D672E5 /* PBXTargetDependency */,
-				206B9CFA1BDABB1B0021D349 /* PBXTargetDependency */,
-				7A00DE2E1F8BDD4200D672E5 /* PBXTargetDependency */,
 			);
 			name = build_all_osx;
 			productName = build_all_osx;
@@ -1349,10 +1349,10 @@
 		20D42A8D1D82CD1A00D0B90A /* CTPerrySQLite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CTPerrySQLite.cpp; sourceTree = "<group>"; };
 		20D42A8E1D82CD1A00D0B90A /* CTPerrySQLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTPerrySQLite.h; sourceTree = "<group>"; };
 		20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libmoai.xcodeproj; path = ../../xcode/libmoai/libmoai.xcodeproj; sourceTree = "<group>"; };
-		7A00DCFF1F8BDB0400D672E5 /* liblibmoai-osx-spine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "liblibmoai-osx-spine.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7A00DD131F8BDB5700D672E5 /* liblibmoai-ios-spine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "liblibmoai-ios-spine.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7A00DD1F1F8BDCB500D672E5 /* liblibmoai-osx-imgui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "liblibmoai-osx-imgui.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7A00DD291F8BDCCA00D672E5 /* liblibmoai-osx-assimp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "liblibmoai-osx-assimp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A00DCFF1F8BDB0400D672E5 /* libmoai-osx-spine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-osx-spine.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A00DD131F8BDB5700D672E5 /* libmoai-ios-spine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios-spine.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A00DD1F1F8BDCB500D672E5 /* libmoai-osx-imgui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-osx-imgui.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A00DD291F8BDCCA00D672E5 /* libmoai-osx-assimp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-osx-assimp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A00DD331F8BDCEB00D672E5 /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		7A00DD341F8BDCEB00D672E5 /* AnimationState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationState.h; sourceTree = "<group>"; };
 		7A00DD351F8BDCEB00D672E5 /* AnimationStateData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationStateData.h; sourceTree = "<group>"; };
@@ -1965,7 +1965,7 @@
 		7A00E4A61F8CEAA400D672E5 /* core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = core.h; sourceTree = "<group>"; };
 		7A00E4A71F8CEAA400D672E5 /* unchecked.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unchecked.h; sourceTree = "<group>"; };
 		7A00E4A81F8CEAA400D672E5 /* utf8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utf8.h; sourceTree = "<group>"; };
-		7A00E6B21F8CEC3300D672E5 /* liblibmoai-osx-3rdparty-assimp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "liblibmoai-osx-3rdparty-assimp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A00E6B21F8CEC3300D672E5 /* libmoai-osx-3rdparty-assimp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-osx-3rdparty-assimp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A00E6B41F8CECBD00D672E5 /* headers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = headers.h; sourceTree = "<group>"; };
 		7A00E6B51F8CECBD00D672E5 /* host.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = host.cpp; sourceTree = "<group>"; };
 		7A00E6B61F8CECBD00D672E5 /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = host.h; sourceTree = "<group>"; };
@@ -2110,11 +2110,11 @@
 				203DA5871BDF92C700EC109A /* libmoai-ios-crashlytics.a */,
 				2090B66B1BEBA40A0057A676 /* libmoai-ios-unityads.a */,
 				2049B9541CAA8C8B005B83B3 /* libmoai_ios_adtoapp.a */,
-				7A00DCFF1F8BDB0400D672E5 /* liblibmoai-osx-spine.a */,
-				7A00DD131F8BDB5700D672E5 /* liblibmoai-ios-spine.a */,
-				7A00DD1F1F8BDCB500D672E5 /* liblibmoai-osx-imgui.a */,
-				7A00DD291F8BDCCA00D672E5 /* liblibmoai-osx-assimp.a */,
-				7A00E6B21F8CEC3300D672E5 /* liblibmoai-osx-3rdparty-assimp.a */,
+				7A00DCFF1F8BDB0400D672E5 /* libmoai-osx-spine.a */,
+				7A00DD131F8BDB5700D672E5 /* libmoai-ios-spine.a */,
+				7A00DD1F1F8BDCB500D672E5 /* libmoai-osx-imgui.a */,
+				7A00DD291F8BDCCA00D672E5 /* libmoai-osx-assimp.a */,
+				7A00E6B21F8CEC3300D672E5 /* libmoai-osx-3rdparty-assimp.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2175,6 +2175,8 @@
 		206BA0451BDE92D60021D349 /* ct-util */ = {
 			isa = PBXGroup;
 			children = (
+				206BA0491BDE92D60021D349 /* host.h */,
+				206BA0481BDE92D60021D349 /* host.cpp */,
 				7A1C9D841C96E01900B00C3F /* CTHelper.cpp */,
 				7A1C9D851C96E01900B00C3F /* CTHelper.h */,
 				20B070DB1C10804D00F83147 /* MOAIColorBlender.cpp */,
@@ -2183,8 +2185,6 @@
 				206BA0461BDE92D60021D349 /* CTUtil.cpp */,
 				20D42A8D1D82CD1A00D0B90A /* CTPerrySQLite.cpp */,
 				20D42A8E1D82CD1A00D0B90A /* CTPerrySQLite.h */,
-				206BA0481BDE92D60021D349 /* host.cpp */,
-				206BA0491BDE92D60021D349 /* host.h */,
 			);
 			path = "ct-util";
 			sourceTree = "<group>";
@@ -3133,19 +3133,19 @@
 		7A00E4601F8CD8A100D672E5 /* moai-imgui */ = {
 			isa = PBXGroup;
 			children = (
-				7A00E4611F8CD8A100D672E5 /* fts_fuzzy_match.h */,
-				7A00E4621F8CD8A100D672E5 /* host.cpp */,
 				7A00E4631F8CD8A100D672E5 /* host.h */,
+				7A00E4621F8CD8A100D672E5 /* host.cpp */,
+				7A00E4611F8CD8A100D672E5 /* fts_fuzzy_match.h */,
 				7A00E4641F8CD8A100D672E5 /* imgui_iterator.h */,
 				7A00E4651F8CD8A100D672E5 /* imgui_iterator_dock.h */,
 				7A00E4661F8CD8A100D672E5 /* MOAIImGui.cpp */,
 				7A00E4671F8CD8A100D672E5 /* MOAIImGui.h */,
 				7A00E4681F8CD8A100D672E5 /* noc_file_dialog.h */,
 				7A00E4691F8CD8A100D672E5 /* noc_file_dialog_osx.mm */,
-				7A00E46A1F8CD8A100D672E5 /* pch.cpp */,
-				7A00E46B1F8CD8A100D672E5 /* pch.h */,
 				7A00E46C1F8CD8A100D672E5 /* wrap_imgui_impl.cpp */,
 				7A00E46D1F8CD8A100D672E5 /* wrap_imgui_impl.h */,
+				7A00E46A1F8CD8A100D672E5 /* pch.cpp */,
+				7A00E46B1F8CD8A100D672E5 /* pch.h */,
 			);
 			path = "moai-imgui";
 			sourceTree = "<group>";
@@ -3859,7 +3859,7 @@
 			);
 			name = "libmoai-osx-spine";
 			productName = OpenUSLS;
-			productReference = 7A00DCFF1F8BDB0400D672E5 /* liblibmoai-osx-spine.a */;
+			productReference = 7A00DCFF1F8BDB0400D672E5 /* libmoai-osx-spine.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		7A00DD001F8BDB5700D672E5 /* libmoai-ios-spine */ = {
@@ -3876,7 +3876,7 @@
 			);
 			name = "libmoai-ios-spine";
 			productName = OpenUSLS;
-			productReference = 7A00DD131F8BDB5700D672E5 /* liblibmoai-ios-spine.a */;
+			productReference = 7A00DD131F8BDB5700D672E5 /* libmoai-ios-spine.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		7A00DD161F8BDCB500D672E5 /* libmoai-osx-imgui */ = {
@@ -3893,7 +3893,7 @@
 			);
 			name = "libmoai-osx-imgui";
 			productName = OpenUSLS;
-			productReference = 7A00DD1F1F8BDCB500D672E5 /* liblibmoai-osx-imgui.a */;
+			productReference = 7A00DD1F1F8BDCB500D672E5 /* libmoai-osx-imgui.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		7A00DD201F8BDCCA00D672E5 /* libmoai-osx-assimp */ = {
@@ -3910,7 +3910,7 @@
 			);
 			name = "libmoai-osx-assimp";
 			productName = OpenUSLS;
-			productReference = 7A00DD291F8BDCCA00D672E5 /* liblibmoai-osx-assimp.a */;
+			productReference = 7A00DD291F8BDCCA00D672E5 /* libmoai-osx-assimp.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		7A00E4AD1F8CEC3300D672E5 /* libmoai-osx-3rdparty-assimp */ = {
@@ -3927,7 +3927,7 @@
 			);
 			name = "libmoai-osx-3rdparty-assimp";
 			productName = OpenUSLS;
-			productReference = 7A00E6B21F8CEC3300D672E5 /* liblibmoai-osx-3rdparty-assimp.a */;
+			productReference = 7A00E6B21F8CEC3300D672E5 /* libmoai-osx-3rdparty-assimp.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -5007,7 +5007,6 @@
 					"\"../../3rdparty/fmod-studio/headers\"",
 					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
 					"\"../../3rdparty/sqlite-3.14.1/\"",
-					"\"../../3rdparty/assimp/include\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = (
@@ -6462,8 +6461,9 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FMOD_OSX_SDK_ROOT)/api/inc",
+					"../../3rdparty/spine-c/include",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "moai-osx-spine";
 				SDKROOT = macosx;
 				SEPARATE_STRIP = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -6506,8 +6506,9 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FMOD_OSX_SDK_ROOT)/api/inc",
+					"../../3rdparty/spine-c/include",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "moai-osx-spine";
 				SDKROOT = macosx;
 				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
@@ -6548,8 +6549,9 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FMOD_OSX_SDK_ROOT)/api/inc",
+					"../../3rdparty/spine-c/include",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "moai-osx-spine";
 				SDKROOT = macosx;
 				SEPARATE_STRIP = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -6592,8 +6594,9 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FMOD_OSX_SDK_ROOT)/api/inc",
+					"../../3rdparty/spine-c/include",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "moai-osx-spine";
 				SDKROOT = macosx;
 				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
@@ -6628,8 +6631,9 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+					"../../3rdparty/spine-c/include",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "moai-ios-spine";
 				SDKROOT = iphoneos;
 				SEPARATE_STRIP = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -6666,8 +6670,9 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+					"../../3rdparty/spine-c/include",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "moai-ios-spine";
 				SDKROOT = iphoneos;
 				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
@@ -6702,8 +6707,9 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+					"../../3rdparty/spine-c/include",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "moai-ios-spine";
 				SDKROOT = iphoneos;
 				SEPARATE_STRIP = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -6740,8 +6746,9 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+					"../../3rdparty/spine-c/include",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "moai-ios-spine";
 				SDKROOT = iphoneos;
 				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
@@ -6783,7 +6790,7 @@
 					"$(inherited)",
 					"$(FMOD_OSX_SDK_ROOT)/api/inc",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "moai-osx-imgui";
 				SDKROOT = macosx;
 				SEPARATE_STRIP = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -6827,7 +6834,7 @@
 					"$(inherited)",
 					"$(FMOD_OSX_SDK_ROOT)/api/inc",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "moai-osx-imgui";
 				SDKROOT = macosx;
 				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
@@ -6869,7 +6876,7 @@
 					"$(inherited)",
 					"$(FMOD_OSX_SDK_ROOT)/api/inc",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "moai-osx-imgui";
 				SDKROOT = macosx;
 				SEPARATE_STRIP = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -6913,7 +6920,7 @@
 					"$(inherited)",
 					"$(FMOD_OSX_SDK_ROOT)/api/inc",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "moai-osx-imgui";
 				SDKROOT = macosx;
 				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
@@ -6963,7 +6970,7 @@
 					"$(FMOD_OSX_SDK_ROOT)/api/inc",
 					../../3rdparty/assimp/include,
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "moai-osx-assimp";
 				SDKROOT = macosx;
 				SEPARATE_STRIP = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -7015,7 +7022,7 @@
 					"$(FMOD_OSX_SDK_ROOT)/api/inc",
 					../../3rdparty/assimp/include,
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "moai-osx-assimp";
 				SDKROOT = macosx;
 				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
@@ -7065,7 +7072,7 @@
 					"$(FMOD_OSX_SDK_ROOT)/api/inc",
 					../../3rdparty/assimp/include,
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "moai-osx-assimp";
 				SDKROOT = macosx;
 				SEPARATE_STRIP = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -7117,7 +7124,7 @@
 					"$(FMOD_OSX_SDK_ROOT)/api/inc",
 					../../3rdparty/assimp/include,
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "moai-osx-assimp";
 				SDKROOT = macosx;
 				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
@@ -7163,15 +7170,15 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(FMOD_OSX_SDK_ROOT)/api/inc",
-					../../3rdparty/assimp/include,
 					../../3rdparty/assimp,
+					"../../3rdparty/assimp-config",
+					../../3rdparty/assimp/include,
 					../../3rdparty/assimp/contrib/openddlparser/include,
-					"../../3rdparty/zlib-1.2.3",
 					../../3rdparty/assimp/contrib/rapidjson/include,
+					"../../3rdparty/zlib-1.2.3",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				OTHER_CFLAGS = "";
+				PRODUCT_NAME = "moai-osx-3rdparty-assimp";
 				SDKROOT = macosx;
 				SEPARATE_STRIP = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -7219,15 +7226,15 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(FMOD_OSX_SDK_ROOT)/api/inc",
-					../../3rdparty/assimp/include,
 					../../3rdparty/assimp,
+					"../../3rdparty/assimp-config",
+					../../3rdparty/assimp/include,
 					../../3rdparty/assimp/contrib/openddlparser/include,
-					"../../3rdparty/zlib-1.2.3",
 					../../3rdparty/assimp/contrib/rapidjson/include,
+					"../../3rdparty/zlib-1.2.3",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				OTHER_CFLAGS = "";
+				PRODUCT_NAME = "moai-osx-3rdparty-assimp";
 				SDKROOT = macosx;
 				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
@@ -7273,15 +7280,15 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(FMOD_OSX_SDK_ROOT)/api/inc",
-					../../3rdparty/assimp/include,
 					../../3rdparty/assimp,
+					"../../3rdparty/assimp-config",
+					../../3rdparty/assimp/include,
 					../../3rdparty/assimp/contrib/openddlparser/include,
-					"../../3rdparty/zlib-1.2.3",
 					../../3rdparty/assimp/contrib/rapidjson/include,
+					"../../3rdparty/zlib-1.2.3",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				OTHER_CFLAGS = "";
+				PRODUCT_NAME = "moai-osx-3rdparty-assimp";
 				SDKROOT = macosx;
 				SEPARATE_STRIP = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -7329,15 +7336,15 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(FMOD_OSX_SDK_ROOT)/api/inc",
-					../../3rdparty/assimp/include,
 					../../3rdparty/assimp,
+					"../../3rdparty/assimp-config",
+					../../3rdparty/assimp/include,
 					../../3rdparty/assimp/contrib/openddlparser/include,
-					"../../3rdparty/zlib-1.2.3",
 					../../3rdparty/assimp/contrib/rapidjson/include,
+					"../../3rdparty/zlib-1.2.3",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				OTHER_CFLAGS = "";
+				PRODUCT_NAME = "moai-osx-3rdparty-assimp";
 				SDKROOT = macosx;
 				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
@@ -7472,7 +7479,6 @@
 					"\"../../3rdparty/fmod-studio/headers\"",
 					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
 					"\"../../3rdparty/sqlite-3.14.1/\"",
-					"\"../../3rdparty/assimp/include\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
@@ -7621,7 +7627,6 @@
 					"\"../../3rdparty/fmod-studio/headers\"",
 					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
 					"\"../../3rdparty/sqlite-3.14.1/\"",
-					"\"../../3rdparty/assimp/include\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = (
@@ -7770,7 +7775,6 @@
 					"\"../../3rdparty/fmod-studio/headers\"",
 					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
 					"\"../../3rdparty/sqlite-3.14.1/\"",
-					"\"../../3rdparty/assimp/include\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = (

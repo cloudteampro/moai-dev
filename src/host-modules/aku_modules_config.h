@@ -6,7 +6,7 @@
 	#endif
 
 	#ifndef AKU_WITH_ASSIMP
-		#define AKU_WITH_ASSIMP 0
+		#define AKU_WITH_ASSIMP 1
 	#endif
 
 	#ifndef AKU_WITH_BOX2D
@@ -14,7 +14,7 @@
 	#endif
 
 	#ifndef AKU_WITH_CLOUDTEAM
-		#define AKU_WITH_CLOUDTEAM 0
+		#define AKU_WITH_CLOUDTEAM 1
 	#endif
 
 	#ifndef AKU_WITH_CRYPTO
@@ -22,7 +22,7 @@
 	#endif
 
 	#ifndef AKU_WITH_FMOD_DESIGNER
-		#define AKU_WITH_FMOD_DESIGNER 0
+		#define AKU_WITH_FMOD_DESIGNER 1
 	#endif
 
 	#ifndef AKU_WITH_FMOD_EX
@@ -62,7 +62,7 @@
 	#endif
 	
 	#ifndef AKU_WITH_IMGUI
-		#define AKU_WITH_IMGUI 0
+		#define AKU_WITH_IMGUI 1
 	#endif
 
 	#ifndef AKU_WITH_LUAEXT
@@ -82,7 +82,7 @@
 	#endif
 
 	#ifndef AKU_WITH_SPINE
-		#define AKU_WITH_SPINE 0
+		#define AKU_WITH_SPINE 1
 	#endif
 
 	#ifndef AKU_WITH_UNTZ

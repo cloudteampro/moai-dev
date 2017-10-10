@@ -139,9 +139,9 @@ void MOAIGfxBuffer::CopyFromStream ( ZLStream& stream ) {
 }
 
 //----------------------------------------------------------------//
-const void* MOAIGfxBuffer::GetAddress () {
+ZLSharedConstBuffer* MOAIGfxBuffer::GetBuffer () {
 
-	return this->mUseVBOs ? 0 : this->mData;
+	return this->mUseVBOs ? 0 : this->ZLCopyOnWrite::GetSharedConstBuffer ();
 }
 
 //----------------------------------------------------------------//

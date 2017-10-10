@@ -106,6 +106,20 @@ public:
 	}
 	
 	//----------------------------------------------------------------//
+	// ( v0 - V ) x ( v1 - V )
+	TYPE CrossJoint ( const ZLMetaVec2D < TYPE >& v0, const ZLMetaVec2D < TYPE >& v1 ) {
+
+		return (( v0.mX - mX ) * ( v1.mY - mY )) - (( v0.mY - mY ) * ( v1.mX - mX ));
+	}
+	
+	//----------------------------------------------------------------//
+	// ( v1 - V0 ) x ( v2 - V0 )
+	static TYPE CrossJoint ( const ZLMetaVec2D < TYPE >& v0, const ZLMetaVec2D < TYPE >& v1, const ZLMetaVec2D < TYPE >& v2 ) {
+
+		return (( v1.mX - v0.mX ) * ( v2.mY - v0.mY )) - (( v1.mY - v0.mY ) * ( v2.mX - v0.mX ));
+	}
+	
+	//----------------------------------------------------------------//
 	bool Compare ( const ZLMetaVec2D < TYPE >& point ) {
 	
 		if (( mX != point.mX ) || ( mY != point.mY )) return false;

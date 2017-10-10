@@ -103,10 +103,6 @@ void AKUModulesAppFinalize () {
 		AKUSpineAppFinalize ();
 	#endif
 
-	#if AKU_WITH_SPINE_V3
-		AKUSpineAppFinalize ();
-	#endif
-
 	#if AKU_WITH_UNTZ
 		AKUUntzAppFinalize ();
 	#endif
@@ -280,10 +276,6 @@ void AKUModulesContextInitialize () {
 	#endif
 
 	#if AKU_WITH_SPINE
-		AKUSpineContextInitialize ();
-	#endif
-
-	#if AKU_WITH_SPINE_V3
 		AKUSpineContextInitialize ();
 	#endif
 

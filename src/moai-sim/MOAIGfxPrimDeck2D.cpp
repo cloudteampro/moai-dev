@@ -232,9 +232,9 @@ u32 MOAIGfxPrimDeck2D::ExportGeometry ( u32 idx, MOAIVertexFormat& format, MOAIS
 			}
 			
 			format.WriteAhead ( vtxStream );
-			format.WriteCoord ( vtxStream, pos.mX, pos.mY, pos.mZ, 1.0f );
-			format.WriteUV ( vtxStream, vtx.mUV.mX, vtx.mUV.mY, 0.0f );
-			format.WriteColor ( vtxStream, 0xffffffff );
+			format.WriteCoord ( vtxStream, 0, pos.mX, pos.mY, pos.mZ, 1.0f );
+			format.WriteUV ( vtxStream, 0, vtx.mUV.mX, vtx.mUV.mY, 0.0f );
+			format.WriteColor ( vtxStream, 0, 0xffffffff );
 			base = format.SeekVertex ( vtxStream, base, 1 );
 		}
 		

@@ -29,8 +29,9 @@ public:
 */
 class MOAIGfxBuffer :
 	public MOAIGfxResource,
-	public MOAIStream,
-	public ZLByteStream {
+	public virtual MOAIStream,
+	public ZLCopyOnWrite {
+
 protected:
 	
 	friend class MOAIGfxDeviceBase;
@@ -82,7 +83,7 @@ public:
 	//----------------------------------------------------------------//
 	void					Clear					();
 	void					CopyFromStream			( ZLStream& stream );
-	const void*				GetAddress				();
+	ZLSharedConstBuffer*	GetBuffer				();
 	size_t					GetSize					();
 							MOAIGfxBuffer			();
 							~MOAIGfxBuffer			();

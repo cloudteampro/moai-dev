@@ -16,12 +16,6 @@ protected:
 	TYPE*			mObject;
 	
 	//----------------------------------------------------------------//
-	inline void operator = ( const MOAILuaSharedPtr < TYPE >& assign ) {
-		UNUSED ( assign );
-		assert ( false ); // unsupported
-	};
-	
-	//----------------------------------------------------------------//
 	inline TYPE* Get () {
 		return this->mObject;
 	}
@@ -78,6 +72,13 @@ public:
 	//----------------------------------------------------------------//
 	inline operator const TYPE* () const {
 		return this->Get ();
+	};
+
+	//----------------------------------------------------------------//
+	inline void operator = ( const MOAILuaSharedPtr < TYPE >& assign ) {
+		assert ( !this->mObject );
+		this->mObject = assign.mObject;
+		(( MOAILuaSharedPtr < TYPE >& )assign ).mObject = 0;
 	};
 
 	//----------------------------------------------------------------//

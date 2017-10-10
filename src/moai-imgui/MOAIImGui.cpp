@@ -133,9 +133,9 @@ int MOAIImGui::_init ( lua_State* L ) {
 	
 	if ( !self->mVtxFormat ) {
 		MOAIVertexFormat* vtxFormat = new MOAIVertexFormat ();
-		vtxFormat->DeclareAttribute ( 0, ZGL_TYPE_FLOAT, 2, MOAIVertexFormat::ARRAY_VERTEX, false );
-		vtxFormat->DeclareAttribute ( 1, ZGL_TYPE_FLOAT, 2, MOAIVertexFormat::ARRAY_TEX_COORD, false );
-		vtxFormat->DeclareAttribute ( 2, ZGL_TYPE_UNSIGNED_BYTE, 4, MOAIVertexFormat::ARRAY_COLOR, true );
+		vtxFormat->DeclareAttribute ( 0, ZGL_TYPE_FLOAT, 2, MOAIVertexFormat::ATTRIBUTE_COORD, false );
+		vtxFormat->DeclareAttribute ( 1, ZGL_TYPE_FLOAT, 2, MOAIVertexFormat::ATTRIBUTE_TEX_COORD, false );
+		vtxFormat->DeclareAttribute ( 2, ZGL_TYPE_UNSIGNED_BYTE, 4, MOAIVertexFormat::ATTRIBUTE_COLOR, true );
 		self->mVtxFormat.Set ( *self, vtxFormat );
 		
 		assert ( self->mVtxFormat->GetVertexSize () == sizeof ( ImDrawVert ));
