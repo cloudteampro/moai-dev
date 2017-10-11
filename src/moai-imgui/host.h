@@ -4,8 +4,8 @@
 // http://getmoai.com
 //----------------------------------------------------------------//
 
-#ifndef AKU_SPINE_H
-#define AKU_SPINE_H
+#ifndef AKU_IMGUI_H
+#define AKU_IMGUI_H
 
 #include <moai-core/host.h>
 

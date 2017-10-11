@@ -571,17 +571,15 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				HEADER_SEARCH_PATHS = (
-					"\"../../src\"",
-					"\"../../src/config\"",
-					"\"../../src/config-default\"",
-					"\"../../3rdparty/sdl2-2.0.5/include\"",
-					"\"../../3rdparty\"",
+					../../src,
+					"../../3rdparty/sdl2-2.0.5/include",
+					../../3rdparty,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/MoaiSample-cqdbxugpyrgpwegimkiivzlhrioj/Build/Products/Debug",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -592,17 +590,15 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
 				HEADER_SEARCH_PATHS = (
-					"\"../../src\"",
-					"\"../../src/config\"",
-					"\"../../src/config-default\"",
-					"\"../../3rdparty/sdl2-2.0.5/include\"",
-					"\"../../3rdparty\"",
+					../../src,
+					"../../3rdparty/sdl2-2.0.5/include",
+					../../3rdparty,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/MoaiSample-cqdbxugpyrgpwegimkiivzlhrioj/Build/Products/Debug",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -650,8 +646,8 @@
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					../../src,
-					"../../src/config-default",
+					"\"../../src\"",
+					"\"../../src/config-default\"",
 					"../../3rdparty/sdl2-2.0.5/include",
 					../../3rdparty/libimgui,
 				);
@@ -710,8 +706,8 @@
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					../../src,
-					"../../src/config-default",
+					"\"../../src\"",
+					"\"../../src/config-default\"",
 					"../../3rdparty/sdl2-2.0.5/include",
 					../../3rdparty/libimgui,
 				);
