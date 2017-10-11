@@ -21827,6 +21827,8 @@
 				GCC_OBJC_CALL_CXX_CDTORS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					DEBUG,
+					_DEBUG,
 					USE_OPENSSL,
 					USE_SSLEAY,
 					USE_SSL,
@@ -21976,6 +21978,7 @@
 					"${inherited}",
 					MACOSX,
 					LUA_USE_MACOSX,
+					"verbose=-1",
 				);
 				PRODUCT_NAME = "moai-osx-zl-core";
 				SDKROOT = macosx;
@@ -21993,6 +21996,7 @@
 					"${inherited}",
 					MACOSX,
 					LUA_USE_MACOSX,
+					"verbose=-1",
 				);
 				PRODUCT_NAME = "moai-osx-zl-core";
 				SDKROOT = macosx;
@@ -27965,6 +27969,7 @@
 					"${inherited}",
 					MACOSX,
 					LUA_USE_MACOSX,
+					"verbose=-1",
 				);
 				PRODUCT_NAME = "moai-osx-zl-core";
 				SDKROOT = macosx;
@@ -28418,6 +28423,7 @@
 					"${inherited}",
 					MACOSX,
 					LUA_USE_MACOSX,
+					"verbose=-1",
 				);
 				PRODUCT_NAME = "moai-osx-zl-core";
 				SDKROOT = macosx;

@@ -154,12 +154,12 @@ void AKUAppInitialize () {
 }
 
 //----------------------------------------------------------------//
-void AKUCallFunc () {
+int AKUCallFunc () {
 
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-	if ( _loadContextFunc ( state ) != 0 ) return;
+	if ( _loadContextFunc ( state ) != 0 ) return AKU_ERROR;
 	int status = state.DebugCall ( 0, 0 );
-	state.LogErrors ( ZLLog::LOG_ERROR, ZLLog::CONSOLE, status );
+	return state.LogErrors ( ZLLog::LOG_ERROR, ZLLog::CONSOLE, status ) ? AKU_ERROR : AKU_OK;
 }
 
 //----------------------------------------------------------------//
@@ -326,11 +326,11 @@ void AKUInitMemPool ( size_t bytes ) {
 }
 
 //----------------------------------------------------------------//
-void AKULoadFuncFromBuffer ( void* data, size_t size, int dataType, int compressed ) {
+int AKULoadFuncFromBuffer ( void* data, size_t size, int dataType, int compressed ) {
 
 	sContext->mLuaFunc.Clear ();
 
-	if ( !size ) return;
+	if ( !size ) return AKU_ERROR;
 
 	MOAIDataBuffer buffer;
 	buffer.Load ( data, size );
@@ -356,6 +356,8 @@ void AKULoadFuncFromBuffer ( void* data, size_t size, int dataType, int compress
 	}
 	
 	buffer.Unlock ();
+
+	return AKU_OK;
 }
 
 //----------------------------------------------------------------//

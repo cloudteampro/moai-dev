@@ -8,6 +8,9 @@
 
 #include <string>
 
+// TODO Fixme
+#include <zl-common/zl_types.h>
+
 using namespace std;
 
 #define STLSTRING_APPEND_VA_ARGS(str,format,top) \
