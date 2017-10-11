@@ -229,36 +229,6 @@
 		7A00DDFC1F8BDCEC00D672E5 /* TransformConstraintData.c in Sources */ = {isa = PBXBuildFile; fileRef = 7A00DD771F8BDCEB00D672E5 /* TransformConstraintData.c */; };
 		7A00DDFD1F8BDCEC00D672E5 /* VertexAttachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 7A00DD781F8BDCEB00D672E5 /* VertexAttachment.c */; };
 		7A00DDFE1F8BDCEC00D672E5 /* VertexAttachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 7A00DD781F8BDCEB00D672E5 /* VertexAttachment.c */; };
-		7A00DE0F1F8BDD2E00D672E5 /* headers.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00DE001F8BDD2E00D672E5 /* headers.h */; };
-		7A00DE101F8BDD2E00D672E5 /* headers.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00DE001F8BDD2E00D672E5 /* headers.h */; };
-		7A00DE111F8BDD2E00D672E5 /* host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00DE011F8BDD2E00D672E5 /* host.cpp */; };
-		7A00DE121F8BDD2E00D672E5 /* host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00DE011F8BDD2E00D672E5 /* host.cpp */; };
-		7A00DE131F8BDD2E00D672E5 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00DE021F8BDD2E00D672E5 /* host.h */; };
-		7A00DE141F8BDD2E00D672E5 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00DE021F8BDD2E00D672E5 /* host.h */; };
-		7A00DE151F8BDD2E00D672E5 /* MOAISpine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00DE031F8BDD2E00D672E5 /* MOAISpine.cpp */; };
-		7A00DE161F8BDD2E00D672E5 /* MOAISpine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00DE031F8BDD2E00D672E5 /* MOAISpine.cpp */; };
-		7A00DE171F8BDD2E00D672E5 /* MOAISpine.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00DE041F8BDD2E00D672E5 /* MOAISpine.h */; };
-		7A00DE181F8BDD2E00D672E5 /* MOAISpine.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00DE041F8BDD2E00D672E5 /* MOAISpine.h */; };
-		7A00DE191F8BDD2E00D672E5 /* MOAISpineBone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00DE051F8BDD2E00D672E5 /* MOAISpineBone.cpp */; };
-		7A00DE1A1F8BDD2E00D672E5 /* MOAISpineBone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00DE051F8BDD2E00D672E5 /* MOAISpineBone.cpp */; };
-		7A00DE1B1F8BDD2E00D672E5 /* MOAISpineBone.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00DE061F8BDD2E00D672E5 /* MOAISpineBone.h */; };
-		7A00DE1C1F8BDD2E00D672E5 /* MOAISpineBone.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00DE061F8BDD2E00D672E5 /* MOAISpineBone.h */; };
-		7A00DE1D1F8BDD2E00D672E5 /* MOAISpineSkeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00DE071F8BDD2E00D672E5 /* MOAISpineSkeleton.cpp */; };
-		7A00DE1E1F8BDD2E00D672E5 /* MOAISpineSkeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00DE071F8BDD2E00D672E5 /* MOAISpineSkeleton.cpp */; };
-		7A00DE1F1F8BDD2E00D672E5 /* MOAISpineSkeleton.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00DE081F8BDD2E00D672E5 /* MOAISpineSkeleton.h */; };
-		7A00DE201F8BDD2E00D672E5 /* MOAISpineSkeleton.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00DE081F8BDD2E00D672E5 /* MOAISpineSkeleton.h */; };
-		7A00DE211F8BDD2E00D672E5 /* MOAISpineSkeletonData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00DE091F8BDD2E00D672E5 /* MOAISpineSkeletonData.cpp */; };
-		7A00DE221F8BDD2E00D672E5 /* MOAISpineSkeletonData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00DE091F8BDD2E00D672E5 /* MOAISpineSkeletonData.cpp */; };
-		7A00DE231F8BDD2E00D672E5 /* MOAISpineSkeletonData.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00DE0A1F8BDD2E00D672E5 /* MOAISpineSkeletonData.h */; };
-		7A00DE241F8BDD2E00D672E5 /* MOAISpineSkeletonData.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00DE0A1F8BDD2E00D672E5 /* MOAISpineSkeletonData.h */; };
-		7A00DE251F8BDD2E00D672E5 /* MOAISpineSlot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00DE0B1F8BDD2E00D672E5 /* MOAISpineSlot.cpp */; };
-		7A00DE261F8BDD2E00D672E5 /* MOAISpineSlot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00DE0B1F8BDD2E00D672E5 /* MOAISpineSlot.cpp */; };
-		7A00DE271F8BDD2E00D672E5 /* MOAISpineSlot.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00DE0C1F8BDD2E00D672E5 /* MOAISpineSlot.h */; };
-		7A00DE281F8BDD2E00D672E5 /* MOAISpineSlot.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00DE0C1F8BDD2E00D672E5 /* MOAISpineSlot.h */; };
-		7A00DE291F8BDD2E00D672E5 /* pch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00DE0D1F8BDD2E00D672E5 /* pch.cpp */; };
-		7A00DE2A1F8BDD2E00D672E5 /* pch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00DE0D1F8BDD2E00D672E5 /* pch.cpp */; };
-		7A00DE2B1F8BDD2E00D672E5 /* pch.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00DE0E1F8BDD2E00D672E5 /* pch.h */; };
-		7A00DE2C1F8BDD2E00D672E5 /* pch.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00DE0E1F8BDD2E00D672E5 /* pch.h */; };
 		7A00DE411F8BDDAA00D672E5 /* imconfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00DE361F8BDDAA00D672E5 /* imconfig.h */; };
 		7A00DE421F8BDDAA00D672E5 /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00DE371F8BDDAA00D672E5 /* imgui.cpp */; };
 		7A00DE431F8BDDAA00D672E5 /* imgui.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00DE381F8BDDAA00D672E5 /* imgui.h */; };
@@ -791,6 +761,36 @@
 		7A00E6CF1F8CECBD00D672E5 /* MOAIAssimpUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00E6C01F8CECBD00D672E5 /* MOAIAssimpUtil.h */; };
 		7A00E6D01F8CECBD00D672E5 /* pch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00E6C11F8CECBD00D672E5 /* pch.cpp */; };
 		7A00E6D11F8CECBD00D672E5 /* pch.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00E6C21F8CECBD00D672E5 /* pch.h */; };
+		7A00E8101F8E3EBB00D672E5 /* headers.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00E8011F8E3EBB00D672E5 /* headers.h */; };
+		7A00E8111F8E3EBB00D672E5 /* headers.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00E8011F8E3EBB00D672E5 /* headers.h */; };
+		7A00E8121F8E3EBB00D672E5 /* host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00E8021F8E3EBB00D672E5 /* host.cpp */; };
+		7A00E8131F8E3EBB00D672E5 /* host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00E8021F8E3EBB00D672E5 /* host.cpp */; };
+		7A00E8141F8E3EBB00D672E5 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00E8031F8E3EBB00D672E5 /* host.h */; };
+		7A00E8151F8E3EBB00D672E5 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00E8031F8E3EBB00D672E5 /* host.h */; };
+		7A00E8161F8E3EBB00D672E5 /* MOAISpine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00E8041F8E3EBB00D672E5 /* MOAISpine.cpp */; };
+		7A00E8171F8E3EBB00D672E5 /* MOAISpine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00E8041F8E3EBB00D672E5 /* MOAISpine.cpp */; };
+		7A00E8181F8E3EBB00D672E5 /* MOAISpine.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00E8051F8E3EBB00D672E5 /* MOAISpine.h */; };
+		7A00E8191F8E3EBB00D672E5 /* MOAISpine.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00E8051F8E3EBB00D672E5 /* MOAISpine.h */; };
+		7A00E81A1F8E3EBB00D672E5 /* MOAISpineBone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00E8061F8E3EBB00D672E5 /* MOAISpineBone.cpp */; };
+		7A00E81B1F8E3EBB00D672E5 /* MOAISpineBone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00E8061F8E3EBB00D672E5 /* MOAISpineBone.cpp */; };
+		7A00E81C1F8E3EBB00D672E5 /* MOAISpineBone.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00E8071F8E3EBB00D672E5 /* MOAISpineBone.h */; };
+		7A00E81D1F8E3EBB00D672E5 /* MOAISpineBone.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00E8071F8E3EBB00D672E5 /* MOAISpineBone.h */; };
+		7A00E81E1F8E3EBB00D672E5 /* MOAISpineSkeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00E8081F8E3EBB00D672E5 /* MOAISpineSkeleton.cpp */; };
+		7A00E81F1F8E3EBB00D672E5 /* MOAISpineSkeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00E8081F8E3EBB00D672E5 /* MOAISpineSkeleton.cpp */; };
+		7A00E8201F8E3EBB00D672E5 /* MOAISpineSkeleton.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00E8091F8E3EBB00D672E5 /* MOAISpineSkeleton.h */; };
+		7A00E8211F8E3EBB00D672E5 /* MOAISpineSkeleton.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00E8091F8E3EBB00D672E5 /* MOAISpineSkeleton.h */; };
+		7A00E8221F8E3EBB00D672E5 /* MOAISpineSkeletonData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00E80A1F8E3EBB00D672E5 /* MOAISpineSkeletonData.cpp */; };
+		7A00E8231F8E3EBB00D672E5 /* MOAISpineSkeletonData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00E80A1F8E3EBB00D672E5 /* MOAISpineSkeletonData.cpp */; };
+		7A00E8241F8E3EBB00D672E5 /* MOAISpineSkeletonData.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00E80B1F8E3EBB00D672E5 /* MOAISpineSkeletonData.h */; };
+		7A00E8251F8E3EBB00D672E5 /* MOAISpineSkeletonData.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00E80B1F8E3EBB00D672E5 /* MOAISpineSkeletonData.h */; };
+		7A00E8261F8E3EBB00D672E5 /* MOAISpineSlot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00E80C1F8E3EBB00D672E5 /* MOAISpineSlot.cpp */; };
+		7A00E8271F8E3EBB00D672E5 /* MOAISpineSlot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00E80C1F8E3EBB00D672E5 /* MOAISpineSlot.cpp */; };
+		7A00E8281F8E3EBB00D672E5 /* MOAISpineSlot.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00E80D1F8E3EBB00D672E5 /* MOAISpineSlot.h */; };
+		7A00E8291F8E3EBB00D672E5 /* MOAISpineSlot.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00E80D1F8E3EBB00D672E5 /* MOAISpineSlot.h */; };
+		7A00E82A1F8E3EBB00D672E5 /* pch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00E80E1F8E3EBB00D672E5 /* pch.cpp */; };
+		7A00E82B1F8E3EBB00D672E5 /* pch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A00E80E1F8E3EBB00D672E5 /* pch.cpp */; };
+		7A00E82C1F8E3EBB00D672E5 /* pch.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00E80F1F8E3EBB00D672E5 /* pch.h */; };
+		7A00E82D1F8E3EBB00D672E5 /* pch.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A00E80F1F8E3EBB00D672E5 /* pch.h */; };
 		7A05C4231C97074200759015 /* CTHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A1C9D851C96E01900B00C3F /* CTHelper.h */; };
 		7A05C4241C97074300759015 /* CTHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A1C9D851C96E01900B00C3F /* CTHelper.h */; };
 		7A1C9D861C96E01900B00C3F /* CTHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A1C9D841C96E01900B00C3F /* CTHelper.cpp */; };
@@ -1419,21 +1419,6 @@
 		7A00DD761F8BDCEB00D672E5 /* TransformConstraint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TransformConstraint.c; sourceTree = "<group>"; };
 		7A00DD771F8BDCEB00D672E5 /* TransformConstraintData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TransformConstraintData.c; sourceTree = "<group>"; };
 		7A00DD781F8BDCEB00D672E5 /* VertexAttachment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VertexAttachment.c; sourceTree = "<group>"; };
-		7A00DE001F8BDD2E00D672E5 /* headers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = headers.h; sourceTree = "<group>"; };
-		7A00DE011F8BDD2E00D672E5 /* host.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = host.cpp; sourceTree = "<group>"; };
-		7A00DE021F8BDD2E00D672E5 /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = host.h; sourceTree = "<group>"; };
-		7A00DE031F8BDD2E00D672E5 /* MOAISpine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAISpine.cpp; sourceTree = "<group>"; };
-		7A00DE041F8BDD2E00D672E5 /* MOAISpine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAISpine.h; sourceTree = "<group>"; };
-		7A00DE051F8BDD2E00D672E5 /* MOAISpineBone.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAISpineBone.cpp; sourceTree = "<group>"; };
-		7A00DE061F8BDD2E00D672E5 /* MOAISpineBone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAISpineBone.h; sourceTree = "<group>"; };
-		7A00DE071F8BDD2E00D672E5 /* MOAISpineSkeleton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAISpineSkeleton.cpp; sourceTree = "<group>"; };
-		7A00DE081F8BDD2E00D672E5 /* MOAISpineSkeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAISpineSkeleton.h; sourceTree = "<group>"; };
-		7A00DE091F8BDD2E00D672E5 /* MOAISpineSkeletonData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAISpineSkeletonData.cpp; sourceTree = "<group>"; };
-		7A00DE0A1F8BDD2E00D672E5 /* MOAISpineSkeletonData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAISpineSkeletonData.h; sourceTree = "<group>"; };
-		7A00DE0B1F8BDD2E00D672E5 /* MOAISpineSlot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAISpineSlot.cpp; sourceTree = "<group>"; };
-		7A00DE0C1F8BDD2E00D672E5 /* MOAISpineSlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAISpineSlot.h; sourceTree = "<group>"; };
-		7A00DE0D1F8BDD2E00D672E5 /* pch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pch.cpp; sourceTree = "<group>"; };
-		7A00DE0E1F8BDD2E00D672E5 /* pch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pch.h; sourceTree = "<group>"; };
 		7A00DE361F8BDDAA00D672E5 /* imconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imconfig.h; sourceTree = "<group>"; };
 		7A00DE371F8BDDAA00D672E5 /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
 		7A00DE381F8BDDAA00D672E5 /* imgui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui.h; sourceTree = "<group>"; };
@@ -1981,6 +1966,21 @@
 		7A00E6C01F8CECBD00D672E5 /* MOAIAssimpUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIAssimpUtil.h; sourceTree = "<group>"; };
 		7A00E6C11F8CECBD00D672E5 /* pch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pch.cpp; sourceTree = "<group>"; };
 		7A00E6C21F8CECBD00D672E5 /* pch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pch.h; sourceTree = "<group>"; };
+		7A00E8011F8E3EBB00D672E5 /* headers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = headers.h; sourceTree = "<group>"; };
+		7A00E8021F8E3EBB00D672E5 /* host.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = host.cpp; sourceTree = "<group>"; };
+		7A00E8031F8E3EBB00D672E5 /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = host.h; sourceTree = "<group>"; };
+		7A00E8041F8E3EBB00D672E5 /* MOAISpine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAISpine.cpp; sourceTree = "<group>"; };
+		7A00E8051F8E3EBB00D672E5 /* MOAISpine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAISpine.h; sourceTree = "<group>"; };
+		7A00E8061F8E3EBB00D672E5 /* MOAISpineBone.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAISpineBone.cpp; sourceTree = "<group>"; };
+		7A00E8071F8E3EBB00D672E5 /* MOAISpineBone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAISpineBone.h; sourceTree = "<group>"; };
+		7A00E8081F8E3EBB00D672E5 /* MOAISpineSkeleton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAISpineSkeleton.cpp; sourceTree = "<group>"; };
+		7A00E8091F8E3EBB00D672E5 /* MOAISpineSkeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAISpineSkeleton.h; sourceTree = "<group>"; };
+		7A00E80A1F8E3EBB00D672E5 /* MOAISpineSkeletonData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAISpineSkeletonData.cpp; sourceTree = "<group>"; };
+		7A00E80B1F8E3EBB00D672E5 /* MOAISpineSkeletonData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAISpineSkeletonData.h; sourceTree = "<group>"; };
+		7A00E80C1F8E3EBB00D672E5 /* MOAISpineSlot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAISpineSlot.cpp; sourceTree = "<group>"; };
+		7A00E80D1F8E3EBB00D672E5 /* MOAISpineSlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAISpineSlot.h; sourceTree = "<group>"; };
+		7A00E80E1F8E3EBB00D672E5 /* pch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pch.cpp; sourceTree = "<group>"; };
+		7A00E80F1F8E3EBB00D672E5 /* pch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pch.h; sourceTree = "<group>"; };
 		7A1C9D841C96E01900B00C3F /* CTHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CTHelper.cpp; sourceTree = "<group>"; };
 		7A1C9D851C96E01900B00C3F /* CTHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTHelper.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -2087,9 +2087,9 @@
 		0324E4F113564BC7000ADC60 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				7A00E8001F8E3EBB00D672E5 /* moai-spine */,
 				7A00E6B31F8CECBD00D672E5 /* moai-assimp */,
 				7A00E4601F8CD8A100D672E5 /* moai-imgui */,
-				7A00DDFF1F8BDD2E00D672E5 /* moai-spine */,
 				206BA0451BDE92D60021D349 /* ct-util */,
 				2049B90C1CAA8C35005B83B3 /* moai-ios-adtoapp */,
 				203DA5C21BDF933C00EC109A /* moai-ios-crashlytics */,
@@ -2381,28 +2381,6 @@
 				7A00DD781F8BDCEB00D672E5 /* VertexAttachment.c */,
 			);
 			path = spine;
-			sourceTree = "<group>";
-		};
-		7A00DDFF1F8BDD2E00D672E5 /* moai-spine */ = {
-			isa = PBXGroup;
-			children = (
-				7A00DE001F8BDD2E00D672E5 /* headers.h */,
-				7A00DE011F8BDD2E00D672E5 /* host.cpp */,
-				7A00DE021F8BDD2E00D672E5 /* host.h */,
-				7A00DE031F8BDD2E00D672E5 /* MOAISpine.cpp */,
-				7A00DE041F8BDD2E00D672E5 /* MOAISpine.h */,
-				7A00DE051F8BDD2E00D672E5 /* MOAISpineBone.cpp */,
-				7A00DE061F8BDD2E00D672E5 /* MOAISpineBone.h */,
-				7A00DE071F8BDD2E00D672E5 /* MOAISpineSkeleton.cpp */,
-				7A00DE081F8BDD2E00D672E5 /* MOAISpineSkeleton.h */,
-				7A00DE091F8BDD2E00D672E5 /* MOAISpineSkeletonData.cpp */,
-				7A00DE0A1F8BDD2E00D672E5 /* MOAISpineSkeletonData.h */,
-				7A00DE0B1F8BDD2E00D672E5 /* MOAISpineSlot.cpp */,
-				7A00DE0C1F8BDD2E00D672E5 /* MOAISpineSlot.h */,
-				7A00DE0D1F8BDD2E00D672E5 /* pch.cpp */,
-				7A00DE0E1F8BDD2E00D672E5 /* pch.h */,
-			);
-			path = "moai-spine";
 			sourceTree = "<group>";
 		};
 		7A00DE351F8BDDAA00D672E5 /* libimgui */ = {
@@ -3199,6 +3177,28 @@
 			path = "moai-assimp";
 			sourceTree = "<group>";
 		};
+		7A00E8001F8E3EBB00D672E5 /* moai-spine */ = {
+			isa = PBXGroup;
+			children = (
+				7A00E8011F8E3EBB00D672E5 /* headers.h */,
+				7A00E8021F8E3EBB00D672E5 /* host.cpp */,
+				7A00E8031F8E3EBB00D672E5 /* host.h */,
+				7A00E8041F8E3EBB00D672E5 /* MOAISpine.cpp */,
+				7A00E8051F8E3EBB00D672E5 /* MOAISpine.h */,
+				7A00E8061F8E3EBB00D672E5 /* MOAISpineBone.cpp */,
+				7A00E8071F8E3EBB00D672E5 /* MOAISpineBone.h */,
+				7A00E8081F8E3EBB00D672E5 /* MOAISpineSkeleton.cpp */,
+				7A00E8091F8E3EBB00D672E5 /* MOAISpineSkeleton.h */,
+				7A00E80A1F8E3EBB00D672E5 /* MOAISpineSkeletonData.cpp */,
+				7A00E80B1F8E3EBB00D672E5 /* MOAISpineSkeletonData.h */,
+				7A00E80C1F8E3EBB00D672E5 /* MOAISpineSlot.cpp */,
+				7A00E80D1F8E3EBB00D672E5 /* MOAISpineSlot.h */,
+				7A00E80E1F8E3EBB00D672E5 /* pch.cpp */,
+				7A00E80F1F8E3EBB00D672E5 /* pch.h */,
+			);
+			path = "moai-spine";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -3285,16 +3285,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A00DE171F8BDD2E00D672E5 /* MOAISpine.h in Headers */,
+				7A00E8181F8E3EBB00D672E5 /* MOAISpine.h in Headers */,
 				7A00DD891F8BDCEB00D672E5 /* BoneData.h in Headers */,
 				7A00DDA91F8BDCEB00D672E5 /* SkeletonJson.h in Headers */,
 				7A00DDB31F8BDCEB00D672E5 /* TransformConstraint.h in Headers */,
 				7A00DD8F1F8BDCEB00D672E5 /* EventData.h in Headers */,
 				7A00DD9D1F8BDCEB00D672E5 /* PathConstraintData.h in Headers */,
-				7A00DE1B1F8BDD2E00D672E5 /* MOAISpineBone.h in Headers */,
+				7A00E81C1F8E3EBB00D672E5 /* MOAISpineBone.h in Headers */,
 				7A00DD871F8BDCEB00D672E5 /* Bone.h in Headers */,
 				7A00DD7D1F8BDCEB00D672E5 /* AnimationStateData.h in Headers */,
-				7A00DE1F1F8BDD2E00D672E5 /* MOAISpineSkeleton.h in Headers */,
+				7A00E8201F8E3EBB00D672E5 /* MOAISpineSkeleton.h in Headers */,
 				7A00DDDB1F8BDCEC00D672E5 /* Json.h in Headers */,
 				7A00DD9F1F8BDCEB00D672E5 /* RegionAttachment.h in Headers */,
 				7A00DD831F8BDCEB00D672E5 /* Attachment.h in Headers */,
@@ -3302,12 +3302,12 @@
 				7A00DD8D1F8BDCEB00D672E5 /* Event.h in Headers */,
 				7A00DD791F8BDCEB00D672E5 /* Animation.h in Headers */,
 				7A00DDA11F8BDCEB00D672E5 /* Skeleton.h in Headers */,
-				7A00DE231F8BDD2E00D672E5 /* MOAISpineSkeletonData.h in Headers */,
+				7A00E8241F8E3EBB00D672E5 /* MOAISpineSkeletonData.h in Headers */,
 				7A00DDAF1F8BDCEB00D672E5 /* SlotData.h in Headers */,
 				7A00DD7F1F8BDCEB00D672E5 /* Atlas.h in Headers */,
 				7A00DDB71F8BDCEB00D672E5 /* VertexAttachment.h in Headers */,
 				7A00DDDD1F8BDCEC00D672E5 /* kvec.h in Headers */,
-				7A00DE131F8BDD2E00D672E5 /* host.h in Headers */,
+				7A00E8141F8E3EBB00D672E5 /* host.h in Headers */,
 				7A00DD911F8BDCEB00D672E5 /* extension.h in Headers */,
 				7A00DDAB1F8BDCEB00D672E5 /* Skin.h in Headers */,
 				7A00DD931F8BDCEB00D672E5 /* IkConstraint.h in Headers */,
@@ -3315,7 +3315,7 @@
 				7A00DDA31F8BDCEB00D672E5 /* SkeletonBinary.h in Headers */,
 				7A00DDB51F8BDCEB00D672E5 /* TransformConstraintData.h in Headers */,
 				7A00DD951F8BDCEB00D672E5 /* IkConstraintData.h in Headers */,
-				7A00DE2B1F8BDD2E00D672E5 /* pch.h in Headers */,
+				7A00E82C1F8E3EBB00D672E5 /* pch.h in Headers */,
 				7A00DD851F8BDCEB00D672E5 /* AttachmentLoader.h in Headers */,
 				7A00DDB11F8BDCEB00D672E5 /* spine.h in Headers */,
 				7A00DD991F8BDCEB00D672E5 /* PathAttachment.h in Headers */,
@@ -3323,10 +3323,10 @@
 				7A00DDA71F8BDCEB00D672E5 /* SkeletonData.h in Headers */,
 				7A00DD811F8BDCEB00D672E5 /* AtlasAttachmentLoader.h in Headers */,
 				7A00DD7B1F8BDCEB00D672E5 /* AnimationState.h in Headers */,
-				7A00DE271F8BDD2E00D672E5 /* MOAISpineSlot.h in Headers */,
+				7A00E8281F8E3EBB00D672E5 /* MOAISpineSlot.h in Headers */,
 				7A00DDA51F8BDCEB00D672E5 /* SkeletonBounds.h in Headers */,
 				7A00DD8B1F8BDCEB00D672E5 /* BoundingBoxAttachment.h in Headers */,
-				7A00DE0F1F8BDD2E00D672E5 /* headers.h in Headers */,
+				7A00E8101F8E3EBB00D672E5 /* headers.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3334,16 +3334,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A00DE181F8BDD2E00D672E5 /* MOAISpine.h in Headers */,
+				7A00E8191F8E3EBB00D672E5 /* MOAISpine.h in Headers */,
 				7A00DD8A1F8BDCEB00D672E5 /* BoneData.h in Headers */,
 				7A00DDAA1F8BDCEB00D672E5 /* SkeletonJson.h in Headers */,
 				7A00DDB41F8BDCEB00D672E5 /* TransformConstraint.h in Headers */,
 				7A00DD901F8BDCEB00D672E5 /* EventData.h in Headers */,
 				7A00DD9E1F8BDCEB00D672E5 /* PathConstraintData.h in Headers */,
-				7A00DE1C1F8BDD2E00D672E5 /* MOAISpineBone.h in Headers */,
+				7A00E81D1F8E3EBB00D672E5 /* MOAISpineBone.h in Headers */,
 				7A00DD881F8BDCEB00D672E5 /* Bone.h in Headers */,
 				7A00DD7E1F8BDCEB00D672E5 /* AnimationStateData.h in Headers */,
-				7A00DE201F8BDD2E00D672E5 /* MOAISpineSkeleton.h in Headers */,
+				7A00E8211F8E3EBB00D672E5 /* MOAISpineSkeleton.h in Headers */,
 				7A00DDDC1F8BDCEC00D672E5 /* Json.h in Headers */,
 				7A00DDA01F8BDCEB00D672E5 /* RegionAttachment.h in Headers */,
 				7A00DD841F8BDCEB00D672E5 /* Attachment.h in Headers */,
@@ -3351,12 +3351,12 @@
 				7A00DD8E1F8BDCEB00D672E5 /* Event.h in Headers */,
 				7A00DD7A1F8BDCEB00D672E5 /* Animation.h in Headers */,
 				7A00DDA21F8BDCEB00D672E5 /* Skeleton.h in Headers */,
-				7A00DE241F8BDD2E00D672E5 /* MOAISpineSkeletonData.h in Headers */,
+				7A00E8251F8E3EBB00D672E5 /* MOAISpineSkeletonData.h in Headers */,
 				7A00DDB01F8BDCEB00D672E5 /* SlotData.h in Headers */,
 				7A00DD801F8BDCEB00D672E5 /* Atlas.h in Headers */,
 				7A00DDB81F8BDCEB00D672E5 /* VertexAttachment.h in Headers */,
 				7A00DDDE1F8BDCEC00D672E5 /* kvec.h in Headers */,
-				7A00DE141F8BDD2E00D672E5 /* host.h in Headers */,
+				7A00E8151F8E3EBB00D672E5 /* host.h in Headers */,
 				7A00DD921F8BDCEB00D672E5 /* extension.h in Headers */,
 				7A00DDAC1F8BDCEB00D672E5 /* Skin.h in Headers */,
 				7A00DD941F8BDCEB00D672E5 /* IkConstraint.h in Headers */,
@@ -3364,7 +3364,7 @@
 				7A00DDA41F8BDCEB00D672E5 /* SkeletonBinary.h in Headers */,
 				7A00DDB61F8BDCEB00D672E5 /* TransformConstraintData.h in Headers */,
 				7A00DD961F8BDCEB00D672E5 /* IkConstraintData.h in Headers */,
-				7A00DE2C1F8BDD2E00D672E5 /* pch.h in Headers */,
+				7A00E82D1F8E3EBB00D672E5 /* pch.h in Headers */,
 				7A00DD861F8BDCEB00D672E5 /* AttachmentLoader.h in Headers */,
 				7A00DDB21F8BDCEB00D672E5 /* spine.h in Headers */,
 				7A00DD9A1F8BDCEB00D672E5 /* PathAttachment.h in Headers */,
@@ -3372,10 +3372,10 @@
 				7A00DDA81F8BDCEB00D672E5 /* SkeletonData.h in Headers */,
 				7A00DD821F8BDCEB00D672E5 /* AtlasAttachmentLoader.h in Headers */,
 				7A00DD7C1F8BDCEB00D672E5 /* AnimationState.h in Headers */,
-				7A00DE281F8BDD2E00D672E5 /* MOAISpineSlot.h in Headers */,
+				7A00E8291F8E3EBB00D672E5 /* MOAISpineSlot.h in Headers */,
 				7A00DDA61F8BDCEB00D672E5 /* SkeletonBounds.h in Headers */,
 				7A00DD8C1F8BDCEB00D672E5 /* BoundingBoxAttachment.h in Headers */,
-				7A00DE101F8BDD2E00D672E5 /* headers.h in Headers */,
+				7A00E8111F8E3EBB00D672E5 /* headers.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4488,17 +4488,17 @@
 				7A00DDBF1F8BDCEB00D672E5 /* AnimationStateData.c in Sources */,
 				7A00DDBD1F8BDCEB00D672E5 /* AnimationState.c in Sources */,
 				7A00DDBB1F8BDCEB00D672E5 /* Animation.c in Sources */,
-				7A00DE191F8BDD2E00D672E5 /* MOAISpineBone.cpp in Sources */,
+				7A00E81A1F8E3EBB00D672E5 /* MOAISpineBone.cpp in Sources */,
 				7A00DDEB1F8BDCEC00D672E5 /* SkeletonBinary.c in Sources */,
 				7A00DDFD1F8BDCEC00D672E5 /* VertexAttachment.c in Sources */,
 				7A00DDCB1F8BDCEB00D672E5 /* BoneData.c in Sources */,
 				7A00DDFB1F8BDCEC00D672E5 /* TransformConstraintData.c in Sources */,
-				7A00DE151F8BDD2E00D672E5 /* MOAISpine.cpp in Sources */,
+				7A00E8161F8E3EBB00D672E5 /* MOAISpine.cpp in Sources */,
 				7A00DDE91F8BDCEC00D672E5 /* Skeleton.c in Sources */,
 				7A00DDD51F8BDCEC00D672E5 /* IkConstraint.c in Sources */,
 				7A00DDDF1F8BDCEC00D672E5 /* MeshAttachment.c in Sources */,
-				7A00DE291F8BDD2E00D672E5 /* pch.cpp in Sources */,
-				7A00DE1D1F8BDD2E00D672E5 /* MOAISpineSkeleton.cpp in Sources */,
+				7A00E82A1F8E3EBB00D672E5 /* pch.cpp in Sources */,
+				7A00E81E1F8E3EBB00D672E5 /* MOAISpineSkeleton.cpp in Sources */,
 				7A00DDE11F8BDCEC00D672E5 /* PathAttachment.c in Sources */,
 				7A00DDD11F8BDCEC00D672E5 /* EventData.c in Sources */,
 				7A00DDD71F8BDCEC00D672E5 /* IkConstraintData.c in Sources */,
@@ -4506,16 +4506,16 @@
 				7A00DDF11F8BDCEC00D672E5 /* SkeletonJson.c in Sources */,
 				7A00DDF71F8BDCEC00D672E5 /* SlotData.c in Sources */,
 				7A00DDF51F8BDCEC00D672E5 /* Slot.c in Sources */,
-				7A00DE111F8BDD2E00D672E5 /* host.cpp in Sources */,
+				7A00E8121F8E3EBB00D672E5 /* host.cpp in Sources */,
 				7A00DDCD1F8BDCEB00D672E5 /* BoundingBoxAttachment.c in Sources */,
 				7A00DDE51F8BDCEC00D672E5 /* PathConstraintData.c in Sources */,
-				7A00DE251F8BDD2E00D672E5 /* MOAISpineSlot.cpp in Sources */,
+				7A00E8261F8E3EBB00D672E5 /* MOAISpineSlot.cpp in Sources */,
 				7A00DDF91F8BDCEC00D672E5 /* TransformConstraint.c in Sources */,
 				7A00DDCF1F8BDCEC00D672E5 /* Event.c in Sources */,
 				7A00DDF31F8BDCEC00D672E5 /* Skin.c in Sources */,
 				7A00DDC31F8BDCEB00D672E5 /* AtlasAttachmentLoader.c in Sources */,
 				7A00DDED1F8BDCEC00D672E5 /* SkeletonBounds.c in Sources */,
-				7A00DE211F8BDD2E00D672E5 /* MOAISpineSkeletonData.cpp in Sources */,
+				7A00E8221F8E3EBB00D672E5 /* MOAISpineSkeletonData.cpp in Sources */,
 				7A00DDC51F8BDCEB00D672E5 /* Attachment.c in Sources */,
 				7A00DDC11F8BDCEB00D672E5 /* Atlas.c in Sources */,
 				7A00DDE31F8BDCEC00D672E5 /* PathConstraint.c in Sources */,
@@ -4534,17 +4534,17 @@
 				7A00DDC01F8BDCEB00D672E5 /* AnimationStateData.c in Sources */,
 				7A00DDBE1F8BDCEB00D672E5 /* AnimationState.c in Sources */,
 				7A00DDBC1F8BDCEB00D672E5 /* Animation.c in Sources */,
-				7A00DE1A1F8BDD2E00D672E5 /* MOAISpineBone.cpp in Sources */,
+				7A00E81B1F8E3EBB00D672E5 /* MOAISpineBone.cpp in Sources */,
 				7A00DDEC1F8BDCEC00D672E5 /* SkeletonBinary.c in Sources */,
 				7A00DDFE1F8BDCEC00D672E5 /* VertexAttachment.c in Sources */,
 				7A00DDCC1F8BDCEB00D672E5 /* BoneData.c in Sources */,
 				7A00DDFC1F8BDCEC00D672E5 /* TransformConstraintData.c in Sources */,
-				7A00DE161F8BDD2E00D672E5 /* MOAISpine.cpp in Sources */,
+				7A00E8171F8E3EBB00D672E5 /* MOAISpine.cpp in Sources */,
 				7A00DDEA1F8BDCEC00D672E5 /* Skeleton.c in Sources */,
 				7A00DDD61F8BDCEC00D672E5 /* IkConstraint.c in Sources */,
 				7A00DDE01F8BDCEC00D672E5 /* MeshAttachment.c in Sources */,
-				7A00DE2A1F8BDD2E00D672E5 /* pch.cpp in Sources */,
-				7A00DE1E1F8BDD2E00D672E5 /* MOAISpineSkeleton.cpp in Sources */,
+				7A00E82B1F8E3EBB00D672E5 /* pch.cpp in Sources */,
+				7A00E81F1F8E3EBB00D672E5 /* MOAISpineSkeleton.cpp in Sources */,
 				7A00DDE21F8BDCEC00D672E5 /* PathAttachment.c in Sources */,
 				7A00DDD21F8BDCEC00D672E5 /* EventData.c in Sources */,
 				7A00DDD81F8BDCEC00D672E5 /* IkConstraintData.c in Sources */,
@@ -4552,16 +4552,16 @@
 				7A00DDF21F8BDCEC00D672E5 /* SkeletonJson.c in Sources */,
 				7A00DDF81F8BDCEC00D672E5 /* SlotData.c in Sources */,
 				7A00DDF61F8BDCEC00D672E5 /* Slot.c in Sources */,
-				7A00DE121F8BDD2E00D672E5 /* host.cpp in Sources */,
+				7A00E8131F8E3EBB00D672E5 /* host.cpp in Sources */,
 				7A00DDCE1F8BDCEB00D672E5 /* BoundingBoxAttachment.c in Sources */,
 				7A00DDE61F8BDCEC00D672E5 /* PathConstraintData.c in Sources */,
-				7A00DE261F8BDD2E00D672E5 /* MOAISpineSlot.cpp in Sources */,
+				7A00E8271F8E3EBB00D672E5 /* MOAISpineSlot.cpp in Sources */,
 				7A00DDFA1F8BDCEC00D672E5 /* TransformConstraint.c in Sources */,
 				7A00DDD01F8BDCEC00D672E5 /* Event.c in Sources */,
 				7A00DDF41F8BDCEC00D672E5 /* Skin.c in Sources */,
 				7A00DDC41F8BDCEB00D672E5 /* AtlasAttachmentLoader.c in Sources */,
 				7A00DDEE1F8BDCEC00D672E5 /* SkeletonBounds.c in Sources */,
-				7A00DE221F8BDD2E00D672E5 /* MOAISpineSkeletonData.cpp in Sources */,
+				7A00E8231F8E3EBB00D672E5 /* MOAISpineSkeletonData.cpp in Sources */,
 				7A00DDC61F8BDCEB00D672E5 /* Attachment.c in Sources */,
 				7A00DDC21F8BDCEB00D672E5 /* Atlas.c in Sources */,
 				7A00DDE41F8BDCEC00D672E5 /* PathConstraint.c in Sources */,
@@ -4884,7 +4884,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -6460,7 +6460,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(FMOD_OSX_SDK_ROOT)/api/inc",
 					"../../3rdparty/spine-c/include",
 				);
 				PRODUCT_NAME = "moai-osx-spine";
@@ -6505,7 +6504,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(FMOD_OSX_SDK_ROOT)/api/inc",
 					"../../3rdparty/spine-c/include",
 				);
 				PRODUCT_NAME = "moai-osx-spine";
@@ -6548,7 +6546,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(FMOD_OSX_SDK_ROOT)/api/inc",
 					"../../3rdparty/spine-c/include",
 				);
 				PRODUCT_NAME = "moai-osx-spine";
@@ -6593,7 +6590,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(FMOD_OSX_SDK_ROOT)/api/inc",
 					"../../3rdparty/spine-c/include",
 				);
 				PRODUCT_NAME = "moai-osx-spine";
@@ -6630,7 +6626,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(FMOD_IOS_SDK_ROOT)/api/inc",
 					"../../3rdparty/spine-c/include",
 				);
 				PRODUCT_NAME = "moai-ios-spine";
@@ -6669,7 +6664,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(FMOD_IOS_SDK_ROOT)/api/inc",
 					"../../3rdparty/spine-c/include",
 				);
 				PRODUCT_NAME = "moai-ios-spine";
@@ -6706,7 +6700,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(FMOD_IOS_SDK_ROOT)/api/inc",
 					"../../3rdparty/spine-c/include",
 				);
 				PRODUCT_NAME = "moai-ios-spine";
@@ -6745,7 +6738,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(FMOD_IOS_SDK_ROOT)/api/inc",
 					"../../3rdparty/spine-c/include",
 				);
 				PRODUCT_NAME = "moai-ios-spine";
@@ -7356,7 +7348,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -7504,7 +7496,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -7652,7 +7644,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;

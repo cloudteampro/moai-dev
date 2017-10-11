@@ -27,7 +27,6 @@ add_subdirectory ( moai-image-png )
 add_subdirectory ( moai-image-webp )
 
 add_subdirectory ( moai-spine )
-add_subdirectory ( moai-spine-v3 )
 add_subdirectory ( moai-fmod-studio )
 
 if (MOAI_TEST)
