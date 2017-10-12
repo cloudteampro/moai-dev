@@ -4,8 +4,9 @@
 #ifndef MOAILUASTATE_H
 #define MOAILUASTATE_H
 
-class MOAILuaRef;
+class MOAILuaMemberRef;
 class MOAILuaObject;
+class MOAILuaRef;
 
 //================================================================//
 // MOAILuaState
@@ -115,10 +116,12 @@ public:
 	void			Push						( const ZLRect& value );
 	void			Push						( const ZLVec2D& value );
 	void			Push						( const ZLVec3D& value );
+	void			Push						( const ZLVec4D& value );
 	
 	void			Push						( lua_CFunction value );
 	void			Push						( MOAILuaObject* luaObject );
 	void			Push						( MOAILuaRef& ref );
+	void			Push						( MOAILuaMemberRef& ref );
 	void			Push						( const void* value );
 	void			Push						( void* data, size_t size );
 	
@@ -163,7 +166,6 @@ public:
 	template < typename TYPE > TYPE						GetValue			( int idx, TYPE value );
 	template < typename TYPE > ZLMetaVec2D < TYPE >		GetVec2D			( int idx, TYPE value = 0 );
 	template < typename TYPE > ZLMetaVec3D < TYPE >		GetVec3D			( int idx, TYPE value = 0 );
-	template < typename TYPE > ZLMetaVec4D < TYPE >		GetVec4D			( int idx, TYPE value = 0 );
 	template < typename TYPE > TYPE						PopValue			( TYPE value );
 	template < typename TYPE > void						Push				( ZLMetaRect < TYPE >& rect );
 	template < typename TYPE > void						ReadArray			( int size, TYPE* values, TYPE value );
@@ -171,6 +173,28 @@ public:
 	template < typename TYPE > void						SetFieldByIndex		( int idx, int key, TYPE value );
 	template < typename TYPE > void						SetGlobal			( cc8* key, TYPE value );
 	template < typename TYPE > void						WriteArray			( int size, TYPE* values );
+	
+	//----------------------------------------------------------------//
+	template < typename TYPE >
+	TYPE GetFieldValue ( int idx, cc8* key, TYPE value ) {
+	
+		this->GetField ( idx, key );
+		TYPE result = this->GetValue < TYPE >( -1, value );
+		this->Pop ();
+		
+		return result;
+	}
+	
+	//----------------------------------------------------------------//
+	template < typename TYPE >
+	TYPE GetFieldValue ( int idx, int key, TYPE value ) {
+	
+		this->GetField ( idx, key );
+		TYPE result = this->GetValue < TYPE >( -1, value );
+		this->Pop ();
+		
+		return result;
+	}
 };
 
 //----------------------------------------------------------------//

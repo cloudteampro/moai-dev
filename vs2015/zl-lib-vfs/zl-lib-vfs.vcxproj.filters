@@ -13,6 +13,7 @@
     <ClCompile Include="..\..\src\zl-vfs\ZLVfsVirtualPath.cpp" />
     <ClCompile Include="..\..\src\zl-vfs\ZLVfsZipArchive.cpp" />
     <ClCompile Include="..\..\src\zl-vfs\ZLVfsZipStream.cpp" />
+    <ClCompile Include="..\..\src\zl-vfs\ZLThreadLocalPtr_windows.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\zl-vfs\assert.h" />
@@ -24,6 +25,7 @@
     <ClInclude Include="..\..\src\zl-vfs\zl_replace_new_delete.h" />
     <ClInclude Include="..\..\src\zl-vfs\zl_replace_stdio.h" />
     <ClInclude Include="..\..\src\zl-vfs\zl_replace_stdlib.h" />
+    <ClInclude Include="..\..\src\zl-vfs\zl_types.h" />
     <ClInclude Include="..\..\src\zl-vfs\zl_util.h" />
     <ClInclude Include="..\..\src\zl-vfs\ZLVfsDirectoryItr.h" />
     <ClInclude Include="..\..\src\zl-vfs\ZLVfsFile.h" />
@@ -37,6 +39,7 @@
     <ClInclude Include="..\..\src\zl-common\zl_types.h">
       <Filter>common</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\zl-vfs\ZLThreadLocalPtr.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="common">

@@ -11,7 +11,7 @@
 // MOAIAdColonyAndroid
 //================================================================//
 class MOAIAdColonyAndroid :
-	public ZLContextClass < MOAIAdColonyAndroid, MOAIGlobalEventSource >,
+	public MOAIGlobalClass < MOAIAdColonyAndroid, MOAIGlobalEventSource >,
 	public JniUtils {
 private:
 

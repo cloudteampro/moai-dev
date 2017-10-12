@@ -29,10 +29,6 @@ void AKUModulesIosAppFinalize () {
 		AKUIosChartBoostAppFinalize ();
 	#endif
 
-	#if AKU_WITH_IOS_CRASHLYTICS
-		AKUIosCrashlyticsAppFinalize ();
-	#endif
-
 	#if AKU_WITH_IOS_CRITTERCISM
 		AKUIosCrittercismAppFinalize ();
 	#endif
@@ -101,10 +97,6 @@ void AKUModulesIosAppInitialize () {
 		AKUIosChartBoostAppInitialize ();
 	#endif
 
-	#if AKU_WITH_IOS_CRASHLYTICS
-		AKUIosCrashlyticsAppInitialize ();
-	#endif
-
 	#if AKU_WITH_IOS_CRITTERCISM
 		AKUIosCrittercismAppInitialize ();
 	#endif
@@ -155,15 +147,6 @@ void AKUModulesIosAppInitialize () {
 }
 
 //----------------------------------------------------------------//
-void AKUModulesIosApplicationDidBecomeActive ( UIApplication* application ) {
-    
-    // return
-    #if AKU_WITH_IOS_FACEBOOK
-        AKUIosFacebookApplicationDidBecomeActive ( application );
-    #endif
-}
-
-//----------------------------------------------------------------//
 BOOL AKUModulesIosApplicationDidFinishLaunchingWithOptions ( UIApplication* application, NSDictionary* launchOptions ) {
 
     BOOL status = YES;
@@ -203,10 +186,6 @@ void AKUModulesIosContextInitialize () {
 
 	#if AKU_WITH_IOS_CHARTBOOST
 		AKUIosChartBoostContextInitialize ();
-	#endif
-
-	#if AKU_WITH_IOS_CRASHLYTICS
-		AKUIosCrashlyticsContextInitialize ();
 	#endif
 
 	#if AKU_WITH_IOS_CRITTERCISM

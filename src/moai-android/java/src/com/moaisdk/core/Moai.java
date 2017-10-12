@@ -20,7 +20,6 @@ import android.provider.Settings.Secure;
 import android.util.DisplayMetrics;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.Runtime;
 import java.util.Calendar;
 import java.util.Locale;
@@ -40,19 +39,19 @@ public class Moai {
 
 	public enum ApplicationState {
 
-		APPLICATION_UNINITIALIZED,
-		APPLICATION_RUNNING,
-		APPLICATION_PAUSED;
+        APPLICATION_UNINITIALIZED,
+        APPLICATION_RUNNING,
+        APPLICATION_PAUSED;
 
-		public static ApplicationState valueOf ( int index ) {
+        public static ApplicationState valueOf ( int index ) {
 
-			ApplicationState [] values = ApplicationState.values ();
-			if (( index < 0 ) || ( index >= values.length )) {
-				return APPLICATION_UNINITIALIZED;
-			}
-			return values [ index ];
-		}
-	}
+            ApplicationState [] values = ApplicationState.values ();
+            if (( index < 0 ) || ( index >= values.length )) {
+                return APPLICATION_UNINITIALIZED;
+            }
+            return values [ index ];
+        }
+    }
 
 	public enum DialogResult {
 
@@ -61,15 +60,15 @@ public class Moai {
 		RESULT_NEGATIVE,
 		RESULT_CANCEL;
 
-		public static DialogResult valueOf ( int index ) {
+        public static DialogResult valueOf ( int index ) {
 
-			DialogResult [] values = DialogResult.values ();
-			if (( index < 0 ) || ( index >= values.length )) {
-				return RESULT_CANCEL;
-			}
-			return values [ index ];
-		}
-	}
+            DialogResult [] values = DialogResult.values ();
+            if (( index < 0 ) || ( index >= values.length )) {
+                return RESULT_CANCEL;
+            }
+            return values [ index ];
+        }
+    }
 
 	public enum ConnectionType {
 
@@ -77,29 +76,29 @@ public class Moai {
 		CONNECTION_WIFI,
 		CONNECTION_WWAN;
 
-		public static ConnectionType valueOf ( int index ) {
+        public static ConnectionType valueOf ( int index ) {
 
-			ConnectionType [] values = ConnectionType.values ();
-			if (( index < 0 ) || ( index >= values.length )) {
-				return CONNECTION_NONE;
-			}
-			return values [ index ];
-		}
-	}
+            ConnectionType [] values = ConnectionType.values ();
+            if (( index < 0 ) || ( index >= values.length )) {
+                return CONNECTION_NONE;
+            }
+            return values [ index ];
+        }
+    }
 
 	public enum InputDevice {
 
 		INPUT_DEVICE;
 
-		public static InputDevice valueOf ( int index ) {
+        public static InputDevice valueOf ( int index ) {
 
-			InputDevice [] values = InputDevice.values ();
-			if (( index < 0 ) || ( index >= values.length )) {
-				return INPUT_DEVICE;
-			}
-			return values [ index ];
-		}
-	}
+            InputDevice [] values = InputDevice.values ();
+            if (( index < 0 ) || ( index >= values.length )) {
+                return INPUT_DEVICE;
+            }
+            return values [ index ];
+        }
+    }
 
 	public enum InputSensor {
 
@@ -108,15 +107,15 @@ public class Moai {
 		SENSOR_LOCATION,
 		SENSOR_TOUCH;
 
-		public static InputSensor valueOf ( int index ) {
+        public static InputSensor valueOf ( int index ) {
 
-			InputSensor [] values = InputSensor.values ();
-			if (( index < 0 ) || ( index >= values.length )) {
-				return SENSOR_TOUCH;
-			}
-			return values [ index ];
-		}
-	}
+            InputSensor [] values = InputSensor.values ();
+            if (( index < 0 ) || ( index >= values.length )) {
+                return SENSOR_TOUCH;
+            }
+            return values [ index ];
+        }
+    }
 
 	public enum ListenerEvent {
 
@@ -127,42 +126,36 @@ public class Moai {
 		ACTIVITY_ON_PAUSE,
 		ACTIVITY_ON_RESUME,
 		ACTIVITY_ON_RESTART,
-		APP_OPENED_FROM_URL,
 		BACK_BUTTON_PRESSED,
-		EVENT_PICTURE_TAKEN,
-		EVENT_MEMORY_WARNING,
 		UNKNOWN;
 		
-		public static ListenerEvent valueOf ( int index ) {
+        public static ListenerEvent valueOf ( int index ) {
 
-			ListenerEvent [] values = ListenerEvent.values ();
-			if (( index < 0 ) || ( index >= values.length )) {
-				return UNKNOWN;
-			}
-			return values [ index ];
-		}
-	}
+            ListenerEvent [] values = ListenerEvent.values ();
+            if (( index < 0 ) || ( index >= values.length )) {
+                return UNKNOWN;
+            }
+            return values [ index ];
+        }
+    }
 
 	private static String [] sExternalClasses = {
-		// "com.moaisdk.adcolony.MoaiAdColony",
-		// "com.moaisdk.amazonbilling.MoaiAmazonBilling",
+		"com.moaisdk.adcolony.MoaiAdColony",
+		"com.moaisdk.amazonbilling.MoaiAmazonBilling",
 		"com.moaisdk.chartboost.MoaiChartBoost",
-		// "com.moaisdk.crittercism.MoaiCrittercism",
+		"com.moaisdk.crittercism.MoaiCrittercism",
+		"com.moaisdk.deltadna.MoaiDeltaDNA",
 		"com.moaisdk.facebook.MoaiFacebook",
-		// "com.moaisdk.fortumo.MoaiFortumo",
+        "com.moaisdk.fortumo.MoaiFortumo",
 		"com.moaisdk.flurry.MoaiFlurry",
 		"com.moaisdk.googlebilling.MoaiGoogleBilling",
-		// "com.moaisdk.googleplayservices.MoaiGooglePlayServices",
-		"com.moaisdk.googleplayservicesgames.MoaiGooglePlayServicesGames",
+		"com.moaisdk.googleplayservices.MoaiGooglePlayServices",
 		"com.moaisdk.googlepush.MoaiGooglePush",
 		"com.moaisdk.core.MoaiKeyboard",
-		// "com.moaisdk.core.MoaiMoviePlayer",
-		"com.moaisdk.fmodstudio.MoaiFmodStudio",
-		// "com.moaisdk.tapjoy.MoaiTapjoy",
-		// "com.moaisdk.twitter.MoaiTwitter",
-		// "com.moaisdk.vungle.MoaiVungle",
-		"com.moaisdk.unityads.MoaiUnityAds",
-		"com.moaisdk.core.MoaiWebView",
+		"com.moaisdk.core.MoaiMoviePlayer",
+		"com.moaisdk.tapjoy.MoaiTapjoy",
+        "com.moaisdk.twitter.MoaiTwitter",
+		"com.moaisdk.vungle.MoaiVungle",
 	};
 
 	private static Activity 				sActivity = null;
@@ -182,9 +175,6 @@ public class Moai {
 	protected static native void 		AKUEnqueueLocationEvent			( int deviceId, int sensorId, double longitude, double latitude, double altitude, float hAccuracy, float vAccuracy, float speed );
 	protected static native void 		AKUEnqueueCompassEvent			( int deviceId, int sensorId, float heading );
 	protected static native void 		AKUEnqueueTouchEvent 			( int deviceId, int sensorId, int touchId, boolean down, int x, int y, int tapCount );
-	protected static native void		AKUEnvironmentSetBool			( String key, boolean value );
-	protected static native void		AKUEnvironmentSetInt			( String key, int value );
-	protected static native void		AKUEnvironmentSetString			( String key, String value );
 	protected static native void 		AKUFinalize 					();
 	protected static native void		AKUModulesUpdate				();
 	protected static native void 		AKUMountVirtualDirectory 		( String virtualPath, String archive );
@@ -197,7 +187,7 @@ public class Moai {
 	protected static native void		AKUSetConnectionType 			( long connectionType );
 	protected static native void 		AKUSetContext 					( int contextId );
 	protected static native void		AKUSetDeviceLocale				( String langCode, String countryCode );
-	protected static native void 		AKUSetDeviceProperties 			( String appName, String appId, String appVersion, String appVersionCode, String abi, String devBrand, String devName, String devManufacturer, String devModel, String devProduct, int numProcessors, String osBrand, String osVersion, String osBuild, String udid );
+	protected static native void 		AKUSetDeviceProperties 			( String appName, String appId, String appVersion, String abi, String devBrand, String devName, String devManufacturer, String devModel, String devProduct, int numProcessors, String osBrand, String osVersion, String udid );
 	protected static native void 		AKUSetDocumentDirectory 		( String path );
 	protected static native void 		AKUSetInputConfigurationName	( String name );
 	protected static native void 		AKUSetInputDevice		 		( int deviceId, String name );
@@ -214,32 +204,16 @@ public class Moai {
 
 		
 		try {
-			String str =  new String ( bytes, "UTF8" );
+  			String str =  new String ( bytes, "UTF8" );
 			MoaiLog.i ( "JAVA CreateJString Created a string:");
 			MoaiLog.i( str );
 			return str;
 
-		}
+  		}
 		catch(UnsupportedEncodingException e1) {
 
 			MoaiLog.i ( "JAVA CreateJString failed to convert string" );
 			return null;
-		}
-	}
-
-	//----------------------------------------------------------------//
-	static class NotifUid {
-		String message;
-		int seconds;
-		
-		NotifUid ( String message, int seconds ) {
-			this.message = message;
-			this.seconds = seconds;
-		}
-		
-		@Override
-		public int hashCode () {
-			return message.hashCode () + seconds;
 		}
 	}
 
@@ -355,20 +329,17 @@ public class Moai {
 			String appName;
 			try {
 
-				appName = sActivity.getPackageManager ().getApplicationLabel ( sActivity.getPackageManager ().getApplicationInfo ( appId, 0 )).toString ();
+			    appName = sActivity.getPackageManager ().getApplicationLabel ( sActivity.getPackageManager ().getApplicationInfo ( appId, 0 )).toString ();
 			} catch ( Exception e ) {
 				appName = "UNKNOWN";
 			}
 
 			String appVersion;
-			String appVersionCode;
 			try {
 				appVersion = sActivity.getPackageManager ().getPackageInfo ( appId, 0 ).versionName;
-				appVersionCode = sActivity.getPackageManager ().getPackageInfo ( appId, 0 ).versionCode + "";
 			}
 			catch ( Exception e ) {
 				appVersion = "UNKNOWN";
-				appVersionCode = "0";
 			}
 
 			String udid	= Secure.getString ( sActivity.getContentResolver (), Secure.ANDROID_ID );
@@ -376,19 +347,7 @@ public class Moai {
 				udid = "UNKNOWN";
 			}
 
-			int screenLayout;
-			try {
-				screenLayout = sActivity.getResources ().getConfiguration ().screenLayout;
-			}
-			catch ( Exception e ) {
-				screenLayout = 0;
-			}
-
-			AKUSetDeviceProperties ( appName, appId, appVersion, appVersionCode, Build.CPU_ABI, Build.BRAND, Build.DEVICE, Build.MANUFACTURER, Build.MODEL, Build.PRODUCT, Runtime.getRuntime ().availableProcessors (), "Android", Build.VERSION.RELEASE, Build.ID, udid );
-
-			AKUEnvironmentSetInt ( "androidScreenLayout", screenLayout );
-			AKUEnvironmentSetString ( "androidBuildFingerprint", Build.FINGERPRINT );
-
+			AKUSetDeviceProperties ( appName, appId, appVersion, Build.CPU_ABI, Build.BRAND, Build.DEVICE, Build.MANUFACTURER, Build.MODEL, Build.PRODUCT, Runtime.getRuntime ().availableProcessors (), "Android", Build.VERSION.RELEASE, udid );
 			AKUSetDeviceLocale ( Locale.getDefault ().getLanguage (), Locale.getDefault ().getCountry ());
 		}
 	}
@@ -617,13 +576,8 @@ public class Moai {
 				Method theMethod = theClass.getMethod ( methodName, parameterTypes );
 				result = theMethod.invoke ( theInstance, parameterValues );
 			}
-			catch ( NoSuchMethodException e ) {}
-			catch ( IllegalAccessException e ) {}
-			catch ( InvocationTargetException e ) {
-
-				StringWriter writer = new StringWriter ();
-				e.printStackTrace ( new PrintWriter ( writer ));
-				MoaiLog.i ( writer.toString ());
+			catch ( Throwable e ) {
+				MoaiLog.i(">>> Moai.java(551): Failed to call " + methodName + " for " + theClass.getName());
 			}
 		}
 		return result;
@@ -632,44 +586,6 @@ public class Moai {
 	//================================================================//
 	// Miscellaneous JNI callback methods
 	//================================================================//
-
-	//----------------------------------------------------------------//
-	public static void fetchAdvertisingId () {
-
-		new Thread ( new Runnable () {
-			public void run () {
-				try {
-					Class < ? > GooglePlayServicesUtil = Class.forName ( "com.google.android.gms.common.GooglePlayServicesUtil" );
-					
-					Method isGooglePlayServicesAvailable = GooglePlayServicesUtil.getMethod ( "isGooglePlayServicesAvailable", Context.class );
-
-					if ( isGooglePlayServicesAvailable.invoke ( null, sActivity ).equals ( 0 )) { // ConnectionResult.SUCCESS
-						
-						Class < ? > AdvertisingClientId = Class.forName ( "com.google.android.gms.ads.identifier.AdvertisingIdClient" );
-						Method getAdvertisingIdInfo = AdvertisingClientId.getMethod ( "getAdvertisingIdInfo", Context.class );
-						Object advertisingTrackingInfo = getAdvertisingIdInfo.invoke ( null, sActivity );
-
-						Class < ? > Info = Class.forName ( "com.google.android.gms.ads.identifier.AdvertisingIdClient$Info" );
-						Method getId = Info.getMethod ( "getId" );
-						String advertisingIdentifier = ( String ) getId.invoke ( advertisingTrackingInfo );
-
-						Method isLimitAdTrackingEnabled = Info.getMethod ( "isLimitAdTrackingEnabled" );
-						Boolean limitedAdvertisingTracking = ( Boolean ) isLimitAdTrackingEnabled.invoke ( advertisingTrackingInfo );
-
-						synchronized ( sAkuLock ) {
-							AKUEnvironmentSetString ( "androidAdvertisingId", advertisingIdentifier );
-							AKUEnvironmentSetBool ( "androidLimitedAdTracking", limitedAdvertisingTracking );
-						}
-
-					} else {
-						MoaiLog.i ( "Google Play Services not integrated, using fallback" );
-					}
-				} catch ( Exception e ) {
-					MoaiLog.i ( "Exception while trying to access Google Play Services " + e );
-				}
-			}
-		}).start ();
-	}
 
 	//----------------------------------------------------------------//
 	public static Activity getActivity () {
@@ -688,18 +604,18 @@ public class Moai {
 
 		int myHeight = 0;
 		switch ( sActivity.getResources ().getDisplayMetrics ().densityDpi ) {
-			case DisplayMetrics.DENSITY_HIGH:
+	        case DisplayMetrics.DENSITY_HIGH:
 
-				myHeight = 54;
-				break;
-			case DisplayMetrics.DENSITY_MEDIUM:
+	            myHeight = 54;
+	            break;
+	        case DisplayMetrics.DENSITY_MEDIUM:
 
-				myHeight = 36;
-				break;
-			case DisplayMetrics.DENSITY_LOW:
+	            myHeight = 36;
+	            break;
+	        case DisplayMetrics.DENSITY_LOW:
 
-				myHeight = 26;
-				break;
+	            myHeight = 26;
+	            break;
 			default:
 
 				myHeight = 0;
@@ -731,18 +647,15 @@ public class Moai {
 		MoaiLog.i ( "Moai localNotificationInSeconds: Adding notification alarm" );
 
 		Calendar cal = Calendar.getInstance (); 	// get a Calendar object with current time
-		cal.setTimeInMillis ( System.currentTimeMillis ());
+        cal.setTimeInMillis ( System.currentTimeMillis ());
 		cal.add ( Calendar.SECOND, seconds );		// add desired time to the calendar object
 
 		Intent intent = new Intent ( sActivity, MoaiLocalNotificationReceiver.class );
 		for ( int i = 0; i < keys.length; ++i ) {
 			intent.putExtra ( keys [ i ], values [ i ]);
 		}
-		intent.putExtra ( "message", message );
-		intent.putExtra ( "seconds", seconds+"" );
 
-		NotifUid uid = new NotifUid ( message, seconds );
-		PendingIntent sender = PendingIntent.getBroadcast ( sActivity, uid.hashCode (), intent, 0 );
+		PendingIntent sender = PendingIntent.getBroadcast ( sActivity, 0, intent, 0 );
 
 		AlarmManager am = ( AlarmManager ) sActivity.getSystemService ( Context.ALARM_SERVICE );
 		am.set ( AlarmManager.RTC_WAKEUP, cal.getTimeInMillis (), sender );
@@ -757,47 +670,6 @@ public class Moai {
 		Intent intent = new Intent ( Intent.ACTION_VIEW );
 		intent.setData ( Uri.parse( url ));
 		sActivity.startActivity ( intent );
-	}
-
-	//----------------------------------------------------------------//
-	public static void quitApp () {
-		
-		sActivity.finish ();
-	}
-
-
-	//----------------------------------------------------------------//
-	public static void removeLocalNotification ( int seconds, String message ) {
-		MoaiLog.i ( "Moai removeLocalNotification: " );
-		
-		Intent intent = new Intent ( sActivity, MoaiLocalNotificationReceiver.class );
-		intent.putExtra ( "message", message );
-		intent.putExtra ( "seconds", seconds+"" );
-
-		NotifUid uid = new NotifUid ( message, seconds );
-
-		MoaiLog.i ( "Moai removeLocalNotification: uid = " + uid.hashCode ());
-
-		PendingIntent sender = PendingIntent.getBroadcast ( sActivity, uid.hashCode (), intent, 0 );
-		
-		try {
-			AlarmManager am = ( AlarmManager ) sActivity.getSystemService ( Context.ALARM_SERVICE );
-			am.cancel ( sender );
-		} catch ( Exception e ) {
-			 
-		}
-	}
-
-	//----------------------------------------------------------------//
-	public static void sendMail ( String recipient, String subject, String message ) {
-
-		Intent intent = new Intent ( Intent.ACTION_SEND ).setType ( "message/rfc822" );
-
-		if ( recipient != null ) intent.putExtra ( Intent.EXTRA_EMAIL, new String[] {recipient} );
-		if ( subject != null ) intent.putExtra ( Intent.EXTRA_SUBJECT, subject );
-		if ( message != null ) intent.putExtra ( Intent.EXTRA_TEXT, message );
-
-		sActivity.startActivity ( Intent.createChooser ( intent, "Send E-mail" ));
 	}
 
 	//----------------------------------------------------------------//

@@ -31,7 +31,7 @@ int MOAICamera::_getFarPlane ( lua_State* L ) {
 /**	@lua	getFieldOfView
 	@text	Returns the camera's horizontal field of view.
 
-	@in		MOAICamera	self
+	@in		MOAICamera self
 	@out	number hfov
 */
 int MOAICamera::_getFieldOfView ( lua_State* L ) {
@@ -120,19 +120,6 @@ int MOAICamera::_getNearPlane ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
-/**	@lua	getType
-	@text	Return current camera type.
-	
-	@out	number	typed
-*/
-int MOAICamera::_getType ( lua_State* L ) {
-	MOAI_LUA_SETUP ( MOAICamera, "U" )
-	
-	state.Push ( self->mType );
-	return 1;
-}
-
-//----------------------------------------------------------------//
 /**	@lua	getViewVector
 	@text	Get the camera's normalized view vector (i.e. the Z axis).
 
@@ -200,7 +187,7 @@ int MOAICamera::_moveFieldOfView ( lua_State* L ) {
 		);
 		
 		action->SetSpan ( delay );
-		action->Start ( MOAISim::Get ().GetActionMgr (), false );
+		action->Start ( 0, false );
 		action->PushLuaUserdata ( state );
 
 		return 1;
@@ -237,7 +224,7 @@ int MOAICamera::_seekFieldOfView ( lua_State* L ) {
 		);
 		
 		action->SetSpan ( delay );
-		action->Start ( MOAISim::Get ().GetActionMgr (), false );
+		action->Start ( 0, false );
 		action->PushLuaUserdata ( state );
 
 		return 1;
@@ -269,13 +256,11 @@ int MOAICamera::_setFarPlane ( lua_State* L ) {
 
 	@in		MOAICamera self
 	@opt	number hfow			Default value is 60.
-	@opt	boolean				treat fov as vertical instead of horizontal. Default is false
 	@out	nil
 */
 int MOAICamera::_setFieldOfView( lua_State* L ) {
 	MOAI_LUA_SETUP ( MOAICamera, "U" )
 	self->mFieldOfView = state.GetValue < float >( 2, DEFAULT_HFOV );
-	self->mVerticalFOV = state.GetValue < bool >( 3, false );
 	return 0;
 }
 
@@ -371,7 +356,7 @@ ZLMatrix4x4 MOAICamera::GetProjMtx ( const MOAIViewport& viewport ) const {
 	
 	// project
 	
-	ZLVec2D viewScale = viewport.GetScale ();
+	ZLVec2D viewScale = viewport.GetScale (); // TODO: bit confusing in the 3d; clarify
 	
 	switch ( this->mType ) {
 	
@@ -385,21 +370,14 @@ ZLMatrix4x4 MOAICamera::GetProjMtx ( const MOAIViewport& viewport ) const {
 		}
 		case CAMERA_TYPE_3D: {
 			
-			float xs, ys;
-			
-			if ( this->mVerticalFOV ) {
-				ys = Cot (( this->mFieldOfView * ( float )D2R ) / 2.0f );
-				xs = ys * viewport.GetInvAspect ();
-			}
-			else {
-				xs = Cot (( this->mFieldOfView * ( float )D2R ) / 2.0f );
-				ys = xs * viewport.GetAspect ();
-			}
+			float xs = Tan (( this->mFieldOfView * ( float )D2R ) / 2.0f ) * this->mNearPlane;
+			float ys = xs / viewport.GetAspect ();
 			
 			xs *= viewScale.mX;
 			ys *= viewScale.mY;
+
+			mtx.Frustum ( -xs, ys, xs, -ys, this->mNearPlane, this->mFarPlane );
 			
-			mtx.Perspective ( xs, ys, this->mNearPlane, this->mFarPlane );
 			break;
 		}
 		case CAMERA_TYPE_WINDOW:
@@ -489,12 +467,12 @@ void MOAICamera::LookAt ( float x, float y, float z ) {
 	target.Init ( local.mX, 0.0f, local.mZ );
 	target.Norm ();
 	
-	float yRot = ( float )(zAxis.Radians ( target ) * R2D * ( target.mX > 0.0f ? 1.0f : -1.0f )); // yaw
+	float yRot = ( float )( zAxis.Radians ( target ) * R2D * ( target.mX > 0.0f ? 1.0f : -1.0f )); // yaw
 	
 	target = local;
 	target.Norm ();
 	
-	float xRot = ( float )(yAxis.Radians ( target ) * R2D); // pitch
+	float xRot = ( float )( yAxis.Radians ( target ) * R2D ); // pitch
 	
 	
 	ZLVec3D rot = this->GetRot ();
@@ -506,8 +484,7 @@ MOAICamera::MOAICamera () :
 	mFieldOfView ( DEFAULT_HFOV ),
 	mNearPlane ( DEFAULT_NEAR_PLANE ),
 	mFarPlane ( DEFAULT_FAR_PLANE ),
-	mType ( CAMERA_TYPE_3D ),
-	mVerticalFOV ( false ) {
+	mType ( CAMERA_TYPE_3D ) {
 
 	RTTI_SINGLE ( MOAITransform )
 	
@@ -524,9 +501,9 @@ void MOAICamera::RegisterLuaClass ( MOAILuaState& state ) {
 	
 	state.SetField ( -1, "ATTR_FOV",			MOAICameraAttr::Pack ( ATTR_FOV ));
 	
-	state.SetField ( -1, "CAMERA_TYPE_3D",			( u32 )CAMERA_TYPE_3D );
-	state.SetField ( -1, "CAMERA_TYPE_ORTHO",		( u32 )CAMERA_TYPE_ORTHO );
-	state.SetField ( -1, "CAMERA_TYPE_WINDOW",		( u32 )CAMERA_TYPE_WINDOW );
+	state.SetField ( -1, "CAMERA_TYPE_3D",		( u32 )CAMERA_TYPE_3D );
+	state.SetField ( -1, "CAMERA_TYPE_ORTHO",	( u32 )CAMERA_TYPE_ORTHO );
+	state.SetField ( -1, "CAMERA_TYPE_WINDOW",	( u32 )CAMERA_TYPE_WINDOW );
 }
 
 //----------------------------------------------------------------//
@@ -539,7 +516,6 @@ void MOAICamera::RegisterLuaFuncs ( MOAILuaState& state ) {
 		{ "getFloorMove",		_getFloorMove },
 		{ "getFocalLength",		_getFocalLength },
 		{ "getNearPlane",		_getNearPlane },
-		{ "getType",			_getType },
 		{ "getViewVector",		_getViewVector },
 		{ "lookAt",				_lookAt },
 		{ "moveFieldOfView",	_moveFieldOfView },

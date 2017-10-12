@@ -108,20 +108,13 @@ MOAIHttpTaskNSURL::MOAIHttpTaskNSURL () :
 	mDataReceived ( 0 ),
 	mCanceled ( false ),
 	mStream ( 0 ),
-	mRequest ( 0 ),
-	mDelegate ( nil ) {
+	mRequest ( 0 ) {
 	
 	RTTI_SINGLE ( MOAIHttpTaskBase )
 }
 
 //----------------------------------------------------------------//
 MOAIHttpTaskNSURL::~MOAIHttpTaskNSURL () {
-	
-	if ( this->mDelegate ) {
-		[ this->mDelegate clear ];
-		[ this->mDelegate release ];
-		this->mDelegate = nil;
-	}
 	
 	this->Clear ();
 }
@@ -188,13 +181,9 @@ void MOAIHttpTaskNSURL::PerformAsync () {
 	this->LatchRetain ();
 
 	NSURLRequest* request = this->Prepare ();
+	MOAIHttpTaskNSURLDelegate* delegate = [[[ MOAIHttpTaskNSURLDelegate alloc ] initWithTask:this ] autorelease ];
 	
-	if ( this->mDelegate == nil ) {
-		this->mDelegate = [[ MOAIHttpTaskNSURLDelegate alloc ] initWithTask:this ];
-	}
-//	MOAIHttpTaskNSURLDelegate* delegate = [[[ MOAIHttpTaskNSURLDelegate alloc ] initWithTask:this ] autorelease ];
-	
-	[ NSURLConnection connectionWithRequest:request delegate:this->mDelegate ];
+	[ NSURLConnection connectionWithRequest:request delegate:delegate ];
 	//dispatch_async ( dispatch_get_main_queue(), ^{ connection_ = [ this->mEasyHandle initWithRequest: this->mRequest delegate: mUrlDelegate ]; });
 }
 
@@ -314,11 +303,6 @@ void MOAIHttpTaskNSURL::SetVerbose ( bool verbose ) {
 	#pragma mark Protocol MOAIHttpTaskNSURLDelegate
 	//================================================================//
 
-	//----------------------------------------------------------------//
-	-( void )clear {
-		self->mTask = 0;
-	}
-
 	#pragma mark delegate methods for asynchronous requests
 
 	//----------------------------------------------------------------//
@@ -342,33 +326,27 @@ void MOAIHttpTaskNSURL::SetVerbose ( bool verbose ) {
 	//----------------------------------------------------------------//
 	- (void)connection:(NSURLConnection*) myConnection didReceiveResponse:(NSURLResponse*) myResponse {
 		UNUSED ( myConnection );
-		
-		if ( self->mTask ) {
-			NSDictionary* headers = [( NSHTTPURLResponse* )myResponse allHeaderFields ];
-			self->mTask->DidReceiveResponse ([( NSHTTPURLResponse* )myResponse statusCode ], headers, ( int )[( NSHTTPURLResponse* )myResponse expectedContentLength ]);
-		}
+	
+		NSDictionary* headers = [( NSHTTPURLResponse* )myResponse allHeaderFields ];
+		self->mTask->DidReceiveResponse ([( NSHTTPURLResponse* )myResponse statusCode ], headers, ( int )[( NSHTTPURLResponse* )myResponse expectedContentLength ]);
 	}
 
 	//----------------------------------------------------------------//
 	- (void)connection:(NSURLConnection*) myConnection didReceiveData:(NSData*) myData {
 		UNUSED ( myConnection );
-		
-		if ( self->mTask ) {
-			self->mTask->DidReceiveData ( myData.bytes, myData.length );
-			if ( self->mTask->GetCanceled ()) {
-				[ myConnection cancel ];
-			}
+	
+		self->mTask->DidReceiveData ( myData.bytes, myData.length );
+		if ( self->mTask->GetCanceled ()) {
+			[ myConnection cancel ];
 		}
 	}
 
 	//----------------------------------------------------------------//
 	- (void)connection:(NSURLConnection*) myConnection didFailWithError:(NSError*) myError {
 		UNUSED ( myConnection );
-		
-		if ( self->mTask ) {
-			NSLog ( @"Error: %@ %@", myError, [ myError userInfo ]);
-			self->mTask->DidFinishLoading ();
-		}
+	
+		NSLog ( @"Error: %@ %@", myError, [ myError userInfo ]);
+		self->mTask->DidFinishLoading ();
 	}
 
 	//----------------------------------------------------------------//
@@ -384,10 +362,7 @@ void MOAIHttpTaskNSURL::SetVerbose ( bool verbose ) {
 	//----------------------------------------------------------------//
 	- (void)connectionDidFinishLoading:(NSURLConnection*) myConnection {
 		UNUSED ( myConnection );
-		
-		if ( self->mTask ) {
-			self->mTask->DidFinishLoading ();
-		}
+		self->mTask->DidFinishLoading ();
 	}
 
 

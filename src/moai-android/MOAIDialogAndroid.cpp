@@ -61,7 +61,7 @@ int MOAIDialogAndroid::_showDialog ( lua_State* L ) {
 	jclass moai = env->FindClass ( "com/moaisdk/core/Moai" );
     if ( moai == NULL ) {
 
-		ZLLogF ( ZLLog::CONSOLE, "MOAIDialogAndroid: Unable to find java class %s", "com/moaisdk/core/Moai" );
+		ZLLogF ( ZLLog::CONSOLE, "MOAIDialogAndroid: Unable to find java class %s", "com/ziplinegames/moai/Moai" );
     }
     else {
 
@@ -129,7 +129,7 @@ void MOAIDialogAndroid::NotifyDialogDismissed ( int dialogResult ) {
 //================================================================//
 
 //----------------------------------------------------------------//
-extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_core_Moai_AKUAppDialogDismissed ( JNIEnv* env, jclass obj, jint code ) {
+extern "C" JNIEXPORT void JNICALL Java_com_ziplinegames_moai_Moai_AKUAppDialogDismissed ( JNIEnv* env, jclass obj, jint code ) {
 
 	MOAIDialogAndroid::Get ().NotifyDialogDismissed ( code );
 }

@@ -71,10 +71,6 @@
 	#ifndef MOAI_WITH_MONGOOSE
 		#define MOAI_WITH_MONGOOSE 1
 	#endif
-
-	#ifndef MOAI_WITH_MSGPACK
-		#define MOAI_WITH_MSGPACK 1
-	#endif
 	
 	#ifndef MOAI_WITH_OGG
 		#define MOAI_WITH_OGG 1
@@ -106,21 +102,6 @@
 	
 	#ifndef MOAI_WITH_VORBIS
 		#define MOAI_WITH_VORBIS 1
-	#endif
-
-	//----------------------------------------------------------------//
-	// graphics subsystem
-	
-	#ifndef MOAI_GFX_DUMMY
-		#define MOAI_GFX_DUMMY 0
-	#endif
-
-	#ifndef MOAI_GFX_FLASCC
-		#define MOAI_GFX_FLASCC 0
-	#endif
-
-	#ifndef MOAI_GFX_OPENGL
-		#define MOAI_GFX_OPENGL 1
 	#endif
 	
 #endif

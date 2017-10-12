@@ -15,7 +15,7 @@
 
 */
 class MOAISpine :
-	public ZLContextClass < MOAISpine, MOAILuaObject > {
+	public MOAIGlobalClass < MOAISpine, MOAILuaObject > {
 private:
 	
 	MOAILuaStrongRef mReadFileRef;

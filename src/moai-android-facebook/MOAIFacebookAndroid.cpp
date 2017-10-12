@@ -16,57 +16,106 @@ extern JavaVM* jvm;
 //================================================================//
 
 //----------------------------------------------------------------//
-/**	@lua	graphRequest
-	@text	Make a request on Facebook's Graph API
+/**	@lua	getUserID
+	@text	Retrieve the Facebook user ID
 
-	@in 	string 		method, "GET" or "POST"
-	@in		string		path
-	@opt	table		parameters
-	@opt	function 	callback
-	@out	nil
+	@out	string	ID
+*/
+int MOAIFacebookAndroid::_getUserID ( lua_State* L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIFacebookAndroid, "" )
+
+	MOAIJString jID = ( jstring )self->CallStaticObjectMethod ( self->mJava_GetUserID );
+	cc8* id = self->GetCString ( jID );
+	lua_pushstring ( state, id );
+	self->ReleaseCString ( jID, id );
+	return 1;
+}
+
+//----------------------------------------------------------------//
+/**	@lua	getUserName
+	@text	Retrieve the Facebook user name
+
+	@out	string	name
+*/
+int MOAIFacebookAndroid::_getUserName ( lua_State* L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIFacebookAndroid, "" )
+
+	MOAIJString jName = ( jstring )self->CallStaticObjectMethod ( self->mJava_GetUserName );
+	cc8* name = self->GetCString ( jName );
+	lua_pushstring ( state, name );
+	self->ReleaseCString ( jName, name );
+	return 1;
+}
+
+//----------------------------------------------------------------//
+/**	@lua	getToken
+	@text	Retrieve the Facebook login token.
+				
+	@out	string	token
+*/
+int MOAIFacebookAndroid::_getToken ( lua_State* L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIFacebookAndroid, "" )
+	
+	MOAIJString jtoken = ( jstring )self->CallStaticObjectMethod ( self->mJava_GetToken );
+	cc8* token = self->GetCString ( jtoken );
+	lua_pushstring ( state, token );
+	self->ReleaseCString ( jtoken, token );
+	return 1;
+}
+
+//----------------------------------------------------------------//
+/**	@lua	getTokenExpireTime
+	@text	Retrieve the Facebook login token.
+
+	@out	string	token
+*/
+int MOAIFacebookAndroid::_getTokenExpireTime ( lua_State* L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIFacebookAndroid, "" )
+
+	MOAIJString jtoken = ( jstring )self->CallStaticObjectMethod ( self->mJava_GetTokenExpireTime );
+	cc8* token = self->GetCString ( jtoken );
+	lua_pushstring ( state, token );
+	self->ReleaseCString ( jtoken, token );
+	return 1;
+}
+
+//----------------------------------------------------------------//
+/**	@lua	getTokenRefreshTime
+	@text	Retrieve the Facebook login token.
+
+	@out	string	token
+*/
+int MOAIFacebookAndroid::_getTokenRefreshTime ( lua_State* L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIFacebookAndroid, "" )
+
+	MOAIJString jtoken = ( jstring )self->CallStaticObjectMethod ( self->mJava_GetTokenRefreshTime );
+	cc8* token = self->GetCString ( jtoken );
+	lua_pushstring ( state, token );
+	self->ReleaseCString ( jtoken, token );
+	return 1;
+}
+
+//----------------------------------------------------------------//
+/**	@lua	graphRequest
+    @text	Make a request on Facebook's Graph API
+
+	@in		string  path
+	@opt	table  parameters
+    @out	nil
 */
 int MOAIFacebookAndroid::_graphRequest ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIFacebookAndroid, "" )
 
-	MOAIJString jmethod = self->GetJString ( state.GetValue < cc8* >( 1, "GET" ) );
-	MOAIJString jpath = self->GetJString ( state.GetValue < cc8* >( 2, "" ) );
-	jobject jbundle = NULL;
+	//MOAIJString jpath = self->GetJString ( lua_tostring ( state, 1 ));
 
-	if ( state.IsType ( 3, LUA_TTABLE ) ) {
-		jbundle = self->BundleFromLua( L, 3 );
-	}
+    //jobject bundle;
+    //if ( state.IsType ( 2, LUA_TTABLE ) ) {
+    //    bundle = self->BundleFromLua( L, 2 );
+    //}
 
-	int ref = LUA_NOREF;
-	if ( state.IsType ( 4, LUA_TFUNCTION )) {
-		ref = self->mRefs.Ref ( state, 4 );
-	}
+	//self->CallStaticVoidMethod ( self->mJava_GraphRequest, jpath, bundle );
 
-	self->CallStaticVoidMethod ( self->mJava_GraphRequest, ( jstring )jmethod, ( jstring )jpath, jbundle, ref );
 	return 0;
-}
-
-//----------------------------------------------------------------//
-/**	@lua	hasGranted
-	@text	Determine whether or not the current permission is granted.
-				
-	@out 	boolean	valid
-*/
-int MOAIFacebookAndroid::_hasGranted ( lua_State* L ) {
-	MOAI_JAVA_LUA_SETUP ( MOAIFacebookAndroid, "" )
-
-	cc8* permission = state.GetValue < cc8* > ( 1, 0 );
-	
-	if ( permission ) {
-		
-		MOAIJString jpermission = self->GetJString ( permission );
-		state.Push ( self->CallStaticBooleanMethod ( self->mJava_HasGranted, ( jstring )jpermission ));
-	}
-	else {
-	
-		state.Push ( false );
-	}
-
-	return 1;
 }
 
 //----------------------------------------------------------------//
@@ -85,53 +134,6 @@ int MOAIFacebookAndroid::_init ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
-/**	@lua	logEvent
-	@text	Log event
-
-	@in 	string 	eventName
-	@in		double 	valueToSum
-	@opt	table 	parameters
-	@out	nil
-*/
-int MOAIFacebookAndroid::_logEvent ( lua_State* L ) {
-	MOAI_JAVA_LUA_SETUP ( MOAIFacebookAndroid, "" )
-
-	MOAIJString jeventName = self->GetJString ( lua_tostring ( state, 1 ));
-	double valueToSum = state.GetValue < double >( 2, 0 );
-	jobject jbundle = NULL;
-	if ( state.IsType ( 3, LUA_TTABLE ) ) {
-		jbundle = self->BundleFromLua( L, 3 );
-	}
-
-	self->CallStaticVoidMethod ( self->mJava_LogEvent, ( jstring )jeventName, valueToSum, jbundle );
-	return 0;
-}
-
-//----------------------------------------------------------------//
-/**	@lua	logPurchase
-	@text	Log purchase
-
-	@in 	string 	eventName
-	@in		double 	valueToSum
-	@opt	table 	parameters
-	@out	nil
-*/
-int MOAIFacebookAndroid::_logPurchase ( lua_State* L ) {
-	MOAI_JAVA_LUA_SETUP ( MOAIFacebookAndroid, "" )
-
-	double amount = state.GetValue < double >( 1, 0.0f );
-	MOAIJString jcurrency = self->GetJString ( state.GetValue < cc8* >( 2, "USD" ) );
-
-	jobject jbundle = NULL;
-	if ( state.IsType ( 3, LUA_TTABLE ) ) {
-	   jbundle = self->BundleFromLua( L, 3 );
-	}
-
-	self->CallStaticVoidMethod ( self->mJava_LogPurchase, amount, ( jstring )jcurrency, jbundle );
-	return 0;
-}
-
-//----------------------------------------------------------------//
 /**	@lua	login
 	@text	Prompt the user to login to Facebook.
 				
@@ -141,13 +143,37 @@ int MOAIFacebookAndroid::_logPurchase ( lua_State* L ) {
 int MOAIFacebookAndroid::_login ( lua_State *L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIFacebookAndroid, "" )
 	
-	jobjectArray jpermissions = NULL;
+	jobjectArray jpermissions 		= NULL;
+	MOAIJString  prevToken			= NULL;
+	MOAIJString  fbId				= NULL;
+	MOAIJString  tokenExpireTime	= NULL;
+	MOAIJString  tokenRefreshTime	= NULL;
 	
 	if ( state.IsType ( 1, LUA_TTABLE )) {
-		jpermissions = self->StringArrayFromLua ( L, 1 );
+        jpermissions = self->StringArrayFromLua ( L, 1 );
 	}
 
-	self->CallStaticVoidMethod ( self->mJava_Login, jpermissions );				
+	if ( state.IsType ( 2, LUA_TSTRING )) {
+		prevToken = self->GetJString ( lua_tostring ( state, 2 ));
+	}
+
+	if ( state.IsType ( 3, LUA_TSTRING )) {
+		fbId = self->GetJString ( lua_tostring ( state, 3 ));
+	}
+
+	if ( state.IsType ( 4, LUA_TSTRING )) {
+		tokenExpireTime = self->GetJString ( lua_tostring ( state, 4 ));
+	}
+
+	if ( state.IsType ( 5, LUA_TSTRING )) {
+		tokenRefreshTime = self->GetJString ( lua_tostring ( state, 5 ));
+	}
+
+	if ( jpermissions == NULL ) {
+		jpermissions = self->Env ()->NewObjectArray ( 0, self->Env ()->FindClass( "java/lang/String" ), 0 );
+	}
+
+	self->CallStaticVoidMethod ( self->mJava_Login, jpermissions, ( jstring ) prevToken, ( jstring ) fbId, ( jstring ) tokenExpireTime, ( jstring ) tokenRefreshTime );
 	return 0;
 }
 
@@ -186,113 +212,33 @@ int MOAIFacebookAndroid::_postToFeed ( lua_State* L ) {
 	MOAIJString jdescription	= self->GetJString ( lua_tostring ( state, 5 ));
 	MOAIJString jmessage		= self->GetJString ( lua_tostring ( state, 6 ));
 	
-	self->CallStaticVoidMethod ( self->mJava_PostToFeed, ( jstring )jlink, ( jstring )jpicture, ( jstring )jname, ( jstring )jcaption, ( jstring )jdescription, ( jstring )jmessage );
+	self->CallStaticVoidMethod ( self->mJava_PostToFeed, ( jstring )jlink, ( jstring )jpicture, ( jstring )jname, ( jstring )jcaption, ( jstring )jdescription, ( jstring )jmessage );	
 		
 	return 0;
 }
 
 //----------------------------------------------------------------//
-/**	@lua	requestPublishPermissions
-	@text	
-				
-	@in	table	permissions		Set of required permissions. See Facebook documentation for a full list
-	@out 	nil
-*/
-int MOAIFacebookAndroid::_requestPublishPermissions ( lua_State *L ) {
+// TODO: doxygen
+int MOAIFacebookAndroid::_restoreSession ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIFacebookAndroid, "" )
-	
-	jobjectArray jpermissions = NULL;
-	if ( state.IsType ( 1, LUA_TTABLE )) {
-		jpermissions = self->StringArrayFromLua ( L, 1 );
-	}
 
-	self->CallStaticVoidMethod ( self->mJava_RequestPublishPermissions, jpermissions );
-	return 0;
-}
-
-//----------------------------------------------------------------//
-/**	@lua	requestReadPermissions
-	@text	
-				
-	@in	table	permissions		Set of required permissions. See Facebook documentation for a full list
-	@out 	nil
-*/
-int MOAIFacebookAndroid::_requestReadPermissions ( lua_State *L ) {
-	MOAI_JAVA_LUA_SETUP ( MOAIFacebookAndroid, "" )
-	
-	jobjectArray jpermissions = NULL;
-	if ( state.IsType ( 1, LUA_TTABLE )) {
-		jpermissions = self->StringArrayFromLua ( L, 1 );
-	}
-
-	self->CallStaticVoidMethod ( self->mJava_RequestReadPermissions, jpermissions );
-	return 0;
+	lua_pushboolean ( state, self->CallStaticBooleanMethod ( self->mJava_RestoreSession ));
+	return 1;
 }
 
 //----------------------------------------------------------------//
 /**	@lua	sendRequest
 	@text	Send an app request to the logged in users' friends.
-	
-	@in		string		message		The message for the request. See Facebook documentation. Default is nil.
+				
+	@opt	string	message			The message for the request. See Facebook documentation. Default is nil.
 	@out 	nil
 */
-int MOAIFacebookAndroid::_sendGameRequest ( lua_State* L ) {
+int MOAIFacebookAndroid::_sendRequest ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIFacebookAndroid, "" )
 	
 	MOAIJString jmessage = self->GetJString ( lua_tostring ( state, 1 ));
-	MOAIJString jdata;
-	MOAIJString jtitle;
-	MOAIJString jobjectID;
-	MOAIJString jactionType;
-	MOAIJString jfilters;
-	
-	jobjectArray jrecipients = NULL;
-	jobjectArray jrecipientSuggestions = NULL;
-
-	// At the time of writing, frictionless is not supported with Android FB SDK v4.7
-	// bool frictionless = NO;
-	
-	if ( state.IsType ( 2, LUA_TTABLE )) {
-		
-		// frictionless	= ( BOOL ) state.GetValue < bool >( 2, "frictionless" );
-		
-		jdata			= self->GetJString ( state.GetField < cc8* >( 2, "data", 0 ));
-		jtitle			= self->GetJString ( state.GetField < cc8* >( 2, "title", 0 ));
-		jobjectID		= self->GetJString ( state.GetField < cc8* >( 2, "objectID", 0 ));
-		jactionType 	= self->GetJString ( state.GetField < cc8* >( 2, "actionType", "ACTION_NONE" ));
-		jfilters 		= self->GetJString ( state.GetField < cc8* >( 2, "filters", "FILTER_NONE" ));
-
-		if ( state.GetFieldWithType ( 2, "recipients", LUA_TTABLE )) {
-			jrecipients = self->StringArrayFromLua ( state, -1 );
-			state.Pop ( 1 );
-		}
-		
-		if ( state.GetFieldWithType ( 2, "recipientSuggestions", LUA_TTABLE )) {
-			jrecipientSuggestions = self->StringArrayFromLua ( state, -1 );
-			state.Pop ( 1 );
-		}
-	}
-	
-	int ref = LUA_NOREF;
-	if ( state.IsType ( 3, LUA_TFUNCTION )) {
-		ref = self->mRefs.Ref ( state, 3 );
-	}
-	
-	bool result = self->CallStaticBooleanMethod (
-		self->mJava_SendGameRequest,
-		( jstring )jdata,
-		( jstring )jtitle,
-		( jstring )jmessage,
-		( jstring )jactionType,
-		( jstring )jobjectID,
-		( jstring )jfilters,
-		jrecipients,
-		jrecipientSuggestions,
-		ref
-	);
-
-	lua_pushboolean ( state, result );
-	return 1;
+	self->CallStaticVoidMethod ( self->mJava_SendRequest, ( jstring )jmessage );		
+	return 0;
 }
 
 //----------------------------------------------------------------//
@@ -304,7 +250,7 @@ int MOAIFacebookAndroid::_sendGameRequest ( lua_State* L ) {
 int MOAIFacebookAndroid::_sessionValid ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIFacebookAndroid, "" )
 
-	lua_pushboolean ( state, self->CallStaticBooleanMethod ( self->mJava_SessionValid ));
+	lua_pushboolean ( state, self->CallStaticBooleanMethod ( self->mJava_IsSessionValid ));
 	return 1;
 }
 
@@ -328,227 +274,95 @@ int MOAIFacebookAndroid::_showInviteDialog ( lua_State* L ) {
 //================================================================//
 
 //----------------------------------------------------------------//
-void MOAIFacebookAndroid::ClearCallbackRef ( int ref ) {
-	
-	if ( MOAILuaRuntime::IsValid () && ref != LUA_NOREF ) {
-		this->mRefs.Unref ( ref );
-	}
-}
-
-//----------------------------------------------------------------//
-void MOAIFacebookAndroid::GameRequestDialogDidComplete ( cc8* requestId, jobjectArray recipients, int ref ) {
-	
-	if ( !MOAILuaRuntime::IsValid ()) return;
-	
-	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-	
-	if ( ref == LUA_NOREF ) {
-		this->PushListener ( REQUEST_DIALOG_RESPONSE, state );
-	}
-	else {
-		this->mRefs.PushRef ( state, ref );
-	}
-	
-	if ( state.IsType ( -1, LUA_TFUNCTION )) {
-		state.Push ( true );
-
-		// create table for return result
-		lua_newtable ( state );
-
-		state.SetField ( -1, "request", requestId );
-
-		// push key and value
-		state.Push ( "to" );
-		this->StringArrayToLua ( state, recipients );
-
-		// set key-value pair
-		lua_settable ( state, -3 );
-
-		state.DebugCall ( 2, 0 );
-	}
-}
-
-//----------------------------------------------------------------//
-void MOAIFacebookAndroid::GameRequestDialogDidFail ( cc8* error, int ref ) {
-	
-	if ( !MOAILuaRuntime::IsValid ()) return;
-	
-	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-	
-	if ( ref == LUA_NOREF ) {
-		this->PushListener ( REQUEST_DIALOG_RESPONSE, state );
-	}
-	else {
-		this->mRefs.PushRef ( state, ref );
-	}
-	
-	if ( state.IsType ( -1, LUA_TFUNCTION )) {
-		state.Push ( false );
-		state.Push ( error );
-		state.DebugCall ( 2, 0 );
-	}
-}
-
-//----------------------------------------------------------------//
-void MOAIFacebookAndroid::GraphRequestResponse ( cc8* result, int ref ) {
-
-	if ( !MOAILuaRuntime::IsValid ()) return;
-	
-	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-	
-	if ( ref == LUA_NOREF ) {
-		this->PushListener ( REQUEST_RESPONSE, state );
-	}
-	else {
-		this->mRefs.PushRef ( state, ref );
-	}
-	
-	if ( state.IsType ( -1, LUA_TFUNCTION )) {
-		
-		state.Push ( true );
-		this->JsonToLua ( state, result );
-		state.DebugCall ( 2, 0 );
-	}
-}
-
-//----------------------------------------------------------------//
-void MOAIFacebookAndroid::GraphRequestResponseFailure ( cc8* error, int ref ) {
-	
-	if ( !MOAILuaRuntime::IsValid ()) return;
-	
-	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-	
-	if ( ref == LUA_NOREF ) {
-		this->PushListener ( REQUEST_RESPONSE, state );
-	}
-	else {
-		this->mRefs.PushRef ( state, ref );
-	}
-	
-	if ( state.IsType ( -1, LUA_TFUNCTION )) {
-		
-		state.Push ( false );
-		state.Push ( error );
-		state.DebugCall ( 2, 0 );
-	}
-}
-
-//----------------------------------------------------------------//
 MOAIFacebookAndroid::MOAIFacebookAndroid () {
 
 	RTTI_SINGLE ( MOAIGlobalEventSource )
-	
+		
 	this->SetClass ( "com/moaisdk/facebook/MoaiFacebook" );
 
-	this->mJava_AppEventsConstants 				= static_cast < jclass >( this->Env ()->NewGlobalRef ( this->GetClass ( "com/facebook/appevents/AppEventsConstants" )));
-
-	// this->mJava_DeclinedPermissions			= this->GetStaticMethod ( "declinedPermissions", "()" );
-	// this->mJava_GetExpirationDate			= this->GetStaticMethod ( "getExpirationDate", "()" );
-	// this->mJava_GetProfile					= this->GetStaticMethod ( "getProfile", "()" );
-	// this->mJava_GetToken					= this->GetStaticMethod ( "getToken", "()" );
-	this->mJava_GraphRequest				= this->GetStaticMethod ( "graphRequest", "(Ljava/lang/String;Ljava/lang/String;Landroid/os/Bundle;I)V" );
-	this->mJava_HasGranted					= this->GetStaticMethod ( "hasGranted", "(Ljava/lang/String;)Z" );
-	this->mJava_Init						= this->GetStaticMethod ( "init", "(Ljava/lang/String;)V" );
-	this->mJava_LogEvent					= this->GetStaticMethod ( "logEvent", "(Ljava/lang/String;DLandroid/os/Bundle;)V" );
-	this->mJava_LogPurchase					= this->GetStaticMethod ( "logPurchase", "(DLjava/lang/String;Landroid/os/Bundle;)V" );
-	this->mJava_Login						= this->GetStaticMethod ( "login", "([Ljava/lang/String;)V" );
-	this->mJava_Logout						= this->GetStaticMethod ( "logout", "()V" );
-	this->mJava_PostToFeed					= this->GetStaticMethod ( "postToFeed", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V" );
-	this->mJava_RequestPublishPermissions	= this->GetStaticMethod ( "requestPublishPermissions", "([Ljava/lang/String;)V" );
-	this->mJava_RequestReadPermissions		= this->GetStaticMethod ( "requestReadPermissions", "([Ljava/lang/String;)V" );
-	this->mJava_SendGameRequest				= this->GetStaticMethod ( "sendGameRequest", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;I)Z" );
-	this->mJava_SessionValid				= this->GetStaticMethod ( "sessionValid", "()Z" );
-	this->mJava_ShowInviteDialog			= this->GetStaticMethod ( "showInviteDialog", "(Ljava/lang/String;Ljava/lang/String;)V" );
-
-	mRefs.InitStrong ();
+	this->mJava_GetToken			= this->GetStaticMethod ( "getToken", "()Ljava/lang/String;" );
+	this->mJava_GetTokenExpireTime	= this->GetStaticMethod ( "getTokenExpireTime", "()Ljava/lang/String;" );
+	this->mJava_GetTokenRefreshTime	= this->GetStaticMethod ( "getTokenRefreshTime", "()Ljava/lang/String;" );
+	this->mJava_GetUserID			= this->GetStaticMethod ( "getUserID", "()Ljava/lang/String;" );
+	this->mJava_GetUserName			= this->GetStaticMethod ( "getUserName", "()Ljava/lang/String;" );
+	//this->mJava_GraphRequest		= this->GetStaticMethod ( "graphRequest", "(Ljava/lang/String;Landroid/os/Bundle;)V" );
+	this->mJava_Init				= this->GetStaticMethod ( "init", "(Ljava/lang/String;)V" );
+	this->mJava_IsSessionValid		= this->GetStaticMethod ( "isSessionValid", "()Z" );
+	this->mJava_Login				= this->GetStaticMethod ( "login", "([Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V" );
+	this->mJava_Logout				= this->GetStaticMethod ( "logout", "()V" );
+	this->mJava_PostToFeed			= this->GetStaticMethod ( "postToFeed", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V" );
+	this->mJava_RestoreSession		= this->GetStaticMethod ( "restoreSession", "()Z" );
+	this->mJava_SendRequest			= this->GetStaticMethod ( "sendRequest", "(Ljava/lang/String;)V" );
+	this->mJava_ShowInviteDialog	= this->GetStaticMethod ( "showInviteDialog", "(Ljava/lang/String;Ljava/lang/String;)V" );
 }
 
 //----------------------------------------------------------------//
 MOAIFacebookAndroid::~MOAIFacebookAndroid () {
 
-	if ( MOAILuaRuntime::IsValid ()) {
-		mRefs.Clear ();
-	}
 }
 
 //----------------------------------------------------------------//
 void MOAIFacebookAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 
-	// Events
-	state.SetField ( -1, "DIALOG_DID_COMPLETE", 		( u32 )DIALOG_DID_COMPLETE );
-	state.SetField ( -1, "DIALOG_DID_NOT_COMPLETE",		( u32 )DIALOG_DID_NOT_COMPLETE );
-	state.SetField ( -1, "PERMISSIONS_DENIED",			( u32 )PERMISSIONS_DENIED );
-	state.SetField ( -1, "PERMISSIONS_GRANTED",			( u32 )PERMISSIONS_GRANTED );
-	state.SetField ( -1, "PROFILE_UPDATED",				( u32 )PROFILE_UPDATED );
-	state.SetField ( -1, "REQUEST_RESPONSE", 			( u32 )REQUEST_RESPONSE );
-	state.SetField ( -1, "REQUEST_DIALOG_RESPONSE",		( u32 )REQUEST_DIALOG_RESPONSE );
-	state.SetField ( -1, "SESSION_DID_LOGIN", 			( u32 )SESSION_DID_LOGIN );
-	state.SetField ( -1, "SESSION_DID_NOT_LOGIN", 		( u32 )SESSION_DID_NOT_LOGIN );
-	state.SetField ( -1, "SESSION_EXTENDED",			( u32 )SESSION_EXTENDED );
-
-	// Game request action types
-	state.SetField ( -1, "ACTION_NONE", 				"ACTION_NONE" );
-	state.SetField ( -1, "ACTION_SEND", 				"SEND" );
-	state.SetField ( -1, "ACTION_ASK_FOR", 				"ASKFOR" );
-	state.SetField ( -1, "ACTION_TURN", 				"TURN" );
-
-	// Game request filters
-	state.SetField ( -1, "FILTER_NONE", 				"FILTER_NONE" );
-	state.SetField ( -1, "FILTER_APP_USERS", 			"APP_USERS" );
-	state.SetField ( -1, "FILTER_APP_NON_USERS", 		"APP_NON_USERS" );
-
-	// Analytics predefined event names
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "EVENT_ACHIEVED_LEVEL",			"EVENT_NAME_ACHIEVED_LEVEL" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "EVENT_ADDED_PAYMENT_INFO",		"EVENT_NAME_ADDED_PAYMENT_INFO" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "EVENT_ADDED_TO_CART",			"EVENT_NAME_ADDED_TO_CART" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "EVENT_ADDED_TO_WISHLIST",		"EVENT_NAME_ADDED_TO_WISHLIST" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "EVENT_COMPLETED_REGISTRATION", 	"EVENT_NAME_COMPLETED_REGISTRATION" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "EVENT_COMPLETED_TUTORIAL",		"EVENT_NAME_COMPLETED_TUTORIAL" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "EVENT_INITIATED_CHECKOUT",		"EVENT_NAME_INITIATED_CHECKOUT" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "EVENT_RATED",					"EVENT_NAME_RATED" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "EVENT_SEARCHED",					"EVENT_NAME_SEARCHED" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "EVENT_SPENT_CREDITS",			"EVENT_NAME_SPENT_CREDITS" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "EVENT_UNLOCKED_ACHIEVEMENT",		"EVENT_NAME_UNLOCKED_ACHIEVEMENT" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "EVENT_VIEWED_CONTENT",			"EVENT_NAME_VIEWED_CONTENT" );
-
-	// Analytics predefined event parameters names
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_CONTENT_ID",				"EVENT_PARAM_CONTENT_ID" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_CONTENT_TYPE",			"EVENT_PARAM_CONTENT_TYPE" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_CURRENCY",				"EVENT_PARAM_CURRENCY" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_DESCRIPTION",				"EVENT_PARAM_DESCRIPTION" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_LEVEL",					"EVENT_PARAM_LEVEL" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_MAX_RATING_VALUE",		"EVENT_PARAM_MAX_RATING_VALUE" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_NUM_ITEMS",				"EVENT_PARAM_NUM_ITEMS" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_PAYMENT_INFO_AVAILABLE",	"EVENT_PARAM_PAYMENT_INFO_AVAILABLE" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_REGISTRATION_METHOD",		"EVENT_PARAM_REGISTRATION_METHOD" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_SEARCH_STRING",			"EVENT_PARAM_SEARCH_STRING" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_SUCCESS",					"EVENT_PARAM_SUCCESS" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_NAME_SOURCE_APPLICATION",		"EVENT_PARAM_SOURCE_APPLICATION" );
-
-	// Analytics predefined event parameters values
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_VALUE_NO",						"EVENT_PARAM_VALUE_NO" );
-	RegisterStringConstant ( state, mJava_AppEventsConstants, "PARAM_VALUE_YES",					"EVENT_PARAM_VALUE_YES" );
+	state.SetField ( -1, "LOGIN_DISMISSED",	( u32 ) LOGIN_DISMISSED );
+	state.SetField ( -1, "LOGIN_SUCCESS",	( u32 ) LOGIN_SUCCESS );
+	state.SetField ( -1, "LOGIN_ERROR", 	( u32 ) LOGIN_ERROR );
 
 	luaL_Reg regTable [] = {
-		{ "getListener",				&MOAIGlobalEventSource::_getListener < MOAIFacebookAndroid > },
-		{ "graphRequest",				_graphRequest },
-		{ "hasGranted",					_hasGranted },
-		{ "init",						_init },
-		{ "logEvent",					_logEvent },
-		{ "logPurchase",				_logPurchase },
-		{ "login",						_login },
-		{ "logout",						_logout },
-		{ "postToFeed",					_postToFeed },
-		{ "requestPublishPermissions",	_requestPublishPermissions },
-		{ "requestReadPermissions",		_requestReadPermissions },
-		{ "sendGameRequest",			_sendGameRequest },
-		{ "sessionValid",				_sessionValid },
-		{ "setListener",				&MOAIGlobalEventSource::_setListener < MOAIFacebookAndroid > },
-		{ "showInviteDialog",			_showInviteDialog },
-		{ NULL, NULL},
+		{ "getListener",			&MOAIGlobalEventSource::_getListener < MOAIFacebookAndroid > },
+		{ "getUserID",				_getUserID },
+		{ "getUserName",			_getUserName },
+		{ "getToken",				_getToken },
+		{ "getTokenExpireTime",		_getTokenExpireTime },
+		{ "getTokenRefreshTime",	_getTokenRefreshTime },
+		{ "graphRequest",			_graphRequest },
+		{ "init",					_init },
+		{ "login",					_login },
+		{ "logout",					_logout },
+		{ "postToFeed",				_postToFeed },
+		{ "restoreSession",			_restoreSession },
+		{ "sendRequest",			_sendRequest },
+		{ "sessionValid",			_sessionValid },
+		{ "setListener",			&MOAIGlobalEventSource::_setListener < MOAIFacebookAndroid > },
+		{ "showInviteDialog",		_showInviteDialog },
+		{ NULL, NULL }
 	};
 
 	luaL_register ( state, 0, regTable );
+}
+
+//----------------------------------------------------------------//
+void MOAIFacebookAndroid::NotifyLoginSuccess () {
+
+	this->InvokeListener ( LOGIN_SUCCESS );
+}
+
+//----------------------------------------------------------------//
+void MOAIFacebookAndroid::NotifyLoginDismissed () {
+
+	this->InvokeListener ( LOGIN_DISMISSED );
+}
+
+//----------------------------------------------------------------//
+void MOAIFacebookAndroid::NotifyLoginError () {
+
+	this->InvokeListener ( LOGIN_ERROR );
+}
+
+//----------------------------------------------------------------//
+void MOAIFacebookAndroid::NotifyRequestComplete ( cc8* response ) {
+
+	//MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
+	//if ( this->PushListener ( REQUEST_RESPONSE, state )) {
+	//	lua_pushstring ( state, response );
+	//	state.DebugCall ( 1, 0 );
+	//}
+}
+
+//----------------------------------------------------------------//
+void MOAIFacebookAndroid::NotifyRequestFailed () {
+
+	//this->InvokeListener ( REQUEST_RESPONSE_FAILED );
 }
 
 //================================================================//
@@ -556,94 +370,24 @@ void MOAIFacebookAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 //================================================================//
 
 //----------------------------------------------------------------//
-extern "C" JNIEXPORT int JNICALL Java_com_moaisdk_facebook_MoaiFacebook_AKUClearCallbackRef ( JNIEnv* env, jclass obj, jint ref ) {
-	
-	if ( MOAIFacebookAndroid::IsValid ()) {
-		MOAIFacebookAndroid::Get ().ClearCallbackRef ( ref );
-	}
-	return LUA_NOREF;
-}
-
-//----------------------------------------------------------------//
-extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_facebook_MoaiFacebook_AKUNotifyFacebookLoginDismissed ( JNIEnv* env, jclass obj ) {
-
-	if ( MOAIFacebookAndroid::IsValid ()) {
-		MOAIFacebookAndroid::Get ().InvokeListener ( MOAIFacebookAndroid::SESSION_DID_NOT_LOGIN );
-	}
-}
-
-//----------------------------------------------------------------//
-extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_facebook_MoaiFacebook_AKUNotifyFacebookLoginError ( JNIEnv* env, jclass obj, jstring error ) {
-
-	if ( MOAIFacebookAndroid::IsValid ()) {
-		MOAIFacebookAndroid::Get ().InvokeListener ( MOAIFacebookAndroid::SESSION_DID_NOT_LOGIN );
-	}
-}
-
-//----------------------------------------------------------------//
 extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_facebook_MoaiFacebook_AKUNotifyFacebookLoginSuccess ( JNIEnv* env, jclass obj ) {
 
-	if ( MOAIFacebookAndroid::IsValid ()) {
-		MOAIFacebookAndroid::Get ().InvokeListener ( MOAIFacebookAndroid::SESSION_DID_LOGIN );
-	}
+	MOAIFacebookAndroid::Get ().NotifyLoginSuccess ();
 }
 
 //----------------------------------------------------------------//
-extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_facebook_MoaiFacebook_AKUNotifyGameRequestFailed ( JNIEnv* env, jclass obj, jstring jerror, jint ref ) {
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_facebook_MoaiFacebook_AKUNotifyFacebookLoginError ( JNIEnv* env, jclass obj ) {
 
-	if ( MOAIFacebookAndroid::IsValid ()) {
-
-		JNI_GET_CSTRING ( jerror, error )
-		MOAIFacebookAndroid::Get ().GameRequestDialogDidFail ( error, ref );
-		JNI_RELEASE_CSTRING ( jerror, error )
-	}
+	MOAIFacebookAndroid::Get ().NotifyLoginError ();
 }
 
-//----------------------------------------------------------------//
-extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_facebook_MoaiFacebook_AKUNotifyGameRequestSuccess ( JNIEnv* env, jclass obj, jstring jrequestId, jobjectArray recipients, jint ref ) {
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_facebook_MoaiFacebook_AKUNotifyFacebookLoginDismissed ( JNIEnv* env, jclass obj ) {
 
-	if ( MOAIFacebookAndroid::IsValid ()) {
-
-		JNI_GET_CSTRING ( jrequestId, requestId );
-		MOAIFacebookAndroid::Get ().GameRequestDialogDidComplete ( requestId, recipients, ref );
-		JNI_RELEASE_CSTRING ( jrequestId, requestId );
-	}
+	MOAIFacebookAndroid::Get ().NotifyLoginDismissed ();
 }
 
-//----------------------------------------------------------------//
-extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_facebook_MoaiFacebook_AKUNotifyGraphRequestFailed ( JNIEnv* env, jclass obj, jstring jerror, jint ref ) {
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_facebook_MoaiFacebook_AKUNotifyFacebookRequestFailed ( JNIEnv* env, jclass obj ) {
 
-	if ( MOAIFacebookAndroid::IsValid ()) {
-
-		JNI_GET_CSTRING ( jerror, error );
-		MOAIFacebookAndroid::Get ().GraphRequestResponseFailure ( error, ref );
-		JNI_RELEASE_CSTRING ( jerror, error );
-	}
+	MOAIFacebookAndroid::Get ().NotifyRequestFailed ( );
 }
 
-//----------------------------------------------------------------//
-extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_facebook_MoaiFacebook_AKUNotifyGraphRequestSuccess ( JNIEnv* env, jclass obj, jstring jresult, jint ref ) {
-
-	if ( MOAIFacebookAndroid::IsValid ()) {
-
-		JNI_GET_CSTRING ( jresult, result );
-		MOAIFacebookAndroid::Get ().GraphRequestResponse ( result, ref );
-		JNI_RELEASE_CSTRING ( jresult, result );
-	}
-}
-
-//----------------------------------------------------------------//
-extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_facebook_MoaiFacebook_AKUNotifyPermissionsDenied ( JNIEnv* env, jclass obj ) {
-
-	if ( MOAIFacebookAndroid::IsValid ()) {
-		MOAIFacebookAndroid::Get ().InvokeListener ( MOAIFacebookAndroid::PERMISSIONS_DENIED );
-	}
-}
-
-//----------------------------------------------------------------//
-extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_facebook_MoaiFacebook_AKUNotifyPermissionsGranted ( JNIEnv* env, jclass obj ) {
-
-	if ( MOAIFacebookAndroid::IsValid ()) {
-		MOAIFacebookAndroid::Get ().InvokeListener ( MOAIFacebookAndroid::PERMISSIONS_GRANTED );
-	}
-}

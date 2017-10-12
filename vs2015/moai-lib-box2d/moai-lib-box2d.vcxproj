@@ -18,55 +18,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\src\moai-box2d\pch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\..\src\moai-box2d\host.cpp" />
-    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DArbiter.cpp" />
-    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DBody.cpp" />
-    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DDebugDraw.cpp" />
-    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DDistanceJoint.cpp" />
-    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DFixture.cpp" />
-    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DFrictionJoint.cpp" />
-    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DGearJoint.cpp" />
-    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DJoint.cpp" />
-    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DMotorJoint.cpp" />
-    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DMouseJoint.cpp" />
-    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DPrismaticJoint.cpp" />
-    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DPulleyJoint.cpp" />
-    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DRevoluteJoint.cpp" />
-    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DRopeJoint.cpp" />
-    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DWeldJoint.cpp" />
-    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DWheelJoint.cpp" />
-    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DWorld.cpp" />
-    
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\src\moai-box2d\headers.h" />
-    <ClInclude Include="..\..\src\moai-box2d\host.h" />
-    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DArbiter.h" />
-    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DBody.h" />
-    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DDebugDraw.h" />
-    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DDistanceJoint.h" />
-    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DFixture.h" />
-    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DFrictionJoint.h" />
-    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DGearJoint.h" />
-    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DJoint.h" />
-    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DMotorJoint.h" />
-    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DMouseJoint.h" />
-    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DPrismaticJoint.h" />
-    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DPulleyJoint.h" />
-    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DRevoluteJoint.h" />
-    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DRopeJoint.h" />
-    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DWeldJoint.h" />
-    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DWheelJoint.h" />
-    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DWorld.h" />
-    <ClInclude Include="..\..\src\moai-box2d\pch.h" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{BAAF0611-4BA9-4BDD-9D83-822F3B23ABA3}</ProjectGuid>
     <RootNamespace>moai-lib-box2d</RootNamespace>
@@ -159,7 +110,9 @@
     <Lib>
       <AdditionalLibraryDirectories>..\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
-    
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -179,7 +132,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ProgramDataBaseFileName>$(OutDir)$(ProjectName).pdb</ProgramDataBaseFileName>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ForcedIncludeFiles>zl-vfs/zl_replace.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -188,7 +141,9 @@
     <Lib>
       <AdditionalLibraryDirectories>..\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
-    
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <CustomBuildStep>
@@ -222,7 +177,9 @@
       <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
       <AdditionalLibraryDirectories>..\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
-    
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <CustomBuildStep>
@@ -249,7 +206,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ProgramDataBaseFileName>$(OutDir)$(ProjectName).pdb</ProgramDataBaseFileName>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ForcedIncludeFiles>zl-vfs/zl_replace.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -259,8 +216,58 @@
       <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
       <AdditionalLibraryDirectories>..\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
-    
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\moai-box2d\headers.h" />
+    <ClInclude Include="..\..\src\moai-box2d\host.h" />
+    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DArbiter.h" />
+    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DBody.h" />
+    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DDebugDraw.h" />
+    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DDistanceJoint.h" />
+    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DFixture.h" />
+    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DFrictionJoint.h" />
+    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DGearJoint.h" />
+    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DJoint.h" />
+    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DMotorJoint.h" />
+    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DMouseJoint.h" />
+    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DPrismaticJoint.h" />
+    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DPulleyJoint.h" />
+    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DRevoluteJoint.h" />
+    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DRopeJoint.h" />
+    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DWeldJoint.h" />
+    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DWheelJoint.h" />
+    <ClInclude Include="..\..\src\moai-box2d\MOAIBox2DWorld.h" />
+    <ClInclude Include="..\..\src\moai-box2d\pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\moai-box2d\host.cpp" />
+    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DArbiter.cpp" />
+    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DBody.cpp" />
+    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DDebugDraw.cpp" />
+    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DDistanceJoint.cpp" />
+    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DFixture.cpp" />
+    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DFrictionJoint.cpp" />
+    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DGearJoint.cpp" />
+    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DJoint.cpp" />
+    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DMotorJoint.cpp" />
+    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DMouseJoint.cpp" />
+    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DPrismaticJoint.cpp" />
+    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DPulleyJoint.cpp" />
+    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DRevoluteJoint.cpp" />
+    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DRopeJoint.cpp" />
+    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DWeldJoint.cpp" />
+    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DWheelJoint.cpp" />
+    <ClCompile Include="..\..\src\moai-box2d\MOAIBox2DWorld.cpp" />
+    <ClCompile Include="..\..\src\moai-box2d\pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

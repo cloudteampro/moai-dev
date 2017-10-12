@@ -22,11 +22,15 @@
     <ClInclude Include="..\..\src\moai-util\headers.h" />
     <ClInclude Include="..\..\src\moai-util\host.h" />
     <ClInclude Include="..\..\src\moai-util\MOAIByteStream.h" />
+    <ClInclude Include="..\..\src\moai-util\MOAIConditionVariable.h" />
+    <ClInclude Include="..\..\src\moai-util\MOAIConditionVariable_posix.h" />
+    <ClInclude Include="..\..\src\moai-util\MOAIConditionVariable_win32.h" />
     <ClInclude Include="..\..\src\moai-util\MOAIDataBuffer.h" />
     <ClInclude Include="..\..\src\moai-util\MOAIDataBufferStream.h" />
     <ClInclude Include="..\..\src\moai-util\MOAIDataIOTask.h" />
     <ClInclude Include="..\..\src\moai-util\MOAIFileStream.h" />
     <ClInclude Include="..\..\src\moai-util\MOAIFileSystem.h" />
+    <ClInclude Include="..\..\src\moai-util\MOAIFourier.h" />
     <ClInclude Include="..\..\src\moai-util\MOAIHashWriter.h" />
     <ClInclude Include="..\..\src\moai-util\MOAIJsonParser.h" />
     <ClInclude Include="..\..\src\moai-util\MOAILuaUtil.h" />
@@ -43,7 +47,6 @@
     <ClInclude Include="..\..\src\moai-util\MOAITask.h" />
     <ClInclude Include="..\..\src\moai-util\MOAITaskQueue.h" />
     <ClInclude Include="..\..\src\moai-util\MOAITaskSubscriber.h" />
-    <ClInclude Include="..\..\src\moai-util\MOAITaskThread.h" />
     <ClInclude Include="..\..\src\moai-util\MOAIThread.h" />
     <ClInclude Include="..\..\src\moai-util\MOAIThread_posix.h" />
     <ClInclude Include="..\..\src\moai-util\MOAIThread_win32.h" />
@@ -54,11 +57,15 @@
   <ItemGroup>
     <ClCompile Include="..\..\src\moai-util\host.cpp" />
     <ClCompile Include="..\..\src\moai-util\MOAIByteStream.cpp" />
+    <ClCompile Include="..\..\src\moai-util\MOAIConditionVariable.cpp" />
+    <ClCompile Include="..\..\src\moai-util\MOAIConditionVariable_posix.cpp" />
+    <ClCompile Include="..\..\src\moai-util\MOAIConditionVariable_win32.cpp" />
     <ClCompile Include="..\..\src\moai-util\MOAIDataBuffer.cpp" />
     <ClCompile Include="..\..\src\moai-util\MOAIDataBufferStream.cpp" />
     <ClCompile Include="..\..\src\moai-util\MOAIDataIOTask.cpp" />
     <ClCompile Include="..\..\src\moai-util\MOAIFileStream.cpp" />
     <ClCompile Include="..\..\src\moai-util\MOAIFileSystem.cpp" />
+    <ClCompile Include="..\..\src\moai-util\MOAIFourier.cpp" />
     <ClCompile Include="..\..\src\moai-util\MOAIHashWriter.cpp" />
     <ClCompile Include="..\..\src\moai-util\MOAIJsonParser.cpp" />
     <ClCompile Include="..\..\src\moai-util\MOAILuaUtil.cpp" />
@@ -75,7 +82,6 @@
     <ClCompile Include="..\..\src\moai-util\MOAITask.cpp" />
     <ClCompile Include="..\..\src\moai-util\MOAITaskQueue.cpp" />
     <ClCompile Include="..\..\src\moai-util\MOAITaskSubscriber.cpp" />
-    <ClCompile Include="..\..\src\moai-util\MOAITaskThread.cpp" />
     <ClCompile Include="..\..\src\moai-util\MOAIThread.cpp" />
     <ClCompile Include="..\..\src\moai-util\MOAIThread_posix.cpp" />
     <ClCompile Include="..\..\src\moai-util\MOAIThread_win32.cpp" />
@@ -177,7 +183,9 @@
     <Lib>
       <AdditionalLibraryDirectories>..\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
-    
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -197,7 +205,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ProgramDataBaseFileName>$(OutDir)$(ProjectName).pdb</ProgramDataBaseFileName>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ForcedIncludeFiles>zl-vfs/zl_replace.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -206,7 +214,9 @@
     <Lib>
       <AdditionalLibraryDirectories>..\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
-    
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <CustomBuildStep>
@@ -240,7 +250,9 @@
       <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
       <AdditionalLibraryDirectories>..\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
-    
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <CustomBuildStep>
@@ -267,7 +279,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ProgramDataBaseFileName>$(OutDir)$(ProjectName).pdb</ProgramDataBaseFileName>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ForcedIncludeFiles>zl-vfs/zl_replace.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -277,7 +289,9 @@
       <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
       <AdditionalLibraryDirectories>..\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
-    
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

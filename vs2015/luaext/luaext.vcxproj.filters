@@ -19,9 +19,6 @@
     <Filter Include="luasocket-embed">
       <UniqueIdentifier>{3d9da368-fe8a-43e2-afc3-f54337c5a576}</UniqueIdentifier>
     </Filter>
-    <Filter Include="cmsgpack">
-      <UniqueIdentifier>{f3e94443-c2fa-48f9-9413-4bc4c9ee2c19}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\3rdparty\luasocket-2.0.2\src\auxiliar.c">
@@ -72,6 +69,9 @@
     <ClCompile Include="..\..\3rdparty\luasql-2.2.0\src\luasql.c">
       <Filter>luasql</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\3rdparty\luafilesystem-1.5.0\src\lfs.c">
+      <Filter>luafilesystem</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\3rdparty\luasocket-2.0.2-embed\fullluasocket.c">
       <Filter>luasocket-embed</Filter>
     </ClCompile>
@@ -80,12 +80,6 @@
     </ClCompile>
     <ClCompile Include="..\..\3rdparty\luacrypto-0.3.2\src\lcrypto.c">
       <Filter>luacrypto</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\3rdparty\luafilesystem-1.5.0\src\lfs.c">
-      <Filter>luafilesystem</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\3rdparty\lua-cmsgpack\lua_cmsgpack.c">
-      <Filter>cmsgpack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -134,6 +128,9 @@
     <ClInclude Include="..\..\3rdparty\luasql-2.2.0\src\luasql.h">
       <Filter>luasql</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\3rdparty\luafilesystem-1.5.0\src\lfs.h">
+      <Filter>luafilesystem</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\3rdparty\luasocket-2.0.2-embed\fullluasocket.h">
       <Filter>luasocket-embed</Filter>
     </ClInclude>
@@ -142,9 +139,6 @@
     </ClInclude>
     <ClInclude Include="..\..\3rdparty\luacrypto-0.3.2\src\lcrypto.h">
       <Filter>luacrypto</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\3rdparty\luafilesystem-1.5.0\src\lfs.h">
-      <Filter>luafilesystem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

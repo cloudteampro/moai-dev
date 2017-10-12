@@ -31,7 +31,7 @@
 	@const	TRANSACTION_STATE_CANCELLED		Error code indicating a canceled transaction.
 */
 class MOAIBillingIOS :
-	public ZLContextClass < MOAIBillingIOS, MOAILuaObject > {
+	public MOAIGlobalClass < MOAIBillingIOS, MOAILuaObject > {
 private:
 
 	//----------------------------------------------------------------//

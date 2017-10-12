@@ -48,12 +48,9 @@ public:
 
 private:
 
-	// friend class MOAIGfxMgr;
-	// friend class MOAIGfxPipelineClerk;
-	// friend class MOAIGfxStateCache;
-	friend class MOAIGfxDevice;
-	friend class MOAIGfxDeviceBase;
-	friend class MOAIGfxDeviceStateCache;
+	friend class MOAIGfxMgr;
+	friend class MOAIGfxPipelineClerk;
+	friend class MOAIGfxStateCache;
 
 	static const u32 COLOR_SIZE				= 4;
 	static const u32 NORMAL_SIZE			= 3;
@@ -82,8 +79,7 @@ private:
 	static int					_getVertexSize					( lua_State* L );
 	
 	//----------------------------------------------------------------//
-	void						Bind							( ZLSharedConstBuffer* buffer ) const;
-	// void						Bind							( ZLSharedConstBuffer* buffer, bool copyBuffer ) const;
+	void						Bind							( ZLSharedConstBuffer* buffer, bool copyBuffer ) const;
 	static u32					GetComponentSize				( u32 size, u32 type );
 	static u32					GetLuaIndexForUseID				( u32 useID );
 	static u32					GetUseIDForLuaIndex				( u32 idx );

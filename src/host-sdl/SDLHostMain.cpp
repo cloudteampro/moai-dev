@@ -19,6 +19,11 @@
 //----------------------------------------------------------------//
 #ifdef _WIN32
 	int CALLBACK WinMain ( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow ) {
+		(( void )hInstance );
+		(( void )hPrevInstance );
+		(( void )lpCmdLine );
+		(( void )nCmdShow );
+
 		int argc = __argc;
 		char** argv = __argv;
 
@@ -37,23 +42,6 @@
 
 //----------------------------------------------------------------//
 int main ( int argc, char** argv ) {
-
-#ifdef _DEBUG
-	printf ( "DEBUG BUILD\n" );
-#elif WIN32
-	bool console = false;
-
-	// if ( argc > 1 ) {
-	// 	if ( strcasecmp ( argv [ argc - 1 ], "-console" ) == 0 ) {
-	// 		console = true;
-	// 		argc = argc - 1;
-	// 	}
-	// }
-
-	if ( !console ) {
-		FreeConsole ();
-	}
-#endif
 
 	SDLHost ( argc, argv );
     return 0;

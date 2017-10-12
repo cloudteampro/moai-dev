@@ -11,28 +11,6 @@
 //================================================================//
 
 //----------------------------------------------------------------//
-/**	@lua	appReceipt
-	@text	Returns json string containing app receipt. Can be used to
-			validate purchases on iOS 7 and above.
-
-	@out	string	or nil if not available
-*/
-int MOAIBillingIOS::_appReceipt ( lua_State* L ) {
-	MOAI_LUA_SETUP_SINGLE ( MOAIBillingIOS, "" )
-	
-	if ( NSFoundationVersionNumber >= NSFoundationVersionNumber_iOS_7_0 ) {
-		
-		NSData* receiptData = [ NSData dataWithContentsOfURL:[[ NSBundle mainBundle ] appStoreReceiptURL ]];
-		if ( receiptData ) {
-			[ receiptData toLua:state ];
-			return 1;
-		}
-	}
-	
-	return 0;
-}
-
-//----------------------------------------------------------------//
 /**	@lua	canMakePayments
 	@text	Determines whether or not the app has permission to 
 			request payments for in-app purchases.
@@ -40,7 +18,8 @@ int MOAIBillingIOS::_appReceipt ( lua_State* L ) {
 	@out	bool enabled
 */
 int MOAIBillingIOS::_canMakePayments ( lua_State* L ) {
-	MOAI_LUA_SETUP_SINGLE ( MOAIBillingIOS, "" )
+	
+	MOAILuaState state ( L );
 	
 	BOOL result = [ SKPaymentQueue canMakePayments ];
 	lua_pushboolean ( state, result );
@@ -49,39 +28,11 @@ int MOAIBillingIOS::_canMakePayments ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
-/**	@lua	finishTransaction
-	@text	Finish transaction manually. 
-			Only call if autoFinishTransactions is set to false.
-	
-	@in		string	transactionIdentifier	This is not productId, but a server provided
-											unique identifier found in transaction table
-	@out	boolead success
-*/
-int MOAIBillingIOS::_finishTransaction ( lua_State *L ) {
-	MOAI_LUA_SETUP_SINGLE ( MOAIBillingIOS, "S" )
-	
-	NSString* transactionId = [[ NSString alloc ] initWithLua:state stackIndex:1 ];
-	
-	NSArray* transactions = [[ SKPaymentQueue defaultQueue ] transactions ];
-	for ( SKPaymentTransaction* transaction in transactions ) {
-		
-		if ([ transactionId isEqualToString:transaction.transactionIdentifier ]) {
-			[[ SKPaymentQueue defaultQueue ] finishTransaction:transaction ];
-			break;
-		}
-	}
-	
-	[ transactionId release ];
-	return 0;
-}
-
-//----------------------------------------------------------------//
 /**	@lua	requestPaymentForProduct
 	@text	Request payment for an in-app purchase.
 	
 	@in		string 	sku				The SKU to purchase.
 	@opt	number 	quantity		Default value is 1.
-	@opt	string	username		Optional username
 	@out	nil
 */
 int MOAIBillingIOS::_requestPaymentForProduct ( lua_State* L ) {
@@ -89,21 +40,12 @@ int MOAIBillingIOS::_requestPaymentForProduct ( lua_State* L ) {
 	MOAILuaState state ( L );
 	
 	cc8* identifier = state.GetValue < cc8* >( 1, "" );
-	int quantity	= state.GetValue < int >( 2, 1 );
-	cc8* username	= state.GetValue < cc8* >( 3, 0 );
+	int quantity = state.GetValue < int >( 2, 1 );
 	
 	if ( quantity ) {
 		
-		// TODO: deal with deprecation here
-		// Create MOAILuaObject wrapper for SKProduct?
 		SKMutablePayment* payment = [ SKMutablePayment paymentWithProductIdentifier:[ NSString stringWithUTF8String:identifier ]];
 		payment.quantity = quantity;
-		
-		if ( username ) {
-			if ([ payment respondsToSelector:@selector ( setApplicationUsername: )]) {
-				payment.applicationUsername = [ NSString stringWithUTF8String:username ];
-			}
-		}
 		[[ SKPaymentQueue defaultQueue ] addPayment:payment ];
 	}
 	
@@ -161,17 +103,22 @@ int MOAIBillingIOS::_restoreCompletedTransactions( lua_State* L ) {
 	
 	UNUSED ( L );
 	
-	[[ SKPaymentQueue defaultQueue ] restoreCompletedTransactions ];
+	[[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
 
 	return 0;
 }
 
 //----------------------------------------------------------------//
-// TODO doxygen
-int MOAIBillingIOS::_setAutoFinishTransactions ( lua_State *L ) {
-	MOAI_LUA_SETUP_SINGLE ( MOAIBillingIOS, "" )
+int MOAIBillingIOS::_setListener ( lua_State* L ) {
 	
-	self->mAutoFinishTransactions = state.GetValue < bool >( 1, true );
+	MOAILuaState state ( L );
+	
+	u32 idx = state.GetValue < u32 >( 1, TOTAL );
+	
+	if ( idx < TOTAL ) {
+		MOAIBillingIOS::Get ().mListeners [ idx ].SetRef ( state, 2 );
+	}
+	
 	return 0;
 }
 
@@ -180,10 +127,9 @@ int MOAIBillingIOS::_setAutoFinishTransactions ( lua_State *L ) {
 //================================================================//
 
 //----------------------------------------------------------------//
-MOAIBillingIOS::MOAIBillingIOS () :
-	mAutoFinishTransactions ( true ) {
+MOAIBillingIOS::MOAIBillingIOS () {
 
-	RTTI_SINGLE ( MOAIGlobalEventSource )
+	RTTI_SINGLE ( MOAILuaObject )
 	
 	this->mStoreKitListener = [[ MOAIStoreKitListener alloc ] init ];
 	[[ SKPaymentQueue defaultQueue ] addTransactionObserver:this->mStoreKitListener ];
@@ -192,20 +138,21 @@ MOAIBillingIOS::MOAIBillingIOS () :
 //----------------------------------------------------------------//
 MOAIBillingIOS::~MOAIBillingIOS () {
 
-	[[ SKPaymentQueue defaultQueue ] removeTransactionObserver:this->mStoreKitListener ];
+	[[ SKPaymentQueue defaultQueue ] removeTransactionObserver:this->mStoreKitListener];
 	[ this->mStoreKitListener release ];
 }
 
 //----------------------------------------------------------------//
 void MOAIBillingIOS::DidReceivePaymentQueueError ( NSError* error, cc8* extraInfo ) {
 	
-	if ( !MOAILuaRuntime::IsValid ()) return;
+	MOAILuaRef& callback = this->mListeners [ PAYMENT_QUEUE_ERROR ];
 	
-	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-	if ( this->PushListener ( PAYMENT_QUEUE_ERROR, state )) {
+	if ( callback ) {
+		MOAIScopedLuaState state = callback.GetSelf ();
 		
 		[ error toLua:state ];
-		state.Push ( extraInfo );
+		lua_pushstring(state, extraInfo);
+		
 		state.DebugCall ( 2, 0 );
 	}
 }
@@ -214,7 +161,13 @@ void MOAIBillingIOS::DidReceivePaymentQueueError ( NSError* error, cc8* extraInf
 void MOAIBillingIOS::DidReceiveRestoreFinished ( SKPaymentQueue* queue ) {
 	
 	UNUSED ( queue );
-	this->InvokeListener ( PAYMENT_RESTORE_FINISHED );
+	
+	MOAILuaRef& callback = this->mListeners [ PAYMENT_RESTORE_FINISHED ];
+	
+	if ( callback ) {
+		MOAIScopedLuaState state = callback.GetSelf ();		
+		state.DebugCall ( 0, 0 );
+	}
 }
 
 //----------------------------------------------------------------//
@@ -222,21 +175,18 @@ void MOAIBillingIOS::PaymentQueueUpdatedTransactions ( SKPaymentQueue* queue, NS
 	
 	UNUSED ( queue );
 
-	if ( !MOAILuaRuntime::IsValid ()) return;
-	
+	MOAILuaRef& callback = this->mListeners [ PAYMENT_QUEUE_TRANSACTION ];
+
 	for ( SKPaymentTransaction* transaction in transactions ) {
+	
+		if ( callback ) {
 		
-		MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-		
-		if ( this->PushListener ( PAYMENT_QUEUE_TRANSACTION, state )) {
-			
+			MOAIScopedLuaState state = callback.GetSelf ();
 			this->PushPaymentTransaction ( state, transaction );
 			state.DebugCall ( 1, 0 );
 		}
 		
-		if ( this->mAutoFinishTransactions &&
-			 ( transaction.transactionState != SKPaymentTransactionStatePurchasing &&
-			   transaction.transactionState != SKPaymentTransactionStateDeferred )) {
+		if ( transaction.transactionState != SKPaymentTransactionStatePurchasing ) {
 			
 			[[ SKPaymentQueue defaultQueue ] finishTransaction:transaction ];
 		}
@@ -245,16 +195,15 @@ void MOAIBillingIOS::PaymentQueueUpdatedTransactions ( SKPaymentQueue* queue, NS
 
 //----------------------------------------------------------------//
 void MOAIBillingIOS::ProductsRequestDidReceiveResponse ( SKProductsRequest* request, SKProductsResponse* response ) {
-	
-	if ( !MOAILuaRuntime::IsValid ()) return;
-	
-	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-	if ( this->PushListener ( PRODUCT_REQUEST_RESPONSE, state )) {
+
+	MOAILuaRef& callback = this->mListeners [ PRODUCT_REQUEST_RESPONSE ];
+	if ( callback ) {
 		
-		NSNumberFormatter *formatter = [[ NSNumberFormatter alloc ] init ];
-		[ formatter setFormatterBehavior:NSNumberFormatterBehavior10_4 ];
-		[ formatter setNumberStyle:NSNumberFormatterCurrencyStyle ];
+		NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+		[formatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
+		[formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
 		
+		MOAIScopedLuaState state = callback.GetSelf ();
 		lua_newtable ( state );
 		
 		int count = 1;
@@ -263,15 +212,15 @@ void MOAIBillingIOS::ProductsRequestDidReceiveResponse ( SKProductsRequest* requ
 			lua_pushnumber ( state, count++ );
 			lua_newtable ( state );
 		
-			[ formatter setLocale:product.priceLocale ];
-			NSString * formattedString = [ formatter stringFromNumber:product.price ];
+			[formatter setLocale:product.priceLocale];
+			NSString * formattedString = [ formatter stringFromNumber:product.price];
 			
-			state.SetField ( -1, "localizedTitle",			[ product.localizedTitle UTF8String ]);
-			state.SetField ( -1, "localizedDescription",	[ product.localizedDescription UTF8String ]);
-			state.SetField ( -1, "price",					[ product.price floatValue ]);
-			state.SetField ( -1, "localizedPrice",			[ formattedString UTF8String]);
-			state.SetField ( -1, "priceLocale",				[ product.priceLocale.localeIdentifier UTF8String ]);
-			state.SetField ( -1, "productIdentifier",		[ product.productIdentifier UTF8String ]);
+			state.SetField ( -1, "localizedTitle", [ product.localizedTitle UTF8String ]);
+			state.SetField ( -1, "localizedDescription", [ product.localizedDescription UTF8String ]);
+			state.SetField ( -1, "price", [ product.price floatValue ]);
+			state.SetField ( -1, "localizedPrice", [ formattedString UTF8String]);
+			state.SetField ( -1, "priceLocale", [ product.priceLocale.localeIdentifier UTF8String ]);
+			state.SetField ( -1, "productIdentifier", [ product.productIdentifier UTF8String ]);
 			
 			lua_settable ( state, -3 );
 		}
@@ -285,119 +234,112 @@ void MOAIBillingIOS::ProductsRequestDidReceiveResponse ( SKProductsRequest* requ
 		}
 		
 		state.DebugCall ( 1, 0 );
-		[ formatter release ];
+		[formatter release];
+		
 	}
 	
 	[ request autorelease ];
 }
 
 //----------------------------------------------------------------//
-void MOAIBillingIOS::PushPaymentTransaction ( MOAILuaState& state, SKPaymentTransaction* transaction ) {
+void MOAIBillingIOS::PushPaymentTransaction ( lua_State* L, SKPaymentTransaction* transaction ) {
 
-	lua_newtable ( state );
+	lua_newtable ( L );
 	
-	state.Push ( "transactionState" );
+	lua_pushstring ( L, "transactionState" );
 	
 	switch ( transaction.transactionState ) {
 		
 		case SKPaymentTransactionStatePurchasing: {
 			
-			state.Push ( TRANSACTION_STATE_PURCHASING );
+			lua_pushnumber ( L, TRANSACTION_STATE_PURCHASING );
 			break;
 		}
 		case SKPaymentTransactionStatePurchased: {
 			
-			state.Push ( TRANSACTION_STATE_PURCHASED );
+			lua_pushnumber ( L, TRANSACTION_STATE_PURCHASED );
 			break;
 		}
 		case SKPaymentTransactionStateFailed: {
 			
 			if ( transaction.error.code == SKErrorPaymentCancelled ) {
 				
-				state.Push ( TRANSACTION_STATE_CANCELLED );
+				lua_pushnumber ( L, TRANSACTION_STATE_CANCELLED );
 			}
 			else {
 				
-				state.Push ( TRANSACTION_STATE_FAILED );
+				lua_pushnumber ( L, TRANSACTION_STATE_FAILED );
 			}
 			break;
 		}
 		case SKPaymentTransactionStateRestored: {
 			
-			state.Push ( TRANSACTION_STATE_RESTORED );
-			break;
-		}
-		case SKPaymentTransactionStateDeferred: {
-			
-			state.Push ( TRANSACTION_STATE_DEFFERED );
+			lua_pushnumber ( L, TRANSACTION_STATE_RESTORED );
 			break;
 		}
 		default: {
 			
-			state.Push ();
+			lua_pushnil ( L );
 			break;
 		}
 	}
 	
-	lua_settable ( state, -3 );
+	lua_settable ( L, -3 );
 	
 	if ( transaction.payment ) {
 		
-		state.Push ( "payment" );
-		lua_newtable ( state );
+		lua_pushstring ( L, "payment" );
+		lua_newtable ( L );
 		
-		SKPayment* payment = transaction.payment;
+		lua_pushstring ( L, "productIdentifier" );
+		[ transaction.payment.productIdentifier toLua:L ];
+		lua_settable ( L, -3 );
 		
-		state.SetField ( -1, "productIdentifier", [ payment.productIdentifier UTF8String ]);
-		state.SetField ( -1, "quantity", ( int )payment.quantity );
-
-		if ([ payment respondsToSelector:@selector ( applicationUsername )]) {
-			if ( payment.applicationUsername ) {
-				state.SetField ( -1, "applicationUsername", [ payment.applicationUsername UTF8String ]);
-			}
-		}
+		lua_pushstring ( L, "quantity" );
+		lua_pushnumber ( L, transaction.payment.quantity );
+		lua_settable ( L, -3 );
 		
-		lua_settable ( state, -3 );
+		lua_settable ( L, -3 );
 	}
 	
 	if ( transaction.transactionState == SKPaymentTransactionStateFailed ) {
 		
-		state.SetField ( -1, "error", [[ transaction.error localizedDescription ] UTF8String ]);
+		lua_pushstring ( L, "error" );
+		[ transaction.error toLua:L ];
+		lua_settable ( L, -3 );
 	}
 	
 	if ( transaction.transactionState == SKPaymentTransactionStateRestored ) {
 		
-		state.Push ( "originalTransaction" );
-		this->PushPaymentTransaction ( state, transaction.originalTransaction );
-		lua_settable ( state, -3 );
+		lua_pushstring ( L, "originalTransaction" );
+		this->PushPaymentTransaction ( L, transaction.originalTransaction );
+		lua_settable ( L, -3 );
 	}
 	
 	if ( transaction.transactionState == SKPaymentTransactionStatePurchased ) {
-
-		state.Push ( "transactionReceipt" );
 		
-		if ( transaction.transactionReceipt ) {
-			[ transaction.transactionReceipt toLua:state ];
+		lua_pushstring ( L, "transactionReceipt" );
+		if( transaction.transactionReceipt != nil ) {
+			
+			[ transaction.transactionReceipt toLua:L ];
 		}
 		else {
-			state.Push ();
+			
+			lua_pushnil ( L );
 		}
-		
-		lua_settable ( state, -3 );
+
+		lua_settable ( L, -3 );
 	}
 	
 	if (( transaction.transactionState == SKPaymentTransactionStatePurchased ) || ( transaction.transactionState == SKPaymentTransactionStateRestored )) {
 		
-		state.SetField ( -1, "transactionIdentifier", [ transaction.transactionIdentifier UTF8String ]);
-		
-		state.Push ( "transactionDate" );
-		if ( transaction.transactionDate ) {
-			[ transaction.transactionDate toLua:state ];
-		}
-		else {
-			state.Push ();
-		}
-		lua_settable ( state, -3 );
+		lua_pushstring ( L, "transactionDate" );
+		[ transaction.transactionDate toLua:L ];
+		lua_settable ( L, -3 );
+
+		lua_pushstring ( L, "transactionIdentifier" );
+		[ transaction.transactionIdentifier toLua:L ];
+		lua_settable ( L, -3 );
 	}
 }
 
@@ -416,15 +358,11 @@ void MOAIBillingIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "TRANSACTION_STATE_CANCELLED", ( u32 )TRANSACTION_STATE_CANCELLED );
 	
 	luaL_Reg regTable [] = {
-		{ "appReceipt",						_appReceipt },
 		{ "canMakePayments",				_canMakePayments },
-		{ "finishTransaction",				_finishTransaction },
-		{ "getListener",					&MOAIGlobalEventSource::_getListener < MOAIBillingIOS > },
 		{ "restoreCompletedTransactions",	_restoreCompletedTransactions },
 		{ "requestPaymentForProduct",		_requestPaymentForProduct },
 		{ "requestProductIdentifiers",		_requestProductIdentifiers },
-		{ "setAutoFinishTransactions",		_setAutoFinishTransactions },
-		{ "setListener",					&MOAIGlobalEventSource::_setListener < MOAIBillingIOS > },
+		{ "setListener",					_setListener },
 		{ NULL, NULL }
 	};
 

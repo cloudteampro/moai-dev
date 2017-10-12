@@ -5,7 +5,7 @@
 #include <float.h>
 #include <moai-sim/MOAIDeck.h>
 #include <moai-sim/MOAIDeckRemapper.h>
-#include <moai-sim/MOAIGfxDevice.h>
+#include <moai-sim/MOAIGfxMgr.h>
 #include <moai-sim/MOAIParticleState.h>
 #include <moai-sim/MOAIParticleSystem.h>
 #include <moai-sim/MOAITextureBase.h>
@@ -252,14 +252,6 @@ int MOAIParticleSystem::_setComputeBounds ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
-int MOAIParticleSystem::_setRenderAsTrail ( lua_State* L ) {
-	MOAI_LUA_SETUP ( MOAIParticleSystem, "U" )
-
-	self->mRenderAsTrail = state.GetValue < bool >( 2, true );
-	return 0;
-}
-
-//----------------------------------------------------------------//
 /**	@lua	setSpriteColor
 	@text	Set the color of the most recently added sprite.
 	
@@ -349,10 +341,9 @@ int MOAIParticleSystem::_surge ( lua_State* L ) {
 	float y		= state.GetValue < float >( 4, 0.0f );
 	float dx	= state.GetValue < float >( 5, 0.0f );
 	float dy	= state.GetValue < float >( 6, 0.0f );
-	u32 stateId	= state.GetValue < u32 >( 7, 1 ) - 1;
 	
 	for ( u32 i = 0; i < n; ++i ) {
-		self->PushParticle ( x, y, dx, dy, stateId );
+		self->PushParticle ( x, y, dx, dy );
 	}
 
 	return 0;
@@ -386,18 +377,7 @@ void MOAIParticleSystem::Draw ( int subPrimID, float lod ) {
 	if ( !this->mDeck ) return;
 	if ( this->IsClear ()) return;
 
-	if ( this->mRenderAsTrail ) {
-		this->DrawTrail ();
-	}
-	else {
-		this->DrawSprites ();
-	}
-}
-
-//----------------------------------------------------------------//
-void MOAIParticleSystem::DrawSprites () {
-
-	MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get ();
+	MOAIGfxMgr& gfxMgr = MOAIGfxMgr::Get ();
 	
 	this->LoadGfxState ();
 	this->LoadUVTransform ();
@@ -407,7 +387,7 @@ void MOAIParticleSystem::DrawSprites () {
 	ZLAffine3D drawingMtx;
 	ZLAffine3D spriteMtx;
 	
-	u32 maxSprites = this->mSprites.Size ();
+	u32 maxSprites = ( u32 )this->mSprites.Size ();
 	u32 total = this->mSpriteTop;
 	u32 base = 0;
 	if ( total > maxSprites ) {
@@ -424,47 +404,19 @@ void MOAIParticleSystem::DrawSprites () {
 		else {
 			idx = ( base + ( total - 1 - i )) % maxSprites;
 		}
-		
+				
 		AKUParticleSprite& sprite = this->mSprites [ idx ];
-		gfxDevice.SetPenColor ( sprite.mRed, sprite.mGreen, sprite.mBlue, sprite.mAlpha );
+		gfxMgr.mGfxState.SetPenColor ( sprite.mRed, sprite.mGreen, sprite.mBlue, sprite.mAlpha );
 		
 		spriteMtx.ScRoTr ( sprite.mXScl, sprite.mYScl, 1.0f, 0.0f, 0.0f, sprite.mZRot * ( float )D2R, sprite.mXLoc, sprite.mYLoc, 0.0f );
 		
 		drawingMtx = this->GetLocalToWorldMtx ();
 		drawingMtx.Prepend ( spriteMtx );
 		
-		gfxDevice.SetVertexTransform ( MOAIGfxDevice::VTX_WORLD_TRANSFORM, drawingMtx );
+		gfxMgr.mGfxState.SetMtx ( MOAIGfxGlobalsCache::WORLD_MTX, drawingMtx );
 		
 		this->mDeck->Draw ( MOAIDeckRemapper::Remap ( this->mRemapper, this->mIndex + ( u32 )sprite.mGfxID ), materials );
 	}
-}
-
-//----------------------------------------------------------------//
-void MOAIParticleSystem::DrawTrail () {
-//	MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get ();
-//	
-//	gfxDevice.BindBufferedDrawing ( MOAIVertexFormatMgr::XYZWUVC );
-//
-//	this->LoadGfxState ();
-//	this->LoadUVTransform ();
-//
-//	ZLAffine3D drawingMtx;
-//	ZLAffine3D spriteMtx;
-//
-//	u32 maxSprites = this->mSprites.Size ();
-//	u32 total = this->mSpriteTop;
-//	u32 base = 0;
-//	if ( total > maxSprites ) {
-//		base = total % maxSprites;
-//		total = maxSprites;
-//	}
-//	
-//	
-//	
-//	for ( u32 i = 0; i < total; ++i ) {
-//		drawingMtx = this->GetLocalToWorldMtx ();
-//		spriteMtx.ScRoTr ( sprite.mXScl, sprite.mYScl, 1.0f, 0.0f, 0.0f, sprite.mZRot * ( float )D2R, sprite.mXLoc, sprite.mYLoc, 0.0f );
-//	}
 }
 
 //----------------------------------------------------------------//
@@ -511,7 +463,6 @@ MOAIParticleSystem::MOAIParticleSystem () :
 	mParticleSize ( 0 ),
 	mCapParticles ( false ),
 	mCapSprites ( false ),
-	mRenderAsTrail ( false ),
 	mHead ( 0 ),
 	mTail ( 0 ),
 	mFree ( 0 ),
@@ -569,7 +520,7 @@ void MOAIParticleSystem::OnUpdate ( double step ) {
 			
 			// update the particle
 			if ( particle->mState ) {
-				particle->mState->ProcessParticle ( *this, *particle, ( float )step );
+				particle->mState->ProcessParticle ( *this, *particle,( float )step );
 			}
 			
 			// if is still to be killed, move it to the free list, else put it back in the queue
@@ -646,7 +597,7 @@ bool MOAIParticleSystem::PushParticle ( float x, float y, float dx, float dy, u3
 //----------------------------------------------------------------//
 bool MOAIParticleSystem::PushSprite ( const AKUParticleSprite& sprite ) {
 
-	u32 size = this->mSprites.Size ();
+	u32 size = ( u32 )this->mSprites.Size ();
 	
 	if ( size && this->mDeck ) {
 	
@@ -666,7 +617,7 @@ bool MOAIParticleSystem::PushSprite ( const AKUParticleSprite& sprite ) {
 		bounds.Scale ( scale );
 		
 		float radius = bounds.GetMaxExtent () * 1.4f; // handles case when bounds are rotated
-		
+
 		bounds.mMin.Init ( -radius, -radius, 0.0f );
 		bounds.mMax.Init ( radius, radius, 0.0f );
 		
@@ -712,7 +663,6 @@ void MOAIParticleSystem::RegisterLuaFuncs ( MOAILuaState& state ) {
 		{ "reserveStates",		_reserveStates },
 		{ "setDrawOrder",		_setDrawOrder },
 		{ "setComputeBounds",	_setComputeBounds },
-		{ "setRenderAsTrail",	_setRenderAsTrail },
 		{ "setSpriteColor",		_setSpriteColor },
 		{ "setSpriteDeckIdx",	_setSpriteDeckIdx },
 		{ "setState",			_setState },

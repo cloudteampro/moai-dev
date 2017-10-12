@@ -1,11 +1,7 @@
 // Copyright (c) 2010-2011 Zipline Games, Inc. All Rights Reserved.
 // http://getmoai.com
 
-#include "pch.h"
-
 #include <moai-ios-motion/MOAIMotionMgrIOS.h>
-#include <moai-sim/MOAIVectorSensor.h>
-
 
 #import <CoreLocation/CoreLocation.h>
 #import <CoreMotion/CoreMotion.h>
@@ -273,7 +269,7 @@ void MOAIMotionMgrIOS::Init () {
 	state.Push ( inputMgr.GetDevice ( this->mInputDeviceID ));
 	lua_setfield ( state, -2, "deviceMotion" );
 	
-	this->Start ( MOAISim::Get ().GetActionTree (), true );
+	this->Start ( MOAISim::Get ().GetActionTree ().GetDefaultParent (), true );
 }
 
 //----------------------------------------------------------------//

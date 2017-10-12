@@ -7,19 +7,6 @@
 #include <zl-util/ZLVec2D.h>
 
 //================================================================//
-// ZLAbstractVertexWriter2D
-//================================================================//
-// TODO: this should be moved someplace more general
-class ZLAbstractVertexWriter2D {
-public:
-
-	//----------------------------------------------------------------//
-	virtual void	WriteVertex					( const ZLVec2D& v ) = 0;
-					ZLAbstractVertexWriter2D	() {};
-	virtual			~ZLAbstractVertexWriter2D	() {};
-};
-
-//================================================================//
 // ZLCurve1D
 //================================================================//
 class ZLCurve1D {

@@ -36,10 +36,8 @@ class MOAINotificationsIOS :
 private:
 
 	//----------------------------------------------------------------//
-	static int	_cancelAllLocalNotifications		( lua_State* L );
 	static int	_getAppIconBadgeNumber				( lua_State* L );
 	static int	_localNotificationInSeconds			( lua_State* L );
-	static int	_registerForNotificationTypes		( lua_State* L );
 	static int	_registerForRemoteNotifications		( lua_State* L );
 	static int	_setAppIconBadgeNumber				( lua_State* L );
 	static int	_setListener						( lua_State* L );
@@ -53,7 +51,6 @@ public:
 		LOCAL_NOTIFICATION_MESSAGE_RECEIVED,
 		REMOTE_NOTIFICATION_REGISTRATION_COMPLETE,
 		REMOTE_NOTIFICATION_MESSAGE_RECEIVED,
-		NOTIFICATION_TYPES_REGISTERED,
 		TOTAL
 	};
 
@@ -71,7 +68,6 @@ public:
 	void	NotifyLocalNotificationReceived     ( UILocalNotification* notification );
 	void	NotifyRemoteNotificationReceived	( NSDictionary* notification );
 	void	NotifyRemoteRegistrationComplete	( NSData* token, NSError *error );
-	void	NotifySettingsRegistrationComplete	( u32 types );
 	void	RegisterLuaClass					( MOAILuaState& state );
 };
 

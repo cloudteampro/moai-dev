@@ -59,12 +59,9 @@ public:
 	void*				Invalidate				();
 	ZLSizeResult		ReadBytes				( void* buffer, size_t size );
 	void*				Reserve					( size_t size );
-	void				SetBuffer				( void* buffer, size_t size, size_t length = 0 );
-	void				SetBuffer				( const void* buffer, size_t size, size_t length = 0 );
 	ZLResultCode		SetCursor				( size_t offset );
 	ZLSizeResult		SetLength				( size_t length );
 	ZLSizeResult		WriteBytes				( const void* buffer, size_t size );
-	void				WriteBytesUnsafe		( const void* buffer, size_t size );
 						ZLCopyOnWrite			();
 						ZLCopyOnWrite			( size_t size );
 						ZLCopyOnWrite			( size_t size, u8 fill );
@@ -76,12 +73,6 @@ public:
 	inline ZLCopyOnWrite& operator= ( const ZLCopyOnWrite& rhs ) {
 		this->Assign ( rhs );
 		return *this;
-	}
-
-	//----------------------------------------------------------------//
-	template < typename TYPE >
-	void WriteUnsafe ( TYPE value ) {
-		this->WriteBytesUnsafe ( &value, sizeof ( TYPE ));
 	}
 };
 

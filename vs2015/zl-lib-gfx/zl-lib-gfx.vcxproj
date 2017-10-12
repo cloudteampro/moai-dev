@@ -21,17 +21,28 @@
   <ItemGroup>
     <ClInclude Include="..\..\src\zl-gfx\headers.h" />
     <ClInclude Include="..\..\src\zl-gfx\pch.h" />
+    <ClInclude Include="..\..\src\zl-gfx\ZLGfx-gles.h" />
+    <ClInclude Include="..\..\src\zl-gfx\ZLGfx.h" />
+    <ClInclude Include="..\..\src\zl-gfx\ZLGfxDevice.h" />
+    <ClInclude Include="..\..\src\zl-gfx\ZLGfxEnum.h" />
+    <ClInclude Include="..\..\src\zl-gfx\ZLGfxImmediate.h" />
+    <ClInclude Include="..\..\src\zl-gfx\ZLGfxLogger.h" />
+    <ClInclude Include="..\..\src\zl-gfx\ZLGfxRetained.h" />
+    <ClInclude Include="..\..\src\zl-gfx\zl_gfx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\zl-gfx\pch.cpp">
-    <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\src\zl-gfx\zl_gfx_dummy.cpp" />
-    <ClCompile Include="..\..\src\zl-gfx\zl_gfx_flascc.cpp" />
-    <ClCompile Include="..\..\src\zl-gfx\zl_gfx_opengl.cpp" />
+    <ClCompile Include="..\..\src\zl-gfx\ZLGfx.cpp" />
+    <ClCompile Include="..\..\src\zl-gfx\ZLGfxDevice.cpp" />
+    <ClCompile Include="..\..\src\zl-gfx\ZLGfxEnum.cpp" />
+    <ClCompile Include="..\..\src\zl-gfx\ZLGfxImmediate.cpp" />
+    <ClCompile Include="..\..\src\zl-gfx\ZLGfxLogger.cpp" />
+    <ClCompile Include="..\..\src\zl-gfx\ZLGfxRetained.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{15EA6761-E3C5-4035-97EE-4F74A5ACEE96}</ProjectGuid>
@@ -122,7 +133,9 @@
     <Lib>
       <AdditionalLibraryDirectories>..\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
-    
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -142,7 +155,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ProgramDataBaseFileName>$(OutDir)$(ProjectName).pdb</ProgramDataBaseFileName>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ForcedIncludeFiles>zl-vfs/zl_replace.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -151,7 +164,9 @@
     <Lib>
       <AdditionalLibraryDirectories>..\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
-    
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <CustomBuildStep>
@@ -186,7 +201,9 @@
       <AdditionalLibraryDirectories>..\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
     </Lib>
-    
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <CustomBuildStep>
@@ -213,7 +230,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ProgramDataBaseFileName>$(OutDir)$(ProjectName).pdb</ProgramDataBaseFileName>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ForcedIncludeFiles>zl-vfs/zl_replace.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -223,7 +240,9 @@
       <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
       <AdditionalLibraryDirectories>..\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
-    
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

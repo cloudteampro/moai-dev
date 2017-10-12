@@ -72,18 +72,6 @@ int MOAIFlurryAndroid::_logEvent ( lua_State *L ) {
 
 //----------------------------------------------------------------//
 // TODO: doxygen
-int MOAIFlurryAndroid::_setAppVersion ( lua_State * L ) {
-	MOAI_JAVA_LUA_SETUP ( MOAIFlurryAndroid, "" )
-
-	MOAIJString jversion = self->GetJString ( state.GetValue < cc8* >( 1, "" ));
-	jmethodID setAppVersion = self->GetStaticMethod ( "setAppVersion", "(Ljava/lang/String;)V" );
-	self->CallStaticVoidMethod ( setAppVersion, ( jstring )jversion );
-
-	return 0;
-}
-
-//----------------------------------------------------------------//
-// TODO: doxygen
 int MOAIFlurryAndroid::_setUserID ( lua_State *L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIFlurryAndroid, "" )
 
@@ -114,11 +102,7 @@ void MOAIFlurryAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "endEvent",			_endEvent },
 		{ "init",				_init },
 		{ "logEvent",			_logEvent },
-		{ "setAppVersion",		_setAppVersion},
 		{ "setUserID",			_setUserID },
-		
-		// compat with MOAIFlurryIOS interface
-		{ "startSession",		_init },
 		{ NULL, NULL }
 	};
 

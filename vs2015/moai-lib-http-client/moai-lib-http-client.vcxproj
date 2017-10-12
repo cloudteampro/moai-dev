@@ -18,34 +18,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\src\moai-http-client\headers.h" />
-    <ClInclude Include="..\..\src\moai-http-client\host.h" />
-    <ClInclude Include="..\..\src\moai-http-client\MOAIHttpTaskBase.h" />
-    <ClInclude Include="..\..\src\moai-http-client\MOAIHttpTaskCurl.h" />
-    <ClInclude Include="..\..\src\moai-http-client\MOAIHttpTaskNaCl.h" />
-    <ClInclude Include="..\..\src\moai-http-client\MOAIHttpTaskNSURL.h" />
-    <ClInclude Include="..\..\src\moai-http-client\MOAIUrlMgrCurl.h" />
-    <ClInclude Include="..\..\src\moai-http-client\MOAIUrlMgrNaCl.h" />
-    <ClInclude Include="..\..\src\moai-http-client\pch.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\src\moai-http-client\host.cpp" />
-    <ClCompile Include="..\..\src\moai-http-client\MOAIHttpTaskBase.cpp" />
-    <ClCompile Include="..\..\src\moai-http-client\MOAIHttpTaskCurl.cpp" />
-    <ClCompile Include="..\..\src\moai-http-client\MOAIHttpTaskNaCl.cpp" />
-    <ClCompile Include="..\..\src\moai-http-client\MOAIUrlMgrCurl.cpp" />
-    <ClCompile Include="..\..\src\moai-http-client\MOAIUrlMgrNaCl.cpp" />
-    <ClCompile Include="..\..\src\moai-http-client\pch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\src\moai-http-client\MOAIHttpTaskNSURL.mm" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CAF76E4C-0B1B-424D-B36E-BA0D974A7A0C}</ProjectGuid>
     <RootNamespace>moai-lib-http-client</RootNamespace>
@@ -135,7 +107,9 @@
     <Lib>
       <AdditionalLibraryDirectories>..\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
-    
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -155,7 +129,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ProgramDataBaseFileName>$(OutDir)$(ProjectName).pdb</ProgramDataBaseFileName>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ForcedIncludeFiles>zl-vfs/zl_replace.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -164,7 +138,9 @@
     <Lib>
       <AdditionalLibraryDirectories>..\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
-    
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <CustomBuildStep>
@@ -198,7 +174,9 @@
       <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
       <AdditionalLibraryDirectories>..\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
-    
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <CustomBuildStep>
@@ -225,7 +203,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ProgramDataBaseFileName>$(OutDir)$(ProjectName).pdb</ProgramDataBaseFileName>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ForcedIncludeFiles>zl-vfs/zl_replace.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -235,8 +213,34 @@
       <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
       <AdditionalLibraryDirectories>..\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
-    
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\moai-http-client\headers.h" />
+    <ClInclude Include="..\..\src\moai-http-client\host.h" />
+    <ClInclude Include="..\..\src\moai-http-client\MOAIHttpTaskBase.h" />
+    <ClInclude Include="..\..\src\moai-http-client\MOAIHttpTaskCurl.h" />
+    <ClInclude Include="..\..\src\moai-http-client\MOAIHttpTaskNaCl.h" />
+    <ClInclude Include="..\..\src\moai-http-client\MOAIUrlMgrCurl.h" />
+    <ClInclude Include="..\..\src\moai-http-client\MOAIUrlMgrNaCl.h" />
+    <ClInclude Include="..\..\src\moai-http-client\pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\moai-http-client\host.cpp" />
+    <ClCompile Include="..\..\src\moai-http-client\MOAIHttpTaskBase.cpp" />
+    <ClCompile Include="..\..\src\moai-http-client\MOAIHttpTaskCurl.cpp" />
+    <ClCompile Include="..\..\src\moai-http-client\MOAIHttpTaskNaCl.cpp" />
+    <ClCompile Include="..\..\src\moai-http-client\MOAIUrlMgrCurl.cpp" />
+    <ClCompile Include="..\..\src\moai-http-client\MOAIUrlMgrNaCl.cpp" />
+    <ClCompile Include="..\..\src\moai-http-client\pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

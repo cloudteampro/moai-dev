@@ -105,7 +105,9 @@ public:
 	static const u32 OVERLAP_EVENTS_LIFECYCLE		= 0x04;		// will create overlap links and receive begin/end events
 	static const u32 OVERLAP_GRANULARITY_FINE		= 0x08;		// will use higher resolution primitives if available
 	static const u32 OVERLAP_CALCULATE_BOUNDS		= 0x10;		// will calculate bounds instead of just a point between both props
+
 	static const u32 GROUP_MASK_ALL					= 0xffffffff;
+
 	static const u32 DEFAULT_OVERLAP_FLAGS			= 0;
 
 	//----------------------------------------------------------------//

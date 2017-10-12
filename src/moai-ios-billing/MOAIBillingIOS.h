@@ -31,19 +31,15 @@
 	@const	TRANSACTION_STATE_CANCELLED		Error code indicating a canceled transaction.
 */
 class MOAIBillingIOS :
-	public ZLContextClass < MOAIBillingIOS, MOAIGlobalEventSource > {
+	public ZLContextClass < MOAIBillingIOS, MOAILuaObject > {
 private:
-		
-	bool		mAutoFinishTransactions;
-		
+
 	//----------------------------------------------------------------//
-	static int	_appReceipt						( lua_State* L );
 	static int	_canMakePayments				( lua_State* L );
-	static int	_finishTransaction				( lua_State* L );
 	static int	_restoreCompletedTransactions	( lua_State* L );
 	static int	_requestPaymentForProduct		( lua_State* L );
 	static int	_requestProductIdentifiers		( lua_State* L );
-	static int	_setAutoFinishTransactions		( lua_State* L );
+	static int	_setListener					( lua_State* L );
 
 public:
 	
@@ -63,18 +59,20 @@ public:
 		TRANSACTION_STATE_FAILED,
 		TRANSACTION_STATE_RESTORED,
 		TRANSACTION_STATE_CANCELLED,
-		TRANSACTION_STATE_DEFFERED,
 	};
 	
+	MOAILuaStrongRef		mListeners [ TOTAL ];
 	MOAIStoreKitListener*	mStoreKitListener;
 
 			MOAIBillingIOS						();
 			~MOAIBillingIOS						();
 	void	DidReceivePaymentQueueError			( NSError *error, cc8 *extraInfo );
 	void	DidReceiveRestoreFinished			( SKPaymentQueue* queue );
+	void	InitStoreKit						();
+	void	OnInit								();
 	void	PaymentQueueUpdatedTransactions		( SKPaymentQueue* queue, NSArray* transactions );
 	void	ProductsRequestDidReceiveResponse	( SKProductsRequest* request, SKProductsResponse* response );
-	void	PushPaymentTransaction				( MOAILuaState& state, SKPaymentTransaction* transaction );
+	void	PushPaymentTransaction				( lua_State* L, SKPaymentTransaction* transaction );
 	void	RegisterLuaClass					( MOAILuaState& state );
 };
 

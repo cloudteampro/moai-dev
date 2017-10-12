@@ -61,10 +61,6 @@ void AKUModulesAppFinalize () {
 		AKUBox2DAppFinalize ();
 	#endif
 
-	#if AKU_WITH_CLOUDTEAM
-		AKUCTUtilAppFinalize ();
-	#endif
-
 	#if AKU_WITH_CRYPTO
 		AKUCryptoAppFinalize ();
 	#endif
@@ -75,14 +71,6 @@ void AKUModulesAppFinalize () {
 
 	#if AKU_WITH_FMOD_EX
 		AKUFmodExAppFinalize ();
-	#endif
-
-	#if AKU_WITH_FMOD_STUDIO
-		AKUFmodStudioAppFinalize ();
-	#endif
-
-	#if AKU_WITH_HARNESS
-		AKUHarnessAppFinalize ();
 	#endif
 
 	#if AKU_WITH_HTTP_CLIENT
@@ -104,7 +92,7 @@ void AKUModulesAppFinalize () {
 	#if AKU_WITH_SIM
 		AKUSimAppFinalize ();
 	#endif
-
+	
 	#if AKU_WITH_SPINE
 		AKUSpineAppFinalize ();
 	#endif
@@ -127,7 +115,7 @@ void AKUModulesAppFinalize () {
 }
 
 //----------------------------------------------------------------//
-void AKUModulesAppInitialize () {
+int AKUModulesAppInitialize () {
 
 	#if AKU_WITH_ANDROID
 		AKUModulesAndroidAppInitialize ();
@@ -137,20 +125,12 @@ void AKUModulesAppInitialize () {
 		AKUAppleAppInitialize ();
 	#endif
 
-	#if AKU_WITH_ASSIMP
-		AKUAssimpContextInitialize ();
-	#endif
-
     #if AKU_WITH_AUDIO_SAMPLER
 		AKUAudioSamplerAppInitialize ();
 	#endif
 
 	#if AKU_WITH_BOX2D
 		AKUBox2DAppInitialize ();
-	#endif
-
-	#if AKU_WITH_CLOUDTEAM
-		AKUCTUtilAppInitialize ();
 	#endif
 
 	#if AKU_WITH_CRYPTO
@@ -165,24 +145,12 @@ void AKUModulesAppInitialize () {
 		AKUFmodExAppInitialize ();
 	#endif
 
-	#if AKU_WITH_FMOD_STUDIO
-		AKUFmodStudioAppInitialize ();
-	#endif
-
-	#if AKU_WITH_HARNESS
-		AKUHarnessAppInitialize ();
-	#endif
-
 	#if AKU_WITH_HTTP_CLIENT
 		AKUHttpClientAppInitialize ();
 	#endif
 
 	#if AKU_WITH_HTTP_SERVER
 		AKUHttpServerAppInitialize ();
-	#endif
-
-	#if AKU_WITH_IMGUI
-		AKUImGuiContextInitialize ();
 	#endif
 
 	#if AKU_WITH_LUAEXT
@@ -196,7 +164,7 @@ void AKUModulesAppInitialize () {
 	#if AKU_WITH_SIM
 		AKUSimAppInitialize ();
 	#endif
-
+	
 	#if AKU_WITH_SPINE
 		AKUSpineAppInitialize ();
 	#endif
@@ -216,10 +184,12 @@ void AKUModulesAppInitialize () {
 	#if AKU_WITH_PLUGINS
 		AKUPluginsAppInitialize ();
 	#endif
+	
+	return AKU_OK;
 }
 
 //----------------------------------------------------------------//
-void AKUModulesContextInitialize () {
+int AKUModulesContextInitialize () {
 
 	ZLResultCodeAccumulator result;
 
@@ -231,16 +201,16 @@ void AKUModulesContextInitialize () {
 		AKUAppleContextInitialize ();
 	#endif
 
+	#if AKU_WITH_ASSIMP
+		AKUAssimpContextInitialize ();
+	#endif
+
     #if AKU_WITH_AUDIO_SAMPLER
 		AKUAudioSamplerContextInitialize ();
 	#endif
 
 	#if AKU_WITH_BOX2D
 		AKUBox2DContextInitialize ();
-	#endif
-
-	#if AKU_WITH_CLOUDTEAM
-		AKUCTUtilContextInitialize ();
 	#endif
 
 	#if AKU_WITH_CRYPTO
@@ -255,8 +225,8 @@ void AKUModulesContextInitialize () {
 		AKUFmodExContextInitialize ();
 	#endif
 
-	#if AKU_WITH_FMOD_STUDIO
-		AKUFmodStudioContextInitialize ();
+	#if AKU_WITH_HARFBUZZ
+		AKUHarfBuzzContextInitialize ();
 	#endif
 
 	#if AKU_WITH_HARNESS
@@ -282,7 +252,7 @@ void AKUModulesContextInitialize () {
 	#if AKU_WITH_SIM
 		AKUSimContextInitialize ();
 	#endif
-
+	
 	#if AKU_WITH_SPINE
 		AKUSpineContextInitialize ();
 	#endif
@@ -317,12 +287,16 @@ void AKUModulesContextInitialize () {
 		AKUImagePvrContextInitialize ();
 	#endif
 
+	#if AKU_WITH_IMAGE_TGA
+		AKUImageTgaContextInitialize ();
+	#endif
+
 	#if AKU_WITH_IMAGE_WEBP
 		AKUImageWebPContextInitialize ();
 	#endif
-
+	
 	result.Reset ();
-	result = AKULoadFuncFromBuffer ( moai_lua, moai_lua_SIZE, AKU_DATA_STRING, AKU_DATA_ZIPPED );
+	result = AKULoadFuncFromBuffer ( moai_lua, moai_lua_SIZE, "moai.lua", AKU_DATA_ZIPPED );
 	result = AKUCallFunc ();
 	
 	if ( result != AKU_OK ) {
@@ -330,12 +304,14 @@ void AKUModulesContextInitialize () {
 	}
 
 	result.Reset ();
-	result = AKULoadFuncFromBuffer ( moai_test_mgr_lua, moai_test_mgr_lua_SIZE, AKU_DATA_STRING, AKU_DATA_ZIPPED );
+	result = AKULoadFuncFromBuffer ( moai_test_mgr_lua, moai_test_mgr_lua_SIZE, "moai_test_mgr.lua", AKU_DATA_ZIPPED );
 	result = AKUCallFunc ();
 	
 	if ( result != AKU_OK ) {
 		ZLLog_ErrorF ( ZLLog::CONSOLE, "ERROR: Failed to load Moai's embedded test manager. Some functions may be unavailable.\n" );
 	}
+	
+	return result;
 }
 
 //----------------------------------------------------------------//
@@ -351,10 +327,6 @@ void AKUModulesPause ( bool pause ) {
 	
 	#if AKU_WITH_UNTZ
 		AKUUntzPause ( pause );
-	#endif
-
-	#if AKU_WITH_FMOD_STUDIO
-		AKUFmodStudioPause ( pause );
 	#endif
 	
 	#if AKU_WITH_IOS
@@ -383,14 +355,6 @@ void AKUModulesUpdate () {
 
 	#if AKU_WITH_FMOD_EX
 		AKUFmodExUpdate ();
-	#endif
-
-	#if AKU_WITH_FMOD_STUDIO
-		AKUFmodStudioUpdate ();
-	#endif
-
-	#if AKU_WITH_HARNESS
-		AKUHarnessUpdate ()
 	#endif
 
 	#if AKU_WITH_SIM

@@ -26,8 +26,6 @@ class MOAIAppAndroid :
 private:
 
 	//----------------------------------------------------------------//
-	static int	_exit					( lua_State* L );
-	static int	_fetchAdvertisingId		( lua_State* L );
 	static int	_getPictureCode			( lua_State* L );
 	static int	_getPicturePath			( lua_State* L );
 	static int	_getUTCTime				( lua_State* L );
@@ -48,8 +46,8 @@ public:
 		ACTIVITY_ON_PAUSE,
 		ACTIVITY_ON_RESUME,
 		ACTIVITY_ON_RESTART,
-		APP_OPENED_FROM_URL,
 		BACK_BUTTON_PRESSED,
+		APP_OPENED_FROM_URL,
 		EVENT_PICTURE_TAKEN,
 		EVENT_MEMORY_WARNING,
         TOTAL,

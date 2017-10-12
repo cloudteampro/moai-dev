@@ -9,7 +9,6 @@
 
 @class MOAIGameCenterIOSLeaderboardDelegate;
 @class MOAIGameCenterIOSAchievementDelegate;
-@class MOAIGameCenterIOSGameCenterDelegate;
 
 //================================================================//
 // MOAIGameCenterIOS
@@ -25,20 +24,18 @@
 	@const	PLAYERSCOPE_FRIENDS		Get leaderboard scores only for active player's friends.
 */
 class MOAIGameCenterIOS :
-	public ZLContextClass < MOAIGameCenterIOS, MOAIGlobalEventSource > {
+	public ZLContextClass < MOAIGameCenterIOS, MOAILuaObject > {
 private:
 
 	//----------------------------------------------------------------//
 	static int	_authenticatePlayer			( lua_State* L );
 	static int	_getPlayerAlias				( lua_State* L );
-	static int	_getPlayerId				( lua_State* L );
 	static int	_getScores					( lua_State* L );
 	static int	_isAuthenticated			( lua_State* L );
 	static int	_isSupported				( lua_State* L );
 	static int	_reportAchievementProgress	( lua_State* L );
 	static int	_reportScore				( lua_State* L );
 	static int	_setGetScoresCallback		( lua_State* L );
-	static int	_showGameCenter				( lua_State* L );
 	static int	_showDefaultAchievements	( lua_State* L );
 	static int	_showDefaultLeaderboard		( lua_State* L );
 	
@@ -56,17 +53,11 @@ public:
 		PLAYERSCOPE_GLOBAL = 0,
 		PLAYERSCOPE_FRIENDS
 	};
-
-	enum {
-		SIGN_IN_SUCCESS,
-		SIGN_IN_FAIL,
-	};
 	
 	MOAILuaStrongRef						mGetScoresCallback;
 	BOOL									mIsGameCenterSupported;
 	MOAIGameCenterIOSLeaderboardDelegate*	mLeaderboardDelegate;
 	MOAIGameCenterIOSAchievementDelegate*	mAchievementDelegate;
-	MOAIGameCenterIOSGameCenterDelegate*	mGameCenterDelegate;
 	NSMutableDictionary*        			mAchievementsDictionary;
 	GKLocalPlayer*							mLocalPlayer;
 	
@@ -95,14 +86,6 @@ public:
 // MOAIGameCenterIOSAchievementDelegate
 //================================================================//
 @interface MOAIGameCenterIOSAchievementDelegate : NSObject < GKAchievementViewControllerDelegate > {
-@private
-}
-@end
-
-//================================================================//
-// MOAIGameCenterIOSGameCenterDelegate
-//================================================================//
-@interface MOAIGameCenterIOSGameCenterDelegate : NSObject < GKGameCenterControllerDelegate > {
 @private
 }
 @end

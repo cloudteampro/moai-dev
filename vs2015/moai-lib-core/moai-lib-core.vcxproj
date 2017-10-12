@@ -18,74 +18,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\src\moai-core\headers.h" />
-    <ClInclude Include="..\..\src\moai-core\host.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAICanary.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAIDeserializer.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAIEnvironment.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAIEventSource.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAIFoo.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAIFooMgr.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAIGlobals.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAILogMessages.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAILogMgr.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAILua.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAILuaClass-impl.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAILuaClass.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAILuaLocal.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAILuaObject.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAILuaRef.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAILuaRefTable.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAILuaRuntime.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAILuaSharedPtr.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAILuaState-impl.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAILuaState.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAIObject.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAIRtti.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAIScopedLuaState.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAISerializer.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAISerializerBase.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAISharedPtr.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAITestMgr.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAITrace.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAIVersion.h" />
-    <ClInclude Include="..\..\src\moai-core\MOAIWeakPtr.h" />
-    <ClInclude Include="..\..\src\moai-core\moai_version.h" />
-    <ClInclude Include="..\..\src\moai-core\pch.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\src\moai-core\pch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\..\src\moai-core\host.cpp" />
-    <ClCompile Include="..\..\src\moai-core\MOAICanary.cpp" />
-    <ClCompile Include="..\..\src\moai-core\MOAIDeserializer.cpp" />
-    <ClCompile Include="..\..\src\moai-core\MOAIEnvironment.cpp" />
-    <ClCompile Include="..\..\src\moai-core\MOAIEventSource.cpp" />
-    <ClCompile Include="..\..\src\moai-core\MOAIFoo.cpp" />
-    <ClCompile Include="..\..\src\moai-core\MOAIFooMgr.cpp" />
-    <ClCompile Include="..\..\src\moai-core\MOAIGlobals.cpp" />
-    <ClCompile Include="..\..\src\moai-core\MOAILogMessages.cpp" />
-    <ClCompile Include="..\..\src\moai-core\MOAILogMgr.cpp" />
-    <ClCompile Include="..\..\src\moai-core\MOAILuaClass.cpp" />
-    <ClCompile Include="..\..\src\moai-core\MOAILuaObject.cpp" />
-    <ClCompile Include="..\..\src\moai-core\MOAILuaRef.cpp" />
-    <ClCompile Include="..\..\src\moai-core\MOAILuaRefTable.cpp" />
-    <ClCompile Include="..\..\src\moai-core\MOAILuaRuntime.cpp" />
-    <ClCompile Include="..\..\src\moai-core\MOAILuaState.cpp" />
-    <ClCompile Include="..\..\src\moai-core\MOAIObject.cpp" />
-    <ClCompile Include="..\..\src\moai-core\MOAIRtti.cpp" />
-    <ClCompile Include="..\..\src\moai-core\MOAIScopedLuaState.cpp" />
-    <ClCompile Include="..\..\src\moai-core\MOAISerializer.cpp" />
-    <ClCompile Include="..\..\src\moai-core\MOAISerializerBase.cpp" />
-    <ClCompile Include="..\..\src\moai-core\MOAITestMgr.cpp" />
-    <ClCompile Include="..\..\src\moai-core\MOAITrace.cpp" />
-    <ClCompile Include="..\..\src\moai-core\MOAIVersion.cpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{AA2BD0BE-D174-4F8F-A7F7-B924128FED00}</ProjectGuid>
     <RootNamespace>moai-lib-core</RootNamespace>
@@ -175,7 +107,9 @@
     <Lib>
       <AdditionalLibraryDirectories>..\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
-    
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -195,7 +129,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ProgramDataBaseFileName>$(OutDir)$(ProjectName).pdb</ProgramDataBaseFileName>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ForcedIncludeFiles>zl-vfs/zl_replace.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -204,7 +138,9 @@
     <Lib>
       <AdditionalLibraryDirectories>..\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
-    
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <CustomBuildStep>
@@ -238,7 +174,9 @@
       <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
       <AdditionalLibraryDirectories>..\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
-    
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <CustomBuildStep>
@@ -265,7 +203,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ProgramDataBaseFileName>$(OutDir)$(ProjectName).pdb</ProgramDataBaseFileName>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ForcedIncludeFiles>zl-vfs/zl_replace.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -275,8 +213,74 @@
       <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
       <AdditionalLibraryDirectories>..\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
-    
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\moai-core\headers.h" />
+    <ClInclude Include="..\..\src\moai-core\host.h" />
+    <ClInclude Include="..\..\src\moai-core\MOAICanary.h" />
+    <ClInclude Include="..\..\src\moai-core\MOAIDeserializer.h" />
+    <ClInclude Include="..\..\src\moai-core\MOAIEnvironment.h" />
+    <ClInclude Include="..\..\src\moai-core\MOAIEventSource.h" />
+    <ClInclude Include="..\..\src\moai-core\MOAIFoo.h" />
+    <ClInclude Include="..\..\src\moai-core\MOAIFooMgr.h" />
+    <ClInclude Include="..\..\src\moai-core\MOAILogMessages.h" />
+    <ClInclude Include="..\..\src\moai-core\MOAILogMgr.h" />
+    <ClInclude Include="..\..\src\moai-core\MOAILua.h" />
+    <ClInclude Include="..\..\src\moai-core\MOAILuaClass-impl.h" />
+    <ClInclude Include="..\..\src\moai-core\MOAILuaClass.h" />
+    <ClInclude Include="..\..\src\moai-core\MOAILuaLocal.h" />
+    <ClInclude Include="..\..\src\moai-core\MOAILuaObject.h" />
+    <ClInclude Include="..\..\src\moai-core\MOAILuaRef.h" />
+    <ClInclude Include="..\..\src\moai-core\MOAILuaRefTable.h" />
+    <ClInclude Include="..\..\src\moai-core\MOAILuaRuntime.h" />
+    <ClInclude Include="..\..\src\moai-core\MOAILuaSharedPtr.h" />
+    <ClInclude Include="..\..\src\moai-core\MOAILuaState-impl.h" />
+    <ClInclude Include="..\..\src\moai-core\MOAILuaState.h" />
+    <ClInclude Include="..\..\src\moai-core\MOAIObject.h" />
+    <ClInclude Include="..\..\src\moai-core\MOAIScopedLuaState.h" />
+    <ClInclude Include="..\..\src\moai-core\MOAISerializer.h" />
+    <ClInclude Include="..\..\src\moai-core\MOAISerializerBase.h" />
+    <ClInclude Include="..\..\src\moai-core\MOAISharedPtr.h" />
+    <ClInclude Include="..\..\src\moai-core\MOAITestMgr.h" />
+    <ClInclude Include="..\..\src\moai-core\MOAITrace.h" />
+    <ClInclude Include="..\..\src\moai-core\MOAIVersion.h" />
+    <ClInclude Include="..\..\src\moai-core\MOAIWeakPtr.h" />
+    <ClInclude Include="..\..\src\moai-core\moai_version.h" />
+    <ClInclude Include="..\..\src\moai-core\pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\moai-core\host.cpp" />
+    <ClCompile Include="..\..\src\moai-core\MOAICanary.cpp" />
+    <ClCompile Include="..\..\src\moai-core\MOAIDeserializer.cpp" />
+    <ClCompile Include="..\..\src\moai-core\MOAIEnvironment.cpp" />
+    <ClCompile Include="..\..\src\moai-core\MOAIEventSource.cpp" />
+    <ClCompile Include="..\..\src\moai-core\MOAIFoo.cpp" />
+    <ClCompile Include="..\..\src\moai-core\MOAIFooMgr.cpp" />
+    <ClCompile Include="..\..\src\moai-core\MOAILogMessages.cpp" />
+    <ClCompile Include="..\..\src\moai-core\MOAILogMgr.cpp" />
+    <ClCompile Include="..\..\src\moai-core\MOAILuaClass.cpp" />
+    <ClCompile Include="..\..\src\moai-core\MOAILuaObject.cpp" />
+    <ClCompile Include="..\..\src\moai-core\MOAILuaRef.cpp" />
+    <ClCompile Include="..\..\src\moai-core\MOAILuaRefTable.cpp" />
+    <ClCompile Include="..\..\src\moai-core\MOAILuaRuntime.cpp" />
+    <ClCompile Include="..\..\src\moai-core\MOAILuaState.cpp" />
+    <ClCompile Include="..\..\src\moai-core\MOAIObject.cpp" />
+    <ClCompile Include="..\..\src\moai-core\MOAIScopedLuaState.cpp" />
+    <ClCompile Include="..\..\src\moai-core\MOAISerializer.cpp" />
+    <ClCompile Include="..\..\src\moai-core\MOAISerializerBase.cpp" />
+    <ClCompile Include="..\..\src\moai-core\MOAITestMgr.cpp" />
+    <ClCompile Include="..\..\src\moai-core\MOAITrace.cpp" />
+    <ClCompile Include="..\..\src\moai-core\MOAIVersion.cpp" />
+    <ClCompile Include="..\..\src\moai-core\pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

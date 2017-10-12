@@ -2,7 +2,7 @@
 // http://getmoai.com
 
 #include "pch.h"
-#include <moai-sim/MOAIGfxDevice.h>
+#include <moai-sim/MOAIGfxMgr.h>
 #include <moai-sim/MOAIShader.h>
 #include <moai-sim/MOAIShaderMgr.h>
 #include <moai-sim/MOAIShaderProgram.h>
@@ -24,8 +24,6 @@
 #include <moai-sim/shaders/MOAILineShader3D-vsh.h>
 #include <moai-sim/shaders/MOAIMeshShader-fsh.h>
 #include <moai-sim/shaders/MOAIMeshShader-vsh.h>
-#include <moai-sim/shaders/MOAISkinnedMeshShader-fsh.h>
-#include <moai-sim/shaders/MOAISkinnedMeshShader-vsh.h>
 
 //================================================================//
 // local
@@ -74,12 +72,11 @@ int MOAIShaderMgr::_getShader ( lua_State* L ) {
 //================================================================//
 
 //----------------------------------------------------------------//
-void MOAIShaderMgr::BindShader ( u32 shaderID ) {
+void MOAIShaderMgr::AffirmAll () {
 
-	MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get ();
-
-	MOAIShader* shader = this->GetShader ( shaderID );
-	gfxDevice.SetShader ( shader );
+	for ( u32 i = 0; i < TOTAL_SHADERS; ++i ) {
+		this->GetShader ( i );
+	}
 }
 
 //----------------------------------------------------------------//
@@ -118,8 +115,8 @@ MOAIShaderProgram* MOAIShaderMgr::GetProgram ( u32 shaderID ) {
 					program->DeclareUniform ( 1, "ySnap", MOAIShaderUniform::UNIFORM_FLOAT );
 					
 					program->ReserveGlobals ( 2 );
-					program->SetGlobal ( 0, 0, MOAIShaderProgram::GLOBAL_VIEW_HALF_WIDTH );
-					program->SetGlobal ( 1, 1, MOAIShaderProgram::GLOBAL_VIEW_HALF_HEIGHT );
+					program->SetGlobal ( 0, 0, MOAIGfxGlobalsCache::VIEW_HALF_WIDTH );
+					program->SetGlobal ( 1, 1, MOAIGfxGlobalsCache::VIEW_HALF_HEIGHT );
 					
 					break;
 				
@@ -151,8 +148,8 @@ MOAIShaderProgram* MOAIShaderMgr::GetProgram ( u32 shaderID ) {
 					program->DeclareUniform ( 1, "ySnap", MOAIShaderUniform::UNIFORM_FLOAT );
 					
 					program->ReserveGlobals ( 2 );
-					program->SetGlobal ( 0, 0, MOAIShaderProgram::GLOBAL_VIEW_HALF_WIDTH );
-					program->SetGlobal ( 1, 1, MOAIShaderProgram::GLOBAL_VIEW_HALF_HEIGHT );
+					program->SetGlobal ( 0, 0, MOAIGfxGlobalsCache::VIEW_HALF_WIDTH );
+					program->SetGlobal ( 1, 1, MOAIGfxGlobalsCache::VIEW_HALF_HEIGHT );
 					
 					break;
 					
@@ -191,8 +188,8 @@ MOAIShaderProgram* MOAIShaderMgr::GetProgram ( u32 shaderID ) {
 					program->DeclareUniform ( 1, "ucolor", MOAIShaderUniform::UNIFORM_VECTOR_F4 );
 					
 					program->ReserveGlobals ( 2 );
-					program->SetGlobal ( 0, 0, MOAIShaderProgram::GLOBAL_WORLD_VIEW_PROJ );
-					program->SetGlobal ( 1, 1, MOAIShaderProgram::GLOBAL_PEN_COLOR );
+					program->SetGlobal ( 0, 0, MOAIGfxGlobalsCache::WORLD_VIEW_PROJ_MTX );
+					program->SetGlobal ( 1, 1, MOAIGfxGlobalsCache::PEN_COLOR );
 					
 					break;
 
@@ -208,28 +205,8 @@ MOAIShaderProgram* MOAIShaderMgr::GetProgram ( u32 shaderID ) {
 					program->DeclareUniform ( 1, "ucolor", MOAIShaderUniform::UNIFORM_VECTOR_F4 );
 					
 					program->ReserveGlobals ( 2 );
-					program->SetGlobal ( 0, 0, MOAIShaderProgram::GLOBAL_WORLD_VIEW_PROJ );
-					program->SetGlobal ( 1, 1, MOAIShaderProgram::GLOBAL_PEN_COLOR );
-					
-					break;
-					
-				case SKINNED_MESH_SHADER:
-					
-					program->SetSource ( _skinnedMeshShaderVSH, _skinnedMeshShaderFSH );
-					program->SetVertexAttribute ( 0, "position" );
-					program->SetVertexAttribute ( 1, "uv" );
-					program->SetVertexAttribute ( 2, "boneWeight" );
-					program->SetVertexAttribute ( 3, "boneIndex" );
-					program->SetVertexAttribute ( 4, "color" );
-					
-					program->ReserveUniforms ( 3 );
-					program->DeclareUniform ( 0, "transform", MOAIShaderUniform::UNIFORM_MATRIX_F4 );
-					program->DeclareUniform ( 1, "ucolor", MOAIShaderUniform::UNIFORM_VECTOR_F4 );
-					program->DeclareUniform ( 2, "palette", MOAIShaderUniform::UNIFORM_VECTOR_F4_ARRAY );
-					
-					program->ReserveGlobals ( 2 );
-					program->SetGlobal ( 0, 0, MOAIShaderProgram::GLOBAL_WORLD_VIEW_PROJ );
-					program->SetGlobal ( 1, 1, MOAIShaderProgram::GLOBAL_PEN_COLOR );
+					program->SetGlobal ( 0, 0, MOAIGfxGlobalsCache::WORLD_VIEW_PROJ_MTX );
+					program->SetGlobal ( 1, 1, MOAIGfxGlobalsCache::PEN_COLOR );
 					
 					break;
 			}
@@ -306,7 +283,6 @@ void MOAIShaderMgr::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "LINE_SHADER",				( u32 )LINE_SHADER );
 	state.SetField ( -1, "LINE_SHADER_3D",			( u32 )LINE_SHADER_3D );
 	state.SetField ( -1, "MESH_SHADER",				( u32 )MESH_SHADER );
-	state.SetField ( -1, "SKINNED_MESH_SHADER",		( u32 )SKINNED_MESH_SHADER );
 	
 	luaL_Reg regTable [] = {
 		{ "getProgram",				_getProgram },

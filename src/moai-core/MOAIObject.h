@@ -4,8 +4,6 @@
 #ifndef MOAIOBJECT_H
 #define MOAIOBJECT_H
 
-#include <zl-util/ZLRtti.h>
-
 class MOAICanary;
 
 //================================================================//

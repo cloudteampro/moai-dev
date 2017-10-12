@@ -5,6 +5,7 @@
 #include <moai-core/host.h>
 #include <moai-core/headers.h>
 #include <moai-util/MOAIDataBuffer.h>
+#include <moai-util/MOAILuaUtil.h>
 
 //================================================================//
 // AKUContext
@@ -19,22 +20,37 @@ public:
 	//----------------------------------------------------------------//
 	AKUContext () :
 		mUserdata ( 0 ) {
+		
+		//this->mGlobals = ZLContextMgr::Create ();
 	}
 	
 	//----------------------------------------------------------------//
 	~AKUContext () {
+	
+//		if ( this->mGlobals ) {
+//			ZLContextMgr::Delete ( this->mGlobals );
+//			this->mGlobals = 0;
+//		}
 	}
 };
+
+//typedef STLMap < AKUContextID, AKUContext* >::iterator ContextMapIt;
+//typedef STLMap < AKUContextID, AKUContext* > ContextMap;
+//
+//static ContextMap*		sContextMap = 0;
+//static AKUContextID		sContextIDCounter = 0;
+//static AKUContextID		sContextID = 0;
+//static AKUContext*		sContext = 0;
 
 //================================================================//
 // local
 //================================================================//
 
-int 	_debugCallWithArgs	( MOAILuaState& state, int totalArgs, int asParams );
-int		_loadContextFunc	( MOAILuaState& state );
-int		_loadFuncFromBuffer	( MOAIDataBuffer& buffer, cc8* chunkname, int compressed );
-void	_pushArgOrParam		( MOAILuaState& state, int index, char* arg, int asParam );
-void	_setupArgs			( MOAILuaState& state, char* exeName, char* scriptName, int asParams );
+int			_debugCallWithArgs		( MOAILuaState& state, int totalArgs, int asParams );
+int			_loadContextFunc		( MOAILuaState& state );
+int			_loadFuncFromBuffer		( MOAIDataBuffer& buffer, cc8* chunkname, int compressed );
+void		_pushArgOrParam			( MOAILuaState& state, int index, char* arg, int asParam );
+void		_setupArgs				( MOAILuaState& state, char* exeName, char* scriptName, int asParams );
 
 //----------------------------------------------------------------//
 int _debugCallWithArgs ( MOAILuaState& state, int totalArgs, int asParams ) {
@@ -164,17 +180,17 @@ void _setupArgs ( MOAILuaState& state, char* exeName, char* scriptName, int asPa
 //----------------------------------------------------------------//
 void AKUAppFinalize () {
 
-	// if ( sContextMap ) {
-
-	// 	ContextMapIt contextMapIt = sContextMap->begin ();
-	// 	for ( ; contextMapIt != sContextMap->end (); ++contextMapIt ) {
-	// 		AKUContext* context = contextMapIt->second;
-	// 		delete context;
-	// 	}
-	// 	delete sContextMap;
-	// 	sContextMap = 0;
-	// }
-
+//	if ( sContextMap ) {
+//
+//		ContextMapIt contextMapIt = sContextMap->begin ();
+//		for ( ; contextMapIt != sContextMap->end (); ++contextMapIt ) {
+//			AKUContext* context = contextMapIt->second;
+//			delete context;
+//		}
+//		delete sContextMap;
+//		sContextMap = 0;
+//	}
+	
 	ZLContextMgr::Finalize ();
 	
 	zl_cleanup ();
@@ -201,7 +217,7 @@ void AKUAppInitialize () {
 	srand (( u32 )time ( 0 ));
 	zl_init ();
 	
-	// sContextMap = new ContextMap;
+	//sContextMap = new ContextMap;
 }
 
 //----------------------------------------------------------------//
@@ -218,11 +234,11 @@ int AKUCallFunc () {
 // arg[0]  => argZero - first arg counting from offset (script name as passed to host binary)
 // arg[1]  => next arg/option/script
 // arg[2]  => next arg/option/script
-	// ...
+// ...
 int AKUCallFuncWithArgArray ( char* exeName, char* scriptName, int argc, char** argv, int asParams ) {
 
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-	if ( _loadContextFunc ( state ) != 0 ) return;
+	if ( _loadContextFunc ( state ) != 0 ) return AKU_ERROR;
 
 	_setupArgs ( state, exeName, scriptName, asParams );
 	
@@ -236,7 +252,7 @@ int AKUCallFuncWithArgArray ( char* exeName, char* scriptName, int argc, char** 
 int AKUCallFuncWithArgString ( char* exeName, char* scriptName, char* args, int asParams ) {
 
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-	if ( _loadContextFunc ( state ) != 0 ) return;
+	if ( _loadContextFunc ( state ) != 0 ) return AKU_ERROR;
 
 	_setupArgs ( state, exeName, scriptName, asParams );
 	
@@ -255,7 +271,7 @@ int AKUCallFuncWithArgString ( char* exeName, char* scriptName, char* args, int 
 //----------------------------------------------------------------//
 int AKUCheckContext ( AKUContextID contextID ) {
 	
-	// return sContextMap->contains ( contextID ) ? 0 : -1;
+	//return sContextMap->contains ( contextID ) ? 0 : -1;
 	return ZLContextMgr::Check (( ZLContext* )contextID );
 }
 
@@ -273,7 +289,6 @@ void AKUClearMemPool () {
 //----------------------------------------------------------------//
 int AKUCountContexts () {
 
-	// return sContextMap ? ( int )sContextMap->size () : 0;
 	return ( int )ZLContextMgr::CountContexts ();
 }
 
@@ -384,41 +399,6 @@ void AKUInitMemPool ( size_t bytes ) {
 }
 
 //----------------------------------------------------------------//
-int AKULoadFuncFromBuffer ( void* data, size_t size, int dataType, int compressed ) {
-
-	sContext->mLuaFunc.Clear ();
-
-	if ( !size ) return AKU_ERROR;
-
-	MOAIDataBuffer buffer;
-	buffer.Load ( data, size );
-	
-	if ( compressed == AKU_DATA_ZIPPED ) {
-		buffer.Inflate ( ZLDeflateWriter::DEFAULT_WBITS );
-	}
-
-	buffer.Lock ( &data, &size );
-	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-
-	if ( dataType == AKU_DATA_BYTECODE ) {
-		lua_getglobal ( state, "loadstring" );
-		state.Push ( data, size );
-		int status = state.DebugCall ( 1, 1 );
-		if ( !state.LogErrors ( ZLLog::LOG_ERROR, ZLLog::CONSOLE, status )) {
-			sContext->mLuaFunc.SetRef ( state, -1 );
-		}
-	}
-	
-	if ( dataType == AKU_DATA_STRING ) {
-		AKULoadFuncFromString (( cc8* )data );
-	}
-	
-	buffer.Unlock ();
-
-	return AKU_OK;
-}
-
-//----------------------------------------------------------------//
 int AKULoadFuncFromBuffer ( void* data, size_t size, const char* chunkname, int compressed ) {
 
 	AKUContext::Get ().mLuaFunc.Clear ();
@@ -446,26 +426,6 @@ int AKULoadFuncFromFile ( const char* filename ) {
 	return _loadFuncFromBuffer ( buffer, filename, AKU_DATA_UNCOMPRESSED );
 }
 
-// //----------------------------------------------------------------//
-// void AKULoadFuncFromString ( const char* script ) {
-
-// 	sContext->mLuaFunc.Clear ();
-
-// 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-	
-// 	lua_getglobal ( state, "loadstring" );
-// 	if ( !state.IsType ( -1, LUA_TFUNCTION )) {
-// 		ZLLog_ErrorF ( ZLLog::CONSOLE, "Missing global Lua function 'loadstring'\n" );
-// 	}
-	
-// 	state.Push ( script );
-	
-// 	int status = state.DebugCall ( 1, 1 );
-// 	if ( !state.LogErrors ( ZLLog::LOG_ERROR, ZLLog::CONSOLE, status )) {
-// 		sContext->mLuaFunc.SetRef ( state, -1 );
-// 	}
-// }
-
 //----------------------------------------------------------------//
 int AKULoadFuncFromString ( const char* script, size_t size, const char* chunkname ) {
 
@@ -485,7 +445,7 @@ int AKUMountVirtualDirectory ( char const* virtualPath, char const* archive ) {
 //----------------------------------------------------------------//
 int AKUSetContext ( AKUContextID contextID ) {
 	
-	//	if ( sContextID != contextID ) {
+//	if ( sContextID != contextID ) {
 //		
 //		sContextID = contextID;
 //		sContext = sContextMap->value_for_key ( contextID );

@@ -220,7 +220,7 @@ u32 ZLParser::ParseToken ( ZLDfaToken* token, bool trimReductions ) {
 					head.mSymbol = ruleResult;
 					
 					// Create the syntax node and initialize it...
-					u32 handleSize = rule.mRuleSymbols.Size ();
+					size_t handleSize = rule.mRuleSymbols.Size ();
 					
 					u16 prevStateID = this->mTokenStack.back ().mLALRStateID;
 					
@@ -353,7 +353,7 @@ void ZLParser::RetrieveToken ( ZLDfaToken* token, ZLLexStream* scanner ) {
 			assert ( edge.mCharSetID < this->mCGT->mCharSetTable.Size ());
 			ZLCgtCharSet& charSet = this->mCGT->mCharSetTable [ edge.mCharSetID ];
 			
-			if ( charSet.mCharacters.find (( char )lookahead ) != string::npos ) {
+			if ( charSet.mCharacters.find (( char )lookahead ) != STLString::npos ) {
 				dfaState = &this->mCGT->mDFAStateTable [ edge.mTargetStateID ];
 				transition = true;
 				break;

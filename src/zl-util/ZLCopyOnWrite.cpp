@@ -184,26 +184,6 @@ void* ZLCopyOnWrite::Reserve ( size_t size ) {
 }
 
 //----------------------------------------------------------------//
-void ZLCopyOnWrite::SetBuffer ( void* buffer, size_t size, size_t length ) {
-
-	this->SetBuffer (( const void* )buffer, size, length );
-	this->mInternal->mBuffer = buffer;
-}
-
-//----------------------------------------------------------------//
-void ZLCopyOnWrite::SetBuffer ( const void* buffer, size_t size, size_t length ) {
-
-	length = length > size ? size : length;
-
-	this->mCursor = 0;
-
-	ZLCopyOnWriteBuffer* internal = this->mInternal;
-	internal->mLength = length;
-	internal->mSize = size;
-	internal->mBuffer = 0;
-}
-
-//----------------------------------------------------------------//
 ZLResultCode ZLCopyOnWrite::SetCursor ( size_t offset ) {
 
 	size_t length = this->GetLength ();
@@ -259,13 +239,6 @@ ZLSizeResult ZLCopyOnWrite::WriteBytes ( const void* buffer, size_t size ) {
 		}
 	}
 	ZL_RETURN_SIZE_RESULT ( writeSize, ZL_OK );
-}
-
-//----------------------------------------------------------------//
-void ZLCopyOnWrite::WriteBytesUnsafe ( const void* buffer, size_t size ) {
-	
-	memcpy ( &(( u8* )this->mInternal->mBuffer )[ this->mCursor ], buffer, size );
-	this->mCursor += size;
 }
 
 //----------------------------------------------------------------//

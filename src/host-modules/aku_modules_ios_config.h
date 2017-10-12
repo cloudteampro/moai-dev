@@ -17,10 +17,6 @@
 		#define AKU_WITH_IOS_CHARTBOOST 0
 	#endif
 
-	#ifndef AKU_WITH_IOS_CRASHLYTICS
-		#define AKU_WITH_IOS_CRASHLYTICS 0
-	#endif
-
 	#ifndef AKU_WITH_IOS_CRITTERCISM
 		#define AKU_WITH_IOS_CRITTERCISM 0
 	#endif
@@ -68,5 +64,6 @@
 	#ifndef AKU_WITH_IOS_VUNGLE
 		#define AKU_WITH_IOS_VUNGLE 0
 	#endif
+
 
 #endif

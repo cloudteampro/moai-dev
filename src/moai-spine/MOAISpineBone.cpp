@@ -144,51 +144,46 @@ void MOAISpineBone::OnDepNodeUpdate () {
 			spBone_updateWorldTransform ( mBone );
 		}
 		
-		// TODO: fix me
-		// spine now uses proper scale inheritance, so some things can be done differently
-		// (maybe drop that bone hierarchy thingy alltogether)
+		float parentRot = 0.0f;
+		float parentSclX = 1.0f;
+		float parentSclY = 1.0f;
+		
+		if ( !mBone->data->inheritRotation && mBone->parent ) {
+			parentRot = -mBone->parent->worldRotation;
+		}
+		if ( !mBone->data->inheritScale && mBone->parent ) {
+			parentSclX = 1.f / mBone->parent->worldScaleX;
+			parentSclY = 1.f / mBone->parent->worldScaleY;
+		}
+		
 		mLocalToWorldMtx.ScRoTr (
-			mBone->ascaleX,
-			mBone->ascaleY,
-			1.0f,
-			0.0f,
-			0.0f,
-			( mBone->arotation ) * ( float )D2R,
-			mBone->ax,
-			mBone->ay,
-			0.0f
+			mBone->scaleX * parentSclX,
+			mBone->scaleY * parentSclY,
+			1,
+			0,
+			0,
+			( mBone->rotation + parentRot ) * ( float )D2R,
+			mBone->x,
+			mBone->y,
+			0
 		);
 		
-//		float parentRot = 0.0f;
-//		float parentSclX = 1.0f;
-//		float parentSclY = 1.0f;
-//		
-//		if ( !mBone->data->inheritRotation && mBone->parent ) {
-//			parentRot = -mBone->parent->appliedRotation;
-//		}
-//		if ( !mBone->data->inheritScale && mBone->parent ) {
-//			parentSclX = 1.f / mBone->parent->worldScaleX;
-//			parentSclY = 1.f / mBone->parent->worldScaleY;
-//		}
-//		
-//		mLocalToWorldMtx.ScRoTr (
-//			mBone->scaleX * parentSclX,
-//			mBone->scaleY * parentSclY,
-//			1,
-//			0,
-//			0,
-//			( mBone->rotation + parentRot ) * ( float )D2R,
-//			mBone->x,
-//			mBone->y,
-//			0
-//		);
-//		
 		const ZLAffine3D* inherit = this->GetLinkedValue < ZLAffine3D* >( MOAITransformAttr::Pack ( INHERIT_TRANSFORM ), 0 );
 		if ( inherit ) {
 			mLocalToWorldMtx.Append ( *inherit );
 		}
 		
 		if ( mRootTransform ) {
+			if ( mBone->worldFlipX ) {
+				mLocalToWorldMtx.m [ ZLAffine3D::C0_R0 ] *= -1;
+				mLocalToWorldMtx.m [ ZLAffine3D::C0_R1 ] *= -1;
+				mLocalToWorldMtx.m [ ZLAffine3D::C0_R2 ] *= -1;
+			}
+			if ( mBone->worldFlipY ) {
+				mLocalToWorldMtx.m [ ZLAffine3D::C1_R0 ] *= -1;
+				mLocalToWorldMtx.m [ ZLAffine3D::C1_R1 ] *= -1;
+				mLocalToWorldMtx.m [ ZLAffine3D::C1_R2 ] *= -1;
+			}
 			mLocalToWorldMtx.Append ( mRootTransform->GetLocalToWorldMtx () );
 		}
 		

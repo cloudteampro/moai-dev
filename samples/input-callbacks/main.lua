@@ -91,12 +91,3 @@ end
 
 MOAIInputMgr.device.mouseRight:setCallback ( onMouseRightEvent )
 
-
-----------------------------------------------------------------
--- joystick events
-
-function onJoystickEvent ( x, y )
-	printf ( "joystick axis: %d %d\n", x, y )
-end
-
-MOAIInputMgr.device.joystick:setCallback ( onJoystickEvent )

@@ -24,77 +24,66 @@
 	@const	SESSION_DID_NOT_LOGIN		Event code for a failed (or canceled) Facebook login.
 */
 class MOAIFacebookAndroid :
-	public ZLContextClass < MOAIFacebookAndroid, MOAIGlobalEventSource >,
+	public MOAIGlobalClass < MOAIFacebookAndroid, MOAIGlobalEventSource >,
 	public JniUtils {
 private:
-	
-	MOAILuaRefTable			mRefs;
 
-	jclass					mJava_AppEventsConstants;
-
-	jmethodID 				mJava_GraphRequest;
-	jmethodID 				mJava_HasGranted;
-	jmethodID 				mJava_Init;
-	jmethodID 				mJava_LogEvent;
-	jmethodID 				mJava_LogPurchase;
-	jmethodID 				mJava_Login;
-	jmethodID 				mJava_Logout;
-	jmethodID 				mJava_PostToFeed;
-	jmethodID 				mJava_RequestPublishPermissions;
-	jmethodID 				mJava_RequestReadPermissions;
-	jmethodID 				mJava_SendGameRequest;
-	jmethodID 				mJava_SessionValid;
-	jmethodID				mJava_ShowInviteDialog;
+	jmethodID	mJava_GetToken;
+	jmethodID	mJava_GetTokenExpireTime;
+	jmethodID	mJava_GetTokenRefreshTime;
+	jmethodID	mJava_GetUserID;
+	jmethodID	mJava_GetUserName;
+	jmethodID	mJava_GraphRequest;
+	jmethodID	mJava_Init;
+	jmethodID	mJava_IsSessionValid;
+	jmethodID	mJava_Login;
+	jmethodID	mJava_Logout;
+	jmethodID	mJava_PostToFeed;
+	jmethodID	mJava_RestoreSession;
+	jmethodID	mJava_SendRequest;
+	jmethodID	mJava_ShowInviteDialog;
 
 	//----------------------------------------------------------------//
-	// static int		_declinedPermissions		( lua_State* L );
-	// static int		_getExpirationDate			( lua_State* L );
-	// static int		_getProfile					( lua_State* L );
-	// static int		_getToken					( lua_State* L );
-	static int		_graphRequest				( lua_State* L );
-	static int		_hasGranted					( lua_State* L );
-	static int		_init						( lua_State* L );
-	static int		_logEvent					( lua_State* L );
-	static int		_logPurchase				( lua_State* L );
-	static int		_login						( lua_State* L );
-	static int		_logout						( lua_State* L );
-	static int		_postToFeed					( lua_State* L );
-	static int		_requestPublishPermissions	( lua_State* L );
-	static int		_requestReadPermissions		( lua_State* L );
-	static int		_sendGameRequest			( lua_State* L );
-	static int		_sessionValid				( lua_State* L );
-	static int		_showInviteDialog			( lua_State* L );
-	// static int		_setProfileAutoUpdate		( lua_State* L );
+	static int	_getUserID				( lua_State* L );
+	static int	_getUserName			( lua_State* L );
+	static int	_getToken				( lua_State* L );
+	static int	_getTokenExpireTime		( lua_State* L );
+	static int	_getTokenRefreshTime	( lua_State* L );
+	static int	_graphRequest			( lua_State* L );
+	static int	_init					( lua_State* L );
+	static int	_login					( lua_State* L );
+	static int	_logout					( lua_State* L );
+	static int	_postToFeed				( lua_State* L );
+	static int	_restoreSession			( lua_State* L );
+	static int	_sendRequest			( lua_State* L );
+	static int	_sessionValid			( lua_State* L );
+	static int	_showInviteDialog		( lua_State* L );
 
 public:
 
 	DECL_LUA_SINGLETON ( MOAIFacebookAndroid );
 
 	enum {
-		DIALOG_DID_COMPLETE,		// deprecated, never dispatched
-		DIALOG_DID_NOT_COMPLETE,	// deprecated, never dispatched
-		PERMISSIONS_DENIED,
-		PERMISSIONS_GRANTED,
-		PROFILE_UPDATED,
-		REQUEST_RESPONSE,
-		REQUEST_DIALOG_RESPONSE,
-		SESSION_DID_LOGIN,
-		SESSION_DID_NOT_LOGIN,
-		SESSION_EXTENDED,
+		LOGIN_DISMISSED,
+		LOGIN_SUCCESS,
+		LOGIN_ERROR,
+		TOTAL,
 	};
 
-	void	ClearCallbackRef				( int ref );
-	void	GameRequestDialogDidComplete	( cc8* requestId, jobjectArray recipients, int ref );
-	void	GameRequestDialogDidFail		( cc8* error, int ref );
-	void	GraphRequestResponse			( cc8* result, int ref );
-	void	GraphRequestResponseFailure		( cc8* error, int ref );
-			MOAIFacebookAndroid				();
-			~MOAIFacebookAndroid			();
-	void	PermissionsDenied				();
-	void	PermissionsGranted				();
-	void	RegisterLuaClass				( MOAILuaState& state );
-	void	SessionDidLogin					();
-	void	SessionDidNotLogin				();
+	enum {
+        DIALOG_RESULT_SUCCESS,
+        DIALOG_RESULT_CANCEL,
+        DIALOG_RESULT_ERROR,
+	};
+
+			MOAIFacebookAndroid		();
+			~MOAIFacebookAndroid	();
+	void 	NotifyLoginSuccess		();
+	void 	NotifyLoginDismissed	();
+	void 	NotifyLoginError	    ();
+	void 	NotifyRequestComplete	( cc8* response );
+	void 	NotifyRequestFailed	    ();
+	void	RegisterLuaClass		( MOAILuaState& state );
 };
 
 #endif  //MOAIFACEBOOK_H

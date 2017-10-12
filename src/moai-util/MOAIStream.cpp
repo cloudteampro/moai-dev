@@ -194,6 +194,19 @@ int MOAIStream::_read32 ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+/**	@lua	readBoolean
+	@text	Reads an 8-bit boolean value from the stream.
+	
+	@in		MOAIStream self
+	@out	number value		Value from the stream.
+	@out	number size			Number of bytes successfully read.
+*/
+int MOAIStream::_readBoolean ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIStream, "U" );
+	return self->ReadValues < bool >( state, 2 );
+}
+
+//----------------------------------------------------------------//
 /**	@lua	readDouble
 	@text	Reads a 64-bit floating point value from the stream.
 	
@@ -236,6 +249,27 @@ int MOAIStream::_readFormat ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+// TODO: doxygen
+int MOAIStream::_readString ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIStream, "U" );
+
+	size_t len = self->Read < u32 >( 0 );
+	assert ( len < 1024 ); // TODO: should be defined somewhere
+
+	if ( len > 0 ) {
+		char* buffer = ( char* )alloca ( len + 1 );
+
+		self->ReadBytes ( buffer, len );
+		buffer [ len ] = 0;
+
+		lua_pushlstring ( L, buffer, len );
+		
+		return 1;
+	}
+	return 0;
+}
+
+//----------------------------------------------------------------//
 /**	@lua	readU8
 	@text	Reads an unsigned 8-bit value from the stream.
 	
@@ -272,6 +306,19 @@ int MOAIStream::_readU16 ( lua_State* L ) {
 int MOAIStream::_readU32 ( lua_State* L ) {
 	MOAI_LUA_SETUP ( MOAIStream, "U" );
 	return self->ReadValues < u32 >( state, 2 );
+}
+
+//----------------------------------------------------------------//
+// TODO: doxygen
+int MOAIStream::_sample ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIStream, "U" );
+
+	u32 sampleSize		= state.GetValue < u32 >( 2, 1 );
+	u32 streamType		= state.GetValue < u32 >( 3, ZLSample::SAMPLE_FLOAT );
+	
+	state.Push ( self->Sample ( streamType, sampleSize ));
+
+	return 1;
 }
 
 //----------------------------------------------------------------//
@@ -358,6 +405,19 @@ int MOAIStream::_write16 ( lua_State* L ) {
 int MOAIStream::_write32 ( lua_State* L ) {
 	MOAI_LUA_SETUP ( MOAIStream, "U" );
 	return self->WriteValues < s32 >( state, 2 );
+}
+
+//----------------------------------------------------------------//
+/**	@lua	writeBoolean
+	@text	Writes an 8-bit boolean value to the stream.
+	
+	@in		MOAIStream self
+	@in		boolean value		Value to write.
+	@out	number size			Number of bytes successfully written.
+*/
+int MOAIStream::_writeBoolean ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIStream, "U" );
+	return self->WriteValues < bool >( state, 2 );
 }
 
 //----------------------------------------------------------------//
@@ -460,6 +520,23 @@ int MOAIStream::_writeStream ( lua_State* L ) {
 		}
 	}
 	
+	state.Push (( u32 )result ); // TODO: overflow?
+	return 1;
+}
+
+//----------------------------------------------------------------//
+// TODO: doxygen
+int MOAIStream::_writeString ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIStream, "U" );
+
+	size_t len;
+	cc8* str = lua_tolstring ( state, 2, &len );
+	
+	size_t result = 0;
+	
+	self->Write < u32 >(( u32 )len ); // TODO: assert on overflow; report error
+	result = self->WriteBytes ( str, len );
+
 	state.Push (( u32 )result ); // TODO: overflow?
 	return 1;
 }
@@ -619,7 +696,7 @@ int MOAIStream::ReadFormat ( MOAILuaState& state, int idx ) {
 	idx = state.AbsIndex ( idx );
 	cc8* format = state.GetValue < cc8* >( idx, "" );
 	
-	u32 bytes = 0;
+	size_t bytes = 0;
 	u32 type = UNKNOWN;
 	
 	while ( format ) {
@@ -656,7 +733,7 @@ int MOAIStream::ReadFormat ( MOAILuaState& state, int idx ) {
 		}
 	}
 	
-	state.Push ( bytes );
+	state.Push (( u64 )bytes );
 	return ( state.GetTop () - idx );
 }
 
@@ -666,6 +743,14 @@ void MOAIStream::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "SEEK_CUR", ( u32 )SEEK_CUR );
 	state.SetField ( -1, "SEEK_END", ( u32 )SEEK_END );
 	state.SetField ( -1, "SEEK_SET", ( u32 )SEEK_SET );
+	
+	state.SetField ( -1, "SAMPLE_S8",			( u32 )ZLSample::SAMPLE_S8 );
+	state.SetField ( -1, "SAMPLE_U8",			( u32 )ZLSample::SAMPLE_U8 );
+	state.SetField ( -1, "SAMPLE_S16",			( u32 )ZLSample::SAMPLE_S16 );
+	state.SetField ( -1, "SAMPLE_U16",			( u32 )ZLSample::SAMPLE_U16 );
+	state.SetField ( -1, "SAMPLE_S32",			( u32 )ZLSample::SAMPLE_S32 );
+	state.SetField ( -1, "SAMPLE_U32",			( u32 )ZLSample::SAMPLE_U32 );
+	state.SetField ( -1, "SAMPLE_FLOAT",		( u32 )ZLSample::SAMPLE_FLOAT );
 }
 
 //----------------------------------------------------------------//
@@ -681,22 +766,27 @@ void MOAIStream::RegisterLuaFuncs ( MOAILuaState& state ) {
 		{ "read8",				_read8 },
 		{ "read16",				_read16 },
 		{ "read32",				_read32 },
+		{ "readBoolean",		_readBoolean },
 		{ "readDouble",			_readDouble },
 		{ "readFloat",			_readFloat },
 		{ "readFormat",			_readFormat },
+		{ "readString",			_readString },
 		{ "readU8",				_readU8 },
 		{ "readU16",			_readU16 },
 		{ "readU32",			_readU32 },
+		{ "sample",				_sample },
 		{ "seek",				_seek },
 		{ "write",				_write },
 		{ "write8",				_write8 },
 		{ "write16",			_write16 },
 		{ "write32",			_write32 },
+		{ "writeBoolean",		_writeBoolean },
 		{ "writeColor32",		_writeColor32 },
 		{ "writeDouble",		_writeDouble },
 		{ "writeFloat",			_writeFloat },
 		{ "writeFormat",		_writeFormat },
 		{ "writeStream",		_writeStream },
+		{ "writeString",		_writeString },
 		{ "writeU8",			_writeU8 },
 		{ "writeU16",			_writeU16 },
 		{ "writeU32",			_writeU32 },

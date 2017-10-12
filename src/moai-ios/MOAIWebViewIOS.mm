@@ -364,18 +364,12 @@ int MOAIWebViewIOS::_show ( lua_State* L ) {
 
 //----------------------------------------------------------------//
 MOAIWebViewIOS::MOAIWebViewIOS () :
-	mWebViewController ( false ) {
+	mWebViewController ( 0 ) {
 
 	RTTI_SINGLE ( MOAIInstanceEventSource )
 	
 	this->mWebViewController = [[ MOAIWebViewController alloc ] init ];
-	
-	// Some methods in this class access webView property of MOAIWebViewController,
-	// but this property is initialized only in -(void)loadView. 
-	// By accessing view property here we force loadView to be called
-	if ( this->mWebViewController.view ) {
-		[ this->mWebViewController setMoaiWebView:this ];
-	}
+	[ this->mWebViewController setMoaiWebView:this ];
 }
 
 //----------------------------------------------------------------//
@@ -384,7 +378,6 @@ MOAIWebViewIOS::~MOAIWebViewIOS () {
 	if ( this->mWebViewController ) {
 		[ this->mWebViewController setMoaiWebView:NULL ];
 		[ this->mWebViewController release ];
-		this->mWebViewController = nil;
 	}
 }
 

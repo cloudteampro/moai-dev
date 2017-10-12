@@ -183,12 +183,12 @@ float ZLInterpolate::Curve ( u32 mode, float t ) {
 		case kCircEaseIn:
 			
 			t = t - 1.0f;
-			return sqrtf ( 1.0f - t * t );
+			return ( float )sqrt ( 1.0f - t * t );
 
 		//................................................................
 		case kCircEaseOut:
 			
-			return 1.0f - sqrtf ( 1.0f - t * t );
+			return 1.0f - ( float )sqrt ( 1.0f - t * t );
 
 		//................................................................
 		case kCircSmooth:
@@ -247,7 +247,7 @@ float ZLInterpolate::Curve ( u32 mode, float t ) {
 			
 			p = 0.3f;
 			s = 0.25f * p;
-			return ( float )(1.0f + powf ( 2.0f, -10.f * t ) * ( float )( sin ( (t - s) * (2.0f * M_PI) / p )));
+			return ( float )( 1.0 + pow ( 2.0, -10.0 * t ) * sin (( t - s ) * ( 2.0 * M_PI ) / p ));
 
 		//................................................................
 		case kElasticOut:
@@ -263,7 +263,7 @@ float ZLInterpolate::Curve ( u32 mode, float t ) {
 			p = 0.3f;
 			s = 0.25f * p;
 			t = t - 1.0f;
-			return ( float )( -powf ( 2.0f, 10.f * t ) * ( float )( sin ( (t - s) * (2.0f * M_PI) / p )));
+			return ( float )( -pow ( 2.0f, 10.f * t ) * sin (( t - s ) * ( 2.0f * M_PI ) / p ));
 
 		//................................................................
 		case kElasticSmooth:
@@ -282,10 +282,10 @@ float ZLInterpolate::Curve ( u32 mode, float t ) {
 			
 			if ( t < 1.0f ) {
 				t = t - 1.0f;
-				return ( float )( -0.5f * ( powf ( 2.0f, 10.f * t ) * ( float )( sin ( (t - s) * (2.0f * M_PI) / p ))));
+				return ( float )( -0.5 * ( pow ( 2.0f, 10.0 * t ) * sin (( t - s ) * ( 2.0 * M_PI ) / p )));
 			}
 			t = t - 1.0f;
-			return ( float )(1.0f + 0.5f * ( powf ( 2.0f, -10.f * t ) * ( float )( sin ( (t - s) * (2.0f * M_PI) / p ))));
+			return ( float )( 1.0 + 0.5 * ( pow ( 2.0f, -10.0 * t ) * sin (( t - s ) * ( 2.0 * M_PI ) / p )));
 
 		//................................................................
 		case kBackEaseIn:

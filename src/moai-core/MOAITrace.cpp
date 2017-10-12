@@ -43,15 +43,6 @@ int MOAITrace::_start ( lua_State* L ) {
 	UNUSED ( L );
 
 	MOAITrace::Get ().Start ();
-	MOAITrace::Get ().mEnableTrace = true;
-	return 0;
-}
-
-//----------------------------------------------------------------//
-int MOAITrace::_stop ( lua_State* L ) {
-	UNUSED ( L );
-
-	MOAITrace::Get ().mEnableTrace = false;
 	return 0;
 }
 
@@ -169,7 +160,7 @@ void MOAITrace::HandleTrace ( lua_State* L, lua_Debug *ar ) {
 				const void* func = lua_topointer ( L, -1 );
 				lua_pop ( L, 1 );
 				
-				MOAIFuncTraceStackFrame& frame = threadTrace.mStack.Pop ();
+				MOAIFuncTraceStackFrame frame = threadTrace.mStack.Pop ();
 				assert ( frame.mFunc == func );
 				
 				MOAIFuncTrace& record = this->mFuncTrace [ func ];
@@ -229,7 +220,6 @@ void MOAITrace::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "run",				_run },
 		{ "setVerbose",			_setVerbose },
 		{ "start",				_start },
-		{ "stop",				_stop },
 		{ NULL, NULL }
 	};
 

@@ -10,7 +10,7 @@ SETTINGS = {
 	LIB_NAME			= 'moai',
 	MY_ARM_MODE			= 'arm',
 	MY_ARM_ARCH			= 'armeabi-v7a arm64-v8a x86',
-	MY_APP_PLATFORM		= 'android-10',
+	MY_APP_PLATFORM		= 'android-21',
 }
 
 MODULES = {
@@ -98,7 +98,7 @@ MODULES = {
 
 		STATIC_LIBRARIES = 'libbox2d libmoai-box2d',
 	},
-	
+
 	----------------------------------------------------------------
 	CHARTBOOST = {
 		
@@ -168,7 +168,28 @@ MODULES = {
 
 		STATIC_LIBRARIES = 'libmoai-crypto libzl-crypto libcrypto-a libcrypto-b libcrypto-c libcrypto-d',
 	},
+
+	----------------------------------------------------------------
+	DELTADNA = {
+		
+		PREPROCESSOR_FLAG = 'AKU_WITH_ANDROID_DELTADNA',
+		NAMESPACE = 'com.moaisdk.deltadna',
 	
+		HEADER_SEARCH_PATHS = {
+		},
+
+		MAKE = {
+			'$(MOAI_SDK_HOME)/util/ant-libmoai/modules/moai-deltadna.mk',
+		},
+		
+		JAVA = {
+			MOAI_SDK_HOME .. '3rdparty-android/deltadna-v3.3.6',
+			MOAI_SDK_HOME .. 'src/moai-android-deltadna',
+		},
+
+		STATIC_LIBRARIES = 'libmoai-deltadna',
+	},
+
 	----------------------------------------------------------------
 	FACEBOOK = {
 		
@@ -214,6 +235,7 @@ MODULES = {
 
 	----------------------------------------------------------------
 	--[[
+	
 	FMOD_EX = {
 	
 		PREPROCESSOR_FLAG = 'AKU_WITH_FMOD_EX',
@@ -238,7 +260,7 @@ MODULES = {
 	----------------------------------------------------------------
 	GOOGLE_PLAY_SERVICES = {
 		
-		PREPROCESSOR_FLAG = 'AKU_WITH_ANDROID_GOOGLE_PLAY',
+		PREPROCESSOR_FLAG = 'AKU_WITH_ANDROID_GOOGLE_PLAY_SERVICES',
 		NAMESPACE = 'com.moaisdk.googleplayservices',
 	
 		HEADER_SEARCH_PATHS = {
@@ -463,7 +485,7 @@ MODULES = {
 
 		STATIC_LIBRARIES = 'libmoai-sim libfreetype libtess libzl-gfx',
 	},
-	
+
 	----------------------------------------------------------------
 	TAPJOY = {
 		
@@ -532,7 +554,7 @@ MODULES = {
 
 		STATIC_LIBRARIES = 'libogg libvorbis libuntz libmoai-untz',
 	},
-	
+
 	----------------------------------------------------------------
 	VUNGLE = {
 		
@@ -581,6 +603,7 @@ TARGETS = {
 			'BOX2D',
 			'CHARTBOOST',
 			'CRYPTO',
+			'DELTADNA',
 			'FACEBOOK',
 			'FLURRY',
 			'GOOGLE_PLAY_SERVICES',
@@ -609,14 +632,13 @@ STATIC_LINK_ORDER = {
 	'libmoai-adcolony',
 	'libmoai-chartboost',
 	'libmoai-crittercism',
+	'libmoai-deltadna',
 	'libmoai-facebook',
 	'libmoai-flurry',
 	'libmoai-google-play-services',
 	'libmoai-tapjoy',
 	'libmoai-twitter',
 	'libmoai-vungle',
-
-	'libmoai-chartboost',
 
 	-- moai
 	'libmoai-android',

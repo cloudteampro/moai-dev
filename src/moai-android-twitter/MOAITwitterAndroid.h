@@ -21,7 +21,7 @@
 	@const	SESSION_DID_NOT_LOGIN		Event indicating an unsuccessful (or canceled) Twitter login.
 */
 class MOAITwitterAndroid :
-	public ZLContextClass < MOAITwitterAndroid, MOAILuaObject > {
+	public MOAIGlobalClass < MOAITwitterAndroid, MOAILuaObject > {
 private:
 
 	//----------------------------------------------------------------//

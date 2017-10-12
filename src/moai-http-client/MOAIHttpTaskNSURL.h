@@ -49,8 +49,6 @@ private:
 	int						connectAttempts_;	/* The connect attempts is used to determine whether the alternate URL will be used. */
 	NSMutableURLRequest*	mRequest;
 	
-	MOAIHttpTaskNSURLDelegate* mDelegate;
-	
 	
 	//----------------------------------------------------------------//
 	static u32			_writeData				( char* data, u32 n, u32 l, void* s );
@@ -99,7 +97,6 @@ public:
 
 	//----------------------------------------------------------------//
 	-( id )	initWithTask	:( MOAIHttpTaskNSURL* )task;
-	-( void ) clear;
 @end
 
 #endif

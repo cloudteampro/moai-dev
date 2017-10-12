@@ -12,7 +12,7 @@
 // MOAIPlayhavenIOS
 //================================================================//
 class MOAIPlayhavenIOS :
-	public ZLContextClass < MOAIPlayhavenIOS, MOAILuaObject > {
+	public MOAIGlobalClass < MOAIPlayhavenIOS, MOAILuaObject > {
 private:
 		static int _init( lua_State* L );
 		static int _setListener(lua_State* L);

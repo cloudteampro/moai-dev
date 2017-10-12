@@ -12,7 +12,7 @@
 //================================================================//
 // TODO: doxygen
 class MOAITapjoyAndroid :
-	public ZLContextClass < MOAITapjoyAndroid, MOAIGlobalEventSource >,
+	public MOAIGlobalClass < MOAITapjoyAndroid, MOAIGlobalEventSource >,
 	public JniUtils {
 private:
 

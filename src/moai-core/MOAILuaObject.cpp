@@ -19,6 +19,11 @@ int MOAILuaObject::_gc ( lua_State* L ) {
 
 	MOAILuaState state ( L );
 	MOAILuaObject* self = ( MOAILuaObject* )state.GetPtrUserData ( 1 );
+	
+	//edgecase: ignore _gc() called by previous Lua Userdata
+	self->mActiveUserdataCount -- ;
+	if ( self->mActiveUserdataCount > 0 ) return 0;
+	
 	self->mCollected = true;
 	
 	if ( MOAILuaRuntime::IsValid ()) {
@@ -144,14 +149,6 @@ int MOAILuaObject::_pin ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
-int MOAILuaObject::_printTracking ( lua_State* L ) {
-	MOAI_LUA_SETUP ( MOAILuaObject, "U" )
-	
-	self->PrintTracking ();
-	return 0;
-}
-
-//----------------------------------------------------------------//
 int MOAILuaObject::_tostring ( lua_State* L ) {
 
 	MOAILuaState state ( L );
@@ -230,7 +227,8 @@ void MOAILuaObject::BindToLua ( MOAILuaState& state ) {
 	
 	// and take a weak ref back to the userdata	
 	this->mUserdata.SetRef ( state, -1 );
-	assert ( !lua_isnil ( state, -1 ));
+	assert ( this->mUserdata );
+	this->mActiveUserdataCount ++;
 	
 	// NOTE: we have to do this *after* mUserdata has been initialized as LuaRetain calls PushLuaUserdata
 	// which in turn calls BindToLua if there is no mUserdata...
@@ -303,6 +301,12 @@ bool MOAILuaObject::IsSingleton () {
 }
 
 //----------------------------------------------------------------//
+void MOAILuaObject::LuaRelease () {
+
+	this->LuaRelease ( this );
+}
+
+//----------------------------------------------------------------//
 void MOAILuaObject::LuaRelease ( MOAILuaObject* object ) {
 
 	if ( !object ) return;
@@ -317,7 +321,10 @@ void MOAILuaObject::LuaRelease ( MOAILuaObject* object ) {
 				u32 count = state.GetValue < u32 >( -1, 0 ); // get the count (or 0)
 				lua_pop ( state, 1 ); // pop the old count
 				
-				if ( count == 0 ) return; // do nothing
+				if ( count == 0 ) {
+					lua_pop ( state, 2 ); // pop userdata && ref table
+					return; // do nothing
+				}
 				
 				if ( count > 1 ) {
 					lua_pushnumber ( state, count - 1 ); // push the new count
@@ -329,12 +336,19 @@ void MOAILuaObject::LuaRelease ( MOAILuaObject* object ) {
 				// this should make the object eligible for garbage collection
 				lua_settable ( state, -3 ); // save it in the table
 			}
+			lua_pop ( state, 1 ); //pop ref table
 		}
 	}
 	
 	// this will take the ref count to zero, but if the object hasn't been collected it *won't* get deleted
 	// thanks to the override of MOAIObject OnRelease ()
 	object->Release ();
+}
+
+//----------------------------------------------------------------//
+void MOAILuaObject::LuaRetain () {
+
+	this->LuaRetain ( this );
 }
 
 //----------------------------------------------------------------//
@@ -360,12 +374,14 @@ void MOAILuaObject::LuaRetain ( MOAILuaObject* object ) {
 			lua_pushnumber ( state, count + 1 ); // push the new count
 			lua_settable ( state, -3 ); // save it in the table
 		}
+		lua_pop ( state, 1 ); //pop ref table
 	}
 }
 
 //----------------------------------------------------------------//
 MOAILuaObject::MOAILuaObject ():
-	mCollected ( false ) {
+	mCollected ( false ),
+	mActiveUserdataCount ( 0 ) {
 	RTTI_SINGLE ( RTTIBase )
 	
 	if ( MOAILuaRuntime::IsValid ()) {
@@ -388,12 +404,10 @@ MOAILuaObject::~MOAILuaObject () {
 			this->mUserdata.PushRef ( state );
 			
 			u32 top = state.GetTop ();
-			bool isUserdata = state.IsType ( top, LUA_TUSERDATA );
 			
 			MOAILuaRuntime::Get ().PurgeUserdata ( state, -1 );
 			
 			top = state.GetTop ();
-			isUserdata = state.IsType ( top, LUA_TUSERDATA );
 			
 			if ( lua_getmetatable ( state, -1 )) {
 				lua_pushnil ( state );
@@ -402,7 +416,6 @@ MOAILuaObject::~MOAILuaObject () {
 			}
 			
 			top = state.GetTop ();
-			isUserdata = state.IsType ( top, LUA_TUSERDATA );
 			
 			// and the ref table
 			lua_pushnil ( state );
@@ -550,7 +563,6 @@ void MOAILuaObject::RegisterLuaFuncs ( MOAILuaState& state ) {
 		{ "getMemberTable",			_getMemberTable },
 		{ "getRefTable",			_getRefTable },
 		{ "pin",					_pin },
-		{ "printTracking",			_printTracking },
 		{ "serializeIn",			_serializeIn },
 		{ "serializeOut",			_serializeOut },
 		{ "setFinalizer",			_setFinalizer },

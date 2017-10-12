@@ -13,7 +13,7 @@
 	@text	Wrapper for Mixpanel interface.
 */
 class MOAIMixpanelIOS :
-	public ZLContextClass < MOAIMixpanelIOS, MOAILuaObject > {
+	public MOAIGlobalClass < MOAIMixpanelIOS, MOAILuaObject > {
 private:
 
 	//----------------------------------------------------------------//

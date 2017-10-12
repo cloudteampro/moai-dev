@@ -1,8 +1,6 @@
 // Copyright (c) 2010-2011 Zipline Games, Inc. All Rights Reserved.
 // http://getmoai.com
 
-#include "pch.h"
-
 #import <AudioToolbox/AudioToolbox.h>
 
 #import <moai-apple/NSData+MOAILib.h>
@@ -12,7 +10,7 @@
 #import <moai-apple/NSString+MOAILib.h>
 
 #import <moai-ios/MOAIAppIOS.h>
-// #import <moai-ios/MOAITakeCameraListener.h>
+//#import <moai-ios/MOAITakeCameraListener.h>
 
 #import <ifaddrs.h>
 #import <arpa/inet.h>
@@ -265,24 +263,6 @@ int MOAIAppIOS::_getUTCTime ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
-/**	@lua	openSettings
-	@text	Open your app's section in the iOS Settings app. Works on iOS 8 and later
-	
-	@out	nil
-*/
-int MOAIAppIOS::_openSettings ( lua_State *L ) {
-	MOAILuaState state ( L );
-	
-	BOOL canOpenSettings = ( &UIApplicationOpenSettingsURLString != NULL );
-	if ( canOpenSettings ) {
-		NSURL *url = [ NSURL URLWithString:UIApplicationOpenSettingsURLString ];
-		[[ UIApplication sharedApplication ] openURL:url ];
-	}
-	
-	return 0;
-}
-
-//----------------------------------------------------------------//
 /**	@lua	openURL
 	@text	Open the native device web browser at the specified URL.
  
@@ -356,27 +336,27 @@ int MOAIAppIOS::_sendMail ( lua_State* L ) {
 	
 	MOAILuaState state ( L );
 	
-	cc8* recipient = state.GetValue < cc8* >( 1, "" );
-	cc8* subject = state.GetValue < cc8* >( 2, "" );
-	cc8* message = state.GetValue < cc8* >( 3, "" );
-	
-	MFMailComposeViewController* controller = [[ MFMailComposeViewController alloc ] init ];
-	controller.mailComposeDelegate = MOAIAppIOS::Get ().mMailDelegate;
-	
-	NSArray* to = [ NSArray arrayWithObject:[ NSString  stringWithUTF8String:recipient ]];
-	
-	[ controller setToRecipients:to ];
-	[ controller setSubject:[ NSString stringWithUTF8String:subject ]];
-	[ controller setMessageBody:[ NSString stringWithUTF8String:message ] isHTML:NO ]; 
-	
-	if ( controller ) {
-				
-		UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
-		UIViewController* rootVC = [ window rootViewController ];	
-		[ rootVC presentViewController:controller animated:YES completion:nil];
-	}
-	
-	[controller release];
+//	cc8* recipient = state.GetValue < cc8* >( 1, "" );
+//	cc8* subject = state.GetValue < cc8* >( 2, "" );
+//	cc8* message = state.GetValue < cc8* >( 3, "" );
+//	
+//	MFMailComposeViewController* controller = [[ MFMailComposeViewController alloc ] init ];
+//	controller.mailComposeDelegate = MOAIAppIOS::Get ().mMailDelegate;
+//	
+//	NSArray* to = [ NSArray arrayWithObject:[ NSString  stringWithUTF8String:recipient ]];
+//	
+//	[ controller setToRecipients:to ];
+//	[ controller setSubject:[ NSString stringWithUTF8String:subject ]];
+//	[ controller setMessageBody:[ NSString stringWithUTF8String:message ] isHTML:NO ]; 
+//	
+//	if (controller) {
+//				
+//		UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
+//		UIViewController* rootVC = [ window rootViewController ];	
+//		[ rootVC presentViewController:controller animated:YES completion:nil];
+//	}
+//	
+//	[controller release];
 	
 	return 1;
 }
@@ -391,44 +371,45 @@ int MOAIAppIOS::_sendMail ( lua_State* L ) {
 	@in int			if device is an ipad width coordinate of Popover
 	@in int			if device is an ipad height coordinate of Popover
  */
-int MOAIAppIOS::_takeCamera( lua_State* L ) {
-	
-	// int x, y, width, height = 0;
-	// NSUInteger sourceType;
-	
-	// MOAILuaState state ( L );
-	// if ( state.IsType ( 1, LUA_TFUNCTION )) {
-	// 	MOAIAppIOS::Get ().mOnTakeCameraCallback.SetRef ( state, 1 );
-	// }
-	
-	// sourceType = state.GetValue < NSUInteger >( 2, 0 );
-	// x = state.GetValue < int >( 3, 0 );
-	// y = state.GetValue < int >( 4, 0 );
-	// width = state.GetValue < int >( 5, 0 );
-	// height = state.GetValue < int >( 6, 0 );
-	
-	// UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
-	// UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
-	// UIViewController* rootVC = [ window rootViewController ];
-
-	// ipc.delegate = MOAIAppIOS::Get ().mTakeCameraListener;
-	// ipc.sourceType = sourceType;
-	
-	// if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-	// 	MOAIAppIOS::Get().mImagePickerPopover = [[UIPopoverController alloc] 
-	// 											   initWithContentViewController: ipc];
-	// 	[MOAIAppIOS::Get ().mTakeCameraListener setPopover:MOAIAppIOS::Get().mImagePickerPopover];
-	// 	MOAIAppIOS::Get().mImagePickerPopover.delegate = MOAIAppIOS::Get ().mTakeCameraListener;
-	// 	CGRect rect = CGRectMake(x,y,10,10);
-	// 	[MOAIAppIOS::Get().mImagePickerPopover presentPopoverFromRect:rect inView:[rootVC view] 
-	// 					  permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-
-	// } else {
-	// 	[rootVC presentViewController:ipc animated:YES completion:nil];
-	// }
-	
-	return 0;
-}
+//int MOAIAppIOS::_takeCamera( lua_State* L ) {
+//	
+//	int x, y, width, height = 0;
+//	NSUInteger sourceType;
+//	
+//	MOAILuaState state ( L );
+//	if ( state.IsType ( 1, LUA_TFUNCTION )) {
+//		MOAIAppIOS::Get ().mOnTakeCameraCallback.SetRef ( state, 1 );
+//	}
+//	
+//	sourceType = state.GetValue < NSUInteger >( 2, 0 );
+//	x = state.GetValue < int >( 3, 0 );
+//	y = state.GetValue < int >( 4, 0 );
+//	width = state.GetValue < int >( 5, 0 );
+//	height = state.GetValue < int >( 6, 0 );
+//	
+//	UIImagePickerController *ipc = [[UIImagePickerController alloc]
+//									init]; 
+//	UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
+//	UIViewController* rootVC = [ window rootViewController ];
+//
+//	ipc.delegate = MOAIAppIOS::Get ().mTakeCameraListener;
+//	ipc.sourceType = sourceType;
+//	
+//	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+//		MOAIAppIOS::Get().mImagePickerPopover = [[UIPopoverController alloc] 
+//												   initWithContentViewController: ipc];
+//		[MOAIAppIOS::Get ().mTakeCameraListener setPopover:MOAIAppIOS::Get().mImagePickerPopover];
+//		MOAIAppIOS::Get().mImagePickerPopover.delegate = MOAIAppIOS::Get ().mTakeCameraListener;
+//		CGRect rect = CGRectMake(x,y,10,10);
+//		[MOAIAppIOS::Get().mImagePickerPopover presentPopoverFromRect:rect inView:[rootVC view] 
+//						  permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+//
+//	} else {
+//		[rootVC presentViewController:ipc animated:YES completion:nil];
+//	}
+//	
+//	return 0;
+//}
 
 //----------------------------------------------------------------//
 /**	@lua	vibrate
@@ -446,12 +427,12 @@ int MOAIAppIOS::_vibrate ( lua_State *L ) {
 }
 
 
-// void MOAIAppIOS::callTakeCameraLuaCallback (NSString *imagePath) {
-// 	MOAILuaRef& callback = MOAIAppIOS::Get ().mOnTakeCameraCallback;
-// 	MOAIScopedLuaState state = callback.GetSelf ();
-// 	state.Push ([imagePath UTF8String]);
-// 	state.DebugCall ( 1, 0 );
-// }
+void MOAIAppIOS::callTakeCameraLuaCallback (NSString *imagePath) {
+	MOAILuaRef& callback = MOAIAppIOS::Get ().mOnTakeCameraCallback;
+	MOAIScopedLuaState state = callback.GetSelf ();
+	state.Push ([imagePath UTF8String]);
+	state.DebugCall ( 1, 0 );
+}
 
 //================================================================//
 // MOAIAppIOS
@@ -481,8 +462,8 @@ MOAIAppIOS::MOAIAppIOS () {
 
 	RTTI_SINGLE ( MOAIGlobalEventSource )
 
-	this->mMailDelegate = [[ MOAIMailComposeDelegate alloc ] init ];
-	// this->mTakeCameraListener = [[ MOAITakeCameraListener alloc ] init ];
+	//this->mMailDelegate = [ MOAIMailComposeDelegate alloc ];
+	//this->mTakeCameraListener = [ MOAITakeCameraListener alloc ];
 	
 	this->RegisterNotificationListeners ();
 }
@@ -490,10 +471,10 @@ MOAIAppIOS::MOAIAppIOS () {
 //----------------------------------------------------------------//
 MOAIAppIOS::~MOAIAppIOS () {
 
-	this->RemoveNotificationListeners ();
+	RemoveNotificationListeners ();
 
-	[ this->mMailDelegate release ];
-	// [ this->mTakeCameraListener release];
+	//[ this->mMailDelegate release ];
+	//[ this->mTakeCameraListener release];
 }
 
 //----------------------------------------------------------------//
@@ -541,12 +522,11 @@ void MOAIAppIOS::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "getResourcePathInBundle",	_getResourcePathInBundle },
 		{ "getSystemUptime",			_getSystemUptime },
 		{ "getUTCTime",					_getUTCTime },
-		{ "openSettings",				_openSettings },
 		{ "openURL",					_openURL },
 		{ "openURLWithParams",			_openURLWithParams },
 		{ "sendMail",					_sendMail },
 		{ "setListener",				&MOAIGlobalEventSource::_setListener < MOAIAppIOS > },
-		{ "takeCamera",					_takeCamera },
+		//{ "takeCamera",					_takeCamera },
 		{ "vibrate",					_vibrate },
 		{ NULL, NULL }
 	};
@@ -579,7 +559,7 @@ void MOAIAppIOS::RegisterNotificationListeners () {
 				
 				ZLLog_DebugF ( ZLLog::CONSOLE, "MOAIAppIOS: received notification '%s'\n", [ notification.name UTF8String ]);
 				
-				MOAIScopedContext scopedContext;
+				ZLScopedContext scopedContext;
 				
 				if ( !ZLContextMgr::Check ( context )) return;
 				ZLContextMgr::Set ( context );
@@ -612,24 +592,26 @@ void MOAIAppIOS::RemoveNotificationListeners () {
 //================================================================//
 // MOAIMailComposeDelegate
 //================================================================//
-@implementation MOAIMailComposeDelegate
-
-//================================================================//
-#pragma mark -
-#pragma mark Protocol MOAIMailComposeDelegate
-//================================================================//
-
--( void ) mailComposeController:( MFMailComposeViewController* )controller didFinishWithResult:( MFMailComposeResult )result error:( NSError* )error {
-	UNUSED ( controller );
-	UNUSED ( result );
-	UNUSED ( error );
-
-	UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
-	UIViewController* rootVC = [ window rootViewController ];
-
-	if ( rootVC ) {
-		[ rootVC dismissViewControllerAnimated:YES completion:nil ];
-	}
-}
-
-@end
+//@implementation MOAIMailComposeDelegate
+//
+////================================================================//
+//#pragma mark -
+//#pragma mark Protocol MOAIMailComposeDelegate
+////================================================================//
+//
+//- (void)mailComposeController:(MFMailComposeViewController*)controller
+//          didFinishWithResult:(MFMailComposeResult)result
+//                        error:(NSError*)error {
+//	UNUSED ( controller );
+//	UNUSED ( result );
+//	UNUSED ( error );
+//
+//	UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
+//	UIViewController* rootVC = [ window rootViewController ];
+//
+//	if ( rootVC ) {
+//		[ rootVC dismissViewControllerAnimated:YES completion:nil ];
+//	}
+//}
+//
+//@end

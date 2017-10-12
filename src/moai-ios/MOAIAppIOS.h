@@ -12,7 +12,7 @@
 #import <moai-core/headers.h>
 
 @class MOAIMailComposeDelegate;
-@class MOAITakeCameraListener;
+//@class MOAITakeCameraListener;
 
 //================================================================//
 // MOAIAppIOS
@@ -45,10 +45,10 @@ private:
 	typedef STLList < id >::iterator NotificationObserverIt;
 	STLList < id >	mNotificationObservers;
 
-	// MOAILuaStrongRef			mOnTakeCameraCallback;
-	// MOAITakeCameraListener*		mTakeCameraListener;
-	MOAIMailComposeDelegate*	mMailDelegate;
-	// UIPopoverController*		mImagePickerPopover;
+	MOAILuaStrongRef			mOnTakeCameraCallback;
+	//MOAITakeCameraListener*		mTakeCameraListener;
+	//MOAIMailComposeDelegate*	mMailDelegate;
+	//UIPopoverController*		mImagePickerPopover;
 	
 	//----------------------------------------------------------------//
 	static int		_canOpenURL						( lua_State* L );
@@ -59,11 +59,10 @@ private:
 	static int		_getResourcePathInBundle		( lua_State* L );
 	static int		_getSystemUptime				( lua_State* L );
 	static int		_getUTCTime						( lua_State* L );
-	static int		_openSettings					( lua_State* L );
 	static int		_openURL						( lua_State* L );
 	static int		_openURLWithParams				( lua_State* L );
 	static int		_sendMail						( lua_State* L );
-	static int		_takeCamera						( lua_State* L );
+	//static int		_takeCamera						( lua_State* L );
 	static int		_vibrate						( lua_State* L );
 	
 	//----------------------------------------------------------------//
@@ -107,15 +106,15 @@ public:
 	void				OpenUrl									( NSURL* url, NSString* sourceApplication );
 	void				RegisterLuaClass						( MOAILuaState& state );
 
-	// static void			callTakeCameraLuaCallback				( NSString* imagePath );
+	static void			callTakeCameraLuaCallback				( NSString* imagePath );
 };
 
 //================================================================//
 // MOAIMailComposeDelegate
 //================================================================//
-@interface MOAIMailComposeDelegate : NSObject < MFMailComposeViewControllerDelegate > {
-@private
-}
-@end
+//@interface MOAIMailComposeDelegate : NSObject < MFMailComposeViewControllerDelegate > {
+//@private
+//}
+//@end
 
 #endif

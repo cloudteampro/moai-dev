@@ -33,8 +33,6 @@
     <ClInclude Include="..\..\src\moai-sim\MOAIBitmapFontReader.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAIBlendMode.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAIBlocker.h" />
-    <ClInclude Include="..\..\src\moai-sim\MOAIBone.h" />
-    <ClInclude Include="..\..\src\moai-sim\MOAIBoneArray.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAIBoundsDeck.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAIButtonSensor.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAICamera.h" />
@@ -63,17 +61,16 @@
     <ClInclude Include="..\..\src\moai-sim\MOAIFreeTypeFontReader.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAIGeometryWriter.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAIGfxBuffer.h" />
-    <ClInclude Include="..\..\src\moai-sim\MOAIGfxDevice.h" />
-    <ClInclude Include="..\..\src\moai-sim\MOAIGfxDeviceBase.h" />
-    <ClInclude Include="..\..\src\moai-sim\MOAIGfxDeviceMtxCache.h" />
-    <ClInclude Include="..\..\src\moai-sim\MOAIGfxDeviceStateCache.h" />
-    <ClInclude Include="..\..\src\moai-sim\MOAIGfxDeviceVertexWriter.h" />
-    <ClInclude Include="..\..\src\moai-sim\MOAIGfxPrimDeck2D.h" />
+    <ClInclude Include="..\..\src\moai-sim\MOAIGfxGlobalsCache.h" />
+    <ClInclude Include="..\..\src\moai-sim\MOAIGfxMgr.h" />
+    <ClInclude Include="..\..\src\moai-sim\MOAIGfxPipelineClerk.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAIGfxQuad2D.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAIGfxQuadDeck2D.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAIGfxQuadListDeck2D.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAIGfxResource.h" />
-    <ClInclude Include="..\..\src\moai-sim\MOAIGfxResourceMgr.h" />
+    <ClInclude Include="..\..\src\moai-sim\MOAIGfxResourceClerk.h" />
+    <ClInclude Include="..\..\src\moai-sim\MOAIGfxStateCache.h" />
+    <ClInclude Include="..\..\src\moai-sim\MOAIGfxVertexCache.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAIGlyph.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAIGlyphCache.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAIGlyphSet.h" />
@@ -103,6 +100,9 @@
     <ClInclude Include="..\..\src\moai-sim\MOAIMaterialBatch.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAIMatrix.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAIMesh.h" />
+    <ClInclude Include="..\..\src\moai-sim\MOAIMeshPartition.h" />
+    <ClInclude Include="..\..\src\moai-sim\MOAIMeshSparseQuadTree.h" />
+    <ClInclude Include="..\..\src\moai-sim\MOAIMeshTernaryTree.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAIMotionSensor.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAIMultiTexture.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAINode.h" />
@@ -123,8 +123,10 @@
     <ClInclude Include="..\..\src\moai-sim\MOAIPartitionLevel.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAIPartitionResultBuffer.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAIPartitionResultMgr.h" />
+    <ClInclude Include="..\..\src\moai-sim\MOAIPath.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAIPathFinder.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAIPathGraph.h" />
+    <ClInclude Include="..\..\src\moai-sim\MOAIPathStepper.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAIPathTerrainDeck.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAIPinTransform.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAIPointerSensor.h" />
@@ -151,10 +153,11 @@
     <ClInclude Include="..\..\src\moai-sim\MOAISurfaceDeck2D.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAISurfaceSampler2D.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAITextBundle.h" />
-    <ClInclude Include="..\..\src\moai-sim\MOAITextDesigner.h" />
-    <ClInclude Include="..\..\src\moai-sim\MOAITextDesignParser.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAITextLabel.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAITextLayout.h" />
+    <ClInclude Include="..\..\src\moai-sim\MOAITextLayoutEngine.h" />
+    <ClInclude Include="..\..\src\moai-sim\MOAITextLayoutRules.h" />
+    <ClInclude Include="..\..\src\moai-sim\MOAITextShaper.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAITextStyle.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAITextStyleCache.h" />
     <ClInclude Include="..\..\src\moai-sim\MOAITextStyleMap.h" />
@@ -217,8 +220,6 @@
     <ClCompile Include="..\..\src\moai-sim\MOAIBitmapFontReader.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAIBlendMode.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAIBlocker.cpp" />
-    <ClCompile Include="..\..\src\moai-sim\MOAIBone.cpp" />
-    <ClCompile Include="..\..\src\moai-sim\MOAIBoneArray.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAIBoundsDeck.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAIButtonSensor.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAICamera.cpp" />
@@ -248,17 +249,16 @@
     <ClCompile Include="..\..\src\moai-sim\MOAIFreeTypeFontReader.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAIGeometryWriter.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAIGfxBuffer.cpp" />
-    <ClCompile Include="..\..\src\moai-sim\MOAIGfxDevice.cpp" />
-    <ClCompile Include="..\..\src\moai-sim\MOAIGfxDeviceBase.cpp" />
-    <ClCompile Include="..\..\src\moai-sim\MOAIGfxDeviceMtxCache.cpp" />
-    <ClCompile Include="..\..\src\moai-sim\MOAIGfxDeviceStateCache.cpp" />
-    <ClCompile Include="..\..\src\moai-sim\MOAIGfxDeviceVertexWriter.cpp" />
-    <ClCompile Include="..\..\src\moai-sim\MOAIGfxPrimDeck2D.cpp" />
+    <ClCompile Include="..\..\src\moai-sim\MOAIGfxGlobalsCache.cpp" />
+    <ClCompile Include="..\..\src\moai-sim\MOAIGfxMgr.cpp" />
+    <ClCompile Include="..\..\src\moai-sim\MOAIGfxPipelineClerk.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAIGfxQuad2D.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAIGfxQuadDeck2D.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAIGfxQuadListDeck2D.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAIGfxResource.cpp" />
-    <ClCompile Include="..\..\src\moai-sim\MOAIGfxResourceMgr.cpp" />
+    <ClCompile Include="..\..\src\moai-sim\MOAIGfxResourceClerk.cpp" />
+    <ClCompile Include="..\..\src\moai-sim\MOAIGfxStateCache.cpp" />
+    <ClCompile Include="..\..\src\moai-sim\MOAIGfxVertexCache.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAIGlyph.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAIGlyphCache.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAIGlyphSet.cpp" />
@@ -287,6 +287,8 @@
     <ClCompile Include="..\..\src\moai-sim\MOAIMaterialBatch.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAIMatrix.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAIMesh.cpp" />
+    <ClCompile Include="..\..\src\moai-sim\MOAIMeshSparseQuadTree.cpp" />
+    <ClCompile Include="..\..\src\moai-sim\MOAIMeshTernaryTree.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAIMotionSensor.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAIMultiTexture.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAINode.cpp" />
@@ -306,8 +308,10 @@
     <ClCompile Include="..\..\src\moai-sim\MOAIPartitionLevel.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAIPartitionResultBuffer.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAIPartitionResultMgr.cpp" />
+    <ClCompile Include="..\..\src\moai-sim\MOAIPath.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAIPathFinder.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAIPathGraph.cpp" />
+    <ClCompile Include="..\..\src\moai-sim\MOAIPathStepper.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAIPathTerrainDeck.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAIPinTransform.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAIPointerSensor.cpp" />
@@ -333,10 +337,11 @@
     <ClCompile Include="..\..\src\moai-sim\MOAISurfaceDeck2D.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAISurfaceSampler2D.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAITextBundle.cpp" />
-    <ClCompile Include="..\..\src\moai-sim\MOAITextDesigner.cpp" />
-    <ClCompile Include="..\..\src\moai-sim\MOAITextDesignParser.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAITextLabel.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAITextLayout.cpp" />
+    <ClCompile Include="..\..\src\moai-sim\MOAITextLayoutEngine.cpp" />
+    <ClCompile Include="..\..\src\moai-sim\MOAITextLayoutRules.cpp" />
+    <ClCompile Include="..\..\src\moai-sim\MOAITextShaper.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAITextStyle.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAITextStyleCache.cpp" />
     <ClCompile Include="..\..\src\moai-sim\MOAITextStyleMap.cpp" />
@@ -462,7 +467,9 @@
     <Lib>
       <AdditionalLibraryDirectories>..\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
-    
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -482,7 +489,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ProgramDataBaseFileName>$(OutDir)$(ProjectName).pdb</ProgramDataBaseFileName>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ForcedIncludeFiles>zl-vfs/zl_replace.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -491,7 +498,9 @@
     <Lib>
       <AdditionalLibraryDirectories>..\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
-    
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <CustomBuildStep>
@@ -525,7 +534,9 @@
       <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
       <AdditionalLibraryDirectories>..\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
-    
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <CustomBuildStep>
@@ -552,7 +563,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ProgramDataBaseFileName>$(OutDir)$(ProjectName).pdb</ProgramDataBaseFileName>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ForcedIncludeFiles>zl-vfs/zl_replace.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -562,7 +573,9 @@
       <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
       <AdditionalLibraryDirectories>..\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
-    
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

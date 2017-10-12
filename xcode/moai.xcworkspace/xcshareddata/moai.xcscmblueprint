@@ -1,0 +1,44 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "63C4897045D0EF88507AD257AEF500CB53038CE0",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "9B988C7359AA495F85FDA9F3B96E8CAA9B874E81" : 9223372036854775807,
+    "AE3F0F79FA18959EE39DE06BF81D40ADA159F259" : 9223372036854775807,
+    "0BE2D393D91F44FADD1C4CA1AAED513D7753907E" : 0,
+    "63C4897045D0EF88507AD257AEF500CB53038CE0" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "5B4A9246-61B4-4626-9114-86A313C2FB15",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "9B988C7359AA495F85FDA9F3B96E8CAA9B874E81" : "moai-fgc\/3rdparty\/TGAReader\/",
+    "AE3F0F79FA18959EE39DE06BF81D40ADA159F259" : "moai-fgc\/3rdparty\/assimp\/",
+    "0BE2D393D91F44FADD1C4CA1AAED513D7753907E" : "moai-fgc\/3rdparty\/kissfft\/",
+    "63C4897045D0EF88507AD257AEF500CB53038CE0" : "moai-fgc\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "moai",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "xcode\/moai.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/itdaniher\/kissfft.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0BE2D393D91F44FADD1C4CA1AAED513D7753907E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/fallguyconsulting\/moai-dev",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "63C4897045D0EF88507AD257AEF500CB53038CE0"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/npedotnet\/TGAReader.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9B988C7359AA495F85FDA9F3B96E8CAA9B874E81"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/assimp\/assimp.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "AE3F0F79FA18959EE39DE06BF81D40ADA159F259"
+    }
+  ]
+}

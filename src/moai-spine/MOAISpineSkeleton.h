@@ -27,9 +27,13 @@ private:
 		
 	spSkeleton*			mSkeleton;
 	spAnimationState*	mAnimationState;
+	MOAISpineBone*		mRootBone;
 		
 	MOAILuaSharedPtr < MOAISpineSkeletonData > mSkeletonData;
 	ZLLeanStack < float, 32 > mVertices;
+		
+	typedef STLMap < STLString, MOAISpineBone* >::iterator BoneTransformIt;
+	STLMap < STLString, MOAISpineBone* > mBoneTransformMap;
 	
 	typedef STLMap < STLString, MOAISpineSlot* >::iterator SlotColorIt;
 	STLMap < STLString, MOAISpineSlot* > mSlotColorMap;
@@ -40,7 +44,7 @@ private:
 	static int		_clearTrack				( lua_State* L );
 	static int		_getAnimations			( lua_State* L );
 	static int		_getAttachmentVertices	( lua_State* L );
-//	static int		_getBone				( lua_State* L );
+	static int		_getBone				( lua_State* L );
 	static int		_getBoneTransform		( lua_State* L );
     static int      _getDuration            ( lua_State* L );
 	static int		_getSlot				( lua_State* L );
@@ -78,6 +82,7 @@ public:
 
 	//----------------------------------------------------------------//
 	void			AddAnimation			( int trackId, cc8* name, bool loop, float delay );
+	void			AffirmBoneHierarchy		( spBone* bone );
 	void			ClearAllTracks			();
 	void			ClearTrack				( int trackId );
 	void			Draw					( int subPrimID, float lod );
@@ -88,7 +93,7 @@ public:
 					MOAISpineSkeleton		();
 					~MOAISpineSkeleton		();
 	
-	void			OnAnimationEvent		( int trackIndex, spEventType type, spEvent* event );
+	void			OnAnimationEvent		( int trackIndex, spEventType type, spEvent* event, int loopCount );
 	void			RegisterLuaClass		( MOAILuaState& state );
 	void			RegisterLuaFuncs		( MOAILuaState& state );
 	void			SetAnimation			( int trackId, cc8* name, bool loop );

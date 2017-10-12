@@ -9,10 +9,6 @@
 
 class MOAIColor;
 class MOAITransformBase;
-class MOAITransformArray;
-
-#define		OPENGL_PREPROC		"#define LOWP\n #define MEDP\n"
-#define		OPENGL_ES_PREPROC	"#define LOWP lowp\n #define MEDP mediump\n"
 
 //================================================================//
 // MOAIShaderUniformBuffer
@@ -35,7 +31,7 @@ protected:
 	//----------------------------------------------------------------//
 	void		Clear				();
 	void		ClearValue			();
-	bool		SetBuffer			( void* buffer, size_t size, bool check );
+	u32			SetBuffer			( void* buffer, size_t size );
 
 public:
 
@@ -47,7 +43,6 @@ public:
 		UNIFORM_MATRIX_F3,
 		UNIFORM_MATRIX_F4,
 		UNIFORM_VECTOR_F4,
-		UNIFORM_VECTOR_F4_ARRAY,
 	};
 
 	GET ( u32, Type, mType )
@@ -58,15 +53,14 @@ public:
 	void		GetFlags			( MOAIAttrOp& attrOp );
 	void        GetValue			( MOAIAttrOp& attrOp );
 	void		SetType				( u32 type );
-	bool		SetValue			( float value );
-	bool		SetValue			( int value );
-	bool		SetValue			( const MOAIAttrOp& attrOp, bool check );
-	bool		SetValue			( const ZLColorVec& value, bool check );
-	bool		SetValue			( const ZLAffine3D& value, bool check );
-	bool		SetValue			( const ZLMatrix4x4& value, bool check );
-	bool    	SetValue          	( const ZLMatrix3x3& value, bool check );
-	bool		SetValue			( const MOAIShaderUniformBuffer& uniformBuffer, bool check );
-	bool		SetValue			( ZLLeanArray < ZLVec4D >& value, bool check );
+	u32			SetValue			( float value );
+	u32			SetValue			( int value );
+	u32			SetValue			( const MOAIAttrOp& attrOp );
+	u32			SetValue			( const ZLColorVec& value );
+	u32			SetValue			( const ZLAffine3D& value );
+	u32			SetValue			( const ZLMatrix4x4& value );
+	u32			SetValue          	( const ZLMatrix3x3& value );
+	u32			SetValue			( const MOAIShaderUniformBuffer& uniformBuffer );
 };
 
 //================================================================//
@@ -79,19 +73,21 @@ private:
 	friend class MOAIShader;
 	friend class MOAIShaderProgram;
 
-	STLString	mName;
-	u32			mAddr;			// this is resolved when linking the shader
-	bool		mGlobal;		// flag to indicate global usage
+	STLString		mName;
+	u32				mAddr;			// this is resolved when linking the shader
+	u32				mFlags;			// used by MOAIShaderProgram
 
 public:
 
+	enum {
+		UNIFORM_FLAG_DIRTY		= 0x01,
+		UNIFORM_FLAG_GLOBAL		= 0x02,
+	};
+
 	//----------------------------------------------------------------//
 	void		Bind				();
-	
-	//----------------------------------------------------------------//
-	inline bool IsGlobal () {
-		return this->mGlobal;
-	}
+				MOAIShaderUniform	();
+				~MOAIShaderUniform	();
 	
 	//----------------------------------------------------------------//
 	inline bool IsValid () {

@@ -12,7 +12,7 @@
 /**	@lua	MOAITstoreGamecenterAndroid
 */
 class MOAITstoreGamecenterAndroid :
-	public ZLContextClass < MOAITstoreGamecenterAndroid, MOAILuaObject > {
+	public MOAIGlobalClass < MOAITstoreGamecenterAndroid, MOAILuaObject > {
 private:
 
 	//----------------------------------------------------------------//

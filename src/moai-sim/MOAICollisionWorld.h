@@ -41,7 +41,6 @@ private:
 	//----------------------------------------------------------------//
 	static int			_insertProp				( lua_State* L );
 	static int			_processOverlaps		( lua_State* L );
-	static int			_removeProp				( lua_State* L );
 	static int			_setCallback			( lua_State* L );
 	static int			_setPartition			( lua_State* L );
 
@@ -76,9 +75,7 @@ public:
 		OVERLAP_UPDATE,
 	};
 	
-	enum {
-		OVERLAP_PASS_INIT	= 0,
-	};
+	static const u32 OVERLAP_PASS_INIT = 0;
 	
 	//----------------------------------------------------------------//
 					MOAICollisionWorld		();

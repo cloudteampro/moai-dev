@@ -3,9 +3,10 @@
 
 #include "pch.h"
 #include <moai-sim/MOAIDraw.h>
-#include <moai-sim/MOAIGfxDevice.h>
+#include <moai-sim/MOAIGfxMgr.h>
 #include <moai-sim/MOAIIndexBuffer.h>
 #include <moai-sim/MOAIRegion.h>
+#include <moai-sim/MOAITransform.h>
 #include <moai-sim/MOAIVectorUtil.h>
 #include <moai-sim/MOAIVertexBuffer.h>
 #include <tesselator.h>
@@ -13,6 +14,20 @@
 //================================================================//
 // lua
 //================================================================//
+
+//----------------------------------------------------------------//
+// TODO: doxygen
+int MOAIRegion::_append ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIRegion, "U" )
+	
+	MOAIRegion* regionA = state.GetLuaObject < MOAIRegion >( 2, false );
+	MOAIRegion* regionB = state.GetLuaObject < MOAIRegion >( 3, false );
+
+	if ( regionA && regionB ) {
+		self->Append ( *regionA, *regionB );
+	}
+	return 0;
+}
 
 //----------------------------------------------------------------//
 // TODO: doxygen
@@ -41,6 +56,93 @@ int MOAIRegion::_boolean ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+// TODO: doxygen
+int MOAIRegion::_clear ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIRegion, "U" )
+
+	self->Clear ();
+	return 0;
+}
+
+//----------------------------------------------------------------//
+// TODO: doxygen
+int MOAIRegion::_clip ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIRegion, "U" )
+	
+	MOAIRegion* region = state.GetLuaObject < MOAIRegion >( 2, true );
+	
+	if ( region ) {
+	
+		MOAIRegion* clip = state.GetLuaObject < MOAIRegion >( 3, false );
+		if ( clip ) {
+			
+			MOAITransform* transform = state.GetLuaObject < MOAITransform >( 4, false );
+			
+			if ( transform ) {
+				self->Clip ( *region, *clip, &transform->GetLocalToWorldMtx ());
+			}
+			else {
+				self->Clip ( *region, *clip );
+			}
+		}
+		else {
+	
+			float xn	= state.GetValue < float >( 3, 0.0f );
+			float yn	= state.GetValue < float >( 4, 0.0f );
+			float d		= state.GetValue < float >( 5, 0.0f );
+			
+			ZLVec2D n ( xn, yn );
+			float len = n.Length ();
+			
+			if ( len > 0.0f ) {
+			
+				n.Scale ( 1.0f / len );
+				
+				ZLPlane2D p;
+				p.Init ( xn, yn, d );
+				
+				self->Clip ( *region, p );
+			}
+		}
+	}
+	return 0;
+}
+
+//----------------------------------------------------------------//
+// TODO: doxygen
+int MOAIRegion::_convexHull ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIRegion, "U" )
+
+	MOAIStream* stream = state.GetLuaObject < MOAIStream >( 2, true );
+	
+	if ( stream ) {
+	
+		size_t resetCursor = stream->GetCursor ();
+	
+		size_t nVerts = state.GetValue < u32 >( 3, 0 );
+	
+		if ( nVerts == 0 ) {
+			nVerts = stream->GetLength () / ZLPolygon2D::VERTEX_SIZE;
+			stream->Seek ( 0, SEEK_SET );
+		}
+	
+		if ( nVerts > 0 ) {
+		
+			ZLSizeResult result = self->ConvexHull ( *stream, nVerts );
+			
+			if ( result.mCode == ZL_OK ) {
+				state.Push (( u32 )result.mValue );
+				return 1;
+			}
+		}
+		
+		stream->Seek (( long )resetCursor, SEEK_SET );
+	}
+	return 0;
+}
+
+//----------------------------------------------------------------//
+// TODO: doxygen
 int MOAIRegion::_copy ( lua_State* L ) {
 	MOAI_LUA_SETUP ( MOAIRegion, "UU" )
 
@@ -53,6 +155,16 @@ int MOAIRegion::_copy ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+// TODO: doxygen
+int MOAIRegion::_countPolygons ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIRegion, "U" )
+	
+	state.Push (( u32 )self->mPolygons.Size ());
+	return 1;
+}
+
+//----------------------------------------------------------------//
+// TODO: doxygen
 int MOAIRegion::_cull ( lua_State* L ) {
 	MOAI_LUA_SETUP ( MOAIRegion, "U" )
 	
@@ -94,6 +206,23 @@ int MOAIRegion::_edge ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+int MOAIRegion::_findExtremity ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIRegion, "UNN" )
+
+	ZLVec2D n = state.GetValue < ZLVec2D >( 2, ZLVec2D ( 0.0f, 0.0f ));
+	ZLVec2D e;
+	
+	if ( self->FindExtremity ( n, e )) {
+	
+		state.Push ( e.mX );
+		state.Push ( e.mY );
+		
+		return 2;
+	}
+	return 0;
+}
+
+//----------------------------------------------------------------//
 // TODO: doxygen
 int MOAIRegion::_getDistance ( lua_State* L ) {
 	MOAI_LUA_SETUP ( MOAIRegion, "U" )
@@ -117,6 +246,37 @@ int MOAIRegion::_getDistance ( lua_State* L ) {
 
 //----------------------------------------------------------------//
 // TODO: doxygen
+int MOAIRegion::_getPolygon ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIRegion, "U" )
+
+	u32 polygonID = state.GetValue < u32 >( 2, 1 ) - 1;
+	
+	if ( polygonID < self->mPolygons.Size ()) {
+	
+		lua_newtable ( state );
+	
+		const ZLPolygon2D& polygon = self->mPolygons [ polygonID ];
+	
+		size_t polygonSize = polygon.GetSize ();
+		for ( size_t i = 0; i < polygonSize; ++i ) {
+		
+			ZLVec2D vec = polygon.GetVertex ( i );
+		
+			state.Push (( u32 )i + 1 );
+		
+			lua_newtable ( state );
+			state.SetField ( -1, "x", vec.mX );
+			state.SetField ( -1, "y", vec.mY );
+			
+			lua_settable ( state, -3 );
+		}
+		return 1;
+	}
+	return 0;
+}
+
+//----------------------------------------------------------------//
+// TODO: doxygen
 int MOAIRegion::_getTriangles ( lua_State* L ) {
 	MOAI_LUA_SETUP ( MOAIRegion, "U" )
 	
@@ -131,7 +291,7 @@ int MOAIRegion::_getTriangles ( lua_State* L ) {
 		u32 idxSizeInBytes = state.GetValue < u32 >( 4, 4 );
 		MOAIVertexFormat* format = state.GetLuaObject < MOAIVertexFormat >( 5, false );
 		
-		base = idxBuffer->GetCursor () / idxSizeInBytes;
+		base = ( u32 )( idxBuffer->GetCursor () / idxSizeInBytes );
 		totalElements = self->GetTriangles ( *format, *vtxBuffer, *idxBuffer, idxSizeInBytes );
 	}
 	else {
@@ -141,7 +301,7 @@ int MOAIRegion::_getTriangles ( lua_State* L ) {
 		MOAIVertexFormat* format	= state.GetLuaObject < MOAIVertexFormat >( 4, false );
 		
 		if ( vtxStream && idxStream && format ) {
-			base = idxStream->GetCursor () / 4;
+			base = ( u32 )( idxStream->GetCursor () / 4 );
 			totalElements = self->GetTriangles ( *format, *vtxStream, *idxStream );
 		}
 	}
@@ -150,6 +310,37 @@ int MOAIRegion::_getTriangles ( lua_State* L ) {
 	state.Push ( base );
 	state.Push ( base + totalElements );
 	return 3;
+}
+
+//----------------------------------------------------------------//
+// TODO: doxygen
+int MOAIRegion::_getVertices ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIRegion, "U" )
+
+	MOAIStream* stream = state.GetLuaObject < MOAIStream >( 2, true );
+	
+	if ( stream ) {
+	
+		ZLSizeResult result = self->GetVertices ( *stream );
+		
+		if ( result.mCode == ZL_OK ) {
+			state.Push (( u32 )result.mValue );
+			return 1;
+		}
+	}
+	return 0;
+}
+
+//----------------------------------------------------------------//
+// TODO: doxygen
+int MOAIRegion::_pad ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIRegion, "U" )
+	
+	MOAIRegion* region = state.GetLuaObject < MOAIRegion >( 2, false );
+	if ( region ) {
+		self->Pad ( *region, state.GetValue < float >( 3, 0.0f ));
+	}
+	return 0;
 }
 
 //----------------------------------------------------------------//
@@ -227,9 +418,19 @@ int MOAIRegion::_setVertex ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+// TODO: doxygen
 int MOAIRegion::_setWinding ( lua_State* L ) {
-	MOAI_LUA_SETUP ( MOAIRegion, "U" )
+	MOAI_LUA_SETUP ( MOAIRegion, "UU" )
 	
+	MOAIRegion* region		= state.GetLuaObject < MOAIRegion >( 2, false );
+	
+	if ( region ) {
+		
+		if ( self != region ) {
+			self->Copy ( *region );
+		}
+		self->SetWinding ( state.GetValue < u32 >( 3, WINDING_ANTICLOCKWISE ));
+	}
 	return 0;
 }
 
@@ -257,26 +458,26 @@ int MOAIRegion::_stroke ( lua_State* L ) {
 
 	MOAIRegion* region		= state.GetLuaObject < MOAIRegion >( 2, false );
 	
-	float exterior			= 0.0;
-	bool strokeExterior		= false;
-	
-	float interior			= 0.0;
-	bool strokeInterior		= false;
-	
-	if ( state.IsType ( 3, LUA_TNUMBER )) {
-		exterior = state.GetValue < float >( 3, 0.0f );
-		strokeExterior = true;
-	}
-	
-	if ( strokeExterior && state.IsType ( 4, LUA_TNUMBER )) {
-	
-		interior = exterior;
-		strokeInterior = true;
-	
-		exterior = state.GetValue < float >( 4, 0.0f );
-	}
-	
 	if ( region ) {
+		
+		float exterior			= 0.0;
+		bool strokeExterior		= false;
+		
+		float interior			= 0.0;
+		bool strokeInterior		= false;
+		
+		if ( state.IsType ( 3, LUA_TNUMBER )) {
+			exterior = state.GetValue < float >( 3, 0.0f );
+			strokeExterior = true;
+		}
+		
+		if ( strokeExterior && state.IsType ( 4, LUA_TNUMBER )) {
+		
+			interior = exterior;
+			strokeInterior = true;
+		
+			exterior = state.GetValue < float >( 4, 0.0f );
+		}
 	
 		if ( strokeExterior || strokeInterior ) {
 			self->Stroke ( *region, exterior, strokeExterior, interior, strokeInterior );
@@ -351,6 +552,25 @@ int MOAIRegion::AddFillContours ( SafeTesselator& tess, u32 mask ) const {
 }
 
 //----------------------------------------------------------------//
+void MOAIRegion::Append ( const MOAIRegion& regionA, const MOAIRegion& regionB ) {
+
+	size_t sizeA = regionA.GetSize ();
+	size_t sizeB = regionB.GetSize ();
+	
+	this->ReservePolygons ( sizeA + sizeB );
+	
+	for ( size_t i = 0; i < sizeA; ++i ) {
+		this->mPolygons [ i ].Copy ( regionA.mPolygons [ i ]);
+	}
+	
+	for ( size_t i = 0; i < sizeB; ++i ) {
+		this->mPolygons [ i + sizeA ].Copy ( regionA.mPolygons [ i + sizeA ]);
+	}
+	
+	this->Bless ();
+}
+
+//----------------------------------------------------------------//
 void MOAIRegion::Bless () {
 
 	size_t size = this->mPolygons.Size ();
@@ -404,13 +624,51 @@ void MOAIRegion::BooleanNot ( const MOAIRegion& regionA, const MOAIRegion& regio
 void MOAIRegion::BooleanOr ( const MOAIRegion& regionA, const MOAIRegion& regionB ) {
 
 	this->CombineAndTesselate ( regionA, regionB, TESS_WINDING_POSITIVE );
-	this->Print ();
+	//this->Print ();
 }
 
 //----------------------------------------------------------------//
 void MOAIRegion::BooleanXor ( const MOAIRegion& regionA, const MOAIRegion& regionB ) {
 
 	this->CombineAndTesselate ( regionA, regionB, TESS_WINDING_ODD );
+}
+
+//----------------------------------------------------------------//
+void MOAIRegion::Clear () {
+
+	this->mPolygons.Clear ();
+}
+
+//----------------------------------------------------------------//
+void MOAIRegion::Clip ( const MOAIRegion& region, ZLPlane2D plane ) {
+
+	ZLMemStream clippedPolyVerts;
+	ZLMemStream clippedPolySizes;
+
+	for ( size_t i = 0; i < region.mPolygons.Size (); ++i ) {
+	
+		ZLPolygon2D& poly = region.mPolygons [ i ];
+		poly.Clip ( plane, clippedPolyVerts, clippedPolySizes );
+	}
+	
+	this->Read ( clippedPolyVerts, clippedPolySizes );
+}
+
+//----------------------------------------------------------------//
+void MOAIRegion::Clip ( const MOAIRegion& region, const MOAIRegion& clip, const ZLAffine3D* mtx ) {
+
+	ZLMemStream clippedPolyVerts;
+	ZLMemStream clippedPolySizes;
+
+	const ZLPolygon2D& clipPoly = clip.GetPolygon ( 0 );
+
+	for ( size_t i = 0; i < region.mPolygons.Size (); ++i ) {
+	
+		ZLPolygon2D& poly = region.mPolygons [ i ];
+		poly.Clip ( clipPoly, mtx, clippedPolyVerts, clippedPolySizes );
+	}
+	
+	this->Read ( clippedPolyVerts, clippedPolySizes );
 }
 
 //----------------------------------------------------------------//
@@ -429,6 +687,25 @@ int MOAIRegion::CombineAndTesselate ( const MOAIRegion& regionA, const MOAIRegio
 		this->Cull ( *this, ZLPolygon2D::IS_CORRUPT );
 	}
 	return error;
+}
+
+//----------------------------------------------------------------//
+ZLSizeResult MOAIRegion::ConvexHull ( ZLStream& vtxStream, size_t nVerts ) {
+
+	ZLCleanup < MOAIRegion > cleanup ( this, &MOAIRegion::Clear );
+
+	this->Clear ();
+
+	ZL_HANDLE_ERROR_CODE ( this->ReservePolygons ( 1 ), ZL_RETURN_SIZE_RESULT ( 0, CODE ))
+
+	ZLMemStream hull;
+	ZLSizeResult hullSize = this->mPolygons [ 0 ].ConvexHull ( vtxStream, nVerts );
+	
+	ZL_HANDLE_ERROR_CODE ( hullSize.mCode, ZL_RETURN_SIZE_RESULT ( 0, CODE ))
+	if ( hullSize < 3 ) ZL_RETURN_SIZE_RESULT ( 0, ZL_ERROR )
+	
+	cleanup.Skip ();
+	ZL_RETURN_SIZE_RESULT ( nVerts, ZL_OK )
 }
 
 //----------------------------------------------------------------//
@@ -514,54 +791,54 @@ void MOAIRegion::DrawDebug () const {
 	static u32 POLY_ANTICLOCKWISE_CONVEX_COLOR		= ZLColor::PackRGBA ( 0.0f, 1.0f, 1.0f, 1.0f );
 	static u32 POLY_ANTICLOCKWISE_CONCAVE_COLOR		= ZLColor::PackRGBA ( 0.0f, 0.5f, 1.0f, 1.0f );
 	
-	static u32 POLY_CLOCKWISE_CONVEX_COLOR			= ZLColor::PackRGBA ( 0.5f, 1.0f, 0.0f, 1.0f );
+	static u32 POLY_CLOCKWISE_CONVEX_COLOR			= ZLColor::PackRGBA ( 0.75f, 1.0f, 0.0f, 1.0f );
 	static u32 POLY_CLOCKWISE_CONCAVE_COLOR			= ZLColor::PackRGBA ( 0.0f, 1.0f, 0.0f, 1.0f );
 	
 	static u32 POLY_CORRUPT_COLOR					= ZLColor::PackRGBA ( 1.0f, 0.0f, 0.0f, 1.0f );
 
-	MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get ();
+	MOAIGfxMgr& gfxMgr = MOAIGfxMgr::Get ();
 
 	MOAIDraw::Bind ();
 
-	u32 nPolys = this->mPolygons.Size ();
-	for ( u32 i = 0; i < nPolys; ++i ) {
+	size_t nPolys = this->mPolygons.Size ();
+	for ( size_t i = 0; i < nPolys; ++i ) {
 		const ZLPolygon2D& poly = this->mPolygons [ i ];
 		
 		switch ( poly.GetInfo ()) {
 		
 			case ZLPolygon2D::POLY_UNKNOWN: {
-				gfxDevice.SetPenColor ( POLY_UNKNOWN_COLOR );
-				gfxDevice.SetPenWidth ( 1.0f );
+				gfxMgr.mGfxState.SetPenColor ( POLY_UNKNOWN_COLOR );
+				gfxMgr.mGfxState.SetPenWidth ( 1.0f );
 				break;
 			}
-			case ZLPolygon2D::POLY_COMPLEX_BIT: {
-				gfxDevice.SetPenColor ( POLY_COMPLEX_COLOR );
-				gfxDevice.SetPenWidth ( 1.0f );
+			case ZLPolygon2D::POLY_COMPLEX: {
+				gfxMgr.mGfxState.SetPenColor ( POLY_COMPLEX_COLOR );
+				gfxMgr.mGfxState.SetPenWidth ( 1.0f );
 				break;
 			}
 			case ZLPolygon2D::POLY_ANTICLOCKWISE_CONVEX: {
-				gfxDevice.SetPenColor ( POLY_ANTICLOCKWISE_CONVEX_COLOR );
-				gfxDevice.SetPenWidth ( 2.0f );
+				gfxMgr.mGfxState.SetPenColor ( POLY_ANTICLOCKWISE_CONVEX_COLOR );
+				gfxMgr.mGfxState.SetPenWidth ( 2.0f );
 				break;
 			}
 			case ZLPolygon2D::POLY_ANTICLOCKWISE_CONCAVE: {
-				gfxDevice.SetPenColor ( POLY_ANTICLOCKWISE_CONCAVE_COLOR );
-				gfxDevice.SetPenWidth ( 2.0f );
+				gfxMgr.mGfxState.SetPenColor ( POLY_ANTICLOCKWISE_CONCAVE_COLOR );
+				gfxMgr.mGfxState.SetPenWidth ( 2.0f );
 				break;
 			}
 			case ZLPolygon2D::POLY_CLOCKWISE_CONVEX: {
-				gfxDevice.SetPenColor ( POLY_CLOCKWISE_CONVEX_COLOR );
-				gfxDevice.SetPenWidth ( 1.0f );
+				gfxMgr.mGfxState.SetPenColor ( POLY_CLOCKWISE_CONVEX_COLOR );
+				gfxMgr.mGfxState.SetPenWidth ( 1.0f );
 				break;
 			}
 			case ZLPolygon2D::POLY_CLOCKWISE_CONCAVE: {
-				gfxDevice.SetPenColor ( POLY_CLOCKWISE_CONCAVE_COLOR );
-				gfxDevice.SetPenWidth ( 1.0f );
+				gfxMgr.mGfxState.SetPenColor ( POLY_CLOCKWISE_CONCAVE_COLOR );
+				gfxMgr.mGfxState.SetPenWidth ( 1.0f );
 				break;
 			}
 			case ZLPolygon2D::POLY_CORRUPT: {
-				gfxDevice.SetPenColor ( POLY_CORRUPT_COLOR );
-				gfxDevice.SetPenWidth ( 1.0f );
+				gfxMgr.mGfxState.SetPenColor ( POLY_CORRUPT_COLOR );
+				gfxMgr.mGfxState.SetPenWidth ( 1.0f );
 				break;
 			}
 		}
@@ -626,6 +903,41 @@ void MOAIRegion::Edge ( const MOAIRegion& region, const ZLVec2D& offset ) {
 }
 
 //----------------------------------------------------------------//
+bool MOAIRegion::FindExtremity ( ZLVec2D n, ZLVec2D& e ) {
+
+	n.NormSafe ();
+
+	bool		found = false;
+	float		bestDist = 0.0f;
+	ZLVec2D		bestVert ( 0.0f, 0.0f );
+
+	size_t size = this->mPolygons.Size ();
+	for ( size_t i = 0; i < size; ++i ) {
+		ZLPolygon2D& polygon = this->mPolygons [ i ];
+		
+		size_t nVerts = polygon.GetSize ();
+		for ( size_t j = 0; j < nVerts; ++j ) {
+			
+			ZLVec2D vert = polygon.GetVertex ( j );
+			
+			float d = n.Dot ( vert );
+
+			if (( !found ) || ( d > bestDist )) {
+			
+				bestVert = vert;
+				bestDist = d;
+				found = true;
+			}
+		}
+	}
+	
+	if ( found ) {
+		e = bestVert;
+	}
+	return found;
+}
+
+//----------------------------------------------------------------//
 bool MOAIRegion::GetDistance ( const ZLVec2D& point, float& d ) const {
 
 	ZLVec2D unused;
@@ -671,10 +983,10 @@ const ZLPolygon2D& MOAIRegion::GetPolygon ( u32 idx ) const {
 //----------------------------------------------------------------//
 u32 MOAIRegion::GetTriangles ( SafeTesselator& tess ) const {
 
-	u32 nPolys = this->mPolygons.Size ();
-	for ( u32 i = 0; i < nPolys; ++i ) {
+	size_t nPolys = this->mPolygons.Size ();
+	for ( size_t i = 0; i < nPolys; ++i ) {
 		const ZLPolygon2D& poly = this->mPolygons [ i ];
-		tess.AddContour ( 2, poly.GetVertices (), sizeof ( ZLVec2D ), poly.GetSize ());
+		tess.AddContour ( 2, poly.GetVertices (), sizeof ( ZLVec2D ), ( int )poly.GetSize ());
 	}
 	
 	return tess.Tesselate ( TESS_WINDING_NONZERO, TESS_POLYGONS, 3, 2 );
@@ -705,6 +1017,28 @@ u32 MOAIRegion::GetTriangles ( MOAIVertexFormat& format, MOAIVertexBuffer& vtxBu
 }
 
 //----------------------------------------------------------------//
+ZLSizeResult MOAIRegion::GetVertices ( ZLStream& vtxStream ) const {
+
+	size_t count = 0;
+
+	size_t nPolys = this->mPolygons.Size ();
+	for ( size_t i = 0; i < nPolys; ++i ) {
+	
+		const ZLPolygon2D& poly = this->mPolygons [ i ];
+	
+		size_t nVerts = poly.GetSize ();
+		for ( size_t j = 0; j < nVerts; ++j ) {
+		
+			const ZLVec2D& v = poly.GetVertex ( j );
+			vtxStream.Write < float >( v.mX );
+			vtxStream.Write < float >( v.mY );
+			count++;
+		}
+	}
+	ZL_RETURN_SIZE_RESULT ( count, ZL_OK )
+}
+
+//----------------------------------------------------------------//
 MOAIRegion::MOAIRegion () {
 	
 	RTTI_SINGLE ( MOAILuaObject )
@@ -715,9 +1049,41 @@ MOAIRegion::~MOAIRegion () {
 }
 
 //----------------------------------------------------------------//
+void MOAIRegion::Pad ( const MOAIRegion& region, float pad ) {
+
+	this->Copy ( region );
+
+	if ( pad == 0.0f ) return;
+	
+	size_t size = region.mPolygons.Size ();
+
+	MOAIVectorStyle style;
+	style.Default ();
+
+	for ( size_t i = 0; i < size; ++i ) {
+	
+		ZLPolygon2D& polygon = region.mPolygons [ i ];
+		
+		int nVerts = ( int )polygon.GetSize ();
+		
+		MOAIVectorLineJoin* joins = ( MOAIVectorLineJoin* )alloca ( sizeof ( MOAIVectorLineJoin ) * nVerts );
+		
+		MOAIVectorUtil::ComputeLineJoins ( joins, polygon.GetVertices (), nVerts, false, true, false );
+	
+		int contourVerts = MOAIVectorUtil::StrokeLine ( style, 0, joins, nVerts, pad, false );
+		ZLVec2D* contour = ( ZLVec2D* )alloca ( sizeof ( ZLVec2D ) * contourVerts );
+		MOAIVectorUtil::StrokeLine ( style, contour, joins, nVerts, pad, false );
+		
+		this->mPolygons [ i ].SetVertices ( contour, contourVerts );
+	}
+	
+	this->Bless ();
+}
+
+//----------------------------------------------------------------//
 bool MOAIRegion::PointInside ( const ZLVec2D& p, float pad ) const {
 
-	u32 nPolys = this->mPolygons.Size ();
+	size_t nPolys = this->mPolygons.Size ();
 
 	if ( pad != 0.0f ) {
 		float dist = 0.0f;
@@ -730,7 +1096,7 @@ bool MOAIRegion::PointInside ( const ZLVec2D& p, float pad ) const {
 
 	bool inside = false;
 
-	for ( u32 i = 0; i < nPolys; ++i ) {
+	for ( size_t i = 0; i < nPolys; ++i ) {
 		
 		switch ( this->mPolygons [ i ].PointInside ( p )) {
 		
@@ -765,6 +1131,38 @@ void MOAIRegion::Print () const {
 }
 
 //----------------------------------------------------------------//
+void MOAIRegion::Read ( ZLStream& verts, ZLStream& polySizes ) {
+
+	this->Clear ();
+	
+	size_t nPolygons = polySizes.GetLength () / sizeof ( size_t );
+	
+	if ( nPolygons ) {
+	
+		verts.Seek ( 0, SEEK_SET );
+		polySizes.Seek ( 0, SEEK_SET );
+		
+		this->ReservePolygons ( nPolygons );
+		
+		for ( size_t i = 0; i < nPolygons; ++i ) {
+
+			size_t polySize = polySizes.Read < size_t >( 0 );
+			
+			ZLPolygon2D& poly = this->mPolygons [ i ];
+			poly.ReserveVertices ( polySize );
+			
+			for ( size_t j = 0; j < polySize; ++j ) {
+			
+				ZLVec2D vert = verts.Read < ZLVec2D >( ZLVec2D ( 0.0f, 0.0f ));
+				poly.SetVert ( j, vert.mX, vert.mY );
+			}
+		}
+		
+		this->Bless ();
+	}
+}
+
+//----------------------------------------------------------------//
 void MOAIRegion::RegisterLuaClass ( MOAILuaState& state ) {
 
 	state.SetField ( -1, "BOOLEAN_AND",					( u32 )BOOLEAN_AND );
@@ -792,20 +1190,32 @@ void MOAIRegion::RegisterLuaClass ( MOAILuaState& state ) {
 	
 	state.SetField ( -1, "MAKE_CONVEX",					( u32 )ZLPolygon2D::IS_CONVEX );
 	state.SetField ( -1, "MAKE_CONCAVE",				( u32 )ZLPolygon2D::IS_CONCAVE );
+	
+	state.SetField ( -1, "WINDING_CLOCKWISE",			( u32 )WINDING_CLOCKWISE );
+	state.SetField ( -1, "WINDING_ANTICLOCKWISE",		( u32 )WINDING_ANTICLOCKWISE );
 }
 
 //----------------------------------------------------------------//
 void MOAIRegion::RegisterLuaFuncs ( MOAILuaState& state ) {
 
 	luaL_Reg regTable [] = {
+		{ "append",				_append },
 		{ "bless",				_bless },
 		{ "boolean",			_boolean },
+		{ "clear",				_clear },
+		{ "clip",				_clip },
+		{ "convexHull",			_convexHull },
 		{ "copy",				_copy },
+		{ "countPolygons",		_countPolygons },
 		{ "cull",				_cull },
 		{ "drawDebug",			_drawDebug },
 		{ "edge",				_edge },
+		{ "findExtremity",		_findExtremity },
 		{ "getDistance",		_getDistance },
+		{ "getPolygon",			_getPolygon },
 		{ "getTriangles",		_getTriangles },
+		{ "getVertices",		_getVertices },
+		{ "pad",				_pad },
 		{ "pointInside",		_pointInside },
 		{ "print",				_print },
 		{ "reservePolygons",	_reservePolygons },
@@ -824,9 +1234,20 @@ void MOAIRegion::RegisterLuaFuncs ( MOAILuaState& state ) {
 }
 
 //----------------------------------------------------------------//
-void MOAIRegion::ReservePolygons ( u32 size ) {
+ZLResultCode MOAIRegion::ReservePolygons ( size_t size ) {
 
-	this->mPolygons.Init ( size );
+	return this->mPolygons.Init ( size );
+}
+
+//----------------------------------------------------------------//
+ZLResultCode MOAIRegion::ReserveVertices ( size_t idx, size_t size ) {
+
+	if ( idx >= this->mPolygons.Size ()) {
+	
+		ZLResultCode result = this->mPolygons.Grow ( idx );
+		if ( result != ZL_OK ) return result;
+	}
+	return this->mPolygons [ idx ].ReserveVertices ( size );
 }
 
 //----------------------------------------------------------------//
@@ -846,13 +1267,13 @@ void MOAIRegion::ReverseWinding ( const MOAIRegion& region ) {
 void MOAIRegion::SerializeIn ( MOAILuaState& state, MOAIDeserializer& serializer ) {
 	UNUSED ( serializer );
 
-	size_t nPolys = lua_objlen ( state, -1 );
+	size_t nPolys = ( int )lua_objlen ( state, -1 );
 	this->mPolygons.Init ( nPolys );
 	
 	for ( size_t i = 0; i < nPolys; ++i ) {
 		ZLPolygon2D& poly = this->mPolygons [ i ];
 	
-		state.GetField ( -1, i + 1 );
+		state.GetField ( -1, ( int )( i + 1 )); // TODO: cast
 	
 		size_t len = 0;
 		const void* vertices = lua_tolstring ( state, -1, &len );
@@ -877,6 +1298,20 @@ void MOAIRegion::SerializeOut ( MOAILuaState& state, MOAISerializer& serializer 
 		state.Push (( u32 )i + 1 );
 		lua_pushlstring ( state, ( cc8* )poly.GetVertices (), poly.GetSize () * sizeof ( ZLVec2D ));
 		lua_settable ( state, -3 );
+	}
+}
+
+//----------------------------------------------------------------//
+void MOAIRegion::SetWinding ( u32 winding ) {
+
+	size_t nPolys = this->mPolygons.Size ();
+	for ( size_t i = 0; i < nPolys; ++i ) {
+		ZLPolygon2D& poly = this->mPolygons [ i ];
+		
+		if ((( winding == WINDING_CLOCKWISE ) && poly.Check ( ZLPolygon2D::IS_ANTICLOCKWISE )) ||
+			(( winding == WINDING_ANTICLOCKWISE ) && poly.Check ( ZLPolygon2D::IS_CLOCKWISE ))) {
+			poly.ReverseWinding ();
+		}
 	}
 }
 
@@ -911,7 +1346,7 @@ void MOAIRegion::Stroke ( const MOAIRegion& region, float exterior, bool strokeE
 	for ( size_t i = 0; i < size; ++i ) {
 		ZLPolygon2D& polygon = region.mPolygons [ i ];
 		
-		size_t nVerts = polygon.GetSize ();
+		int nVerts = ( int )polygon.GetSize ();
 		
 		MOAIVectorLineJoin* joins = ( MOAIVectorLineJoin* )alloca ( sizeof ( MOAIVectorLineJoin ) * nVerts );
 		

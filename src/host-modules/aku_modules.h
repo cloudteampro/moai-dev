@@ -30,10 +30,6 @@
 	#include <moai-box2d/host.h>
 #endif
 
-#if AKU_WITH_CLOUDTEAM
-	#include <ct-util/host.h>
-#endif
-
 #if AKU_WITH_CRYPTO
 	#include <moai-crypto/host.h>
 #endif
@@ -46,8 +42,8 @@
 	#include <moai-fmod-ex/host.h>
 #endif
 
-#if AKU_WITH_FMOD_STUDIO
-	#include <moai-fmod-studio/host.h>
+#if AKU_WITH_HARFBUZZ
+	#include <moai-harfbuzz/host.h>
 #endif
 
 #if AKU_WITH_HARNESS
@@ -74,12 +70,12 @@
 	#include <moai-image-pvr/host.h>
 #endif
 
-#if AKU_WITH_IMAGE_WEBP
-	#include <moai-image-webp/host.h>
+#if AKU_WITH_IMAGE_TGA
+	#include <moai-image-tga/host.h>
 #endif
 
-#if AKU_WITH_IMGUI
-	#include <moai-imgui/host.h>
+#if AKU_WITH_IMAGE_WEBP
+	#include <moai-image-webp/host.h>
 #endif
 
 #if AKU_WITH_LUAEXT
@@ -108,8 +104,8 @@
 
 //----------------------------------------------------------------//
 void		AKUModulesAppFinalize					();
-void		AKUModulesAppInitialize					();
-void		AKUModulesContextInitialize				();
+int			AKUModulesAppInitialize					();
+int			AKUModulesContextInitialize				();
 void		AKUModulesPause							( bool pause );
 void		AKUModulesUpdate						();
 

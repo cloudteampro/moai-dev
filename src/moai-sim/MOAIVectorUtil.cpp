@@ -7,12 +7,9 @@
 #include <moai-sim/MOAIVectorUtil.h>
 #include <moai-sim/MOAIVertexBuffer.h>
 #include <moai-sim/MOAIVertexFormatMgr.h>
-#include <tesselator.h>
 #include <signal.h>
 #include <setjmp.h>
-#include <zl-vfs/assert.h>
-
-#define TESS_PRECISION 10000
+#include <tesselator.h>
 
 #ifdef MOAI_COMPILER_MSVC
 	#pragma warning ( disable : 4611 )
@@ -25,15 +22,15 @@
 const ZLVec3D SafeTesselator::sNormal = ZLVec3D ( 0.0f, 0.0f, 1.0f );
 
 //----------------------------------------------------------------//
-void SafeTesselator::AddContour ( int size, const void* vertices, int stride, size_t numVertices ) {
+void SafeTesselator::AddContour ( int numComponents, const void* vertices, int stride, size_t numVertices ) {
 	
-	tessAddContour ( this->mTess, size, vertices, stride, ( int )numVertices );
+	tessAddContour ( this->mTess, numComponents, vertices, stride, ( int )numVertices ); // TODO: check overflow
 }
 
 //----------------------------------------------------------------//
 void SafeTesselator::AddPolygon ( const ZLPolygon2D& poly ) {
 
-	tessAddContour ( this->mTess, 2, poly.GetVertices (), sizeof ( TESSreal ) * 2, poly.GetSize ());
+	this->AddContour ( 2, poly.GetVertices (), sizeof ( TESSreal ) * 2, poly.GetSize ());
 }
 
 //----------------------------------------------------------------//
@@ -50,9 +47,10 @@ u32 SafeTesselator::GetTriangles ( MOAIVertexFormat& format, ZLStream& vtxStream
 	for ( int i = 0; i < nelems; ++i ) {
 		const int* tri = &elems [ i * 3 ];
 		
-		idxStream.Write < u32 >( idxBase + tri [ 0 ]);
-		idxStream.Write < u32 >( idxBase + tri [ 1 ]);
-		idxStream.Write < u32 >( idxBase + tri [ 2 ]);
+		// TODO: check overflow
+		idxStream.Write < u32 >(( u32 )( idxBase + tri [ 0 ]));
+		idxStream.Write < u32 >(( u32 )( idxBase + tri [ 1 ]));
+		idxStream.Write < u32 >(( u32 )( idxBase + tri [ 2 ]));
 	}
 
 	const float* verts = tessGetVertices ( this->mTess );
@@ -68,7 +66,7 @@ u32 SafeTesselator::GetTriangles ( MOAIVertexFormat& format, ZLStream& vtxStream
 	}
 
 	// idx stream is 32-bits, so divide by 4 to get total indices written
-	return ( idxStream.GetLength () - idxCursor ) >> 2;
+	return ( u32 )(( idxStream.GetCursor () - idxCursor ) >> 2 ); // TODO: cast
 }
 
 //----------------------------------------------------------------//
@@ -79,7 +77,7 @@ u32 SafeTesselator::GetTriangles ( MOAIVertexFormat& format, MOAIVertexBuffer& v
 
 	this->GetTriangles ( format, vtxStream, idxStream );
 	
-	return MOAIGeometryWriter::GetMesh ( format, vtxStream, idxStream, vtxBuffer, idxBuffer, idxSizeInBytes );
+	return MOAIGeometryWriter::GetMesh ( format, vtxStream, vtxStream.GetLength (), idxStream, idxStream.GetLength (), vtxBuffer, idxBuffer, idxSizeInBytes );
 }
 
 //------------------------------------------------------------------//
@@ -88,7 +86,7 @@ void SafeTesselator::Reset () {
 		tessDeleteTess ( this->mTess );
 	}
 	this->mTess = tessNewTess ( 0 );
-	tessSetPrecision ( this->mTess, TESS_PRECISION );
+	//tessSetPrecision ( this->mTess, TESS_PRECISION );
 }
 
 //------------------------------------------------------------------//
@@ -176,9 +174,21 @@ void MOAIVectorUtil::ComputeLineJoins ( MOAIVectorLineJoin* joins, const ZLVec2D
 	
 	for ( int i = start; i < max; ++i ) {
 		
-		ZLVec2D n = joins [( i + top ) % nVerts ].mEdgeNorm;
-		n.Add ( joins [ i ].mEdgeNorm );
-		n.Norm ();
+		int prevID = ( i + top ) % nVerts;
+		
+		ZLVec2D prevNorm = joins [ prevID ].mEdgeNorm;
+		ZLVec2D nextNorm = joins [ i ].mEdgeNorm;
+		
+		ZLVec2D n = prevNorm;
+		
+		if ( prevNorm.Dot ( nextNorm ) > -1.0f ) {
+			n.Add ( joins [ i ].mEdgeNorm );
+			n.Norm ();
+		}
+		else {
+			n = joins [ prevID ].mEdgeVec;
+			n.Scale ( scale );
+		}
 		
 		joins [ i ].mJointNorm = n;
 	}

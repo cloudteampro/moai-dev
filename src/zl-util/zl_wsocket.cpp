@@ -38,6 +38,7 @@ SUPPRESS_EMPTY_FILE_WARNING
 *
 * RCS ID: $Id: wsocket.c,v 1.36 2007/06/11 23:44:54 diego Exp $
 \*=========================================================================*/
+
 #include <string.h>
 
 #include <zl-util/zl_socket.h>
@@ -83,7 +84,7 @@ int zl_socket_waitfd(zl_socket* ps, int sw, double tm) {
     fd_set rfds, wfds, efds, *rp = NULL, *wp = NULL, *ep = NULL;
     struct timeval tv, *tp = NULL;
     double t;
-    if (tm == 0.0) return IO_TIMEOUT;  /* optimize timeout == 0 case */
+    if (tm == 0.0) return ZL_IO_TIMEOUT;  /* optimize timeout == 0 case */
     if (sw & WAITFD_R) { 
         FD_ZERO(&rfds); 
 		FD_SET(*ps, &rfds);
@@ -100,9 +101,9 @@ int zl_socket_waitfd(zl_socket* ps, int sw, double tm) {
     }
     ret = select(0, rp, wp, ep, tp);
     if (ret == -1) return WSAGetLastError();
-    if (ret == 0) return IO_TIMEOUT;
-    if (sw == WAITFD_C && FD_ISSET(*ps, &efds)) return IO_CLOSED;
-    return IO_DONE;
+    if (ret == 0) return ZL_IO_TIMEOUT;
+    if (sw == WAITFD_C && FD_ISSET(*ps, &efds)) return ZL_IO_CLOSED;
+    return ZL_IO_DONE;
 }
 
 /*-------------------------------------------------------------------------*\
@@ -162,7 +163,7 @@ void zl_socket_shutdown(zl_socket* ps, int how) {
 \*-------------------------------------------------------------------------*/
 int zl_socket_create(zl_socket* ps, int domain, int type, int protocol) {
     *ps = socket(domain, type, protocol);
-    if (*ps != SOCKET_INVALID) return IO_DONE;
+    if (*ps != SOCKET_INVALID) return ZL_IO_DONE;
     else return WSAGetLastError();
 }
 
@@ -172,17 +173,17 @@ int zl_socket_create(zl_socket* ps, int domain, int type, int protocol) {
 int zl_socket_connect(zl_socket* ps, zl_sockaddr *addr, socklen_t len, double tm) {
     int err;
     /* don't call on closed socket */
-    if (*ps == SOCKET_INVALID) return IO_CLOSED;
+    if (*ps == SOCKET_INVALID) return ZL_IO_CLOSED;
     /* ask system to connect */
-    if (connect(*ps, addr, len) == 0) return IO_DONE;
+    if (connect(*ps, addr, len) == 0) return ZL_IO_DONE;
     /* make sure the system is trying to connect */
     err = WSAGetLastError();
     if (err != WSAEWOULDBLOCK && err != WSAEINPROGRESS) return err;
     /* zero timeout case optimization */
-    if (tm == 0.0) return IO_TIMEOUT;
+    if (tm == 0.0) return ZL_IO_TIMEOUT;
     /* we wait until something happens */
     err = zl_socket_waitfd(ps, WAITFD_C, tm);
-    if (err == IO_CLOSED) {
+    if (err == ZL_IO_CLOSED) {
         int errlen = sizeof(err);
         /* give windows time to set the error (yes, disgusting) */
         Sleep(10);
@@ -190,7 +191,7 @@ int zl_socket_connect(zl_socket* ps, zl_sockaddr *addr, socklen_t len, double tm
         getsockopt(*ps, SOL_SOCKET, SO_ERROR, (char *)&err, &errlen); 
         /* we KNOW there was an error. if 'why' is 0, we will return
         * "unknown error", but it's not really our fault */
-        return err > 0? err: IO_UNKNOWN; 
+        return err > 0? err: ZL_IO_UNKNOWN; 
     } else return err;
 
 }
@@ -199,7 +200,7 @@ int zl_socket_connect(zl_socket* ps, zl_sockaddr *addr, socklen_t len, double tm
 * Binds or returns error message
 \*-------------------------------------------------------------------------*/
 int zl_socket_bind(zl_socket* ps, zl_sockaddr *addr, socklen_t len) {
-    int err = IO_DONE;
+    int err = ZL_IO_DONE;
     zl_socket_setblocking(ps);
     if (bind(*ps, addr, len) < 0) err = WSAGetLastError();
     zl_socket_setnonblocking(ps);
@@ -210,7 +211,7 @@ int zl_socket_bind(zl_socket* ps, zl_sockaddr *addr, socklen_t len) {
 * 
 \*-------------------------------------------------------------------------*/
 int zl_socket_listen(zl_socket* ps, int backlog) {
-    int err = IO_DONE;
+    int err = ZL_IO_DONE;
     zl_socket_setblocking(ps);
     if (listen(*ps, backlog) < 0) err = WSAGetLastError();
     zl_socket_setnonblocking(ps);
@@ -224,22 +225,22 @@ int zl_socket_accept(zl_socket* ps, zl_socket* pa, zl_sockaddr *addr, socklen_t 
         double tm) {
     zl_sockaddr daddr;
     socklen_t dlen = sizeof(daddr);
-    if (*ps == SOCKET_INVALID) return IO_CLOSED;
+    if (*ps == SOCKET_INVALID) return ZL_IO_CLOSED;
     if (!addr) addr = &daddr;
     if (!len) len = &dlen;
     for ( ;; ) {
         int err;
         /* try to get client socket */
-        if ((*pa = accept(*ps, addr, len)) != SOCKET_INVALID) return IO_DONE;
+        if ((*pa = accept(*ps, addr, len)) != SOCKET_INVALID) return ZL_IO_DONE;
         /* find out why we failed */
         err = WSAGetLastError(); 
         /* if we failed because there was no connectoin, keep trying */
         if (err != WSAEWOULDBLOCK && err != WSAECONNABORTED) return err;
         /* call select to avoid busy wait */
-        if ((err = zl_socket_waitfd(ps, WAITFD_R, tm)) != IO_DONE) return err;
+        if ((err = zl_socket_waitfd(ps, WAITFD_R, tm)) != ZL_IO_DONE) return err;
     } 
     /* can't reach here */
-    //return IO_UNKNOWN; 
+    //return ZL_IO_UNKNOWN; 
 }
 
 /*-------------------------------------------------------------------------*\
@@ -254,7 +255,7 @@ int zl_socket_send(zl_socket* ps, const char *data, size_t count,
     int err;
     *sent = 0;
     /* avoid making system calls on closed sockets */
-    if (*ps == SOCKET_INVALID) return IO_CLOSED;
+    if (*ps == SOCKET_INVALID) return ZL_IO_CLOSED;
     /* loop until we send something or we give up on error */
     for ( ;; ) {
         /* try to send something */
@@ -262,17 +263,17 @@ int zl_socket_send(zl_socket* ps, const char *data, size_t count,
         /* if we sent something, we are done */
         if (put > 0) {
             *sent = put;
-            return IO_DONE;
+            return ZL_IO_DONE;
         }
         /* deal with failure */
         err = WSAGetLastError(); 
         /* we can only proceed if there was no serious error */
         if (err != WSAEWOULDBLOCK) return err;
         /* avoid busy wait */
-        if ((err = zl_socket_waitfd(ps, WAITFD_W, tm)) != IO_DONE) return err;
+        if ((err = zl_socket_waitfd(ps, WAITFD_W, tm)) != ZL_IO_DONE) return err;
     } 
     /* can't reach here */
-    //return IO_UNKNOWN;
+    //return ZL_IO_UNKNOWN;
 }
 
 /*-------------------------------------------------------------------------*\
@@ -283,18 +284,18 @@ int zl_socket_sendto(zl_socket* ps, const char *data, size_t count, size_t *sent
 {
     int err;
     *sent = 0;
-    if (*ps == SOCKET_INVALID) return IO_CLOSED;
+    if (*ps == SOCKET_INVALID) return ZL_IO_CLOSED;
     for ( ;; ) {
         int put = sendto(*ps, data, (int) count, 0, addr, len);
         if (put > 0) {
             *sent = put;
-            return IO_DONE;
+            return ZL_IO_DONE;
         }
         err = WSAGetLastError(); 
         if (err != WSAEWOULDBLOCK) return err;
-        if ((err = zl_socket_waitfd(ps, WAITFD_W, tm)) != IO_DONE) return err;
+        if ((err = zl_socket_waitfd(ps, WAITFD_W, tm)) != ZL_IO_DONE) return err;
     } 
-    //return IO_UNKNOWN;
+    //return ZL_IO_UNKNOWN;
 }
 
 /*-------------------------------------------------------------------------*\
@@ -303,19 +304,19 @@ int zl_socket_sendto(zl_socket* ps, const char *data, size_t count, size_t *sent
 int zl_socket_recv(zl_socket* ps, char *data, size_t count, size_t *got, double tm) {
     int err;
     *got = 0;
-    if (*ps == SOCKET_INVALID) return IO_CLOSED;
+    if (*ps == SOCKET_INVALID) return ZL_IO_CLOSED;
     for ( ;; ) {
         int taken = recv(*ps, data, (int) count, 0);
         if (taken > 0) {
             *got = taken;
-            return IO_DONE;
+            return ZL_IO_DONE;
         }
-        if (taken == 0) return IO_CLOSED;
+        if (taken == 0) return ZL_IO_CLOSED;
         err = WSAGetLastError();
         if (err != WSAEWOULDBLOCK) return err;
-        if ((err = zl_socket_waitfd(ps, WAITFD_R, tm)) != IO_DONE) return err;
+        if ((err = zl_socket_waitfd(ps, WAITFD_R, tm)) != ZL_IO_DONE) return err;
     }
-    //return IO_UNKNOWN;
+    //return ZL_IO_UNKNOWN;
 }
 
 /*-------------------------------------------------------------------------*\
@@ -325,19 +326,19 @@ int zl_socket_recvfrom(zl_socket* ps, char *data, size_t count, size_t *got,
         zl_sockaddr *addr, socklen_t *len, double tm) {
     int err;
     *got = 0;
-    if (*ps == SOCKET_INVALID) return IO_CLOSED;
+    if (*ps == SOCKET_INVALID) return ZL_IO_CLOSED;
     for ( ;; ) {
         int taken = recvfrom(*ps, data, (int) count, 0, addr, len);
         if (taken > 0) {
             *got = taken;
-            return IO_DONE;
+            return ZL_IO_DONE;
         }
-        if (taken == 0) return IO_CLOSED;
+        if (taken == 0) return ZL_IO_CLOSED;
         err = WSAGetLastError();
         if (err != WSAEWOULDBLOCK) return err;
-        if ((err = zl_socket_waitfd(ps, WAITFD_R, tm)) != IO_DONE) return err;
+        if ((err = zl_socket_waitfd(ps, WAITFD_R, tm)) != ZL_IO_DONE) return err;
     }
-    //return IO_UNKNOWN;
+    //return ZL_IO_UNKNOWN;
 }
 
 
@@ -346,13 +347,13 @@ int zl_socket_recvfrom(zl_socket* ps, char *data, size_t count, size_t *got,
 \*-------------------------------------------------------------------------*/
 int zl_socket_gethostbyaddr(const char *addr, socklen_t len, struct hostent **hp) {
     *hp = gethostbyaddr(addr, len, AF_INET);
-    if (*hp) return IO_DONE;
+    if (*hp) return ZL_IO_DONE;
     else return WSAGetLastError();
 }
 
 int zl_socket_gethostbyname(const char *addr, struct hostent **hp) {
     *hp = gethostbyname(addr);
-    if (*hp) return IO_DONE;
+    if (*hp) return ZL_IO_DONE;
     else return  WSAGetLastError();
 }
 
@@ -361,17 +362,17 @@ int zl_socket_gethostbyname(const char *addr, struct hostent **hp) {
 \*-------------------------------------------------------------------------*/
 
 //----------------------------------------------------------------//
-cc8* zl_io_strerror(int err) {
+cc8* zl_ZL_IO_strerror(int err) {
 	switch (err) {
-	case IO_DONE: return NULL;
-	case IO_CLOSED: return "closed";
-	case IO_TIMEOUT: return "timeout";
+	case ZL_IO_DONE: return NULL;
+	case ZL_IO_CLOSED: return "closed";
+	case ZL_IO_TIMEOUT: return "timeout";
 	default: return "unknown error";
 	}
 }
 
 const char *socket_hoststrerror(int err) {
-    if (err <= 0) return zl_io_strerror(err);
+    if (err <= 0) return zl_ZL_IO_strerror(err);
     switch (err) {
         case WSAHOST_NOT_FOUND: return "host not found";
         default: return wstrerror(err); 
@@ -379,7 +380,7 @@ const char *socket_hoststrerror(int err) {
 }
 
 const char *socket_strerror(int err) {
-    if (err <= 0) return zl_io_strerror(err);
+    if (err <= 0) return zl_ZL_IO_strerror(err);
     switch (err) {
         case WSAEADDRINUSE: return "address already in use";
         case WSAECONNREFUSED: return "connection refused";

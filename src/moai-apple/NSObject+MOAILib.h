@@ -1,14 +1,6 @@
 #import <Foundation/Foundation.h>
 #import <moai-core/headers.h>
 
-#define OBJC_TO_LUA(obj,state)								\
-	if ( obj == nil ) {										\
-		lua_pushnil ( state );								\
-	}														\
-	else {													\
-		[ obj toLua:state ];								\
-	}
-
 //================================================================//
 // NSObject ( MOAILib )
 //================================================================//

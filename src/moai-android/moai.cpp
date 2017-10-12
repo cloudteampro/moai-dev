@@ -138,7 +138,7 @@
 	}
 
 	//----------------------------------------------------------------//
-	extern "C" JNIEXPORT jint JNICALL Java_com_moaisdk_core_Moai_AKUCreateContext ( JNIEnv* env, jclass obj ) {
+	extern "C" JNIEXPORT void* JNICALL Java_com_moaisdk_core_Moai_AKUCreateContext ( JNIEnv* env, jclass obj ) {
 
 		AKUContextID context = AKUCreateContext ();
 		if ( context ) {
@@ -148,7 +148,7 @@
 	}
 
 	//----------------------------------------------------------------//
-	extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_core_Moai_AKUDeleteContext ( JNIEnv* env, jclass obj, jint contextId ) {
+	extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_core_Moai_AKUDeleteContext ( JNIEnv* env, jclass obj, void* contextId ) {
 
 		AKUDeleteContext ( contextId );
 	}
@@ -227,40 +227,6 @@
 		ievent.m_y = y;
 
 		inputQueue->Push ( ievent );
-	}
-
-	//----------------------------------------------------------------//
-	extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_core_Moai_AKUEnvironmentSetBool ( JNIEnv* env, jclass obj, jstring jkey, jboolean jvalue ) {
-		
-		if ( !MOAIEnvironment::IsValid ()) return;
-
-		JNI_GET_CSTRING ( jkey, key );
-		MOAIEnvironment::Get ().SetValue ( key,	( bool )jvalue );
-		JNI_RELEASE_CSTRING ( jkey, key );
-	}
-
-	//----------------------------------------------------------------//
-	extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_core_Moai_AKUEnvironmentSetInt ( JNIEnv* env, jclass obj, jstring jkey, jint jvalue ) {
-		
-		if ( !MOAIEnvironment::IsValid ()) return;
-
-		JNI_GET_CSTRING ( jkey, key );
-		MOAIEnvironment::Get ().SetValue ( key,	( int )jvalue );
-		JNI_RELEASE_CSTRING ( jkey, key );
-	}
-
-	//----------------------------------------------------------------//
-	extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_core_Moai_AKUEnvironmentSetString ( JNIEnv* env, jclass obj, jstring jkey, jstring jvalue ) {
-		
-		if ( !MOAIEnvironment::IsValid ()) return;
-
-		JNI_GET_CSTRING ( jkey, key );
-		JNI_GET_CSTRING ( jvalue, value );
-		
-		MOAIEnvironment::Get ().SetValue ( key,	value );
-
-		JNI_RELEASE_CSTRING ( jkey, key );
-		JNI_RELEASE_CSTRING ( jvalue, value );
 	}
 
 	//----------------------------------------------------------------//
@@ -349,7 +315,7 @@
 	}
 
 	//----------------------------------------------------------------//
-	extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_core_Moai_AKUSetContext ( JNIEnv* env, jclass obj, jint contextId ) {
+	extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_core_Moai_AKUSetContext ( JNIEnv* env, jclass obj, void* contextId ) {
 
 		AKUSetContext ( contextId );
 	}
@@ -370,12 +336,11 @@
 	}
 
 	//----------------------------------------------------------------//
-	extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_core_Moai_AKUSetDeviceProperties ( JNIEnv* env, jclass obj, jstring jappName, jstring jappId, jstring jappVersionName, jstring jappVersionCode, jstring jabi, jstring jdevBrand, jstring jdevName, jstring jdevManufacturer, jstring jdevModel, jstring jdevProduct, jint jnumProcessors, jstring josBrand, jstring josVersion, jstring josBuild, jstring judid ) {
+	extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_core_Moai_AKUSetDeviceProperties ( JNIEnv* env, jclass obj, jstring jappName, jstring jappId, jstring jappVersion, jstring jabi, jstring jdevBrand, jstring jdevName, jstring jdevManufacturer, jstring jdevModel, jstring jdevProduct, jint jnumProcessors, jstring josBrand, jstring josVersion, jstring judid ) {
 
 		JNI_GET_CSTRING ( jappName, appName );
 		JNI_GET_CSTRING ( jappId, appId );
-		JNI_GET_CSTRING ( jappVersionName, appVersionName );
-		JNI_GET_CSTRING ( jappVersionCode, appVersionCode );
+		JNI_GET_CSTRING ( jappVersion, appVersion );
 		JNI_GET_CSTRING ( jabi, abi );
 		JNI_GET_CSTRING ( jdevBrand, devBrand );
 		JNI_GET_CSTRING ( jdevName, devName );
@@ -384,31 +349,27 @@
 		JNI_GET_CSTRING ( jdevProduct, devProduct );
 		JNI_GET_CSTRING ( josBrand, osBrand );
 		JNI_GET_CSTRING ( josVersion, osVersion );
-		JNI_GET_CSTRING ( josBuild, osBuild );
 		JNI_GET_CSTRING ( judid, udid );
 
 		MOAIEnvironment& environment = MOAIEnvironment::Get ();
 
-		environment.SetValue ( MOAI_ENV_appDisplayName,			appName );
-		environment.SetValue ( MOAI_ENV_appID,					appId );
-		environment.SetValue ( MOAI_ENV_appVersion,				appVersionName );
-		environment.SetValue ( MOAI_ENV_buildVersion,			appVersionCode );
-		environment.SetValue ( MOAI_ENV_cpuabi,					abi );
-		environment.SetValue ( MOAI_ENV_devBrand,				devBrand );
-		environment.SetValue ( MOAI_ENV_devName,				devName );
-		environment.SetValue ( MOAI_ENV_devManufacturer,		devManufacturer );
-		environment.SetValue ( MOAI_ENV_devModel,				devModel );
-		environment.SetValue ( MOAI_ENV_devProduct,				devProduct );
-		environment.SetValue ( MOAI_ENV_numProcessors,			( int )jnumProcessors );
-		environment.SetValue ( MOAI_ENV_osBrand,				osBrand );
-		environment.SetValue ( MOAI_ENV_osVersion,				osVersion );
-		environment.SetValue ( MOAI_ENV_osBuild,				osBuild );
-		environment.SetValue ( MOAI_ENV_udid,					udid );
+		environment.SetValue ( MOAI_ENV_appDisplayName,		appName );
+		environment.SetValue ( MOAI_ENV_appID,				appId );
+		environment.SetValue ( MOAI_ENV_appVersion,			appVersion );
+		environment.SetValue ( MOAI_ENV_cpuabi,				abi );
+		environment.SetValue ( MOAI_ENV_devBrand,			devBrand );
+		environment.SetValue ( MOAI_ENV_devName,			devName );
+		environment.SetValue ( MOAI_ENV_devManufacturer,	devManufacturer );
+		environment.SetValue ( MOAI_ENV_devModel,			devModel );
+		environment.SetValue ( MOAI_ENV_devProduct,			devProduct );
+		environment.SetValue ( MOAI_ENV_numProcessors,		jnumProcessors );
+		environment.SetValue ( MOAI_ENV_osBrand,			osBrand );
+		environment.SetValue ( MOAI_ENV_osVersion,			osVersion );
+		environment.SetValue ( MOAI_ENV_udid,				udid );
 
 		JNI_RELEASE_CSTRING ( jappName, appName );
 		JNI_RELEASE_CSTRING ( jappId, appId );
-		JNI_RELEASE_CSTRING ( jappVersionName, appVersionName );
-		JNI_RELEASE_CSTRING ( jappVersionCode, appVersionCode );
+		JNI_RELEASE_CSTRING ( jappVersion, appVersion );
 		JNI_RELEASE_CSTRING ( jabi, abi );
 		JNI_RELEASE_CSTRING ( jdevBrand, devBrand );
 		JNI_RELEASE_CSTRING ( jdevName, devName );
@@ -417,7 +378,6 @@
 		JNI_RELEASE_CSTRING ( jdevProduct, devProduct );
 		JNI_RELEASE_CSTRING ( josBrand, osBrand );
 		JNI_RELEASE_CSTRING ( josVersion, osVersion );
-		JNI_RELEASE_CSTRING ( josBuild, osBuild );
 		JNI_RELEASE_CSTRING ( judid, udid );
 	}
 

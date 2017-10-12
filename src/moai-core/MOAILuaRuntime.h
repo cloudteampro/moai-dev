@@ -38,7 +38,7 @@ private:
 	typedef STLSet < const void* >							TraversalSet;
 	typedef TraversalSet::iterator							TraversalSetIt;
 
-	typedef STLMap < MOAILuaObject*, StringSet >			ObjectPathMap;
+	typedef STLMap < const MOAILuaObject*, StringSet >		ObjectPathMap;
 	typedef ObjectPathMap::iterator							ObjectPathMapIt;
 
 	TraversalSet		mTraversalStack; // to hold traversed objects
@@ -65,6 +65,7 @@ private:
 
 	typedef STLSet < MOAILuaObject* >						ObjectSet;
 	typedef ObjectSet::iterator								ObjectSetIt;
+	typedef ObjectSet::const_iterator						ObjectSetConstIt;
 
 	typedef STLMap < MOAILuaObject*, MOAILuaObjectInfo >	TrackingMap;
 	typedef TrackingMap::iterator							TrackingMapIt;
@@ -146,7 +147,6 @@ public:
 	friend class MOAILuaStrongRef;
 	friend class MOAILuaWeakRef;
 	friend class MOAILuaState;
-	template<typename U> friend class MOAILuaLocal;
 
 	DECL_LUA_SINGLETON ( MOAILuaRuntime )
 

@@ -25,15 +25,19 @@ int MOAIAnimCurveQuat::_getValueAtTime ( lua_State* L ) {
 
 	float time = state.GetValue < float >( 2, 0 );
 	
-	ZLQuaternion quat;
-	quat = self->GetValue( time );
+	MOAIAnimKeySpan span = self->GetSpan ( time );
+	ZLQuaternion quat = self->GetValue ( span );
 	
 	ZLVec3D value;
 	quat.Get ( value.mX, value.mY, value.mZ );
+
 	state.Push ( value.mX );
 	state.Push ( value.mY );
 	state.Push ( value.mZ );
-	return 3;
+	
+	state.Push ( span.mKeyID + 1 );
+	
+	return 4;
 }
 
 //----------------------------------------------------------------//
@@ -70,47 +74,6 @@ int MOAIAnimCurveQuat::_setKey ( lua_State* L ) {
 	return 0;
 }
 
-//----------------------------------------------------------------//
-/**	@lua	setKeyQuat
-	@text	Initialize a key frame at a given time with a given value as raw quaternion components.
-	
-	@in		MOAIAnimCurveQuat self
-	@in		number index			Index of the keyframe.
-	@in		number time				Location of the key frame along the curve.
-	@in		number s				S quaternion component
-	@in		number x				X quaternion component
-	@in		number y				Y quaternion component
-	@in		number z				Z quaternion component
-	@opt	number mode				The ease mode. One of MOAIEaseType.EASE_IN, MOAIEaseType.EASE_OUT, MOAIEaseType.FLAT MOAIEaseType.LINEAR,
- MOAIEaseType.SMOOTH, MOAIEaseType.SOFT_EASE_IN, MOAIEaseType.SOFT_EASE_OUT, MOAIEaseType.SOFT_SMOOTH. Defaults to MOAIEaseType.SMOOTH.
-	@opt	number weight			Blends between chosen ease type (of any) and a linear transition. Defaults to 1.
-	@out	nil
- */
-int MOAIAnimCurveQuat::_setKeyQuat ( lua_State* L ) {
-	MOAI_LUA_SETUP ( MOAIAnimCurveQuat, "UNNNN" );
-	
-	u32 index		= state.GetValue < u32 >( 2, 1 ) - 1;
-	float time		= state.GetValue < float >( 3, 0.0f );
-	ZLVec4D value	= state.GetVec4D < float >( 4 );
-	u32 mode		= state.GetValue < u32 >( 8, ZLInterpolate::kSmooth );
-	float weight	= state.GetValue < float >( 9, 1.0f );
-	
-	if ( MOAILogMessages::CheckIndexPlusOne ( index, self->mKeys.Size (), L )) {
-		
-		self->SetKey ( index, time, mode, weight );
-		self->SetSample ( index, value.mX, value.mY, value.mZ, value.mW );
-	}
-	
-	ZLQuaternion quat;
-	quat.Set ( value.mX, value.mY, value.mZ, value.mW );
-	float x, y, z;
-	quat.Get ( x, y, z );
-	MOAILogF ( 0, ZLLog::LOG_ERROR, "%f, %f, %f", x, y, z );
-	
-	return 0;
-}
-
-
 //================================================================//
 // MOAIAnimCurveQuat
 //================================================================//
@@ -126,7 +89,7 @@ ZLQuaternion MOAIAnimCurveQuat::GetCurveDelta () const {
 
 	ZLQuaternion delta;
 
-	u32 size = this->mKeys.Size ();
+	u32 size = ( u32 )this->mKeys.Size ();
 	if ( size > 1 ) {
 		delta = this->mSamples [ size - 1 ];
 		delta.Sub ( this->mSamples [ 0 ]);
@@ -222,7 +185,6 @@ void MOAIAnimCurveQuat::RegisterLuaFuncs ( MOAILuaState& state ) {
 	luaL_Reg regTable [] = {
 		{ "getValueAtTime",		_getValueAtTime },
 		{ "setKey",				_setKey },
-		{ "setKeyQuat",			_setKeyQuat },
 		{ NULL, NULL }
 	};
 
@@ -240,13 +202,5 @@ void MOAIAnimCurveQuat::SetSample ( u32 id, float x, float y, float z ) {
 
 	if ( id < this->mKeys.Size ()) {
 		this->mSamples [ id ].Set ( x, y, z );
-	}
-}
-
-//----------------------------------------------------------------//
-void MOAIAnimCurveQuat::SetSample ( u32 id, float s, float x, float y, float z ) {
-	
-	if ( id < this->mKeys.Size ()) {
-		this->mSamples [ id ].Set ( s, x, y, z );
 	}
 }

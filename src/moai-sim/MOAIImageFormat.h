@@ -27,21 +27,24 @@ protected:
 	//----------------------------------------------------------------//
 	void				Alloc						( MOAIImage& image ) const;
 	void				CleanupTexture				( MOAISingleTexture& texture );
-	void*				GetBitmap					( MOAIImage& image ) const;
-	void*				GetRowAddr					( MOAIImage& image, u32 y ) const;
+	const void*			GetBitmap					( MOAIImage& image ) const;
+	void*				GetBitmapMutable			( MOAIImage& image ) const;
 	const void*			GetRowAddr					( const MOAIImage& image, u32 y ) const;
+	void*				GetRowAddrMutable			( MOAIImage& image, u32 y ) const;
 	void				SetColorFormat				( MOAIImage& image, ZLColor::ColorFormat colorFormat ) const;
 	bool				SetDimensions				( MOAIImage& image, u32 width, u32 height, u32 transform ) const;
 	void				SetPixelFormat				( MOAIImage& image, MOAIImage::PixelFormat pixelFormat ) const;
-	void				SetTextureID				( MOAISingleTexture& texture, u32 glTexID, int internalFormat, int pixelType, size_t textureSize );
+	void				SetTextureID				( MOAISingleTexture& texture, ZLGfxHandle* glTexID, int internalFormat, int pixelType, size_t textureSize );
 
 public:
 
 	//----------------------------------------------------------------//
-	virtual bool		CheckHeader					( const void* buffer ) = 0;
+	virtual bool		CheckHeader					( const void* buffer );
 	virtual bool		CreateTexture				( MOAISingleTexture& texture, const void* data, size_t size );
-	virtual size_t		GetHeaderSize				() = 0;
+	virtual size_t		GetHeaderSize				();
+	virtual size_t		GetHeaderGuessSize			();
 	virtual bool		GetTextureInfo				( ZLStream& stream, MOAITextureInfo& info );
+	virtual bool		GuessHeader					( const void* buffer );
 						MOAIImageFormat				();
 	virtual				~MOAIImageFormat			();
 	virtual bool		ReadImage					( MOAIImage& image, ZLStream& stream, u32 transform );

@@ -5,7 +5,6 @@
 #define	MOAIBILLINGANDROID_H
 
 #include <moai-core/headers.h>
-#include <moai-android/JniUtils.h>
 
 //================================================================//
 // MOAIBillingAndroid
@@ -36,8 +35,7 @@
 	@const	BILLING_PURCHASE_STATE_ITEM_REFUNDED		Purchase state code for a refunded/revoked purchase.
 */
 class MOAIBillingAndroid :
-	public ZLContextClass < MOAIBillingAndroid, MOAILuaObject >,
-	public JniUtils {
+	public ZLContextClass < MOAIBillingAndroid, MOAILuaObject > {
 private:
 		
 	static cc8*	_luaParseTable 	( lua_State* L, int idx );
@@ -60,7 +58,6 @@ private:
 	static int _getPurchasedProducts		( lua_State* L );
 	static int _purchaseProduct				( lua_State* L );
 	static int _purchaseProductFortumo		( lua_State* L );
-	static int _requestProductsAsync		( lua_State* L );
 	static int _requestProductsSync			( lua_State* L );
 	
 public:
@@ -73,45 +70,44 @@ public:
 		PURCHASE_STATE_CHANGED,
 		RESTORE_RESPONSE_RECEIVED,
 		USER_ID_DETERMINED,
-		PRODUCT_REQUEST_RESPONSE,
 		TOTAL,
 	};
 
 	enum {
-		BILLING_PROVIDER_GOOGLE,
-		BILLING_PROVIDER_AMAZON,
+        BILLING_PROVIDER_GOOGLE,
+        BILLING_PROVIDER_AMAZON,
 		BILLING_PROVIDER_TSTORE,
 		BILLING_PROVIDER_FORTUMO
 	};
 
 	enum {
-		BILLING_RESULT_SUCCESS,
-		BILLING_RESULT_USER_CANCELED,
-		BILLING_RESULT_BILLING_UNAVAILABLE,
-		BILLING_RESULT_ITEM_UNAVAILABLE,
-		BILLING_RESULT_ERROR,
+        BILLING_RESULT_SUCCESS,
+        BILLING_RESULT_USER_CANCELED,
+        BILLING_RESULT_BILLING_UNAVAILABLE,
+        BILLING_RESULT_ITEM_UNAVAILABLE,
+        BILLING_RESULT_ERROR,
 	};
 
 	enum {
-		BILLING_PURCHASE_STATE_ITEM_PURCHASED,
-		BILLING_PURCHASE_STATE_PURCHASE_CANCELED,
-		BILLING_PURCHASE_STATE_ITEM_REFUNDED,
+        BILLING_PURCHASE_STATE_ITEM_PURCHASED,
+        BILLING_PURCHASE_STATE_PURCHASE_CANCELED,
+        BILLING_PURCHASE_STATE_ITEM_REFUNDED,
 	};
 	
 	enum {
-		GOOGLE_RESPONSE_CODE_OK,
-		GOOGLE_RESPONSE_CODE_USER_CANCELED,
-		GOOGLE_RESPONSE_CODE_SERVICE_UNAVAILABLE,
-		GOOGLE_RESPONSE_CODE_BILLING_UNAVAILABLE,
-		GOOGLE_RESPONSE_CODE_ITEM_UNAVAILABLE,
-		GOOGLE_RESPONSE_CODE_DEVELOPER_ERROR,
-		GOOGLE_RESPONSE_CODE_ERROR,
+        GOOGLE_RESPONSE_CODE_OK,
+        GOOGLE_RESPONSE_CODE_USER_CANCELED,
+        GOOGLE_RESPONSE_CODE_SERVICE_UNAVAILABLE,
+        GOOGLE_RESPONSE_CODE_BILLING_UNAVAILABLE,
+        GOOGLE_RESPONSE_CODE_ITEM_UNAVAILABLE,
+        GOOGLE_RESPONSE_CODE_DEVELOPER_ERROR,
+        GOOGLE_RESPONSE_CODE_ERROR,
 	};
 	
 	enum {
-		GOOGLE_PURCHASE_STATE_ITEM_PURCHASED = 0,
-		GOOGLE_PURCHASE_STATE_PURCHASE_CANCELED = 1,
-		GOOGLE_PURCHASE_STATE_ITEM_REFUNDED = 2,
+        GOOGLE_PURCHASE_STATE_ITEM_PURCHASED,
+        GOOGLE_PURCHASE_STATE_PURCHASE_CANCELED,
+        GOOGLE_PURCHASE_STATE_ITEM_REFUNDED,
 	};
 	
 	enum {
@@ -142,14 +138,14 @@ public:
 	};
 
 	enum {
-		BILLINGV3_RESPONSE_RESULT_OK = 0,
-		BILLINGV3_RESPONSE_RESULT_USER_CANCELED = 1,
-		BILLINGV3_RESPONSE_RESULT_BILLING_UNAVAILABLE = 3,
-		BILLINGV3_RESPONSE_RESULT_ITEM_UNAVAILABLE = 4,
-		BILLINGV3_RESPONSE_RESULT_DEVELOPER_ERROR = 5,
-		BILLINGV3_RESPONSE_RESULT_ERROR = 6,
-		BILLINGV3_RESPONSE_RESULT_ITEM_ALREADY_OWNED = 7,
-		BILLINGV3_RESPONSE_RESULT_ITEM_NOT_OWNED = 8,
+        BILLINGV3_RESPONSE_RESULT_OK = 0,
+        BILLINGV3_RESPONSE_RESULT_USER_CANCELED = 1,
+        BILLINGV3_RESPONSE_RESULT_BILLING_UNAVAILABLE = 3,
+        BILLINGV3_RESPONSE_RESULT_ITEM_UNAVAILABLE = 4,
+        BILLINGV3_RESPONSE_RESULT_DEVELOPER_ERROR = 5,
+        BILLINGV3_RESPONSE_RESULT_ERROR = 6,
+        BILLINGV3_RESPONSE_RESULT_ITEM_ALREADY_OWNED = 7,
+        BILLINGV3_RESPONSE_RESULT_ITEM_NOT_OWNED = 8,
 	}; 
 
 	cc8*			mBillingProvider;
@@ -164,7 +160,6 @@ public:
 	static int		MapGooglePurchaseStateCode		( int code );
 	static int		MapGoogleResponseCode			( int code );
 	void			NotifyBillingSupported			( bool supported );
-	void			NotifyProductsInfoReceived 		( cc8* result );
 	void			NotifyPurchaseResponseReceived	( int code, cc8* identifier );
 	void			NotifyPurchaseStateChanged		( int code, cc8* identifier, cc8* order, cc8* user, cc8* notification, cc8* payload );
 	void			NotifyRestoreResponseReceived	( int code, bool more, cc8* offset );

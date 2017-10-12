@@ -15,15 +15,14 @@ class MOAIDataIOTask :
 	public MOAITask {
 private:
 
-	STLString								mFilename;
-	MOAILuaSharedPtr < MOAIDataBuffer >		mData;
-	MOAILuaMemberRef						mOnFinish;
-	u32										mAction;
+	STLString						mFilename;
+	MOAIDataBuffer*					mData;
+	MOAILuaStrongRef				mOnFinish;
+	u32								mAction;
 	
-	bool									mInflateOnLoad;
-	bool									mInflateOnTaskThread;
-	bool									mResult;
-	int										mWindowBits;
+	bool							mInflateOnLoad;
+	bool							mInflateOnTaskThread;
+	int								mWindowBits;
 
 	//----------------------------------------------------------------//
 	void		Execute				();
@@ -36,8 +35,6 @@ public:
 		LOAD_ACTION,
 		SAVE_ACTION,
 	};
-
-	DECL_LUA_FACTORY ( MOAIDataIOTask )
 
 	//----------------------------------------------------------------//
 	void		Init				( cc8* filename, MOAIDataBuffer& target, u32 action );

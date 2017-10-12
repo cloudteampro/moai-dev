@@ -13,10 +13,6 @@
 		#define AKU_WITH_BOX2D 1
 	#endif
 
-	#ifndef AKU_WITH_CLOUDTEAM
-		#define AKU_WITH_CLOUDTEAM 1
-	#endif
-
 	#ifndef AKU_WITH_CRYPTO
 		#define AKU_WITH_CRYPTO 1
 	#endif
@@ -29,8 +25,8 @@
 		#define AKU_WITH_FMOD_EX 0
 	#endif
 
-	#ifndef AKU_WITH_FMOD_STUDIO
-		#define AKU_WITH_FMOD_STUDIO 0
+	#ifndef AKU_WITH_HARFBUZZ
+		#define AKU_WITH_HARFBUZZ 0
 	#endif
 
 	#ifndef AKU_WITH_HARNESS
@@ -45,6 +41,11 @@
 		#define AKU_WITH_HTTP_SERVER 0
 	#endif
 
+	// TODO: fix on iOS; should be AKU_WITH_IOS_IFA
+	#ifndef AKU_WITH_IFA // technically not a module; just configuration
+		#define AKU_WITH_IFA 0
+	#endif
+
 	#ifndef AKU_WITH_IMAGE_JPG
 		#define AKU_WITH_IMAGE_JPG 1
 	#endif
@@ -57,12 +58,12 @@
 		#define AKU_WITH_IMAGE_PVR 1
 	#endif
 
+	#ifndef AKU_WITH_IMAGE_TGA
+		#define AKU_WITH_IMAGE_TGA 0
+	#endif
+
 	#ifndef AKU_WITH_IMAGE_WEBP
 		#define AKU_WITH_IMAGE_WEBP 1
-	#endif
-	
-	#ifndef AKU_WITH_IMGUI
-		#define AKU_WITH_IMGUI 0
 	#endif
 
 	#ifndef AKU_WITH_LUAEXT
@@ -82,7 +83,7 @@
 	#endif
 
 	#ifndef AKU_WITH_SPINE
-		#define AKU_WITH_SPINE 1
+		#define AKU_WITH_SPINE 0
 	#endif
 
 	#ifndef AKU_WITH_UNTZ

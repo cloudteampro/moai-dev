@@ -6,14 +6,12 @@
 #include <string.h>
 
 #include <moai-core/host.h>
+#include <moai-sdl/host.h>
 #include <host-modules/aku_modules.h>
-
-#include <zl-common/zl_types.h>
-#include <zl-util/ZLLeanArray.h>
 
 #ifdef MOAI_OS_WINDOWS
     #include <windows.h>
-#elif defined(MOAI_OS_LINUX)
+#elif defined ( MOAI_OS_LINUX )
     #include <X11/Xlib.h>      //XOpenDisplay,etc
     #include <xcb/xcb.h>
     #include <xcb/xcb_aux.h> 
@@ -23,27 +21,23 @@
 #include <SDL.h>
 
 #include "SDLHost.h"
-#include "SDLGameController.h"
+#include "SDLJoystick.h"
 #include "SDLKeyCodeMapping.h"
 
-#define MAX_GAME_CONTROLLERS 4
-
 #ifdef __APPLE__
-#include <CoreFoundation/CoreFoundation.h>
-#include <limits.h>
+	#include <CoreFoundation/CoreFoundation.h>
+	#include <limits.h>
 #endif
 
-#include "SDLImGuiHelper.h"
+//#include <OpenGL/gl.h>
+//#include <OpenGL/glext.h>
+#include <zl-gfx/ZLGfx-gles.h>
 
 #define UNUSED(p) (( void )p)
 
 namespace InputDeviceID {
 	enum {
 		DEVICE,
-		GAMEPAD1,
-		GAMEPAD2,
-		GAMEPAD3,
-		GAMEPAD4,
 		TOTAL,
 	};
 }
@@ -56,62 +50,191 @@ namespace InputSensorID {
 		MOUSE_MIDDLE,
 		MOUSE_RIGHT,
 		MOUSE_WHEEL,
-//		JOYSTICK,
+		JOYSTICK,
 //		TOUCH,
 		TOTAL,
 	};
 }
 
-namespace InputControllerSensorID {
-	enum {
-		BUTTON_A = 0,
-		BUTTON_B,
-		BUTTON_X,
-		BUTTON_Y,
-		BUTTON_BACK,
-		BUTTON_GUIDE,
-		BUTTON_START,
-		BUTTON_LEFTSTICK,
-		BUTTON_RIGHTSTICK,
-		BUTTON_LEFTSHOULDER,
-		BUTTON_RIGHTSHOULDER,
-		BUTTON_UP,
-		BUTTON_DOWN,
-		BUTTON_LEFT,
-		BUTTON_RIGHT,
-		AXIS_LEFT,
-		AXIS_RIGHT,
-		AXIS_TRIGGER,
-		TOTAL,
-	};
-}
+// run with multithreaded host or not
+//#define GFX_ASYNC 1
 
-const char* CONTROLLER_EVENT_NAMES[] = {
-		"a",
-		"b",
-		"x",
-		"y",
-		"back",
-		"guide",
-		"start",
-		"leftStick",
-		"rightStick",
-		"leftShoulder",
-		"rightShoulder",
-		"up",
-		"down",
-		"left",
-		"right",
-		"axisLeft",
-		"axisRight",
-		"axisTrigger", // left - x, right - y
-};
+// counters for testing async timing issues (dropped frames)
+static const int SIM_UPDATE_INTERVAL		= 1;
+static const int LOAD_UPDATE_INTERVAL		= 1;
+static const int RENDER_UPDATE_INTERVAL		= 1;
+
+static float sDeviceScaleX = 1.0f;
+static float sDeviceScaleY = 1.0f;
 
 static SDL_Window* sWindow = 0;
 
 typedef int ( *DisplayModeFunc ) (int, SDL_DisplayMode *);
 
 static void SetScreenSize ( DisplayModeFunc func);
+
+//================================================================//
+// WorkerThreadInfo
+//================================================================//
+class WorkerThreadInfo {
+public:
+
+	enum {
+		LOADING_FLAG		= 0x01,
+		RENDER_FLAG			= 0x02,
+	};
+	
+private:
+
+	static SDL_mutex*		sDisplayListMutex;
+	//static SDL_GLContext	sSharedContext;
+
+	SDL_Thread*		mThread;
+	SDL_cond*		mCondition;
+	SDL_mutex*		mConditionMutex;
+	bool			mIsDone;
+	
+	SDL_GLContext	mContext;
+	
+	int				mMask;
+	
+	//----------------------------------------------------------------//
+	static int ThreadMain ( void* data ) {
+
+		SDL_LockMutex ( sDisplayListMutex );
+
+		WorkerThreadInfo* info = ( WorkerThreadInfo* )data;
+
+		SDL_GL_MakeCurrent ( sWindow, info->mContext );
+		
+		if ( info->mMask & LOADING_FLAG ) {
+			AKUDisplayListEnable ( AKU_DISPLAY_LIST_LOADING );
+		}
+		
+		if ( info->mMask & RENDER_FLAG ) {
+			AKUDetectGfxContext ();
+			AKUDisplayListEnable ( AKU_DISPLAY_LIST_DRAWING );
+		}
+
+		SDL_UnlockMutex ( sDisplayListMutex );
+
+		int loadUpdateCounter = 0;
+		int renderUpdateCounter = 0;
+
+		while ( info->mIsDone == false ) {
+		
+			SDL_LockMutex ( info->mConditionMutex );
+			SDL_CondWait ( info->mCondition, info->mConditionMutex );
+			SDL_UnlockMutex ( info->mConditionMutex );
+			
+			
+			if ( loadUpdateCounter >= ( LOAD_UPDATE_INTERVAL - 1 )) {
+				loadUpdateCounter = 0;
+			
+				if ( info->mMask & LOADING_FLAG ) {
+				
+					WorkerThreadInfo::DisplayListBeginPhase ( AKU_DISPLAY_LIST_LOADING_PHASE );
+					AKUDisplayListProcess ( AKU_DISPLAY_LIST_LOADING );
+					WorkerThreadInfo::DisplayListEndPhase ( AKU_DISPLAY_LIST_LOADING_PHASE );
+				}
+			}
+			
+			if ( renderUpdateCounter >= ( RENDER_UPDATE_INTERVAL - 1 )) {
+				renderUpdateCounter = 0;
+			
+				if ( info->mMask & RENDER_FLAG ) {
+					
+					WorkerThreadInfo::DisplayListBeginPhase ( AKU_DISPLAY_LIST_DRAWING_PHASE );
+					AKUDisplayListProcess ( AKU_DISPLAY_LIST_DRAWING );
+					WorkerThreadInfo::DisplayListEndPhase ( AKU_DISPLAY_LIST_DRAWING_PHASE );
+					
+					SDL_GL_SwapWindow ( sWindow );
+				}
+			}
+			
+			loadUpdateCounter++;
+			renderUpdateCounter++;
+		}
+		
+		SDL_GL_DeleteContext ( info->mContext );
+		
+		return 0;
+	}
+
+public:
+
+	//----------------------------------------------------------------//
+	static void DisplayListBeginPhase ( int list ) {
+	
+		SDL_LockMutex ( sDisplayListMutex );
+		AKUDisplayListBeginPhase ( list );
+		SDL_UnlockMutex ( sDisplayListMutex );
+	}
+	
+	//----------------------------------------------------------------//
+	static void DisplayListEndPhase ( int list ) {
+	
+		SDL_LockMutex ( sDisplayListMutex );
+		AKUDisplayListEndPhase ( list );
+		SDL_UnlockMutex ( sDisplayListMutex );
+	}
+
+	//----------------------------------------------------------------//
+	void Signal () {
+	
+		bool hasContent = false;
+		
+		if (( this->mMask & LOADING_FLAG ) && AKUDisplayListHasContent ( AKU_DISPLAY_LIST_LOADING )) {
+			hasContent = true;
+		}
+		
+		if (( this->mMask & RENDER_FLAG ) && AKUDisplayListHasContent ( AKU_DISPLAY_LIST_DRAWING )) {
+			hasContent = true;
+		}
+	
+		if ( hasContent ) {
+			SDL_LockMutex ( this->mConditionMutex );
+			SDL_CondSignal ( this->mCondition );
+			SDL_UnlockMutex ( this->mConditionMutex );
+		}
+	}
+	
+	//----------------------------------------------------------------//
+	void Start ( int mask, const char* name ) {
+
+		this->mContext = SDL_GL_CreateContext ( sWindow );
+		SDL_GL_SetSwapInterval ( 1 );
+
+		this->mMask					= mask;
+		this->mCondition			= SDL_CreateCond ();
+		this->mConditionMutex		= SDL_CreateMutex ();
+		this->mThread				= SDL_CreateThread ( WorkerThreadInfo::ThreadMain, name, this );
+	}
+	
+	//----------------------------------------------------------------//
+	void Stop () {
+	
+		SDL_LockMutex ( this->mConditionMutex );
+		this->mIsDone = true;
+		SDL_CondSignal ( this->mCondition );
+		SDL_UnlockMutex ( this->mConditionMutex );
+		SDL_WaitThread ( this->mThread, 0 );
+	}
+	
+	//----------------------------------------------------------------//
+	WorkerThreadInfo () :
+		mThread ( 0 ),
+		mCondition ( 0 ),
+		mConditionMutex ( 0 ),
+		mIsDone ( false ) {
+		
+		if ( !sDisplayListMutex ) {
+			sDisplayListMutex = SDL_CreateMutex ();
+		}
+	}
+};
+
+SDL_mutex* WorkerThreadInfo::sDisplayListMutex = 0;
 
 //================================================================//
 // aku callbacks
@@ -154,10 +277,19 @@ void _AKUExitFullscreenModeFunc () {
 void _AKUOpenWindowFunc ( const char* title, int width, int height ) {
 	
 	if ( !sWindow ) {
-		sWindow = SDL_CreateWindow ( title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN );
-		SDL_GL_CreateContext ( sWindow );
-		SDL_GL_SetSwapInterval ( 1 );
-		AKUDetectGfxContext ();
+		
+		GetDeviceToPixelScale ( sDeviceScaleX, sDeviceScaleY );
+	
+		SDL_GL_SetAttribute ( SDL_GL_SHARE_WITH_CURRENT_CONTEXT, 1 );
+		sWindow = SDL_CreateWindow (
+			title,
+			SDL_WINDOWPOS_CENTERED,
+			SDL_WINDOWPOS_CENTERED,
+			( int )( width / sDeviceScaleX ),
+			( int )( height / sDeviceScaleY ),
+			SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_ALLOW_HIGHDPI
+		);
+
 		AKUSetViewSize ( width, height );
 		AKUSdlSetWindow ( sWindow );
 
@@ -173,6 +305,7 @@ void _AKUOpenWindowFunc ( const char* title, int width, int height ) {
 
 //----------------------------------------------------------------//
 void _AKUSetTextInputRectFunc ( int xMin, int yMin, int xMax, int yMax ) {
+
 	SDL_Rect sdlRect;
 	sdlRect.x = xMin;
 	sdlRect.y = yMin;
@@ -182,16 +315,30 @@ void _AKUSetTextInputRectFunc ( int xMin, int yMin, int xMax, int yMax ) {
 	SDL_SetTextInputRect ( &sdlRect );
 }
 
+//================================================================//
+// SDL callbacks
+//================================================================//
+
+void	_SDL_LogOutputFunction	( void *userdata, int category, SDL_LogPriority priority, const char *message );
+
+//----------------------------------------------------------------//
+void _SDL_LogOutputFunction ( void *userdata, int category, SDL_LogPriority priority, const char *message ) {
+	UNUSED ( userdata );
+	UNUSED ( category );
+	UNUSED ( priority );
+
+	printf ( "%s", message );
+}
 
 //================================================================//
 // helpers
 //================================================================//
 
-static void	Finalize			();
-static void	Init				( int argc, char** argv );
-static void	MainLoop			();
-static void	PrintMoaiVersion	();
-static void SetScreenDpi        ();
+static void			Finalize				();
+static void			Init					( int argc, char** argv );
+static void			MainLoop				();
+static void			PrintMoaiVersion		();
+static void			SetScreenDpi			();
 
 //----------------------------------------------------------------//
 void Finalize () {
@@ -202,11 +349,29 @@ void Finalize () {
 	SDL_Quit ();
 }
 
+#ifndef __APPLE__
+
+//----------------------------------------------------------------//
+void GetDeviceToPixelScale ( float& w, float& h ) {
+
+	w = 1.0f;
+	h = 1.0f;
+}
+
+#endif
+
 //----------------------------------------------------------------//
 void Init ( int argc, char** argv ) {
 
+	SDL_LogSetOutputFunction ( _SDL_LogOutputFunction, 0 );
+	SDL_LogSetPriority ( SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_VERBOSE );
+
 	SDL_Init ( SDL_INIT_EVERYTHING );
 	PrintMoaiVersion ();
+
+	#ifdef _DEBUG
+		printf ( "DEBUG BUILD\n" );
+	#endif
 
 	AKUAppInitialize ();
 	AKUModulesAppInitialize ();
@@ -214,190 +379,108 @@ void Init ( int argc, char** argv ) {
 	AKUCreateContext ();
 	AKUModulesContextInitialize ();
 	AKUModulesRunLuaAPIWrapper ();
-	
-	// for now this one is here
-	SDLImGuiContextInitialize ();
-	
+
 	AKUSetInputConfigurationName ( "SDL" );
 
-	SetScreenSize( SDL_GetDesktopDisplayMode );
+	SetScreenSize ( SDL_GetDesktopDisplayMode );
 
-    SetScreenDpi();
+    SetScreenDpi ();
 
 	AKUReserveInputDevices			( InputDeviceID::TOTAL );
-	AKUSetInputDevice				( InputDeviceID::DEVICE, 	"device" );
-	AKUSetInputDevice				( InputDeviceID::GAMEPAD1, 	"gamepad1" );
-	AKUSetInputDevice				( InputDeviceID::GAMEPAD2, 	"gamepad2" );
-	AKUSetInputDevice				( InputDeviceID::GAMEPAD3, 	"gamepad3" );
-	AKUSetInputDevice				( InputDeviceID::GAMEPAD4, 	"gamepad4" );
+	AKUSetInputDevice				( InputDeviceID::DEVICE, "device" );
+	
+	AKUReserveInputDeviceSensors	( InputDeviceID::DEVICE, InputSensorID::TOTAL );
+	AKUSetInputDeviceKeyboard		( InputDeviceID::DEVICE, InputSensorID::KEYBOARD,		"keyboard" );
+	AKUSetInputDevicePointer		( InputDeviceID::DEVICE, InputSensorID::POINTER,		"pointer" );
+	AKUSetInputDeviceButton			( InputDeviceID::DEVICE, InputSensorID::MOUSE_LEFT,		"mouseLeft" );
+	AKUSetInputDeviceButton			( InputDeviceID::DEVICE, InputSensorID::MOUSE_MIDDLE,	"mouseMiddle" );
+	AKUSetInputDeviceButton			( InputDeviceID::DEVICE, InputSensorID::MOUSE_RIGHT,	"mouseRight" );
+	AKUSetInputDeviceWheel			( InputDeviceID::DEVICE, InputSensorID::MOUSE_WHEEL,	"mouseWheel" );
+	AKUSetInputDeviceJoystick       ( InputDeviceID::DEVICE, InputSensorID::JOYSTICK,	    "joystick" );
 
-	AKUReserveInputDeviceSensors	( InputDeviceID::DEVICE, 	InputSensorID::TOTAL );
-	AKUSetInputDeviceKeyboard		( InputDeviceID::DEVICE, 	InputSensorID::KEYBOARD,	"keyboard" );
-	AKUSetInputDevicePointer		( InputDeviceID::DEVICE, 	InputSensorID::POINTER,		"pointer" );
-	AKUSetInputDeviceButton			( InputDeviceID::DEVICE, 	InputSensorID::MOUSE_LEFT,	"mouseLeft" );
-	AKUSetInputDeviceButton			( InputDeviceID::DEVICE, 	InputSensorID::MOUSE_MIDDLE,"mouseMiddle" );
-	AKUSetInputDeviceButton			( InputDeviceID::DEVICE, 	InputSensorID::MOUSE_RIGHT,	"mouseRight" );
-	AKUSetInputDeviceWheel			( InputDeviceID::DEVICE, 	InputSensorID::MOUSE_WHEEL,	"mouseWheel" );
-	// AKUSetInputDeviceJoystick       ( InputDeviceID::DEVICE, InputSensorID::JOYSTICK,	    "joystick" );
-
-	AKUReserveInputDeviceSensors	( InputDeviceID::GAMEPAD1, 	InputControllerSensorID::TOTAL );
-	for ( int i = 0; i <= InputControllerSensorID::BUTTON_RIGHT; ++i ) {
-		AKUSetInputDeviceButton		( InputDeviceID::GAMEPAD1, 	i,	CONTROLLER_EVENT_NAMES [ i ] );
-	}
-	for ( int i = InputControllerSensorID::AXIS_LEFT; i < InputControllerSensorID::TOTAL; ++i ) {
-		AKUSetInputDeviceJoystick	( InputDeviceID::GAMEPAD1, 	i,	CONTROLLER_EVENT_NAMES [ i ] );
-	}
-	AKUSetInputDeviceActive			( InputDeviceID::GAMEPAD1, 	false );
-
-	AKUReserveInputDeviceSensors	( InputDeviceID::GAMEPAD2, 	InputControllerSensorID::TOTAL );
-	for ( int i = 0; i <= InputControllerSensorID::BUTTON_RIGHT; ++i ) {
-		AKUSetInputDeviceButton		( InputDeviceID::GAMEPAD2, 	i, 	CONTROLLER_EVENT_NAMES [ i ] );
-	}
-	for ( int i = InputControllerSensorID::AXIS_LEFT; i < InputControllerSensorID::TOTAL; ++i ) {
-		AKUSetInputDeviceJoystick	( InputDeviceID::GAMEPAD2, 	i, 	CONTROLLER_EVENT_NAMES [ i ] );
-	}
-	AKUSetInputDeviceActive			( InputDeviceID::GAMEPAD2, 	false );
-
-	AKUReserveInputDeviceSensors	( InputDeviceID::GAMEPAD3, InputControllerSensorID::TOTAL );
-	for ( int i = 0; i <= InputControllerSensorID::BUTTON_RIGHT; ++i ) {
-		AKUSetInputDeviceButton		( InputDeviceID::GAMEPAD3, 	i, 	CONTROLLER_EVENT_NAMES [ i ] );
-	}
-	for ( int i = InputControllerSensorID::AXIS_LEFT; i < InputControllerSensorID::TOTAL; ++i ) {
-		AKUSetInputDeviceJoystick	( InputDeviceID::GAMEPAD3, 	i, 	CONTROLLER_EVENT_NAMES [ i ] );
-	}
-	AKUSetInputDeviceActive			( InputDeviceID::GAMEPAD3, 	false );
-
-	AKUReserveInputDeviceSensors	( InputDeviceID::GAMEPAD4, InputControllerSensorID::TOTAL );
-	for ( int i = 0; i <= InputControllerSensorID::BUTTON_RIGHT; ++i ) {
-		AKUSetInputDeviceButton		( InputDeviceID::GAMEPAD4, i, 	CONTROLLER_EVENT_NAMES [ i ] );
-	}
-	for ( int i = InputControllerSensorID::AXIS_LEFT; i < InputControllerSensorID::TOTAL; ++i ) {
-		AKUSetInputDeviceJoystick	( InputDeviceID::GAMEPAD4, 	i, 	CONTROLLER_EVENT_NAMES [ i ] );
-	}
-	AKUSetInputDeviceActive			( InputDeviceID::GAMEPAD4, 	false );
-
-	AKUSetFunc_EnterFullscreenMode 	( _AKUEnterFullscreenModeFunc );
-	AKUSetFunc_ExitFullscreenMode 	( _AKUExitFullscreenModeFunc );
+	AKUSetFunc_EnterFullscreenMode ( _AKUEnterFullscreenModeFunc );
+	AKUSetFunc_ExitFullscreenMode ( _AKUExitFullscreenModeFunc );
 
 	AKUSetFunc_ShowCursor ( _AKUShowCursor );
 	AKUSetFunc_HideCursor ( _AKUHideCursor );
 
 	AKUSetFunc_OpenWindow ( _AKUOpenWindowFunc );
 	
-	AKUSetFunc_SetTextInputRect( _AKUSetTextInputRectFunc );
+	AKUSetFunc_SetTextInputRect ( _AKUSetTextInputRectFunc );
 	
 	#ifdef __APPLE__
-			//are we a bundle?
-			CFBundleRef bref = CFBundleGetMainBundle();
-			if (bref == NULL || CFBundleGetIdentifier(bref) == NULL) {
-	AKUModulesParseArgs ( argc, argv );
 	
-			} 
-			else {
+		//are we a bundle?
+		CFBundleRef bref = CFBundleGetMainBundle ();
+		if ( bref == NULL || CFBundleGetIdentifier ( bref ) == NULL ) {
+			AKUModulesParseArgs ( argc, argv );
+		}
+		else {
+		
+			CFURLRef bundleurl = CFBundleCopyResourcesDirectoryURL ( bref );
+			assert ( bundleurl != NULL );
 			
-					CFURLRef bundleurl = CFBundleCopyResourcesDirectoryURL(bref);
-					assert(bundleurl != NULL);
-					
-					UInt8 buf[PATH_MAX];
-					CFURLGetFileSystemRepresentation(bundleurl, true, buf, PATH_MAX);
+			UInt8 buf [ PATH_MAX ];
+			CFURLGetFileSystemRepresentation ( bundleurl, true, buf, PATH_MAX );
 
-					AKUSetWorkingDirectory((const char *)buf);
-					AKULoadFuncFromFile("bootstrap.lua");
-					AKUCallFunc();
-			}
+			AKUSetWorkingDirectory(( const char * )buf );
+			AKULoadFuncFromFile ( "bootstrap.lua" );
+			AKUCallFunc ();
+		}
 	#else
-			
-			
+	
 		AKUModulesParseArgs ( argc, argv );
+	
 	#endif
 
-	
 	atexit ( Finalize ); // do this *after* SDL_Init
-}
-
-// based on host-glut 
-//void _onMultiButton( int touch_id, float x, float y, int state );
-//void _onMultiButton( int touch_id, float x, float y, int state ) {
-//
-//	AKUEnqueueTouchEvent (
-//		InputDeviceID::DEVICE,
-//		InputSensorID::TOUCH,
-//		touch_id,
-//		state == SDL_FINGERDOWN,
-//		( float )x,
-//		( float )y
-//	);
-//}
-
-
-
-//----------------------------------------------------------------//
-void SetScreenSize(DisplayModeFunc func ) {
-
-    SDL_DisplayMode dm;
-
-    if ( func != NULL && func( 0, &dm ) == 0 ) {
-    	AKUSetScreenSize(dm.w, dm.h);
-    }
-}
-
-
-//----------------------------------------------------------------//
-void SetScreenDpi() {
-
-#ifdef MOAI_OS_WINDOWS
-
-    HDC hDC = GetWindowDC(NULL);
-    int widthInMm = GetDeviceCaps(hDC, HORZSIZE);
-    double widthInInches = widthInMm / 25.4;
-    int widthInPixels = GetDeviceCaps(hDC, HORZRES);
-    AKUSetScreenDpi(( int )( widthInPixels / widthInInches ));
-
-#elif defined(MOAI_OS_LINUX)
-
-	char* display_name = getenv( "DISPLAY" );
-	if ( !display_name ) return;
-
-	int nscreen = 0;
-	xcb_connection_t* conn = xcb_connect( display_name, &nscreen );
-	if ( !conn ) return;
-
-	xcb_screen_t* screen = xcb_aux_get_screen( conn, nscreen );
-
-	double widthInInches = screen->width_in_millimeters / 25.4;
-	int widthInPixels = screen->width_in_pixels;
-
-	AKUSetScreenDpi(( int )widthInPixels / widthInInches );
-
-	xcb_disconnect( conn );
-  
-#endif
-
 }
 
 //----------------------------------------------------------------//
 void MainLoop () {
+	
+	SDL_GL_SetAttribute ( SDL_GL_MULTISAMPLEBUFFERS, 1 );
+	SDL_GL_SetAttribute ( SDL_GL_MULTISAMPLESAMPLES, 16 );
+	
+	#if GFX_ASYNC
+	
+		WorkerThreadInfo loadingThread;
+		loadingThread.Start ( WorkerThreadInfo::LOADING_FLAG, "Loading Thread" );
+		
+		WorkerThreadInfo renderThread;
+		renderThread.Start ( WorkerThreadInfo::RENDER_FLAG, "Render Thread" );
 
-	SDL_InitSubSystem ( SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER ); // for win32 correct joystick work
+		SDL_GL_MakeCurrent ( sWindow, NULL );
+	
+	#else
+	
+		SDL_GLContext context = SDL_GL_CreateContext ( sWindow );
+		SDL_GL_SetSwapInterval ( 1 );
+	
+		AKUDetectGfxContext ();
+	
+	#endif
 
-	SDL_GameControllerAddMappingsFromFile ( "gamecontrollerdb.txt" );
+	// TODO: array's of Joysticks
+	Joystick * joystick0 = NULL;
 
-	ZLLeanArray < GameController > gameControllers;
-	gameControllers.Init ( MAX_GAME_CONTROLLERS );
-
-	int gcIndex = 0;
-	for ( int i = 0; i < SDL_NumJoysticks (); ++i ) {
-
-	    if ( !SDL_IsGameController ( i )) continue;
-
-	    if ( gcIndex >= MAX_GAME_CONTROLLERS ) break;
-
-	    gameControllers [ i ].Open ( i );
-	    AKUSetInputDeviceActive ( InputDeviceID::GAMEPAD1 + i, true );
-	    gcIndex++;
+	if ( SDL_NumJoysticks () < 1 ) {
+		
+		std::cerr << "No Joysticks connected." << std::endl;
 	}
+	else {
+		
+		joystick0 = new Joystick ( 0 ); // 0 == first joystick of system.
 
-	Uint32 lastFrame = SDL_GetTicks ();
+		if ( joystick0->isOpen () || !joystick0->Open ()) {
+			delete joystick0;
+			joystick0 = NULL;
+		}
+	}
+	
+	int simUpdateCounter = 0;
+	
+	Uint32 lastFrame = SDL_GetTicks();
 	
 	bool running = true;
 	while ( running ) {
@@ -474,79 +557,25 @@ void MainLoop () {
 					 * SDL_JOYDEVICEADDED	joystick connected
 					 * SDL_JOYDEVICEREMOVED	joystick disconnected
 					 * */
+				case SDL_JOYAXISMOTION:
+						
+						//TODO: array's of Joysticks
 
-				case SDL_CONTROLLERDEVICEADDED: {
+						if ( sdlEvent.jaxis.which == 0 /* what joystick? */  && joystick0 != NULL ) {
 
-					int id = sdlEvent.cdevice.which;
-
-					if( SDL_IsGameController ( id ) ) {
-
-						for ( int i = 0; i < MAX_GAME_CONTROLLERS; ++i ) {
-
-							if ( !gameControllers [ i ].isOpen ()) {
-
-								gameControllers [ i ].Open ( id );
-								AKUSetInputDeviceActive ( InputDeviceID::GAMEPAD1 + i, true );
-								printf ( "MOAI: Controller added %d (%d)\n", i, id );
-								break;
-							}
+                            const Joystick::AXIS_MOTION & axis = joystick0->HandleAxisMotion(sdlEvent);
+					        AKUEnqueueJoystickEvent ( InputDeviceID::DEVICE, InputSensorID::JOYSTICK, ( float )axis.x, ( float )axis.y );
 						}
-				    }
-				    break;
-				}
-					
-				case SDL_CONTROLLERDEVICEREMOVED: {
-
-					int id = sdlEvent.cdevice.which;
-
-					for ( int i = 0; i < MAX_GAME_CONTROLLERS; ++i ) {
-
-						if (gameControllers [ i ].isMe ( id )) {
-
-							AKUSetInputDeviceActive ( InputDeviceID::GAMEPAD1 + i, false );
-							gameControllers [ i ].Close ();
-							printf ( "MOAI: Controller removed %d (%d)\n", i, id );
-							break;
-						}
-					}
 					break;
-				}
-					
-				case SDL_CONTROLLERBUTTONDOWN:
-				case SDL_CONTROLLERBUTTONUP: {
-
-					int id = sdlEvent.cbutton.which;
-
-					for ( int i = 0; i < MAX_GAME_CONTROLLERS; ++i ) {
-
-						if ( gameControllers [ i ].isMe ( id )) {
-
-							AKUEnqueueButtonEvent ( InputDeviceID::GAMEPAD1 + i, sdlEvent.cbutton.button, ( sdlEvent.cbutton.state == 1 ));
-							break;
-						}
-					}
-					break;
-				}
-					
-				case SDL_CONTROLLERAXISMOTION: {
-					int id = sdlEvent.caxis.which;
-
-					for ( int i = 0; i < MAX_GAME_CONTROLLERS; ++i ) {
-
-						if ( gameControllers [ i ].isMe ( id )) {
-
-							const GameController::AXIS axis = gameControllers [ i ].getAxis ( sdlEvent );
-							int sensorID = InputControllerSensorID::AXIS_LEFT + axis.id;
-							AKUEnqueueJoystickEvent ( InputDeviceID::GAMEPAD1 + i, sensorID, axis.x, axis.y );
-							break;
-						}
-					}
-					break;
-				}
 
 				case SDL_MOUSEMOTION:
 				
-					AKUEnqueuePointerEvent ( InputDeviceID::DEVICE, InputSensorID::POINTER, sdlEvent.motion.x, sdlEvent.motion.y );
+					AKUEnqueuePointerEvent (
+						InputDeviceID::DEVICE,
+						InputSensorID::POINTER,
+						( int )( sdlEvent.motion.x * sDeviceScaleX ),
+						( int )( sdlEvent.motion.y * sDeviceScaleY )
+					);
 					break;
 
 				case SDL_WINDOWEVENT:
@@ -556,38 +585,46 @@ void MainLoop () {
 							sdlEvent.window.event == SDL_WINDOWEVENT_RESIZED ) {
 						
 						AKUSetViewSize(sdlEvent.window.data1, sdlEvent.window.data2);
-					} else if ( sdlEvent.window.event == SDL_WINDOWEVENT_FOCUS_LOST ) {
+					}
+					else if ( sdlEvent.window.event == SDL_WINDOWEVENT_FOCUS_LOST ) {
 						// If the focus is lost, it must be stopped.
 						SDL_StopTextInput();
 						
 						// Clear Editing text.
 						AKUEnqueueKeyboardEditEvent ( InputDeviceID::DEVICE, InputSensorID::KEYBOARD, "", 0, 0, SDL_TEXTEDITINGEVENT_TEXT_SIZE );
-					} else if ( sdlEvent.window.event == SDL_WINDOWEVENT_FOCUS_GAINED ) {
+					}
+					else if ( sdlEvent.window.event == SDL_WINDOWEVENT_FOCUS_GAINED ) {
 						// Start when the focus is given.
 						// TODO:Restored the edit text.
 						SDL_StartTextInput();
 					}
 					break;
-
-//                case SDL_FINGERDOWN:
-//                case SDL_FINGERUP:
-//                case SDL_FINGERMOTION:
-//                    const int id    = ( int )sdlEvent.tfinger.fingerId;
-//					const float x   = sdlEvent.tfinger.x;
-//					const float y   = sdlEvent.tfinger.y;
-//					const int state = ( sdlEvent.type == SDL_FINGERDOWN || sdlEvent.type == SDL_FINGERMOTION ) ? SDL_FINGERDOWN : SDL_FINGERUP;
-//
-//					_onMultiButton(id, x, y, state);
-//
-//					break;
-			} //end_switch
-		}//end_while
+			}
+		}
 		
 		AKUModulesUpdate ();
-		SDLImGuiUpdate ();
 		
-		AKURender ();
-		SDL_GL_SwapWindow ( sWindow );
+		if ( simUpdateCounter >= ( SIM_UPDATE_INTERVAL - 1 )) {
+			simUpdateCounter = 0;
+		
+			#if GFX_ASYNC
+			
+				WorkerThreadInfo::DisplayListBeginPhase ( AKU_DISPLAY_LIST_LOGIC_PHASE );
+				AKURender ();
+				WorkerThreadInfo::DisplayListEndPhase ( AKU_DISPLAY_LIST_LOGIC_PHASE );
+				
+				loadingThread.Signal ();
+				renderThread.Signal ();
+			
+			#else
+			
+				AKURender ();
+				SDL_GL_SwapWindow ( sWindow );
+			
+			#endif
+			
+			simUpdateCounter++;
+		}
 		
 		Uint32 frameDelta = ( Uint32 )( AKUGetSimStep () * 1000.0 );
 		Uint32 currentFrame = SDL_GetTicks ();
@@ -596,8 +633,18 @@ void MainLoop () {
 		if ( delta < frameDelta ) {
 			SDL_Delay ( frameDelta - delta );
 		}
-		lastFrame = SDL_GetTicks();
+		lastFrame = SDL_GetTicks ();
 	}
+	
+	#if GFX_ASYNC
+	
+		loadingThread.Stop ();
+		renderThread.Stop ();
+	#else
+	
+		AKUDeleteContext ( AKUGetContext ());
+		SDL_GL_DeleteContext ( context );
+	#endif
 }
 
 //----------------------------------------------------------------//
@@ -607,6 +654,49 @@ void PrintMoaiVersion () {
 	char version [ length ];
 	AKUGetMoaiVersion ( version, length );
 	printf ( "%s\n", version );
+}
+
+//----------------------------------------------------------------//
+void SetScreenSize ( DisplayModeFunc func ) {
+
+    SDL_DisplayMode dm;
+
+    if ( func != NULL && func( 0, &dm ) == 0 ) {
+    	AKUSetScreenSize(dm.w, dm.h);
+    }
+}
+
+
+//----------------------------------------------------------------//
+void SetScreenDpi() {
+
+	#ifdef MOAI_OS_WINDOWS
+
+		HDC hDC = GetWindowDC ( NULL );
+		int widthInMm = GetDeviceCaps ( hDC, HORZSIZE );
+		double widthInInches = widthInMm / 25.4;
+		int widthInPixels = GetDeviceCaps ( hDC, HORZRES );
+		AKUSetScreenDpi (( int )( widthInPixels / widthInInches ));
+
+	#elif defined ( MOAI_OS_LINUX )
+
+		char* display_name = getenv( "DISPLAY" );
+		if ( !display_name ) return;
+
+		int nscreen = 0;
+		xcb_connection_t* conn = xcb_connect( display_name, &nscreen );
+		if ( !conn ) return;
+
+		xcb_screen_t* screen = xcb_aux_get_screen( conn, nscreen );
+
+		double widthInInches = screen->width_in_millimeters / 25.4;
+		int widthInPixels = screen->width_in_pixels;
+
+		AKUSetScreenDpi(( int )widthInPixels / widthInInches );
+
+		xcb_disconnect( conn );
+	  
+	#endif
 }
 
 //================================================================//
@@ -621,6 +711,5 @@ int SDLHost ( int argc, char** argv ) {
 	if ( sWindow ) {
 		MainLoop ();
 	}
-
 	return 0;
 }

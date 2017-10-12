@@ -7,7 +7,7 @@
 #include <moai-sim/MOAICollisionShape.h>
 #include <moai-sim/MOAICollisionWorld.h>
 #include <moai-sim/MOAIGraphicsProp.h>
-#include <moai-sim/MOAIGfxDevice.h>
+#include <moai-sim/MOAIGfxMgr.h>
 #include <moai-sim/MOAIPartition.h>
 #include <moai-sim/MOAIPartitionResultBuffer.h>
 #include <moai-sim/MOAIPartitionResultMgr.h>
@@ -33,17 +33,6 @@ int MOAICollisionWorld::_processOverlaps ( lua_State* L ) {
 	MOAI_LUA_SETUP ( MOAICollisionWorld, "U" )
 
 	self->ProcessOverlaps ();
-	return 0;
-}
-
-//----------------------------------------------------------------//
-int MOAICollisionWorld::_removeProp ( lua_State* L ) {
-	MOAI_LUA_SETUP ( MOAICollisionWorld, "U" )
-
-	MOAICollisionProp* prop = state.GetLuaObject < MOAICollisionProp >( 2, true );
-	if ( prop ) {
-		self->RemoveProp ( *prop );
-	}
 	return 0;
 }
 
@@ -465,7 +454,6 @@ void MOAICollisionWorld::RegisterLuaFuncs ( MOAILuaState& state ) {
 	luaL_Reg regTable [] = {
 		{ "insertProp",			_insertProp },
 		{ "processOverlaps",	_processOverlaps },
-		{ "removeProp",			_removeProp },
 		{ "setCallback",		_setCallback },
 		{ "setPartition",		_setPartition },
 		{ NULL, NULL }
@@ -495,10 +483,10 @@ void MOAICollisionWorld::Render () {
 
 	draw.Bind ();
 
-	MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get ();
+	MOAIGfxMgr& gfxMgr = MOAIGfxMgr::Get ();
 
-	gfxDevice.SetVertexMtxMode ( MOAIGfxDevice::VTX_STAGE_WORLD, MOAIGfxDevice::VTX_STAGE_PROJ );
-	gfxDevice.SetVertexTransform ( MOAIGfxDevice::VTX_WORLD_TRANSFORM );
+	gfxMgr.mGfxState.SetMtx ( MOAIGfxGlobalsCache::WORLD_MTX );
+	gfxMgr.mVertexCache.SetVertexTransform ( gfxMgr.mGfxState.GetMtx ( MOAIGfxGlobalsCache::VIEW_PROJ_MTX ));
 
 	MOAICollisionProp* drawList = 0;
 

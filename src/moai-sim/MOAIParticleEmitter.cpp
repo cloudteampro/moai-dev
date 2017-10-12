@@ -163,10 +163,10 @@ int MOAIParticleEmitter::_setState ( lua_State* L ) {
 	@out	nil
 */
 int MOAIParticleEmitter::_setSystem ( lua_State* L ) {
-	MOAI_LUA_SETUP ( MOAIParticleEmitter, "U" )
-	
+	MOAI_LUA_SETUP ( MOAIParticleEmitter, "UU" )
+
 	self->mSystem.Set ( *self, state.GetLuaObject < MOAIParticleSystem >( 2, true ));
-	
+
 	return 0;
 }
 

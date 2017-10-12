@@ -1,13 +1,15 @@
 // Copyright (c) 2010-2011 Zipline Games, Inc. All Rights Reserved.
 // http://getmoai.com
 
-#import "pch.h"
 #import "host.h"
 #import "headers.h"
 
 #import <contrib/MOAIOpenUDID.h>
-#import <AdSupport/ASIdentifierManager.h>
-#import <moai-sim/MOAIGfxDevice.h>
+#import <moai-sim/headers.h>
+
+#if AKU_WITH_IFA
+	#import <AdSupport/ASIdentifierManager.h>
+#endif
 
 #include <sys/types.h>
 #include <sys/sysctl.h>
@@ -52,9 +54,11 @@ void AKUIosContextInitialize () {
 	environment.SetValue ( MOAI_ENV_osBrand,				"iOS" );
 	environment.SetValue ( MOAI_ENV_osVersion,				[[ UIDevice currentDevice ].systemVersion UTF8String ]);
 	environment.SetValue ( MOAI_ENV_openUdid,				[[ MOAIOpenUDID value] UTF8String ]);
+	environment.SetValue ( MOAI_ENV_screenScale,			[[ UIScreen mainScreen ] scale ]);
 	environment.SetValue ( MOAI_ENV_systemLanguageCode,		[[[ NSLocale preferredLanguages ] objectAtIndex: 0 ] UTF8String ]);
 	environment.SetValue ( MOAI_ENV_verticalResolution,		[[ UIScreen mainScreen ] bounds ].size.height * [[ UIScreen mainScreen ] scale ]);
 	
+	environment.SetValue ( MOAI_ENV_appDirectory,			[[ NSSearchPathForDirectoriesInDomains ( NSApplicationDirectory, NSUserDomainMask, YES ) objectAtIndex:0 ] UTF8String ]);
 	environment.SetValue ( MOAI_ENV_cacheDirectory,			[[ NSSearchPathForDirectoriesInDomains ( NSCachesDirectory, NSUserDomainMask, YES ) objectAtIndex:0 ] UTF8String ]);
 	environment.SetValue ( MOAI_ENV_resourceDirectory,		[[[ NSBundle mainBundle ] resourcePath ] UTF8String ]);
 	environment.SetValue ( MOAI_ENV_documentDirectory,		[[ NSSearchPathForDirectoriesInDomains ( NSDocumentDirectory, NSUserDomainMask, YES ) objectAtIndex:0 ] UTF8String ]);
@@ -64,13 +68,15 @@ void AKUIosContextInitialize () {
 		environment.SetValue ( MOAI_ENV_iosIFV, [[[[UIDevice currentDevice] identifierForVendor ] UUIDString ] UTF8String ]);
 	}
 	
-	Class identifierManagerClass = NSClassFromString ( @"ASIdentifierManager" );
-	if ( identifierManagerClass ) {
-		ASIdentifierManager* sharedManager = [ identifierManagerClass sharedManager ];
-		if ([ sharedManager isAdvertisingTrackingEnabled ]) {
-			environment.SetValue ( MOAI_ENV_iosIFA, [[[ sharedManager advertisingIdentifier ] UUIDString ] UTF8String ]);
+	#if AKU_WITH_IFA
+		Class identifierManagerClass = NSClassFromString ( @"ASIdentifierManager" );
+		if ( identifierManagerClass ) {
+			ASIdentifierManager* sharedManager = [ identifierManagerClass sharedManager ];
+			if ([ sharedManager isAdvertisingTrackingEnabled ]) {
+				environment.SetValue ( MOAI_ENV_iosIFA, [[[ sharedManager advertisingIdentifier ] UUIDString ] UTF8String ]);
+			}
 		}
-    }
+	#endif
 	
     int name [] = { CTL_HW, HW_MACHINE };
 	
@@ -102,12 +108,6 @@ void AKUIosNotifyRemoteNotificationRegistrationComplete ( NSData* deviceToken, N
 }
 
 //----------------------------------------------------------------//
-void AKUIosNotifyUserNotificationSettingsRegistered ( UIUserNotificationSettings* settings ) {
-	
-	MOAINotificationsIOS::Get ().NotifySettingsRegistrationComplete ([ settings types ]);
-}
-
-//----------------------------------------------------------------//
 void AKUIosOpenUrl ( NSURL* url, NSString* sourceApplication ) {
 
 	MOAIAppIOS::Get ().OpenUrl ( url, sourceApplication );
@@ -116,6 +116,6 @@ void AKUIosOpenUrl ( NSURL* url, NSString* sourceApplication ) {
 //----------------------------------------------------------------//
 void AKUIosSetFrameBuffer ( GLuint frameBuffer ) {
 
-	MOAIGfxDevice::Get ().GetDefaultFrameBuffer ()->SetGLFrameBufferID ( frameBuffer );
+	MOAIGfxMgr::Get ().mGfxState.GetDefaultFrameBuffer ()->SetGLFrameBufferID ( new ZLGfxHandle ( ZLGfxHandle::FRAMEBUFFER, frameBuffer, true ));
 }
 

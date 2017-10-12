@@ -8,8 +8,7 @@
 #include "moai-sim/pch.h"
 
 #include <jni.h>
-#include <jansson.h>
-#include <moai-android/MOAIJString.h>
+ #include <moai-android/MOAIJString.h>
 
 //================================================================//
 // Utility macros
@@ -59,28 +58,15 @@ public:
 	jstring				GetJString					( cc8* cstr );
 	jmethodID			GetMethod					( cc8* methodName, cc8* methodSignature );
 	jmethodID			GetMethod					( jclass clazz, cc8* methodName, cc8* methodSignature );
-	jfieldID			GetStaticField				( cc8* fieldName );
-	jfieldID			GetStaticField				( jclass clazz, cc8* fieldName );
 	jmethodID			GetStaticMethod				( cc8* methodName, cc8* methodSignature );
 	jmethodID			GetStaticMethod				( jclass clazz, cc8* methodName, cc8* methodSignature );
-	jstring				GetStaticObjectField		( jfieldID fieldId );
-	jstring				GetStaticObjectField		( jclass clazz, jfieldID fieldId );
-	jstring				GetStaticObjectField		( cc8* fieldName );
-	jstring				GetStaticObjectField		( jclass clazz, cc8* fieldName );
-	void				JsonArrayToLua				( lua_State* L, json_t* json );
-	void				JsonObjectToLua				( lua_State* L, json_t* json );
-	void				JsonToLua					( lua_State* L, json_t* json );
-	void				JsonToLua					( lua_State* L, cc8* jsonString );
 	jobject				HashMapFromLua				( lua_State* L, int index );
 						JniUtils					();
 						~JniUtils					();
-	void 				RegisterStringConstant 		( lua_State* L, cc8* fieldKey, cc8* fieldName );
-	void 				RegisterStringConstant 		( lua_State* L, jclass clazz, cc8* fieldKey, cc8* fieldName );
 	void				ReleaseCString				( jstring jstr, cc8* cstr );
 	bool				SetClass					( cc8* className );
 	bool				SetClassViaLoader			( cc8* className );
 	jobjectArray		StringArrayFromLua			( lua_State* L, int index );
-	void 				StringArrayToLua			( lua_State* L, jobjectArray arr );
 };
 
 #endif

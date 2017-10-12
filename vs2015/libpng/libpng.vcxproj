@@ -105,6 +105,9 @@
       <ExceptionHandling>Sync</ExceptionHandling>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
     </ClCompile>
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -128,6 +131,9 @@
       <ExceptionHandling>Sync</ExceptionHandling>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
     </ClCompile>
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -152,6 +158,9 @@
       <ExceptionHandling>Sync</ExceptionHandling>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
     </ClCompile>
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
@@ -177,29 +186,32 @@
       <ExceptionHandling>Sync</ExceptionHandling>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
     </ClCompile>
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\3rdparty\lpng1419\png.c" />
-    <ClCompile Include="..\..\3rdparty\lpng1419\pngerror.c" />
-    <ClCompile Include="..\..\3rdparty\lpng1419\pngget.c" />
-    <ClCompile Include="..\..\3rdparty\lpng1419\pngmem.c" />
-    <ClCompile Include="..\..\3rdparty\lpng1419\pngpread.c" />
-    <ClCompile Include="..\..\3rdparty\lpng1419\pngread.c" />
-    <ClCompile Include="..\..\3rdparty\lpng1419\pngrio.c" />
-    <ClCompile Include="..\..\3rdparty\lpng1419\pngrtran.c" />
-    <ClCompile Include="..\..\3rdparty\lpng1419\pngrutil.c" />
-    <ClCompile Include="..\..\3rdparty\lpng1419\pngset.c" />
-    <ClCompile Include="..\..\3rdparty\lpng1419\pngtest.c" />
-    <ClCompile Include="..\..\3rdparty\lpng1419\pngtrans.c" />
-    <ClCompile Include="..\..\3rdparty\lpng1419\pngwio.c" />
-    <ClCompile Include="..\..\3rdparty\lpng1419\pngwrite.c" />
-    <ClCompile Include="..\..\3rdparty\lpng1419\pngwtran.c" />
-    <ClCompile Include="..\..\3rdparty\lpng1419\pngwutil.c" />
+    <ClCompile Include="..\..\3rdparty\lpng140\png.c" />
+    <ClCompile Include="..\..\3rdparty\lpng140\pngerror.c" />
+    <ClCompile Include="..\..\3rdparty\lpng140\pngget.c" />
+    <ClCompile Include="..\..\3rdparty\lpng140\pngmem.c" />
+    <ClCompile Include="..\..\3rdparty\lpng140\pngpread.c" />
+    <ClCompile Include="..\..\3rdparty\lpng140\pngread.c" />
+    <ClCompile Include="..\..\3rdparty\lpng140\pngrio.c" />
+    <ClCompile Include="..\..\3rdparty\lpng140\pngrtran.c" />
+    <ClCompile Include="..\..\3rdparty\lpng140\pngrutil.c" />
+    <ClCompile Include="..\..\3rdparty\lpng140\pngset.c" />
+    <ClCompile Include="..\..\3rdparty\lpng140\pngtest.c" />
+    <ClCompile Include="..\..\3rdparty\lpng140\pngtrans.c" />
+    <ClCompile Include="..\..\3rdparty\lpng140\pngwio.c" />
+    <ClCompile Include="..\..\3rdparty\lpng140\pngwrite.c" />
+    <ClCompile Include="..\..\3rdparty\lpng140\pngwtran.c" />
+    <ClCompile Include="..\..\3rdparty\lpng140\pngwutil.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\3rdparty\lpng1419\png.h" />
-    <ClInclude Include="..\..\3rdparty\lpng1419\pngconf.h" />
-    <ClInclude Include="..\..\3rdparty\lpng1419\pngpriv.h" />
+    <ClInclude Include="..\..\3rdparty\lpng140\png.h" />
+    <ClInclude Include="..\..\3rdparty\lpng140\pngconf.h" />
+    <ClInclude Include="..\..\3rdparty\lpng140\pngpriv.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

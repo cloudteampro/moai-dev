@@ -25,13 +25,6 @@ protected:
 		return this->mObject;
 	}
 
-	//----------------------------------------------------------------//
-	MOAILuaSharedPtr ( const MOAILuaSharedPtr < TYPE >& assign ) :
-		mObject ( 0 ) {
-		UNUSED ( assign );
-		assert ( false ); // unsupported
-	};
-
 public:
 
 	//----------------------------------------------------------------//
@@ -73,7 +66,7 @@ public:
 	inline operator const TYPE* () const {
 		return this->Get ();
 	};
-
+	
 	//----------------------------------------------------------------//
 	inline void operator = ( const MOAILuaSharedPtr < TYPE >& assign ) {
 		assert ( !this->mObject );
@@ -112,6 +105,12 @@ public:
 	~MOAILuaSharedPtr () {
 		assert ( !this->mObject ); // must be manually cleared before destruction; use Set ( owner, 0 )
 	}
+	
+	//----------------------------------------------------------------//
+	MOAILuaSharedPtr ( const MOAILuaSharedPtr < TYPE >& assign ) :
+		mObject ( assign.mObject ) {
+		(( MOAILuaSharedPtr < TYPE >& )assign ).mObject = 0;
+	};
 };
 
 #endif

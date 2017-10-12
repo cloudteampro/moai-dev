@@ -12,16 +12,15 @@
 //----------------------------------------------------------------//
 void MOAIDataIOTask::Execute () {
 
-	if ( this->mAction == LOAD_ACTION ) {
-		bool result = this->mData->Load ( this->mFilename );
+	if ( this->mAction == LOAD_ACTION ) { 
+		this->mData->Load ( this->mFilename );
 		
 		if ( this->mInflateOnTaskThread ) {
-			result = result && this->mData->Inflate ( this->mWindowBits );
+			this->mData->Inflate ( this->mWindowBits );
 		}
-		this->mResult = result;
 	}
 	else if ( this->mAction == SAVE_ACTION ) {
-		this->mResult = this->mData->Save ( this->mFilename );
+		this->mData->Save ( this->mFilename );
 	}
 }
 
@@ -29,25 +28,26 @@ void MOAIDataIOTask::Execute () {
 void MOAIDataIOTask::Init ( cc8* filename, MOAIDataBuffer& target, u32 action ) {
 
 	this->mFilename = filename;
-	this->mData.Set ( *this, &target );
 	this->mAction = action;
-	this->mResult = false;
+	this->mData = &target;
+	
+	this->mData->LuaRetain ( this->mData );
 }
 
 //----------------------------------------------------------------//
 MOAIDataIOTask::MOAIDataIOTask () :
+	mData ( 0 ),
 	mAction ( NONE ),
 	mInflateOnLoad ( false ),
 	mInflateOnTaskThread ( false ),
 	mWindowBits ( 0 ) {
-	
-	RTTI_SINGLE ( MOAITask )
 }
 
 //----------------------------------------------------------------//
 MOAIDataIOTask::~MOAIDataIOTask () {
 
-	this->mData.Set ( *this, 0 );
+	this->mData->LuaRelease ( this->mData );
+	this->mData = 0;
 }
 
 //----------------------------------------------------------------//
@@ -61,8 +61,7 @@ void MOAIDataIOTask::Publish () {
 		MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 		if ( this->mOnFinish.PushRef ( state )) {
 			this->mData->PushLuaUserdata ( state );
-			state.Push ( this->mResult );
-			state.DebugCall ( 2, 0 );
+			state.DebugCall ( 1, 0 );
 		}
 	}
 }
@@ -81,7 +80,7 @@ void MOAIDataIOTask::RegisterLuaFuncs ( MOAILuaState& state ) {
 void MOAIDataIOTask::SetCallback ( lua_State* L, int idx ) {
 
 	MOAILuaState state ( L );
-	this->mOnFinish.SetRef ( *this, state, idx );
+	this->mOnFinish.SetRef ( state, idx );
 }
 
 //----------------------------------------------------------------//

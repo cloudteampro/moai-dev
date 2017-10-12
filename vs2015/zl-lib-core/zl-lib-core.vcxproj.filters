@@ -40,6 +40,9 @@
     <Filter Include="socket">
       <UniqueIdentifier>{ee52e811-e07f-4ed9-b694-a0611b8cbf40}</UniqueIdentifier>
     </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{1ab81aca-0abc-49ea-ad62-97cce83beea3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\zl-util\ZLAccessors.h">
@@ -174,13 +177,13 @@
     <ClInclude Include="..\..\src\zl-util\ZLPolar.h">
       <Filter>math</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\zl-util\ZLPolygon2D.h">
+      <Filter>math</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\src\zl-util\ZLPrism.h">
       <Filter>math</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\zl-util\ZLQuad.h">
-      <Filter>math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\zl-util\ZLQuadCoord.h">
       <Filter>math</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\zl-util\ZLQuaternion.h">
@@ -281,6 +284,9 @@
     <ClInclude Include="..\..\src\zl-util\ZLStreamAdapter.h">
       <Filter>stream</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\zl-util\ZLSharedHandle.h">
+      <Filter>util</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\src\zl-util\ZLHexAdapter.h">
       <Filter>stream\encoding</Filter>
     </ClInclude>
@@ -293,10 +299,29 @@
     <ClInclude Include="..\..\src\zl-util\zl_wsocket.h">
       <Filter>socket</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\zl-util\ZLCubicBezier2D.h">
+      <Filter>math</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\src\zl-util\ZLFrustumFitter.h">
       <Filter>math</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\zl-util\ZLCopyOnWrite.h">
+      <Filter>util</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\src\zl-util\ZLBitBuffer.h" />
+    <ClInclude Include="..\..\src\zl-util\ZLRefCountedObject.h" />
+    <ClInclude Include="..\..\src\zl-util\ZLSample.h" />
+    <ClInclude Include="..\..\src\zl-util\ZLRingAdapter.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\zl-common\zl_platform.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\zl-common\zl_types.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\zl-util\ZLContext.h" />
+    <ClInclude Include="..\..\src\zl-util\ZLRtti.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\zl-util\ZLAdapterInfo_posix.cpp">
@@ -372,9 +397,6 @@
       <Filter>math</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\zl-util\ZLQuad.cpp">
-      <Filter>math</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\zl-util\ZLQuadCoord.cpp">
       <Filter>math</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\zl-util\ZLQuaternion.cpp">
@@ -468,9 +490,28 @@
     <ClCompile Include="..\..\src\zl-util\zl_wsocket.cpp">
       <Filter>socket</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\zl-util\ZLCubicBezier2D.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\src\zl-util\ZLFrustumFitter.cpp">
       <Filter>math</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\zl-util\ZLCopyOnWrite.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\src\zl-util\ZLBitBuffer.cpp" />
+    <ClCompile Include="..\..\src\zl-util\ZLRefCountedObject.cpp" />
+    <ClCompile Include="..\..\src\zl-util\ZLSample.cpp" />
+    <ClCompile Include="..\..\src\zl-util\ZLRingAdapter.cpp">
+      <Filter>stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zl-util\ZLPolygon2D.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zl-util\ZLContext.cpp" />
+    <ClCompile Include="..\..\src\zl-util\ZLRtti.cpp" />
+    <ClCompile Include="..\..\src\zl-util\ZLPolygon2D-clip.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

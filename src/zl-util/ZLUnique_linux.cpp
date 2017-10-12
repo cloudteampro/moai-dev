@@ -2,6 +2,9 @@
 // http://getmoai.com
 
 #include "pch.h"
+
+SUPPRESS_EMPTY_FILE_WARNING
+
 #ifndef _WIN32
 
 #include <zl-util/ZLUnique.h>
@@ -24,13 +27,9 @@ STLString ZLUnique::GetGUID () {
 		CFUUIDRef uuid = CFUUIDCreate( NULL );
 		CFStringRef guid = CFUUIDCreateString ( NULL, uuid );
 		CFRelease ( uuid );
-		const char* output = CFStringGetCStringPtr ( guid, kCFStringEncodingUTF8 );
-		if ( output == NULL ) {
-			output = CFStringGetCStringPtr ( guid, kCFStringEncodingMacRoman );
-		}
-		STLString result ( output );
+		STLString result = CFStringGetCStringPtr ( guid, kCFStringEncodingUTF8 );
 		CFRelease ( guid );
-	
+		
 		return result;
 	#else
 		kashmir::system::DevRand devrandom;

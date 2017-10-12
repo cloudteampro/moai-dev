@@ -31,7 +31,6 @@ private:
 	
 	bool								mCapParticles;
 	bool								mCapSprites;
-	bool								mRenderAsTrail;
 	
 	MOAIParticle*						mHead;
 	MOAIParticle*						mTail;
@@ -58,7 +57,6 @@ private:
 	static int		_reserveStates			( lua_State* L );
 	static int		_setComputeBounds		( lua_State* L );
 	static int		_setDrawOrder			( lua_State* L );
-	static int		_setRenderAsTrail		( lua_State* L );
 	static int		_setSpriteColor			( lua_State* L );
 	static int		_setSpriteDeckIdx		( lua_State* L );
 	static int		_setState				( lua_State* L );
@@ -67,8 +65,6 @@ private:
 	//----------------------------------------------------------------//
 	void					ClearStates				();
 	void					ClearQueue				();
-	void					DrawSprites				();
-	void					DrawTrail				();
 	void					EnqueueParticle			( MOAIParticle& particle );
 	AKUParticleSprite*		GetTopSprite			();
 	MOAIParticleState*		GetState				( u32 id );
@@ -100,11 +96,13 @@ public:
 	void			RegisterLuaClass		( MOAILuaState& state );
 	void			RegisterLuaFuncs		( MOAILuaState& state );
 	void			ReserveParticles		( u32 maxParticles, u32 particleSize );
+	void			ReserveRects			( u32 total );
 	void			ReserveSprites			( u32 maxSprites );
 	void			ReserveStates			( u32 total );
 	void			SerializeIn				( MOAILuaState& state, MOAIDeserializer& serializer );
 	void			SerializeOut			( MOAILuaState& state, MOAISerializer& serializer );
 	void			SetConstant				( u32 idx, float value );
+	void			SetRect					( u32 idx, ZLRect& rect );
 };
 
 #endif

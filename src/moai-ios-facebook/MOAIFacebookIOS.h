@@ -8,12 +8,11 @@
 #define MOAIFACEBOOKIOS_H
 
 #import <Foundation/Foundation.h> 
-#import <moai-core/headers.h>
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
-#import <FBSDKShareKit/FBSDKShareKit.h>
+#import <moai-core/headers.h>    
 
-@class MOAIFBSDKDelegate;
+@class MOAIFacebookIOSDialogDelegate;
+@class MOAIFacebookIOSRequestDelegate;
+@class MOAIFacebookIOSSessionDelegate;
 
 //================================================================//
 // MOAIFacebookIOS
@@ -32,66 +31,55 @@
 	@const	REQUEST_RESPONSE_FAILED		Event code for failed graph request responses.
 */
 class MOAIFacebookIOS :
-	public ZLContextClass < MOAIFacebookIOS, MOAIGlobalEventSource > {
+	public ZLContextClass < MOAIFacebookIOS, MOAILuaObject >,
+	public MOAIGlobalEventSource {
 private:
-
-	MOAILuaRefTable				mRefs;
-	MOAIFBSDKDelegate*			mDelegate;
 	
 	//----------------------------------------------------------------//
-	static int		_createTestUser				( lua_State* L );
-	static int		_declinedPermissions		( lua_State* L );
-//	static int		_extendToken				( lua_State* L );
 	static int		_getExpirationDate			( lua_State* L );
-	static int		_getProfile					( lua_State* L );
+	static int		_getUserEmail				( lua_State* L );
+	static int		_getUserID					( lua_State* L );
+	static int		_getUserName				( lua_State* L );
 	static int		_getToken					( lua_State* L );
 	static int		_graphRequest				( lua_State* L );
-	static int		_hasGranted					( lua_State* L );
+	static int		_handleDidBecomeActive		( lua_State* L );
+	static int      _handleOpenUrl				( lua_State* L );
 	static int		_init						( lua_State* L );
-	static int		_logEvent					( lua_State* L );
-	static int		_logPurchase				( lua_State* L );
 	static int		_login						( lua_State* L );
 	static int		_logout						( lua_State* L );
 	static int		_postToFeed					( lua_State* L );
-	static int		_requestPublishPermissions	( lua_State* L );
-	static int		_requestReadPermissions		( lua_State* L );
-	static int		_sendGameRequest			( lua_State* L );
+	static int		_restoreSession				( lua_State* L );
+	static int		_sendRequest				( lua_State* L );
 	static int		_sessionValid				( lua_State* L );
-	static int		_setProfileAutoUpdate		( lua_State* L );
-
-public:
 	
+		
+	STLString			mName;
+	STLString			mEmail;
+public:
+    
 	DECL_LUA_SINGLETON ( MOAIFacebookIOS );
 	
 	enum {
-		PERMISSIONS_DENIED,
-		PERMISSIONS_GRANTED,
-		PROFILE_UPDATED,
+		DIALOG_DID_COMPLETE,
+		DIALOG_DID_NOT_COMPLETE,
 		REQUEST_RESPONSE,
-		REQUEST_DIALOG_RESPONSE,
+		REQUEST_RESPONSE_FAILED,
 		SESSION_DID_LOGIN,
 		SESSION_DID_NOT_LOGIN,
-		SESSION_EXTENDED,
+		SESSION_EXTENDED
 	};
 	
 	//----------------------------------------------------------------//
-	void		ClearCallbackRef				( int ref );
-	void		GameRequestDialogDidComplete	( NSDictionary* results, int ref );
-	void		GameRequestDialogDidFail		( NSError* error, int ref );
-	void		GraphRequestResponse			( id result, int ref );
-	void		GraphRequestResponseFailure		( NSError* error, int ref );
-	void		Logout							();
-				MOAIFacebookIOS					();
-				~MOAIFacebookIOS				();
-	void		NotifyProfileChanged			( FBSDKProfile* profile );
-	void		PermissionsDenied				( NSString* error );
-	void		PermissionsGranted				();
-	void		PushProfile						( MOAILuaState& state, FBSDKProfile* profile );
-	void		RegisterLuaClass				( MOAILuaState& state );
-	void		SessionDidLogin					();
-	void		SessionDidNotLogin				();
-	void		SessionExtended					( cc8* token, cc8* expDate );
+	void		DialogDidNotComplete	        ();
+	void		DialogDidComplete		        ();
+				MOAIFacebookIOS			        ();
+				~MOAIFacebookIOS		        ();
+	void		RegisterLuaClass		        ( MOAILuaState& state );
+	void		ReceivedRequestResponse	        ( id result );
+	void		ReceivedRequestResponseFailure	();
+	void		SessionDidLogin			        ();
+	void		SessionDidNotLogin		        ();
+	void		SessionExtended			        ( cc8* token, cc8* expDate );
 };
-
 
 #endif // MOAIFACEBOOK_H

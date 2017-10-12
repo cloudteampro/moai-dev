@@ -110,7 +110,9 @@
     <Lib>
       <AdditionalLibraryDirectories>..\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
-    
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -130,7 +132,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ProgramDataBaseFileName>$(OutDir)$(ProjectName).pdb</ProgramDataBaseFileName>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ForcedIncludeFiles>zl-vfs/zl_replace.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -139,7 +141,9 @@
     <Lib>
       <AdditionalLibraryDirectories>..\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
-    
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <CustomBuildStep>
@@ -174,7 +178,9 @@
       <AdditionalLibraryDirectories>..\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
     </Lib>
-    
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <CustomBuildStep>
@@ -201,7 +207,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ProgramDataBaseFileName>$(OutDir)$(ProjectName).pdb</ProgramDataBaseFileName>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ForcedIncludeFiles>zl-vfs/zl_replace.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -211,13 +217,20 @@
       <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
       <AdditionalLibraryDirectories>..\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
-    
+    <PostBuildEvent>
+      <Command>xcopy /yr "$(OutDir)$(TargetFileName)" "..\..\bin\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\zl-common\zl_platform.h" />
+    <ClInclude Include="..\..\src\zl-common\zl_types.h" />
     <ClInclude Include="..\..\src\zl-util\ZLAccessors.h" />
     <ClInclude Include="..\..\src\zl-util\ZLAdapterInfo.h" />
     <ClInclude Include="..\..\src\zl-util\ZLBinarySearch.h" />
     <ClInclude Include="..\..\src\zl-util\ZLBitBuffer.h" />
+    <ClInclude Include="..\..\src\zl-util\ZLContext.h" />
+    <ClInclude Include="..\..\src\zl-util\ZLCopyOnWrite.h" />
+    <ClInclude Include="..\..\src\zl-util\ZLCubicBezier2D.h" />
     <ClInclude Include="..\..\src\zl-util\ZLDelegate.h" />
     <ClInclude Include="..\..\src\zl-util\ZLDirectoryItr.h" />
     <ClInclude Include="..\..\src\zl-util\ZLFileSys.h" />
@@ -228,6 +241,11 @@
     <ClInclude Include="..\..\src\zl-util\ZLLog.h" />
     <ClInclude Include="..\..\src\zl-util\ZLRadixSort16.h" />
     <ClInclude Include="..\..\src\zl-util\ZLRadixSort32.h" />
+    <ClInclude Include="..\..\src\zl-util\ZLRefCountedObject.h" />
+    <ClInclude Include="..\..\src\zl-util\ZLRingAdapter.h" />
+    <ClInclude Include="..\..\src\zl-util\ZLRtti.h" />
+    <ClInclude Include="..\..\src\zl-util\ZLSample.h" />
+    <ClInclude Include="..\..\src\zl-util\ZLSharedHandle.h" />
     <ClInclude Include="..\..\src\zl-util\ZLStreamAdapter.h" />
     <ClInclude Include="..\..\src\zl-util\ZLTypedPtr.h" />
     <ClInclude Include="..\..\src\zl-util\ZLTypeID.h" />
@@ -262,9 +280,9 @@
     <ClInclude Include="..\..\src\zl-util\ZLMercator.h" />
     <ClInclude Include="..\..\src\zl-util\ZLPlane.h" />
     <ClInclude Include="..\..\src\zl-util\ZLPolar.h" />
+    <ClInclude Include="..\..\src\zl-util\ZLPolygon2D.h" />
     <ClInclude Include="..\..\src\zl-util\ZLPrism.h" />
     <ClInclude Include="..\..\src\zl-util\ZLQuad.h" />
-    <ClInclude Include="..\..\src\zl-util\ZLQuadCoord.h" />
     <ClInclude Include="..\..\src\zl-util\ZLQuaternion.h" />
     <ClInclude Include="..\..\src\zl-util\ZLRect.h" />
     <ClInclude Include="..\..\src\zl-util\ZLRhombus.h" />
@@ -306,6 +324,9 @@
     <ClCompile Include="..\..\src\zl-util\ZLAdapterInfo_posix.cpp" />
     <ClCompile Include="..\..\src\zl-util\ZLAdapterInfo_win32.cpp" />
     <ClCompile Include="..\..\src\zl-util\ZLBitBuffer.cpp" />
+    <ClCompile Include="..\..\src\zl-util\ZLContext.cpp" />
+    <ClCompile Include="..\..\src\zl-util\ZLCopyOnWrite.cpp" />
+    <ClCompile Include="..\..\src\zl-util\ZLCubicBezier2D.cpp" />
     <ClCompile Include="..\..\src\zl-util\ZLDirectoryItr.cpp" />
     <ClCompile Include="..\..\src\zl-util\ZLFileSys.cpp" />
     <ClCompile Include="..\..\src\zl-util\ZLFrustumFitter.cpp" />
@@ -313,6 +334,12 @@
     <ClCompile Include="..\..\src\zl-util\ZLHexAdapter.cpp" />
     <ClCompile Include="..\..\src\zl-util\ZLHexDump.cpp" />
     <ClCompile Include="..\..\src\zl-util\ZLLog.cpp" />
+    <ClCompile Include="..\..\src\zl-util\ZLPolygon2D-clip.cpp" />
+    <ClCompile Include="..\..\src\zl-util\ZLPolygon2D.cpp" />
+    <ClCompile Include="..\..\src\zl-util\ZLRefCountedObject.cpp" />
+    <ClCompile Include="..\..\src\zl-util\ZLRingAdapter.cpp" />
+    <ClCompile Include="..\..\src\zl-util\ZLRtti.cpp" />
+    <ClCompile Include="..\..\src\zl-util\ZLSample.cpp" />
     <ClCompile Include="..\..\src\zl-util\ZLStreamAdapter.cpp" />
     <ClCompile Include="..\..\src\zl-util\ZLTypedPtr.cpp" />
     <ClCompile Include="..\..\src\zl-util\ZLUnique_linux.cpp" />
@@ -332,7 +359,6 @@
     <ClCompile Include="..\..\src\zl-util\ZLPolar.cpp" />
     <ClCompile Include="..\..\src\zl-util\ZLPrism.cpp" />
     <ClCompile Include="..\..\src\zl-util\ZLQuad.cpp" />
-    <ClCompile Include="..\..\src\zl-util\ZLQuadCoord.cpp" />
     <ClCompile Include="..\..\src\zl-util\ZLQuaternion.cpp" />
     <ClCompile Include="..\..\src\zl-util\ZLRhombus.cpp" />
     <ClCompile Include="..\..\src\zl-util\ZLSurface2D.cpp" />

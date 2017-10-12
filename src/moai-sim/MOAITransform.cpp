@@ -233,7 +233,7 @@ int MOAITransform::_move ( lua_State* L ) {
 		);
 		
 		action->SetSpan ( delay );
-		action->Start ( MOAISim::Get ().GetActionMgr (), false );
+		action->Start ( 0, false );
 		action->PushLuaUserdata ( state );
 		
 		return 1;
@@ -292,7 +292,7 @@ int MOAITransform::_moveLoc ( lua_State* L ) {
 		);
 		
 		action->SetSpan ( delay );
-		action->Start ( MOAISim::Get ().GetActionMgr (), false );
+		action->Start ( 0, false );
 		action->PushLuaUserdata ( state );
 
 		return 1;
@@ -342,7 +342,7 @@ int MOAITransform::_movePiv ( lua_State* L ) {
 		);
 		
 		action->SetSpan ( delay );
-		action->Start ( MOAISim::Get ().GetActionMgr (), false );
+		action->Start ( 0, false );
 		action->PushLuaUserdata ( state );
 
 		return 1;
@@ -392,7 +392,7 @@ int MOAITransform::_moveRot ( lua_State* L ) {
 		);
 		
 		action->SetSpan ( delay );
-		action->Start ( MOAISim::Get ().GetActionMgr (), false );
+		action->Start ( 0, false );
 		action->PushLuaUserdata ( state );
 
 		return 1;
@@ -442,7 +442,7 @@ int MOAITransform::_moveScl ( lua_State* L ) {
 		);
 		
 		action->SetSpan ( delay );
-		action->Start ( MOAISim::Get ().GetActionMgr (), false );
+		action->Start ( 0, false );
 		action->PushLuaUserdata ( state );
 
 		return 1;
@@ -505,7 +505,7 @@ int MOAITransform::_seek ( lua_State* L ) {
 		);
 		
 		action->SetSpan ( delay );
-		action->Start ( MOAISim::Get ().GetActionMgr (), false );
+		action->Start ( 0, false );
 		action->PushLuaUserdata ( state );
 
 		return 1;
@@ -558,7 +558,7 @@ int MOAITransform::_seekLoc ( lua_State* L ) {
 		);
 		
 		action->SetSpan ( delay );
-		action->Start ( MOAISim::Get ().GetActionMgr (), false );
+		action->Start ( 0, false );
 		action->PushLuaUserdata ( state );
 
 		return 1;
@@ -607,7 +607,7 @@ int MOAITransform::_seekPiv ( lua_State* L ) {
 		);
 		
 		action->SetSpan ( delay );
-		action->Start ( MOAISim::Get ().GetActionMgr (), false );
+		action->Start ( 0, false );
 		action->PushLuaUserdata ( state );
 
 		return 1;
@@ -656,7 +656,7 @@ int MOAITransform::_seekRot ( lua_State* L ) {
 		);
 		
 		action->SetSpan ( delay );
-		action->Start ( MOAISim::Get ().GetActionMgr (), false );
+		action->Start ( 0, false );
 		action->PushLuaUserdata ( state );
 
 		return 1;
@@ -705,7 +705,7 @@ int MOAITransform::_seekScl ( lua_State* L ) {
 		);
 		
 		action->SetSpan ( delay );
-		action->Start ( MOAISim::Get ().GetActionMgr (), false );
+		action->Start ( 0, false );
 		action->PushLuaUserdata ( state );
 
 		return 1;
@@ -940,10 +940,6 @@ bool MOAITransform::ApplyAttrOp ( u32 attrID, MOAIAttrOp& attrOp, u32 op ) {
 			case ATTR_TRANSLATE:
 				this->mLoc = attrOp.Apply < ZLVec3D >( this->mLoc, op, MOAIAttrOp::ATTR_READ_WRITE, MOAIAttrOp::ATTR_TYPE_VECTOR );
 				return true;
-				
-			case ATTR_SCALE:
-				this->mScale = attrOp.Apply < ZLVec3D >( this->mScale, op, MOAIAttrOp::ATTR_READ_WRITE, MOAIAttrOp::ATTR_TYPE_VECTOR );
-				return true;
 		}
 	}
 	return MOAITransformBase::ApplyAttrOp ( attrID, attrOp, op );
@@ -1099,7 +1095,6 @@ void MOAITransform::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "ATTR_Z_SCL",			MOAITransformAttr::Pack ( ATTR_Z_SCL ));
 	state.SetField ( -1, "ATTR_ROTATE_QUAT",	MOAITransformAttr::Pack ( ATTR_ROTATE_QUAT ));
 	state.SetField ( -1, "ATTR_TRANSLATE",		MOAITransformAttr::Pack ( ATTR_TRANSLATE ));
-	state.SetField ( -1, "ATTR_SCALE",			MOAITransformAttr::Pack ( ATTR_SCALE ));
 }
 
 //----------------------------------------------------------------//

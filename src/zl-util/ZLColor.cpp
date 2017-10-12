@@ -889,13 +889,14 @@ ZLColorVec ZLColor::Set ( u32 c0 ) {
 }
 
 //----------------------------------------------------------------//
+// TODO: WTF is this?
 u32 ZLColor::Set ( u32 c0, u8 b, u8 v ) {
 	UNUSED ( b );
 	UNUSED ( v );
-	
+
 	u32 r32 = c0;
 	//u8* rb32 = ( u8* )&r32;
-	
+		
 	return r32;
 }
 
@@ -1052,32 +1053,16 @@ void ZLColorVec::AddAndClamp ( const ZLColorVec& c ) {
 	this->mB += c.mB;
 	this->mA += c.mA;
 	
-	this->mR = this->mR < 1.0f ? this->mR : 1.0f;
-	this->mG = this->mG < 1.0f ? this->mG : 1.0f;
-	this->mB = this->mB < 1.0f ? this->mB : 1.0f;
-	this->mA = this->mA < 1.0f ? this->mA : 1.0f;
+	this->Clamp ();
 }
 
 //----------------------------------------------------------------//
-bool ZLColorVec::Compare ( const ZLColorVec& c ) {
-
-	if ((( mR != c.mR ) || ( mR != c.mR )) ||
-		(( mG != c.mG ) || ( mG != c.mG )) ||
-		(( mB != c.mB ) || ( mB != c.mB )) ||
-		(( mA != c.mA ) || ( mA != c.mA ))) return false;
-
-	return true;
-}
-
-//----------------------------------------------------------------//
-bool ZLColorVec::Compare ( const ZLColorVec& c, float res ) {
-
-	if ((( mR < ( c.mR - res )) || ( mR > ( c.mR + res ))) ||
-		(( mG < ( c.mG - res )) || ( mG > ( c.mG + res ))) ||
-		(( mB < ( c.mB - res )) || ( mB > ( c.mB + res ))) ||
-		(( mA < ( c.mA - res )) || ( mA > ( c.mA + res )))) return false;
-
-	return true;
+void ZLColorVec::Clamp () {
+	
+	this->mR = ZLFloat::Clamp ( this->mR, 0.0f, 1.0f );
+	this->mG = ZLFloat::Clamp ( this->mG, 0.0f, 1.0f );
+	this->mB = ZLFloat::Clamp ( this->mB, 0.0f, 1.0f );
+	this->mA = ZLFloat::Clamp ( this->mA, 0.0f, 1.0f );
 }
 
 //----------------------------------------------------------------//
@@ -1158,6 +1143,23 @@ float ZLColorVec::GetLuma () const {
 bool ZLColorVec::IsClear () const {
 
 	return (( this->mR == 0.0f ) && ( this->mG == 0.0f ) && ( this->mB == 0.0f ) && ( this->mA == 0.0f ));
+}
+
+//----------------------------------------------------------------//
+bool ZLColorVec::IsEqual ( const ZLColorVec& c ) const {
+
+	return (( mR == c.mR ) && ( mG == c.mG ) && ( mB == c.mB ) && ( mA == c.mA ));
+}
+
+//----------------------------------------------------------------//
+bool ZLColorVec::IsEqual ( const ZLColorVec& c, float res ) const {
+
+	if ((( mR < ( c.mR - res )) || ( mR > ( c.mR + res ))) ||
+		(( mG < ( c.mG - res )) || ( mG > ( c.mG + res ))) ||
+		(( mB < ( c.mB - res )) || ( mB > ( c.mB + res ))) ||
+		(( mA < ( c.mA - res )) || ( mA > ( c.mA + res )))) return false;
+
+	return true;
 }
 
 //----------------------------------------------------------------//

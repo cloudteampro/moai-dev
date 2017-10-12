@@ -62,11 +62,11 @@ private:
 	enum {
 		BUFFER_SIZE = 512,
 	};
-
+	
 	ZLXmlParser	mParser;
 	ZLStream*	mStream;
 	
-	u32			mInputLen;
+	int			mInputLen;
 	char		mBuffer [ BUFFER_SIZE ];
 
 	STLList < ZLXmlElement* > mElementStack;
@@ -117,3 +117,4 @@ public:
 
 #endif
 #endif
+

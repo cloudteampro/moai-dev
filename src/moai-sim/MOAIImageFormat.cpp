@@ -23,6 +23,13 @@ void MOAIImageFormat::CleanupTexture ( MOAISingleTexture& texture ) {
 }
 
 //----------------------------------------------------------------//
+bool MOAIImageFormat::CheckHeader ( const void* buffer ) {
+	UNUSED ( buffer );
+
+	return false;
+}
+
+//----------------------------------------------------------------//
 bool MOAIImageFormat::CreateTexture ( MOAISingleTexture& texture, const void* data, size_t size ) {
 	UNUSED ( texture );
 	UNUSED ( data );
@@ -32,15 +39,27 @@ bool MOAIImageFormat::CreateTexture ( MOAISingleTexture& texture, const void* da
 }
 
 //----------------------------------------------------------------//
-void* MOAIImageFormat::GetBitmap ( MOAIImage& image ) const {
+const void* MOAIImageFormat::GetBitmap ( MOAIImage& image ) const {
 
-	return image.mBitmap;
+	return image.mBitmap.GetBuffer ();
 }
 
 //----------------------------------------------------------------//
-void* MOAIImageFormat::GetRowAddr ( MOAIImage& image, u32 y ) const {
+void* MOAIImageFormat::GetBitmapMutable ( MOAIImage& image ) const {
 
-	return image.GetRowAddr ( y );
+	return image.mBitmap.Invalidate ();
+}
+
+//----------------------------------------------------------------//
+size_t MOAIImageFormat::GetHeaderSize () {
+
+	return 0;
+}
+
+//----------------------------------------------------------------//
+size_t MOAIImageFormat::GetHeaderGuessSize () {
+
+	return 0;
 }
 
 //----------------------------------------------------------------//
@@ -50,10 +69,23 @@ const void* MOAIImageFormat::GetRowAddr ( const MOAIImage& image, u32 y ) const 
 }
 
 //----------------------------------------------------------------//
+void* MOAIImageFormat::GetRowAddrMutable ( MOAIImage& image, u32 y ) const {
+
+	return image.GetRowAddrMutable ( y );
+}
+
+//----------------------------------------------------------------//
 bool MOAIImageFormat::GetTextureInfo ( ZLStream& stream, MOAITextureInfo& info ) {
 	UNUSED ( stream );
 	UNUSED ( info );
 	
+	return false;
+}
+
+//----------------------------------------------------------------//
+bool MOAIImageFormat::GuessHeader ( const void* buffer ) {
+	UNUSED ( buffer );
+
 	return false;
 }
 
@@ -97,7 +129,7 @@ void MOAIImageFormat::SetPixelFormat ( MOAIImage& image, MOAIImage::PixelFormat 
 }
 
 //----------------------------------------------------------------//
-void MOAIImageFormat::SetTextureID ( MOAISingleTexture& texture, u32 glTexID, int internalFormat, int pixelType, size_t textureSize ) {
+void MOAIImageFormat::SetTextureID ( MOAISingleTexture& texture, ZLGfxHandle* glTexID, int internalFormat, int pixelType, size_t textureSize ) {
 
 	texture.SetTextureID ( glTexID, internalFormat, pixelType, textureSize );
 }

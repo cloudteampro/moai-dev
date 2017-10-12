@@ -5,7 +5,7 @@
 #define ZL_ASSERT_H
 
 #ifdef  __cplusplus
-	extern "C" {
+    extern "C" {
 #endif
 
 #include <setjmp.h>
@@ -19,11 +19,11 @@
 //================================================================//
 
 //----------------------------------------------------------------//
-extern void					zl_handle_assert			( const char* condition, const char* funcname, const char* filename, int lineno );
-extern jmp_buf*				zl_set_assert_jmp_buf		( jmp_buf* env );
+extern void                    zl_handle_assert            ( const char* condition, const char* funcname, const char* filename, int lineno );
+extern jmp_buf*                zl_set_assert_jmp_buf        ( jmp_buf* env );
 
 #ifdef  __cplusplus
-	}
+    }
 #endif
 
 #endif

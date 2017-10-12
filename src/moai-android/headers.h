@@ -11,6 +11,5 @@
 #include <moai-android/MOAIMoviePlayerAndroid.h>
 #include <moai-android/MOAIBillingAndroid.h>
 #include <moai-android/MOAINotificationsAndroid.h>
-#include <moai-android/MOAIWebViewAndroid.h>
 
 #endif

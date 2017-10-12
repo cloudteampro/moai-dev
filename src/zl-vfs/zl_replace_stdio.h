@@ -51,9 +51,6 @@
 #undef fgetc
 #define fgetc zl_fgetc
 
-#undef fgetwc
-#define fgetwc zl_fgetwc
-
 #undef fgetpos
 #define fgetpos zl_fgetpos
 
@@ -84,8 +81,6 @@
 #undef fputc
 #define fputc zl_fputc
 
-#undef fputwc
-#define fputwc zl_fputwc
 #undef fputs
 #define fputs zl_fputs
 
@@ -175,9 +170,6 @@
 
 #undef ungetc
 #define ungetc zl_ungetc
-
-#undef ungetwc
-#define ungetwc zl_ungetwc
 
 #undef vfprintf
 #define vfprintf zl_vfprintf
