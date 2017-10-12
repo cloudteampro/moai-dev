@@ -31,7 +31,7 @@ class MOAIViewport;
 */
 class MOAIGfxDevice :
 	public MOAIGfxDeviceVertexWriter,
-	public MOAIGlobalClass < MOAIGfxDevice, MOAIGlobalEventSource > {
+	public ZLContextClass < MOAIGfxDevice, MOAIGlobalEventSource > {
 public:
 	
 	enum {

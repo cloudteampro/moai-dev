@@ -192,7 +192,6 @@ private:
 	// TODO: sGlobalsSet needs to be shared across all threads and wrapped in a mutex.
 	// should no longer be a ZLThreadLocalPtr.
 	static ZLThreadLocalPtr < GlobalsSet >		sGlobalsSet;
-	
 	static ZLThreadLocalPtr < ZLContext >		sInstance;
 
 	//----------------------------------------------------------------//

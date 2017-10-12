@@ -13,7 +13,7 @@
 	@text	Wrapper for WebView interaction on Android devices.
 */
 class MOAIWebViewAndroid : 
-	public MOAIGlobalClass < MOAIWebViewAndroid, MOAILuaObject >,
+	public ZLContextClass < MOAIWebViewAndroid, MOAILuaObject >,
 	public JniUtils {
 private:
 

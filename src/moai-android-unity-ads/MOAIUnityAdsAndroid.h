@@ -19,7 +19,7 @@
  
  */
 class MOAIUnityAdsAndroid :
-	public MOAIGlobalClass < MOAIUnityAdsAndroid, MOAIGlobalEventSource >,
+	public ZLContextClass < MOAIUnityAdsAndroid, MOAIGlobalEventSource >,
 	public JniUtils {
 private:
 	

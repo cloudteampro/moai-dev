@@ -581,6 +581,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/MoaiSample-cqdbxugpyrgpwegimkiivzlhrioj/Build/Products/Debug",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/moai-osx-ecrwhyikmcmgeveilibjvyrflhgl/Build/Products/Debug",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -608,6 +609,8 @@
 					"AKU_WITH_HTTP_SERVER=1",
 					"AKU_WITH_SDL=1",
 					LUA_USE_MACOSX,
+					"AKU_WITH_ASSIMP=1",
+					"AKU_WITH_IMGUI=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					../../src,
@@ -619,6 +622,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/MoaiSample-cqdbxugpyrgpwegimkiivzlhrioj/Build/Products/Debug",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/moai-osx-ecrwhyikmcmgeveilibjvyrflhgl/Build/Products/Debug",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";

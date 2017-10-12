@@ -43,7 +43,7 @@ class GameController {
         explicit        GameController      ();
                         ~GameController     ();
                         GameController      ( const GameController& ) = delete;
-        void            operator=           ( const GameController& ) = delete;
+//        void            operator=           ( const GameController& ) = delete;
         bool            Open                ( const int idx );
         void            Close               ();
         bool            isOpen              () const;

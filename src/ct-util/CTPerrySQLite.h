@@ -53,7 +53,7 @@ public:
 	@text	Global error logger for all instances of CTPerrySQLite
 */
 class CTPerrySQLiteLogger :
-	public MOAIGlobalClass < CTPerrySQLiteLogger, MOAILuaObject > {
+	public ZLContextClass < CTPerrySQLiteLogger, MOAILuaObject > {
 private:
 	
 	MOAILuaStrongRef	mErrorHandler;

@@ -6,8 +6,10 @@
 #include <string.h>
 
 #include <moai-core/host.h>
-#include <zl-util/ZLLeanArray.h>
 #include <host-modules/aku_modules.h>
+
+#include <zl-common/zl_types.h>
+#include <zl-util/ZLLeanArray.h>
 
 #ifdef MOAI_OS_WINDOWS
     #include <windows.h>

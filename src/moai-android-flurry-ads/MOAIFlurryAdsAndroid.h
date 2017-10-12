@@ -19,7 +19,7 @@
  
  */
 class MOAIFlurryAdsAndroid :
-	public MOAIGlobalClass < MOAIFlurryAdsAndroid, MOAIGlobalEventSource >,
+	public ZLContextClass < MOAIFlurryAdsAndroid, MOAIGlobalEventSource >,
 	public JniUtils {
 private:
 	

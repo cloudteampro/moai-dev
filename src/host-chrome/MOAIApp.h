@@ -7,7 +7,7 @@
 #include "moai-core/headers.h"
 
 class MOAIApp :
-	public MOAIGlobalClass < MOAIApp, MOAILuaObject > {
+	public ZLContextClass < MOAIApp, MOAILuaObject > {
 private:
 
 	enum {

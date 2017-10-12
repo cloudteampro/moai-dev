@@ -12,7 +12,7 @@
 // MOAICrashlyticsAndroid
 //================================================================//
 class MOAICrashlyticsAndroid :
-	public MOAIGlobalClass < MOAICrashlyticsAndroid, MOAILuaObject >,
+	public ZLContextClass < MOAICrashlyticsAndroid, MOAILuaObject >,
 	JniUtils {
 private:
 

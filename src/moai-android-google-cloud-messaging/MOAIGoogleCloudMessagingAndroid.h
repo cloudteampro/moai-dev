@@ -17,7 +17,7 @@
 // MOAIGoogleCloudMessagingAndroid
 //================================================================//
 class MOAIGoogleCloudMessagingAndroid :
-	public MOAIGlobalClass < MOAIGoogleCloudMessagingAndroid, MOAILuaObject >,
+	public ZLContextClass < MOAIGoogleCloudMessagingAndroid, MOAILuaObject >,
 	public MOAIGlobalEventSource {
 private:
 		//----------------------------------------------------------------//

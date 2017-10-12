@@ -15,7 +15,7 @@
 // MOAIAdToAppIOS
 //================================================================//
 class MOAIAdToAppIOS :
-	public MOAIGlobalClass < MOAIAdToAppIOS, MOAILuaObject >,
+	public ZLContextClass < MOAIAdToAppIOS, MOAILuaObject >,
 	public MOAIGlobalEventSource {
 private:
 

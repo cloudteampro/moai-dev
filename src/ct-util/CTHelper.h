@@ -13,7 +13,7 @@
 	@text	CloudTeam lua helper. Mostly for temporary hacks
 */
 class CTHelper :
-	public MOAIGlobalClass < CTHelper, MOAILuaObject > {
+	public ZLContextClass < CTHelper, MOAILuaObject > {
 private:
 
 	//----------------------------------------------------------------//

@@ -14,7 +14,7 @@
 	@text	CloudTeam lua utilities. Mostly for temporary hacks
 */
 class CTUtil :
-	public MOAIGlobalClass < CTUtil, MOAIGlobalEventSource > {
+	public ZLContextClass < CTUtil, MOAIGlobalEventSource > {
 private:
 
 	bool 	mRelaunchScheduled;

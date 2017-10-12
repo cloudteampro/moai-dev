@@ -32,7 +32,7 @@ public:
 // MOAIGfxResourceMgr
 //================================================================//
 class MOAIGfxResourceMgr :
-	public MOAIGlobalClass < MOAIGfxResourceMgr, MOAILuaObject > {
+	public ZLContextClass < MOAIGfxResourceMgr, MOAILuaObject > {
 private:
 	
 	typedef ZLLeanList < MOAIGfxResource* >::Iterator ResourceIt;

@@ -14,7 +14,7 @@
 	@text	Wrapper for Crashlytics integration on iOS devices.
 */
 class MOAICrashlyticsIOS :
-	public MOAIGlobalClass < MOAICrashlyticsIOS, MOAILuaObject > {
+	public ZLContextClass < MOAICrashlyticsIOS, MOAILuaObject > {
 private:
 
 	//----------------------------------------------------------------//

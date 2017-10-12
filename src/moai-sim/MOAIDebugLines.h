@@ -46,7 +46,7 @@ private:
 	@const	TEXT_BOX_LAYOUT
 */
 class MOAIDebugLines :
-	public MOAIGlobalClass < MOAIDebugLines, MOAILuaObject > {
+	public ZLContextClass < MOAIDebugLines, MOAILuaObject > {
 public:
 
 	enum {

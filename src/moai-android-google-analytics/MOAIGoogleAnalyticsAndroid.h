@@ -16,7 +16,7 @@
  
  */
 class MOAIGoogleAnalyticsAndroid :
-public MOAIGlobalClass < MOAIGoogleAnalyticsAndroid, MOAILuaObject > {
+public ZLContextClass < MOAIGoogleAnalyticsAndroid, MOAILuaObject > {
 private:
 	
 	//----------------------------------------------------------------//

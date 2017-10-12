@@ -17,7 +17,7 @@ bool MOAIFmodCheckError ( FMOD_RESULT result );
 	@text	FMOD singleton.
 */
 class MOAIFmodStudio :
-	public MOAIGlobalClass < MOAIFmodStudio, MOAILuaObject > {
+	public ZLContextClass < MOAIFmodStudio, MOAILuaObject > {
 private:
 
 	FMOD_SYSTEM*		mSoundSys;

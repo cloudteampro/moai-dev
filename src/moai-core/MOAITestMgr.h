@@ -5,10 +5,7 @@
 #define	MOAITESTMGR_H
 
 #include <moai-core/MOAIEventSource.h>
-#include <moai-core/MOAIGlobals.h>
 #include <moai-core/MOAILua.h>
-
-
 
 //================================================================//
 // MOAITestResult
@@ -37,7 +34,7 @@ public:
 //================================================================//
 // TODO: doxygen
 class MOAITestMgr :
-	public MOAIGlobalClass < MOAITestMgr, MOAILuaObject > {
+	public ZLContextClass < MOAITestMgr, MOAILuaObject > {
 private:
 
 	MOAILuaStrongRef	mStepFunc;

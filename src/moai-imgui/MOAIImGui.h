@@ -22,7 +22,7 @@ public:
 /**	@name	MOAIImGui
 */
 class MOAIImGui :
-	public MOAIGlobalClass < MOAIImGui, MOAILuaObject > {
+	public ZLContextClass < MOAIImGui, MOAILuaObject > {
 private:
 	friend class MOAIImGuiRenderable;
 

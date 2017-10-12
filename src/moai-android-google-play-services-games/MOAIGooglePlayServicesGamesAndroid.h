@@ -16,7 +16,7 @@
 	@text	Wrapper for Google Play services.
 */
 class MOAIGooglePlayServicesGamesAndroid :
-	public MOAIGlobalClass < MOAIGooglePlayServicesGamesAndroid, MOAIGlobalEventSource >,
+	public ZLContextClass < MOAIGooglePlayServicesGamesAndroid, MOAIGlobalEventSource >,
 	public JniUtils {
 private:
 

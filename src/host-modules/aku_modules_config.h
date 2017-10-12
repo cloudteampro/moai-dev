@@ -6,7 +6,7 @@
 	#endif
 
 	#ifndef AKU_WITH_ASSIMP
-		#define AKU_WITH_ASSIMP 1
+		#define AKU_WITH_ASSIMP 0
 	#endif
 
 	#ifndef AKU_WITH_BOX2D
@@ -22,7 +22,7 @@
 	#endif
 
 	#ifndef AKU_WITH_FMOD_DESIGNER
-		#define AKU_WITH_FMOD_DESIGNER 1
+		#define AKU_WITH_FMOD_DESIGNER 0
 	#endif
 
 	#ifndef AKU_WITH_FMOD_EX
@@ -62,7 +62,7 @@
 	#endif
 	
 	#ifndef AKU_WITH_IMGUI
-		#define AKU_WITH_IMGUI 1
+		#define AKU_WITH_IMGUI 0
 	#endif
 
 	#ifndef AKU_WITH_LUAEXT

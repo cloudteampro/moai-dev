@@ -70,7 +70,7 @@
 
 	[ self stopListener ];
 
-	MOAIGlobals* context = MOAIGlobalsMgr::Get ();
+	ZLContext* context = ZLContextMgr::Get ();
 
 	mObserver = [[ NSNotificationCenter defaultCenter ]
 		addObserverForName:kReachabilityChangedNotification
@@ -80,8 +80,8 @@
 		
 			MOAIScopedContext scopedContext;
 
-			if ( !MOAIGlobalsMgr::Check ( context )) return;
-			MOAIGlobalsMgr::Set ( context );
+			if ( !ZLContextMgr::Check ( context )) return;
+			ZLContextMgr::Set ( context );
 			
 			NSLog ( @"%@", notification.name );
 			

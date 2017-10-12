@@ -21,7 +21,7 @@
 	@const	TWEET_CANCELLED			Event indicating an unsuccessful Tweet.
 */
 class MOAITwitterIOS :
-	public MOAIGlobalClass < MOAITwitterIOS, MOAILuaObject > {
+	public ZLContextClass < MOAITwitterIOS, MOAILuaObject > {
 private:
 
 	//----------------------------------------------------------------//
