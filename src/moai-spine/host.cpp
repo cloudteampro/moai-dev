@@ -37,54 +37,49 @@ int spAtlasFilterToGL( spAtlasFilter filter ) {
 
 void _spAtlasPage_createTexture ( spAtlasPage* self, const char* path ) {
 	
-	MOAILuaStrongRef& createTextureRef = MOAISpine::Get ().GetCreateTextureRef ();
-	MOAITextureBase* texture;
+	MOAILuaStrongRef& createTextureRef = MOAISpine::Get ().GetCreateTextureRef();
+	MOAITexture* texture;
 	
 	if ( MOAILuaRuntime::IsValid () && createTextureRef ) {
 		
-		MOAIScopedLuaState state = createTextureRef.GetSelf ();
+		MOAIScopedLuaState state = createTextureRef.GetSelf();
 		
 		state.Push ( path );
-		state.Push ( spAtlasFilterToGL ( self->minFilter ));
-		state.Push ( spAtlasFilterToGL ( self->magFilter ));
+		state.Push ( spAtlasFilterToGL(self->minFilter) );
+		state.Push ( spAtlasFilterToGL(self->magFilter) );
 		state.DebugCall ( 3, 1 );
 		
-		texture = MOAITexture::AffirmTexture ( state, -1 );
+		texture = state.GetLuaObject < MOAITexture >( -1, true );
 	}
 	else {
 		
-		MOAITexture* fallback = new MOAITexture ();
-		fallback->Init ( path, MOAIImageTransform::TRUECOLOR | MOAIImageTransform::PREMULTIPLY_ALPHA );
-		fallback->SetFilter ( spAtlasFilterToGL ( self->minFilter ), spAtlasFilterToGL ( self->magFilter ));
-		
-		texture = ( MOAITextureBase* )fallback;
+		texture = new MOAITexture();
+		texture->Init ( path, MOAIImageTransform::TRUECOLOR | MOAIImageTransform::PREMULTIPLY_ALPHA );
+		texture->SetFilter ( spAtlasFilterToGL (self->minFilter), spAtlasFilterToGL (self->magFilter) );
 	}
 	
 	self->rendererObject = texture;
-	
-	// Spine docs says that we must set width/height to spAtlasPage in this function.
-	// However, width and height values are already set from atlas file.
-	// Those values are used to calculate UVs, so not overriding them gives the ability to use different sized textures.
-	
+	self->width = texture->GetWidth ();
+	self->height = texture->GetHeight ();
 	texture->Retain ();
 }
 
 //----------------------------------------------------------------//
 void _spAtlasPage_disposeTexture ( spAtlasPage* self ) {
 	
-	MOAITextureBase* texture = ( MOAITextureBase* ) self->rendererObject;
+	MOAITexture* texture = (MOAITexture*)self->rendererObject;
 	texture->Release ();
 }
 
 //----------------------------------------------------------------//
 char* _spUtil_readFile (const char* path, int* length) {
 	
-	MOAILuaStrongRef& readFileRef = MOAISpine::Get ().GetReadFileRef ();
+	MOAILuaStrongRef& readFileRef = MOAISpine::Get ().GetReadFileRef();
 	
-	if ( MOAILuaRuntime::IsValid ()) {
+	if ( MOAILuaRuntime::IsValid()) {
 		
 		if ( readFileRef ) {
-			MOAIScopedLuaState state = readFileRef.GetSelf ();
+			MOAIScopedLuaState state = readFileRef.GetSelf();
 			state.Push ( path );
 			state.DebugCall ( 1, 1 );
 			
@@ -114,7 +109,7 @@ void AKUSpineContextInitialize () {
 	}
 
 	REGISTER_LUA_CLASS ( MOAISpine )
-	REGISTER_LUA_CLASS ( MOAISpineBone )
+//	REGISTER_LUA_CLASS ( MOAISpineBone )
 	REGISTER_LUA_CLASS ( MOAISpineSkeleton )
 	REGISTER_LUA_CLASS ( MOAISpineSkeletonData )
 	REGISTER_LUA_CLASS ( MOAISpineSlot )

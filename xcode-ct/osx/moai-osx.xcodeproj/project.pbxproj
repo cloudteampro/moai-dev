@@ -14,7 +14,6 @@
 		0300CF7B140DC61000ABCC5B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0300CF7A140DC61000ABCC5B /* AudioToolbox.framework */; };
 		0300CF94140DC65100ABCC5B /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0300CF93140DC65100ABCC5B /* AudioUnit.framework */; };
 		200159331E2A515000C4B645 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 200159321E2A515000C4B645 /* CoreVideo.framework */; };
-		20662B551C53A016004D0132 /* libmoai-osx-fmod-studio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20662B501C539EE6004D0132 /* libmoai-osx-fmod-studio.a */; };
 		20662B5C1C53A033004D0132 /* libmoai-osx-image-jpg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20662B581C53A033004D0132 /* libmoai-osx-image-jpg.a */; };
 		20662B5D1C53A033004D0132 /* libmoai-osx-image-png.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20662B591C53A033004D0132 /* libmoai-osx-image-png.a */; };
 		20662B5E1C53A033004D0132 /* libmoai-osx-image-pvr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20662B5A1C53A033004D0132 /* libmoai-osx-image-pvr.a */; };
@@ -27,6 +26,11 @@
 		7AF6C4FD1F8FBD8800E6EB84 /* SDLHostMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AF6C4F61F8FBD8800E6EB84 /* SDLHostMain.cpp */; };
 		7AF6C4FE1F8FBD8800E6EB84 /* SDLJoystick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AF6C4F71F8FBD8800E6EB84 /* SDLJoystick.cpp */; };
 		7AF6C4FF1F8FBD8800E6EB84 /* SDLKeyCodeMapping.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AF6C4F91F8FBD8800E6EB84 /* SDLKeyCodeMapping.cpp */; };
+		7AF6C7B71F9119DC00E6EB84 /* libmoai-osx-fmod-studio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20662B501C539EE6004D0132 /* libmoai-osx-fmod-studio.a */; };
+		7AF6C7B91F9120AF00E6EB84 /* libmoai-osx-harfbuzz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF6C7B81F9120AF00E6EB84 /* libmoai-osx-harfbuzz.a */; };
+		7AF6C7BC1F9120B900E6EB84 /* libmoai-osx-3rdparty-assimp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF6C7BA1F9120B900E6EB84 /* libmoai-osx-3rdparty-assimp.a */; };
+		7AF6C7BD1F9120B900E6EB84 /* libmoai-osx-assimp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF6C7BB1F9120B900E6EB84 /* libmoai-osx-assimp.a */; };
+		7AF6C7BE1F9120C400E6EB84 /* libmoai-osx-spine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20662B521C539EE6004D0132 /* libmoai-osx-spine.a */; };
 		CD096FD218E0FFE300A36EDD /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD096FD118E0FFE300A36EDD /* libstdc++.dylib */; };
 		CD1845BD1A626F0300FCCCE0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1845BC1A626F0300FCCCE0 /* SystemConfiguration.framework */; };
 		CD6600661831CB5400D9862B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6600651831CB5400D9862B /* OpenGL.framework */; };
@@ -152,6 +156,10 @@
 		7AF6C4F81F8FBD8800E6EB84 /* SDLJoystick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDLJoystick.h; path = "../../src/host-sdl/SDLJoystick.h"; sourceTree = "<group>"; };
 		7AF6C4F91F8FBD8800E6EB84 /* SDLKeyCodeMapping.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SDLKeyCodeMapping.cpp; path = "../../src/host-sdl/SDLKeyCodeMapping.cpp"; sourceTree = "<group>"; };
 		7AF6C4FA1F8FBD8800E6EB84 /* SDLKeyCodeMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDLKeyCodeMapping.h; path = "../../src/host-sdl/SDLKeyCodeMapping.h"; sourceTree = "<group>"; };
+		7AF6C5721F9103B800E6EB84 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		7AF6C7B81F9120AF00E6EB84 /* libmoai-osx-harfbuzz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmoai-osx-harfbuzz.a"; path = "../../xcode/libmoai/build/Debug/libmoai-osx-harfbuzz.a"; sourceTree = "<group>"; };
+		7AF6C7BA1F9120B900E6EB84 /* libmoai-osx-3rdparty-assimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmoai-osx-3rdparty-assimp.a"; path = "../../../../../Library/Developer/Xcode/DerivedData/moai-osx-ecrwhyikmcmgeveilibjvyrflhgl/Build/Products/Debug/libmoai-osx-3rdparty-assimp.a"; sourceTree = "<group>"; };
+		7AF6C7BB1F9120B900E6EB84 /* libmoai-osx-assimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmoai-osx-assimp.a"; path = "../../../../../Library/Developer/Xcode/DerivedData/moai-osx-ecrwhyikmcmgeveilibjvyrflhgl/Build/Products/Debug/libmoai-osx-assimp.a"; sourceTree = "<group>"; };
 		CD096FD118E0FFE300A36EDD /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		CD1845BC1A626F0300FCCCE0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CD6600651831CB5400D9862B /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -188,13 +196,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				200159331E2A515000C4B645 /* CoreVideo.framework in Frameworks */,
+				7AF6C7BE1F9120C400E6EB84 /* libmoai-osx-spine.a in Frameworks */,
+				7AF6C7BC1F9120B900E6EB84 /* libmoai-osx-3rdparty-assimp.a in Frameworks */,
+				7AF6C7BD1F9120B900E6EB84 /* libmoai-osx-assimp.a in Frameworks */,
+				7AF6C7B91F9120AF00E6EB84 /* libmoai-osx-harfbuzz.a in Frameworks */,
+				7AF6C7B71F9119DC00E6EB84 /* libmoai-osx-fmod-studio.a in Frameworks */,
 				20662B611C53A139004D0132 /* libfmod.dylib in Frameworks */,
 				20662B5C1C53A033004D0132 /* libmoai-osx-image-jpg.a in Frameworks */,
 				20662B5D1C53A033004D0132 /* libmoai-osx-image-png.a in Frameworks */,
 				20662B5E1C53A033004D0132 /* libmoai-osx-image-pvr.a in Frameworks */,
 				20662B5F1C53A033004D0132 /* libmoai-osx-image-webp.a in Frameworks */,
-				20662B551C53A016004D0132 /* libmoai-osx-fmod-studio.a in Frameworks */,
 				CDFD8FB11AD8653C0003F415 /* libmoai-osx-3rdparty-core.a in Frameworks */,
 				CDFD8FB21AD8653C0003F415 /* libmoai-osx-3rdparty-crypto.a in Frameworks */,
 				CDFD8FB31AD8653C0003F415 /* libmoai-osx-3rdparty-sdl.a in Frameworks */,
@@ -218,6 +229,7 @@
 				0300CF67140DC53C00ABCC5B /* Carbon.framework in Frameworks */,
 				CD795EF217F08E4B006AEB47 /* Cocoa.framework in Frameworks */,
 				CD795EF417F08F4E006AEB47 /* CoreAudio.framework in Frameworks */,
+				200159331E2A515000C4B645 /* CoreVideo.framework in Frameworks */,
 				0300CF66140DC53C00ABCC5B /* CoreFoundation.framework in Frameworks */,
 				4C623B6615246B25008E4436 /* CoreServices.framework in Frameworks */,
 				CD795EF617F08F86006AEB47 /* ForceFeedback.framework in Frameworks */,
@@ -270,6 +282,10 @@
 		CD2FDE8613542E9F00B814DF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7AF6C7BA1F9120B900E6EB84 /* libmoai-osx-3rdparty-assimp.a */,
+				7AF6C7BB1F9120B900E6EB84 /* libmoai-osx-assimp.a */,
+				7AF6C7B81F9120AF00E6EB84 /* libmoai-osx-harfbuzz.a */,
+				7AF6C5721F9103B800E6EB84 /* AVFoundation.framework */,
 				200159321E2A515000C4B645 /* CoreVideo.framework */,
 				20662B601C53A139004D0132 /* libfmod.dylib */,
 				20662B581C53A033004D0132 /* libmoai-osx-image-jpg.a */,
@@ -514,11 +530,31 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"($inherited)",
+					_DEBUG,
+					DEBUG,
+					POSIX,
+					MACOSX,
+					SQLITE_ENABLE_COLUMN_METADATA,
+					SQLITE_ENABLE_FTS3,
+					SQLITE_ENABLE_FTS3_PARENTHESIS,
+					TIXML_USE_STL,
+					HAVE_MEMMOVE,
+					XML_STATIC,
+					FT_DEBUG_LEVEL_ERROR,
+					FT_DEBUG_LEVEL_TRACE,
+					FT2_BUILD_LIBRARY,
+					DARWIN_NO_CARBON,
+					"AKU_WITH_APPLE=1",
+					"AKU_WITH_HARFBUZZ=1",
+					"AKU_WITH_HTTP_SERVER=1",
+					"AKU_WITH_SDL=1",
 					"AKU_WITH_ASSIMP=1",
 				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/moai-osx-ecrwhyikmcmgeveilibjvyrflhgl/Build/Products/Debug",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -529,23 +565,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"($inherited)",
-					"AKU_WITH_ASSIMP=1",
-				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		03B080970F708135005CD8E5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LIBRARY = "libc++";
-				GCC_ENABLE_CPP_EXCEPTIONS = NO;
-				GCC_ENABLE_CPP_RTTI = NO;
-				GCC_OBJC_CALL_CXX_CDTORS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
+					NDEBUG,
 					POSIX,
 					MACOSX,
 					SQLITE_ENABLE_COLUMN_METADATA,
@@ -556,9 +576,43 @@
 					FT2_BUILD_LIBRARY,
 					DARWIN_NO_CARBON,
 					"AKU_WITH_APPLE=1",
+					"AKU_WITH_HARFBUZZ=1",
 					"AKU_WITH_HTTP_SERVER=1",
 					"AKU_WITH_SDL=1",
-					LUA_USE_MACOSX,
+					"AKU_WITH_ASSIMP=1",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/moai-osx-ecrwhyikmcmgeveilibjvyrflhgl/Build/Products/Debug",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		03B080970F708135005CD8E5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LIBRARY = "compiler-default";
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_OBJC_CALL_CXX_CDTORS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NDEBUG,
+					POSIX,
+					MACOSX,
+					SQLITE_ENABLE_COLUMN_METADATA,
+					TIXML_USE_STL,
+					ENABLE_CUSTOM_WEBVIEW,
+					HAVE_MEMMOVE,
+					XML_STATIC,
+					FT2_BUILD_LIBRARY,
+					DARWIN_NO_CARBON,
+					"AKU_WITH_APPLE=1",
+					"AKU_WITH_HARFBUZZ=1",
+					"AKU_WITH_HTTP_SERVER=1",
+					"AKU_WITH_SDL=1",
+					"AKU_WITH_ASSIMP=1",
 				);
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -596,7 +650,7 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
 				GCC_OBJC_CALL_CXX_CDTORS = YES;
@@ -616,9 +670,10 @@
 					FT2_BUILD_LIBRARY,
 					DARWIN_NO_CARBON,
 					"AKU_WITH_APPLE=1",
+					"AKU_WITH_HARFBUZZ=1",
 					"AKU_WITH_HTTP_SERVER=1",
 					"AKU_WITH_SDL=1",
-					LUA_USE_MACOSX,
+					"AKU_WITH_ASSIMP=1",
 				);
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

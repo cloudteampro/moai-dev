@@ -72,6 +72,10 @@ void AKUModulesAppFinalize () {
 	#if AKU_WITH_FMOD_EX
 		AKUFmodExAppFinalize ();
 	#endif
+	
+	#if AKU_WITH_FMOD_STUDIO
+		AKUFmodStudioAppFinalize ();
+	#endif
 
 	#if AKU_WITH_HTTP_CLIENT
 		AKUHttpClientAppFinalize ();
@@ -144,7 +148,11 @@ int AKUModulesAppInitialize () {
 	#if AKU_WITH_FMOD_EX
 		AKUFmodExAppInitialize ();
 	#endif
-
+	
+	#if AKU_WITH_FMOD_STUDIO
+		AKUFmodStudioAppInitialize ();
+	#endif
+	
 	#if AKU_WITH_HTTP_CLIENT
 		AKUHttpClientAppInitialize ();
 	#endif
@@ -223,6 +231,10 @@ int AKUModulesContextInitialize () {
 
 	#if AKU_WITH_FMOD_EX
 		AKUFmodExContextInitialize ();
+	#endif
+	
+	#if AKU_WITH_FMOD_STUDIO
+		AKUFmodStudioContextInitialize ();
 	#endif
 
 	#if AKU_WITH_HARFBUZZ
@@ -329,6 +341,10 @@ void AKUModulesPause ( bool pause ) {
 		AKUUntzPause ( pause );
 	#endif
 	
+	#if AKU_WITH_FMOD_STUDIO
+		AKUFmodStudioPause ( pause );
+	#endif
+	
 	#if AKU_WITH_IOS
 		AKUModulesIosPause ( pause );
 	#endif
@@ -355,6 +371,10 @@ void AKUModulesUpdate () {
 
 	#if AKU_WITH_FMOD_EX
 		AKUFmodExUpdate ();
+	#endif
+	
+	#if AKU_WITH_FMOD_STUDIO
+		AKUFmodStudioUpdate ();
 	#endif
 
 	#if AKU_WITH_SIM

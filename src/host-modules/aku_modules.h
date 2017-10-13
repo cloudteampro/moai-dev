@@ -42,6 +42,10 @@
 	#include <moai-fmod-ex/host.h>
 #endif
 
+#if AKU_WITH_FMOD_STUDIO
+	#include <moai-fmod-studio/host.h>
+#endif
+
 #if AKU_WITH_HARFBUZZ
 	#include <moai-harfbuzz/host.h>
 #endif

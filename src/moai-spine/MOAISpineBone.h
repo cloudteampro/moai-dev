@@ -11,6 +11,8 @@
 //================================================================//
 /**	@name	MOAISpineBone
 	@text	MOAITransform that is bound to spine bone
+			
+			Disabled in spine-v3 runtime.
 
 */
 class MOAISpineBone :
