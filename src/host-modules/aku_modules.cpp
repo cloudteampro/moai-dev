@@ -253,6 +253,10 @@ int AKUModulesContextInitialize () {
 		AKUHttpServerContextInitialize ();
 	#endif
 
+	#if AKU_WITH_IMGUI
+		AKUImGuiContextInitialize ();
+	#endif
+
 	#if AKU_WITH_LUAEXT
 		AKULuaExtContextInitialize ();
 	#endif

@@ -82,6 +82,10 @@
 	#include <moai-image-webp/host.h>
 #endif
 
+#if AKU_WITH_IMGUI
+	#include <moai-imgui/host.h>
+#endif
+
 #if AKU_WITH_LUAEXT
 	#include <moai-luaext/host.h>
 #endif

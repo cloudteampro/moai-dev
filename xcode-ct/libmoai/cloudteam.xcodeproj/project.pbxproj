@@ -16,6 +16,7 @@
 				20993E8E1BDE94A4009D7CED /* PBXTargetDependency */,
 				206B9D3D1BDE49020021D349 /* PBXTargetDependency */,
 				206B9CF81BDABB1B0021D349 /* PBXTargetDependency */,
+				7AF6C80E1F91294700E6EB84 /* PBXTargetDependency */,
 				206B9CFA1BDABB1B0021D349 /* PBXTargetDependency */,
 			);
 			name = build_all_osx;
@@ -260,6 +261,30 @@
 		7AF6C7B01F91105000E6EB84 /* TransformConstraintData.c in Sources */ = {isa = PBXBuildFile; fileRef = 7AF6C7311F91105000E6EB84 /* TransformConstraintData.c */; };
 		7AF6C7B11F91105000E6EB84 /* VertexAttachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 7AF6C7321F91105000E6EB84 /* VertexAttachment.c */; };
 		7AF6C7B21F91105000E6EB84 /* VertexAttachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 7AF6C7321F91105000E6EB84 /* VertexAttachment.c */; };
+		7AF6C7E31F91286400E6EB84 /* imconfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AF6C7D81F91286400E6EB84 /* imconfig.h */; };
+		7AF6C7E41F91286400E6EB84 /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AF6C7D91F91286400E6EB84 /* imgui.cpp */; };
+		7AF6C7E51F91286400E6EB84 /* imgui.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AF6C7DA1F91286400E6EB84 /* imgui.h */; };
+		7AF6C7E61F91286400E6EB84 /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AF6C7DB1F91286400E6EB84 /* imgui_demo.cpp */; };
+		7AF6C7E71F91286400E6EB84 /* imgui_dock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AF6C7DC1F91286400E6EB84 /* imgui_dock.cpp */; };
+		7AF6C7E81F91286400E6EB84 /* imgui_dock.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AF6C7DD1F91286400E6EB84 /* imgui_dock.h */; };
+		7AF6C7E91F91286400E6EB84 /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AF6C7DE1F91286400E6EB84 /* imgui_draw.cpp */; };
+		7AF6C7EA1F91286400E6EB84 /* imgui_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AF6C7DF1F91286400E6EB84 /* imgui_internal.h */; };
+		7AF6C7EB1F91286400E6EB84 /* stb_rect_pack.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AF6C7E01F91286400E6EB84 /* stb_rect_pack.h */; };
+		7AF6C7EC1F91286400E6EB84 /* stb_textedit.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AF6C7E11F91286400E6EB84 /* stb_textedit.h */; };
+		7AF6C7ED1F91286400E6EB84 /* stb_truetype.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AF6C7E21F91286400E6EB84 /* stb_truetype.h */; };
+		7AF6C7FC1F91287100E6EB84 /* fts_fuzzy_match.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AF6C7EF1F91287100E6EB84 /* fts_fuzzy_match.h */; };
+		7AF6C7FD1F91287100E6EB84 /* host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AF6C7F01F91287100E6EB84 /* host.cpp */; };
+		7AF6C7FE1F91287100E6EB84 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AF6C7F11F91287100E6EB84 /* host.h */; };
+		7AF6C7FF1F91287100E6EB84 /* imgui_iterator.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AF6C7F21F91287100E6EB84 /* imgui_iterator.h */; };
+		7AF6C8001F91287100E6EB84 /* imgui_iterator_dock.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AF6C7F31F91287100E6EB84 /* imgui_iterator_dock.h */; };
+		7AF6C8011F91287100E6EB84 /* MOAIImGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AF6C7F41F91287100E6EB84 /* MOAIImGui.cpp */; };
+		7AF6C8021F91287100E6EB84 /* MOAIImGui.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AF6C7F51F91287100E6EB84 /* MOAIImGui.h */; };
+		7AF6C8031F91287100E6EB84 /* noc_file_dialog.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AF6C7F61F91287100E6EB84 /* noc_file_dialog.h */; };
+		7AF6C8041F91287100E6EB84 /* noc_file_dialog_osx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7AF6C7F71F91287100E6EB84 /* noc_file_dialog_osx.mm */; };
+		7AF6C8051F91287100E6EB84 /* pch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AF6C7F81F91287100E6EB84 /* pch.cpp */; };
+		7AF6C8061F91287100E6EB84 /* pch.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AF6C7F91F91287100E6EB84 /* pch.h */; };
+		7AF6C8071F91287100E6EB84 /* wrap_imgui_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AF6C7FA1F91287100E6EB84 /* wrap_imgui_impl.cpp */; };
+		7AF6C8081F91287100E6EB84 /* wrap_imgui_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AF6C7FB1F91287100E6EB84 /* wrap_imgui_impl.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -844,6 +869,13 @@
 			remoteGlobalIDString = CDA1D0881D1B75B20006C5E5;
 			remoteInfo = "libmoai-osx-image-tga";
 		};
+		7AF6C80D1F91294700E6EB84 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7AF6C7BF1F9127FF00E6EB84;
+			remoteInfo = "libmoai-osx-imgui";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -976,6 +1008,31 @@
 		7AF6C7301F91105000E6EB84 /* TransformConstraint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TransformConstraint.c; sourceTree = "<group>"; };
 		7AF6C7311F91105000E6EB84 /* TransformConstraintData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TransformConstraintData.c; sourceTree = "<group>"; };
 		7AF6C7321F91105000E6EB84 /* VertexAttachment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VertexAttachment.c; sourceTree = "<group>"; };
+		7AF6C7D41F9127FF00E6EB84 /* libmoai-osx-imgui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-osx-imgui.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7AF6C7D81F91286400E6EB84 /* imconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imconfig.h; sourceTree = "<group>"; };
+		7AF6C7D91F91286400E6EB84 /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
+		7AF6C7DA1F91286400E6EB84 /* imgui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui.h; sourceTree = "<group>"; };
+		7AF6C7DB1F91286400E6EB84 /* imgui_demo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_demo.cpp; sourceTree = "<group>"; };
+		7AF6C7DC1F91286400E6EB84 /* imgui_dock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_dock.cpp; sourceTree = "<group>"; };
+		7AF6C7DD1F91286400E6EB84 /* imgui_dock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_dock.h; sourceTree = "<group>"; };
+		7AF6C7DE1F91286400E6EB84 /* imgui_draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_draw.cpp; sourceTree = "<group>"; };
+		7AF6C7DF1F91286400E6EB84 /* imgui_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_internal.h; sourceTree = "<group>"; };
+		7AF6C7E01F91286400E6EB84 /* stb_rect_pack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_rect_pack.h; sourceTree = "<group>"; };
+		7AF6C7E11F91286400E6EB84 /* stb_textedit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_textedit.h; sourceTree = "<group>"; };
+		7AF6C7E21F91286400E6EB84 /* stb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_truetype.h; sourceTree = "<group>"; };
+		7AF6C7EF1F91287100E6EB84 /* fts_fuzzy_match.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fts_fuzzy_match.h; sourceTree = "<group>"; };
+		7AF6C7F01F91287100E6EB84 /* host.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = host.cpp; sourceTree = "<group>"; };
+		7AF6C7F11F91287100E6EB84 /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = host.h; sourceTree = "<group>"; };
+		7AF6C7F21F91287100E6EB84 /* imgui_iterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_iterator.h; sourceTree = "<group>"; };
+		7AF6C7F31F91287100E6EB84 /* imgui_iterator_dock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_iterator_dock.h; sourceTree = "<group>"; };
+		7AF6C7F41F91287100E6EB84 /* MOAIImGui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIImGui.cpp; sourceTree = "<group>"; };
+		7AF6C7F51F91287100E6EB84 /* MOAIImGui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIImGui.h; sourceTree = "<group>"; };
+		7AF6C7F61F91287100E6EB84 /* noc_file_dialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = noc_file_dialog.h; sourceTree = "<group>"; };
+		7AF6C7F71F91287100E6EB84 /* noc_file_dialog_osx.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = noc_file_dialog_osx.mm; sourceTree = "<group>"; };
+		7AF6C7F81F91287100E6EB84 /* pch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pch.cpp; sourceTree = "<group>"; };
+		7AF6C7F91F91287100E6EB84 /* pch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pch.h; sourceTree = "<group>"; };
+		7AF6C7FA1F91287100E6EB84 /* wrap_imgui_impl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wrap_imgui_impl.cpp; sourceTree = "<group>"; };
+		7AF6C7FB1F91287100E6EB84 /* wrap_imgui_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wrap_imgui_impl.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1042,12 +1099,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7AF6C7CE1F9127FF00E6EB84 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		032409EE13564CAF000ADC60 /* 3rd party */ = {
 			isa = PBXGroup;
 			children = (
+				7AF6C7D71F91286400E6EB84 /* libimgui */,
 				7AF6C6E71F91105000E6EB84 /* spine-c */,
 				2049B9681CAA8D38005B83B3 /* adtoapp */,
 			);
@@ -1057,6 +1122,7 @@
 		0324E4F113564BC7000ADC60 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				7AF6C7EE1F91287100E6EB84 /* moai-imgui */,
 				7AF6C6091F910E5A00E6EB84 /* moai-ios-unityads */,
 				7AF6C6001F910E2900E6EB84 /* moai-ios-crashlytics */,
 				7AF6C5DB1F910E0400E6EB84 /* ct-util */,
@@ -1080,6 +1146,7 @@
 				203DA5871BDF92C700EC109A /* libmoai-ios-crashlytics.a */,
 				2090B66B1BEBA40A0057A676 /* libmoai-ios-unityads.a */,
 				2049B9541CAA8C8B005B83B3 /* libmoai_ios_adtoapp.a */,
+				7AF6C7D41F9127FF00E6EB84 /* libmoai-osx-imgui.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1392,6 +1459,45 @@
 			path = spine;
 			sourceTree = "<group>";
 		};
+		7AF6C7D71F91286400E6EB84 /* libimgui */ = {
+			isa = PBXGroup;
+			children = (
+				7AF6C7D81F91286400E6EB84 /* imconfig.h */,
+				7AF6C7D91F91286400E6EB84 /* imgui.cpp */,
+				7AF6C7DA1F91286400E6EB84 /* imgui.h */,
+				7AF6C7DB1F91286400E6EB84 /* imgui_demo.cpp */,
+				7AF6C7DC1F91286400E6EB84 /* imgui_dock.cpp */,
+				7AF6C7DD1F91286400E6EB84 /* imgui_dock.h */,
+				7AF6C7DE1F91286400E6EB84 /* imgui_draw.cpp */,
+				7AF6C7DF1F91286400E6EB84 /* imgui_internal.h */,
+				7AF6C7E01F91286400E6EB84 /* stb_rect_pack.h */,
+				7AF6C7E11F91286400E6EB84 /* stb_textedit.h */,
+				7AF6C7E21F91286400E6EB84 /* stb_truetype.h */,
+			);
+			name = libimgui;
+			path = ../../3rdparty/libimgui;
+			sourceTree = "<group>";
+		};
+		7AF6C7EE1F91287100E6EB84 /* moai-imgui */ = {
+			isa = PBXGroup;
+			children = (
+				7AF6C7EF1F91287100E6EB84 /* fts_fuzzy_match.h */,
+				7AF6C7F01F91287100E6EB84 /* host.cpp */,
+				7AF6C7F11F91287100E6EB84 /* host.h */,
+				7AF6C7F21F91287100E6EB84 /* imgui_iterator.h */,
+				7AF6C7F31F91287100E6EB84 /* imgui_iterator_dock.h */,
+				7AF6C7F41F91287100E6EB84 /* MOAIImGui.cpp */,
+				7AF6C7F51F91287100E6EB84 /* MOAIImGui.h */,
+				7AF6C7F61F91287100E6EB84 /* noc_file_dialog.h */,
+				7AF6C7F71F91287100E6EB84 /* noc_file_dialog_osx.mm */,
+				7AF6C7F81F91287100E6EB84 /* pch.cpp */,
+				7AF6C7F91F91287100E6EB84 /* pch.h */,
+				7AF6C7FA1F91287100E6EB84 /* wrap_imgui_impl.cpp */,
+				7AF6C7FB1F91287100E6EB84 /* wrap_imgui_impl.h */,
+			);
+			path = "moai-imgui";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1572,6 +1678,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7AF6C7D61F91281900E6EB84 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AF6C7FF1F91287100E6EB84 /* imgui_iterator.h in Headers */,
+				7AF6C7FE1F91287100E6EB84 /* host.h in Headers */,
+				7AF6C8081F91287100E6EB84 /* wrap_imgui_impl.h in Headers */,
+				7AF6C8061F91287100E6EB84 /* pch.h in Headers */,
+				7AF6C8031F91287100E6EB84 /* noc_file_dialog.h in Headers */,
+				7AF6C7EB1F91286400E6EB84 /* stb_rect_pack.h in Headers */,
+				7AF6C7E51F91286400E6EB84 /* imgui.h in Headers */,
+				7AF6C7EA1F91286400E6EB84 /* imgui_internal.h in Headers */,
+				7AF6C8001F91287100E6EB84 /* imgui_iterator_dock.h in Headers */,
+				7AF6C8021F91287100E6EB84 /* MOAIImGui.h in Headers */,
+				7AF6C7ED1F91286400E6EB84 /* stb_truetype.h in Headers */,
+				7AF6C7EC1F91286400E6EB84 /* stb_textedit.h in Headers */,
+				7AF6C7E81F91286400E6EB84 /* imgui_dock.h in Headers */,
+				7AF6C7E31F91286400E6EB84 /* imconfig.h in Headers */,
+				7AF6C7FC1F91287100E6EB84 /* fts_fuzzy_match.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -1728,6 +1856,23 @@
 			productReference = 2090B66B1BEBA40A0057A676 /* libmoai-ios-unityads.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		7AF6C7BF1F9127FF00E6EB84 /* libmoai-osx-imgui */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7AF6C7CF1F9127FF00E6EB84 /* Build configuration list for PBXNativeTarget "libmoai-osx-imgui" */;
+			buildPhases = (
+				7AF6C7CE1F9127FF00E6EB84 /* Frameworks */,
+				7AF6C7D51F91281700E6EB84 /* Sources */,
+				7AF6C7D61F91281900E6EB84 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "libmoai-osx-imgui";
+			productName = OpenUSLS;
+			productReference = 7AF6C7D41F9127FF00E6EB84 /* libmoai-osx-imgui.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1786,6 +1931,7 @@
 				206B9B081BDAB53F0021D349 /* libmoai-osx-fmod-studio */,
 				206B9ABC1BDAB4F60021D349 /* libmoai-osx-spine */,
 				206B9D1B1BDE37CA0021D349 /* libmoai-osx-ct-util */,
+				7AF6C7BF1F9127FF00E6EB84 /* libmoai-osx-imgui */,
 			);
 		};
 /* End PBXProject section */
@@ -2466,6 +2612,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7AF6C7D51F91281700E6EB84 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AF6C8071F91287100E6EB84 /* wrap_imgui_impl.cpp in Sources */,
+				7AF6C7E61F91286400E6EB84 /* imgui_demo.cpp in Sources */,
+				7AF6C8011F91287100E6EB84 /* MOAIImGui.cpp in Sources */,
+				7AF6C7E41F91286400E6EB84 /* imgui.cpp in Sources */,
+				7AF6C8051F91287100E6EB84 /* pch.cpp in Sources */,
+				7AF6C8041F91287100E6EB84 /* noc_file_dialog_osx.mm in Sources */,
+				7AF6C7E71F91286400E6EB84 /* imgui_dock.cpp in Sources */,
+				7AF6C7FD1F91287100E6EB84 /* host.cpp in Sources */,
+				7AF6C7E91F91286400E6EB84 /* imgui_draw.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -2523,6 +2685,11 @@
 			isa = PBXTargetDependency;
 			name = "libmoai-ios-all";
 			targetProxy = 20993ECB1BDE94AA009D7CED /* PBXContainerItemProxy */;
+		};
+		7AF6C80E1F91294700E6EB84 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7AF6C7BF1F9127FF00E6EB84 /* libmoai-osx-imgui */;
+			targetProxy = 7AF6C80D1F91294700E6EB84 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -4182,6 +4349,178 @@
 			};
 			name = Distribution;
 		};
+		7AF6C7D01F9127FF00E6EB84 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"${inherited}",
+					MACOSX,
+					LUA_USE_MACOSX,
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					../../3rdparty/libimgui,
+				);
+				PRODUCT_NAME = "moai-osx-imgui";
+				SDKROOT = macosx;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
+				WARNING_CFLAGS = "-w";
+			};
+			name = Debug;
+		};
+		7AF6C7D11F9127FF00E6EB84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"${inherited}",
+					MACOSX,
+					LUA_USE_MACOSX,
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					../../3rdparty/libimgui,
+				);
+				PRODUCT_NAME = "moai-osx-imgui";
+				SDKROOT = macosx;
+				STRIP_STYLE = debugging;
+				WARNING_CFLAGS = "-w";
+			};
+			name = Release;
+		};
+		7AF6C7D21F9127FF00E6EB84 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"${inherited}",
+					MACOSX,
+					LUA_USE_MACOSX,
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					../../3rdparty/libimgui,
+				);
+				PRODUCT_NAME = "moai-osx-imgui";
+				SDKROOT = macosx;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
+				WARNING_CFLAGS = "-w";
+			};
+			name = AdHoc;
+		};
+		7AF6C7D31F9127FF00E6EB84 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"${inherited}",
+					MACOSX,
+					LUA_USE_MACOSX,
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					../../3rdparty/libimgui,
+				);
+				PRODUCT_NAME = "moai-osx-imgui";
+				SDKROOT = macosx;
+				STRIP_STYLE = debugging;
+				WARNING_CFLAGS = "-w";
+			};
+			name = Distribution;
+		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4745,6 +5084,17 @@
 				2090B6681BEBA40A0057A676 /* Release */,
 				2090B6691BEBA40A0057A676 /* AdHoc */,
 				2090B66A1BEBA40A0057A676 /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		7AF6C7CF1F9127FF00E6EB84 /* Build configuration list for PBXNativeTarget "libmoai-osx-imgui" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7AF6C7D01F9127FF00E6EB84 /* Debug */,
+				7AF6C7D11F9127FF00E6EB84 /* Release */,
+				7AF6C7D21F9127FF00E6EB84 /* AdHoc */,
+				7AF6C7D31F9127FF00E6EB84 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

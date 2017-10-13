@@ -31,6 +31,7 @@
 		7AF6C7BC1F9120B900E6EB84 /* libmoai-osx-3rdparty-assimp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF6C7BA1F9120B900E6EB84 /* libmoai-osx-3rdparty-assimp.a */; };
 		7AF6C7BD1F9120B900E6EB84 /* libmoai-osx-assimp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF6C7BB1F9120B900E6EB84 /* libmoai-osx-assimp.a */; };
 		7AF6C7BE1F9120C400E6EB84 /* libmoai-osx-spine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20662B521C539EE6004D0132 /* libmoai-osx-spine.a */; };
+		7AF6C80C1F91293200E6EB84 /* libmoai-imgui-osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF6C80B1F9128CF00E6EB84 /* libmoai-imgui-osx.a */; };
 		CD096FD218E0FFE300A36EDD /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CD096FD118E0FFE300A36EDD /* libstdc++.dylib */; };
 		CD1845BD1A626F0300FCCCE0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1845BC1A626F0300FCCCE0 /* SystemConfiguration.framework */; };
 		CD6600661831CB5400D9862B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6600651831CB5400D9862B /* OpenGL.framework */; };
@@ -128,6 +129,13 @@
 			remoteGlobalIDString = 2049B9541CAA8C8B005B83B3;
 			remoteInfo = "libmoai-ios-adtoapp";
 		};
+		7AF6C80A1F9128CF00E6EB84 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20662B371C539EE4004D0132 /* cloudteam.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7AF6C7D41F9127FF00E6EB84;
+			remoteInfo = "libmoai-osx-imgui";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -196,6 +204,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AF6C80C1F91293200E6EB84 /* libmoai-imgui-osx.a in Frameworks */,
 				7AF6C7BE1F9120C400E6EB84 /* libmoai-osx-spine.a in Frameworks */,
 				7AF6C7BC1F9120B900E6EB84 /* libmoai-osx-3rdparty-assimp.a in Frameworks */,
 				7AF6C7BD1F9120B900E6EB84 /* libmoai-osx-assimp.a in Frameworks */,
@@ -263,6 +272,7 @@
 				20662B501C539EE6004D0132 /* libmoai-osx-fmod-studio.a */,
 				20662B521C539EE6004D0132 /* libmoai-osx-spine.a */,
 				20662B541C539EE6004D0132 /* libmoai-osx-ct-util.a */,
+				7AF6C80B1F9128CF00E6EB84 /* libmoai-imgui-osx.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -478,6 +488,13 @@
 			remoteRef = 20FD8C591D12C1DD006587F8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		7AF6C80B1F9128CF00E6EB84 /* libmoai-imgui-osx.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libmoai-imgui-osx.a";
+			remoteRef = 7AF6C80A1F9128CF00E6EB84 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -549,6 +566,7 @@
 					"AKU_WITH_HTTP_SERVER=1",
 					"AKU_WITH_SDL=1",
 					"AKU_WITH_ASSIMP=1",
+					"AKU_WITH_IMGUI=1",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -580,6 +598,7 @@
 					"AKU_WITH_HTTP_SERVER=1",
 					"AKU_WITH_SDL=1",
 					"AKU_WITH_ASSIMP=1",
+					"AKU_WITH_IMGUI=1",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -613,6 +632,7 @@
 					"AKU_WITH_HTTP_SERVER=1",
 					"AKU_WITH_SDL=1",
 					"AKU_WITH_ASSIMP=1",
+					"AKU_WITH_IMGUI=1",
 				);
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -674,6 +694,7 @@
 					"AKU_WITH_HTTP_SERVER=1",
 					"AKU_WITH_SDL=1",
 					"AKU_WITH_ASSIMP=1",
+					"AKU_WITH_IMGUI=1",
 				);
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
