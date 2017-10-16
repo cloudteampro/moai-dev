@@ -238,6 +238,14 @@ const ZLFrustum& MOAIGfxGlobalsCache::GetViewVolume () {
 }
 
 //----------------------------------------------------------------//
+void MOAIGfxGlobalsCache::UpdateViewVolume () {
+
+	ZLMatrix4x4 invViewProj;
+	invViewProj.Inverse ( GetMtx ( MOAIGfxGlobalsCache::WORLD_VIEW_PROJ_MTX ));
+	this->mViewVolume.Init ( invViewProj );
+}
+
+//----------------------------------------------------------------//
 MOAIGfxGlobalsCache::MOAIGfxGlobalsCache () :
 	mDirtyFlags ( 0 ),
 	mShaderFlags ( 0 ),

@@ -52,6 +52,7 @@ public:
 	void				Assign					( const ZLCopyOnWrite& assign );
 	void				Free					();
 	const void*			GetBuffer				() const;
+	void				SetBuffer				( void* buffer, size_t size, size_t length = 0 );
 	u32					GetCaps					();
 	size_t				GetCursor				();
 	size_t				GetLength				();

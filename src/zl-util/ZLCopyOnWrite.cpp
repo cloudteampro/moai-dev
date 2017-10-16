@@ -104,6 +104,22 @@ const void* ZLCopyOnWrite::GetBuffer () const {
 }
 
 //----------------------------------------------------------------//
+void ZLCopyOnWrite::SetBuffer ( void* buffer, size_t size, size_t length ) {
+
+	this->mCursor = 0;
+
+	if ( !this->mInternal ) {
+		this->mInternal = new ZLCopyOnWriteBuffer ();
+		this->mInternal->Retain ();
+	}
+
+	length = length > size ? size : length;
+	this->mInternal->mLength = length;
+	this->mInternal->mSize = size;
+	this->mInternal->mBuffer = buffer;
+}
+
+//----------------------------------------------------------------//
 u32 ZLCopyOnWrite::GetCaps () {
 
 	return CAN_READ | CAN_WRITE | CAN_SEEK;

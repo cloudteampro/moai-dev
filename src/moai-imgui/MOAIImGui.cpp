@@ -133,12 +133,17 @@ int MOAIImGui::_init ( lua_State* L ) {
 	
 	if ( !self->mVtxFormat ) {
 		MOAIVertexFormat* vtxFormat = new MOAIVertexFormat ();
-		vtxFormat->DeclareAttribute ( 0, ZGL_TYPE_FLOAT, 2, MOAIVertexFormat::ARRAY_VERTEX, false );
-		vtxFormat->DeclareAttribute ( 1, ZGL_TYPE_FLOAT, 2, MOAIVertexFormat::ARRAY_TEX_COORD, false );
-		vtxFormat->DeclareAttribute ( 2, ZGL_TYPE_UNSIGNED_BYTE, 4, MOAIVertexFormat::ARRAY_COLOR, true );
+		vtxFormat->DeclareAttribute ( 0, ZGL_TYPE_FLOAT, 2, MOAIVertexFormat::ATTRIBUTE_COORD, false );
+		vtxFormat->DeclareAttribute ( 1, ZGL_TYPE_FLOAT, 2, MOAIVertexFormat::ATTRIBUTE_TEX_COORD, false );
+		vtxFormat->DeclareAttribute ( 2, ZGL_TYPE_UNSIGNED_BYTE, 4, MOAIVertexFormat::ATTRIBUTE_COLOR, true );
 		self->mVtxFormat.Set ( *self, vtxFormat );
 		
 		assert ( self->mVtxFormat->GetVertexSize () == sizeof ( ImDrawVert ));
+	}
+
+	if ( !self->mIdxBuffer ) {
+		MOAIImGuiIdxBuffer* idxBuffer = new MOAIImGuiIdxBuffer ();
+		self->mIdxBuffer.Set ( *self, idxBuffer );
 	}
 	
 	if ( !self->mVtxBuffer ) {
@@ -186,10 +191,8 @@ int MOAIImGui::_init ( lua_State* L ) {
 int MOAIImGui::_newFrame ( lua_State* L ) {
 	MOAI_LUA_SETUP_SINGLE ( MOAIImGui, "" )
 	
-	MOAIGfxDevice& device = MOAIGfxDevice::Get ();
-	
-	float w = state.GetValue < float >( 1, device.GetWidth ());
-	float h = state.GetValue < float >( 2, device.GetHeight ());
+	float w = state.GetValue < float >( 1, 100.0f );
+	float h = state.GetValue < float >( 2, 100.0f );
 	float dt = state.GetValue < float >( 3, 1.0f / 60.f );
 	
 	self->mViewport->Init ( 0.f, 0.f, w, h );
@@ -334,6 +337,7 @@ MOAIImGui::~MOAIImGui () {
 	this->mTexture.Set ( *this, 0 );
 	this->mViewport.Set ( *this, 0 );
 	this->mVtxFormat.Set ( *this, 0 );
+	this->mIdxBuffer.Set ( *this, 0 );
 	this->mVtxBuffer.Set ( *this, 0 );
 }
 
@@ -382,14 +386,30 @@ void MOAIImGui::InitTexture ( int width, int height, u8 *pixels ) {
 }
 
 //================================================================//
+// MOAIImGuiIdxBuffer
+//================================================================//
+
+//----------------------------------------------------------------//
+void MOAIImGuiIdxBuffer::SetData ( void *data, u32 length ) {
+	
+	this->SetBuffer (data, length, length );
+}
+
+//----------------------------------------------------------------//
+MOAIImGuiIdxBuffer::MOAIImGuiIdxBuffer () {
+	RTTI_BEGIN
+		RTTI_EXTEND ( MOAIIndexBuffer )
+	RTTI_END
+}
+
+//================================================================//
 // MOAIImGuiVtxBuffer
 //================================================================//
 
 //----------------------------------------------------------------//
 void MOAIImGuiVtxBuffer::SetData ( void *data, u32 length ) {
 	
-	this->SetBuffer (( const void* )data, length, length );
-	this->mData = data;
+	this->SetBuffer (data, length, length );
 }
 
 //----------------------------------------------------------------//
@@ -398,7 +418,6 @@ MOAIImGuiVtxBuffer::MOAIImGuiVtxBuffer () {
 		RTTI_EXTEND ( MOAIVertexBuffer )
 	RTTI_END
 }
-
 
 //================================================================//
 // MOAIImGuiRenderable
@@ -425,30 +444,32 @@ void MOAIImGuiRenderable::Render () {
 	ImDrawData* draw = ImGui::GetDrawData ();
 	if ( !draw ) return;
 	
-	MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get ();
+	MOAIGfxMgr& gfxMgr = MOAIGfxMgr::Get ();
+//	MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get ();
 	MOAIRenderMgr& renderMgr = MOAIRenderMgr::Get ();
 	
-	gfxDevice.ResetState ();
+	gfxMgr.mGfxState.ResetState ();
 	renderMgr.SetViewport ( imgui.mViewport );
 	
-	ZLRect viewRect = *imgui.mViewport;
-	gfxDevice.SetViewRect ( viewRect );
+	ZLRect viewportRect = *imgui.mViewport;
+	gfxMgr.mGfxState.SetViewRect ( viewportRect );
 	
 	ZLMatrix4x4 proj = imgui.mViewport->GetProjMtx ();
-	gfxDevice.SetVertexTransform ( MOAIGfxDevice::VTX_WORLD_TRANSFORM );
-	gfxDevice.SetVertexTransform ( MOAIGfxDevice::VTX_VIEW_TRANSFORM );
-	gfxDevice.SetVertexTransform ( MOAIGfxDevice::VTX_PROJ_TRANSFORM, proj );
+	gfxMgr.mGfxState.SetMtx ( MOAIGfxGlobalsCache::WORLD_MTX );
+	gfxMgr.mGfxState.SetMtx ( MOAIGfxGlobalsCache::VIEW_MTX );
+	gfxMgr.mGfxState.SetMtx ( MOAIGfxGlobalsCache::PROJ_MTX, proj );
 	
-	gfxDevice.SetVertexMtxMode ( MOAIGfxDevice::VTX_STAGE_MODEL, MOAIGfxDevice::VTX_STAGE_MODEL );
-	gfxDevice.SetUVMtxMode ( MOAIGfxDevice::UV_STAGE_MODEL, MOAIGfxDevice::UV_STAGE_TEXTURE );
-	gfxDevice.UpdateViewVolume ();
+	gfxMgr.mVertexCache.SetVertexTransform ( gfxMgr.mGfxState.GetMtx ( MOAIGfxGlobalsCache::WORLD_VIEW_PROJ_MTX ));
+	gfxMgr.mVertexCache.SetUVTransform ( gfxMgr.mGfxState.GetMtx ( MOAIGfxGlobalsCache::UV_MTX ));
+	gfxMgr.mGfxState.UpdateViewVolume ();
 	
-	gfxDevice.SetPenColor ( 1.f, 1.f, 1.f, 1.f );
-	gfxDevice.SetCullFunc ( 0 );
-	gfxDevice.SetDepthFunc ( 0 );
+	gfxMgr.mGfxState.SetPenColor ( 1.f, 1.f, 1.f, 1.f );
+	gfxMgr.mGfxState.SetCullFunc ( 0 );
+	gfxMgr.mGfxState.SetDepthFunc ( 0 );
 	
-	gfxDevice.SetShader ( MOAIShaderMgr::MESH_SHADER );
-	gfxDevice.UpdateShaderGlobals ();
+	gfxMgr.mGfxState.BindShader ( MOAIShaderMgr::MESH_SHADER );
+	
+	gfxMgr.mGfxState.UpdateAndBindUniforms ();
 	
 	ZLRect scissorRect;
 	MOAIBlendMode blendNormal;
@@ -459,15 +480,17 @@ void MOAIImGuiRenderable::Render () {
 	
 	u32 indexSizeInBytes = sizeof ( ImDrawIdx );
 	
+	ZLGfx& gfx = gfxMgr.GetDrawingAPI ();
+	
 	for ( u32 n = 0; n < draw->CmdListsCount; ++n ) {
 		
 		const ImDrawList* cmdList = draw->CmdLists [ n ];
 		imgui.mVtxBuffer->SetData (( void* )cmdList->VtxBuffer.begin (), cmdList->VtxBuffer.size () * sizeof ( ImDrawVert ));
 		
-		gfxDevice.BindVertexBuffer ( imgui.mVtxBuffer );
-		gfxDevice.BindVertexFormat ( imgui.mVtxFormat );
+		gfxMgr.mGfxState.BindVertexBuffer ( imgui.mVtxBuffer );
+		gfxMgr.mGfxState.BindVertexFormat ( imgui.mVtxFormat );
 		
-		gfxDevice.SetBlendMode ( blendNormal );
+		gfxMgr.mGfxState.SetBlendMode ( blendNormal );
 		
 		int idxHead = 0;
 		for ( u32 i = 0; i < cmdList->CmdBuffer.size (); ++i ) {
@@ -477,20 +500,24 @@ void MOAIImGuiRenderable::Render () {
 			scissorRect.Init ( cmd.ClipRect.x, cmd.ClipRect.y, cmd.ClipRect.z, cmd.ClipRect.w );
 			
 			// TODO: custom textures may need premultiplied alpha blending
-			gfxDevice.SetTexture (( MOAITexture* )cmd.TextureId );
-			gfxDevice.SetScissorRect ( scissorRect );
+			gfxMgr.mGfxState.BindTexture (( MOAITexture* )cmd.TextureId );
+			gfxMgr.mGfxState.SetScissorRect ( scissorRect );
 			
-			zglDrawElements (
+			imgui.mIdxBuffer->SetData(( void* )cmdList->IdxBuffer.begin (),  cmdList->IdxBuffer.size () * sizeof ( ImDrawVert ));
+			
+			gfx.DrawElements (
 				ZGL_PRIM_TRIANGLES,
 				cmd.ElemCount,
 				indexSizeInBytes == 2 ? ZGL_TYPE_UNSIGNED_SHORT : ZGL_TYPE_UNSIGNED_INT,
-				( const void* )(( size_t )cmdList->IdxBuffer.begin () + ( idxHead * indexSizeInBytes ))
+				imgui.mIdxBuffer->GetBuffer(),
+				idxHead * indexSizeInBytes
 			);
-			gfxDevice.IncrementDrawCount ();
+			// TODO:
+//			gfxMgr.mGfxState.IncrementDrawCount ();
 			idxHead += cmd.ElemCount;
 		}
 		
-		gfxDevice.BindVertexBuffer ();
-		gfxDevice.BindVertexFormat ();
+		gfxMgr.mGfxState.BindVertexBuffer ();
+		gfxMgr.mGfxState.BindVertexFormat ();
 	}
 }

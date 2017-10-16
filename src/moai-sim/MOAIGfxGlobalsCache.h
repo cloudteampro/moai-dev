@@ -151,6 +151,7 @@ public:
 	ZLMatrix4x4				GetWndToWorldMtx			( const ZLRect& wndRect );
 	
 	const ZLFrustum&		GetViewVolume				();
+	void					UpdateViewVolume			();
 	
 							MOAIGfxGlobalsCache			();
 							~MOAIGfxGlobalsCache		();

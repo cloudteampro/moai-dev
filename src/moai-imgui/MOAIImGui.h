@@ -7,6 +7,16 @@
 #include <libimgui/imgui.h>
 
 //================================================================//
+// MOAIImGuiIdxBuffer
+//================================================================//
+class MOAIImGuiIdxBuffer:
+	public MOAIIndexBuffer {
+public:
+					MOAIImGuiIdxBuffer	();
+	void			SetData				( void* data, u32 length );
+};
+
+//================================================================//
 // MOAIImGuiVtxBuffer
 //================================================================//
 class MOAIImGuiVtxBuffer:
@@ -22,13 +32,14 @@ public:
 /**	@name	MOAIImGui
 */
 class MOAIImGui :
-	public MOAIGlobalClass < MOAIImGui, MOAILuaObject > {
+	public ZLContextClass < MOAIImGui, MOAILuaObject > {
 private:
 	friend class MOAIImGuiRenderable;
 
 	MOAILuaSharedPtr < MOAITexture >		mTexture;
 	MOAILuaSharedPtr < MOAIViewport >		mViewport;
 	MOAILuaSharedPtr < MOAIVertexFormat >	mVtxFormat;
+	MOAILuaSharedPtr < MOAIImGuiIdxBuffer >	mIdxBuffer;
 	MOAILuaSharedPtr < MOAIImGuiVtxBuffer >	mVtxBuffer;
 	ImGuiMouseCursor						mDesiredCursor;
 
