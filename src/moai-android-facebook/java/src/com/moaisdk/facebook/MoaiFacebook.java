@@ -314,6 +314,11 @@ public class MoaiFacebook {
 	}
 
 	//----------------------------------------------------------------//
+	public static void sendAppInvite ( String linkUrl, String previewImageUrl ) {
+		MoaiLog.i("MoaiFacebook: sendAppInvite");
+	}
+
+	//----------------------------------------------------------------//
 	public static void postToFeed ( String link, String picture, String name, String caption, String description, String message ) {
 		// TODO
 	}

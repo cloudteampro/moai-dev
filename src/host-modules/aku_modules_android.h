@@ -15,6 +15,10 @@
   #include <moai-android/host.h>
 #endif
 
+#if AKU_WITH_ANDROID_APPSFLYER
+	#include <moai-android-appsflyer/host.h>
+#endif
+
 #if AKU_WITH_ANDROID_BILLING
 	#include <moai-android/host.h>
 #endif

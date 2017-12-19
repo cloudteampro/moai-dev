@@ -10,9 +10,8 @@ import android.app.Activity;
 
 import com.moaisdk.core.*;
 
-import com.unity3d.ads.android.data.UnityAdsDevice;
-import com.unity3d.ads.android.IUnityAdsListener;
-import com.unity3d.ads.android.UnityAds;
+import com.unity3d.ads.IUnityAdsListener;
+import com.unity3d.ads.UnityAds;
 
 //================================================================//
 // MoaiUnityAds
@@ -20,16 +19,17 @@ import com.unity3d.ads.android.UnityAds;
 public class MoaiUnityAds {
 
 	public enum ListenerEvent {
-		ON_HIDE,
-		ON_SHOW,
-		VIDEO_COMPLETED,
-		VIDEO_STARTED,
+		UNITYADS_READY,
+		UNITYADS_START,
+		UNITYADS_FINISH,
+		UNITYADS_ERROR,
     }
 
 	private static Activity 		sActivity 		= null;
+	private static UnityAdsListener sAdsListener 	= null;
 	
 	protected static native void AKUInvokeListener 	( int eventID );
-	protected static native void AKUVideoCompleted 	( String rewardItemKey, boolean skipped );
+	protected static native void AKUVideoCompleted 	( int result );
 	
 	//----------------------------------------------------------------//
 	public static void onCreate ( Activity activity ) {
@@ -38,7 +38,7 @@ public class MoaiUnityAds {
 		
 		sActivity = activity;
 
-  		UnityAds.changeActivity ( sActivity );
+  		// UnityAds.changeActivity ( sActivity );
 	}
 	
 	//================================================================//
@@ -48,74 +48,36 @@ public class MoaiUnityAds {
 	//----------------------------------------------------------------//
 	public static boolean canShow ( String zone ) {
 
-		if ( zone != null ) {
-			try {
-				UnityAds.setZone ( zone );
-			} catch ( Exception e ) {
-				e.printStackTrace ();
-				return false;
-			}
-		}
+		// if ( zone != null ) {
+		// 	try {
+		// 		UnityAds.setZone ( zone );
+		// 	} catch ( Exception e ) {
+		// 		e.printStackTrace ();
+		// 		return false;
+		// 	}
+		// }
 
-		return UnityAds.canShow ();
+		return UnityAds.isReady (); // canShow
 	}
 
 	//----------------------------------------------------------------//
 	public static void init ( String gameID, boolean debug, boolean test ) {
 
-		MoaiLog.i ( " MoaiUnityAds: init with gameID" );
+		MoaiLog.i ( " MoaiUnityAds: initialize with gameID" );
 
-		UnityAds.init (( Activity ) sActivity, gameID, new IUnityAdsListener () {
+		UnityAdsListener unityAdsListener = new UnityAdsListener();
 
-			//================================================================//
-			// MoaiUnityAds callback methods
-			//================================================================//
+		UnityAds.initialize (( Activity ) sActivity, gameID, unityAdsListener, test );
 
-			public void onHide () {
-
-				synchronized ( Moai.sAkuLock ) {
-					MoaiUnityAds.AKUInvokeListener ( ListenerEvent.ON_HIDE.ordinal ());
-				}
-			}
-
-			public void onShow () {
-
-				synchronized ( Moai.sAkuLock ) {
-					MoaiUnityAds.AKUInvokeListener ( ListenerEvent.ON_SHOW.ordinal ());
-				}
-			}
-
-			public void onVideoStarted () {
-
-				synchronized ( Moai.sAkuLock ) {
-					
-					MoaiLog.i ( " MoaiUnityAds: onShow" );
-
-					MoaiUnityAds.AKUInvokeListener ( ListenerEvent.VIDEO_STARTED.ordinal ());
-				}
-			}
-
-			public void onVideoCompleted ( String rewardItemKey, boolean skipped ) {
-
-				synchronized ( Moai.sAkuLock ) {
-					
-					MoaiLog.i ( " MoaiUnityAds: onVideoCompleted: skipped" );
-					MoaiUnityAds.AKUVideoCompleted ( rewardItemKey, skipped );
-				}
-			}
-
-			public void onFetchCompleted () {}
-
-			public void onFetchFailed () {}
-		});
+		sAdsListener = unityAdsListener;
 
 		// Setting up debug mode with verbose print
 		if ( debug ) {
 			UnityAds.setDebugMode ( true );
 		}
-		if ( test ) {
-			UnityAds.setTestMode ( true );
-		}
+		// if ( test ) {
+		// 	UnityAds.setTestMode ( true );
+		// }
 	}
 	
 	//----------------------------------------------------------------//
@@ -123,18 +85,70 @@ public class MoaiUnityAds {
 
 		MoaiLog.i ( "MoaiUnityAds show" );
 		MoaiLog.i ( zone );
-		if ( zone != null ) {
+		// if ( zone != null ) {
 
-			try {
-				UnityAds.setZone ( zone );
-			} catch ( Exception e ) {
-				e.printStackTrace ();
-				return false;
-			}
-		}
-		if ( UnityAds.canShow ()) {
-			return UnityAds.show ();
+		// 	try {
+		// 		UnityAds.setZone ( zone );
+		// 	} catch ( Exception e ) {
+		// 		e.printStackTrace ();
+		// 		return false;
+		// 	}
+		// }
+		// if ( UnityAds.canShow ()) {
+		// 	return UnityAds.show ();
+		// }
+		// return false;
+
+		if ( UnityAds.isReady ()) {
+			UnityAds.show (( Activity ) sActivity );
+			return true;
 		}
 		return false;
+	}
+
+	/* LISTENER */
+
+	private static class UnityAdsListener implements IUnityAdsListener {
+		//================================================================//
+		// MoaiUnityAds callback methods
+		//================================================================//
+
+		@Override
+		public void onUnityAdsReady(final String zoneId) {
+
+			synchronized ( Moai.sAkuLock ) {
+
+				MoaiLog.i ( " MoaiUnityAds: onVideoReady" );
+				MoaiUnityAds.AKUInvokeListener ( ListenerEvent.UNITYADS_READY.ordinal ());
+			}
+		}
+
+		@Override
+		public void onUnityAdsStart(String zoneId) {
+
+			synchronized ( Moai.sAkuLock ) {
+				
+				MoaiLog.i ( " MoaiUnityAds: onVideoStart" );
+				MoaiUnityAds.AKUInvokeListener ( ListenerEvent.UNITYADS_START.ordinal ());
+			}
+		}
+
+		@Override
+		public void onUnityAdsFinish(String zoneId, UnityAds.FinishState result) {
+
+			synchronized ( Moai.sAkuLock ) {
+				
+				MoaiLog.i ( " MoaiUnityAds: onVideoFinish" );
+				MoaiUnityAds.AKUVideoCompleted ( result.ordinal ());
+			}
+		}
+
+		@Override
+		public void onUnityAdsError(UnityAds.UnityAdsError error, String message) {
+			synchronized ( Moai.sAkuLock ) {
+				MoaiLog.i ( " MoaiUnityAds: onVideoError" );
+				MoaiUnityAds.AKUInvokeListener ( ListenerEvent.UNITYADS_ERROR.ordinal ());
+			}
+		}
 	}
 }

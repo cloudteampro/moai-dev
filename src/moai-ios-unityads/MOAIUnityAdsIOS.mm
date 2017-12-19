@@ -26,14 +26,13 @@ int MOAIUnityAdsIOS::_init ( lua_State* L ) {
 	bool debug = state.GetValue < bool >( 2, false );
 	bool test  = state.GetValue < bool >( 3, false );
 
-	[[ UnityAds sharedInstance ] setDebugMode:debug ];
-	[[ UnityAds sharedInstance ] setTestMode:test ];
-	[[ UnityAds sharedInstance ] setDelegate:MOAIUnityAdsIOS::Get ().mDelegate ];
+	// UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
+	// UIViewController* rootVC = [ window rootViewController ];
 
-	UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
-	UIViewController* rootVC = [ window rootViewController ];
+	[ UnityAds initialize:[ NSString stringWithUTF8String:appID ] delegate:MOAIUnityAdsIOS::Get ().mDelegate testMode:test ];
+	[ UnityAds setDebugMode:debug ];
+	// [[ UnityAds sharedInstance ] setTestMode:test ];
 
-	[[ UnityAds sharedInstance ] startWithGameId:[ NSString stringWithUTF8String:appID ] andViewController:rootVC ];
 	return 0;
 }
 
@@ -44,14 +43,18 @@ int MOAIUnityAdsIOS::_init ( lua_State* L ) {
 int MOAIUnityAdsIOS::_canShow ( lua_State* L ) {
 	MOAILuaState state ( L );
 
-	cc8* zone = state.GetValue < cc8* >( 1, 0 );
+	// cc8* zone = state.GetValue < cc8* >( 1, 0 );
 
-	if ( zone ) {
-		[[ UnityAds sharedInstance ] setZone:[ NSString stringWithUTF8String:zone ]];
-	}
+	// if ( zone ) {
+	// 	[[ UnityAds sharedInstance ] setZone:[ NSString stringWithUTF8String:zone ]];
+	// }
 
-	bool canShow = [[ UnityAds sharedInstance ] canShow ] && [[ UnityAds sharedInstance ] canShowAds ];
+	// bool canShow = [[ UnityAds sharedInstance ] canShow ] && [[ UnityAds sharedInstance ] canShowAds ];
+
+	bool canShow = [ UnityAds isReady ];
+
 	state.Push ( canShow );
+
 	return 1;
 }
 
@@ -62,14 +65,25 @@ int MOAIUnityAdsIOS::_canShow ( lua_State* L ) {
 int MOAIUnityAdsIOS::_show ( lua_State* L ) {   
 	MOAILuaState state ( L );
 
-	cc8* zone = state.GetValue < cc8* >( 1, 0 );
+	// cc8* zone = state.GetValue < cc8* >( 1, 0 );
 
-	if ( zone ) {
-		[[ UnityAds sharedInstance ] setZone:[ NSString stringWithUTF8String:zone ]];
-	}
+	// if ( zone ) {
+	// 	[[ UnityAds sharedInstance ] setZone:[ NSString stringWithUTF8String:zone ]];
+	// }
 
-	if ([[ UnityAds sharedInstance ] canShow ]) {
-		state.Push ([[ UnityAds sharedInstance ] show ]);
+	// if ([[ UnityAds sharedInstance ] canShow ]) {
+	// 	state.Push ([[ UnityAds sharedInstance ] show ]);
+	// }
+	// else {
+	// 	state.Push ( false );
+	// }
+
+	if ([ UnityAds isReady ]) {
+
+		UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
+		UIViewController* rootVC = [ window rootViewController ];
+		[ UnityAds show:rootVC ];
+		state.Push ( true );
 	}
 	else {
 		state.Push ( false );
@@ -97,25 +111,23 @@ MOAIUnityAdsIOS::~MOAIUnityAdsIOS () {
 }
 
 //----------------------------------------------------------------//
-void MOAIUnityAdsIOS::NotifyVideoCompleted ( cc8* reward, bool skipped ) {
+void MOAIUnityAdsIOS::NotifyVideoFinished ( u32 result ) {
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 	
-	if ( this->PushListener ( AD_COMPLETED, state )) {
+	if ( this->PushListener ( UNITYADS_FINISH, state )) {
 		
-		state.Push ( reward );
-		state.Push ( skipped );
-		state.DebugCall ( 2, 0 );
+		state.Push ( result );
+		state.DebugCall ( 1, 0 );
 	}
 }
 
 //----------------------------------------------------------------//
 void MOAIUnityAdsIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	
-	state.SetField ( -1, "AD_WILL_SHOW",		( u32 )AD_WILL_SHOW );
-	state.SetField ( -1, "AD_DID_SHOW",			( u32 )AD_DID_SHOW );
-	state.SetField ( -1, "AD_WILL_HIDE",		( u32 )AD_WILL_HIDE );
-	state.SetField ( -1, "AD_DID_HIDE",			( u32 )AD_DID_HIDE );
-	state.SetField ( -1, "AD_COMPLETED",		( u32 )AD_COMPLETED );
+	state.SetField ( -1, "UNITYADS_READY",		( u32 )UNITYADS_READY );
+	state.SetField ( -1, "UNITYADS_START",		( u32 )UNITYADS_START );
+	state.SetField ( -1, "UNITYADS_FINISH",		( u32 )UNITYADS_FINISH );
+	state.SetField ( -1, "UNITYADS_ERROR",		( u32 )UNITYADS_ERROR );
 	
 	luaL_Reg regTable [] = {
 		{ "canShow",			_canShow },
@@ -134,24 +146,20 @@ void MOAIUnityAdsIOS::RegisterLuaClass ( MOAILuaState& state ) {
 //================================================================//
 @implementation MOAIUnityAdsIOSDelegate
 
-	- ( void ) unityAdsVideoCompleted:( NSString * )rewardItemKey skipped:( BOOL )skipped {
-		MOAIUnityAdsIOS::Get ().NotifyVideoCompleted ([ rewardItemKey UTF8String ], skipped );
+	- ( void ) unityAdsReady:( NSString * )placementId {
+		MOAIUnityAdsIOS::Get ().InvokeListener ( MOAIUnityAdsIOS::UNITYADS_READY );
 	}
 
-	- ( void ) unityAdsWillShow {
-		MOAIUnityAdsIOS::Get ().InvokeListener ( MOAIUnityAdsIOS::AD_WILL_SHOW );
+	- ( void ) unityAdsDidStart:( NSString * )placementId {
+		MOAIUnityAdsIOS::Get ().InvokeListener ( MOAIUnityAdsIOS::UNITYADS_START );
 	}
 
-	- ( void ) unityAdsDidShow {
-		MOAIUnityAdsIOS::Get ().InvokeListener ( MOAIUnityAdsIOS::AD_DID_SHOW );
+	- ( void ) unityAdsDidFinish:( NSString * )placementId withFinishState:( UnityAdsFinishState )result {
+		MOAIUnityAdsIOS::Get ().NotifyVideoFinished (( int )result );
 	}
 
-	- ( void ) unityAdsWillHide {
-		MOAIUnityAdsIOS::Get ().InvokeListener ( MOAIUnityAdsIOS::AD_WILL_HIDE );
-	}
-
-	- ( void ) unityAdsDidHide {
-		MOAIUnityAdsIOS::Get ().InvokeListener ( MOAIUnityAdsIOS::AD_DID_HIDE );
+	- ( void ) unityAdsDidError:( UnityAdsError )error withMessage:( NSString * )message {
+		MOAIUnityAdsIOS::Get ().InvokeListener ( MOAIUnityAdsIOS::UNITYADS_ERROR );
 	}
 
 @end

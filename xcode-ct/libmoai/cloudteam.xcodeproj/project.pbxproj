@@ -30,6 +30,7 @@
 			dependencies = (
 				20993ECC1BDE94AA009D7CED /* PBXTargetDependency */,
 				2049B9661CAA8CF1005B83B3 /* PBXTargetDependency */,
+				7AB72C611FE93F73001DC0B1 /* PBXTargetDependency */,
 				2010D68A1BE38397008AD676 /* PBXTargetDependency */,
 				206B9D3B1BDE48FD0021D349 /* PBXTargetDependency */,
 				206B9D041BDABB2E0021D349 /* PBXTargetDependency */,
@@ -392,6 +393,10 @@
 		7A05C4241C97074300759015 /* CTHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A1C9D851C96E01900B00C3F /* CTHelper.h */; };
 		7A1C9D861C96E01900B00C3F /* CTHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A1C9D841C96E01900B00C3F /* CTHelper.cpp */; };
 		7A1C9D871C96E01900B00C3F /* CTHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A1C9D841C96E01900B00C3F /* CTHelper.cpp */; };
+		7AB72C5B1FE93E4F001DC0B1 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AB72C071FE93DA8001DC0B1 /* host.h */; };
+		7AB72C5C1FE93E4F001DC0B1 /* MOAIAppsFlyerIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AB72C091FE93DA8001DC0B1 /* MOAIAppsFlyerIOS.h */; };
+		7AB72C5E1FE93E61001DC0B1 /* host.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7AB72C081FE93DA8001DC0B1 /* host.mm */; };
+		7AB72C5F1FE93E61001DC0B1 /* MOAIAppsFlyerIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7AB72C0A1FE93DA8001DC0B1 /* MOAIAppsFlyerIOS.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -892,6 +897,13 @@
 			remoteGlobalIDString = CD6D752517EE415D00964415;
 			remoteInfo = "libmoai-osx-zl-vfs";
 		};
+		7AB72C601FE93F73001DC0B1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7AB72C481FE93DCE001DC0B1;
+			remoteInfo = "libmoai-ios-appsflyer";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -900,7 +912,7 @@
 		203DA5C41BDF933C00EC109A /* host.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = host.mm; sourceTree = "<group>"; };
 		203DA5C51BDF933C00EC109A /* MOAICrashlyticsIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAICrashlyticsIOS.h; sourceTree = "<group>"; };
 		203DA5C61BDF933C00EC109A /* MOAICrashlyticsIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MOAICrashlyticsIOS.mm; sourceTree = "<group>"; };
-		2049B9541CAA8C8B005B83B3 /* libmoai_ios_adtoapp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmoai_ios_adtoapp.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2049B9541CAA8C8B005B83B3 /* libmoai-ios-adtoapp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios-adtoapp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2049B95D1CAA8CD6005B83B3 /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = host.h; path = "moai-ios-adtoapp/host.h"; sourceTree = "<group>"; };
 		2049B95E1CAA8CD6005B83B3 /* host.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = host.mm; path = "moai-ios-adtoapp/host.mm"; sourceTree = "<group>"; };
 		2049B95F1CAA8CD6005B83B3 /* MOAIAdToAppIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MOAIAdToAppIOS.h; path = "moai-ios-adtoapp/MOAIAdToAppIOS.h"; sourceTree = "<group>"; };
@@ -1094,6 +1106,11 @@
 		20F75E451D3FD5B00050B737 /* pch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pch.h; sourceTree = "<group>"; };
 		7A1C9D841C96E01900B00C3F /* CTHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CTHelper.cpp; sourceTree = "<group>"; };
 		7A1C9D851C96E01900B00C3F /* CTHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTHelper.h; sourceTree = "<group>"; };
+		7AB72C071FE93DA8001DC0B1 /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = host.h; sourceTree = "<group>"; };
+		7AB72C081FE93DA8001DC0B1 /* host.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = host.mm; sourceTree = "<group>"; };
+		7AB72C091FE93DA8001DC0B1 /* MOAIAppsFlyerIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIAppsFlyerIOS.h; sourceTree = "<group>"; };
+		7AB72C0A1FE93DA8001DC0B1 /* MOAIAppsFlyerIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MOAIAppsFlyerIOS.mm; sourceTree = "<group>"; };
+		7AB72C591FE93DCE001DC0B1 /* libmoai-ios-appsflyer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios-appsflyer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1174,6 +1191,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7AB72C531FE93DCE001DC0B1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -1190,6 +1214,7 @@
 		0324E4F113564BC7000ADC60 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				7AB72C061FE93DA8001DC0B1 /* moai-ios-appsflyer */,
 				206BA0451BDE92D60021D349 /* ct-util */,
 				2049B90C1CAA8C35005B83B3 /* moai-ios-adtoapp */,
 				203DA5C21BDF933C00EC109A /* moai-ios-crashlytics */,
@@ -1213,9 +1238,10 @@
 				206B9D2C1BDE37CA0021D349 /* libmoai-osx-ct-util.a */,
 				203DA5871BDF92C700EC109A /* libmoai-ios-crashlytics.a */,
 				2090B66B1BEBA40A0057A676 /* libmoai-ios-unityads.a */,
-				2049B9541CAA8C8B005B83B3 /* libmoai_ios_adtoapp.a */,
+				2049B9541CAA8C8B005B83B3 /* libmoai-ios-adtoapp.a */,
 				20F75CE11D3FD31B0050B737 /* libmoai-ios-spine-v3.a */,
 				20F75D691D3FD31F0050B737 /* libmoai-osx-spine-v3.a */,
+				7AB72C591FE93DCE001DC0B1 /* libmoai-ios-appsflyer.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1622,6 +1648,17 @@
 			sourceTree = "<group>";
 			usesTabs = 1;
 		};
+		7AB72C061FE93DA8001DC0B1 /* moai-ios-appsflyer */ = {
+			isa = PBXGroup;
+			children = (
+				7AB72C071FE93DA8001DC0B1 /* host.h */,
+				7AB72C081FE93DA8001DC0B1 /* host.mm */,
+				7AB72C091FE93DA8001DC0B1 /* MOAIAppsFlyerIOS.h */,
+				7AB72C0A1FE93DA8001DC0B1 /* MOAIAppsFlyerIOS.mm */,
+			);
+			path = "moai-ios-appsflyer";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1882,6 +1919,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7AB72C5A1FE93E3E001DC0B1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AB72C5B1FE93E4F001DC0B1 /* host.h in Headers */,
+				7AB72C5C1FE93E4F001DC0B1 /* MOAIAppsFlyerIOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -1916,7 +1962,7 @@
 			);
 			name = "libmoai-ios-adtoapp";
 			productName = OpenUSLS;
-			productReference = 2049B9541CAA8C8B005B83B3 /* libmoai_ios_adtoapp.a */;
+			productReference = 2049B9541CAA8C8B005B83B3 /* libmoai-ios-adtoapp.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		206B9ABC1BDAB4F60021D349 /* libmoai-osx-spine */ = {
@@ -2072,6 +2118,23 @@
 			productReference = 20F75D691D3FD31F0050B737 /* libmoai-osx-spine-v3.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		7AB72C481FE93DCE001DC0B1 /* libmoai-ios-appsflyer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7AB72C541FE93DCE001DC0B1 /* Build configuration list for PBXNativeTarget "libmoai-ios-appsflyer" */;
+			buildPhases = (
+				7AB72C531FE93DCE001DC0B1 /* Frameworks */,
+				7AB72C5A1FE93E3E001DC0B1 /* Headers */,
+				7AB72C5D1FE93E54001DC0B1 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "libmoai-ios-appsflyer";
+			productName = OpenUSLS;
+			productReference = 7AB72C591FE93DCE001DC0B1 /* libmoai-ios-appsflyer.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2122,6 +2185,7 @@
 				206B9CFD1BDABB250021D349 /* build_all_ios */,
 				206B9CF11BDABA590021D349 /* build_all_osx */,
 				2049B9471CAA8C8B005B83B3 /* libmoai-ios-adtoapp */,
+				7AB72C481FE93DCE001DC0B1 /* libmoai-ios-appsflyer */,
 				203DA5761BDF92C700EC109A /* libmoai-ios-crashlytics */,
 				206B9D091BDE37C80021D349 /* libmoai-ios-ct-util */,
 				206B9AFE1BDAB53D0021D349 /* libmoai-ios-fmod-studio */,
@@ -2792,6 +2856,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7AB72C5D1FE93E54001DC0B1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AB72C5E1FE93E61001DC0B1 /* host.mm in Sources */,
+				7AB72C5F1FE93E61001DC0B1 /* MOAIAppsFlyerIOS.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -2859,6 +2932,11 @@
 			isa = PBXTargetDependency;
 			name = "libmoai-ios-all";
 			targetProxy = 20993ECB1BDE94AA009D7CED /* PBXContainerItemProxy */;
+		};
+		7AB72C611FE93F73001DC0B1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7AB72C481FE93DCE001DC0B1 /* libmoai-ios-appsflyer */;
+			targetProxy = 7AB72C601FE93F73001DC0B1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2990,6 +3068,7 @@
 					"\"../../3rdparty/fmod-studio/headers\"",
 					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
 					"\"../../3rdparty/sqlite-3.14.1/\"",
+					"\"../../3rdparty/appsflyer/\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = (
@@ -3166,7 +3245,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/crashlytics;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -3192,7 +3271,7 @@
 					"$(inherited)",
 					"$(FMOD_IOS_SDK_ROOT)/api/inc",
 				);
-				PRODUCT_NAME = moai_ios_adtoapp;
+				PRODUCT_NAME = "moai-ios-adtoapp";
 				SDKROOT = iphoneos;
 				SEPARATE_STRIP = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -3205,7 +3284,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/crashlytics;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -3231,7 +3310,7 @@
 					"$(inherited)",
 					"$(FMOD_IOS_SDK_ROOT)/api/inc",
 				);
-				PRODUCT_NAME = moai_ios_adtoapp;
+				PRODUCT_NAME = "moai-ios-adtoapp";
 				SDKROOT = iphoneos;
 				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
@@ -3242,7 +3321,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/crashlytics;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -3268,7 +3347,7 @@
 					"$(inherited)",
 					"$(FMOD_IOS_SDK_ROOT)/api/inc",
 				);
-				PRODUCT_NAME = moai_ios_adtoapp;
+				PRODUCT_NAME = "moai-ios-adtoapp";
 				SDKROOT = iphoneos;
 				SEPARATE_STRIP = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -3281,7 +3360,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/crashlytics;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -3307,7 +3386,7 @@
 					"$(inherited)",
 					"$(FMOD_IOS_SDK_ROOT)/api/inc",
 				);
-				PRODUCT_NAME = moai_ios_adtoapp;
+				PRODUCT_NAME = "moai-ios-adtoapp";
 				SDKROOT = iphoneos;
 				STRIP_STYLE = debugging;
 				WARNING_CFLAGS = "-w";
@@ -4838,6 +4917,158 @@
 			};
 			name = Distribution;
 		};
+		7AB72C551FE93DCE001DC0B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/appsflyer;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+				);
+				PRODUCT_NAME = "moai-ios-appsflyer";
+				SDKROOT = iphoneos;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
+				WARNING_CFLAGS = "-w";
+			};
+			name = Debug;
+		};
+		7AB72C561FE93DCE001DC0B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/appsflyer;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+				);
+				PRODUCT_NAME = "moai-ios-appsflyer";
+				SDKROOT = iphoneos;
+				STRIP_STYLE = debugging;
+				WARNING_CFLAGS = "-w";
+			};
+			name = Release;
+		};
+		7AB72C571FE93DCE001DC0B1 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/appsflyer;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+				);
+				PRODUCT_NAME = "moai-ios-appsflyer";
+				SDKROOT = iphoneos;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
+				WARNING_CFLAGS = "-w";
+			};
+			name = AdHoc;
+		};
+		7AB72C581FE93DCE001DC0B1 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/appsflyer;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+				);
+				PRODUCT_NAME = "moai-ios-appsflyer";
+				SDKROOT = iphoneos;
+				STRIP_STYLE = debugging;
+				WARNING_CFLAGS = "-w";
+			};
+			name = Distribution;
+		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4965,6 +5196,7 @@
 					"\"../../3rdparty/fmod-studio/headers\"",
 					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
 					"\"../../3rdparty/sqlite-3.14.1/\"",
+					"\"../../3rdparty/appsflyer/\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
@@ -5112,6 +5344,7 @@
 					"\"../../3rdparty/fmod-studio/headers\"",
 					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
 					"\"../../3rdparty/sqlite-3.14.1/\"",
+					"\"../../3rdparty/appsflyer/\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = (
@@ -5259,6 +5492,7 @@
 					"\"../../3rdparty/fmod-studio/headers\"",
 					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
 					"\"../../3rdparty/sqlite-3.14.1/\"",
+					"\"../../3rdparty/appsflyer/\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = (
@@ -5421,6 +5655,17 @@
 				20F75D661D3FD31F0050B737 /* Release */,
 				20F75D671D3FD31F0050B737 /* AdHoc */,
 				20F75D681D3FD31F0050B737 /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		7AB72C541FE93DCE001DC0B1 /* Build configuration list for PBXNativeTarget "libmoai-ios-appsflyer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7AB72C551FE93DCE001DC0B1 /* Debug */,
+				7AB72C561FE93DCE001DC0B1 /* Release */,
+				7AB72C571FE93DCE001DC0B1 /* AdHoc */,
+				7AB72C581FE93DCE001DC0B1 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

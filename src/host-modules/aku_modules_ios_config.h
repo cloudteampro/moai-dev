@@ -8,6 +8,10 @@
 	#ifndef AKU_WITH_IOS_ADCOLONY
 		#define AKU_WITH_IOS_ADCOLONY 0
 	#endif
+	
+	#ifndef AKU_WITH_IOS_APPSFLYER
+		#define AKU_WITH_IOS_APPSFLYER 0
+	#endif
 
 	#ifndef AKU_WITH_IOS_BILLING
 		#define AKU_WITH_IOS_BILLING 1

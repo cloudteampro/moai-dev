@@ -52,6 +52,7 @@ private:
 	static int		_logPurchase				( lua_State* L );
 	static int		_login						( lua_State* L );
 	static int		_logout						( lua_State* L );
+	static int		_sendAppInvite				( lua_State* L );
 	static int		_postToFeed					( lua_State* L );
 	static int		_requestPublishPermissions	( lua_State* L );
 	static int		_requestReadPermissions		( lua_State* L );

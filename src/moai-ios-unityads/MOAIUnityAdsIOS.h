@@ -32,16 +32,15 @@ public:
 	DECL_LUA_SINGLETON ( MOAIUnityAdsIOS );
 	
 	enum {
-		AD_WILL_SHOW,
-		AD_DID_SHOW,
-		AD_WILL_HIDE,
-		AD_DID_HIDE,
-		AD_COMPLETED,
+		UNITYADS_READY,
+		UNITYADS_START,
+		UNITYADS_FINISH,
+		UNITYADS_ERROR
 	};
 	
 			MOAIUnityAdsIOS				();
 			~MOAIUnityAdsIOS			();
-	void	NotifyVideoCompleted		( cc8* reward, bool skipped );
+	void	NotifyVideoFinished			( u32 result );
 	void	RegisterLuaClass			( MOAILuaState& state );
 };
 

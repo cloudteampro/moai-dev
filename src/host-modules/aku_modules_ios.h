@@ -15,6 +15,10 @@
 	#include <moai-ios-adcolony/host.h>
 #endif
 
+#if AKU_WITH_IOS_APPSFLYER
+	#include <moai-ios-appsflyer/host.h>
+#endif
+
 #if AKU_WITH_IOS_BILLING
 	#include <moai-ios-billing/host.h>
 #endif

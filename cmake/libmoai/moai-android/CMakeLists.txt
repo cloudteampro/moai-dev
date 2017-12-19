@@ -7,6 +7,7 @@ set ( MOAI_ANDROID_MODULES "" )
 include("./android-module.cmake")
 
 add_subdirectory(moai-android-adcolony)
+add_subdirectory(moai-android-appsflyer)
 add_subdirectory(moai-android-amazon-billing)
 add_subdirectory(moai-android-chartboost)
 add_subdirectory(moai-android-crashlytics)

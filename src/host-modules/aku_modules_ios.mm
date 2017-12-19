@@ -21,6 +21,10 @@ void AKUModulesIosAppFinalize () {
 		AKUIosAdColonyAppFinalize ();
 	#endif
 
+	#if AKU_WITH_IOS_APPSFLYER
+		AKUIosAppsFlyerAppFinalize ();
+	#endif
+
 	#if AKU_WITH_IOS_BILLING
 		AKUIosBillingAppFinalize ();
 	#endif
@@ -93,6 +97,10 @@ void AKUModulesIosAppInitialize () {
 		AKUIosAdColonyAppInitialize ();
 	#endif
 
+	#if AKU_WITH_IOS_APPSFLYER
+		AKUIosAppsFlyerAppInitialize ();
+	#endif
+
 	#if AKU_WITH_IOS_BILLING
 		AKUIosBillingAppInitialize ();
 	#endif
@@ -161,6 +169,10 @@ void AKUModulesIosApplicationDidBecomeActive ( UIApplication* application ) {
     #if AKU_WITH_IOS_FACEBOOK
         AKUIosFacebookApplicationDidBecomeActive ( application );
     #endif
+
+    #if AKU_WITH_IOS_APPSFLYER
+		AKUIosAppsFlyerApplicationDidBecomeActive ( application );
+	#endif
 }
 
 //----------------------------------------------------------------//
@@ -195,6 +207,10 @@ void AKUModulesIosContextInitialize () {
 
 	#if AKU_WITH_IOS_ADCOLONY
 		AKUIosAdColonyContextInitialize ();
+	#endif
+
+	#if AKU_WITH_IOS_APPSFLYER
+		AKUIosAppsFlyerContextInitialize ();
 	#endif
 
 	#if AKU_WITH_IOS_BILLING

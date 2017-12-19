@@ -52,19 +52,19 @@ IOS = {
 	[ 'lib/ios' ]									= true,
 
 	-- 3rdparty
-	[ '3rdparty/Flurry-iOS-7.3.0/Flurry/Flurry.h' ] 			= 'include/Flurry/Flurry.h',
-	[ '3rdparty/Flurry-iOS-7.3.0/Flurry/libFlurry_7.3.0.a' ] 	= 'lib/ios/libFlurry_7.3.0.a',
+	[ '3rdparty/Flurry-iOS-7.3.0/Flurry/Flurry.h' ] 				= 'include/Flurry/Flurry.h',
+	[ '3rdparty/Flurry-iOS-7.3.0/Flurry/libFlurry_7.3.0.a' ] 		= 'lib/ios/libFlurry_7.3.0.a',
 
-	[ '3rdparty/facebook-ios-sdk-4.7/Bolts.framework' ]			= 'lib/ios/Bolts.framework',
-	[ '3rdparty/facebook-ios-sdk-4.7/FBSDKCoreKit.framework' ]	= 'lib/ios/FBSDKCoreKit.framework',
-	[ '3rdparty/facebook-ios-sdk-4.7/FBSDKLoginKit.framework' ]	= 'lib/ios/FBSDKLoginKit.framework',
-	[ '3rdparty/facebook-ios-sdk-4.7/FBSDKShareKit.framework' ]	= 'lib/ios/FBSDKShareKit.framework',
+	[ '3rdparty/facebook-ios-sdk-4.23/Bolts.framework' ]			= 'lib/ios/Bolts.framework',
+	[ '3rdparty/facebook-ios-sdk-4.23/FBSDKCoreKit.framework' ]		= 'lib/ios/FBSDKCoreKit.framework',
+	[ '3rdparty/facebook-ios-sdk-4.23/FBSDKLoginKit.framework' ]	= 'lib/ios/FBSDKLoginKit.framework',
+	[ '3rdparty/facebook-ios-sdk-4.23/FBSDKShareKit.framework' ]	= 'lib/ios/FBSDKShareKit.framework',
 
-	[ '3rdparty/chartboost-6.1/Chartboost.framework' ]			= 'lib/ios/Chartboost.framework',
-	[ '3rdparty/crashlytics/Crashlytics.framework' ]			= 'lib/ios/Crashlytics.framework',
-	[ '3rdparty/crashlytics/Fabric.framework' ]					= 'lib/ios/Fabric.framework',
+	[ '3rdparty/chartboost-6.1/Chartboost.framework' ]				= 'lib/ios/Chartboost.framework',
+	[ '3rdparty/crashlytics/Crashlytics.framework' ]				= 'lib/ios/Crashlytics.framework',
+	[ '3rdparty/crashlytics/Fabric.framework' ]						= 'lib/ios/Fabric.framework',
 
-	[ '3rdparty/fmod-studio/lib/ios/libfmod_iphoneos.a' ]		= 'lib/ios/libfmod_iphoneos.a',
+	[ '3rdparty/fmod-studio/lib/ios/libfmod_iphoneos.a' ]			= 'lib/ios/libfmod_iphoneos.a',
 
 	[ '3rdparty/unity-ads/UnityAds.bundle' ]		= 'lib/ios/UnityAds.bundle',
 	[ '3rdparty/unity-ads/UnityAds.framework' ]		= 'lib/ios/UnityAds.framework',

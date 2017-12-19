@@ -165,6 +165,24 @@ int MOAIFacebookAndroid::_logout ( lua_State *L ) {
 }
 
 //----------------------------------------------------------------//
+// TODO: 3rdparty doxygen
+int MOAIFacebookAndroid::_sendAppInvite ( lua_State* L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIFacebookAndroid, "" )
+
+	MOAIJString jlinkUrl;
+	MOAIJString jpreviewImageUrl;
+
+	if ( state.IsType ( 1, LUA_TTABLE )) {
+		jlinkUrl			= self->GetJString ( state.GetField < cc8* >( 1, "linkUrl", 0 ));
+		jpreviewImageUrl	= self->GetJString ( state.GetField < cc8* >( 1, "previewImageUrl", 0 ));
+	}
+
+	self->CallStaticVoidMethod ( self->mJava_SendAppInvite, (jstring)jlinkUrl, (jstring)jpreviewImageUrl );
+	
+	return 0;
+}
+
+//----------------------------------------------------------------//
 /**	@lua	postToFeed
 	@text	Post a message to the logged in users' news feed.
 				
@@ -248,14 +266,8 @@ int MOAIFacebookAndroid::_sendGameRequest ( lua_State* L ) {
 	
 	jobjectArray jrecipients = NULL;
 	jobjectArray jrecipientSuggestions = NULL;
-
-	// At the time of writing, frictionless is not supported with Android FB SDK v4.7
-	// bool frictionless = NO;
 	
-	if ( state.IsType ( 2, LUA_TTABLE )) {
-		
-		// frictionless	= ( BOOL ) state.GetValue < bool >( 2, "frictionless" );
-		
+	if ( state.IsType ( 2, LUA_TTABLE )) {		
 		jdata			= self->GetJString ( state.GetField < cc8* >( 2, "data", 0 ));
 		jtitle			= self->GetJString ( state.GetField < cc8* >( 2, "title", 0 ));
 		jobjectID		= self->GetJString ( state.GetField < cc8* >( 2, "objectID", 0 ));
@@ -453,6 +465,7 @@ MOAIFacebookAndroid::MOAIFacebookAndroid () {
 	this->mJava_LogPurchase					= this->GetStaticMethod ( "logPurchase", "(DLjava/lang/String;Landroid/os/Bundle;)V" );
 	this->mJava_Login						= this->GetStaticMethod ( "login", "([Ljava/lang/String;)V" );
 	this->mJava_Logout						= this->GetStaticMethod ( "logout", "()V" );
+	this->mJava_SendAppInvite				= this->GetStaticMethod ( "sendAppInvite", "(Ljava/lang/String;Ljava/lang/String;)V" );
 	this->mJava_PostToFeed					= this->GetStaticMethod ( "postToFeed", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V" );
 	this->mJava_RequestPublishPermissions	= this->GetStaticMethod ( "requestPublishPermissions", "([Ljava/lang/String;)V" );
 	this->mJava_RequestReadPermissions		= this->GetStaticMethod ( "requestReadPermissions", "([Ljava/lang/String;)V" );
@@ -538,6 +551,7 @@ void MOAIFacebookAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "logPurchase",				_logPurchase },
 		{ "login",						_login },
 		{ "logout",						_logout },
+		{ "sendAppInvite",				_sendAppInvite },
 		{ "postToFeed",					_postToFeed },
 		{ "requestPublishPermissions",	_requestPublishPermissions },
 		{ "requestReadPermissions",		_requestReadPermissions },
