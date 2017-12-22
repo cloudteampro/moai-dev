@@ -94,10 +94,10 @@ MOAIAppsFlyerAndroid::MOAIAppsFlyerAndroid () {
 	 
 	this->SetClass ( "com/moaisdk/appsflyer/MoaiAppsFlyer" );
 
-	this->mJava_Init					= this->GetStaticMethod ( "init", "(Ljava/lang/String)V" );
+	this->mJava_Init					= this->GetStaticMethod ( "init", "(Ljava/lang/String;)V" );
 	this->mJava_TrackEvent				= this->GetStaticMethod ( "trackEvent", "()V" );
-	this->mJava_TrackPurchase			= this->GetStaticMethod ( "trackPurchase", "(F;Ljava/lang/String)V" );
-	this->mJava_TrackLevelAchieved		= this->GetStaticMethod ( "tracklevelAchieved", "(I)V" );
+	this->mJava_TrackPurchase			= this->GetStaticMethod ( "trackPurchase", "(FLjava/lang/String;)V" );
+	this->mJava_TrackLevelAchieved		= this->GetStaticMethod ( "trackLevelAchieved", "(I)V" );
 }
 
 //----------------------------------------------------------------//

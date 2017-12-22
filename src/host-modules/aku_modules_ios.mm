@@ -195,8 +195,13 @@ BOOL AKUModulesIosApplicationOpenURL ( UIApplication* application,  NSURL* url, 
         if ( AKUIosFacebookApplicationOpenURL ( application, url, sourceApplication, annotation )) return YES;
     #endif
 
+    #if AKU_WITH_IOS_APPSFLYER
+		AKUIosAppsFlyerApplicationOpenURL ( application, url, sourceApplication, annotation );
+	#endif
+
     return NO;
 }
+
 
 //----------------------------------------------------------------//
 void AKUModulesIosContextInitialize () {

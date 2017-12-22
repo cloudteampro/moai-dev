@@ -20,8 +20,32 @@ void AKUIosAppsFlyerAppInitialize () {
 void AKUIosAppsFlyerApplicationDidBecomeActive ( UIApplication* application ) {
 	UNUSED ( application );
 	
-	[[ AppsFlyerTracker sharedTracker ] trackAppLaunch ]; 
+	[[ AppsFlyerTracker sharedTracker ] trackAppLaunch ];
 }
+
+//----------------------------------------------------------------//
+// BOOL AKUIosAppsFlyerApplicationOpenURL ( UIApplication* application,  NSURL* url, NSDictionary* options ) {
+// 	UNUSED ( application );
+
+// 	[[AppsFlyerTracker sharedTracker] handleOpenURL:url options:options];
+//     return YES;
+// }
+
+//----------------------------------------------------------------//
+BOOL AKUIosAppsFlyerApplicationOpenURL ( UIApplication* application,  NSURL* url, NSString* sourceApplication, id annotation ) {
+	UNUSED ( application );
+
+	[[AppsFlyerTracker sharedTracker] handleOpenURL:url sourceApplication:sourceApplication withAnnotation:annotation];
+    return YES;
+}
+
+//----------------------------------------------------------------//
+// BOOL AKUIosAppsFlyerApplicationContinueUserActivity ( UIApplication* application,  NSUserActivity* userActivity, (void (^)(NSArray *_Nullable)) restorationHandler ) {
+// 	UNUSED ( application );
+
+// 	[[AppsFlyerTracker sharedTracker] continueUserActivity:userActivity restorationHandler:restorationHandler];
+//     return YES;
+// }
 
 //----------------------------------------------------------------//
 void AKUIosAppsFlyerContextInitialize () {

@@ -45,7 +45,7 @@ public:
 
 					MOAIUnityAdsAndroid				();
 					~MOAIUnityAdsAndroid			();
-	void			NotifyVideoFinished				( u32 result );
+	void			NotifyVideoFinished				( int result );
 	void			RegisterLuaClass				( MOAILuaState& state );
 };
 

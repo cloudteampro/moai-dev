@@ -527,6 +527,42 @@ int MOAIBillingAndroid::_getPurchasedProducts ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+/**	@lua	getProductInfo
+	@todo
+*/
+int MOAIBillingAndroid::_getProductInfo ( lua_State* L ) {
+
+	MOAILuaState state ( L );
+
+	JNI_GET_ENV ( jvm, env );
+
+	cc8* sku = lua_tostring ( state, 1 );
+	MOAIJString jsku = JNI_GET_JSTRING ( sku );
+
+	int type = lua_tointeger ( state, 2 );
+
+	jclass billing = env->FindClass ( "com/moaisdk/googlebilling/MoaiGoogleBilling" );
+	if ( billing == NULL ) {
+
+		ZLLogF ( ZLLog::CONSOLE, "MOAIBillingAndroid: Unable to find java class %s", "com/moaisdk/googlebilling/MoaiGoogleBilling" );
+	}
+	else {
+
+		jmethodID getProductInfo = env->GetStaticMethodID ( billing, "getProductInfo", "(Ljava/lang/String;I)V" );
+		if ( getProductInfo == NULL ) {
+
+			ZLLogF ( ZLLog::CONSOLE, "MOAIBillingAndroid: Unable to find static java method %s", "getProductInfo" );
+		}
+		else {
+
+			jint result = ( jint )env->CallStaticIntMethod ( billing, getProductInfo, ( jstring )jsku, type );
+		}
+	}
+
+	return 0;
+}
+
+//----------------------------------------------------------------//
 /**	@lua	purchaseProduct
 	@text	Starts a purchase intent for the desired product
 
@@ -814,6 +850,7 @@ void MOAIBillingAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "checkSubscriptionSupported",		_checkSubscriptionSupported },
 		{ "consumePurchaseSync",			_consumePurchaseSync },
 		{ "getPurchasedProducts",	 		_getPurchasedProducts },
+		{ "getProductInfo", 				_getProductInfo },
 		{ "purchaseProduct",	 			_purchaseProduct },
 		{ "purchaseProductFortumo", 		_purchaseProductFortumo },
 		{ "requestProductsAsync", 			_requestProductsAsync },

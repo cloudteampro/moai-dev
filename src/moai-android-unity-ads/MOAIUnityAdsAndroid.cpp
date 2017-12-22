@@ -91,7 +91,7 @@ MOAIUnityAdsAndroid::~MOAIUnityAdsAndroid () {
 }
 
 //----------------------------------------------------------------//
-void MOAIUnityAdsAndroid::NotifyVideoFinished ( u32 result ) {
+void MOAIUnityAdsAndroid::NotifyVideoFinished ( int result ) {
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 
 	if ( this->PushListener ( UNITYADS_FINISH, state )) {
@@ -129,7 +129,7 @@ void MOAIUnityAdsAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_unityads_MoaiUnityAds_AKUInvokeListener ( JNIEnv* env, jclass obj, jint eventID ) {
 
 	if ( MOAIUnityAdsAndroid::IsValid ()) {
-		ZLLogF ( ZLLog::CONSOLE, "Java_com_moaisdk_unityads_MoaiUnityAds_AKUInvokeListener\n" );
+		// ZLLogF ( ZLLog::CONSOLE, "Java_com_moaisdk_unityads_MoaiUnityAds_AKUInvokeListener\n" );
 		MOAIUnityAdsAndroid::Get ().InvokeListener (( u32 )eventID );
 	}
 }
@@ -139,6 +139,7 @@ extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_unityads_MoaiUnityAds_AKUVide
 
 	if ( MOAIUnityAdsAndroid::IsValid ()) {
 
-		MOAIUnityAdsAndroid::Get ().NotifyVideoFinished (( u32 )result );
+		// ZLLogF ( ZLLog::CONSOLE, "Java_com_moaisdk_unityads_MoaiUnityAds_AKUVideoCompleted\n" );
+		MOAIUnityAdsAndroid::Get ().NotifyVideoFinished ( result );
 	}
 }

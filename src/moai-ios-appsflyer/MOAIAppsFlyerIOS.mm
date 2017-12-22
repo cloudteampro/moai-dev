@@ -15,20 +15,22 @@
 /**	@lua	init
 	@text	Initialize AppsFlyer.
 	
-	@in		string	appId			AppStore app id.
 	@in 	string	devKey			AppsFlyer account Dev Key.
+	@in		string	appId			AppStore app id.
 	@out 	nil
 */
 int MOAIAppsFlyerIOS::_init ( lua_State* L ) {
 	
 	MOAILuaState state ( L );
-
-	cc8* appId = lua_tostring ( state, 1 );
-	cc8* devKey = lua_tostring ( state, 2 );
+	
+	cc8* devKey = state.GetValue < cc8* >( 1, 0 );
+	cc8* appId = state.GetValue < cc8* >( 2, 0 );
+	bool isDebug = state.GetValue < bool >( 3, false );
 
 	[AppsFlyerTracker sharedTracker].appsFlyerDevKey = [ NSString stringWithUTF8String:devKey ];
 	[AppsFlyerTracker sharedTracker].appleAppID = [ NSString stringWithUTF8String:appId ];
 	[AppsFlyerTracker sharedTracker].delegate = MOAIAppsFlyerIOS::Get ().mDelegate;
+	[AppsFlyerTracker sharedTracker].isDebug = isDebug;
 	
 	return 0;
 }

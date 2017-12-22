@@ -15,6 +15,9 @@
 AKU_API void	AKUIosAppsFlyerAppFinalize				();
 AKU_API void	AKUIosAppsFlyerAppInitialize			();
 AKU_API void	AKUIosAppsFlyerApplicationDidBecomeActive				( UIApplication* application );
+// AKU_API BOOL 	AKUIosAppsFlyerApplicationOpenURL 		( UIApplication* application,  NSURL* url, NSDictionary* options );
+AKU_API BOOL 	AKUIosAppsFlyerApplicationOpenURL 		( UIApplication* application,  NSURL* url, NSString* sourceApplication, id annotation );
+// AKU_API BOOL 	AKUIosAppsFlyerApplicationContinueUserActivity 			( UIApplication* application,  NSUserActivity* userActivity, (void (^)(NSArray *_Nullable)) restorationHandler );
 AKU_API void	AKUIosAppsFlyerContextInitialize		();
 
 #endif
