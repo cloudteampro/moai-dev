@@ -342,13 +342,16 @@ public class MoaiFacebook {
 	}
 
 	//----------------------------------------------------------------//
-	public static boolean sendGameRequest ( String message, String actionType, String objectId, String filters, String [] recipients, String [] suggestions, int ref ) {
+	public static boolean sendGameRequest ( String data, String title, String message, String actionType, String objectId, String filters, String [] recipients, String [] suggestions, int ref ) {
 
 		GameRequestContent.Builder builder = new GameRequestContent.Builder ();
 
+		builder.setData 	( data );
+		builder.setTitle 	( title );
 		builder.setMessage 	( message );
 		builder.setObjectId ( objectId );
 
+		// WTF? 4.24.0 not found symbol setRecipients, 4.14.0 works fine
 		if ( recipients != null ) {
 			builder.setRecipients 	( new ArrayList < String > ( Arrays.asList ( recipients )));
 		}

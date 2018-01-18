@@ -5,6 +5,7 @@
 #define MOAISPINESKELETON_H
 
 #include <spine/spine.h>
+#include <spine/extension.h>
 
 class MOAISpineBone;
 class MOAISpineSlot;
