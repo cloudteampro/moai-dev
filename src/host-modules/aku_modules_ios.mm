@@ -49,6 +49,10 @@ void AKUModulesIosAppFinalize () {
 		AKUIosFlurryAppFinalize ();
 	#endif
 
+	#if AKU_WITH_IOS_FYBER
+		AKUIosFyberAppFinalize ();
+	#endif
+
 	#if AKU_WITH_IOS_GAMECENTER
 		AKUIosGameCenterAppFinalize ();
 	#endif
@@ -123,6 +127,10 @@ void AKUModulesIosAppInitialize () {
 	
 	#if AKU_WITH_IOS_FLURRY
 		AKUIosFlurryAppInitialize ();
+	#endif
+
+	#if AKU_WITH_IOS_FYBER
+		AKUIosFyberAppInitialize ();
 	#endif
 
 	#if AKU_WITH_IOS_GAMECENTER
@@ -240,6 +248,10 @@ void AKUModulesIosContextInitialize () {
 	
 	#if AKU_WITH_IOS_FLURRY
 		AKUIosFlurryContextInitialize ();
+	#endif
+
+	#if AKU_WITH_IOS_FYBER
+		AKUIosFyberContextInitialize ();
 	#endif
 
 	#if AKU_WITH_IOS_GAMECENTER

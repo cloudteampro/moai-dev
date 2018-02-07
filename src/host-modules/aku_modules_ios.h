@@ -43,6 +43,10 @@
 	#include <moai-ios-flurry/host.h>
 #endif
 
+#if AKU_WITH_IOS_FYBER
+	#include <moai-ios-fyber/host.h>
+#endif
+
 #if AKU_WITH_IOS_GAMECENTER
 	#include <moai-ios-gamecenter/host.h>
 #endif

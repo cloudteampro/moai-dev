@@ -33,9 +33,10 @@
 				7AB72C611FE93F73001DC0B1 /* PBXTargetDependency */,
 				2010D68A1BE38397008AD676 /* PBXTargetDependency */,
 				206B9D3B1BDE48FD0021D349 /* PBXTargetDependency */,
+				206B9D061BDABB2E0021D349 /* PBXTargetDependency */,
+				7A37E05220236F130015225A /* PBXTargetDependency */,
 				206B9D041BDABB2E0021D349 /* PBXTargetDependency */,
 				20541E081D44B62A004F3772 /* PBXTargetDependency */,
-				206B9D061BDABB2E0021D349 /* PBXTargetDependency */,
 				2090B6B01BEBA4A80057A676 /* PBXTargetDependency */,
 			);
 			name = build_all_ios;
@@ -429,6 +430,10 @@
 		7A1191A4200FBCB8002098CB /* VertexEffect.c in Sources */ = {isa = PBXBuildFile; fileRef = 7A119152200FBCB8002098CB /* VertexEffect.c */; };
 		7A1C9D861C96E01900B00C3F /* CTHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A1C9D841C96E01900B00C3F /* CTHelper.cpp */; };
 		7A1C9D871C96E01900B00C3F /* CTHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A1C9D841C96E01900B00C3F /* CTHelper.cpp */; };
+		7A37E04D20236EE60015225A /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A37E04920236EE60015225A /* host.h */; };
+		7A37E04E20236EE60015225A /* host.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7A37E04A20236EE60015225A /* host.mm */; };
+		7A37E04F20236EE60015225A /* MOAIFyberIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A37E04B20236EE60015225A /* MOAIFyberIOS.h */; };
+		7A37E05020236EE60015225A /* MOAIFyberIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7A37E04C20236EE60015225A /* MOAIFyberIOS.mm */; };
 		7AB72C5B1FE93E4F001DC0B1 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AB72C071FE93DA8001DC0B1 /* host.h */; };
 		7AB72C5C1FE93E4F001DC0B1 /* MOAIAppsFlyerIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AB72C091FE93DA8001DC0B1 /* MOAIAppsFlyerIOS.h */; };
 		7AB72C5E1FE93E61001DC0B1 /* host.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7AB72C081FE93DA8001DC0B1 /* host.mm */; };
@@ -933,6 +938,13 @@
 			remoteGlobalIDString = CD6D752517EE415D00964415;
 			remoteInfo = "libmoai-osx-zl-vfs";
 		};
+		7A37E05120236F130015225A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7A37DF4C20236D9E0015225A;
+			remoteInfo = "libmoai-ios-fyber";
+		};
 		7AB72C601FE93F73001DC0B1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -1157,6 +1169,11 @@
 		7A119152200FBCB8002098CB /* VertexEffect.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VertexEffect.c; sourceTree = "<group>"; };
 		7A1C9D841C96E01900B00C3F /* CTHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CTHelper.cpp; sourceTree = "<group>"; };
 		7A1C9D851C96E01900B00C3F /* CTHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTHelper.h; sourceTree = "<group>"; };
+		7A37DF5920236D9E0015225A /* libmoai-ios-fyber.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios-fyber.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A37E04920236EE60015225A /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = host.h; sourceTree = "<group>"; };
+		7A37E04A20236EE60015225A /* host.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = host.mm; sourceTree = "<group>"; };
+		7A37E04B20236EE60015225A /* MOAIFyberIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIFyberIOS.h; sourceTree = "<group>"; };
+		7A37E04C20236EE60015225A /* MOAIFyberIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MOAIFyberIOS.mm; sourceTree = "<group>"; };
 		7AB72C071FE93DA8001DC0B1 /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = host.h; sourceTree = "<group>"; };
 		7AB72C081FE93DA8001DC0B1 /* host.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = host.mm; sourceTree = "<group>"; };
 		7AB72C091FE93DA8001DC0B1 /* MOAIAppsFlyerIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIAppsFlyerIOS.h; sourceTree = "<group>"; };
@@ -1242,6 +1259,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7A37DF4D20236D9E0015225A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7AB72C531FE93DCE001DC0B1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1265,6 +1289,7 @@
 		0324E4F113564BC7000ADC60 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				7A37E04820236EE60015225A /* moai-ios-fyber */,
 				7AB72C061FE93DA8001DC0B1 /* moai-ios-appsflyer */,
 				206BA0451BDE92D60021D349 /* ct-util */,
 				2049B90C1CAA8C35005B83B3 /* moai-ios-adtoapp */,
@@ -1293,6 +1318,7 @@
 				20F75CE11D3FD31B0050B737 /* libmoai-ios-spine-v3.a */,
 				20F75D691D3FD31F0050B737 /* libmoai-osx-spine-v3.a */,
 				7AB72C591FE93DCE001DC0B1 /* libmoai-ios-appsflyer.a */,
+				7A37DF5920236D9E0015225A /* libmoai-ios-fyber.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1714,6 +1740,17 @@
 			sourceTree = "<group>";
 			usesTabs = 1;
 		};
+		7A37E04820236EE60015225A /* moai-ios-fyber */ = {
+			isa = PBXGroup;
+			children = (
+				7A37E04920236EE60015225A /* host.h */,
+				7A37E04A20236EE60015225A /* host.mm */,
+				7A37E04B20236EE60015225A /* MOAIFyberIOS.h */,
+				7A37E04C20236EE60015225A /* MOAIFyberIOS.mm */,
+			);
+			path = "moai-ios-fyber";
+			sourceTree = "<group>";
+		};
 		7AB72C061FE93DA8001DC0B1 /* moai-ios-appsflyer */ = {
 			isa = PBXGroup;
 			children = (
@@ -2005,6 +2042,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7A37DF4E20236D9E0015225A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A37E04D20236EE60015225A /* host.h in Headers */,
+				7A37E04F20236EE60015225A /* MOAIFyberIOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7AB72C5A1FE93E3E001DC0B1 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -2204,6 +2250,23 @@
 			productReference = 20F75D691D3FD31F0050B737 /* libmoai-osx-spine-v3.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		7A37DF4C20236D9E0015225A /* libmoai-ios-fyber */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7A37DF5420236D9E0015225A /* Build configuration list for PBXNativeTarget "libmoai-ios-fyber" */;
+			buildPhases = (
+				7A37DF4D20236D9E0015225A /* Frameworks */,
+				7A37DF4E20236D9E0015225A /* Headers */,
+				7A37DF5120236D9E0015225A /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "libmoai-ios-fyber";
+			productName = OpenUSLS;
+			productReference = 7A37DF5920236D9E0015225A /* libmoai-ios-fyber.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		7AB72C481FE93DCE001DC0B1 /* libmoai-ios-appsflyer */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7AB72C541FE93DCE001DC0B1 /* Build configuration list for PBXNativeTarget "libmoai-ios-appsflyer" */;
@@ -2282,6 +2345,7 @@
 				206B9ABC1BDAB4F60021D349 /* libmoai-osx-spine */,
 				20F75D1C1D3FD31F0050B737 /* libmoai-osx-spine-v3 */,
 				206B9D1B1BDE37CA0021D349 /* libmoai-osx-ct-util */,
+				7A37DF4C20236D9E0015225A /* libmoai-ios-fyber */,
 			);
 		};
 /* End PBXProject section */
@@ -2958,6 +3022,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7A37DF5120236D9E0015225A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A37E05020236EE60015225A /* MOAIFyberIOS.mm in Sources */,
+				7A37E04E20236EE60015225A /* host.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7AB72C5D1FE93E54001DC0B1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3034,6 +3107,11 @@
 			isa = PBXTargetDependency;
 			name = "libmoai-ios-all";
 			targetProxy = 20993ECB1BDE94AA009D7CED /* PBXContainerItemProxy */;
+		};
+		7A37E05220236F130015225A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7A37DF4C20236D9E0015225A /* libmoai-ios-fyber */;
+			targetProxy = 7A37E05120236F130015225A /* PBXContainerItemProxy */;
 		};
 		7AB72C611FE93F73001DC0B1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3171,6 +3249,7 @@
 					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
 					"\"../../3rdparty/sqlite-3.14.1/\"",
 					"\"../../3rdparty/appsflyer/\"",
+					"\"../../3rdparty/fyber-8.20.0/fyber-sdk-lib/\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = (
@@ -5019,6 +5098,162 @@
 			};
 			name = Distribution;
 		};
+		7A37DF5520236D9E0015225A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/fyber-8.20.0/fyber-sdk-lib";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+				);
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
+				PRODUCT_NAME = "moai-ios-fyber";
+				SDKROOT = iphoneos;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
+				WARNING_CFLAGS = "-w";
+			};
+			name = Debug;
+		};
+		7A37DF5620236D9E0015225A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/fyber-8.20.0/fyber-sdk-lib";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+				);
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
+				PRODUCT_NAME = "moai-ios-fyber";
+				SDKROOT = iphoneos;
+				STRIP_STYLE = debugging;
+				WARNING_CFLAGS = "-w";
+			};
+			name = Release;
+		};
+		7A37DF5720236D9E0015225A /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/fyber-8.20.0/fyber-sdk-lib";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+				);
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
+				PRODUCT_NAME = "moai-ios-fyber";
+				SDKROOT = iphoneos;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
+				WARNING_CFLAGS = "-w";
+			};
+			name = AdHoc;
+		};
+		7A37DF5820236D9E0015225A /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/fyber-8.20.0/fyber-sdk-lib";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+				);
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
+				PRODUCT_NAME = "moai-ios-fyber";
+				SDKROOT = iphoneos;
+				STRIP_STYLE = debugging;
+				WARNING_CFLAGS = "-w";
+			};
+			name = Distribution;
+		};
 		7AB72C551FE93DCE001DC0B1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -5299,6 +5534,7 @@
 					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
 					"\"../../3rdparty/sqlite-3.14.1/\"",
 					"\"../../3rdparty/appsflyer/\"",
+					"\"../../3rdparty/fyber-8.20.0/fyber-sdk-lib/\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
@@ -5447,6 +5683,7 @@
 					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
 					"\"../../3rdparty/sqlite-3.14.1/\"",
 					"\"../../3rdparty/appsflyer/\"",
+					"\"../../3rdparty/fyber-8.20.0/fyber-sdk-lib/\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = (
@@ -5595,6 +5832,7 @@
 					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
 					"\"../../3rdparty/sqlite-3.14.1/\"",
 					"\"../../3rdparty/appsflyer/\"",
+					"\"../../3rdparty/fyber-8.20.0/fyber-sdk-lib/\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = (
@@ -5757,6 +5995,17 @@
 				20F75D661D3FD31F0050B737 /* Release */,
 				20F75D671D3FD31F0050B737 /* AdHoc */,
 				20F75D681D3FD31F0050B737 /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		7A37DF5420236D9E0015225A /* Build configuration list for PBXNativeTarget "libmoai-ios-fyber" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A37DF5520236D9E0015225A /* Debug */,
+				7A37DF5620236D9E0015225A /* Release */,
+				7A37DF5720236D9E0015225A /* AdHoc */,
+				7A37DF5820236D9E0015225A /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

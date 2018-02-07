@@ -36,6 +36,10 @@
 	#ifndef AKU_WITH_IOS_FLURRY
 		#define AKU_WITH_IOS_FLURRY 0
 	#endif
+	
+	#ifndef AKU_WITH_IOS_FYBER
+		#define AKU_WITH_IOS_FYBER 0
+	#endif
 
 	#ifndef AKU_WITH_IOS_GAMECENTER
 		#define AKU_WITH_IOS_GAMECENTER 0
