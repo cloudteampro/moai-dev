@@ -43,6 +43,10 @@
 	#include <moai-android-flurry-ads/host.h>
 #endif
 
+#if AKU_WITH_ANDROID_FYBER
+	#include <moai-android-fyber/host.h>
+#endif
+
 #if AKU_WITH_ANDROID_GOOGLE_ANALYTICS
 	#include <moai-android-google-analytics/host.h>
 #endif
