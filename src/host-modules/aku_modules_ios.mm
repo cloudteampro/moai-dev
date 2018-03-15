@@ -210,6 +210,26 @@ BOOL AKUModulesIosApplicationOpenURL ( UIApplication* application,  NSURL* url, 
     return NO;
 }
 
+void AKUModulesIosApplicationDidRegisterForRemoteNotificationsWithDeviceToken ( UIApplication* application,  NSData* deviceToken ) {
+
+	#if AKU_WITH_IOS_FACEBOOK
+        AKUIosFacebookApplicationDidRegisterForRemoteNotificationsWithDeviceToken ( application, deviceToken );
+    #endif
+}
+
+void AKUModulesIosApplicationDidReceiveRemoteNotification ( UIApplication* application,  NSDictionary* userInfo ) {
+
+	#if AKU_WITH_IOS_FACEBOOK
+        AKUIosFacebookApplicationDidReceiveRemoteNotification ( application, userInfo );
+    #endif
+}
+
+void AKUModulesIosApplicationHandleActionWithIdentifier ( UIApplication* application,  NSString* identifier, NSDictionary* userInfo ) {
+
+	#if AKU_WITH_IOS_FACEBOOK
+        AKUIosFacebookApplicationHandleActionWithIdentifier ( application, identifier, userInfo );
+    #endif
+}
 
 //----------------------------------------------------------------//
 void AKUModulesIosContextInitialize () {

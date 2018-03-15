@@ -17,6 +17,9 @@ AKU_API void	AKUIosFacebookAppInitialize								();
 AKU_API void	AKUIosFacebookApplicationDidBecomeActive				( UIApplication* application );
 AKU_API BOOL	AKUIosFacebookApplicationDidFinishLaunchingWithOptions	( UIApplication* application, NSDictionary* launchOptions );
 AKU_API BOOL	AKUIosFacebookApplicationOpenURL						( UIApplication* application,  NSURL* url, NSString* sourceApplication, id annotation );
+AKU_API void 	AKUIosFacebookApplicationDidRegisterForRemoteNotificationsWithDeviceToken ( UIApplication* application,  NSData* deviceToken );
+AKU_API void 	AKUIosFacebookApplicationDidReceiveRemoteNotification 	( UIApplication* application,  NSDictionary* userInfo );
+AKU_API void 	AKUIosFacebookApplicationHandleActionWithIdentifier 	( UIApplication* application,  NSString* identifier, NSDictionary* userInfo );
 AKU_API void	AKUIosFacebookContextInitialize							();
 
 #endif

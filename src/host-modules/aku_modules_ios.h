@@ -94,5 +94,8 @@ void		AKUModulesIosUpdate						();
 void        AKUModulesIosApplicationDidBecomeActive                ( UIApplication* application );
 BOOL        AKUModulesIosApplicationDidFinishLaunchingWithOptions  ( UIApplication* application, NSDictionary* launchOptions );
 BOOL        AKUModulesIosApplicationOpenURL                        ( UIApplication* application,  NSURL* url, NSString* sourceApplication, id annotation );
+void 		AKUModulesIosApplicationDidRegisterForRemoteNotificationsWithDeviceToken ( UIApplication* application,  NSData* deviceToken );
+void 		AKUModulesIosApplicationDidReceiveRemoteNotification 	( UIApplication* application,  NSDictionary* userInfo );
+void 		AKUModulesIosApplicationHandleActionWithIdentifier 		( UIApplication* application,  NSString* identifier, NSDictionary* userInfo );
 
 #endif
