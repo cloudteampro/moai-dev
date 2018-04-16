@@ -41,10 +41,10 @@ int MOAISpineSlot::_setColor ( lua_State* L ) {
 	float a = state.GetValue < float >( 5, 1.0f );
 	
 	if ( self->mSlot ) {
-		self->mSlot->r = r;
-		self->mSlot->g = g;
-		self->mSlot->b = b;
-		self->mSlot->a = a;
+		self->mSlot->color.r = r;
+		self->mSlot->color.g = g;
+		self->mSlot->color.b = b;
+		self->mSlot->color.a = a;
 	}
 	self->Set ( r, g, b, a );
 	self->ScheduleUpdate ();
@@ -64,22 +64,22 @@ bool MOAISpineSlot::ApplyAttrOp ( u32 attrID, MOAIAttrOp& attrOp, u32 op ) {
 		switch ( UNPACK_ATTR ( attrID )) {
 			case MOAIColor::ATTR_R_COL: {
 				if ( mLocked ) break;
-				mSlot->r = attrOp.Apply ( mSlot->r, op, MOAIAttrOp::ATTR_READ_WRITE, MOAIAttrOp::ATTR_TYPE_FLOAT );
+				mSlot->color.r = attrOp.Apply ( mSlot->color.r, op, MOAIAttrOp::ATTR_READ_WRITE, MOAIAttrOp::ATTR_TYPE_FLOAT );
 				return true;
 			}
 			case MOAIColor::ATTR_G_COL: {
 				if ( mLocked ) break;
-				mSlot->g = attrOp.Apply ( mSlot->g, op, MOAIAttrOp::ATTR_READ_WRITE, MOAIAttrOp::ATTR_TYPE_FLOAT );
+				mSlot->color.g = attrOp.Apply ( mSlot->color.g, op, MOAIAttrOp::ATTR_READ_WRITE, MOAIAttrOp::ATTR_TYPE_FLOAT );
 				return true;
 			}
 			case MOAIColor::ATTR_B_COL: {
 				if ( mLocked ) break;
-				mSlot->b = attrOp.Apply ( mSlot->b, op, MOAIAttrOp::ATTR_READ_WRITE, MOAIAttrOp::ATTR_TYPE_FLOAT );
+				mSlot->color.b = attrOp.Apply ( mSlot->color.b, op, MOAIAttrOp::ATTR_READ_WRITE, MOAIAttrOp::ATTR_TYPE_FLOAT );
 				return true;
 			}
 			case MOAIColor::ATTR_A_COL: {
 				if ( mLocked ) break;
-				mSlot->a = attrOp.Apply ( mSlot->a, op, MOAIAttrOp::ATTR_READ_WRITE, MOAIAttrOp::ATTR_TYPE_FLOAT );
+				mSlot->color.a = attrOp.Apply ( mSlot->color.a, op, MOAIAttrOp::ATTR_READ_WRITE, MOAIAttrOp::ATTR_TYPE_FLOAT );
 				return true;
 			}
 		}
@@ -94,8 +94,8 @@ void MOAISpineSlot::LockColor ( bool flag ) {
 	mLocked = flag;
 	
 	if ( mSlot ) {
-		this->Set ( mSlot->r, mSlot->g, mSlot->b, mSlot->a );
-		this->mColor.Set ( mSlot->r, mSlot->g, mSlot->b, mSlot->a );
+		this->Set ( mSlot->color.r, mSlot->color.g, mSlot->color.b, mSlot->color.a );
+		this->mColor.Set ( mSlot->color.r, mSlot->color.g, mSlot->color.b, mSlot->color.a );
 	}
 }
 
@@ -119,13 +119,13 @@ void MOAISpineSlot::OnDepNodeUpdate () {
 	if ( mSlot ) {
 		
 		if ( mLocked ) {
-			mSlot->r = this->mR;
-			mSlot->g = this->mG;
-			mSlot->b = this->mB;
-			mSlot->a = this->mA;
+			mSlot->color.r = this->mR;
+			mSlot->color.g = this->mG;
+			mSlot->color.b = this->mB;
+			mSlot->color.a = this->mA;
 		}
 		
-		this->Set ( mSlot->r, mSlot->g, mSlot->b, mSlot->a );
+		this->Set ( mSlot->color.r, mSlot->color.g, mSlot->color.b, mSlot->color.a );
 		this->mColor = *this;
 	}
 }

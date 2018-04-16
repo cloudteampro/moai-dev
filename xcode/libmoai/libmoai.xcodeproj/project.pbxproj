@@ -20344,7 +20344,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"../../3rdparty/facebook-ios-sdk-4.7",
+					"../../3rdparty/facebook-ios-sdk-4.23",
 					../../3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework,
 					"../../3rdparty/vungle-2.0.1/vunglepub.embeddedframework",
 					"../../3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
@@ -21738,7 +21738,7 @@
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"../../3rdparty/facebook-ios-sdk-4.7",
+					"../../3rdparty/facebook-ios-sdk-4.23",
 					../../3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework,
 					"../../3rdparty/vungle-2.0.1/vunglepub.embeddedframework",
 					"../../3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
@@ -25810,10 +25810,7 @@
 		CDA4B8961808AC82000129F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/patrick/git/moai-dev/3rdparty/facebook-ios-sdk-3.14.1",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					USE_ARES,
 					USE_OPENSSL,
@@ -25852,10 +25849,7 @@
 		CDA4B8971808AC82000129F9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/patrick/git/moai-dev/3rdparty/facebook-ios-sdk-3.14.1",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
 					USE_ARES,
@@ -25888,10 +25882,7 @@
 		CDA4B8981808AC82000129F9 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/patrick/git/moai-dev/3rdparty/facebook-ios-sdk-3.14.1",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
 					USE_ARES,
@@ -25925,10 +25916,7 @@
 		CDA4B8991808AC82000129F9 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/patrick/git/moai-dev/3rdparty/facebook-ios-sdk-3.14.1",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
 					USE_ARES,
@@ -27476,7 +27464,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"../../3rdparty/facebook-ios-sdk-4.7",
+					"../../3rdparty/facebook-ios-sdk-4.23",
 					../../3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework,
 					"../../3rdparty/vungle-2.0.1/vunglepub.embeddedframework",
 					"../../3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
@@ -27920,7 +27908,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"../../3rdparty/facebook-ios-sdk-4.7",
+					"../../3rdparty/facebook-ios-sdk-4.23",
 					../../3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework,
 					"../../3rdparty/vungle-2.0.1/vunglepub.embeddedframework",
 					"../../3rdparty/MobileAppTracking-ios-2.6/sdk-ios",

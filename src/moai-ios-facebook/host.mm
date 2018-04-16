@@ -29,6 +29,12 @@ void AKUIosFacebookApplicationDidBecomeActive ( UIApplication* application ) {
 BOOL AKUIosFacebookApplicationDidFinishLaunchingWithOptions ( UIApplication* application, NSDictionary* launchOptions ) {
 
 	[[ FBSDKApplicationDelegate sharedInstance ] application:application didFinishLaunchingWithOptions:launchOptions ];
+
+	UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound);
+	UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes categories:nil];
+	[[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+	[[UIApplication sharedApplication] registerForRemoteNotifications];
+
 	return YES;
 }
 
@@ -36,6 +42,27 @@ BOOL AKUIosFacebookApplicationDidFinishLaunchingWithOptions ( UIApplication* app
 BOOL AKUIosFacebookApplicationOpenURL ( UIApplication* application,  NSURL* url, NSString* sourceApplication, id annotation ) {
 
 	return [[ FBSDKApplicationDelegate sharedInstance ] application:application openURL:url sourceApplication:sourceApplication annotation:annotation ];
+}
+
+//----------------------------------------------------------------//
+void AKUIosFacebookApplicationDidRegisterForRemoteNotificationsWithDeviceToken ( UIApplication* application,  NSData* deviceToken ) {
+	UNUSED ( application );
+
+	[FBSDKAppEvents setPushNotificationsDeviceToken:deviceToken];
+}
+
+//----------------------------------------------------------------//
+void AKUIosFacebookApplicationDidReceiveRemoteNotification ( UIApplication* application,  NSDictionary* userInfo ) {
+	UNUSED ( application );
+
+	[FBSDKAppEvents logPushNotificationOpen:userInfo];
+}
+
+//----------------------------------------------------------------//
+void AKUIosFacebookApplicationHandleActionWithIdentifier ( UIApplication* application,  NSString* identifier, NSDictionary* userInfo ) {
+	UNUSED ( application );
+
+	[FBSDKAppEvents logPushNotificationOpen:userInfo action:identifier];
 }
 
 //----------------------------------------------------------------//

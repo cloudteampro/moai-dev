@@ -7,7 +7,8 @@ project ( moai-ios-facebook )
 # <FBSDKLoginKit/FBSDKLoginKit.h>
 # <FBSDKShareKit/FBSDKShareKit.h>
 
-set(FACEBOOK_ROOT ${MOAI_ROOT}/3rdparty/facebook-ios-sdk-4.7)
+set(FACEBOOK_ROOT ${MOAI_ROOT}/3rdparty/facebook-ios-sdk-4.23)
+# set(FACEBOOK_ROOT ${MOAI_ROOT}/3rdparty/facebook-ios-sdk-4.7)
 # set(FACEBOOK_ROOT ${MOAI_ROOT}/3rdparty/facebook-ios-sdk-3.14.1/FacebookSDK.framework)
 
 set(FACEBOOK_CORE_ROOT ${FACEBOOK_ROOT}/FBSDKCoreKit.framework)

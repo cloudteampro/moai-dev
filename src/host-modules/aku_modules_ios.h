@@ -15,6 +15,10 @@
 	#include <moai-ios-adcolony/host.h>
 #endif
 
+#if AKU_WITH_IOS_APPSFLYER
+	#include <moai-ios-appsflyer/host.h>
+#endif
+
 #if AKU_WITH_IOS_BILLING
 	#include <moai-ios-billing/host.h>
 #endif
@@ -37,6 +41,10 @@
 
 #if AKU_WITH_IOS_FLURRY
 	#include <moai-ios-flurry/host.h>
+#endif
+
+#if AKU_WITH_IOS_FYBER
+	#include <moai-ios-fyber/host.h>
 #endif
 
 #if AKU_WITH_IOS_GAMECENTER
@@ -86,5 +94,8 @@ void		AKUModulesIosUpdate						();
 void        AKUModulesIosApplicationDidBecomeActive                ( UIApplication* application );
 BOOL        AKUModulesIosApplicationDidFinishLaunchingWithOptions  ( UIApplication* application, NSDictionary* launchOptions );
 BOOL        AKUModulesIosApplicationOpenURL                        ( UIApplication* application,  NSURL* url, NSString* sourceApplication, id annotation );
+void 		AKUModulesIosApplicationDidRegisterForRemoteNotificationsWithDeviceToken ( UIApplication* application,  NSData* deviceToken );
+void 		AKUModulesIosApplicationDidReceiveRemoteNotification 	( UIApplication* application,  NSDictionary* userInfo );
+void 		AKUModulesIosApplicationHandleActionWithIdentifier 		( UIApplication* application,  NSString* identifier, NSDictionary* userInfo );
 
 #endif

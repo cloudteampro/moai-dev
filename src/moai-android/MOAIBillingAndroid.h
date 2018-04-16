@@ -58,6 +58,7 @@ private:
 	static int _checkSubscriptionSupported	( lua_State* L );
 	static int _consumePurchaseSync			( lua_State* L );
 	static int _getPurchasedProducts		( lua_State* L );
+	static int _getProductInfo				( lua_State* L );
 	static int _purchaseProduct				( lua_State* L );
 	static int _purchaseProductFortumo		( lua_State* L );
 	static int _requestProductsAsync		( lua_State* L );

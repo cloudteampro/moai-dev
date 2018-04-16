@@ -39,6 +39,7 @@ private:
 	jmethodID 				mJava_LogPurchase;
 	jmethodID 				mJava_Login;
 	jmethodID 				mJava_Logout;
+	jmethodID 				mJava_SendAppInvite;
 	jmethodID 				mJava_PostToFeed;
 	jmethodID 				mJava_RequestPublishPermissions;
 	jmethodID 				mJava_RequestReadPermissions;
@@ -58,6 +59,7 @@ private:
 	static int		_logPurchase				( lua_State* L );
 	static int		_login						( lua_State* L );
 	static int		_logout						( lua_State* L );
+	static int		_sendAppInvite				( lua_State* L );
 	static int		_postToFeed					( lua_State* L );
 	static int		_requestPublishPermissions	( lua_State* L );
 	static int		_requestReadPermissions		( lua_State* L );

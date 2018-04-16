@@ -91,24 +91,23 @@ MOAIUnityAdsAndroid::~MOAIUnityAdsAndroid () {
 }
 
 //----------------------------------------------------------------//
-void MOAIUnityAdsAndroid::NotifyVideoCompleted ( cc8* reward, bool skipped ) {
+void MOAIUnityAdsAndroid::NotifyVideoFinished ( int result ) {
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 
-	if ( this->PushListener ( VIDEO_COMPLETED, state )) {
+	if ( this->PushListener ( UNITYADS_FINISH, state )) {
 
-		state.Push ( reward );
-		state.Push ( skipped );
-		state.DebugCall ( 2, 0 );
+		state.Push ( result );
+		state.DebugCall ( 1, 0 );
 	}
 }
 
 //----------------------------------------------------------------//
 void MOAIUnityAdsAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 
-	state.SetField ( -1, "ON_HIDE",					( u32 )ON_HIDE );
-	state.SetField ( -1, "ON_SHOW",					( u32 )ON_SHOW );
-	state.SetField ( -1, "VIDEO_COMPLETED",			( u32 )VIDEO_COMPLETED );
-	state.SetField ( -1, "VIDEO_STARTED",			( u32 )VIDEO_STARTED );
+	state.SetField ( -1, "UNITYADS_READY",			( u32 )UNITYADS_READY );
+	state.SetField ( -1, "UNITYADS_START",			( u32 )UNITYADS_START );
+	state.SetField ( -1, "UNITYADS_FINISH",			( u32 )UNITYADS_FINISH );
+	state.SetField ( -1, "UNITYADS_ERROR",			( u32 )UNITYADS_ERROR );
 
 	luaL_Reg regTable [] = {
 		{ "canShow",						_canShow },
@@ -130,18 +129,17 @@ void MOAIUnityAdsAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_unityads_MoaiUnityAds_AKUInvokeListener ( JNIEnv* env, jclass obj, jint eventID ) {
 
 	if ( MOAIUnityAdsAndroid::IsValid ()) {
-		ZLLogF ( ZLLog::CONSOLE, "Java_com_moaisdk_unityads_MoaiUnityAds_AKUInvokeListener\n" );
+		// ZLLogF ( ZLLog::CONSOLE, "Java_com_moaisdk_unityads_MoaiUnityAds_AKUInvokeListener\n" );
 		MOAIUnityAdsAndroid::Get ().InvokeListener (( u32 )eventID );
 	}
 }
 
 //----------------------------------------------------------------//
-extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_unityads_MoaiUnityAds_AKUVideoCompleted ( JNIEnv* env, jclass obj, jstring jreward, jboolean skipped ) {
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_unityads_MoaiUnityAds_AKUVideoCompleted ( JNIEnv* env, jclass obj, jint result ) {
 
 	if ( MOAIUnityAdsAndroid::IsValid ()) {
 
-		JNI_GET_CSTRING ( jreward, reward );
-		MOAIUnityAdsAndroid::Get ().NotifyVideoCompleted ( reward, skipped );
-		JNI_RELEASE_CSTRING ( jreward, reward );
+		// ZLLogF ( ZLLog::CONSOLE, "Java_com_moaisdk_unityads_MoaiUnityAds_AKUVideoCompleted\n" );
+		MOAIUnityAdsAndroid::Get ().NotifyVideoFinished ( result );
 	}
 }

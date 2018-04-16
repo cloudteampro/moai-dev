@@ -15,6 +15,10 @@
   #include <moai-android/host.h>
 #endif
 
+#if AKU_WITH_ANDROID_APPSFLYER
+	#include <moai-android-appsflyer/host.h>
+#endif
+
 #if AKU_WITH_ANDROID_BILLING
 	#include <moai-android/host.h>
 #endif
@@ -37,6 +41,10 @@
 
 #if AKU_WITH_ANDROID_FLURRY_ADS
 	#include <moai-android-flurry-ads/host.h>
+#endif
+
+#if AKU_WITH_ANDROID_FYBER
+	#include <moai-android-fyber/host.h>
 #endif
 
 #if AKU_WITH_ANDROID_GOOGLE_ANALYTICS

@@ -389,6 +389,32 @@ int MOAIFacebookIOS::_logout ( lua_State* L ) {
 
 //----------------------------------------------------------------//
 // TODO: 3rdparty doxygen
+int MOAIFacebookIOS::_sendAppInvite ( lua_State* L ) {
+	MOAI_LUA_SETUP_SINGLE ( MOAIFacebookIOS, "" )
+
+	FBSDKAppInviteContent *content =[[FBSDKAppInviteContent alloc] init];
+
+	if ( state.IsType ( 1, LUA_TTABLE )) {
+		cc8* linkUrl			= state.GetField < cc8* >( 1, "linkUrl", "" );
+		cc8* previewImageUrl	= state.GetField < cc8* >( 1, "previewImageUrl", "" );
+
+		content.appLinkURL = [ NSURL URLWithString:[ NSString stringWithUTF8String:linkUrl ]];
+	    content.appInvitePreviewImageURL = [ NSURL URLWithString:[ NSString stringWithUTF8String:previewImageUrl ]];
+	}
+
+	UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
+	UIViewController* rootVC = [ window rootViewController ];
+        
+    // present the dialog.
+    [FBSDKAppInviteDialog showFromViewController:rootVC withContent:content delegate:nil];
+
+    [content release];
+	
+	return 0;
+}
+
+//----------------------------------------------------------------//
+// TODO: 3rdparty doxygen
 int MOAIFacebookIOS::_postToFeed ( lua_State* L ) {
 	MOAI_LUA_SETUP_SINGLE ( MOAIFacebookIOS, "" )
 	
@@ -736,6 +762,7 @@ void MOAIFacebookIOS::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "logPurchase", 					_logPurchase },
 		{ "login", 							_login },
 		{ "logout", 						_logout },
+		{ "sendAppInvite", 					_sendAppInvite },
 		{ "postToFeed", 					_postToFeed },
 		{ "requestPublishPermissions", 		_requestPublishPermissions },
 		{ "requestReadPermissions", 		_requestReadPermissions },

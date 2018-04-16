@@ -21,6 +21,10 @@ void AKUModulesIosAppFinalize () {
 		AKUIosAdColonyAppFinalize ();
 	#endif
 
+	#if AKU_WITH_IOS_APPSFLYER
+		AKUIosAppsFlyerAppFinalize ();
+	#endif
+
 	#if AKU_WITH_IOS_BILLING
 		AKUIosBillingAppFinalize ();
 	#endif
@@ -43,6 +47,10 @@ void AKUModulesIosAppFinalize () {
 	
 	#if AKU_WITH_IOS_FLURRY
 		AKUIosFlurryAppFinalize ();
+	#endif
+
+	#if AKU_WITH_IOS_FYBER
+		AKUIosFyberAppFinalize ();
 	#endif
 
 	#if AKU_WITH_IOS_GAMECENTER
@@ -93,6 +101,10 @@ void AKUModulesIosAppInitialize () {
 		AKUIosAdColonyAppInitialize ();
 	#endif
 
+	#if AKU_WITH_IOS_APPSFLYER
+		AKUIosAppsFlyerAppInitialize ();
+	#endif
+
 	#if AKU_WITH_IOS_BILLING
 		AKUIosBillingAppInitialize ();
 	#endif
@@ -115,6 +127,10 @@ void AKUModulesIosAppInitialize () {
 	
 	#if AKU_WITH_IOS_FLURRY
 		AKUIosFlurryAppInitialize ();
+	#endif
+
+	#if AKU_WITH_IOS_FYBER
+		AKUIosFyberAppInitialize ();
 	#endif
 
 	#if AKU_WITH_IOS_GAMECENTER
@@ -161,6 +177,10 @@ void AKUModulesIosApplicationDidBecomeActive ( UIApplication* application ) {
     #if AKU_WITH_IOS_FACEBOOK
         AKUIosFacebookApplicationDidBecomeActive ( application );
     #endif
+
+    #if AKU_WITH_IOS_APPSFLYER
+		AKUIosAppsFlyerApplicationDidBecomeActive ( application );
+	#endif
 }
 
 //----------------------------------------------------------------//
@@ -183,7 +203,32 @@ BOOL AKUModulesIosApplicationOpenURL ( UIApplication* application,  NSURL* url, 
         if ( AKUIosFacebookApplicationOpenURL ( application, url, sourceApplication, annotation )) return YES;
     #endif
 
+    #if AKU_WITH_IOS_APPSFLYER
+		AKUIosAppsFlyerApplicationOpenURL ( application, url, sourceApplication, annotation );
+	#endif
+
     return NO;
+}
+
+void AKUModulesIosApplicationDidRegisterForRemoteNotificationsWithDeviceToken ( UIApplication* application,  NSData* deviceToken ) {
+
+	#if AKU_WITH_IOS_FACEBOOK
+        AKUIosFacebookApplicationDidRegisterForRemoteNotificationsWithDeviceToken ( application, deviceToken );
+    #endif
+}
+
+void AKUModulesIosApplicationDidReceiveRemoteNotification ( UIApplication* application,  NSDictionary* userInfo ) {
+
+	#if AKU_WITH_IOS_FACEBOOK
+        AKUIosFacebookApplicationDidReceiveRemoteNotification ( application, userInfo );
+    #endif
+}
+
+void AKUModulesIosApplicationHandleActionWithIdentifier ( UIApplication* application,  NSString* identifier, NSDictionary* userInfo ) {
+
+	#if AKU_WITH_IOS_FACEBOOK
+        AKUIosFacebookApplicationHandleActionWithIdentifier ( application, identifier, userInfo );
+    #endif
 }
 
 //----------------------------------------------------------------//
@@ -195,6 +240,10 @@ void AKUModulesIosContextInitialize () {
 
 	#if AKU_WITH_IOS_ADCOLONY
 		AKUIosAdColonyContextInitialize ();
+	#endif
+
+	#if AKU_WITH_IOS_APPSFLYER
+		AKUIosAppsFlyerContextInitialize ();
 	#endif
 
 	#if AKU_WITH_IOS_BILLING
@@ -219,6 +268,10 @@ void AKUModulesIosContextInitialize () {
 	
 	#if AKU_WITH_IOS_FLURRY
 		AKUIosFlurryContextInitialize ();
+	#endif
+
+	#if AKU_WITH_IOS_FYBER
+		AKUIosFyberContextInitialize ();
 	#endif
 
 	#if AKU_WITH_IOS_GAMECENTER

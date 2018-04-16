@@ -19,6 +19,10 @@ void AKUModulesAndroidAppFinalize () {
 		AKUAndroidAdColonyAppFinalize ();
 	#endif
 
+	#if AKU_WITH_ANDROID_APPSFLYER
+		AKUAndroidAppsFlyerAppFinalize ();
+	#endif
+
 	#if AKU_WITH_ANDROID_CHARTBOOST
 		AKUAndroidChartBoostAppFinalize ();
 	#endif
@@ -37,6 +41,10 @@ void AKUModulesAndroidAppFinalize () {
 
 	#if AKU_WITH_ANDROID_FLURRY_ADS
 		AKUAndroidFlurryAdsAppFinalize ();
+	#endif
+
+	#if AKU_WITH_ANDROID_FYBER
+		AKUAndroidFyberAppFinalize ();
 	#endif
 	
 	#if AKU_WITH_ANDROID_GOOGLE_ANALYTICS
@@ -83,6 +91,10 @@ void AKUModulesAndroidAppInitialize () {
 		AKUAndroidAdColonyAppInitialize ();
 	#endif
 
+	#if AKU_WITH_ANDROID_APPSFLYER
+		AKUAndroidAppsFlyerAppInitialize ();
+	#endif
+
 	#if AKU_WITH_ANDROID_CHARTBOOST
 		AKUAndroidChartBoostAppInitialize ();
 	#endif
@@ -101,6 +113,10 @@ void AKUModulesAndroidAppInitialize () {
 
 	#if AKU_WITH_ANDROID_FLURRY_ADS
 		AKUAndroidFlurryAdsAppInitialize ();
+	#endif
+
+	#if AKU_WITH_ANDROID_FYBER
+		AKUAndroidFyberAppInitialize ();
 	#endif
 	
 	#if AKU_WITH_ANDROID_GOOGLE_ANALYTICS
@@ -147,6 +163,10 @@ void AKUModulesAndroidContextInitialize () {
 		AKUAndroidAdColonyContextInitialize ();
 	#endif
 
+	#if AKU_WITH_ANDROID_APPSFLYER
+		AKUAndroidAppsFlyerContextInitialize();
+	#endif
+
 	#if AKU_WITH_ANDROID_CHARTBOOST
 		AKUAndroidChartBoostContextInitialize ();
 	#endif
@@ -165,6 +185,10 @@ void AKUModulesAndroidContextInitialize () {
 
 	#if AKU_WITH_ANDROID_FLURRY_ADS
 		AKUAndroidFlurryAdsContextInitialize ();
+	#endif
+
+	#if AKU_WITH_ANDROID_FYBER
+		AKUAndroidFyberContextInitialize ();
 	#endif
 	
 	#if AKU_WITH_ANDROID_GOOGLE_ANALYTICS
