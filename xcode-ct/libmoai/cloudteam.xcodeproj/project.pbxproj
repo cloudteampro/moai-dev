@@ -35,6 +35,7 @@
 				206B9D3B1BDE48FD0021D349 /* PBXTargetDependency */,
 				206B9D061BDABB2E0021D349 /* PBXTargetDependency */,
 				7A37E05220236F130015225A /* PBXTargetDependency */,
+				7A3CA47420878A3B0098D698 /* PBXTargetDependency */,
 				206B9D041BDABB2E0021D349 /* PBXTargetDependency */,
 				20541E081D44B62A004F3772 /* PBXTargetDependency */,
 				2090B6B01BEBA4A80057A676 /* PBXTargetDependency */,
@@ -434,6 +435,22 @@
 		7A37E04E20236EE60015225A /* host.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7A37E04A20236EE60015225A /* host.mm */; };
 		7A37E04F20236EE60015225A /* MOAIFyberIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A37E04B20236EE60015225A /* MOAIFyberIOS.h */; };
 		7A37E05020236EE60015225A /* MOAIFyberIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7A37E04C20236EE60015225A /* MOAIFyberIOS.mm */; };
+		7A3CA460208789000098D698 /* GS.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A3CA455208789000098D698 /* GS.h */; };
+		7A3CA461208789000098D698 /* GS.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3CA456208789000098D698 /* GS.m */; };
+		7A3CA462208789000098D698 /* GSAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A3CA457208789000098D698 /* GSAPI.h */; };
+		7A3CA463208789000098D698 /* GSAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3CA458208789000098D698 /* GSAPI.m */; };
+		7A3CA464208789000098D698 /* GSData.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A3CA459208789000098D698 /* GSData.h */; };
+		7A3CA465208789000098D698 /* GSData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3CA45A208789000098D698 /* GSData.m */; };
+		7A3CA46F2087892C0098D698 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A3CA46B2087892C0098D698 /* host.h */; };
+		7A3CA4702087892C0098D698 /* host.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7A3CA46C2087892C0098D698 /* host.mm */; };
+		7A3CA4712087892C0098D698 /* MOAIGameSparksIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A3CA46D2087892C0098D698 /* MOAIGameSparksIOS.h */; };
+		7A3CA4722087892C0098D698 /* MOAIGameSparksIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7A3CA46E2087892C0098D698 /* MOAIGameSparksIOS.mm */; };
+		7A3CA4B320878B740098D698 /* PreviewViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A3CA4B120878B740098D698 /* PreviewViewController.h */; };
+		7A3CA4B420878B740098D698 /* PreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3CA4B220878B740098D698 /* PreviewViewController.m */; };
+		7A3CA53120878F3C0098D698 /* JFRSecurity.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A3CA52D20878F3C0098D698 /* JFRSecurity.h */; };
+		7A3CA53220878F3C0098D698 /* JFRSecurity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3CA52E20878F3C0098D698 /* JFRSecurity.m */; };
+		7A3CA53320878F3C0098D698 /* JFRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A3CA52F20878F3C0098D698 /* JFRWebSocket.h */; };
+		7A3CA53420878F3C0098D698 /* JFRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3CA53020878F3C0098D698 /* JFRWebSocket.m */; };
 		7AB72C5B1FE93E4F001DC0B1 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AB72C071FE93DA8001DC0B1 /* host.h */; };
 		7AB72C5C1FE93E4F001DC0B1 /* MOAIAppsFlyerIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AB72C091FE93DA8001DC0B1 /* MOAIAppsFlyerIOS.h */; };
 		7AB72C5E1FE93E61001DC0B1 /* host.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7AB72C081FE93DA8001DC0B1 /* host.mm */; };
@@ -945,6 +962,13 @@
 			remoteGlobalIDString = 7A37DF4C20236D9E0015225A;
 			remoteInfo = "libmoai-ios-fyber";
 		};
+		7A3CA47320878A3B0098D698 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7A3CA4012087880C0098D698;
+			remoteInfo = "libmoai-ios-gamesparks";
+		};
 		7AB72C601FE93F73001DC0B1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -1174,6 +1198,24 @@
 		7A37E04A20236EE60015225A /* host.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = host.mm; sourceTree = "<group>"; };
 		7A37E04B20236EE60015225A /* MOAIFyberIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIFyberIOS.h; sourceTree = "<group>"; };
 		7A37E04C20236EE60015225A /* MOAIFyberIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MOAIFyberIOS.mm; sourceTree = "<group>"; };
+		7A3CA40E2087880C0098D698 /* libmoai-ios-gamesparks.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios-gamesparks.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A3CA455208789000098D698 /* GS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GS.h; path = ../../3rdparty/gamesparks/GS.h; sourceTree = "<group>"; };
+		7A3CA456208789000098D698 /* GS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GS.m; path = ../../3rdparty/gamesparks/GS.m; sourceTree = "<group>"; };
+		7A3CA457208789000098D698 /* GSAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSAPI.h; path = ../../3rdparty/gamesparks/GSAPI.h; sourceTree = "<group>"; };
+		7A3CA458208789000098D698 /* GSAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GSAPI.m; path = ../../3rdparty/gamesparks/GSAPI.m; sourceTree = "<group>"; };
+		7A3CA459208789000098D698 /* GSData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSData.h; path = ../../3rdparty/gamesparks/GSData.h; sourceTree = "<group>"; };
+		7A3CA45A208789000098D698 /* GSData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GSData.m; path = ../../3rdparty/gamesparks/GSData.m; sourceTree = "<group>"; };
+		7A3CA45F208789000098D698 /* RT */ = {isa = PBXFileReference; lastKnownFileType = folder; name = RT; path = ../../3rdparty/gamesparks/RT; sourceTree = "<group>"; };
+		7A3CA46B2087892C0098D698 /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = host.h; path = "moai-ios-gamesparks/host.h"; sourceTree = "<group>"; };
+		7A3CA46C2087892C0098D698 /* host.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = host.mm; path = "moai-ios-gamesparks/host.mm"; sourceTree = "<group>"; };
+		7A3CA46D2087892C0098D698 /* MOAIGameSparksIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MOAIGameSparksIOS.h; path = "moai-ios-gamesparks/MOAIGameSparksIOS.h"; sourceTree = "<group>"; };
+		7A3CA46E2087892C0098D698 /* MOAIGameSparksIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MOAIGameSparksIOS.mm; path = "moai-ios-gamesparks/MOAIGameSparksIOS.mm"; sourceTree = "<group>"; };
+		7A3CA4B120878B740098D698 /* PreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreviewViewController.h; path = ../../3rdparty/gamesparks/PreviewViewController.h; sourceTree = "<group>"; };
+		7A3CA4B220878B740098D698 /* PreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PreviewViewController.m; path = ../../3rdparty/gamesparks/PreviewViewController.m; sourceTree = "<group>"; };
+		7A3CA52D20878F3C0098D698 /* JFRSecurity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JFRSecurity.h; path = ../../3rdparty/gamesparks/JFRSecurity.h; sourceTree = "<group>"; };
+		7A3CA52E20878F3C0098D698 /* JFRSecurity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JFRSecurity.m; path = ../../3rdparty/gamesparks/JFRSecurity.m; sourceTree = "<group>"; };
+		7A3CA52F20878F3C0098D698 /* JFRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JFRWebSocket.h; path = ../../3rdparty/gamesparks/JFRWebSocket.h; sourceTree = "<group>"; };
+		7A3CA53020878F3C0098D698 /* JFRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JFRWebSocket.m; path = ../../3rdparty/gamesparks/JFRWebSocket.m; sourceTree = "<group>"; };
 		7AB72C071FE93DA8001DC0B1 /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = host.h; sourceTree = "<group>"; };
 		7AB72C081FE93DA8001DC0B1 /* host.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = host.mm; sourceTree = "<group>"; };
 		7AB72C091FE93DA8001DC0B1 /* MOAIAppsFlyerIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIAppsFlyerIOS.h; sourceTree = "<group>"; };
@@ -1266,6 +1308,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7A3CA4022087880C0098D698 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7AB72C531FE93DCE001DC0B1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1279,6 +1328,7 @@
 		032409EE13564CAF000ADC60 /* 3rd party */ = {
 			isa = PBXGroup;
 			children = (
+				7A3CA449208788920098D698 /* gamesparks */,
 				2049B9681CAA8D38005B83B3 /* adtoapp */,
 				206B9B121BDAB5D70021D349 /* spine-c */,
 				20F75D6A1D3FD3630050B737 /* spine_v3-c */,
@@ -1289,6 +1339,7 @@
 		0324E4F113564BC7000ADC60 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				7A3CA46A208789100098D698 /* moai-ios-gamesparks */,
 				7A37E04820236EE60015225A /* moai-ios-fyber */,
 				7AB72C061FE93DA8001DC0B1 /* moai-ios-appsflyer */,
 				206BA0451BDE92D60021D349 /* ct-util */,
@@ -1319,6 +1370,7 @@
 				20F75D691D3FD31F0050B737 /* libmoai-osx-spine-v3.a */,
 				7AB72C591FE93DCE001DC0B1 /* libmoai-ios-appsflyer.a */,
 				7A37DF5920236D9E0015225A /* libmoai-ios-fyber.a */,
+				7A3CA40E2087880C0098D698 /* libmoai-ios-gamesparks.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1751,6 +1803,37 @@
 			path = "moai-ios-fyber";
 			sourceTree = "<group>";
 		};
+		7A3CA449208788920098D698 /* gamesparks */ = {
+			isa = PBXGroup;
+			children = (
+				7A3CA52D20878F3C0098D698 /* JFRSecurity.h */,
+				7A3CA52E20878F3C0098D698 /* JFRSecurity.m */,
+				7A3CA52F20878F3C0098D698 /* JFRWebSocket.h */,
+				7A3CA53020878F3C0098D698 /* JFRWebSocket.m */,
+				7A3CA455208789000098D698 /* GS.h */,
+				7A3CA456208789000098D698 /* GS.m */,
+				7A3CA457208789000098D698 /* GSAPI.h */,
+				7A3CA458208789000098D698 /* GSAPI.m */,
+				7A3CA459208789000098D698 /* GSData.h */,
+				7A3CA45A208789000098D698 /* GSData.m */,
+				7A3CA4B120878B740098D698 /* PreviewViewController.h */,
+				7A3CA4B220878B740098D698 /* PreviewViewController.m */,
+				7A3CA45F208789000098D698 /* RT */,
+			);
+			name = gamesparks;
+			sourceTree = "<group>";
+		};
+		7A3CA46A208789100098D698 /* moai-ios-gamesparks */ = {
+			isa = PBXGroup;
+			children = (
+				7A3CA46B2087892C0098D698 /* host.h */,
+				7A3CA46C2087892C0098D698 /* host.mm */,
+				7A3CA46D2087892C0098D698 /* MOAIGameSparksIOS.h */,
+				7A3CA46E2087892C0098D698 /* MOAIGameSparksIOS.mm */,
+			);
+			name = "moai-ios-gamesparks";
+			sourceTree = "<group>";
+		};
 		7AB72C061FE93DA8001DC0B1 /* moai-ios-appsflyer */ = {
 			isa = PBXGroup;
 			children = (
@@ -2051,6 +2134,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7A3CA4032087880C0098D698 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A3CA462208789000098D698 /* GSAPI.h in Headers */,
+				7A3CA46F2087892C0098D698 /* host.h in Headers */,
+				7A3CA4712087892C0098D698 /* MOAIGameSparksIOS.h in Headers */,
+				7A3CA464208789000098D698 /* GSData.h in Headers */,
+				7A3CA53120878F3C0098D698 /* JFRSecurity.h in Headers */,
+				7A3CA53320878F3C0098D698 /* JFRWebSocket.h in Headers */,
+				7A3CA4B320878B740098D698 /* PreviewViewController.h in Headers */,
+				7A3CA460208789000098D698 /* GS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7AB72C5A1FE93E3E001DC0B1 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -2267,6 +2365,23 @@
 			productReference = 7A37DF5920236D9E0015225A /* libmoai-ios-fyber.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		7A3CA4012087880C0098D698 /* libmoai-ios-gamesparks */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7A3CA4092087880C0098D698 /* Build configuration list for PBXNativeTarget "libmoai-ios-gamesparks" */;
+			buildPhases = (
+				7A3CA4022087880C0098D698 /* Frameworks */,
+				7A3CA4032087880C0098D698 /* Headers */,
+				7A3CA4062087880C0098D698 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "libmoai-ios-gamesparks";
+			productName = OpenUSLS;
+			productReference = 7A3CA40E2087880C0098D698 /* libmoai-ios-gamesparks.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		7AB72C481FE93DCE001DC0B1 /* libmoai-ios-appsflyer */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7AB72C541FE93DCE001DC0B1 /* Build configuration list for PBXNativeTarget "libmoai-ios-appsflyer" */;
@@ -2346,6 +2461,7 @@
 				20F75D1C1D3FD31F0050B737 /* libmoai-osx-spine-v3 */,
 				206B9D1B1BDE37CA0021D349 /* libmoai-osx-ct-util */,
 				7A37DF4C20236D9E0015225A /* libmoai-ios-fyber */,
+				7A3CA4012087880C0098D698 /* libmoai-ios-gamesparks */,
 			);
 		};
 /* End PBXProject section */
@@ -3031,6 +3147,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7A3CA4062087880C0098D698 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A3CA461208789000098D698 /* GS.m in Sources */,
+				7A3CA4722087892C0098D698 /* MOAIGameSparksIOS.mm in Sources */,
+				7A3CA53420878F3C0098D698 /* JFRWebSocket.m in Sources */,
+				7A3CA4B420878B740098D698 /* PreviewViewController.m in Sources */,
+				7A3CA463208789000098D698 /* GSAPI.m in Sources */,
+				7A3CA4702087892C0098D698 /* host.mm in Sources */,
+				7A3CA53220878F3C0098D698 /* JFRSecurity.m in Sources */,
+				7A3CA465208789000098D698 /* GSData.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7AB72C5D1FE93E54001DC0B1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3112,6 +3243,11 @@
 			isa = PBXTargetDependency;
 			target = 7A37DF4C20236D9E0015225A /* libmoai-ios-fyber */;
 			targetProxy = 7A37E05120236F130015225A /* PBXContainerItemProxy */;
+		};
+		7A3CA47420878A3B0098D698 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7A3CA4012087880C0098D698 /* libmoai-ios-gamesparks */;
+			targetProxy = 7A3CA47320878A3B0098D698 /* PBXContainerItemProxy */;
 		};
 		7AB72C611FE93F73001DC0B1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -4260,6 +4396,64 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
+				HEADER_SEARCH_PATHS = (
+					"\"../../src/zl-vfs\"",
+					"\"../../src/config\"",
+					"\"../../src/config-default\"",
+					"\"../../src\"",
+					"\"../../3rdparty\"",
+					"\"../../3rdparty/lua-5.1.3/src\"",
+					"\"../../3rdparty/contrib\"",
+					"\"../../3rdparty/tinyxml\"",
+					"\"../../3rdparty/lpng140\"",
+					"\"../../3rdparty/libpvr-3.4\"",
+					"\"../../3rdparty/c-ares-1.7.5\"",
+					"\"../../3rdparty/openssl-1.0.0m/include-iphone\"",
+					"\"../../3rdparty/openssl-1.0.0m/include\"",
+					"\"../../3rdparty/openssl-1.0.0m/crypto\"",
+					"\"../../3rdparty/openssl-1.0.0m\"",
+					"\"../../3rdparty/curl-7.19.7/include-iphone\"",
+					"\"../../3rdparty/curl-7.19.7/lib\"",
+					"\"../../3rdparty/expat-2.1.0/lib\"",
+					"\"../../3rdparty/freeglut-2.8.1/include\"",
+					"\"../../3rdparty/freetype-2.4.4/include\"",
+					"\"../../3rdparty/box2d-2.3.0\"",
+					"\"../../3rdparty/chipmunk-5.3.4/include\"",
+					"\"../../3rdparty/chipmunk-5.3.4/include/chipmunk\"",
+					"\"../../3rdparty/luacrypto-0.2.0/src\"",
+					"\"../../3rdparty/luacurl-1.2.1/src\"",
+					"\"../../3rdparty/luasocket-2.0.2/src\"",
+					"\"../../3rdparty/luasql-2.2.0/src\"",
+					"\"../../3rdparty/libogg-1.2.2/include\"",
+					"\"../../3rdparty/jansson-2.7/src\"",
+					"\"../../3rdparty/jpeg-8c\"",
+					"\"../../3rdparty/untz/include\"",
+					"\"../../3rdparty/untz/src\"",
+					"\"../../3rdparty/libvorbis-1.3.2/lib\"",
+					"\"../../3rdparty/libvorbis-1.3.2/include\"",
+					"\"../../3rdparty/tlsf-2.0\"",
+					"\"../../3rdparty/zlib-1.2.3\"",
+					"\"../../3rdparty/ooid-0.99\"",
+					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
+					"\"../../3rdparty/chartboost-4.2\"",
+					"\"../../3rdparty/adcolonyiOS-1911/Library\"",
+					"\"../../3rdparty/mongoose\"",
+					"\"../../3rdparty/sdl2-2.0.0/include\"",
+					"\"../../3rdparty/libtess2/include\"",
+					"\"../../3rdparty/sfmt-1.4\"",
+					"\"../../3rdparty/libUAirship-3.0.1/Airship/Common\"",
+					"\"../../3rdparty/libUAirship-3.0.1/Airship/Push\"",
+					"\"../../3rdparty/Flurry-iOS-5.0.0/Flurry\"",
+					"\"../../3rdparty/fmod-studio/headers\"",
+					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
+					"\"../../3rdparty/sqlite-3.14.1/\"",
+					"\"../../3rdparty/appsflyer/\"",
+					"\"../../3rdparty/fyber-8.20.0/fyber-sdk-lib/\"",
+					"\"../../3rdparty/gamesparks/RT/BaseSDK/include\"",
+					"\"../../3rdparty/gamesparks/RT/BaseSDK/\"",
+					"\"../../3rdparty/gamesparks/RT/\"",
+					"\"../../3rdparty/gamesparks/\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SEPARATE_STRIP = NO;
@@ -4273,6 +4467,64 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"../../src/zl-vfs\"",
+					"\"../../src/config\"",
+					"\"../../src/config-default\"",
+					"\"../../src\"",
+					"\"../../3rdparty\"",
+					"\"../../3rdparty/lua-5.1.3/src\"",
+					"\"../../3rdparty/contrib\"",
+					"\"../../3rdparty/tinyxml\"",
+					"\"../../3rdparty/lpng140\"",
+					"\"../../3rdparty/libpvr-3.4\"",
+					"\"../../3rdparty/c-ares-1.7.5\"",
+					"\"../../3rdparty/openssl-1.0.0m/include-iphone\"",
+					"\"../../3rdparty/openssl-1.0.0m/include\"",
+					"\"../../3rdparty/openssl-1.0.0m/crypto\"",
+					"\"../../3rdparty/openssl-1.0.0m\"",
+					"\"../../3rdparty/curl-7.19.7/include-iphone\"",
+					"\"../../3rdparty/curl-7.19.7/lib\"",
+					"\"../../3rdparty/expat-2.1.0/lib\"",
+					"\"../../3rdparty/freeglut-2.8.1/include\"",
+					"\"../../3rdparty/freetype-2.4.4/include\"",
+					"\"../../3rdparty/box2d-2.3.0\"",
+					"\"../../3rdparty/chipmunk-5.3.4/include\"",
+					"\"../../3rdparty/chipmunk-5.3.4/include/chipmunk\"",
+					"\"../../3rdparty/luacrypto-0.2.0/src\"",
+					"\"../../3rdparty/luacurl-1.2.1/src\"",
+					"\"../../3rdparty/luasocket-2.0.2/src\"",
+					"\"../../3rdparty/luasql-2.2.0/src\"",
+					"\"../../3rdparty/libogg-1.2.2/include\"",
+					"\"../../3rdparty/jansson-2.7/src\"",
+					"\"../../3rdparty/jpeg-8c\"",
+					"\"../../3rdparty/untz/include\"",
+					"\"../../3rdparty/untz/src\"",
+					"\"../../3rdparty/libvorbis-1.3.2/lib\"",
+					"\"../../3rdparty/libvorbis-1.3.2/include\"",
+					"\"../../3rdparty/tlsf-2.0\"",
+					"\"../../3rdparty/zlib-1.2.3\"",
+					"\"../../3rdparty/ooid-0.99\"",
+					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
+					"\"../../3rdparty/chartboost-4.2\"",
+					"\"../../3rdparty/adcolonyiOS-1911/Library\"",
+					"\"../../3rdparty/mongoose\"",
+					"\"../../3rdparty/sdl2-2.0.0/include\"",
+					"\"../../3rdparty/libtess2/include\"",
+					"\"../../3rdparty/sfmt-1.4\"",
+					"\"../../3rdparty/libUAirship-3.0.1/Airship/Common\"",
+					"\"../../3rdparty/libUAirship-3.0.1/Airship/Push\"",
+					"\"../../3rdparty/Flurry-iOS-5.0.0/Flurry\"",
+					"\"../../3rdparty/fmod-studio/headers\"",
+					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
+					"\"../../3rdparty/sqlite-3.14.1/\"",
+					"\"../../3rdparty/appsflyer/\"",
+					"\"../../3rdparty/fyber-8.20.0/fyber-sdk-lib/\"",
+					"\"../../3rdparty/gamesparks/RT/BaseSDK/include\"",
+					"\"../../3rdparty/gamesparks/RT/BaseSDK/\"",
+					"\"../../3rdparty/gamesparks/RT/\"",
+					"\"../../3rdparty/gamesparks/\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SEPARATE_STRIP = YES;
@@ -4285,6 +4537,64 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
+				HEADER_SEARCH_PATHS = (
+					"\"../../src/zl-vfs\"",
+					"\"../../src/config\"",
+					"\"../../src/config-default\"",
+					"\"../../src\"",
+					"\"../../3rdparty\"",
+					"\"../../3rdparty/lua-5.1.3/src\"",
+					"\"../../3rdparty/contrib\"",
+					"\"../../3rdparty/tinyxml\"",
+					"\"../../3rdparty/lpng140\"",
+					"\"../../3rdparty/libpvr-3.4\"",
+					"\"../../3rdparty/c-ares-1.7.5\"",
+					"\"../../3rdparty/openssl-1.0.0m/include-iphone\"",
+					"\"../../3rdparty/openssl-1.0.0m/include\"",
+					"\"../../3rdparty/openssl-1.0.0m/crypto\"",
+					"\"../../3rdparty/openssl-1.0.0m\"",
+					"\"../../3rdparty/curl-7.19.7/include-iphone\"",
+					"\"../../3rdparty/curl-7.19.7/lib\"",
+					"\"../../3rdparty/expat-2.1.0/lib\"",
+					"\"../../3rdparty/freeglut-2.8.1/include\"",
+					"\"../../3rdparty/freetype-2.4.4/include\"",
+					"\"../../3rdparty/box2d-2.3.0\"",
+					"\"../../3rdparty/chipmunk-5.3.4/include\"",
+					"\"../../3rdparty/chipmunk-5.3.4/include/chipmunk\"",
+					"\"../../3rdparty/luacrypto-0.2.0/src\"",
+					"\"../../3rdparty/luacurl-1.2.1/src\"",
+					"\"../../3rdparty/luasocket-2.0.2/src\"",
+					"\"../../3rdparty/luasql-2.2.0/src\"",
+					"\"../../3rdparty/libogg-1.2.2/include\"",
+					"\"../../3rdparty/jansson-2.7/src\"",
+					"\"../../3rdparty/jpeg-8c\"",
+					"\"../../3rdparty/untz/include\"",
+					"\"../../3rdparty/untz/src\"",
+					"\"../../3rdparty/libvorbis-1.3.2/lib\"",
+					"\"../../3rdparty/libvorbis-1.3.2/include\"",
+					"\"../../3rdparty/tlsf-2.0\"",
+					"\"../../3rdparty/zlib-1.2.3\"",
+					"\"../../3rdparty/ooid-0.99\"",
+					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
+					"\"../../3rdparty/chartboost-4.2\"",
+					"\"../../3rdparty/adcolonyiOS-1911/Library\"",
+					"\"../../3rdparty/mongoose\"",
+					"\"../../3rdparty/sdl2-2.0.0/include\"",
+					"\"../../3rdparty/libtess2/include\"",
+					"\"../../3rdparty/sfmt-1.4\"",
+					"\"../../3rdparty/libUAirship-3.0.1/Airship/Common\"",
+					"\"../../3rdparty/libUAirship-3.0.1/Airship/Push\"",
+					"\"../../3rdparty/Flurry-iOS-5.0.0/Flurry\"",
+					"\"../../3rdparty/fmod-studio/headers\"",
+					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
+					"\"../../3rdparty/sqlite-3.14.1/\"",
+					"\"../../3rdparty/appsflyer/\"",
+					"\"../../3rdparty/fyber-8.20.0/fyber-sdk-lib/\"",
+					"\"../../3rdparty/gamesparks/RT/BaseSDK/include\"",
+					"\"../../3rdparty/gamesparks/RT/BaseSDK/\"",
+					"\"../../3rdparty/gamesparks/RT/\"",
+					"\"../../3rdparty/gamesparks/\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SEPARATE_STRIP = NO;
@@ -4298,6 +4608,64 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"../../src/zl-vfs\"",
+					"\"../../src/config\"",
+					"\"../../src/config-default\"",
+					"\"../../src\"",
+					"\"../../3rdparty\"",
+					"\"../../3rdparty/lua-5.1.3/src\"",
+					"\"../../3rdparty/contrib\"",
+					"\"../../3rdparty/tinyxml\"",
+					"\"../../3rdparty/lpng140\"",
+					"\"../../3rdparty/libpvr-3.4\"",
+					"\"../../3rdparty/c-ares-1.7.5\"",
+					"\"../../3rdparty/openssl-1.0.0m/include-iphone\"",
+					"\"../../3rdparty/openssl-1.0.0m/include\"",
+					"\"../../3rdparty/openssl-1.0.0m/crypto\"",
+					"\"../../3rdparty/openssl-1.0.0m\"",
+					"\"../../3rdparty/curl-7.19.7/include-iphone\"",
+					"\"../../3rdparty/curl-7.19.7/lib\"",
+					"\"../../3rdparty/expat-2.1.0/lib\"",
+					"\"../../3rdparty/freeglut-2.8.1/include\"",
+					"\"../../3rdparty/freetype-2.4.4/include\"",
+					"\"../../3rdparty/box2d-2.3.0\"",
+					"\"../../3rdparty/chipmunk-5.3.4/include\"",
+					"\"../../3rdparty/chipmunk-5.3.4/include/chipmunk\"",
+					"\"../../3rdparty/luacrypto-0.2.0/src\"",
+					"\"../../3rdparty/luacurl-1.2.1/src\"",
+					"\"../../3rdparty/luasocket-2.0.2/src\"",
+					"\"../../3rdparty/luasql-2.2.0/src\"",
+					"\"../../3rdparty/libogg-1.2.2/include\"",
+					"\"../../3rdparty/jansson-2.7/src\"",
+					"\"../../3rdparty/jpeg-8c\"",
+					"\"../../3rdparty/untz/include\"",
+					"\"../../3rdparty/untz/src\"",
+					"\"../../3rdparty/libvorbis-1.3.2/lib\"",
+					"\"../../3rdparty/libvorbis-1.3.2/include\"",
+					"\"../../3rdparty/tlsf-2.0\"",
+					"\"../../3rdparty/zlib-1.2.3\"",
+					"\"../../3rdparty/ooid-0.99\"",
+					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
+					"\"../../3rdparty/chartboost-4.2\"",
+					"\"../../3rdparty/adcolonyiOS-1911/Library\"",
+					"\"../../3rdparty/mongoose\"",
+					"\"../../3rdparty/sdl2-2.0.0/include\"",
+					"\"../../3rdparty/libtess2/include\"",
+					"\"../../3rdparty/sfmt-1.4\"",
+					"\"../../3rdparty/libUAirship-3.0.1/Airship/Common\"",
+					"\"../../3rdparty/libUAirship-3.0.1/Airship/Push\"",
+					"\"../../3rdparty/Flurry-iOS-5.0.0/Flurry\"",
+					"\"../../3rdparty/fmod-studio/headers\"",
+					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
+					"\"../../3rdparty/sqlite-3.14.1/\"",
+					"\"../../3rdparty/appsflyer/\"",
+					"\"../../3rdparty/fyber-8.20.0/fyber-sdk-lib/\"",
+					"\"../../3rdparty/gamesparks/RT/BaseSDK/include\"",
+					"\"../../3rdparty/gamesparks/RT/BaseSDK/\"",
+					"\"../../3rdparty/gamesparks/RT/\"",
+					"\"../../3rdparty/gamesparks/\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SEPARATE_STRIP = YES;
@@ -5254,6 +5622,158 @@
 			};
 			name = Distribution;
 		};
+		7A3CA40A2087880C0098D698 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+				);
+				PRODUCT_NAME = "moai-ios-gamesparks";
+				SDKROOT = iphoneos;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
+				WARNING_CFLAGS = "-w";
+			};
+			name = Debug;
+		};
+		7A3CA40B2087880C0098D698 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+				);
+				PRODUCT_NAME = "moai-ios-gamesparks";
+				SDKROOT = iphoneos;
+				STRIP_STYLE = debugging;
+				WARNING_CFLAGS = "-w";
+			};
+			name = Release;
+		};
+		7A3CA40C2087880C0098D698 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+				);
+				PRODUCT_NAME = "moai-ios-gamesparks";
+				SDKROOT = iphoneos;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
+				WARNING_CFLAGS = "-w";
+			};
+			name = AdHoc;
+		};
+		7A3CA40D2087880C0098D698 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+				);
+				PRODUCT_NAME = "moai-ios-gamesparks";
+				SDKROOT = iphoneos;
+				STRIP_STYLE = debugging;
+				WARNING_CFLAGS = "-w";
+			};
+			name = Distribution;
+		};
 		7AB72C551FE93DCE001DC0B1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -6006,6 +6526,17 @@
 				7A37DF5620236D9E0015225A /* Release */,
 				7A37DF5720236D9E0015225A /* AdHoc */,
 				7A37DF5820236D9E0015225A /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		7A3CA4092087880C0098D698 /* Build configuration list for PBXNativeTarget "libmoai-ios-gamesparks" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A3CA40A2087880C0098D698 /* Debug */,
+				7A3CA40B2087880C0098D698 /* Release */,
+				7A3CA40C2087880C0098D698 /* AdHoc */,
+				7A3CA40D2087880C0098D698 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
