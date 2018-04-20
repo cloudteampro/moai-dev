@@ -46,6 +46,10 @@ void AKUModulesAndroidAppFinalize () {
 	#if AKU_WITH_ANDROID_FYBER
 		AKUAndroidFyberAppFinalize ();
 	#endif
+
+	#if AKU_WITH_ANDROID_GAMESPARKS
+		AKUAndroidGameSparksAppFinalize ();
+	#endif
 	
 	#if AKU_WITH_ANDROID_GOOGLE_ANALYTICS
 		AKUAndroidGoogleAnalyticsAppFinalize ();
@@ -118,6 +122,10 @@ void AKUModulesAndroidAppInitialize () {
 	#if AKU_WITH_ANDROID_FYBER
 		AKUAndroidFyberAppInitialize ();
 	#endif
+
+	#if AKU_WITH_ANDROID_GAMESPARKS
+		AKUAndroidGameSparksAppInitialize ();
+	#endif
 	
 	#if AKU_WITH_ANDROID_GOOGLE_ANALYTICS
 		AKUAndroidGoogleAnalyticsAppInitialize ();
@@ -189,6 +197,10 @@ void AKUModulesAndroidContextInitialize () {
 
 	#if AKU_WITH_ANDROID_FYBER
 		AKUAndroidFyberContextInitialize ();
+	#endif
+
+	#if AKU_WITH_ANDROID_GAMESPARKS
+		AKUAndroidGameSparksContextInitialize ();
 	#endif
 	
 	#if AKU_WITH_ANDROID_GOOGLE_ANALYTICS

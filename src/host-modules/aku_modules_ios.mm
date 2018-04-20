@@ -56,6 +56,10 @@ void AKUModulesIosAppFinalize () {
 	#if AKU_WITH_IOS_GAMECENTER
 		AKUIosGameCenterAppFinalize ();
 	#endif
+
+	#if AKU_WITH_IOS_GAMESPARKS
+		AKUIosGameSparksAppFinalize ();
+	#endif
 	
 	#if AKU_WITH_IOS_KONTAGENT
 		AKUIosKontagentAppFinalize ();
@@ -135,6 +139,10 @@ void AKUModulesIosAppInitialize () {
 
 	#if AKU_WITH_IOS_GAMECENTER
 		AKUIosGameCenterAppInitialize ();
+	#endif
+
+	#if AKU_WITH_IOS_GAMESPARKS
+		AKUIosGameSparksAppInitialize ();
 	#endif
 
 	#if AKU_WITH_IOS_KONTAGENT
@@ -276,6 +284,10 @@ void AKUModulesIosContextInitialize () {
 
 	#if AKU_WITH_IOS_GAMECENTER
 		AKUIosGameCenterContextInitialize ();
+	#endif
+
+	#if AKU_WITH_IOS_GAMESPARKS
+		AKUIosGameSparksContextInitialize ();
 	#endif
 	
 	#if AKU_WITH_IOS_KONTAGENT

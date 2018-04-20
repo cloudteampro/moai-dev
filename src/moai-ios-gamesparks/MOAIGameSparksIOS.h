@@ -20,12 +20,25 @@ class MOAIGameSparksIOS :
 private:
 
 	static int		_init							( lua_State* L );
+	static int		_connect						( lua_State* L );
+	static int		_connectFB						( lua_State* L );
+	static int		_getAccountDetails				( lua_State* L );
 
 public:
 
 	DECL_LUA_SINGLETON ( MOAIGameSparksIOS );
 
+	enum {
+		ON_AVAILABILITY,
+		ON_GET_ACCOUNT_DETAILS,
+		ON_FB_CONNECT_SUCCESS,
+		ON_FB_CONNECT_FAIL,
+	};
+
 	//----------------------------------------------------------------//
+	void			AvailabilityResponse			( int available );
+	void			FBConnectSuccessResponse		( NSString *displayName, NSString *userId, int isnew );
+	void			FBConnectFailResponse			( NSString *error );
 					MOAIGameSparksIOS				();
 					~MOAIGameSparksIOS				();
 	void			RegisterLuaClass				( MOAILuaState& state );
