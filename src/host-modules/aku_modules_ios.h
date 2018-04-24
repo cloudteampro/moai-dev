@@ -51,6 +51,10 @@
 	#include <moai-ios-gamecenter/host.h>
 #endif
 
+#if AKU_WITH_IOS_GAMESPARKS
+	#include <moai-ios-gamesparks/host.h>
+#endif
+
 #if AKU_WITH_IOS_KONTAGENT
 	#include <moai-ios-kontagent/host.h>
 #endif
