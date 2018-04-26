@@ -26,7 +26,7 @@
 	#endif
 
 	#ifndef AKU_WITH_FMOD_STUDIO
-		#define AKU_WITH_FMOD_STUDIO 0
+		#define AKU_WITH_FMOD_STUDIO 1
 	#endif
 
 	#ifndef AKU_WITH_HARNESS
@@ -78,11 +78,11 @@
 	#endif
 
 	#ifndef AKU_WITH_SPINE_V3
-		#define AKU_WITH_SPINE_V3 0
+		#define AKU_WITH_SPINE_V3 1
 	#endif
 
 	#ifndef AKU_WITH_UNTZ
-		#define AKU_WITH_UNTZ 1
+		#define AKU_WITH_UNTZ 0
 	#endif
 
 	#ifndef AKU_WITH_UTIL
