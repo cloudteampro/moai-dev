@@ -83,6 +83,10 @@
 	#include <moai-ios-urban-airship/host.h>
 #endif
 
+#if AKU_WITH_IOS_UNITYADS
+	#include <moai-ios-unityads/host.h>
+#endif
+
 #if AKU_WITH_IOS_VUNGLE
 	#include <moai-ios-vungle/host.h>
 #endif

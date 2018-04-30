@@ -73,6 +73,10 @@
 		#define AKU_WITH_IOS_TAPJOY 0
 	#endif
 
+	#ifndef AKU_WITH_IOS_UNITYADS
+		#define AKU_WITH_IOS_UNITYADS 1
+	#endif
+
 	#ifndef AKU_WITH_IOS_URBAN_AIRSHIP
 		#define AKU_WITH_IOS_URBAN_AIRSHIP 0
 	#endif

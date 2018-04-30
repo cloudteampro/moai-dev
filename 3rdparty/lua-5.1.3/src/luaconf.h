@@ -116,6 +116,26 @@
 #define LUA_DIRSEP	"/"
 #endif
 
+/*
+** A quick fix is to add this to luaconf.h:
+** iOS has never actually allowed system() or any external process
+** creation. (Apple's own NSTask was always absent from the SDK.) Up
+** until now, system() could be linked, but nobody ever dared called it.
+** Many companies would already remove it to completely avoid the
+** possibility of Apple rejecting their apps.
+** And in fact, Android is pretty much the same way. Their engineers say,
+** "Don't ever do that." The Android process and life-cycle model is
+** completely alien to this model.
+*/
+#if defined(__APPLE__)
+     #include "TargetConditionals.h"
+     #if TARGET_OS_IOS || TARGET_OS_WATCH || TARGET_OS_TV
+         #define system(s) ((s)==NULL ? 0 : -1)
+     #endif // end iOS
+#elif defined(__ANDROID__)
+     #define system(s) ((s)==NULL ? 0 : -1)
+
+#endif
 
 /*
 @@ LUA_PATHSEP is the character that separates templates in a path.
