@@ -15,14 +15,27 @@
 //================================================================//
 // MOAIGameSparksIOS
 //================================================================//
+/**	@lua	MOAIGameSparksAndroid
+	@text	Wrapper for GameSparks integration on Android devices.
+			GameSparks - BaaS(backend-as-a-service) – platform with
+			cloud storage and API. 
+			Exposed to Lua via MOAIGameSparks on all mobile platforms.
+
+	@const	ON_AVAILABILITY
+	@const	ON_GET_ACCOUNT_DETAILS
+	@const	ON_FB_CONNECT_SUCCESS
+	@const	ON_FB_CONNECT_FAIL
+	@const	ON_REGISTRATION
+*/
 class MOAIGameSparksIOS :
 	public MOAIGlobalClass < MOAIGameSparksIOS, MOAIGlobalEventSource > {
 private:
 
-	static int		_init							( lua_State* L );
-	static int		_connect						( lua_State* L );
-	static int		_connectFB						( lua_State* L );
-	static int		_getAccountDetails				( lua_State* L );
+	static int	_connect						( lua_State* L );
+	static int	_connectFB						( lua_State* L );
+	static int	_getAccountDetails				( lua_State* L );
+	static int	_init							( lua_State* L );
+	static int	_login							( lua_State* L );
 
 public:
 
@@ -30,18 +43,22 @@ public:
 
 	enum {
 		ON_AVAILABILITY,
-		ON_GET_ACCOUNT_DETAILS,
 		ON_FB_CONNECT_SUCCESS,
 		ON_FB_CONNECT_FAIL,
+		ON_GET_ACCOUNT_DETAILS,
+		ON_REGISTRATION,
 	};
 
 	//----------------------------------------------------------------//
-	void			AvailabilityResponse			( int available );
-	void			FBConnectSuccessResponse		( NSString *displayName, NSString *userId, int isnew );
-	void			FBConnectFailResponse			( NSString *error );
-					MOAIGameSparksIOS				();
-					~MOAIGameSparksIOS				();
-	void			RegisterLuaClass				( MOAILuaState& state );
+	void	AccountDetailsResponse			();
+	void	AvailabilityResponse			( int available );
+	void	FBConnectSuccessResponse		( NSString *displayName, NSString *userId, bool isNew );
+	void	FBConnectFailResponse			( NSString *error );
+			MOAIGameSparksIOS				();
+			~MOAIGameSparksIOS				();
+	void	RegistrationResponse			( cc8* *authToken, cc8* *displayName, bool newPlayer, cc8* *userId );
+	void	RegisterLuaClass				( MOAILuaState& state );
 };
 
 #endif  //MOAIGAMESPARKSIOS_H
+

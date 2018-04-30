@@ -60,12 +60,20 @@ int MOAIGameSparksIOS::_init ( lua_State* L ) {
 
 //----------------------------------------------------------------//
 /**	@lua	connect
-	@text	Create gamesparks registration
+	@text	Provides authentication using 
+			a username/password combination.
+
+			The username will have been previously 
+			created using a RegistrationRequest.
 	
-	@in 	
+	@in 	string	username
+	@in 	string	password
 	@out 	nil
 */
 int MOAIGameSparksIOS::_connect ( lua_State* L ) {
+
+	MOAIJString username = self->GetJString ( lua_tostring ( state, 1 ));
+	MOAIJString password = self->GetJString ( lua_tostring ( state, 2 ));
 
 	// GSRegistrationRequest* request = [[GSRegistrationRequest alloc] init];
 	// [request setDisplayName:displayName;]
@@ -108,7 +116,7 @@ int MOAIGameSparksIOS::_connectFB ( lua_State* L ) {
 	// [request setSyncDisplayName:syncDisplayName];
 	[request setCallback:^ (GSAuthenticationResponse* response) {
 		if ([response getUserId]) {
-			MOAIGameSparksIOS::Get ().FBConnectSuccessResponse ( [response getDisplayName], [response getUserId], ( int ) [response getNewPlayer] );
+			MOAIGameSparksIOS::Get ().FBConnectSuccessResponse ( [response getDisplayName], [response getUserId], ( bool ) [response getNewPlayer] );
 		}
 		else {
 			// todo: fix get error from responce
@@ -179,7 +187,7 @@ void MOAIGameSparksIOS::AvailabilityResponse ( int available ) {
 }
 
 //----------------------------------------------------------------//
-void MOAIGameSparksIOS::FBConnectSuccessResponse ( NSString *displayName, NSString *userId, int isnew ) {
+void MOAIGameSparksIOS::FBConnectSuccessResponse ( NSString *displayName, NSString *userId, bool isNew ) {
 
 	if ( !MOAILuaRuntime::IsValid ()) return;
 	
@@ -189,7 +197,7 @@ void MOAIGameSparksIOS::FBConnectSuccessResponse ( NSString *displayName, NSStri
 		
 		OBJC_TO_LUA ( displayName, state );
 		OBJC_TO_LUA ( userId, state );
-		state.Push ( isnew );
+		state.Push ( isNew );
 		state.DebugCall ( 3, 0 );
 	}
 }
@@ -228,8 +236,6 @@ void MOAIGameSparksIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "ON_FB_CONNECT_FAIL",		( u32 )ON_FB_CONNECT_FAIL );
 
 	luaL_Reg regTable [] = {
-		
-		
 		{ "connect",				_connect },
 		{ "connectFB",				_connectFB },
 		{ "getAccountDetails",		_getAccountDetails },
@@ -241,3 +247,4 @@ void MOAIGameSparksIOS::RegisterLuaClass ( MOAILuaState& state ) {
 
 	luaL_register ( state, 0, regTable );
 }
+

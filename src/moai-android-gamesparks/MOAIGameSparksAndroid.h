@@ -10,24 +10,58 @@
 //================================================================//
 // MOAIGameSparksAndroid
 //================================================================//
+/**	@lua	MOAIGameSparksAndroid
+	@text	Wrapper for GameSparks integration on Android devices.
+			GameSparks - BaaS(backend-as-a-service) – platform with
+			cloud storage and API. 
+			Exposed to Lua via MOAIGameSparks on all mobile platforms.
+
+	@const	ON_AVAILABILITY
+	@const	ON_GET_ACCOUNT_DETAILS
+	@const	ON_FB_CONNECT_SUCCESS
+	@const	ON_FB_CONNECT_FAIL
+	@const	ON_REGISTRATION
+*/
 class MOAIGameSparksAndroid :
 	public MOAIGlobalClass < MOAIGameSparksAndroid, MOAIGlobalEventSource >,
 	public JniUtils {
 private:
 
-		jmethodID	mJava_Init;
+	jmethodID	mJava_Connect;
+	jmethodID	mJava_ConnectFB;
+	jmethodID	mJava_GetAccountDetails;
+	jmethodID	mJava_Init;
+	jmethodID	mJava_Login;
 
-		//----------------------------------------------------------------//
-		static int	_init	 						( lua_State* L );
+	//----------------------------------------------------------------//
+	static int	_connect						( lua_State* L );
+	static int	_connectFB						( lua_State* L );
+	static int	_getAccountDetails				( lua_State* L );
+	static int	_init	 						( lua_State* L );
+	static int	_login							( lua_State* L );
 
 public:
 
-		DECL_LUA_SINGLETON ( MOAIGameSparksAndroid );
+	DECL_LUA_SINGLETON ( MOAIGameSparksAndroid );
 
-		//----------------------------------------------------------------//
-						MOAIGameSparksAndroid			();
-						~MOAIGameSparksAndroid			();
-		void			RegisterLuaClass				( MOAILuaState& state );
+	enum {
+		ON_AVAILABILITY,
+		ON_FB_CONNECT_SUCCESS,
+		ON_FB_CONNECT_FAIL,
+		ON_GET_ACCOUNT_DETAILS,
+		ON_REGISTRATION,
+	};
+
+	//----------------------------------------------------------------//
+			MOAIGameSparksAndroid			();
+			~MOAIGameSparksAndroid			();
+	void	AccountDetailsResponse			();
+	void	AvailabilityResponse			( bool available );
+	void	FBConnectSuccessResponse		( cc8* *displayName, cc8* *userId, bool isNew );
+	void	FBConnectFailResponse			( cc8* *error );
+	void	RegistrationResponse			( cc8* *authToken, cc8* *displayName, bool newPlayer, cc8* *userId );
+	void	RegisterLuaClass				( MOAILuaState& state );
 };
 
 #endif  //MOAIGAMESPARKSANDROID_H
+
