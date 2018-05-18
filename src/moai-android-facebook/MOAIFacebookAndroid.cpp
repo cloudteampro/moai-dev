@@ -16,6 +16,28 @@ extern JavaVM* jvm;
 //================================================================//
 
 //----------------------------------------------------------------//
+/**	@lua	getToken
+	@text	Access token.
+				
+	@out 	string	accessToken
+*/
+int MOAIFacebookAndroid::_getToken ( lua_State* L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIFacebookAndroid, "" )
+	
+	JNI_GET_ENV ( jvm, env );
+		
+    jstring jaccessToken = ( jstring )self->CallStaticObjectMethod ( self->mJava_GetToken );	
+
+	JNI_GET_CSTRING ( jaccessToken, accessToken );
+
+	lua_pushstring ( state, accessToken );
+
+	JNI_RELEASE_CSTRING ( jaccessToken, accessToken );
+
+	return 1;
+}
+
+//----------------------------------------------------------------//
 /**	@lua	graphRequest
 	@text	Make a request on Facebook's Graph API
 
@@ -457,7 +479,7 @@ MOAIFacebookAndroid::MOAIFacebookAndroid () {
 	// this->mJava_DeclinedPermissions			= this->GetStaticMethod ( "declinedPermissions", "()" );
 	// this->mJava_GetExpirationDate			= this->GetStaticMethod ( "getExpirationDate", "()" );
 	// this->mJava_GetProfile					= this->GetStaticMethod ( "getProfile", "()" );
-	// this->mJava_GetToken					= this->GetStaticMethod ( "getToken", "()" );
+	this->mJava_GetToken					= this->GetStaticMethod ( "getToken", "()Ljava/lang/String;" );
 	this->mJava_GraphRequest				= this->GetStaticMethod ( "graphRequest", "(Ljava/lang/String;Ljava/lang/String;Landroid/os/Bundle;I)V" );
 	this->mJava_HasGranted					= this->GetStaticMethod ( "hasGranted", "(Ljava/lang/String;)Z" );
 	this->mJava_Init						= this->GetStaticMethod ( "init", "(Ljava/lang/String;)V" );
@@ -544,6 +566,7 @@ void MOAIFacebookAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 
 	luaL_Reg regTable [] = {
 		{ "getListener",				&MOAIGlobalEventSource::_getListener < MOAIFacebookAndroid > },
+		{ "getToken",					_getToken },
 		{ "graphRequest",				_graphRequest },
 		{ "hasGranted",					_hasGranted },
 		{ "init",						_init },

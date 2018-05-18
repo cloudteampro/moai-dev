@@ -46,7 +46,7 @@
 	#endif
 	
 	#ifndef AKU_WITH_IOS_GAMESPARKS
-		#define AKU_WITH_IOS_GAMESPARKS 0
+		#define AKU_WITH_IOS_GAMESPARKS 1
 	#endif
 
 	#ifndef AKU_WITH_IOS_MIXPANEL

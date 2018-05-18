@@ -21,43 +21,70 @@
 			cloud storage and API. 
 			Exposed to Lua via MOAIGameSparks on all mobile platforms.
 
+	@const	ON_AUTHENTICATE_FAIL
+	@const	ON_AUTHENTICATE_SUCCESS
 	@const	ON_AVAILABILITY
-	@const	ON_GET_ACCOUNT_DETAILS
-	@const	ON_FB_CONNECT_SUCCESS
-	@const	ON_FB_CONNECT_FAIL
-	@const	ON_REGISTRATION
+	@const	ON_BUY_VIRTUAL_GOOD_FAIL
+	@const	ON_BUY_VIRTUAL_GOOD_SUCCESS
+	@const	ON_FACEBOOK_CONNECT_FAIL
+	@const	ON_FACEBOOK_CONNECT_SUCCESS
+	@const	ON_GET_ACCOUNT_DETAILS_FAIL
+	@const	ON_GET_ACCOUNT_DETAILS_SUCCESS
+	@const	ON_LOG_EVENT_FAIL
+	@const	ON_LOG_EVENT_SUCCESS
+	@const	ON_REGISTRATION_FAIL
+	@const	ON_REGISTRATION_SUCCESS
 */
 class MOAIGameSparksIOS :
 	public MOAIGlobalClass < MOAIGameSparksIOS, MOAIGlobalEventSource > {
 private:
 
-	static int	_connect						( lua_State* L );
-	static int	_connectFB						( lua_State* L );
-	static int	_getAccountDetails				( lua_State* L );
-	static int	_init							( lua_State* L );
-	static int	_login							( lua_State* L );
+	//----------------------------------------------------------------//
+	static int	_init	 					( lua_State* L );
+	static int	_requestAccountDetails		( lua_State* L );
+	static int	_requestAuthentication		( lua_State* L );
+	static int	_requestBuyGoods			( lua_State* L );
+	static int	_requestFacebookConnect		( lua_State* L );
+	static int	_requestLogEvent			( lua_State* L );
+	static int	_requestRegistration		( lua_State* L );
 
 public:
 
 	DECL_LUA_SINGLETON ( MOAIGameSparksIOS );
 
 	enum {
+        ON_AUTHENTICATE_FAIL,
+        ON_AUTHENTICATE_SUCCESS,
 		ON_AVAILABILITY,
-		ON_FB_CONNECT_SUCCESS,
-		ON_FB_CONNECT_FAIL,
-		ON_GET_ACCOUNT_DETAILS,
-		ON_REGISTRATION,
+		ON_BUY_VIRTUAL_GOOD_FAIL,
+		ON_BUY_VIRTUAL_GOOD_SUCCESS,
+		ON_FACEBOOK_CONNECT_FAIL,
+		ON_FACEBOOK_CONNECT_SUCCESS,
+        ON_GET_ACCOUNT_DETAILS_FAIL,
+		ON_GET_ACCOUNT_DETAILS_SUCCESS,
+		ON_LOG_EVENT_FAIL,
+        ON_LOG_EVENT_SUCCESS,
+        ON_REGISTRATION_FAIL,
+		ON_REGISTRATION_SUCCESS
 	};
 
 	//----------------------------------------------------------------//
-	void	AccountDetailsResponse			();
-	void	AvailabilityResponse			( int available );
-	void	FBConnectSuccessResponse		( NSString *displayName, NSString *userId, bool isNew );
-	void	FBConnectFailResponse			( NSString *error );
+	void	AuthenticationFailResponse		( NSString *error );
+	void	AuthenticationSuccessResponse	( NSString *authToken, NSString *displayName, bool newPlayer, NSString *userId );
+	void	AvailabilityResponse			( bool available );
+	void	AccountDetailsFailResponse		( NSString *error );
+	void	AccountDetailsSuccessResponse	( NSString *displayName, NSString *userId );
+	void	BuyVirtualGoodFailResponse		( NSString *error );
+	void	BuyVirtualGoodSuccessResponse	( NSString *boughtItems );
+	void	FacebookConnectFailResponse		( NSString *accessToken, NSString *code, NSString *authentication );
+	void	FacebookConnectSuccessResponse	( NSString *authToken, NSString *displayName, bool newPlayer, NSString *userId );
+	void	LogEventFailResponse			( NSString *error );
+	void	LogEventSuccessResponse			( NSString *eventKey, NSMutableDictionary* attributes, GSLogEventResponse* request );
 			MOAIGameSparksIOS				();
 			~MOAIGameSparksIOS				();
-	void	RegistrationResponse			( cc8* *authToken, cc8* *displayName, bool newPlayer, cc8* *userId );
 	void	RegisterLuaClass				( MOAILuaState& state );
+	void	RegistrationFailResponse		( NSString *error );
+	void	RegistrationSuccessResponse		( NSString *authToken, NSString *displayName, bool newPlayer, NSString *userId );
 };
 
 #endif  //MOAIGAMESPARKSIOS_H

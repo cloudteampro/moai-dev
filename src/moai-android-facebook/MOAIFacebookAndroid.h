@@ -32,6 +32,7 @@ private:
 
 	jclass					mJava_AppEventsConstants;
 
+	jmethodID 				mJava_GetToken;
 	jmethodID 				mJava_GraphRequest;
 	jmethodID 				mJava_HasGranted;
 	jmethodID 				mJava_Init;
@@ -51,7 +52,7 @@ private:
 	// static int		_declinedPermissions		( lua_State* L );
 	// static int		_getExpirationDate			( lua_State* L );
 	// static int		_getProfile					( lua_State* L );
-	// static int		_getToken					( lua_State* L );
+	static int		_getToken					( lua_State* L );
 	static int		_graphRequest				( lua_State* L );
 	static int		_hasGranted					( lua_State* L );
 	static int		_init						( lua_State* L );

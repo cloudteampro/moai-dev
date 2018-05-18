@@ -11,63 +11,6 @@
 // lua
 //================================================================//
 
-displayName	Yes	string	A display name to use
-password	Yes	string	The previously registered password
-segments	No	JSON	An optional segment configuration for this request.
-userName	Yes	string	The previously registered player name
-
-//----------------------------------------------------------------//
-/**	@lua	connect
-	@text	Connect.
-				
-	@in 	string	username
-	@in 	string	password
-	@out 	nil
-*/
-int	MOAIGameSparksAndroid::_connect ( lua_State* L ) {
-	MOAI_JAVA_LUA_SETUP ( MOAIGameSparksAndroid, "" )
-
-	MOAIJString username = self->GetJString ( lua_tostring ( state, 1 ));
-	MOAIJString password = self->GetJString ( lua_tostring ( state, 2 ));
-
-	self->CallStaticVoidMethod ( self->mJava_Connect, ( jstring )username, ( jstring )password );
-	return 0;
-}
-
-authToken	string	44b297a8-162a-4220-8c14-dad9a1946ad2
-displayName	string	The player's display name
-newPlayer	boolean	Indicates whether the player was created as part of this request
-userId	string	The player's id
-
-//----------------------------------------------------------------//
-/**	@lua	connectFB
-	@text	Connect with Facebook.
-				
-	@in 	string	token
-	@out 	nil
-*/
-int	MOAIGameSparksAndroid::_connectFB ( lua_State* L ) {
-	MOAI_JAVA_LUA_SETUP ( MOAIGameSparksAndroid, "" )
-
-	MOAIJString token = self->GetJString ( lua_tostring ( state, 1 ));
-
-	self->CallStaticVoidMethod ( self->mJava_ConnectFB, ( jstring )token );
-	return 0;
-}
-
-//----------------------------------------------------------------//
-/**	@lua	getAccountDetails
-	@text	Request account details.
-				
-	@out 	nil
-*/
-int	MOAIGameSparksAndroid::_getAccountDetails ( lua_State* L ) {
-	MOAI_JAVA_LUA_SETUP ( MOAIGameSparksAndroid, "" )
-
-	self->CallStaticVoidMethod ( self->mJava_GetAccountDetails );
-	return 0;
-}
-
 //----------------------------------------------------------------//
 /**	@lua	init
 	@text	Initialize GameSparks.
@@ -75,6 +18,8 @@ int	MOAIGameSparksAndroid::_getAccountDetails ( lua_State* L ) {
 	@in 	string	apiKey
 	@in 	string	apiSecret
 	@in 	string	credential
+	@in 	boolean	liveMode
+	@in 	boolean	autoUpdate
 	@out 	nil
 */
 int	MOAIGameSparksAndroid::_init ( lua_State* L ) {
@@ -83,27 +28,169 @@ int	MOAIGameSparksAndroid::_init ( lua_State* L ) {
 	MOAIJString japiKey	= self->GetJString ( state.GetValue < cc8* >( 1, 0 ));
 	MOAIJString japiSecret	= self->GetJString ( state.GetValue < cc8* >( 2, 0 ));
 	MOAIJString jcredential	= self->GetJString ( state.GetValue < cc8* >( 3, 0 ));
+	bool liveMode = state.GetValue < bool >( 4, false );
+	bool autoUpdate = state.GetValue < bool >( 5, false );
 
-	self->CallStaticVoidMethod ( self->mJava_Init, ( jstring )japiKey, ( jstring )japiSecret, ( jstring )jcredential );
+	self->CallStaticVoidMethod ( self->mJava_Init, ( jstring )japiKey, ( jstring )japiSecret, ( jstring )jcredential, liveMode, autoUpdate );
 	return 0;
 }
 
+//----------------------------------------------------------------//
+/**	@lua	requestAccountDetails
+	@text	Request account details.
+				
+	@out 	nil
+*/
+int	MOAIGameSparksAndroid::_requestAccountDetails ( lua_State* L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIGameSparksAndroid, "" )
+
+	self->CallStaticVoidMethod ( self->mJava_RequestAccountDetails );
+	return 0;
+}
+
+//----------------------------------------------------------------//
+/**	@lua	requestAuthentication
+	@text	Request authentication.
+				
+	@in 	string	password		The previously registered password
+	@in 	string	username 		The previously registered player name
+	@out 	nil
+*/
+int	MOAIGameSparksAndroid::_requestAuthentication ( lua_State* L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIGameSparksAndroid, "" )
+
+	MOAIJString username = self->GetJString ( lua_tostring ( state, 1 ));
+	MOAIJString password = self->GetJString ( lua_tostring ( state, 2 ));
+
+	self->CallStaticVoidMethod ( self->mJava_RequestAuthentication, ( jstring )username, ( jstring )password );
+	return 0;
+}
+
+//----------------------------------------------------------------//
+/**	@lua	requestBuyGoods
+	@text	Request validate purchase.
+				
+	@opt 	string	currencyCode				The ISO 4217 currency code representing the real-world currency used for this transaction.
+	@in 	string	signature 					The value obtained from data.getStringExtra("INAPP_DATA_SIGNATURE");
+	@in 	string	signedData					The value obtained from data.getStringExtra("INAPP_PURCHASE_DATA")
+	@opt 	int		subUnitPrice 				The price of this purchase
+	@opt 	boolean	uniqueTransactionByPlayer 	boolean	If set to true, the transactionId from this receipt will not be 
+												globally valdidated, this will mean replays between players are possible.
+	@out 	nil
+*/
+int	MOAIGameSparksAndroid::_requestBuyGoods ( lua_State* L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIGameSparksAndroid, "" )
+
+	MOAIJString signature = self->GetJString ( lua_tostring ( state, 1 ));
+	MOAIJString signedData = self->GetJString ( lua_tostring ( state, 2 ));
+
+	self->CallStaticVoidMethod ( self->mJava_RequestBuyGoods, ( jstring )signature, ( jstring )signedData );
+}
+
+//----------------------------------------------------------------//
+/**	@lua	requestFacebookConnect
+	@text	Connect with Facebook.
+				
+	@in 	string	accessToken 				The access token is used by the client to 
+												make authenticated requests on behalf of the end user.
+	@opt 	string	code 						An authorization code is a short-lived token representing the user's access grant, 
+												created by the authorization server and passed to the client application via the browser.
+	@opt 	boolean	doNotLinkToCurrentPlayer	Indicates that the server should not try to link the external profile with the current player. 
+												If false, links the external profile to the currently signed in player. 
+												If true, creates a new player and links the external profile to them. Defaults to false.
+	@opt 	boolean	errorOnSwitch				Indicates whether the server should return an error if an account switch would have occurred, 
+												rather than switching automatically. Defaults to false.
+	@opt 	JSON	segments					An optional segment configuration for this request.
+	@opt 	boolean	switchIfPossible			Indicates that the server should switch to the supplied profile 
+												if it isalready associated to a player. Defaults to false.
+	@opt 	boolean	syncDisplayName				Indicates that the associated players displayName should be kept 
+												in syn with this profile when it's updated by the external provider.
+	@out 	nil
+*/
+int	MOAIGameSparksAndroid::_requestFacebookConnect ( lua_State* L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIGameSparksAndroid, "" )
+
+	MOAIJString accessToken = self->GetJString ( lua_tostring ( state, 1 ));
+
+	self->CallStaticVoidMethod ( self->mJava_RequestFacebookConnect, ( jstring )accessToken );
+	return 0;
+}
+
+//----------------------------------------------------------------//
+/**	@lua	requestLogEvent
+	@text	Request log event.
+				
+	@in 	string	eventKey		Event key
+	@in 	array	userName 		The previously registered player name
+	@out 	nil
+*/
+int	MOAIGameSparksAndroid::_requestLogEvent ( lua_State* L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIGameSparksAndroid, "" )
+
+	MOAIJString eventKey = self->GetJString ( lua_tostring ( state, 1 ));
+	jobject jbundle = NULL;
+
+	if ( state.IsType ( 2, LUA_TTABLE ) ) {
+		jbundle = self->BundleFromLua( L, 2 );
+	}
+
+	self->CallStaticVoidMethod ( self->mJava_RequestAuthentication, ( jstring )eventKey, jbundle );
+	return 0;
+}
+
+//----------------------------------------------------------------//
+/**	@lua	requestRegistration
+	@text	Request Registration.
+				
+	@in 	string	displayName		A display name to use
+	@in 	string	password		The previously registered password
+	@opt 	JSON	segments		An optional segment configuration for this request.
+	@in 	string	userName 		The previously registered player name
+	@out 	nil
+*/
+int	MOAIGameSparksAndroid::_requestRegistration ( lua_State* L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIGameSparksAndroid, "" )
+
+	MOAIJString displayName = self->GetJString ( lua_tostring ( state, 1 ));
+	MOAIJString password = self->GetJString ( lua_tostring ( state, 2 ));
+	MOAIJString userName = self->GetJString ( lua_tostring ( state, 3 ));
+
+	self->CallStaticVoidMethod ( self->mJava_RequestRegistration, ( jstring )displayName, ( jstring )password, ( jstring )userName );
+	return 0;
+}
 
 //================================================================//
 // MOAIGameSparksAndroid
 //================================================================//
 
 //----------------------------------------------------------------//
-void MOAIGameSparksAndroid::AccountDetailsResponse () {
+void MOAIGameSparksAndroid::AuthenticationFailResponse ( cc8* error ) {
+
+	if ( !MOAILuaRuntime::IsValid ()) return;
+
+	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
+	
+	if ( this->PushListener ( ON_AUTHENTICATE_FAIL, state )) {
+		
+		state.Push ( error );
+		state.DebugCall ( 1, 0 );
+	}
+}
+
+//----------------------------------------------------------------//
+void MOAIGameSparksAndroid::AuthenticationSuccessResponse ( cc8* authToken, cc8* displayName, bool newPlayer, cc8* userId ) {
 
 	if ( !MOAILuaRuntime::IsValid ()) return;
 
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 
-	if ( this->PushListener ( ON_GET_ACCOUNT_DETAILS, state )) {
+	if ( this->PushListener ( ON_AUTHENTICATE_SUCCESS, state )) {
 
-		state.Push ( result );
-		state.DebugCall ( 1, 0 );
+		state.Push ( authToken );
+		state.Push ( displayName );
+		state.Push ( newPlayer );
+		state.Push ( userId );
+		state.DebugCall ( 4, 0 );
 	}
 }
 
@@ -116,38 +203,127 @@ void MOAIGameSparksAndroid::AvailabilityResponse ( bool available ) {
 
 	if ( this->PushListener ( ON_AVAILABILITY, state )) {
 
-		state.Push ( result );
+		state.Push ( available );
 		state.DebugCall ( 1, 0 );
 	}
 }
 
 //----------------------------------------------------------------//
-void MOAIGameSparksAndroid::FBConnectSuccessResponse ( cc8* *displayName, cc8* *userId, bool isNew ) {
-	
+void MOAIGameSparksAndroid::AccountDetailsFailResponse ( cc8* error ) {
+
 	if ( !MOAILuaRuntime::IsValid ()) return;
-	
+
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 	
-	if ( this->PushListener ( ON_FB_CONNECT_SUCCESS, state )) {
+	if ( this->PushListener ( ON_GET_ACCOUNT_DETAILS_FAIL, state )) {
+		
+		state.Push ( error );
+		state.DebugCall ( 1, 0 );
+	}
+}
+
+//----------------------------------------------------------------//
+void MOAIGameSparksAndroid::AccountDetailsSuccessResponse ( cc8* displayName, cc8* userId ) {
+
+	if ( !MOAILuaRuntime::IsValid ()) return;
+
+	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
+
+	if ( this->PushListener ( ON_GET_ACCOUNT_DETAILS_SUCCESS, state )) {
 
 		state.Push ( displayName );
 		state.Push ( userId );
-		state.Push ( isNew );
+		state.DebugCall ( 2, 0 );
+	}
+}
+
+//----------------------------------------------------------------//
+void MOAIGameSparksAndroid::BuyVirtualGoodFailResponse ( cc8* error ) {
+
+	if ( !MOAILuaRuntime::IsValid ()) return;
+
+	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
+	
+	if ( this->PushListener ( ON_BUY_VIRTUAL_GOOD_FAIL, state )) {
+		
+		state.Push ( error );
+		state.DebugCall ( 1, 0 );
+	}
+}
+
+//----------------------------------------------------------------//
+void MOAIGameSparksAndroid::BuyVirtualGoodSuccessResponse ( cc8* boughtItems ) {
+
+	if ( !MOAILuaRuntime::IsValid ()) return;
+
+	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
+
+	if ( this->PushListener ( ON_BUY_VIRTUAL_GOOD_SUCCESS, state )) {
+
+		state.Push ( boughtItems );
+		state.DebugCall ( 1, 0 );
+	}
+}
+
+//----------------------------------------------------------------//
+void MOAIGameSparksAndroid::FacebookConnectFailResponse ( cc8* accessToken, cc8* code, cc8* authentication ) {
+
+	if ( !MOAILuaRuntime::IsValid ()) return;
+
+	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
+	
+	if ( this->PushListener ( ON_FACEBOOK_CONNECT_FAIL, state )) {
+		
+		state.Push ( accessToken );
+		state.Push ( code );
+		state.Push ( authentication );
 		state.DebugCall ( 3, 0 );
 	}
 }
 
 //----------------------------------------------------------------//
-void MOAIChartBoostAndroid::FBConnectFailResponse ( cc8* *error ) {
+void MOAIGameSparksAndroid::FacebookConnectSuccessResponse ( cc8* authToken, cc8* displayName, bool newPlayer, cc8* userId ) {
+	
+	if ( !MOAILuaRuntime::IsValid ()) return;
+	
+	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
+	
+	if ( this->PushListener ( ON_FACEBOOK_CONNECT_SUCCESS, state )) {
+
+		state.Push ( authToken );
+		state.Push ( displayName );
+		state.Push ( newPlayer );
+		state.Push ( userId );
+		state.DebugCall ( 4, 0 );
+	}
+}
+
+//----------------------------------------------------------------//
+void MOAIGameSparksAndroid::LogEventFailResponse ( cc8* error ) {
 
 	if ( !MOAILuaRuntime::IsValid ()) return;
 
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 	
-	if ( this->PushListener ( ON_FB_CONNECT_FAIL, state )) {
+	if ( this->PushListener ( ON_LOG_EVENT_FAIL, state )) {
 		
-		state.Push ( reward );
+		state.Push ( error );
 		state.DebugCall ( 1, 0 );
+	}
+}
+
+//----------------------------------------------------------------//
+void MOAIGameSparksAndroid::LogEventSuccessResponse ( cc8* eventKey, cc8* attributes ) {
+
+	if ( !MOAILuaRuntime::IsValid ()) return;
+
+	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
+
+	if ( this->PushListener ( ON_LOG_EVENT_SUCCESS, state )) {
+
+		state.Push ( eventKey );
+		this->JsonToLua ( state, attributes );
+		state.DebugCall ( 2, 0 );
 	}
 }
 
@@ -158,10 +334,13 @@ MOAIGameSparksAndroid::MOAIGameSparksAndroid () {
 	 
 	this->SetClass ( "com/moaisdk/gamesparks/MoaiGameSparks" );
 
-	this->mJava_Connect				= this->GetStaticMethod ( "connect", "(Ljava/lang/String;Ljava/lang/String;)V" );
-	this->mJava_ConnectFB			= this->GetStaticMethod ( "connectFB", "(Ljava/lang/String;)V" );
-	this->mJava_GetAccountDetails	= this->GetStaticMethod ( "getAccountDetails", "()V" );
-	this->mJava_Init				= this->GetStaticMethod ( "init", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V" );
+	this->mJava_Init						= this->GetStaticMethod ( "init", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ZZ)V" );
+	this->mJava_RequestAccountDetails		= this->GetStaticMethod ( "requestAccountDetails", "()V" );
+	this->mJava_RequestAuthentication		= this->GetStaticMethod ( "requestAuthentication", "(Ljava/lang/String;Ljava/lang/String;)V" );
+	this->mJava_RequestBuyGoods				= this->GetStaticMethod ( "requestBuyGoods", "(Ljava/lang/String;Ljava/lang/String;)V" );
+	this->mJava_RequestFacebookConnect		= this->GetStaticMethod ( "requestFacebookConnect", "(Ljava/lang/String;)V" );
+	this->mJava_RequestLogEvent				= this->GetStaticMethod ( "requestLogEvent", "(Ljava/lang/String;Landroid/os/Bundle;)V" );
+	this->mJava_RequestRegistration			= this->GetStaticMethod ( "requestRegistration", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V" );
 }
 
 //----------------------------------------------------------------//
@@ -171,53 +350,256 @@ MOAIGameSparksAndroid::~MOAIGameSparksAndroid () {
 //----------------------------------------------------------------//
 void MOAIGameSparksAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 
-	state.SetField ( -1, "ON_AVAILABILITY",			( u32 )ON_AVAILABILITY );
-	state.SetField ( -1, "ON_GET_ACCOUNT_DETAILS",	( u32 )ON_GET_ACCOUNT_DETAILS );
-	state.SetField ( -1, "ON_FB_CONNECT_SUCCESS",	( u32 )ON_FB_CONNECT_SUCCESS );
-	state.SetField ( -1, "ON_FB_CONNECT_FAIL",		( u32 )ON_FB_CONNECT_FAIL );
+	state.SetField ( -1, "ON_AUTHENTICATE_FAIL",			( u32 )ON_AUTHENTICATE_FAIL );
+	state.SetField ( -1, "ON_AUTHENTICATE_SUCCESS",			( u32 )ON_AUTHENTICATE_SUCCESS );
+	state.SetField ( -1, "ON_AVAILABILITY",					( u32 )ON_AVAILABILITY );
+	state.SetField ( -1, "ON_BUY_VIRTUAL_GOOD_FAIL",		( u32 )ON_BUY_VIRTUAL_GOOD_SUCCESS );
+	state.SetField ( -1, "ON_BUY_VIRTUAL_GOOD_SUCCESS",		( u32 )ON_BUY_VIRTUAL_GOOD_SUCCESS );
+	state.SetField ( -1, "ON_FACEBOOK_CONNECT_FAIL",		( u32 )ON_FACEBOOK_CONNECT_FAIL );
+	state.SetField ( -1, "ON_FACEBOOK_CONNECT_SUCCESS",		( u32 )ON_FACEBOOK_CONNECT_SUCCESS );
+	state.SetField ( -1, "ON_GET_ACCOUNT_DETAILS_FAIL",		( u32 )ON_GET_ACCOUNT_DETAILS_FAIL );
+	state.SetField ( -1, "ON_GET_ACCOUNT_DETAILS_SUCCESS",	( u32 )ON_GET_ACCOUNT_DETAILS_SUCCESS );
+	state.SetField ( -1, "ON_LOG_EVENT_FAIL",				( u32 )ON_LOG_EVENT_FAIL );
+	state.SetField ( -1, "ON_LOG_EVENT_SUCCESS",			( u32 )ON_LOG_EVENT_SUCCESS );
+	state.SetField ( -1, "ON_REGISTRATION_FAIL",			( u32 )ON_REGISTRATION_FAIL );
+	state.SetField ( -1, "ON_REGISTRATION_SUCCESS",			( u32 )ON_REGISTRATION_SUCCESS );
 
 	luaL_Reg regTable [] = {
-		{ "connect",				_connect },
-		{ "connectFB",				_connectFB },
-		{ "getAccountDetails",		_getAccountDetails },
-		{ "getListener",			&MOAIGlobalEventSource::_getListener < MOAIGameSparksAndroid > },
-		{ "init",					_init },
-		{ "setListener",			&MOAIGlobalEventSource::_setListener < MOAIGameSparksAndroid > },
+		{ "init",						_init },
+		{ "getListener",				&MOAIGlobalEventSource::_getListener < MOAIGameSparksAndroid > },
+		{ "requestAccountDetails",		_requestAccountDetails },
+		{ "requestAuthentication",		_requestAuthentication },
+		{ "requestBuyGoods",			_requestBuyGoods },
+		{ "requestFacebookConnect",		_requestFacebookConnect },
+		{ "requestLogEvent",			_requestLogEvent },
+		{ "requestRegistration",		_requestRegistration },
+		{ "setListener",				&MOAIGlobalEventSource::_setListener < MOAIGameSparksAndroid > },
 		{ NULL, NULL }
 	};
 
 	luaL_register ( state, 0, regTable );
 }
 
-//================================================================//
-// ChartBoost JNI methods
-//================================================================//
-
-	void	AvailabilityResponse			( bool available );
-	void	FBConnectSuccessResponse		( cc8* *displayName, cc8* *userId, bool isNew );
-	void	FBConnectFailResponse			( cc8* *error );
-	void	RegistrationResponse			( cc8* *authToken, cc8* *displayName, bool newPlayer, cc8* *userId );
-
-	protected static native void 		();
-	protected static native void AKUAvailabilityResponse 		( bool available );
-	protected static native void AKUFBConnectSuccessResponse	( String displayName, String userId, boolean isNew );
-	protected static native void AKUFBConnectFailResponse		( String error );
-	protected static native void AKURegistrationResponse		( String authToken, String displayName, boolean newPlayer, String userId );
-
 //----------------------------------------------------------------//
-extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_gamesparks_MoaiGameSparks_AKUAccountDetailsResponse ( JNIEnv* env, jclass obj ) {
+void MOAIGameSparksAndroid::RegistrationFailResponse ( cc8* error ) {
 
-	if ( MOAIChartBoostAndroid::IsValid ()) {
-		ZLLog::LogF ( 1, ZLLog::CONSOLE, "Java_com_moaisdk_gamesparks_MoaiGameSparks_AKUAccountDetailsResponse\n" );
-		MOAIChartBoostAndroid::Get ().NotifyRewardedVideoCompleted ( reward );
+	if ( !MOAILuaRuntime::IsValid ()) return;
+
+	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
+	
+	if ( this->PushListener ( ON_REGISTRATION_FAIL, state )) {
+		
+		state.Push ( error );
+		state.DebugCall ( 1, 0 );
 	}
 }
 
 //----------------------------------------------------------------//
-extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_gamesparks_MoaiChartBoost_AKURewardedVideoCompleted ( JNIEnv* env, jclass obj, jint reward ) {
+void MOAIGameSparksAndroid::RegistrationSuccessResponse ( cc8* authToken, cc8* displayName, bool newPlayer, cc8* userId ) {
 
-	if ( MOAIChartBoostAndroid::IsValid ()) {
-		MOAIChartBoostAndroid::Get ().NotifyRewardedVideoCompleted ( reward );
+	if ( !MOAILuaRuntime::IsValid ()) return;
+
+	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
+
+	if ( this->PushListener ( ON_REGISTRATION_SUCCESS, state )) {
+
+		state.Push ( authToken );
+		state.Push ( displayName );
+		state.Push ( newPlayer );
+		state.Push ( userId );
+		state.DebugCall ( 4, 0 );
+	}
+}
+
+//================================================================//
+// GameSparks JNI methods
+//================================================================//
+
+//----------------------------------------------------------------//
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_gamesparks_MoaiGameSparks_AKUAuthenticationFailResponse ( JNIEnv* env, jclass obj, jstring jerror ) {
+
+	if ( MOAIGameSparksAndroid::IsValid ()) {
+		ZLLog::LogF ( 1, ZLLog::CONSOLE, "Java_com_moaisdk_gamesparks_MoaiGameSparks_AKUAuthenticationFailResponse\n" );
+
+		JNI_GET_CSTRING ( jerror, error );
+		MOAIGameSparksAndroid::Get ().AuthenticationFailResponse ( error );
+		JNI_RELEASE_CSTRING ( jerror, error );
+	}
+}
+
+//----------------------------------------------------------------//
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_gamesparks_MoaiGameSparks_AKUAuthenticationSuccessResponse ( JNIEnv* env, jclass obj, jstring jauthToken, jstring jdisplayName, jboolean newPlayer, jstring juserId ) {
+
+	if ( MOAIGameSparksAndroid::IsValid ()) {
+		ZLLog::LogF ( 1, ZLLog::CONSOLE, "Java_com_moaisdk_gamesparks_MoaiGameSparks_AKUAuthenticationSuccessResponse\n" );
+
+		JNI_GET_CSTRING ( jauthToken, authToken );
+		JNI_GET_CSTRING ( jdisplayName, displayName );
+		JNI_GET_CSTRING ( juserId, userId );
+
+		MOAIGameSparksAndroid::Get ().AuthenticationSuccessResponse (  authToken, displayName, newPlayer, userId  );
+
+		JNI_RELEASE_CSTRING ( jauthToken, authToken );
+		JNI_RELEASE_CSTRING ( jdisplayName, displayName );
+		JNI_RELEASE_CSTRING ( juserId, userId );
+	}
+}
+
+//----------------------------------------------------------------//
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_gamesparks_MoaiGameSparks_AKUAvailabilityResponse ( JNIEnv* env, jclass obj, jboolean available ) {
+
+	if ( MOAIGameSparksAndroid::IsValid ()) {
+		ZLLog::LogF ( 1, ZLLog::CONSOLE, "Java_com_moaisdk_gamesparks_MoaiGameSparks_AKUAvailabilityResponse\n" );
+		MOAIGameSparksAndroid::Get ().AvailabilityResponse ( available );
+	}
+}
+
+//----------------------------------------------------------------//
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_gamesparks_MoaiGameSparks_AKUAccountDetailsFailResponse ( JNIEnv* env, jclass obj, jstring jerror ) {
+
+	if ( MOAIGameSparksAndroid::IsValid ()) {
+		ZLLog::LogF ( 1, ZLLog::CONSOLE, "Java_com_moaisdk_gamesparks_MoaiGameSparks_AKUAccountDetailsFailResponse\n" );
+
+		JNI_GET_CSTRING ( jerror, error );
+		MOAIGameSparksAndroid::Get ().AccountDetailsFailResponse ( error );
+		JNI_RELEASE_CSTRING ( jerror, error );
+	}
+}
+
+//----------------------------------------------------------------//
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_gamesparks_MoaiGameSparks_AKUAccountDetailsSuccessResponse ( JNIEnv* env, jclass obj, jstring jdisplayName, jstring juserId ) {
+
+	if ( MOAIGameSparksAndroid::IsValid ()) {
+		ZLLog::LogF ( 1, ZLLog::CONSOLE, "Java_com_moaisdk_gamesparks_MoaiGameSparks_AKUAccountDetailsSuccessResponse\n" );
+
+		JNI_GET_CSTRING ( jdisplayName, displayName );
+		JNI_GET_CSTRING ( juserId, userId );
+
+		MOAIGameSparksAndroid::Get ().AccountDetailsSuccessResponse ( displayName, userId );
+
+		JNI_RELEASE_CSTRING ( jdisplayName, displayName );
+		JNI_RELEASE_CSTRING ( juserId, userId );
+	}
+}
+
+//----------------------------------------------------------------//
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_gamesparks_MoaiGameSparks_AKUBuyVirtualGoodFailResponse ( JNIEnv* env, jclass obj, jstring jerror ) {
+
+	if ( MOAIGameSparksAndroid::IsValid ()) {
+		ZLLog::LogF ( 1, ZLLog::CONSOLE, "Java_com_moaisdk_gamesparks_MoaiGameSparks_AKUBuyVirtualGoodFailResponse\n" );
+
+		JNI_GET_CSTRING ( jerror, error );
+		MOAIGameSparksAndroid::Get ().BuyVirtualGoodFailResponse ( error );
+		JNI_RELEASE_CSTRING ( jerror, error );
+	}
+}
+
+//----------------------------------------------------------------//
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_gamesparks_MoaiGameSparks_AKUBuyVirtualGoodSuccessResponse ( JNIEnv* env, jclass obj, jstring jboughtItems ) {
+
+	if ( MOAIGameSparksAndroid::IsValid ()) {
+		ZLLog::LogF ( 1, ZLLog::CONSOLE, "Java_com_moaisdk_gamesparks_MoaiGameSparks_AKUBuyVirtualGoodSuccessResponse\n" );
+
+		JNI_GET_CSTRING ( jboughtItems, boughtItems );
+
+		MOAIGameSparksAndroid::Get ().BuyVirtualGoodSuccessResponse ( boughtItems );
+
+		JNI_RELEASE_CSTRING ( jboughtItems, boughtItems );
+	}
+}
+
+//----------------------------------------------------------------//
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_gamesparks_MoaiGameSparks_AKUFacebookConnectFailResponse ( JNIEnv* env, jclass obj, jstring jaccessToken, jstring jcode, jstring jauthentication ) {
+
+	if ( MOAIGameSparksAndroid::IsValid ()) {
+		ZLLog::LogF ( 1, ZLLog::CONSOLE, "Java_com_moaisdk_gamesparks_MoaiGameSparks_AKUFacebookConnectFailResponse\n" );
+
+		JNI_GET_CSTRING ( jaccessToken, accessToken );
+		JNI_GET_CSTRING ( jcode, code );
+		JNI_GET_CSTRING ( jauthentication, authentication );
+
+		MOAIGameSparksAndroid::Get ().FacebookConnectFailResponse ( accessToken, code, authentication );
+
+		JNI_RELEASE_CSTRING ( jaccessToken, accessToken );
+		JNI_RELEASE_CSTRING ( jcode, code );
+		JNI_RELEASE_CSTRING ( jauthentication, authentication );
+	}
+}
+
+//----------------------------------------------------------------//
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_gamesparks_MoaiGameSparks_AKUFacebookConnectSuccessResponse ( JNIEnv* env, jclass obj, jstring jauthToken, jstring jdisplayName, jboolean newPlayer, jstring juserId ) {
+
+	if ( MOAIGameSparksAndroid::IsValid ()) {
+		ZLLog::LogF ( 1, ZLLog::CONSOLE, "Java_com_moaisdk_gamesparks_MoaiGameSparks_AKUFacebookConnectSuccessResponse\n" );
+
+		JNI_GET_CSTRING ( jauthToken, authToken );
+		JNI_GET_CSTRING ( jdisplayName, displayName );
+		JNI_GET_CSTRING ( juserId, userId );
+
+		MOAIGameSparksAndroid::Get ().FacebookConnectSuccessResponse (  authToken, displayName, newPlayer, userId  );
+
+		JNI_RELEASE_CSTRING ( jauthToken, authToken );
+		JNI_RELEASE_CSTRING ( jdisplayName, displayName );
+		JNI_RELEASE_CSTRING ( juserId, userId );
+	}
+}
+
+//----------------------------------------------------------------//
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_gamesparks_MoaiGameSparks_AKULogEventFailResponse ( JNIEnv* env, jclass obj, jstring jerror ) {
+
+	if ( MOAIGameSparksAndroid::IsValid ()) {
+		ZLLog::LogF ( 1, ZLLog::CONSOLE, "Java_com_moaisdk_gamesparks_MoaiGameSparks_AKULogEventFailResponse\n" );
+
+		JNI_GET_CSTRING ( jerror, error );
+		MOAIGameSparksAndroid::Get ().LogEventFailResponse ( error );
+		JNI_RELEASE_CSTRING ( jerror, error );
+	}
+}
+
+
+//----------------------------------------------------------------//
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_gamesparks_MoaiGameSparks_AKULogEventSuccessResponse ( JNIEnv* env, jclass obj, jstring jeventKey, jstring jattributes ) {
+
+	if ( MOAIGameSparksAndroid::IsValid ()) {
+		ZLLog::LogF ( 1, ZLLog::CONSOLE, "Java_com_moaisdk_gamesparks_MoaiGameSparks_AKULogEventSuccessResponse\n" );
+
+		JNI_GET_CSTRING ( jeventKey, eventKey );
+		JNI_GET_CSTRING ( jattributes, attributes );
+
+		MOAIGameSparksAndroid::Get ().LogEventSuccessResponse ( eventKey, attributes );
+
+		JNI_RELEASE_CSTRING ( jeventKey, eventKey );
+		JNI_RELEASE_CSTRING ( jattributes, attributes );
+	}
+}
+
+//----------------------------------------------------------------//
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_gamesparks_MoaiGameSparks_AKURegistrationFailResponse ( JNIEnv* env, jclass obj, jstring jerror ) {
+
+	if ( MOAIGameSparksAndroid::IsValid ()) {
+		ZLLog::LogF ( 1, ZLLog::CONSOLE, "Java_com_moaisdk_gamesparks_MoaiGameSparks_AKURegistrationFailResponse\n" );
+
+		JNI_GET_CSTRING ( jerror, error );
+		MOAIGameSparksAndroid::Get ().RegistrationFailResponse ( error );
+		JNI_RELEASE_CSTRING ( jerror, error );
+	}
+}
+
+//----------------------------------------------------------------//
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_gamesparks_MoaiGameSparks_AKURegistrationSuccessResponse ( JNIEnv* env, jclass obj, jstring jauthToken, jstring jdisplayName, jboolean newPlayer, jstring juserId ) {
+
+	if ( MOAIGameSparksAndroid::IsValid ()) {
+		ZLLog::LogF ( 1, ZLLog::CONSOLE, "Java_com_moaisdk_gamesparks_MoaiGameSparks_AKURegistrationSuccessResponse\n" );
+
+		JNI_GET_CSTRING ( jauthToken, authToken );
+		JNI_GET_CSTRING ( jdisplayName, displayName );
+		JNI_GET_CSTRING ( juserId, userId );
+
+		MOAIGameSparksAndroid::Get ().RegistrationSuccessResponse (  authToken, displayName, newPlayer, userId  );
+
+		JNI_RELEASE_CSTRING ( jauthToken, authToken );
+		JNI_RELEASE_CSTRING ( jdisplayName, displayName );
+		JNI_RELEASE_CSTRING ( juserId, userId );
 	}
 }
 
