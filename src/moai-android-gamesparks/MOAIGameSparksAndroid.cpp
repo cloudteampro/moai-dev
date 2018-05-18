@@ -121,7 +121,7 @@ int	MOAIGameSparksAndroid::_requestFacebookConnect ( lua_State* L ) {
 	@text	Request log event.
 				
 	@in 	string	eventKey		Event key
-	@in 	array	userName 		The previously registered player name
+	@in 	table	attributes 		Attributes
 	@out 	nil
 */
 int	MOAIGameSparksAndroid::_requestLogEvent ( lua_State* L ) {

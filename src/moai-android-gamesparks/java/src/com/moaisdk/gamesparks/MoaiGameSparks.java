@@ -262,7 +262,7 @@ public class MoaiGameSparks {
 
         MoaiLog.i ( "MoaiGameSparks onStart" );
 
-        GSAndroidPlatform.gs ().start ();
+        // GSAndroidPlatform.gs ().start ();
     }
 
     //----------------------------------------------------------------//
@@ -283,6 +283,8 @@ public class MoaiGameSparks {
         MoaiLog.i ( "MoaiGameSparks: init" );
         GSAndroidPlatform.initialise ( sActivity, apiKey, apiSecret, credential, liveMode, autoUpdate );
         GSAndroidPlatform.gs ().setOnAvailable ( availabityEventConsumer );
+        
+        GSAndroidPlatform.gs ().start ();
     }
 
     //----------------------------------------------------------------//
