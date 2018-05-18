@@ -134,7 +134,7 @@ int	MOAIGameSparksAndroid::_requestLogEvent ( lua_State* L ) {
 		jbundle = self->BundleFromLua( L, 2 );
 	}
 
-	self->CallStaticVoidMethod ( self->mJava_RequestAuthentication, ( jstring )eventKey, jbundle );
+	self->CallStaticVoidMethod ( self->mJava_RequestLogEvent, ( jstring )eventKey, jbundle );
 	return 0;
 }
 
@@ -353,7 +353,7 @@ void MOAIGameSparksAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "ON_AUTHENTICATE_FAIL",			( u32 )ON_AUTHENTICATE_FAIL );
 	state.SetField ( -1, "ON_AUTHENTICATE_SUCCESS",			( u32 )ON_AUTHENTICATE_SUCCESS );
 	state.SetField ( -1, "ON_AVAILABILITY",					( u32 )ON_AVAILABILITY );
-	state.SetField ( -1, "ON_BUY_VIRTUAL_GOOD_FAIL",		( u32 )ON_BUY_VIRTUAL_GOOD_SUCCESS );
+	state.SetField ( -1, "ON_BUY_VIRTUAL_GOOD_FAIL",		( u32 )ON_BUY_VIRTUAL_GOOD_FAIL );
 	state.SetField ( -1, "ON_BUY_VIRTUAL_GOOD_SUCCESS",		( u32 )ON_BUY_VIRTUAL_GOOD_SUCCESS );
 	state.SetField ( -1, "ON_FACEBOOK_CONNECT_FAIL",		( u32 )ON_FACEBOOK_CONNECT_FAIL );
 	state.SetField ( -1, "ON_FACEBOOK_CONNECT_SUCCESS",		( u32 )ON_FACEBOOK_CONNECT_SUCCESS );

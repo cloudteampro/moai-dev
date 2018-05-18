@@ -369,6 +369,7 @@ public class MoaiGameSparks {
                             }
                         } catch ( JSONException e ) {
 
+                        } catch ( NullPointerException e ) {
                             //Handle exception here
                         }
                     }
@@ -391,7 +392,7 @@ public class MoaiGameSparks {
     }
 
     //----------------------------------------------------------------//
-    public static void requestRegistration ( String displayName, String password, String segments, String userName ) {
+    public static void requestRegistration ( String displayName, String password, String userName ) {
 
         MoaiLog.i ( "MoaiGameSparks: requestRegistration" );
         GSAndroidPlatform.gs ().getRequestBuilder ().createRegistrationRequest ()
