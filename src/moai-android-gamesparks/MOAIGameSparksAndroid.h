@@ -80,7 +80,7 @@ public:
 	void	AccountDetailsSuccessResponse	( cc8* displayName, cc8* userId );
 	void	BuyVirtualGoodFailResponse		( cc8* error );
 	void	BuyVirtualGoodSuccessResponse	( cc8* boughtItems );
-	void	FacebookConnectFailResponse		( cc8* accessToken, cc8* code, cc8* authentication );
+	void	FacebookConnectFailResponse		( cc8* error );
 	void	FacebookConnectSuccessResponse	( cc8* authToken, cc8* displayName, bool newPlayer, cc8* userId );
 	void	LogEventFailResponse			( cc8* error );
 	void	LogEventSuccessResponse			( cc8* eventKey, cc8* attributes );

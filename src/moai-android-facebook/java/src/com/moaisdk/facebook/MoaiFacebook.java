@@ -178,6 +178,8 @@ public class MoaiFacebook {
 		sActivity = activity;
 		FacebookSdk.sdkInitialize ( sActivity );
 
+		// FacebookSdk.setIsDebugEnabled(true);
+
 		sLogger = AppEventsLogger.newLogger ( sActivity );
 		sCallbackManager = CallbackManager.Factory.create ();
 

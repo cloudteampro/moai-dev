@@ -24,6 +24,7 @@ import com.gamesparks.sdk.api.autogen.GSResponseBuilder.LogEventResponse;
 import com.gamesparks.sdk.api.autogen.GSResponseBuilder.RegistrationResponse;
 import com.gamesparks.sdk.api.autogen.GSTypes.*;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -44,7 +45,7 @@ public class MoaiGameSparks {
     protected static native void AKUAccountDetailsSuccessResponse   ( String displayName, String userId );
     protected static native void AKUBuyVirtualGoodFailResponse      ( String error );
     protected static native void AKUBuyVirtualGoodSuccessResponse   ( String boughtItems );
-    protected static native void AKUFacebookConnectFailResponse     ( String accessToken, String code, String authentication );
+    protected static native void AKUFacebookConnectFailResponse     ( String error );
     protected static native void AKUFacebookConnectSuccessResponse  ( String authToken, String displayName, boolean newPlayer, String userId );
     protected static native void AKULogEventFailResponse            ( String error );
     protected static native void AKULogEventSuccessResponse         ( String eventKey, String attributes );
@@ -94,7 +95,10 @@ public class MoaiGameSparks {
                 synchronized ( Moai.sAkuLock ) {
 
                     MoaiLog.i ( "MoaiGameSparks OnAccountDetailsFailResponse: " );
-                    MoaiGameSparks.AKUAccountDetailsFailResponse ( "" );
+                    org.json.simple.JSONObject jsonObject = ( org.json.simple.JSONObject ) accountDetailsResponse.getAttribute ( "error" );
+                    String error = "UNDEFINED_ERROR";
+                    if ( jsonObject != null ) error = jsonObject.toString ();
+                    MoaiGameSparks.AKUAccountDetailsFailResponse ( error );
                 }
             }
         }
@@ -125,8 +129,9 @@ public class MoaiGameSparks {
                 synchronized ( Moai.sAkuLock ) {
 
                     MoaiLog.i ( "MoaiGameSparks OnAuthenticationFailResponse: " );
-                    String error = authenticationResponse.getObject ( "error" ).getString ( "DETAILS" );
-                    if ( error == null ) error = "";
+                    org.json.simple.JSONObject jsonObject = ( org.json.simple.JSONObject ) authenticationResponse.getAttribute ( "error" );
+                    String error = "UNDEFINED_ERROR";
+                    if ( jsonObject != null ) error = jsonObject.toString ();
                     MoaiGameSparks.AKUAuthenticationFailResponse ( error );
                 }
             }
@@ -173,14 +178,28 @@ public class MoaiGameSparks {
                 synchronized ( Moai.sAkuLock ) {
 
                     MoaiLog.i ( "MoaiGameSparks OnPurchaseValidationSuccessResponse: " );
-                    MoaiGameSparks.AKUBuyVirtualGoodSuccessResponse ( boughtItems.get ( 1 ).toString () );
+
+                    JSONArray jsonArray = new JSONArray ();
+                    for ( Boughtitem boughtitem : boughtItems ) {
+                        JSONObject jsonObject = new JSONObject ();
+                        try {
+                            jsonObject.put ("shortCode", boughtitem.getShortCode ());
+                            jsonObject.put ("quantity", boughtitem.getQuantity ());
+                            jsonArray.put ( jsonObject );
+                        } catch ( JSONException e ) {
+                            e.printStackTrace ();
+                        }
+                    }
+                    MoaiGameSparks.AKUBuyVirtualGoodSuccessResponse ( jsonArray.toString ());
                 }
             } else {
 
                 synchronized ( Moai.sAkuLock ) {
+
                     MoaiLog.i ( "MoaiGameSparks OnPurchaseValidationFailResponse: " );
-                    String error = buyVirtualGoodResponse.getObject ( "error" ).getString ( "verificationError" );
-                    if ( error == null ) error = "";
+                    org.json.simple.JSONObject jsonObject = ( org.json.simple.JSONObject ) buyVirtualGoodResponse.getAttribute ( "error" );
+                    String error = "UNDEFINED_ERROR";
+                    if ( jsonObject != null ) error = jsonObject.toString ();
                     MoaiGameSparks.AKUBuyVirtualGoodFailResponse ( error );
                 }
             }
@@ -212,13 +231,10 @@ public class MoaiGameSparks {
                 synchronized ( Moai.sAkuLock ) {
 
                     MoaiLog.i ( "MoaiGameSparks OnFacebookConnectFailResponse: " );
-                    String accessTokenError = authenticationResponse.getObject ( "error" ).getString ( "accessToken" ); //ACCOUNT_ALREADY_LINKED,NOTAUTHENTICATED,REQUIRED
-                    String codeError = authenticationResponse.getObject ( "error" ).getString ( "code" ); //NOTAUTHENTICATED
-                    String authenticationError = authenticationResponse.getObject ( "error" ).getString ( "authentication" ); //COPPA
-                    if ( accessTokenError == null ) accessTokenError = "";
-                    if ( codeError == null ) codeError = "";
-                    if ( authenticationError == null ) authenticationError = "";
-                    MoaiGameSparks.AKUFacebookConnectFailResponse ( accessTokenError, codeError, authenticationError );
+                    org.json.simple.JSONObject jsonObject = ( org.json.simple.JSONObject ) authenticationResponse.getAttribute ( "error" );
+                    String error = "UNDEFINED_ERROR";
+                    if ( jsonObject != null ) error = jsonObject.toString ();
+                    MoaiGameSparks.AKUFacebookConnectFailResponse ( error );
                 }
             }
         }
@@ -249,8 +265,9 @@ public class MoaiGameSparks {
                 synchronized ( Moai.sAkuLock ) {
 
                     MoaiLog.i ( "MoaiGameSparks OnRegistrationFailResponse: " );
-                    String error = registrationResponse.getObject ( "error" ).getString ( "USERNAME" );
-                    if ( error == null ) error = "";
+                    org.json.simple.JSONObject jsonObject = ( org.json.simple.JSONObject ) registrationResponse.getAttribute ( "error" );
+                    String error = "UNDEFINED_ERROR";
+                    if ( jsonObject != null ) error = jsonObject.toString ();
                     MoaiGameSparks.AKURegistrationFailResponse ( error );
                 }
             }
@@ -321,7 +338,6 @@ public class MoaiGameSparks {
     public static void requestFacebookConnect ( String token ) {
 
         MoaiLog.i ( "MoaiGameSparks: requestFacebookConnect" );
-
         GSAndroidPlatform.gs ().getRequestBuilder ().createFacebookConnectRequest ()
                 .setAccessToken( token )
                 //.setCode(code)
@@ -337,9 +353,7 @@ public class MoaiGameSparks {
     public static void requestLogEvent ( final String eventKey, final Bundle attributes ) {
 
         MoaiLog.i ( "MoaiGameSparks: requestLogEvent" );
-
         LogEventRequest logEventRequest = GSAndroidPlatform.gs ().getRequestBuilder ().createLogEventRequest();
-
         logEventRequest.setEventKey ( eventKey );
 
         for ( String key : attributes.keySet ()) {
@@ -377,14 +391,17 @@ public class MoaiGameSparks {
                     synchronized ( Moai.sAkuLock ) {
 
                         MoaiLog.i ( "MoaiGameSparks OnLogEventSuccessResponse: " );
-                        AKULogEventSuccessResponse ( eventKey, json.toString() );
+                        AKULogEventSuccessResponse ( eventKey, json.toString ());
                     }
                 } else {
 
                     synchronized ( Moai.sAkuLock ) {
 
                         MoaiLog.i ( "MoaiGameSparks OnLogEventFailResponse: " );
-                        AKULogEventFailResponse ( "" );
+                        org.json.simple.JSONObject jsonObject = ( org.json.simple.JSONObject ) logEventResponse.getAttribute ( "error" );
+                        String error = "UNDEFINED_ERROR";
+                        if ( jsonObject != null ) error = jsonObject.toString ();
+                        AKULogEventFailResponse ( error );
                     }
                 }
             }

@@ -513,6 +513,8 @@ void MOAIGameSparksIOS::LogEventFailResponse ( NSString *error ) {
 //----------------------------------------------------------------//
 void MOAIGameSparksIOS::LogEventSuccessResponse ( NSString *eventKey, NSMutableDictionary* attributes, GSLogEventResponse* response ) {
 	
+	ZLLog::LogF ( 1, ZLLog::CONSOLE, "LogEventSuccessResponse\n" );
+
 	if ( !MOAILuaRuntime::IsValid ()) return;
 	
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
@@ -522,23 +524,26 @@ void MOAIGameSparksIOS::LogEventSuccessResponse ( NSString *eventKey, NSMutableD
 		OBJC_TO_LUA ( eventKey, state );
 		
 		lua_newtable ( state );
-		
+
 		for ( NSObject *aKey in [ attributes allKeys ]) {
+
+			ZLLog::LogF ( 1, ZLLog::CONSOLE, "LogEventSuccessResponse\n", aKey );
 			
-			NSString* attribute = [ response getAttribute:[ NSString stringWithUTF8String: ( cc8* )aKey ]];
+			NSString* attribute = [ response getAttribute:aKey ];
 			
 			if ( attribute ) {
-				
-				state.SetField(1, (cc8 *)eventKey, [ attribute UTF8String ]);
+
+				lua_newtable ( state );
+
+				state.SetField ( -1, (cc8 *)eventKey, [ attribute UTF8String ]);
+
+				lua_settable ( state, -3 );
 			} else {
-				
-				state.SetField(1, (cc8 *)eventKey, @"");
+
+				//TODO
 			}
 		}
 		
-		lua_settable ( state, -3 );
-		
-		OBJC_TO_LUA ( attributes, state );
 		state.DebugCall ( 2, 0 );
 	}
 }

@@ -85,6 +85,7 @@ int	MOAIGameSparksAndroid::_requestBuyGoods ( lua_State* L ) {
 	MOAIJString signedData = self->GetJString ( lua_tostring ( state, 2 ));
 
 	self->CallStaticVoidMethod ( self->mJava_RequestBuyGoods, ( jstring )signature, ( jstring )signedData );
+	return 0;
 }
 
 //----------------------------------------------------------------//
@@ -266,7 +267,7 @@ void MOAIGameSparksAndroid::BuyVirtualGoodSuccessResponse ( cc8* boughtItems ) {
 }
 
 //----------------------------------------------------------------//
-void MOAIGameSparksAndroid::FacebookConnectFailResponse ( cc8* accessToken, cc8* code, cc8* authentication ) {
+void MOAIGameSparksAndroid::FacebookConnectFailResponse ( cc8* error ) {
 
 	if ( !MOAILuaRuntime::IsValid ()) return;
 
@@ -274,10 +275,8 @@ void MOAIGameSparksAndroid::FacebookConnectFailResponse ( cc8* accessToken, cc8*
 	
 	if ( this->PushListener ( ON_FACEBOOK_CONNECT_FAIL, state )) {
 		
-		state.Push ( accessToken );
-		state.Push ( code );
-		state.Push ( authentication );
-		state.DebugCall ( 3, 0 );
+		state.Push ( error );
+		state.DebugCall ( 1, 0 );
 	}
 }
 
@@ -509,20 +508,14 @@ extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_gamesparks_MoaiGameSparks_AKU
 }
 
 //----------------------------------------------------------------//
-extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_gamesparks_MoaiGameSparks_AKUFacebookConnectFailResponse ( JNIEnv* env, jclass obj, jstring jaccessToken, jstring jcode, jstring jauthentication ) {
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_gamesparks_MoaiGameSparks_AKUFacebookConnectFailResponse ( JNIEnv* env, jclass obj, jstring jerror ) {
 
 	if ( MOAIGameSparksAndroid::IsValid ()) {
 		ZLLog::LogF ( 1, ZLLog::CONSOLE, "Java_com_moaisdk_gamesparks_MoaiGameSparks_AKUFacebookConnectFailResponse\n" );
 
-		JNI_GET_CSTRING ( jaccessToken, accessToken );
-		JNI_GET_CSTRING ( jcode, code );
-		JNI_GET_CSTRING ( jauthentication, authentication );
-
-		MOAIGameSparksAndroid::Get ().FacebookConnectFailResponse ( accessToken, code, authentication );
-
-		JNI_RELEASE_CSTRING ( jaccessToken, accessToken );
-		JNI_RELEASE_CSTRING ( jcode, code );
-		JNI_RELEASE_CSTRING ( jauthentication, authentication );
+		JNI_GET_CSTRING ( jerror, error );
+		MOAIGameSparksAndroid::Get ().FacebookConnectFailResponse ( error );
+		JNI_RELEASE_CSTRING ( jerror, error );
 	}
 }
 
