@@ -35,7 +35,7 @@ int MOAIGameSparksIOS::_init ( lua_State* L ) {
 	GS* gs = [[ GS alloc ] initWithApiKey:[ NSString stringWithUTF8String:apikey ]
 		andApiSecret:[ NSString stringWithUTF8String:apiSecret ]
 		andCredential:[ NSString stringWithUTF8String:credential ]
-		andPreviewMode:liveMode ];
+		andPreviewMode:!liveMode ];
 
 	[ GS setGs:gs ];
 
@@ -170,7 +170,7 @@ int	MOAIGameSparksIOS::_requestBuyGoods ( lua_State* L ) {
 	//[ request setUniqueTransactionByPlayer:uniqueTransactionByPlayer ];
 	[ request setCallback:^ ( GSBuyVirtualGoodResponse* response ) {
 		
-		NSArray* boughtItems = [ response getBoughtItems ]; 
+		NSArray* boughtItems = [ response getBoughtItems ];
 		//NSDictionary* currenciesAdded = [response getCurrenciesAdded ]; 
 		//NSNumber* currency1Added = [ response getCurrency1Added ]; 
 		//NSNumber* currency2Added = [ response getCurrency2Added ]; 
@@ -187,8 +187,12 @@ int	MOAIGameSparksIOS::_requestBuyGoods ( lua_State* L ) {
 		NSDictionary* errors = [ response getErrors ];
 		
 		if ( !errors ) {
+			NSLog ( @"MOAIGameSparksIOS: VALIDATED! 1 ");
+			NSLog ( @"MOAIGameSparksIOS: VALIDATED! 1 %d", [boughtItems[0] getQuantity]);
+			NSLog ( @"MOAIGameSparksIOS: VALIDATED! 1 %@", [boughtItems[0] getShortCode]);
+			NSLog ( @"MOAIGameSparksIOS: VALIDATED! 1 %tu", [boughtItems count]);
 			
-			MOAIGameSparksIOS::Get ().BuyVirtualGoodSuccessResponse ( boughtItems[1] );
+			MOAIGameSparksIOS::Get ().BuyVirtualGoodSuccessResponse ( [boughtItems[0] getShortCode] );
 		} else {
 			
 			MOAIGameSparksIOS::Get ().BuyVirtualGoodFailResponse ([ errors objectForKey:@"verificationError" ]);
@@ -283,11 +287,12 @@ int	MOAIGameSparksIOS::_requestLogEvent ( lua_State* L ) {
 	if ( attributes ) {
 		
 		for ( NSObject *aKey in [ attributes allKeys ]) {
+
 			NSObject *aValue = [ attributes valueForKey:aKey ];
 			
 			if ( [ aValue length ] != 0  ) {
 				
-				[ request setEventAttribute:[ NSString stringWithUTF8String: ( cc8* )aKey ] withString:[ NSString stringWithUTF8String: ( cc8* )aValue ]];
+				[ request setEventAttribute:aKey withString:aValue ];
 			}
 		}
 	}
@@ -297,7 +302,7 @@ int	MOAIGameSparksIOS::_requestLogEvent ( lua_State* L ) {
 
     	NSDictionary* scriptData = [ response getScriptData ];
 		NSDictionary* errors = [ response getErrors ];
-		
+
 		if ( !errors ) {
 			
 			MOAIGameSparksIOS::Get ().LogEventSuccessResponse ([ NSString stringWithUTF8String:eventKey ], attributes, response );
@@ -512,8 +517,6 @@ void MOAIGameSparksIOS::LogEventFailResponse ( NSString *error ) {
 
 //----------------------------------------------------------------//
 void MOAIGameSparksIOS::LogEventSuccessResponse ( NSString *eventKey, NSMutableDictionary* attributes, GSLogEventResponse* response ) {
-	
-	ZLLog::LogF ( 1, ZLLog::CONSOLE, "LogEventSuccessResponse\n" );
 
 	if ( !MOAILuaRuntime::IsValid ()) return;
 	
@@ -522,27 +525,24 @@ void MOAIGameSparksIOS::LogEventSuccessResponse ( NSString *eventKey, NSMutableD
 	if ( this->PushListener ( ON_LOG_EVENT_SUCCESS, state )) {
 		
 		OBJC_TO_LUA ( eventKey, state );
-		
+
 		lua_newtable ( state );
 
 		for ( NSObject *aKey in [ attributes allKeys ]) {
-
-			ZLLog::LogF ( 1, ZLLog::CONSOLE, "LogEventSuccessResponse\n", aKey );
 			
-			NSString* attribute = [ response getAttribute:aKey ];
+			NSString* attribute = [[ response getScriptData ] valueForKey:aKey ];
 			
 			if ( attribute ) {
 
-				lua_newtable ( state );
-
-				state.SetField ( -1, (cc8 *)eventKey, [ attribute UTF8String ]);
-
-				lua_settable ( state, -3 );
+				[ aKey toLua:state ];
+				[ attribute toLua:state ];
 			} else {
 
-				//TODO
+				lua_pushnil ( state );
 			}
 		}
+
+		lua_settable ( state, -3 );
 		
 		state.DebugCall ( 2, 0 );
 	}
