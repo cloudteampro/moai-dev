@@ -24,6 +24,8 @@
 */
 int MOAIGameSparksIOS::_init ( lua_State* L ) {
 	
+	NSLog ( @"MOAIGameSparksIOS: init ");
+	
 	MOAILuaState state ( L );
 
 	cc8* apikey = state.GetValue < cc8* >( 1, 0 );
@@ -63,6 +65,8 @@ int MOAIGameSparksIOS::_init ( lua_State* L ) {
 */
 int MOAIGameSparksIOS::_requestAccountDetails ( lua_State* L ) {
 
+	NSLog ( @"MOAIGameSparksIOS: requestAccountDetails ");
+	
 	MOAILuaState state ( L );
 
 	GSAccountDetailsRequest* request = [[GSAccountDetailsRequest alloc] init];
@@ -113,6 +117,8 @@ int MOAIGameSparksIOS::_requestAccountDetails ( lua_State* L ) {
 */
 int MOAIGameSparksIOS::_requestAuthentication ( lua_State* L ) {
 
+	NSLog ( @"MOAIGameSparksIOS: requestAuthentication ");
+	
 	MOAILuaState state ( L );
 
 	cc8* password = state.GetValue < cc8* >( 1, 0 );
@@ -157,6 +163,8 @@ int MOAIGameSparksIOS::_requestAuthentication ( lua_State* L ) {
 	@out 	nil
 */
 int	MOAIGameSparksIOS::_requestBuyGoods ( lua_State* L ) {
+	
+	NSLog ( @"MOAIGameSparksIOS: requestBuyGoods ");
 
 	MOAILuaState state ( L );
 
@@ -225,6 +233,8 @@ int	MOAIGameSparksIOS::_requestBuyGoods ( lua_State* L ) {
 */
 int MOAIGameSparksIOS::_requestFacebookConnect ( lua_State* L ) {
 
+	NSLog ( @"MOAIGameSparksIOS: requestFacebookConnect ");
+	
 	MOAILuaState state ( L );
 
 	cc8* accessToken = state.GetValue < cc8* >( 1, 0 );
@@ -271,6 +281,8 @@ int MOAIGameSparksIOS::_requestFacebookConnect ( lua_State* L ) {
 */
 int	MOAIGameSparksIOS::_requestLogEvent ( lua_State* L ) {
 
+	NSLog ( @"MOAIGameSparksIOS: requestLogEvent ");
+	
 	MOAILuaState state ( L );
 
 	cc8* eventKey = state.GetValue < cc8* >( 1, 0 );
@@ -328,6 +340,8 @@ int	MOAIGameSparksIOS::_requestLogEvent ( lua_State* L ) {
 */
 int	MOAIGameSparksIOS::_requestRegistration ( lua_State* L ) {
 
+	NSLog ( @"MOAIGameSparksIOS: requestRegistration ");
+	
 	MOAILuaState state ( L );
 
 	cc8* displayName = state.GetValue < cc8* >( 1, 0 );
@@ -525,24 +539,24 @@ void MOAIGameSparksIOS::LogEventSuccessResponse ( NSString *eventKey, NSMutableD
 	if ( this->PushListener ( ON_LOG_EVENT_SUCCESS, state )) {
 		
 		OBJC_TO_LUA ( eventKey, state );
+		
+		NSMutableDictionary* result = [[[ NSMutableDictionary alloc ] init ] autorelease ];
+		[ result initWithLua:state stackIndex:2 ];
 
-		lua_newtable ( state );
-
-		for ( NSObject *aKey in [ attributes allKeys ]) {
+		for ( NSString* aKey in [ attributes allKeys ]) {
 			
 			NSString* attribute = [[ response getScriptData ] valueForKey:aKey ];
 			
 			if ( attribute ) {
 
-				[ aKey toLua:state ];
-				[ attribute toLua:state ];
+				[ result setObject:attribute forKey:aKey ];
 			} else {
 
 				lua_pushnil ( state );
 			}
 		}
-
-		lua_settable ( state, -3 );
+		
+		[ result toLua:state ];
 		
 		state.DebugCall ( 2, 0 );
 	}
