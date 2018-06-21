@@ -26,6 +26,10 @@
 	@const	ON_AVAILABILITY
 	@const	ON_BUY_VIRTUAL_GOOD_FAIL
 	@const	ON_BUY_VIRTUAL_GOOD_SUCCESS
+	@const	ON_CHANGE_USER_DETAILS_FAIL
+	@const	ON_CHANGE_USER_DETAILS_SUCCESS
+	@const	ON_DEVICE_AUTHENTICATE_FAIL
+	@const	ON_DEVICE_AUTHENTICATE_SUCCESS
 	@const	ON_FACEBOOK_CONNECT_FAIL
 	@const	ON_FACEBOOK_CONNECT_SUCCESS
 	@const	ON_GET_ACCOUNT_DETAILS_FAIL
@@ -40,13 +44,15 @@ class MOAIGameSparksIOS :
 private:
 
 	//----------------------------------------------------------------//
-	static int	_init	 					( lua_State* L );
-	static int	_requestAccountDetails		( lua_State* L );
-	static int	_requestAuthentication		( lua_State* L );
-	static int	_requestBuyGoods			( lua_State* L );
-	static int	_requestFacebookConnect		( lua_State* L );
-	static int	_requestLogEvent			( lua_State* L );
-	static int	_requestRegistration		( lua_State* L );
+	static int	_init	 						( lua_State* L );
+	static int	_requestAccountDetails			( lua_State* L );
+	static int	_requestAuthentication			( lua_State* L );
+	static int	_requestBuyGoods				( lua_State* L );
+	static int	_requestChangeUserDetails		( lua_State* L );
+	static int	_requestDeviceAuthentication	( lua_State* L );
+	static int	_requestFacebookConnect			( lua_State* L );
+	static int	_requestLogEvent				( lua_State* L );
+	static int	_requestRegistration			( lua_State* L );
 
 public:
 
@@ -58,6 +64,10 @@ public:
 		ON_AVAILABILITY,
 		ON_BUY_VIRTUAL_GOOD_FAIL,
 		ON_BUY_VIRTUAL_GOOD_SUCCESS,
+		ON_CHANGE_USER_DETAILS_FAIL,
+		ON_CHANGE_USER_DETAILS_SUCCESS,
+		ON_DEVICE_AUTHENTICATE_FAIL,
+		ON_DEVICE_AUTHENTICATE_SUCCESS,
 		ON_FACEBOOK_CONNECT_FAIL,
 		ON_FACEBOOK_CONNECT_SUCCESS,
         ON_GET_ACCOUNT_DETAILS_FAIL,
@@ -69,22 +79,26 @@ public:
 	};
 
 	//----------------------------------------------------------------//
-	void	AuthenticationFailResponse		( NSString *error );
-	void	AuthenticationSuccessResponse	( NSString *authToken, NSString *displayName, bool newPlayer, NSString *userId );
-	void	AvailabilityResponse			( bool available );
-	void	AccountDetailsFailResponse		( NSString *error );
-	void	AccountDetailsSuccessResponse	( NSString *displayName, NSString *userId );
-	void	BuyVirtualGoodFailResponse		( NSString *error );
-	void	BuyVirtualGoodSuccessResponse	( NSString *boughtItems );
-	void	FacebookConnectFailResponse		( NSString *accessToken, NSString *code, NSString *authentication );
-	void	FacebookConnectSuccessResponse	( NSString *authToken, NSString *displayName, bool newPlayer, NSString *userId );
-	void	LogEventFailResponse			( NSString *error );
-	void	LogEventSuccessResponse			( NSString *eventKey, NSMutableDictionary* attributes, GSLogEventResponse* request );
-			MOAIGameSparksIOS				();
-			~MOAIGameSparksIOS				();
-	void	RegisterLuaClass				( MOAILuaState& state );
-	void	RegistrationFailResponse		( NSString *error );
-	void	RegistrationSuccessResponse		( NSString *authToken, NSString *displayName, bool newPlayer, NSString *userId );
+	void	AuthenticationFailResponse				( NSString *errors );
+	void	AuthenticationSuccessResponse			( NSString *authToken, NSString *displayName, bool newPlayer, NSString *userId );
+	void	AvailabilityResponse					( bool available );
+	void	AccountDetailsFailResponse				( NSString *errors );
+	void	AccountDetailsSuccessResponse			( NSString *displayName, NSString *userId );
+	void	BuyVirtualGoodFailResponse				( NSString *errors );
+	void	BuyVirtualGoodSuccessResponse			( NSString *boughtItems );
+	void	ChangeUserDetailsFailResponse			( NSString *errors );
+	void	ChangeUserDetailsSuccessResponse		();
+	void	DeviceAuthenticationFailResponse		( NSString *errors );
+	void	DeviceAuthenticationSuccessResponse		( NSString *authToken, NSString *displayName, bool newPlayer, NSString *userId );
+	void	FacebookConnectFailResponse				( NSString *errors );
+	void	FacebookConnectSuccessResponse			( NSString *authToken, NSString *displayName, bool newPlayer, NSString *userId );
+	void	LogEventFailResponse					( NSString *errors );
+	void	LogEventSuccessResponse					( NSString *eventKey, NSMutableDictionary* attributes, GSLogEventResponse* request );
+			MOAIGameSparksIOS						();
+			~MOAIGameSparksIOS						();
+	void	RegisterLuaClass						( MOAILuaState& state );
+	void	RegistrationFailResponse				( NSString *errors );
+	void	RegistrationSuccessResponse				( NSString *authToken, NSString *displayName, bool newPlayer, NSString *userId );
 };
 
 #endif  //MOAIGAMESPARKSIOS_H

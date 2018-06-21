@@ -24,7 +24,7 @@
 */
 int MOAIGameSparksIOS::_init ( lua_State* L ) {
 	
-	NSLog ( @"MOAIGameSparksIOS: init ");
+	NSLog ( @"MOAIGameSparksIOS: init " );
 	
 	MOAILuaState state ( L );
 
@@ -65,7 +65,7 @@ int MOAIGameSparksIOS::_init ( lua_State* L ) {
 */
 int MOAIGameSparksIOS::_requestAccountDetails ( lua_State* L ) {
 
-	NSLog ( @"MOAIGameSparksIOS: requestAccountDetails ");
+	NSLog ( @"MOAIGameSparksIOS: requestAccountDetails" );
 	
 	MOAILuaState state ( L );
 
@@ -99,7 +99,17 @@ int MOAIGameSparksIOS::_requestAccountDetails ( lua_State* L ) {
 			MOAIGameSparksIOS::Get ().AccountDetailsSuccessResponse ( displayName, userId );
 		} else {
 			
-			MOAIGameSparksIOS::Get ().AccountDetailsFailResponse ( @"" );
+			NSError *error;
+			NSData *jsonData = [ NSJSONSerialization dataWithJSONObject:errors options:NSJSONWritingPrettyPrinted error:&error ];
+			
+			if ( !jsonData ) {
+				
+				MOAIGameSparksIOS::Get ().AccountDetailsFailResponse ( @"UNDEFINED_ERROR" );
+			} else {
+				
+				NSString *jsonString = [[ NSString alloc ] initWithData:jsonData encoding:NSUTF8StringEncoding ];
+				MOAIGameSparksIOS::Get ().AccountDetailsFailResponse ( jsonString );
+			}
 		}
 	}];
 	[[ GS gs ] send:request ];
@@ -117,7 +127,7 @@ int MOAIGameSparksIOS::_requestAccountDetails ( lua_State* L ) {
 */
 int MOAIGameSparksIOS::_requestAuthentication ( lua_State* L ) {
 
-	NSLog ( @"MOAIGameSparksIOS: requestAuthentication ");
+	NSLog ( @"MOAIGameSparksIOS: requestAuthentication" );
 	
 	MOAILuaState state ( L );
 
@@ -142,7 +152,17 @@ int MOAIGameSparksIOS::_requestAuthentication ( lua_State* L ) {
 			MOAIGameSparksIOS::Get ().AuthenticationSuccessResponse ( authToken, displayName, newPlayer, userId );
 		} else {
 			
-			MOAIGameSparksIOS::Get ().AuthenticationFailResponse ([ errors objectForKey:@"DETAILS" ]);
+			NSError *error;
+			NSData *jsonData = [ NSJSONSerialization dataWithJSONObject:errors options:NSJSONWritingPrettyPrinted error:&error ];
+			
+			if ( !jsonData ) {
+				
+				MOAIGameSparksIOS::Get ().AuthenticationFailResponse ( @"UNDEFINED_ERROR" );
+			} else {
+				
+				NSString *jsonString = [[ NSString alloc ] initWithData:jsonData encoding:NSUTF8StringEncoding ];
+				MOAIGameSparksIOS::Get ().AuthenticationFailResponse ( jsonString );
+			}
 		}
 	}];
 	[[ GS gs ] send:request ];
@@ -164,7 +184,7 @@ int MOAIGameSparksIOS::_requestAuthentication ( lua_State* L ) {
 */
 int	MOAIGameSparksIOS::_requestBuyGoods ( lua_State* L ) {
 	
-	NSLog ( @"MOAIGameSparksIOS: requestBuyGoods ");
+	NSLog ( @"MOAIGameSparksIOS: requestBuyGoods" );
 
 	MOAILuaState state ( L );
 
@@ -195,15 +215,141 @@ int	MOAIGameSparksIOS::_requestBuyGoods ( lua_State* L ) {
 		NSDictionary* errors = [ response getErrors ];
 		
 		if ( !errors ) {
-			NSLog ( @"MOAIGameSparksIOS: VALIDATED! 1 ");
-			NSLog ( @"MOAIGameSparksIOS: VALIDATED! 1 %d", [boughtItems[0] getQuantity]);
-			NSLog ( @"MOAIGameSparksIOS: VALIDATED! 1 %@", [boughtItems[0] getShortCode]);
-			NSLog ( @"MOAIGameSparksIOS: VALIDATED! 1 %tu", [boughtItems count]);
 			
 			MOAIGameSparksIOS::Get ().BuyVirtualGoodSuccessResponse ( [boughtItems[0] getShortCode] );
 		} else {
 			
-			MOAIGameSparksIOS::Get ().BuyVirtualGoodFailResponse ([ errors objectForKey:@"verificationError" ]);
+			NSError *error;
+			NSData *jsonData = [ NSJSONSerialization dataWithJSONObject:errors options:NSJSONWritingPrettyPrinted error:&error ];
+			
+			if ( !jsonData ) {
+				
+				MOAIGameSparksIOS::Get ().BuyVirtualGoodFailResponse ( @"UNDEFINED_ERROR" );
+			} else {
+				
+				NSString *jsonString = [[ NSString alloc ] initWithData:jsonData encoding:NSUTF8StringEncoding ];
+				MOAIGameSparksIOS::Get ().BuyVirtualGoodFailResponse ( jsonString );
+			}
+		}
+    }];
+    [[ GS gs ] send:request ];
+
+	return 0;
+}
+
+//----------------------------------------------------------------//
+/**	@lua	requestChangeUserDetails
+	@text	Request change user details.
+				
+	@in 	string	displayName		The new display name to set in the player data.
+	@in 	string	language 		The new language code to set in the player data.
+	@in 	string	newPassword		The new password to set in the player data.
+	@in 	string	oldPassword 	The player's existing password. If supplied it will be checked against 
+									the password stored in the player data. 
+									This allows you re-authenticate the player making the change.
+	@in 	string	userName 		The new userName with which this player will sign in. 
+									If the player currently authenticates using device authentication this will 
+									upgrade their account and require them to use 
+									username and password authentication from now on.
+	@out 	nil
+*/
+int	MOAIGameSparksIOS::_requestChangeUserDetails ( lua_State* L ) {
+
+	NSLog ( @"MOAIGameSparksIOS: _requestChangeUserDetails" );
+
+	MOAILuaState state ( L );
+
+	cc8* displayName = state.GetValue < cc8* >( 1, 0 );
+	cc8* language = state.GetValue < cc8* >( 2, 0 );
+	cc8* newPassword = state.GetValue < cc8* >( 3, 0 );
+	cc8* oldPassword = state.GetValue < cc8* >( 4, 0 );
+	cc8* userName = state.GetValue < cc8* >( 5, 0 );
+	
+	GSChangeUserDetailsRequest* request = [[ GSChangeUserDetailsRequest alloc ] init ];
+	[ request setDisplayName:[ NSString stringWithUTF8String:displayName ]];
+	[ request setLanguage:[ NSString stringWithUTF8String:language ]];
+	[ request setNewPassword:[ NSString stringWithUTF8String:newPassword ]];
+	[ request setOldPassword:[ NSString stringWithUTF8String:oldPassword ]];
+	[ request setUserName:[ NSString stringWithUTF8String:userName ]];
+	[ request setCallback:^ ( GSChangeUserDetailsResponse* response ) {
+		
+		NSDictionary* errors = [ response getErrors ];
+		
+		if ( !errors ) {
+			
+			MOAIGameSparksIOS::Get ().ChangeUserDetailsSuccessResponse ();
+		} else {
+
+			NSError *error;
+			NSData *jsonData = [ NSJSONSerialization dataWithJSONObject:errors options:NSJSONWritingPrettyPrinted error:&error ];
+			
+			if ( !jsonData ) {
+				
+				MOAIGameSparksIOS::Get ().ChangeUserDetailsFailResponse ( @"UNDEFINED_ERROR" );
+			} else {
+				
+				NSString *jsonString = [[ NSString alloc ] initWithData:jsonData encoding:NSUTF8StringEncoding ];
+				MOAIGameSparksIOS::Get ().ChangeUserDetailsFailResponse ( jsonString );
+			}
+		}
+	}];
+	[[ GS gs ] send:request ];
+
+	return 0;
+}
+
+//----------------------------------------------------------------//
+/**	@lua	requestDeviceAuthentication
+	@text	Request device authentication.
+				
+	@in 	string	deviceId		A unique device identifier.
+	@in 	string	deviceOS 		An indicator of the device platform, should be IOS, ANDROID, WP8 or W8
+	@out 	nil
+*/
+int	MOAIGameSparksIOS::_requestDeviceAuthentication ( lua_State* L ) {
+
+	NSLog ( @"MOAIGameSparksIOS: _requestDeviceAuthentication" );
+	
+	MOAILuaState state ( L );
+
+	cc8* deviceId = state.GetValue < cc8* >( 1, 0 );
+	cc8* deviceOS = state.GetValue < cc8* >( 2, 0 );
+
+    GSDeviceAuthenticationRequest* request = [[ GSDeviceAuthenticationRequest alloc ] init ];
+    [ request setDeviceId:[ NSString stringWithUTF8String:deviceId ]];
+    //[ request setDeviceModel:deviceModel ];
+    //[ request setDeviceName:deviceName ];
+    [ request setDeviceOS:[ NSString stringWithUTF8String:deviceOS ]];
+    //[ request setDeviceType:deviceType ];
+    //[ request setDisplayName:displayName ];
+    //[ request setOperatingSystem:operatingSystem ];
+    //[ request setSegments:segments ];
+    [ request setCallback:^ ( GSAuthenticationResponse* response ) {
+
+	    NSString* authToken = [ response getAuthToken ];
+	    NSString* displayName = [ response getDisplayName ];
+	    BOOL newPlayer = [ response getNewPlayer ];
+	    //NSDictionary* scriptData = [ response getScriptData ];
+	    //GSPlayer* switchSummary = [ response getSwitchSummary ];
+	    NSString* userId = [ response getUserId ];
+		NSDictionary* errors = [ response getErrors ];
+		
+		if ( !errors ) {
+
+			MOAIGameSparksIOS::Get ().DeviceAuthenticationSuccessResponse ( authToken, displayName, ( bool ) newPlayer, userId );
+		} else {
+			
+			NSError *error;
+			NSData *jsonData = [ NSJSONSerialization dataWithJSONObject:errors options:NSJSONWritingPrettyPrinted error:&error ];
+			
+			if ( !jsonData ) {
+				
+				MOAIGameSparksIOS::Get ().DeviceAuthenticationFailResponse ( @"UNDEFINED_ERROR" );
+			} else {
+				
+				NSString *jsonString = [[ NSString alloc ] initWithData:jsonData encoding:NSUTF8StringEncoding ];
+				MOAIGameSparksIOS::Get ().DeviceAuthenticationFailResponse ( jsonString );
+			}
 		}
     }];
     [[ GS gs ] send:request ];
@@ -233,7 +379,7 @@ int	MOAIGameSparksIOS::_requestBuyGoods ( lua_State* L ) {
 */
 int MOAIGameSparksIOS::_requestFacebookConnect ( lua_State* L ) {
 
-	NSLog ( @"MOAIGameSparksIOS: requestFacebookConnect ");
+	NSLog ( @"MOAIGameSparksIOS: requestFacebookConnect" );
 	
 	MOAILuaState state ( L );
 
@@ -262,7 +408,17 @@ int MOAIGameSparksIOS::_requestFacebookConnect ( lua_State* L ) {
 			MOAIGameSparksIOS::Get ().FacebookConnectSuccessResponse ( authToken, displayName, ( bool ) newPlayer, userId );
 		} else {
 			
-			MOAIGameSparksIOS::Get ().FacebookConnectFailResponse ([ errors objectForKey:@"accessToken" ], [ errors objectForKey:@"code" ], [ errors objectForKey:@"authentication" ]);
+			NSError *error;
+			NSData *jsonData = [ NSJSONSerialization dataWithJSONObject:errors options:NSJSONWritingPrettyPrinted error:&error ];
+			
+			if ( !jsonData ) {
+				
+				MOAIGameSparksIOS::Get ().FacebookConnectFailResponse ( @"UNDEFINED_ERROR" );
+			} else {
+				
+				NSString *jsonString = [[ NSString alloc ] initWithData:jsonData encoding:NSUTF8StringEncoding ];
+				MOAIGameSparksIOS::Get ().FacebookConnectFailResponse ( jsonString );
+			}
 		}
 	}];
 	[[ GS gs ] send:request ];
@@ -281,7 +437,7 @@ int MOAIGameSparksIOS::_requestFacebookConnect ( lua_State* L ) {
 */
 int	MOAIGameSparksIOS::_requestLogEvent ( lua_State* L ) {
 
-	NSLog ( @"MOAIGameSparksIOS: requestLogEvent ");
+	NSLog ( @"MOAIGameSparksIOS: requestLogEvent" );
 	
 	MOAILuaState state ( L );
 
@@ -320,7 +476,17 @@ int	MOAIGameSparksIOS::_requestLogEvent ( lua_State* L ) {
 			MOAIGameSparksIOS::Get ().LogEventSuccessResponse ([ NSString stringWithUTF8String:eventKey ], attributes, response );
 		} else {
 			
-			MOAIGameSparksIOS::Get ().LogEventFailResponse ( @"" );
+			NSError *error;
+			NSData *jsonData = [ NSJSONSerialization dataWithJSONObject:errors options:NSJSONWritingPrettyPrinted error:&error ];
+			
+			if ( !jsonData ) {
+
+				MOAIGameSparksIOS::Get ().LogEventFailResponse ( @"UNDEFINED_ERROR" );
+			} else {
+
+				NSString *jsonString = [[ NSString alloc ] initWithData:jsonData encoding:NSUTF8StringEncoding ];
+				MOAIGameSparksIOS::Get ().LogEventFailResponse ( jsonString );
+			}
 		}
     }];
     [[ GS gs ] send:request ];
@@ -340,7 +506,7 @@ int	MOAIGameSparksIOS::_requestLogEvent ( lua_State* L ) {
 */
 int	MOAIGameSparksIOS::_requestRegistration ( lua_State* L ) {
 
-	NSLog ( @"MOAIGameSparksIOS: requestRegistration ");
+	NSLog ( @"MOAIGameSparksIOS: requestRegistration" );
 	
 	MOAILuaState state ( L );
 
@@ -367,7 +533,17 @@ int	MOAIGameSparksIOS::_requestRegistration ( lua_State* L ) {
 			MOAIGameSparksIOS::Get ().RegistrationSuccessResponse ( authToken, displayName, newPlayer, userId );
 		} else {
 			
-			MOAIGameSparksIOS::Get ().RegistrationFailResponse ([ errors objectForKey:@"USERNAME" ]);
+			NSError *error;
+			NSData *jsonData = [ NSJSONSerialization dataWithJSONObject:errors options:NSJSONWritingPrettyPrinted error:&error ];
+			
+			if ( !jsonData ) {
+				
+				MOAIGameSparksIOS::Get ().RegistrationFailResponse ( @"UNDEFINED_ERROR" );
+			} else {
+				
+				NSString *jsonString = [[ NSString alloc ] initWithData:jsonData encoding:NSUTF8StringEncoding ];
+				MOAIGameSparksIOS::Get ().RegistrationFailResponse ( jsonString );
+			}
 		}
     }];
     [[ GS gs ] send:request ];
@@ -381,15 +557,17 @@ int	MOAIGameSparksIOS::_requestRegistration ( lua_State* L ) {
 //================================================================//
 
 //----------------------------------------------------------------//
-void MOAIGameSparksIOS::AuthenticationFailResponse ( NSString *error ) {
+void MOAIGameSparksIOS::AuthenticationFailResponse ( NSString *errors ) {
 	
 	if ( !MOAILuaRuntime::IsValid ()) return;
+	
+	NSLog ( @"MOAIGameSparksIOS: AuthenticationFailResponse" );
 	
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 	
 	if ( this->PushListener ( ON_AUTHENTICATE_FAIL, state )) {
 		
-		OBJC_TO_LUA ( error, state );
+		OBJC_TO_LUA ( errors, state );
 		state.DebugCall ( 1, 0 );
 	}
 }
@@ -398,6 +576,8 @@ void MOAIGameSparksIOS::AuthenticationFailResponse ( NSString *error ) {
 void MOAIGameSparksIOS::AuthenticationSuccessResponse ( NSString *authToken, NSString *displayName, bool newPlayer, NSString *userId ) {
 	
 	if ( !MOAILuaRuntime::IsValid ()) return;
+	
+	NSLog ( @"MOAIGameSparksIOS: AuthenticationSuccessResponse" );
 	
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 	
@@ -416,6 +596,8 @@ void MOAIGameSparksIOS::AvailabilityResponse ( bool available ) {
 	
 	if ( !MOAILuaRuntime::IsValid ()) return;
 	
+	NSLog ( @"MOAIGameSparksIOS: AvailabilityResponse" );
+	
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 	
 	if ( this->PushListener ( ON_AVAILABILITY, state )) {
@@ -426,15 +608,17 @@ void MOAIGameSparksIOS::AvailabilityResponse ( bool available ) {
 }
 
 //----------------------------------------------------------------//
-void MOAIGameSparksIOS::AccountDetailsFailResponse ( NSString *error ) {
+void MOAIGameSparksIOS::AccountDetailsFailResponse ( NSString *errors ) {
 
 	if ( !MOAILuaRuntime::IsValid ()) return;
+	
+	NSLog ( @"MOAIGameSparksIOS: AccountDetailsFailResponse" );
 
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 	
 	if ( this->PushListener ( ON_GET_ACCOUNT_DETAILS_FAIL, state )) {
 		
-		OBJC_TO_LUA ( error, state );
+		OBJC_TO_LUA ( errors, state );
 		state.DebugCall ( 1, 0 );
 	}
 }
@@ -443,6 +627,8 @@ void MOAIGameSparksIOS::AccountDetailsFailResponse ( NSString *error ) {
 void MOAIGameSparksIOS::AccountDetailsSuccessResponse ( NSString *displayName, NSString *userId ) {
 
 	if ( !MOAILuaRuntime::IsValid ()) return;
+	
+	NSLog ( @"MOAIGameSparksIOS: AccountDetailsSuccessResponse" );
 
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 
@@ -455,15 +641,17 @@ void MOAIGameSparksIOS::AccountDetailsSuccessResponse ( NSString *displayName, N
 }
 
 //----------------------------------------------------------------//
-void MOAIGameSparksIOS::BuyVirtualGoodFailResponse ( NSString *error ) {
+void MOAIGameSparksIOS::BuyVirtualGoodFailResponse ( NSString *errors ) {
 
 	if ( !MOAILuaRuntime::IsValid ()) return;
+	
+	NSLog ( @"MOAIGameSparksIOS: BuyVirtualGoodFailResponse" );
 
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 	
 	if ( this->PushListener ( ON_BUY_VIRTUAL_GOOD_FAIL, state )) {
 		
-		OBJC_TO_LUA ( error, state );
+		OBJC_TO_LUA ( errors, state );
 		state.DebugCall ( 1, 0 );
 	}
 }
@@ -472,6 +660,8 @@ void MOAIGameSparksIOS::BuyVirtualGoodFailResponse ( NSString *error ) {
 void MOAIGameSparksIOS::BuyVirtualGoodSuccessResponse ( NSString *boughtItems ) {
 
 	if ( !MOAILuaRuntime::IsValid ()) return;
+	
+	NSLog ( @"MOAIGameSparksIOS: BuyVirtualGoodSuccessResponse" );
 
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 
@@ -483,18 +673,84 @@ void MOAIGameSparksIOS::BuyVirtualGoodSuccessResponse ( NSString *boughtItems ) 
 }
 
 //----------------------------------------------------------------//
-void MOAIGameSparksIOS::FacebookConnectFailResponse ( NSString *accessToken, NSString *code, NSString *authentication ) {
+void MOAIGameSparksIOS::ChangeUserDetailsFailResponse ( NSString *errors ) {
 	
 	if ( !MOAILuaRuntime::IsValid ()) return;
+	
+	NSLog ( @"MOAIGameSparksIOS: ChangeUserDetailsFailResponse" );
+	
+	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
+	
+	if ( this->PushListener ( ON_CHANGE_USER_DETAILS_FAIL, state )) {
+		
+		OBJC_TO_LUA ( errors, state );
+		state.DebugCall ( 1, 0 );
+	}
+}
+
+//----------------------------------------------------------------//
+void MOAIGameSparksIOS::ChangeUserDetailsSuccessResponse() {
+	
+	if ( !MOAILuaRuntime::IsValid ()) return;
+	
+	NSLog ( @"MOAIGameSparksIOS: ChangeUserDetailsSuccessResponse" );
+	
+	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
+	
+	if ( this->PushListener ( ON_CHANGE_USER_DETAILS_SUCCESS, state )) {
+		
+		state.DebugCall ( 0, 0 );
+	}
+}
+
+//----------------------------------------------------------------//
+void MOAIGameSparksIOS::DeviceAuthenticationFailResponse ( NSString *errors ) {
+
+	if ( !MOAILuaRuntime::IsValid ()) return;
+	
+	NSLog ( @"MOAIGameSparksIOS: DeviceAuthenticationFailResponse" );
+
+	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
+	
+	if ( this->PushListener ( ON_DEVICE_AUTHENTICATE_FAIL, state )) {
+		
+		OBJC_TO_LUA ( errors, state );
+		state.DebugCall ( 1, 0 );
+	}
+}
+
+//----------------------------------------------------------------//
+void MOAIGameSparksIOS::DeviceAuthenticationSuccessResponse ( NSString *authToken, NSString *displayName, bool newPlayer, NSString *userId ) {
+
+	if ( !MOAILuaRuntime::IsValid ()) return;
+	
+	NSLog ( @"MOAIGameSparksIOS: DeviceAuthenticationSuccessResponse" );
+
+	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
+
+	if ( this->PushListener ( ON_DEVICE_AUTHENTICATE_SUCCESS, state )) {
+
+		OBJC_TO_LUA ( authToken, state );
+		OBJC_TO_LUA ( displayName, state );
+		state.Push ( newPlayer );
+		OBJC_TO_LUA ( userId, state );
+		state.DebugCall ( 4, 0 );
+	}
+}
+
+//----------------------------------------------------------------//
+void MOAIGameSparksIOS::FacebookConnectFailResponse ( NSString *errors ) {
+	
+	if ( !MOAILuaRuntime::IsValid ()) return;
+	
+	NSLog ( @"MOAIGameSparksIOS: FacebookConnectFailResponse" );
 	
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 	
 	if ( this->PushListener ( ON_FACEBOOK_CONNECT_FAIL, state )) {
 		
-		OBJC_TO_LUA ( accessToken, state );
-		OBJC_TO_LUA ( code, state );
-		OBJC_TO_LUA ( authentication, state );
-		state.DebugCall ( 3, 0 );
+		OBJC_TO_LUA ( errors, state );
+		state.DebugCall ( 1, 0 );
 	}
 }
 
@@ -502,6 +758,8 @@ void MOAIGameSparksIOS::FacebookConnectFailResponse ( NSString *accessToken, NSS
 void MOAIGameSparksIOS::FacebookConnectSuccessResponse ( NSString *authToken, NSString *displayName, bool newPlayer, NSString *userId ) {
 	
 	if ( !MOAILuaRuntime::IsValid ()) return;
+	
+	NSLog ( @"MOAIGameSparksIOS: FacebookConnectSuccessResponse" );
 	
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 	
@@ -516,15 +774,17 @@ void MOAIGameSparksIOS::FacebookConnectSuccessResponse ( NSString *authToken, NS
 }
 
 //----------------------------------------------------------------//
-void MOAIGameSparksIOS::LogEventFailResponse ( NSString *error ) {
+void MOAIGameSparksIOS::LogEventFailResponse ( NSString *errors ) {
 	
 	if ( !MOAILuaRuntime::IsValid ()) return;
+	
+	NSLog ( @"MOAIGameSparksIOS: LogEventFailResponse" );
 	
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 	
 	if ( this->PushListener ( ON_LOG_EVENT_FAIL, state )) {
 		
-		OBJC_TO_LUA ( error, state );
+		OBJC_TO_LUA ( errors, state );
 		state.DebugCall ( 1, 0 );
 	}
 }
@@ -533,6 +793,8 @@ void MOAIGameSparksIOS::LogEventFailResponse ( NSString *error ) {
 void MOAIGameSparksIOS::LogEventSuccessResponse ( NSString *eventKey, NSMutableDictionary* attributes, GSLogEventResponse* response ) {
 
 	if ( !MOAILuaRuntime::IsValid ()) return;
+	
+	NSLog ( @"MOAIGameSparksIOS: LogEventSuccessResponse" );
 	
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 	
@@ -552,7 +814,7 @@ void MOAIGameSparksIOS::LogEventSuccessResponse ( NSString *eventKey, NSMutableD
 				[ result setObject:attribute forKey:aKey ];
 			} else {
 
-				lua_pushnil ( state );
+				[ result setObject:@"" forKey:aKey ];
 			}
 		}
 		
@@ -575,30 +837,36 @@ MOAIGameSparksIOS::~MOAIGameSparksIOS () {
 //----------------------------------------------------------------//
 void MOAIGameSparksIOS::RegisterLuaClass ( MOAILuaState& state ) {
 
-	state.SetField ( -1, "ON_AUTHENTICATE_FAIL",			( u32 )ON_AUTHENTICATE_FAIL );
-	state.SetField ( -1, "ON_AUTHENTICATE_SUCCESS",			( u32 )ON_AUTHENTICATE_SUCCESS );
-	state.SetField ( -1, "ON_AVAILABILITY",					( u32 )ON_AVAILABILITY );
-	state.SetField ( -1, "ON_BUY_VIRTUAL_GOOD_FAIL",		( u32 )ON_BUY_VIRTUAL_GOOD_FAIL );
-	state.SetField ( -1, "ON_BUY_VIRTUAL_GOOD_SUCCESS",		( u32 )ON_BUY_VIRTUAL_GOOD_SUCCESS );
-	state.SetField ( -1, "ON_FACEBOOK_CONNECT_FAIL",		( u32 )ON_FACEBOOK_CONNECT_FAIL );
-	state.SetField ( -1, "ON_FACEBOOK_CONNECT_SUCCESS",		( u32 )ON_FACEBOOK_CONNECT_SUCCESS );
-	state.SetField ( -1, "ON_GET_ACCOUNT_DETAILS_FAIL",		( u32 )ON_GET_ACCOUNT_DETAILS_FAIL );
-	state.SetField ( -1, "ON_GET_ACCOUNT_DETAILS_SUCCESS",	( u32 )ON_GET_ACCOUNT_DETAILS_SUCCESS );
-	state.SetField ( -1, "ON_LOG_EVENT_FAIL",				( u32 )ON_LOG_EVENT_FAIL );
-	state.SetField ( -1, "ON_LOG_EVENT_SUCCESS",			( u32 )ON_LOG_EVENT_SUCCESS );
-	state.SetField ( -1, "ON_REGISTRATION_FAIL",			( u32 )ON_REGISTRATION_FAIL );
-	state.SetField ( -1, "ON_REGISTRATION_SUCCESS",			( u32 )ON_REGISTRATION_SUCCESS );
+	state.SetField ( -1, "ON_AUTHENTICATE_FAIL",				( u32 )ON_AUTHENTICATE_FAIL );
+	state.SetField ( -1, "ON_AUTHENTICATE_SUCCESS",				( u32 )ON_AUTHENTICATE_SUCCESS );
+	state.SetField ( -1, "ON_AVAILABILITY",						( u32 )ON_AVAILABILITY );
+	state.SetField ( -1, "ON_BUY_VIRTUAL_GOOD_FAIL",			( u32 )ON_BUY_VIRTUAL_GOOD_FAIL );
+	state.SetField ( -1, "ON_BUY_VIRTUAL_GOOD_SUCCESS",			( u32 )ON_BUY_VIRTUAL_GOOD_SUCCESS );
+	state.SetField ( -1, "ON_CHANGE_USER_DETAILS_FAIL",			( u32 )ON_CHANGE_USER_DETAILS_FAIL );
+	state.SetField ( -1, "ON_CHANGE_USER_DETAILS_SUCCESS",		( u32 )ON_CHANGE_USER_DETAILS_SUCCESS );
+	state.SetField ( -1, "ON_DEVICE_AUTHENTICATE_FAIL",			( u32 )ON_DEVICE_AUTHENTICATE_FAIL );
+	state.SetField ( -1, "ON_DEVICE_AUTHENTICATE_SUCCESS",		( u32 )ON_DEVICE_AUTHENTICATE_SUCCESS );
+	state.SetField ( -1, "ON_FACEBOOK_CONNECT_FAIL",			( u32 )ON_FACEBOOK_CONNECT_FAIL );
+	state.SetField ( -1, "ON_FACEBOOK_CONNECT_SUCCESS",			( u32 )ON_FACEBOOK_CONNECT_SUCCESS );
+	state.SetField ( -1, "ON_GET_ACCOUNT_DETAILS_FAIL",			( u32 )ON_GET_ACCOUNT_DETAILS_FAIL );
+	state.SetField ( -1, "ON_GET_ACCOUNT_DETAILS_SUCCESS",		( u32 )ON_GET_ACCOUNT_DETAILS_SUCCESS );
+	state.SetField ( -1, "ON_LOG_EVENT_FAIL",					( u32 )ON_LOG_EVENT_FAIL );
+	state.SetField ( -1, "ON_LOG_EVENT_SUCCESS",				( u32 )ON_LOG_EVENT_SUCCESS );
+	state.SetField ( -1, "ON_REGISTRATION_FAIL",				( u32 )ON_REGISTRATION_FAIL );
+	state.SetField ( -1, "ON_REGISTRATION_SUCCESS",				( u32 )ON_REGISTRATION_SUCCESS );
 
 	luaL_Reg regTable [] = {
-		{ "init",						_init },
-		{ "getListener",				&MOAIGlobalEventSource::_getListener < MOAIGameSparksIOS > },
-		{ "requestAccountDetails",		_requestAccountDetails },
-		{ "requestAuthentication",		_requestAuthentication },
-		{ "requestBuyGoods",			_requestBuyGoods },
-		{ "requestFacebookConnect",		_requestFacebookConnect },
-		{ "requestLogEvent",			_requestLogEvent },
-		{ "requestRegistration",		_requestRegistration },
-		{ "setListener",				&MOAIGlobalEventSource::_setListener < MOAIGameSparksIOS > },
+		{ "init",							_init },
+		{ "getListener",					&MOAIGlobalEventSource::_getListener < MOAIGameSparksIOS > },
+		{ "requestAccountDetails",			_requestAccountDetails },
+		{ "requestAuthentication",			_requestAuthentication },
+		{ "requestBuyGoods",				_requestBuyGoods },
+		{ "requestChangeUserDetails",		_requestChangeUserDetails },
+		{ "requestDeviceAuthentication",	_requestDeviceAuthentication },
+		{ "requestFacebookConnect",			_requestFacebookConnect },
+		{ "requestLogEvent",				_requestLogEvent },
+		{ "requestRegistration",			_requestRegistration },
+		{ "setListener",					&MOAIGlobalEventSource::_setListener < MOAIGameSparksIOS > },
 		{ NULL, NULL }
 	};
 
@@ -607,15 +875,17 @@ void MOAIGameSparksIOS::RegisterLuaClass ( MOAILuaState& state ) {
 
 
 //----------------------------------------------------------------//
-void MOAIGameSparksIOS::RegistrationFailResponse ( NSString *error ) {
+void MOAIGameSparksIOS::RegistrationFailResponse ( NSString *errors ) {
 
 	if ( !MOAILuaRuntime::IsValid ()) return;
+	
+	NSLog ( @"MOAIGameSparksIOS: RegistrationFailResponse" );
 
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 	
 	if ( this->PushListener ( ON_REGISTRATION_FAIL, state )) {
 		
-		OBJC_TO_LUA ( error, state );
+		OBJC_TO_LUA ( errors, state );
 		state.DebugCall ( 1, 0 );
 	}
 }
@@ -624,6 +894,8 @@ void MOAIGameSparksIOS::RegistrationFailResponse ( NSString *error ) {
 void MOAIGameSparksIOS::RegistrationSuccessResponse ( NSString *authToken, NSString *displayName, bool newPlayer, NSString *userId ) {
 
 	if ( !MOAILuaRuntime::IsValid ()) return;
+	
+	NSLog ( @"MOAIGameSparksIOS: RegistrationSuccessResponse" );
 
 	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
 
