@@ -268,9 +268,9 @@ int	MOAIGameSparksIOS::_requestChangeUserDetails ( lua_State* L ) {
 	GSChangeUserDetailsRequest* request = [[ GSChangeUserDetailsRequest alloc ] init ];
 	[ request setDisplayName:[ NSString stringWithUTF8String:displayName ]];
 	[ request setLanguage:[ NSString stringWithUTF8String:language ]];
-	[ request setNewPassword:[ NSString stringWithUTF8String:newPassword ]];
-	[ request setOldPassword:[ NSString stringWithUTF8String:oldPassword ]];
-	[ request setUserName:[ NSString stringWithUTF8String:userName ]];
+	//[ request setNewPassword:[ NSString stringWithUTF8String:newPassword ]];
+	//[ request setOldPassword:[ NSString stringWithUTF8String:oldPassword ]];
+	//[ request setUserName:[ NSString stringWithUTF8String:userName ]];
 	[ request setCallback:^ ( GSChangeUserDetailsResponse* response ) {
 		
 		NSDictionary* errors = [ response getErrors ];
