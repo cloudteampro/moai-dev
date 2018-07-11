@@ -45,6 +45,7 @@
 			buildPhases = (
 			);
 			dependencies = (
+				D751BF4B20F6686B00EA786C /* PBXTargetDependency */,
 				CDBA1E321B1E442500DCDC75 /* PBXTargetDependency */,
 				CDBA1E361B1E442500DCDC75 /* PBXTargetDependency */,
 				201122181C185856007F0077 /* PBXTargetDependency */,
@@ -5212,6 +5213,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = CDD06BD5139882D900AB0420;
 			remoteInfo = "libmoai-osx-luaext";
+		};
+		D751BF4A20F6686B00EA786C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CDA4B9871808ACA6000129F9;
+			remoteInfo = "libmoai-ios-vungle";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -20131,6 +20139,11 @@
 			target = CDD06BD5139882D900AB0420 /* libmoai-osx-luaext */;
 			targetProxy = CDFD7C321A0857EF00A94E6B /* PBXContainerItemProxy */;
 		};
+		D751BF4B20F6686B00EA786C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CDA4B9871808ACA6000129F9 /* libmoai-ios-vungle */;
+			targetProxy = D751BF4A20F6686B00EA786C /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -20346,7 +20359,7 @@
 					"$(inherited)",
 					"../../3rdparty/facebook-ios-sdk-4.23",
 					../../3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework,
-					"../../3rdparty/vungle-2.0.1/vunglepub.embeddedframework",
+					"../../3rdparty/vungle-6.2.0",
 					"../../3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
 					../../3rdparty/kontagent_ios_v1.5.6,
 					"../../3rdparty/adcolony-2.2.4",
@@ -21740,7 +21753,7 @@
 					"$(inherited)",
 					"../../3rdparty/facebook-ios-sdk-4.23",
 					../../3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework,
-					"../../3rdparty/vungle-2.0.1/vunglepub.embeddedframework",
+					"../../3rdparty/vungle-6.2.0",
 					"../../3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
 					../../3rdparty/kontagent_ios_v1.5.6,
 					"../../3rdparty/adcolony-2.2.4",
@@ -27466,7 +27479,7 @@
 					"$(inherited)",
 					"../../3rdparty/facebook-ios-sdk-4.23",
 					../../3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework,
-					"../../3rdparty/vungle-2.0.1/vunglepub.embeddedframework",
+					"../../3rdparty/vungle-6.2.0",
 					"../../3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
 					../../3rdparty/kontagent_ios_v1.5.6,
 					"../../3rdparty/adcolony-2.2.4",
@@ -27910,7 +27923,7 @@
 					"$(inherited)",
 					"../../3rdparty/facebook-ios-sdk-4.23",
 					../../3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework,
-					"../../3rdparty/vungle-2.0.1/vunglepub.embeddedframework",
+					"../../3rdparty/vungle-6.2.0",
 					"../../3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
 					../../3rdparty/kontagent_ios_v1.5.6,
 					"../../3rdparty/adcolony-2.2.4",

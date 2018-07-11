@@ -34,11 +34,9 @@ public class MoaiUnityAds {
 	//----------------------------------------------------------------//
 	public static void onCreate ( Activity activity ) {
 		
-		MoaiLog.i ( " MoaiUnityAds onCreate: UnityAds.changeActivity ( sActivity ) " );
+		MoaiLog.i ( " MoaiUnityAds onCreate: " );
 		
 		sActivity = activity;
-
-  		// UnityAds.changeActivity ( sActivity );
 	}
 	
 	//================================================================//
@@ -48,16 +46,11 @@ public class MoaiUnityAds {
 	//----------------------------------------------------------------//
 	public static boolean canShow ( String zone ) {
 
-		// if ( zone != null ) {
-		// 	try {
-		// 		UnityAds.setZone ( zone );
-		// 	} catch ( Exception e ) {
-		// 		e.printStackTrace ();
-		// 		return false;
-		// 	}
-		// }
-
-		return UnityAds.isReady (); // canShow
+		if ( zone != null ) {
+			return UnityAds.isReady ( zone );
+		} else {
+			return UnityAds.isReady ();
+		}
 	}
 
 	//----------------------------------------------------------------//
@@ -83,31 +76,26 @@ public class MoaiUnityAds {
 	//----------------------------------------------------------------//
 	public static boolean show ( String zone ) {
 
-		MoaiLog.i ( "MoaiUnityAds show" );
-		MoaiLog.i ( zone );
-		// if ( zone != null ) {
+		MoaiLog.i ( "MoaiUnityAds show" + zone );
 
-		// 	try {
-		// 		UnityAds.setZone ( zone );
-		// 	} catch ( Exception e ) {
-		// 		e.printStackTrace ();
-		// 		return false;
-		// 	}
-		// }
-		// if ( UnityAds.canShow ()) {
-		// 	return UnityAds.show ();
-		// }
-		// return false;
+		if ( zone != null ) {
 
-		if ( UnityAds.isReady ()) {
-			UnityAds.show (( Activity ) sActivity );
-			return true;
+			if ( UnityAds.isReady ( zone )) {
+				UnityAds.show (( Activity ) sActivity, zone );
+				return true;
+			}
+			return false;
+		} else {
+
+			if ( UnityAds.isReady ()) {
+				UnityAds.show (( Activity ) sActivity );
+				return true;
+			}
+			return false;
 		}
-		return false;
 	}
 
-	/* LISTENER */
-
+	//----------------------------------------------------------------//
 	private static class UnityAdsListener implements IUnityAdsListener {
 		//================================================================//
 		// MoaiUnityAds callback methods
@@ -118,7 +106,7 @@ public class MoaiUnityAds {
 
 			synchronized ( Moai.sAkuLock ) {
 
-				MoaiLog.i ( " MoaiUnityAds: onVideoReady" );
+				MoaiLog.i ( " MoaiUnityAds: onVideoReady" + zoneId );
 				MoaiUnityAds.AKUInvokeListener ( ListenerEvent.UNITYADS_READY.ordinal ());
 			}
 		}
@@ -128,7 +116,7 @@ public class MoaiUnityAds {
 
 			synchronized ( Moai.sAkuLock ) {
 				
-				MoaiLog.i ( " MoaiUnityAds: onVideoStart" );
+				MoaiLog.i ( " MoaiUnityAds: onVideoStart" + zoneId );
 				MoaiUnityAds.AKUInvokeListener ( ListenerEvent.UNITYADS_START.ordinal ());
 			}
 		}
@@ -138,7 +126,7 @@ public class MoaiUnityAds {
 
 			synchronized ( Moai.sAkuLock ) {
 				
-				MoaiLog.i ( " MoaiUnityAds: onVideoFinish" );
+				MoaiLog.i ( " MoaiUnityAds: onVideoFinish" + zoneId );
 				MoaiUnityAds.AKUVideoCompleted ( result.ordinal ());
 			}
 		}

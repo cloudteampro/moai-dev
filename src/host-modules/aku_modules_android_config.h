@@ -82,7 +82,7 @@
 	#endif
 
 	#ifndef AKU_WITH_ANDROID_VUNGLE
-		#define AKU_WITH_ANDROID_VUNGLE 0
+		#define AKU_WITH_ANDROID_VUNGLE 1
 	#endif
 
 	#ifndef AKU_WITH_ANDROID_UNITY_ADS

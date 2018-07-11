@@ -9,7 +9,11 @@
 
 #include <moai-core/headers.h>
 
-@class MOAIVungleDelegate;
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <VungleSDK/VungleSDK.h>
+
+@class MOAIVungleIOSDelegate;
 
 //================================================================//
 // MOAIVungleIOS
@@ -18,21 +22,21 @@ class MOAIVungleIOS :
 	public MOAIGlobalClass < MOAIVungleIOS, MOAIGlobalEventSource > {
 private:
 
-	MOAIVungleDelegate*		mDelegate;
-	bool					mWatchedAd;
+	MOAIVungleIOSDelegate*		mDelegate;
 	
 	//----------------------------------------------------------------//
-	static int		_allowAutoRotate			( lua_State* L );
-	static int		_cacheSizeGet				( lua_State* L );
-	static int		_cacheSizeSet				( lua_State* L );
 	static int		_displayAdvert				( lua_State* L );
 	static int		_init						( lua_State* L );
 	static int		_isVideoAvailable			( lua_State* L );
+	static int		_loadVideo					( lua_State* L );
 	
 public:
 		
 	enum {
-		AD_VIEWED,
+		VUNGLE_INITIALIZED,
+		VUNGLE_READY,
+		VUNGLE_START,
+		VUNGLE_FINISH
 	};
 
 	DECL_LUA_SINGLETON ( MOAIVungleIOS );
@@ -40,9 +44,15 @@ public:
 	//----------------------------------------------------------------//
 					MOAIVungleIOS				();
 					~MOAIVungleIOS				();
-	void			NotifyMoviePlayed			();
 	void			RegisterLuaClass			( MOAILuaState& state );
-	void			WatchedAd					( bool playedFull );
 };
+
+//================================================================//
+// MOAIVungleDelegate
+//================================================================//
+@interface MOAIVungleIOSDelegate : NSObject < VungleSDKDelegate > {
+@private
+}
+@end
 
 #endif  //MOAIVUNGLEIOS_H

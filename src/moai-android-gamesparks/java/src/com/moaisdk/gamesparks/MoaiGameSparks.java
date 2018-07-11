@@ -94,7 +94,7 @@ public class MoaiGameSparks {
 
 				synchronized ( Moai.sAkuLock ) {
 
-					MoaiLog.i ( "MoaiGameSparks OnAccountDetailsSuccessResponse: " );
+					MoaiLog.i ( "MoaiGameSparks OnAccountDetailsSuccessResponse: "+displayName+" "+userId );
 					MoaiGameSparks.AKUAccountDetailsSuccessResponse ( displayName, userId );
 				}
 			} else {
@@ -407,13 +407,13 @@ public class MoaiGameSparks {
 	//----------------------------------------------------------------//
 	public static void requestChangeUserDetails ( String displayName, String language, String newPassword, String oldPassword, String userName ) {
 
-		MoaiLog.i ( "MoaiGameSparks: requestChangeUserDetails" );
+		MoaiLog.i ( "MoaiGameSparks: requestChangeUserDetails "+displayName+" "+language+" "+userName );
 		GSAndroidPlatform.gs ().getRequestBuilder ().createChangeUserDetailsRequest ()
 				.setDisplayName ( displayName )
 				.setLanguage ( language )
-				.setNewPassword ( newPassword )
-				.setOldPassword (oldPassword )
-				.setUserName ( userName )
+				// .setNewPassword ( newPassword )
+				// .setOldPassword (oldPassword )
+				// .setUserName ( userName )
 				.send ( changeUserDetailsEventConsumer );
 	}
 
@@ -479,7 +479,7 @@ public class MoaiGameSparks {
 
 						try {
 
-							String attribute = ( String ) logEventResponse.getScriptData ().getAttribute ( key );
+							String attribute = logEventResponse.getScriptData ().getAttribute ( key ).toString();
 							if ( attribute != null ) {
 								json.put ( key, attribute );
 							}

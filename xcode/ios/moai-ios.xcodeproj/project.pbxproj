@@ -713,7 +713,7 @@
 		CDFD7E441A08BBF500A94E6B /* libChartboost.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libChartboost.a; path = "../../3rdparty/chartboost-4.2/libChartboost.a"; sourceTree = "<group>"; };
 		CDFD7E481A08BC0A00A94E6B /* libCrittercism_v4_3_3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCrittercism_v4_3_3.a; path = "../../3rdparty/crittercism-4.3.3/CrittercismSDK/libCrittercism_v4_3_3.a"; sourceTree = "<group>"; };
 		CDFD7E501A08BC4800A94E6B /* Tapjoy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Tapjoy.framework; path = ../../3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework/Tapjoy.framework; sourceTree = "<group>"; };
-		CDFD7E541A08BC7500A94E6B /* vunglepub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = vunglepub.framework; path = "../../3rdparty/vungle-2.0.1/vunglepub.embeddedframework/vunglepub.framework"; sourceTree = "<group>"; };
+		CDFD7E541A08BC7500A94E6B /* VungleSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VungleSDK.framework; path = "../../3rdparty/vungle-6.2.0/VungleSDK.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -853,7 +853,7 @@
 				0711070413C637F000EE7C53 /* CoreTelephony.framework */,
 				07E6C6A0140C5EBD004D1227 /* GameKit.framework */,
 				079530CD1447A0FF00143A72 /* MediaPlayer.framework */,
-				CDFD7E541A08BC7500A94E6B /* vunglepub.framework */,
+				CDFD7E541A08BC7500A94E6B /* VungleSDK.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
