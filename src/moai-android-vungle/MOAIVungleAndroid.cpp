@@ -15,11 +15,10 @@
 int MOAIVungleAndroid::_displayAdvert ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIVungleAndroid, "" )
 
-	bool incentivized		= state.GetValue < bool >( 1, true );
-	bool showCloseButton	= state.GetValue < bool >( 2, false );
+	MOAIJString placementId = self->GetJString ( state.GetValue < cc8* >( 1, "" ));
 
-	jmethodID displayAdvert = self->GetStaticMethod ( "displayAdvert", "(ZZ)Z" );
-	bool result = self->CallStaticBooleanMethod ( displayAdvert, incentivized, showCloseButton );
+	jmethodID displayAdvert = self->GetStaticMethod ( "displayAdvert", "(Ljava/lang/String;)Z" );
+	bool result = self->CallStaticBooleanMethod ( displayAdvert, ( jstring )placementId );
 	state.Push ( result );
 	return 1;
 }
@@ -29,9 +28,10 @@ int	MOAIVungleAndroid::_init ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIVungleAndroid, "" )
 	
 	MOAIJString appID = self->GetJString ( state.GetValue < cc8* >( 1, "" ));
+	MOAIJString placementId = self->GetJString ( state.GetValue < cc8* >( 2, "" ));
 
-	jmethodID init = self->GetStaticMethod ( "init", "(Ljava/lang/String;)V" );
-	self->CallStaticVoidMethod ( init, ( jstring )appID );
+	jmethodID init = self->GetStaticMethod ( "init", "(Ljava/lang/String;Ljava/lang/String;)V" );
+	self->CallStaticVoidMethod ( init, ( jstring )appID, ( jstring )placementId );
 
 	return 0;
 }
@@ -40,10 +40,22 @@ int	MOAIVungleAndroid::_init ( lua_State* L ) {
 int	MOAIVungleAndroid::_isVideoAvailable ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIVungleAndroid, "" )
 	
-	bool debug		= state.GetValue < bool >( 1, true );
+	MOAIJString placementId = self->GetJString ( state.GetValue < cc8* >( 1, "" ));
 	
-	jmethodID isVideoAvailable = self->GetStaticMethod ( "isVideoAvailable", "(Z)Z" );
-	bool result = self->CallStaticBooleanMethod ( isVideoAvailable, debug );
+	jmethodID isVideoAvailable = self->GetStaticMethod ( "isVideoAvailable", "(Ljava/lang/String;)Z" );
+	bool result = self->CallStaticBooleanMethod ( isVideoAvailable, ( jstring )placementId );
+	state.Push ( result );
+	return 1;
+}
+
+//----------------------------------------------------------------//
+int	MOAIVungleAndroid::_loadVideo ( lua_State* L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIVungleAndroid, "" )
+	
+	MOAIJString placementId = self->GetJString ( state.GetValue < cc8* >( 1, "" ));
+	
+	jmethodID loadVideo = self->GetStaticMethod ( "loadVideo", "(Ljava/lang/String;)Z" );
+	bool result = self->CallStaticBooleanMethod ( loadVideo, ( jstring )placementId );
 	state.Push ( result );
 	return 1;
 }
@@ -67,16 +79,18 @@ MOAIVungleAndroid::~MOAIVungleAndroid () {
 //----------------------------------------------------------------//
 void MOAIVungleAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 
-	state.SetField ( -1, "AD_START",		( u32 )AD_START );
-	state.SetField ( -1, "AD_END", 			( u32 )AD_END );
-	state.SetField ( -1, "AD_VIEWED", 		( u32 )AD_VIEWED );
+	state.SetField ( -1, "VUNGLE_INITIALIZED",	( u32 )VUNGLE_INITIALIZED );
+	state.SetField ( -1, "VUNGLE_READY", 		( u32 )VUNGLE_READY );
+	state.SetField ( -1, "VUNGLE_START", 		( u32 )VUNGLE_START );
+	state.SetField ( -1, "VUNGLE_FINISH", 		( u32 )VUNGLE_FINISH );
 
 	luaL_Reg regTable [] = {
-		{ "displayAdvert",				_displayAdvert },
-		{ "getListener",				&MOAIGlobalEventSource::_getListener < MOAIVungleAndroid > },
-		{ "init",						_init },
-		{ "isVideoAvailable",			_isVideoAvailable },
-		{ "setListener",				&MOAIGlobalEventSource::_setListener < MOAIVungleAndroid > },
+		{ "displayAdvert",		_displayAdvert },
+		{ "getListener",		&MOAIGlobalEventSource::_getListener < MOAIVungleAndroid > },
+		{ "init",				_init },
+		{ "isVideoAvailable",	_isVideoAvailable },
+		{ "loadVideo",			_loadVideo },
+		{ "setListener",		&MOAIGlobalEventSource::_setListener < MOAIVungleAndroid > },
 		{ NULL, NULL }
 	};
 
@@ -94,13 +108,3 @@ extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_vungle_MoaiVungle_AKUInvokeLi
 	MOAIVungleAndroid::Get ().InvokeListener (( u32 )eventID );
 }
 
-//----------------------------------------------------------------//
-extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_vungle_MoaiVungle_AKUOnView ( JNIEnv* env, jclass obj, jdouble watched, jdouble length ) {
-
-	ZLLog::LogF ( 1, ZLLog::CONSOLE, "Java_com_moaisdk_vungle_MoaiVungle_AKUOnView\n" );
-	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
-	if ( MOAIVungleAndroid::Get ().PushListener ( MOAIVungleAndroid::AD_VIEWED, state )) {
-		state.Push ( watched == length );
-		state.DebugCall ( 1, 0 );
-	}
-}

@@ -10,23 +10,27 @@ import com.moaisdk.core.MoaiLog;
 
 import android.app.Activity;
 
-import com.vungle.sdk.VunglePub;
-
-@SuppressWarnings("unused")
+import com.vungle.publisher.VungleAdEventListener;
+import com.vungle.publisher.VungleInitListener;
+import com.vungle.publisher.VunglePub;
 
 //================================================================//
 // MoaiVungle
 //================================================================//
 
-public class MoaiVungle implements VunglePub.EventListener {
+public class MoaiVungle implements VunglePub.VungleAdEventListener {
 
 	public enum ListenerEvent {
-		AD_START,
-		AD_END,
-		AD_VIEWED,
+		VUNGLE_INITIALIZED,
+		VUNGLE_READY,
+		VUNGLE_START,
+		VUNGLE_FINISH,
     }
 
 	private static Activity sActivity = null;
+    private static VunglePub vunglePub = null;
+    private static MoaiVungle vungleListener = null;
+    private static boolean isAvailable = false;
 
 	protected static native void AKUInvokeListener ( int eventID );
 	protected static native void AKUOnView ( double watched, double length );
@@ -37,6 +41,9 @@ public class MoaiVungle implements VunglePub.EventListener {
 		MoaiLog.i ( "MoaiVungle: onCreate" );
 
 		sActivity = activity;
+
+		vunglePub = VunglePub.getInstance();
+		vungleListener = new MoaiVungle ();
 	}
 
 	//----------------------------------------------------------------//
@@ -44,7 +51,7 @@ public class MoaiVungle implements VunglePub.EventListener {
 
 		MoaiLog.i ( "MoaiVungle: onPause" );
 
-		VunglePub.onPause ();
+		vunglePub.onPause ();
 	}
 
 	//----------------------------------------------------------------//
@@ -52,58 +59,99 @@ public class MoaiVungle implements VunglePub.EventListener {
 
 		MoaiLog.i ( "MoaiVungle: onResume" );
 
-		VunglePub.onResume ();
+		vunglePub.onResume ();
 	}
+
+    public static void onDestroy() {
+
+		MoaiLog.i ( "MoaiVungle: onDestroy" );
+
+        vunglePub.removeEventListeners ( vungleListener );
+    }
 
 	//================================================================//
 	// MoaiVungle JNI callback methods
 	//================================================================//
 
 	//----------------------------------------------------------------//
-	public static boolean displayAdvert ( boolean incentivized, boolean showCloseButton ) {
+	public static boolean displayAdvert ( String placement ) {
+
+        MoaiLog.i ( "MoaiVungle displayAdvert " + placement );
 		
-		if ( incentivized ) {
-			return VunglePub.displayIncentivizedAdvert ( showCloseButton );
-		}
-		return VunglePub.displayAdvert ();
+		vunglePub.playAd ( placement, null );
+		return isAvailable;
 	}
 
 	//----------------------------------------------------------------//
-	public static void init ( String appId ) {
-		
-		VunglePub.init ( sActivity, appId );
-		VunglePub.setEventListener ( new MoaiVungle ());
+	public static void init ( String appId, String placement ) {
+
+        MoaiLog.i ( "MoaiVungle init" );
+
+        vunglePub.init ( sActivity, appId, new String[] { placement }, new VungleInitListener () {
+            @Override
+            public void onSuccess () {
+
+                MoaiLog.i ( "MoaiVungle init success" );
+
+                vunglePub.clearAndSetEventListeners ( vungleListener );
+
+				AKUInvokeListener ( ListenerEvent.VUNGLE_INITIALIZED.ordinal ());
+            }
+
+            @Override
+            public void onFailure ( Throwable error ) {
+
+                MoaiLog.i ( "MoaiVungle init failure: " );
+            }
+        });
 	}
 
 	//----------------------------------------------------------------//
-	public static boolean isVideoAvailable ( boolean debug ) {
+	public static boolean isVideoAvailable ( placement ) {
 		
-		//MoaiLog.i ( "MoaiVungle: isVideoAvailable" );
-		return VunglePub.isVideoAvailable ( debug );
+        MoaiLog.i ( "MoaiVungle isVideoAvailable " + placement );
+
+		return vunglePub.isAdPlayable ( placement );
+		//return isAvailable;
+	}
+
+	//----------------------------------------------------------------//
+	public static boolean displayAdvert ( String placement ) {
+
+        MoaiLog.i ( "MoaiVungle displayAdvert " + placement );
+
+		vunglePub.loadAd ( placement );
 	}
 
 	//================================================================//
 	// VunglePub.EventListener
 	//================================================================//
 
-	//----------------------------------------------------------------//
-	public void onVungleAdEnd () {
-		
-		MoaiLog.i ( "MoaiVungle: onVungleAdEnd" );
-		AKUInvokeListener ( ListenerEvent.AD_END.ordinal ());
-	}
+    public void onAdEnd ( String placementReferenceId, boolean wasSuccessfulView, boolean wasCallToActionClicked ) {
 
-	//----------------------------------------------------------------//
-	public void onVungleAdStart () {
-		
-		MoaiLog.i ( "MoaiVungle: onVungleAdStart" );
-		AKUInvokeListener ( ListenerEvent.AD_START.ordinal ());
-	}
+		MoaiLog.i ( "MoaiVungle: onAdEnd " + placementReferenceId + " " + wasSuccessfulView + " " + wasCallToActionClicked );
+		AKUInvokeListener ( ListenerEvent.VUNGLE_FINISH.ordinal ());
+    }
 
-	//----------------------------------------------------------------//
-	public void onVungleView ( double watched, double length ) {
-		
-		MoaiLog.i ( String.format ( "MoaiVungle: onVungleView (%f, %f)", watched, length ));
-		AKUOnView ( watched, length );
-	}
+    public void onAdStart ( String placementReferenceId ) {
+
+		MoaiLog.i ( "MoaiVungle: onAdStart " + placementReferenceId );
+		AKUInvokeListener ( ListenerEvent.VUNGLE_START.ordinal ());
+    }
+
+    public void onUnableToPlayAd ( String placementReferenceId, String reason ) {
+
+		MoaiLog.i ( "MoaiVungle: onUnableToPlayAd " + placementReferenceId + " " + reason ); 
+    }
+
+    public void onAdAvailabilityUpdate ( String placementReferenceId, boolean isAdAvailable ) {
+
+		MoaiLog.i ( "MoaiVungle: onAdAvailabilityUpdate " + placementReferenceId + " " + isAdAvailable );
+
+		if ( isAdAvailable ) {
+
+			AKUInvokeListener ( ListenerEvent.VUNGLE_READY.ordinal ());
+		}
+		isAvailable = isAdAvailable;
+    }
 }

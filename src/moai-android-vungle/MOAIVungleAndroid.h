@@ -19,15 +19,17 @@ private:
 	static int	_displayAdvert		( lua_State* L );
 	static int	_init				( lua_State* L );
 	static int	_isVideoAvailable	( lua_State* L );
+	static int	_loadVideo			( lua_State* L );
 
 public:
 
 	DECL_LUA_SINGLETON ( MOAIVungleAndroid );
 
 	enum {
-		AD_START,
-		AD_END,
-		AD_VIEWED,
+		VUNGLE_INITIALIZED,
+		VUNGLE_READY,
+		VUNGLE_START,
+		VUNGLE_FINISH
 	};
 
 	//----------------------------------------------------------------//
