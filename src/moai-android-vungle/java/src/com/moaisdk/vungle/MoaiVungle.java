@@ -18,7 +18,7 @@ import com.vungle.publisher.VunglePub;
 // MoaiVungle
 //================================================================//
 
-public class MoaiVungle implements VunglePub.VungleAdEventListener {
+public class MoaiVungle implements VungleAdEventListener {
 
 	public enum ListenerEvent {
 		VUNGLE_INITIALIZED,
@@ -107,7 +107,7 @@ public class MoaiVungle implements VunglePub.VungleAdEventListener {
 	}
 
 	//----------------------------------------------------------------//
-	public static boolean isVideoAvailable ( placement ) {
+	public static boolean isVideoAvailable ( String placement ) {
 		
         MoaiLog.i ( "MoaiVungle isVideoAvailable " + placement );
 
@@ -116,9 +116,9 @@ public class MoaiVungle implements VunglePub.VungleAdEventListener {
 	}
 
 	//----------------------------------------------------------------//
-	public static boolean displayAdvert ( String placement ) {
+	public static void loadVideo ( String placement ) {
 
-        MoaiLog.i ( "MoaiVungle displayAdvert " + placement );
+        MoaiLog.i ( "MoaiVungle loadVideo " + placement );
 
 		vunglePub.loadAd ( placement );
 	}
@@ -127,23 +127,27 @@ public class MoaiVungle implements VunglePub.VungleAdEventListener {
 	// VunglePub.EventListener
 	//================================================================//
 
+	//----------------------------------------------------------------//
     public void onAdEnd ( String placementReferenceId, boolean wasSuccessfulView, boolean wasCallToActionClicked ) {
 
 		MoaiLog.i ( "MoaiVungle: onAdEnd " + placementReferenceId + " " + wasSuccessfulView + " " + wasCallToActionClicked );
 		AKUInvokeListener ( ListenerEvent.VUNGLE_FINISH.ordinal ());
     }
 
+	//----------------------------------------------------------------//
     public void onAdStart ( String placementReferenceId ) {
 
 		MoaiLog.i ( "MoaiVungle: onAdStart " + placementReferenceId );
 		AKUInvokeListener ( ListenerEvent.VUNGLE_START.ordinal ());
     }
 
+	//----------------------------------------------------------------//
     public void onUnableToPlayAd ( String placementReferenceId, String reason ) {
 
 		MoaiLog.i ( "MoaiVungle: onUnableToPlayAd " + placementReferenceId + " " + reason ); 
     }
 
+	//----------------------------------------------------------------//
     public void onAdAvailabilityUpdate ( String placementReferenceId, boolean isAdAvailable ) {
 
 		MoaiLog.i ( "MoaiVungle: onAdAvailabilityUpdate " + placementReferenceId + " " + isAdAvailable );

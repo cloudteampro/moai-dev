@@ -54,7 +54,7 @@ int	MOAIVungleAndroid::_loadVideo ( lua_State* L ) {
 	
 	MOAIJString placementId = self->GetJString ( state.GetValue < cc8* >( 1, "" ));
 	
-	jmethodID loadVideo = self->GetStaticMethod ( "loadVideo", "(Ljava/lang/String;)Z" );
+	jmethodID loadVideo = self->GetStaticMethod ( "loadVideo", "(Ljava/lang/String;)V" );
 	bool result = self->CallStaticBooleanMethod ( loadVideo, ( jstring )placementId );
 	state.Push ( result );
 	return 1;
