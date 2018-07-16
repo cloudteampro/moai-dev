@@ -18,6 +18,25 @@
 //================================================================//
 
 //----------------------------------------------------------------//
+/**	@name	canRenderGlyph
+	@text   Check if glyph outline exists in font.
+ 
+	@in		MOAIFont    self
+	@in     string      string containing needed glyph
+	@in     size        glyph size.
+	@out	bool        result
+*/
+int MOAIFont::_canRenderGlyph ( lua_State* L ) {
+	MOAI_LUA_SETUP ( MOAIFont, "U" )
+	
+	cc8* charCodes	= state.GetValue < cc8* >( 2, "" );
+	float size		= state.GetValue < float >( 3, 16.0f );
+	
+	state.Push ( self->CanRenderGlyph ( charCodes, size ));
+	return 1;
+}
+
+//----------------------------------------------------------------//
 /**	@lua	getCache
 	@text	Returns glyph cache.
 	
@@ -435,6 +454,25 @@ MOAIGlyphSet& MOAIFont::AffirmGlyphSet ( float size ) {
 }
 
 //----------------------------------------------------------------//
+bool MOAIFont::CanRenderGlyph ( cc8* charCodes, float size ) {
+	
+	if ( !this->mReader ) return false;
+	
+	this->mReader->OpenFontFile ( this->mFilename );
+	this->mReader->SelectFace ( size );
+	
+	bool result = true;
+	int idx = 0;
+	while ( charCodes [ idx ] && result ) {
+		u32 c = moai_u8_nextchar ( charCodes, &idx );
+		result = result && ( this->mReader->SelectGlyph ( c ) == MOAIFontReader::OK );
+	}
+	
+	this->mReader->CloseFontFile ();
+	return result;
+}
+
+//----------------------------------------------------------------//
 // iterate through the pending glyphs in each set and attempt to
 // update them to match target - i.e. metrics or metrics and bitmap
 void MOAIFont::BuildKerning ( MOAIGlyph* glyphs, MOAIGlyph* pendingGlyphs ) {
@@ -756,6 +794,7 @@ void MOAIFont::RegisterLuaFuncs ( MOAILuaState& state ) {
 	MOAIInstanceEventSource::RegisterLuaFuncs ( state );
 	
 	luaL_Reg regTable [] = {
+		{ "canRenderGlyph",				_canRenderGlyph },
 		{ "getCache",					_getCache },
 		{ "getDefaultSize",				_getDefaultSize },
 		{ "getFlags",					_getFlags },
