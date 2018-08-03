@@ -47,8 +47,11 @@ int MOAIUnityAdsIOS::_canShow ( lua_State* L ) {
 	bool canShow = false;
 
 	if ( zone ) {
+		
+		NSLog ( @"MOAIUnityAdsIOS: canShow for zone %@", [ NSString stringWithUTF8String:zone ] );
 		canShow = [ UnityAds isReady: [ NSString stringWithUTF8String:zone ]];
 	} else {
+
 		canShow = [ UnityAds isReady ];
 	}
 
@@ -78,8 +81,11 @@ int MOAIUnityAdsIOS::_show ( lua_State* L ) {
 		UIViewController* rootVC = [ window rootViewController ];
 			
 		if ( zone ) {
+
+			NSLog ( @"MOAIUnityAdsIOS: show for zone %@", [ NSString stringWithUTF8String:zone ] );
 			[ UnityAds show:rootVC placementId: [ NSString stringWithUTF8String:zone ]];
 		} else {
+
 			[ UnityAds show:rootVC ];
 		}
 		state.Push ( true );

@@ -46,6 +46,8 @@ public class MoaiUnityAds {
 	//----------------------------------------------------------------//
 	public static boolean canShow ( String zone ) {
 
+		MoaiLog.i ( " MoaiUnityAds: canShow for zone "+zone );
+
 		if ( zone != null ) {
 			return UnityAds.isReady ( zone );
 		} else {
@@ -56,7 +58,7 @@ public class MoaiUnityAds {
 	//----------------------------------------------------------------//
 	public static void init ( String gameID, boolean debug, boolean test ) {
 
-		MoaiLog.i ( " MoaiUnityAds: initialize with gameID" );
+		MoaiLog.i ( " MoaiUnityAds: initialize with gameID "+gameID+" debug "+debug );
 
 		UnityAdsListener unityAdsListener = new UnityAdsListener();
 
@@ -76,7 +78,7 @@ public class MoaiUnityAds {
 	//----------------------------------------------------------------//
 	public static boolean show ( String zone ) {
 
-		MoaiLog.i ( "MoaiUnityAds show" + zone );
+		MoaiLog.i ( "MoaiUnityAds show for zone " + zone );
 
 		if ( zone != null ) {
 
