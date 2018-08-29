@@ -86,6 +86,25 @@
 		
 		return result;
 	}
+	
+	//----------------------------------------------------------------//
+	-( void )onKeyboardHide:(NSNotification *)notification {
+		UNUSED ( notification );
+
+		BOOL result = YES;
+		
+		MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
+		MOAIKeyboardIOS& keyboard = MOAIKeyboardIOS::Get ();
+		
+		if ( keyboard.PushListener ( MOAIKeyboardIOS::EVENT_RETURN, state )) {
+			state.DebugCall ( 0, 1 );
+			result = state.GetValue < bool >( -1, true );
+		}
+		
+		if ( result ) {
+			keyboard.Finish ();
+		}
+	}
 
 @end
 
@@ -183,6 +202,9 @@ void MOAIKeyboardIOS::Finish () {
 		[ this->mTextField removeFromSuperview ];
 		
 		id delegate = [ this->mTextField delegate ];
+
+		[[ NSNotificationCenter defaultCenter ] removeObserver:delegate ];
+
 		[ this->mTextField setDelegate:0 ];
 		[ delegate release ];
 		
@@ -269,9 +291,12 @@ void MOAIKeyboardIOS::ShowKeyboard ( cc8* text, int type, int returnKey, bool se
 		
 		CGRect frame = CGRectMake ( 0, 0, 320, 24 );
 		this->mTextField = [[ UITextField alloc ] initWithFrame:frame ];
-		[ this->mTextField setDelegate:[[ MOAITextFieldDelegate alloc ] init ]];
+		MOAITextFieldDelegate* textFieldDelegate = [[ MOAITextFieldDelegate alloc ] init ];
+		[ this->mTextField setDelegate: textFieldDelegate ];
 		
 		[ window addSubview:this->mTextField ];
+
+		[[ NSNotificationCenter defaultCenter ] addObserver:textFieldDelegate selector:@selector ( onKeyboardHide: ) name:UIKeyboardWillHideNotification object:nil ];
 	}
 	
 	[ this->mTextField setHidden:YES ];

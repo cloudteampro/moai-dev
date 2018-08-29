@@ -4,6 +4,7 @@
 #include "pch.h"
 
 #import <AudioToolbox/AudioToolbox.h>
+#import <StoreKit/StoreKit.h>
 
 #import <moai-apple/NSData+MOAILib.h>
 #import <moai-apple/NSDate+MOAILib.h>
@@ -382,6 +383,22 @@ int MOAIAppIOS::_sendMail ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+/**	@lua	showReview
+ @text	Open your app's review os dialog. Works on iOS 10.3 and later
+ 
+ @out	nil
+ */
+int MOAIAppIOS::_showReview ( lua_State* L ) {
+	MOAILuaState state ( L );
+	
+	if([SKStoreReviewController class]){
+		[SKStoreReviewController requestReview] ;
+	}
+	
+	return 0;
+}
+
+//----------------------------------------------------------------//
 /** @lua _takeCamera
 	@text Allows to pick a photo from the CameraRoll or from the Camera
 	@in function	callback
@@ -545,6 +562,7 @@ void MOAIAppIOS::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "openURL",					_openURL },
 		{ "openURLWithParams",			_openURLWithParams },
 		{ "sendMail",					_sendMail },
+		{ "showReview",					_showReview },
 		{ "setListener",				&MOAIGlobalEventSource::_setListener < MOAIAppIOS > },
 		{ "takeCamera",					_takeCamera },
 		{ "vibrate",					_vibrate },
