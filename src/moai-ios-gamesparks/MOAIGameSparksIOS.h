@@ -36,6 +36,8 @@
 	@const	ON_GET_ACCOUNT_DETAILS_SUCCESS
 	@const	ON_LOG_EVENT_FAIL
 	@const	ON_LOG_EVENT_SUCCESS
+	@const	ON_PUSH_REGISTRATION_FAIL
+	@const	ON_PUSH_REGISTRATION_SUCCESS
 	@const	ON_REGISTRATION_FAIL
 	@const	ON_REGISTRATION_SUCCESS
 */
@@ -52,6 +54,7 @@ private:
 	static int	_requestDeviceAuthentication	( lua_State* L );
 	static int	_requestFacebookConnect			( lua_State* L );
 	static int	_requestLogEvent				( lua_State* L );
+	static int	_requestPushRegistration		( lua_State* L );
 	static int	_requestRegistration			( lua_State* L );
 
 public:
@@ -74,6 +77,8 @@ public:
 		ON_GET_ACCOUNT_DETAILS_SUCCESS,
 		ON_LOG_EVENT_FAIL,
         ON_LOG_EVENT_SUCCESS,
+		ON_PUSH_REGISTRATION_FAIL,
+		ON_PUSH_REGISTRATION_SUCCESS,
         ON_REGISTRATION_FAIL,
 		ON_REGISTRATION_SUCCESS
 	};
@@ -96,6 +101,8 @@ public:
 	void	LogEventSuccessResponse					( NSString *eventKey, NSMutableDictionary* attributes, GSLogEventResponse* request );
 			MOAIGameSparksIOS						();
 			~MOAIGameSparksIOS						();
+	void	PushRegistrationFailResponse			( NSString *errors );
+	void	PushRegistrationSuccessResponse			( NSString *registrationId );
 	void	RegisterLuaClass						( MOAILuaState& state );
 	void	RegistrationFailResponse				( NSString *errors );
 	void	RegistrationSuccessResponse				( NSString *authToken, NSString *displayName, bool newPlayer, NSString *userId );

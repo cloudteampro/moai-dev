@@ -31,6 +31,8 @@
 	@const	ON_GET_ACCOUNT_DETAILS_SUCCESS
 	@const	ON_LOG_EVENT_FAIL
 	@const	ON_LOG_EVENT_SUCCESS
+	@const	ON_PUSH_REGISTRATION_FAIL
+	@const	ON_PUSH_REGISTRATION_SUCCESS
 	@const	ON_REGISTRATION_FAIL
 	@const	ON_REGISTRATION_SUCCESS
 */
@@ -47,6 +49,7 @@ private:
 	jmethodID	mJava_RequestDeviceAuthentication;
 	jmethodID	mJava_RequestFacebookConnect;
 	jmethodID	mJava_RequestLogEvent;
+	jmethodID	mJava_RequestPushRegistration;
 	jmethodID	mJava_RequestRegistration;
 
 	//----------------------------------------------------------------//
@@ -58,6 +61,7 @@ private:
 	static int	_requestDeviceAuthentication	( lua_State* L );
 	static int	_requestFacebookConnect			( lua_State* L );
 	static int	_requestLogEvent				( lua_State* L );
+	static int	_requestPushRegistration		( lua_State* L );
 	static int	_requestRegistration			( lua_State* L );
 
 public:
@@ -80,6 +84,8 @@ public:
 		ON_GET_ACCOUNT_DETAILS_SUCCESS,
 		ON_LOG_EVENT_FAIL,
         ON_LOG_EVENT_SUCCESS,
+		ON_PUSH_REGISTRATION_FAIL,
+		ON_PUSH_REGISTRATION_SUCCESS,
         ON_REGISTRATION_FAIL,
 		ON_REGISTRATION_SUCCESS
 	};
@@ -102,6 +108,8 @@ public:
 	void	LogEventSuccessResponse					( cc8* eventKey, cc8* attributes );
 			MOAIGameSparksAndroid					();
 			~MOAIGameSparksAndroid					();
+	void	PushRegistrationFailResponse			( cc8* errors );
+	void	PushRegistrationSuccessResponse			( cc8* registrationId );
 	void	RegisterLuaClass						( MOAILuaState& state );
 	void	RegistrationFailResponse				( cc8* errors );
 	void	RegistrationSuccessResponse				( cc8* authToken, cc8* displayName, bool newPlayer, cc8* userId );

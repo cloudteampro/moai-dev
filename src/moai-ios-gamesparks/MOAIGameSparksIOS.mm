@@ -495,6 +495,54 @@ int	MOAIGameSparksIOS::_requestLogEvent ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+/**	@lua	requestPushRegistration
+	@text	Request Push Registration.
+				
+	@in 	string	deviceOS		The type of id, valid values are ios, android, fcm, wp8, w8, kindle or viber
+	@in 	string	pushId			The push notification identifier for the device
+	@out 	nil
+*/
+int	MOAIGameSparksIOS::_requestPushRegistration ( lua_State* L ) {
+
+	NSLog ( @"MOAIGameSparksIOS: requestPushRegistration" );
+
+	MOAILuaState state ( L );
+
+	cc8* deviceOS = state.GetValue < cc8* >( 1, 0 );
+	cc8* pushId = state.GetValue < cc8* >( 2, 0 );
+
+	GSPushRegistrationRequest* request = [[ GSPushRegistrationRequest alloc ] init ];
+    [ request setDeviceOS:[ NSString stringWithUTF8String:deviceOS ]];
+    [ request setPushId:[ NSString stringWithUTF8String:pushId ]];
+    [ request setCallback:^ ( GSPushRegistrationResponse* response ) {
+	    NSString* registrationId = [ response getRegistrationId ];
+    	NSDictionary* scriptData = [ response getScriptData ];
+		NSDictionary* errors = [ response getErrors ];
+
+		if ( !errors ) {
+			
+			MOAIGameSparksIOS::Get ().PushRegistrationSuccessResponse ( registrationId );
+		} else {
+			
+			NSError *error;
+			NSData *jsonData = [ NSJSONSerialization dataWithJSONObject:errors options:NSJSONWritingPrettyPrinted error:&error ];
+			
+			if ( !jsonData ) {
+				
+				MOAIGameSparksIOS::Get ().PushRegistrationFailResponse ( @"UNDEFINED_ERROR" );
+			} else {
+				
+				NSString *jsonString = [[ NSString alloc ] initWithData:jsonData encoding:NSUTF8StringEncoding ];
+				MOAIGameSparksIOS::Get ().PushRegistrationFailResponse ( jsonString );
+			}
+		}
+    }];
+    [[ GS gs ] send:request ];
+
+	return 0;
+}
+
+//----------------------------------------------------------------//
 /**	@lua	requestRegistration
 	@text	Request Registration.
 				
@@ -835,6 +883,38 @@ MOAIGameSparksIOS::~MOAIGameSparksIOS () {
 }
 
 //----------------------------------------------------------------//
+void MOAIGameSparksIOS::PushRegistrationFailResponse ( NSString *errors ) {
+
+	if ( !MOAILuaRuntime::IsValid ()) return;
+	
+	NSLog ( @"MOAIGameSparksIOS: PushRegistrationFailResponse" );
+
+	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
+	
+	if ( this->PushListener ( ON_PUSH_REGISTRATION_FAIL, state )) {
+		
+		OBJC_TO_LUA ( errors, state );
+		state.DebugCall ( 1, 0 );
+	}
+}
+
+//----------------------------------------------------------------//
+void MOAIGameSparksIOS::PushRegistrationSuccessResponse ( NSString *registrationId ) {
+
+	if ( !MOAILuaRuntime::IsValid ()) return;
+	
+	NSLog ( @"MOAIGameSparksIOS: PushRegistrationSuccessResponse" );
+
+	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
+
+	if ( this->PushListener ( ON_PUSH_REGISTRATION_SUCCESS, state )) {
+
+		OBJC_TO_LUA ( registrationId, state );
+		state.DebugCall ( 1, 0 );
+	}
+}
+
+//----------------------------------------------------------------//
 void MOAIGameSparksIOS::RegisterLuaClass ( MOAILuaState& state ) {
 
 	state.SetField ( -1, "ON_AUTHENTICATE_FAIL",				( u32 )ON_AUTHENTICATE_FAIL );
@@ -852,6 +932,8 @@ void MOAIGameSparksIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "ON_GET_ACCOUNT_DETAILS_SUCCESS",		( u32 )ON_GET_ACCOUNT_DETAILS_SUCCESS );
 	state.SetField ( -1, "ON_LOG_EVENT_FAIL",					( u32 )ON_LOG_EVENT_FAIL );
 	state.SetField ( -1, "ON_LOG_EVENT_SUCCESS",				( u32 )ON_LOG_EVENT_SUCCESS );
+	state.SetField ( -1, "ON_PUSH_REGISTRATION_FAIL",			( u32 )ON_PUSH_REGISTRATION_FAIL );
+	state.SetField ( -1, "ON_PUSH_REGISTRATION_SUCCESS",		( u32 )ON_PUSH_REGISTRATION_SUCCESS );
 	state.SetField ( -1, "ON_REGISTRATION_FAIL",				( u32 )ON_REGISTRATION_FAIL );
 	state.SetField ( -1, "ON_REGISTRATION_SUCCESS",				( u32 )ON_REGISTRATION_SUCCESS );
 
@@ -865,6 +947,7 @@ void MOAIGameSparksIOS::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "requestDeviceAuthentication",	_requestDeviceAuthentication },
 		{ "requestFacebookConnect",			_requestFacebookConnect },
 		{ "requestLogEvent",				_requestLogEvent },
+		{ "requestPushRegistration",		_requestPushRegistration },
 		{ "requestRegistration",			_requestRegistration },
 		{ "setListener",					&MOAIGlobalEventSource::_setListener < MOAIGameSparksIOS > },
 		{ NULL, NULL }
@@ -872,7 +955,6 @@ void MOAIGameSparksIOS::RegisterLuaClass ( MOAILuaState& state ) {
 
 	luaL_register ( state, 0, regTable );
 }
-
 
 //----------------------------------------------------------------//
 void MOAIGameSparksIOS::RegistrationFailResponse ( NSString *errors ) {

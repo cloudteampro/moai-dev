@@ -307,6 +307,22 @@ int MOAIAppAndroid::_share ( lua_State* L ) {
 
 //----------------------------------------------------------------//
 // TODO: doxygen
+int MOAIAppAndroid::_showInstallPrompt ( lua_State* L ) {
+	MOAILuaState state ( L );
+	
+	JNI_GET_ENV ( jvm, env );
+	jclass t_class = env->FindClass ( "com/moaisdk/core/Moai" );
+	jmethodID t_method = env->GetStaticMethodID ( t_class, "showInstallPrompt", "()V" );
+
+	if ( t_class != NULL && t_method ) {
+		env->CallStaticVoidMethod ( t_class, t_method );
+	}
+
+	return 0;
+}
+
+//----------------------------------------------------------------//
+// TODO: doxygen
 int MOAIAppAndroid::_takePicture( lua_State* L ) {
 	MOAILuaState state( L);
 
@@ -386,6 +402,7 @@ void MOAIAppAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "openURL",				_openURL },
 		{ "setListener",			&MOAIGlobalEventSource::_setListener < MOAIAppAndroid > },
 		{ "share",					_share },
+		{ "showInstallPrompt",		_showInstallPrompt },
 		{ "takePicture",            _takePicture },
 		{ NULL, NULL }
 	};

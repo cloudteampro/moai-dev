@@ -19,6 +19,10 @@ void AKUModulesAndroidAppFinalize () {
 		AKUAndroidAdColonyAppFinalize ();
 	#endif
 
+	#if AKU_WITH_ANDROID_ADMOB
+		AKUAndroidAdMobAppFinalize ();
+	#endif
+
 	#if AKU_WITH_ANDROID_APPSFLYER
 		AKUAndroidAppsFlyerAppFinalize ();
 	#endif
@@ -93,6 +97,10 @@ void AKUModulesAndroidAppInitialize () {
 
 	#if AKU_WITH_ANDROID_ADCOLONY
 		AKUAndroidAdColonyAppInitialize ();
+	#endif
+		
+	#if AKU_WITH_ANDROID_ADMOB
+		AKUAndroidAdMobAppInitialize ();
 	#endif
 
 	#if AKU_WITH_ANDROID_APPSFLYER
@@ -169,6 +177,10 @@ void AKUModulesAndroidContextInitialize () {
 
 	#if AKU_WITH_ANDROID_ADCOLONY
 		AKUAndroidAdColonyContextInitialize ();
+	#endif
+		
+	#if AKU_WITH_ANDROID_ADMOB
+		AKUAndroidAdMobContextInitialize ();
 	#endif
 
 	#if AKU_WITH_ANDROID_APPSFLYER

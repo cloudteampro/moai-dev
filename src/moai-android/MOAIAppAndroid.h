@@ -36,6 +36,7 @@ private:
 	static int	_openURL				( lua_State* L );
 	static int	_sendMail				( lua_State* L );
 	static int	_share					( lua_State* L );
+	static int	_showInstallPrompt		( lua_State* L );
 	static int	_takePicture			( lua_State* L );
 
 public:

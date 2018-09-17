@@ -9,6 +9,10 @@
 		#define AKU_WITH_ANDROID_ADCOLONY 0
 	#endif
 
+	#ifndef AKU_WITH_ANDROID_ADMOB
+		#define AKU_WITH_ANDROID_ADMOB 1
+	#endif
+
 	#ifndef AKU_WITH_ANDROID_APPSFLYER
 		#define AKU_WITH_ANDROID_APPSFLYER 0
 	#endif

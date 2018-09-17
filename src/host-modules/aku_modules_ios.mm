@@ -21,6 +21,10 @@ void AKUModulesIosAppFinalize () {
 		AKUIosAdColonyAppFinalize ();
 	#endif
 
+	#if AKU_WITH_IOS_ADMOB
+		AKUIosAdMobAppFinalize ();
+	#endif
+
 	#if AKU_WITH_IOS_APPSFLYER
 		AKUIosAppsFlyerAppFinalize ();
 	#endif
@@ -107,6 +111,10 @@ void AKUModulesIosAppInitialize () {
 
 	#if AKU_WITH_IOS_ADCOLONY
 		AKUIosAdColonyAppInitialize ();
+	#endif
+
+	#if AKU_WITH_IOS_ADMOB
+		AKUIosAdMobAppInitialize ();
 	#endif
 
 	#if AKU_WITH_IOS_APPSFLYER
@@ -256,6 +264,10 @@ void AKUModulesIosContextInitialize () {
 
 	#if AKU_WITH_IOS_ADCOLONY
 		AKUIosAdColonyContextInitialize ();
+	#endif
+		
+	#if AKU_WITH_IOS_ADMOB
+		AKUIosAdMobContextInitialize ();
 	#endif
 
 	#if AKU_WITH_IOS_APPSFLYER
