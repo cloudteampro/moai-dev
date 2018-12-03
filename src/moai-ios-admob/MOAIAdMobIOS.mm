@@ -18,14 +18,30 @@ int MOAIAdMobIOS::_show ( lua_State* L ) {
 
 	MOAILuaState state ( L );
 
+	if (![[ GADRewardBasedVideoAd sharedInstance ] isReady ]) {
+
+		NSLog ( @"MOAIAdMobIOS: GADRewardBasedVideoAd: not ready" );
+		state.Push ( false );
+		return 1;
+	}
+
 	UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
 	UIViewController* rootVC = [ window rootViewController ];
 
 	if ([[ GADRewardBasedVideoAd sharedInstance ] isReady ]) {
-	  [[ GADRewardBasedVideoAd sharedInstance ] presentFromRootViewController:rootVC ];
+
+		NSLog ( @"MOAIAdMobIOS: GADRewardBasedVideoAd: presentFromRootViewController" );
+
+		state.Push ( true );
+	  	[[ GADRewardBasedVideoAd sharedInstance ] presentFromRootViewController:rootVC ];
+		return 1;
 	}
 
-	return 0;
+	NSLog ( @"MOAIAdMobIOS: GADRewardBasedVideoAd: failed to show" );
+	
+	state.Push ( false );
+
+	return 1;
 }
 
 //----------------------------------------------------------------//
@@ -73,6 +89,10 @@ int MOAIAdMobIOS::_init ( lua_State* L ) {
 int MOAIAdMobIOS::_loadAd ( lua_State* L ) {
 
 	MOAILuaState state ( L );
+
+	if ([[ GADRewardBasedVideoAd sharedInstance ] isReady ]) {
+		return 0;
+	}
 	
 	cc8* unitID = state.GetValue < cc8* >( 1, "" );
 

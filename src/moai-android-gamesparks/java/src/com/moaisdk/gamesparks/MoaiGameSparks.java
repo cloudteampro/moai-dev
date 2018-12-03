@@ -11,6 +11,7 @@ import com.moaisdk.core.Moai;
 import com.moaisdk.core.MoaiLog;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -24,8 +25,11 @@ import com.gamesparks.sdk.api.autogen.GSResponseBuilder.AccountDetailsResponse;
 import com.gamesparks.sdk.api.autogen.GSResponseBuilder.BuyVirtualGoodResponse;
 import com.gamesparks.sdk.api.autogen.GSResponseBuilder.ChangeUserDetailsResponse;
 import com.gamesparks.sdk.api.autogen.GSResponseBuilder.LogEventResponse;
+import com.gamesparks.sdk.api.autogen.GSResponseBuilder.PushRegistrationResponse;
 import com.gamesparks.sdk.api.autogen.GSResponseBuilder.RegistrationResponse;
 import com.gamesparks.sdk.api.autogen.GSTypes.*;
+
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,7 +43,11 @@ import java.util.Set;
 //================================================================//
 public class MoaiGameSparks {
 
+	public static String firebaseToken = null;
+
 	private static Activity sActivity = null;
+
+	private static boolean paused = false;
 
 	protected static native void AKUAuthenticationFailResponse 				( String errors );
 	protected static native void AKUAuthenticationSuccessResponse 			( String authToken, String displayName, boolean newPlayer, String userId );
@@ -56,6 +64,8 @@ public class MoaiGameSparks {
 	protected static native void AKUFacebookConnectSuccessResponse 			( String authToken, String displayName, boolean newPlayer, String userId );
 	protected static native void AKULogEventFailResponse 					( String errors );
 	protected static native void AKULogEventSuccessResponse 				( String eventKey, String attributes );
+	protected static native void AKUPushRegistrationFailResponse 			( String errors );
+	protected static native void AKUPushRegistrationSuccessResponse 		( String registrationId );
 	protected static native void AKURegistrationFailResponse 				( String errors );
 	protected static native void AKURegistrationSuccessResponse 			( String authToken, String displayName, boolean newPlayer, String userId );
 
@@ -68,6 +78,8 @@ public class MoaiGameSparks {
 
 		@Override
 		public void onEvent ( AccountDetailsResponse accountDetailsResponse ) {
+
+			if ( paused ) return;
 
 			if ( !accountDetailsResponse.hasErrors ()) {
 
@@ -117,6 +129,8 @@ public class MoaiGameSparks {
 		@Override
 		public void onEvent ( AuthenticationResponse authenticationResponse ) {
 
+			if ( paused ) return;
+
 			if ( !authenticationResponse.hasErrors ()) {
 
 				String authToken = authenticationResponse.getAuthToken ();
@@ -151,6 +165,8 @@ public class MoaiGameSparks {
 		@Override
 		public void onEvent ( Boolean available ) {
 
+			if ( paused ) return;
+
 			synchronized ( Moai.sAkuLock ) {
 
 				MoaiLog.i ( "MoaiGameSparks OnAvailable: " + available );
@@ -164,6 +180,8 @@ public class MoaiGameSparks {
 
 		@Override
 		public void onEvent ( BuyVirtualGoodResponse buyVirtualGoodResponse ) {
+
+			if ( paused ) return;
 
 			if ( !buyVirtualGoodResponse.hasErrors ()) {
 
@@ -218,6 +236,9 @@ public class MoaiGameSparks {
 
 		@Override
 		public void onEvent ( ChangeUserDetailsResponse changeUserDetailsResponse ) {
+
+			if ( paused ) return;
+
 			if ( !changeUserDetailsResponse.hasErrors ()) {
 
 				//GSData scriptData = response.getScriptData();
@@ -246,6 +267,8 @@ public class MoaiGameSparks {
 
 		@Override
 		public void onEvent ( AuthenticationResponse authenticationResponse ) {
+
+			if ( paused ) return;
 
 			if ( !authenticationResponse.hasErrors ()) {
 
@@ -282,6 +305,8 @@ public class MoaiGameSparks {
 		@Override
 		public void onEvent ( AuthenticationResponse authenticationResponse ) {
 
+			if ( paused ) return;
+
 			if ( !authenticationResponse.hasErrors ()) {
 
 				String authToken = authenticationResponse.getAuthToken ();
@@ -311,10 +336,43 @@ public class MoaiGameSparks {
 	};
 
 	//----------------------------------------------------------------//
+	private static GSEventConsumer pushRegistrationEventConsumer = new GSEventConsumer < PushRegistrationResponse >() {
+	
+		@Override
+		public void onEvent ( PushRegistrationResponse pushRegistrationResponse ) {
+
+			if ( paused ) return;
+
+			if ( !pushRegistrationResponse.hasErrors ()) {
+
+	            String registrationId = pushRegistrationResponse.getRegistrationId ();
+
+				synchronized ( Moai.sAkuLock ) {
+
+					MoaiLog.i ( "MoaiGameSparks OnPushRegistrationSuccessResponse: " );
+					MoaiGameSparks.AKUPushRegistrationSuccessResponse ( registrationId );
+				}
+			} else {
+
+				synchronized ( Moai.sAkuLock ) {
+
+					MoaiLog.i ( "MoaiGameSparks OnPushRegistrationFailResponse: " );
+					org.json.simple.JSONObject jsonObject = ( org.json.simple.JSONObject ) pushRegistrationResponse.getAttribute ( "error" );
+					String errors = "UNDEFINED_ERROR";
+					if ( jsonObject != null ) errors = jsonObject.toString ();
+					MoaiGameSparks.AKUPushRegistrationFailResponse ( errors );
+				}
+			}
+		}
+	};
+
+	//----------------------------------------------------------------//
 	private static GSEventConsumer registrationEventConsumer = new GSEventConsumer < RegistrationResponse >() {
 
 		@Override
 		public void onEvent ( RegistrationResponse registrationResponse ) {
+
+			if ( paused ) return;
 
 			if ( !registrationResponse.hasErrors ()) {
 
@@ -345,19 +403,86 @@ public class MoaiGameSparks {
 	};
 
 	//----------------------------------------------------------------//
-	public static void onStart () {
-
-		MoaiLog.i ( "MoaiGameSparks onStart" );
-
-		// GSAndroidPlatform.gs ().start ();
-	}
-
-	//----------------------------------------------------------------//
 	public static void onCreate ( Activity activity ) {
 
 		MoaiLog.i ( "MoaiGameSparks onCreate: Initializing GameSparks" );
 
 		sActivity = activity;
+	}
+
+	// //----------------------------------------------------------------//
+	// public static void onStart () {
+
+	// 	MoaiLog.i ( "MoaiGameSparks onStart" );
+
+	// 	// if (GSAndroidPlatform.gs () != null) {
+
+	// 	// 	GSAndroidPlatform.gs ().start ();
+	// 	// 	GSAndroidPlatform.gs ().setOnAvailable ( availabityEventConsumer );
+	// 	// }
+	// }
+	
+	// //----------------------------------------------------------------//
+	// public static void onStop () {
+
+	// 	MoaiLog.i ( "MoaiGameSparks: onStop" );
+
+	// 	// GSAndroidPlatform.gs ().stop ();
+	// 	// GSAndroidPlatform.gs ().setOnAvailable ( null );
+	// }
+
+	//----------------------------------------------------------------//
+    public static void onDestroy() {
+
+		MoaiLog.i ( "MoaiGameSparks: onDestroy" );
+		
+		// GSAndroidPlatform.gs ().stop ();
+		// GSAndroidPlatform.gs ().setOnAvailable ( null );
+    }
+
+	// TODO 
+
+	//----------------------------------------------------------------//
+	public static void onPause () {
+ 
+		MoaiLog.i ( "MoaiGameSparks: onPause" );
+
+		paused = true;
+
+		// GSAndroidPlatform.gs ().stop ();
+		// GSAndroidPlatform.gs ().setOnAvailable ( null );
+	}
+
+	//----------------------------------------------------------------//
+	public static void onResume () {
+ 
+		MoaiLog.i ( "MoaiGameSparks: onResume" );
+
+		paused = false;
+
+		if ( GSAndroidPlatform.gs () != null ) {
+			boolean available = GSAndroidPlatform.gs ().isAvailable ();
+
+			MoaiLog.i ( "MoaiGameSparks: onResume " + available );
+			if ( available ) {
+
+				synchronized ( Moai.sAkuLock ) {
+
+					MoaiLog.i ( "MoaiGameSparks OnAvailable (ON_RESUME): " + available );
+					MoaiGameSparks.AKUAvailabilityResponse ( available );
+				}
+			}
+		}
+
+		// if ( GSAndroidPlatform.gs () != null ) {
+		// 	GSAndroidPlatform.gs ().start ();
+		// }
+	}
+
+	//----------------------------------------------------------------//
+	public static void onStop () {
+
+		MoaiLog.i ( "MoaiGameSparks: onStop" );
 	}
 
 	//================================================================//
@@ -366,12 +491,35 @@ public class MoaiGameSparks {
 
 	//----------------------------------------------------------------//
 	public static void init ( String apiKey, String apiSecret, String credential, boolean liveMode, boolean autoUpdate ) {
-
+		
 		MoaiLog.i ( "MoaiGameSparks: init" );
+
 		GSAndroidPlatform.initialise ( sActivity, apiKey, apiSecret, credential, liveMode, autoUpdate );
 		GSAndroidPlatform.gs ().setOnAvailable ( availabityEventConsumer );
 
 		GSAndroidPlatform.gs ().start ();
+
+		if ( !liveMode ) {
+
+	        Intent reorderActivity = new Intent ( sActivity, sActivity.getClass ());
+	        reorderActivity.setFlags ( Intent.FLAG_ACTIVITY_REORDER_TO_FRONT );
+	        sActivity.startActivity ( reorderActivity );
+	    }
+	}
+
+	//----------------------------------------------------------------//
+	public static boolean isAvailable () {
+
+		boolean available = false;
+
+		if ( GSAndroidPlatform.gs () != null ) {
+
+			available = GSAndroidPlatform.gs ().isAvailable ();
+		}
+
+		MoaiLog.i ( "MoaiGameSparks: isAvailable " + available );
+
+		return available;
 	}
 
 	//----------------------------------------------------------------//
@@ -454,7 +602,7 @@ public class MoaiGameSparks {
 	//----------------------------------------------------------------//
 	public static void requestLogEvent ( final String eventKey, final Bundle attributes ) {
 
-		MoaiLog.i ( "MoaiGameSparks: requestLogEvent" );
+		MoaiLog.i ( "MoaiGameSparks: requestLogEvent " + eventKey );
 		LogEventRequest logEventRequest = GSAndroidPlatform.gs ().getRequestBuilder ().createLogEventRequest ();
 		logEventRequest.setEventKey ( eventKey );
 
@@ -471,6 +619,8 @@ public class MoaiGameSparks {
 
 			@Override
 			public void onEvent ( LogEventResponse logEventResponse ) {
+				
+				if ( paused ) return;
 
 				if ( !logEventResponse.hasErrors ()) {
 
@@ -508,6 +658,20 @@ public class MoaiGameSparks {
 				}
 			}
 		} );
+	}
+
+	//----------------------------------------------------------------//
+	public static void requestPushRegistration ( String deviceOS, String pushId ) {
+		String refreshedToken = FirebaseInstanceId.getInstance ().getToken ();
+
+		MoaiLog.i ( "MoaiGameSparks: requestPushRegistration" );
+		GSAndroidPlatform.gs ().getRequestBuilder ().createPushRegistrationRequest ()
+				// .setDeviceOS ( deviceOS )
+				// .setPushId ( pushId )
+				// .setDeviceOS ( "android" )
+				.setDeviceOS ( "FCM" )
+				.setPushId ( refreshedToken )
+				.send ( pushRegistrationEventConsumer );
 	}
 
 	//----------------------------------------------------------------//

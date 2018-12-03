@@ -48,6 +48,14 @@ void AKUModulesIosAppFinalize () {
 	#if AKU_WITH_IOS_FACEBOOK
 		AKUIosFacebookAppFinalize ();
 	#endif
+
+	#if AKU_WITH_IOS_FIREBASE_INVITES
+		AKUIosFirebaseInvitesAppFinalize ();
+	#endif
+
+	#if AKU_WITH_IOS_FIREBASE_CONFIG
+		AKUIosFirebaseConfigAppFinalize ();
+	#endif
 	
 	#if AKU_WITH_IOS_FLURRY
 		AKUIosFlurryAppFinalize ();
@@ -100,6 +108,10 @@ void AKUModulesIosAppFinalize () {
 	#if AKU_WITH_IOS_VUNGLE
 		AKUIosVungleAppFinalize ();
 	#endif
+
+	#if AKU_WITH_IOS_YANDEX_APPMETRICA
+		AKUIosYandexAppMetricaAppFinalize ();
+	#endif
 }
 
 //----------------------------------------------------------------//
@@ -139,6 +151,14 @@ void AKUModulesIosAppInitialize () {
 
 	#if AKU_WITH_IOS_FACEBOOK
 		AKUIosFacebookAppInitialize ();
+	#endif
+
+	#if AKU_WITH_IOS_FIREBASE_INVITES
+		AKUIosFirebaseInvitesAppInitialize ();
+	#endif
+
+	#if AKU_WITH_IOS_FIREBASE_CONFIG
+		AKUIosFirebaseConfigAppInitialize ();
 	#endif
 	
 	#if AKU_WITH_IOS_FLURRY
@@ -192,6 +212,10 @@ void AKUModulesIosAppInitialize () {
 	#if AKU_WITH_IOS_VUNGLE
 		AKUIosVungleAppInitialize ();
 	#endif
+
+	#if AKU_WITH_IOS_YANDEX_APPMETRICA
+		AKUIosYandexAppMetricaAppInitialize ();
+	#endif
 }
 
 //----------------------------------------------------------------//
@@ -229,6 +253,10 @@ BOOL AKUModulesIosApplicationOpenURL ( UIApplication* application,  NSURL* url, 
 
     #if AKU_WITH_IOS_APPSFLYER
 		AKUIosAppsFlyerApplicationOpenURL ( application, url, sourceApplication, annotation );
+	#endif
+
+    #if AKU_WITH_IOS_YANDEX_APPMETRICA
+		AKUIosYanddexAppMetricaApplicationOpenURL ( application, url, sourceApplication, annotation );
 	#endif
 
     return NO;
@@ -293,6 +321,14 @@ void AKUModulesIosContextInitialize () {
 	#if AKU_WITH_IOS_FACEBOOK
 		AKUIosFacebookContextInitialize ();
 	#endif
+
+	#if AKU_WITH_IOS_FIREBASE_INVITES
+		AKUIosFirebaseInvitesContextInitialize ();
+	#endif
+
+	#if AKU_WITH_IOS_FIREBASE_CONFIG
+		AKUIosFirebaseConfigContextInitialize ();
+	#endif
 	
 	#if AKU_WITH_IOS_FLURRY
 		AKUIosFlurryContextInitialize ();
@@ -344,6 +380,10 @@ void AKUModulesIosContextInitialize () {
 
 	#if AKU_WITH_IOS_VUNGLE
 		AKUIosVungleContextInitialize ();
+	#endif
+
+	#if AKU_WITH_IOS_YANDEX_APPMETRICA
+		AKUIosYandexAppMetricaContextInitialize ();
 	#endif
 }
 

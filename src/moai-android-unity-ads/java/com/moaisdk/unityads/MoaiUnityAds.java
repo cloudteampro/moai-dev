@@ -27,6 +27,8 @@ public class MoaiUnityAds {
 
 	private static Activity 		sActivity 		= null;
 	private static UnityAdsListener sAdsListener 	= null;
+
+	private static boolean destoyed = false;
 	
 	protected static native void AKUInvokeListener 	( int eventID );
 	protected static native void AKUVideoCompleted 	( int result );
@@ -35,9 +37,37 @@ public class MoaiUnityAds {
 	public static void onCreate ( Activity activity ) {
 		
 		MoaiLog.i ( " MoaiUnityAds onCreate: " );
+
+		destoyed = false;
 		
 		sActivity = activity;
 	}
+
+	//----------------------------------------------------------------//
+	public static void onPause () {
+ 
+		MoaiLog.i ( "MoaiUnityAds: onPause" );
+	}
+
+	//----------------------------------------------------------------//
+	public static void onResume () {
+ 
+		MoaiLog.i ( "MoaiUnityAds: onResume" );
+	}
+
+	//----------------------------------------------------------------//
+	public static void onStop () {
+
+		MoaiLog.i ( "MoaiUnityAds: onStop" );
+	}
+
+	//----------------------------------------------------------------//
+    public static void onDestroy() {
+        
+		MoaiLog.i ( "MoaiUnityAds: onDestroy" );
+
+		destoyed = true;
+    }
 	
 	//================================================================//
 	// MoaiUnityAds JNI callback methods
@@ -46,24 +76,25 @@ public class MoaiUnityAds {
 	//----------------------------------------------------------------//
 	public static boolean canShow ( String zone ) {
 
-		MoaiLog.i ( " MoaiUnityAds: canShow for zone "+zone );
-
 		if ( zone != null ) {
-			return UnityAds.isReady ( zone );
+			boolean ready = UnityAds.isReady ( zone );
+
+			// MoaiLog.i ( " MoaiUnityAds: canShow for zone: " + zone + " " + ready );
+			return ready;
 		} else {
-			return UnityAds.isReady ();
+
+			boolean ready = UnityAds.isReady ();
+
+			// MoaiLog.i ( " MoaiUnityAds: canShow " + ready );
+			return ready;
 		}
 	}
 
 	//----------------------------------------------------------------//
 	public static void init ( String gameID, boolean debug, boolean test ) {
 
-		MoaiLog.i ( " MoaiUnityAds: initialize with gameID "+gameID+" debug "+debug );
-
 		UnityAdsListener unityAdsListener = new UnityAdsListener();
-
 		UnityAds.initialize (( Activity ) sActivity, gameID, unityAdsListener, test );
-
 		sAdsListener = unityAdsListener;
 
 		// Setting up debug mode with verbose print
@@ -78,11 +109,10 @@ public class MoaiUnityAds {
 	//----------------------------------------------------------------//
 	public static boolean show ( String zone ) {
 
-		MoaiLog.i ( "MoaiUnityAds show for zone " + zone );
-
 		if ( zone != null ) {
 
 			if ( UnityAds.isReady ( zone )) {
+
 				UnityAds.show (( Activity ) sActivity, zone );
 				return true;
 			}
@@ -90,6 +120,7 @@ public class MoaiUnityAds {
 		} else {
 
 			if ( UnityAds.isReady ()) {
+
 				UnityAds.show (( Activity ) sActivity );
 				return true;
 			}
@@ -99,46 +130,59 @@ public class MoaiUnityAds {
 
 	//----------------------------------------------------------------//
 	private static class UnityAdsListener implements IUnityAdsListener {
+
 		//================================================================//
 		// MoaiUnityAds callback methods
 		//================================================================//
 
 		@Override
-		public void onUnityAdsReady(final String zoneId) {
+		public void onUnityAdsReady ( final String zoneId ) {
+
+			if ( destoyed ) return;
 
 			synchronized ( Moai.sAkuLock ) {
 
-				MoaiLog.i ( " MoaiUnityAds: onVideoReady" + zoneId );
+				MoaiLog.i ( " MoaiUnityAds: onVideoReady for zone: " + zoneId );
 				MoaiUnityAds.AKUInvokeListener ( ListenerEvent.UNITYADS_READY.ordinal ());
 			}
 		}
 
 		@Override
-		public void onUnityAdsStart(String zoneId) {
+		public void onUnityAdsStart ( String zoneId ) {
+
+			if ( destoyed ) return;
 
 			synchronized ( Moai.sAkuLock ) {
 				
-				MoaiLog.i ( " MoaiUnityAds: onVideoStart" + zoneId );
+				MoaiLog.i ( " MoaiUnityAds: onVideoStart for zone: " + zoneId );
 				MoaiUnityAds.AKUInvokeListener ( ListenerEvent.UNITYADS_START.ordinal ());
 			}
 		}
 
 		@Override
-		public void onUnityAdsFinish(String zoneId, UnityAds.FinishState result) {
+		public void onUnityAdsFinish ( String zoneId, UnityAds.FinishState result ) {
+			
+			if ( destoyed ) return;
 
 			synchronized ( Moai.sAkuLock ) {
 				
-				MoaiLog.i ( " MoaiUnityAds: onVideoFinish" + zoneId );
+				MoaiLog.i ( " MoaiUnityAds: onVideoFinish for zone: " + zoneId );
 				MoaiUnityAds.AKUVideoCompleted ( result.ordinal ());
 			}
 		}
 
 		@Override
-		public void onUnityAdsError(UnityAds.UnityAdsError error, String message) {
+		public void onUnityAdsError ( UnityAds.UnityAdsError error, String message ) {
+
+			if ( destoyed ) return;
+
 			synchronized ( Moai.sAkuLock ) {
-				MoaiLog.i ( " MoaiUnityAds: onVideoError" );
+				
+				MoaiLog.i ( " MoaiUnityAds: onVideoError: " + message );
 				MoaiUnityAds.AKUInvokeListener ( ListenerEvent.UNITYADS_ERROR.ordinal ());
 			}
 		}
 	}
 }
+
+

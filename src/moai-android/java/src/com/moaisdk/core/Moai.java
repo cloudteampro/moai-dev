@@ -146,23 +146,29 @@ public class Moai {
 	private static String [] sExternalClasses = {
 		// "com.moaisdk.adcolony.MoaiAdColony",
 		// "com.moaisdk.amazonbilling.MoaiAmazonBilling",
-		"com.moaisdk.chartboost.MoaiChartBoost",
 		// "com.moaisdk.crittercism.MoaiCrittercism",
-		"com.moaisdk.facebook.MoaiFacebook",
 		// "com.moaisdk.fortumo.MoaiFortumo",
-		"com.moaisdk.flurry.MoaiFlurry",
-		"com.moaisdk.googlebilling.MoaiGoogleBilling",
 		// "com.moaisdk.googleplayservices.MoaiGooglePlayServices",
-		"com.moaisdk.googleplayservicesgames.MoaiGooglePlayServicesGames",
-		"com.moaisdk.googlepush.MoaiGooglePush",
-		"com.moaisdk.core.MoaiKeyboard",
+		// "com.moaisdk.googlepush.MoaiGooglePush",
 		// "com.moaisdk.core.MoaiMoviePlayer",
-		"com.moaisdk.fmodstudio.MoaiFmodStudio",
 		// "com.moaisdk.tapjoy.MoaiTapjoy",
 		// "com.moaisdk.twitter.MoaiTwitter",
 		// "com.moaisdk.vungle.MoaiVungle",
+		// "com.moaisdk.chartboost.MoaiChartBoost",
+		// "com.moaisdk.unityads.MoaiUnityAds",
+		// "com.moaisdk.fyber.MoaiFyber",
+		"com.moaisdk.facebook.MoaiFacebook",
+		// "com.moaisdk.flurry.MoaiFlurry",
 		"com.moaisdk.unityads.MoaiUnityAds",
-		"com.moaisdk.core.MoaiWebView",
+		"com.moaisdk.googlebilling.MoaiGoogleBilling",
+		// "com.moaisdk.googleplayservicesgames.MoaiGooglePlayServicesGames",
+		"com.moaisdk.core.MoaiKeyboard",
+		"com.moaisdk.fmodstudio.MoaiFmodStudio",
+		"com.moaisdk.appsflyer.MoaiAppsFlyer",
+		"com.moaisdk.gamesparks.MoaiGameSparks",
+		"com.moaisdk.yandexappmetrica.MoaiYandexAppMetrica",
+		// "com.moaisdk.core.MoaiWebView",
+		"com.moaisdk.admob.MoaiAdMob",
 	};
 
 	private static Activity 				sActivity = null;
@@ -284,9 +290,10 @@ public class Moai {
 	//----------------------------------------------------------------//
 	public static void dialogDismissed ( int dialogResult ) {
 
-		//synchronized ( sAkuLock ) {
-		//	AKUAppDialogDismissed ( dialogResult );
-		//}
+		// TODO: check this
+		synchronized ( sAkuLock ) {
+			AKUAppDialogDismissed ( dialogResult );
+		}
 	}
 
 	//----------------------------------------------------------------//

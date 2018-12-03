@@ -6,6 +6,7 @@
 
 package com.moaisdk.vungle;
 
+import com.moaisdk.core.Moai;
 import com.moaisdk.core.MoaiLog;
 
 import android.app.Activity;
@@ -95,7 +96,9 @@ public class MoaiVungle implements VungleAdEventListener {
 
                 vunglePub.clearAndSetEventListeners ( vungleListener );
 
-				AKUInvokeListener ( ListenerEvent.VUNGLE_INITIALIZED.ordinal ());
+				synchronized ( Moai.sAkuLock ) {
+					AKUInvokeListener ( ListenerEvent.VUNGLE_INITIALIZED.ordinal ());
+				}
             }
 
             @Override
@@ -131,14 +134,22 @@ public class MoaiVungle implements VungleAdEventListener {
     public void onAdEnd ( String placementReferenceId, boolean wasSuccessfulView, boolean wasCallToActionClicked ) {
 
 		MoaiLog.i ( "MoaiVungle: onAdEnd " + placementReferenceId + " " + wasSuccessfulView + " " + wasCallToActionClicked );
-		AKUInvokeListener ( ListenerEvent.VUNGLE_FINISH.ordinal ());
+
+		synchronized ( Moai.sAkuLock ) {
+
+			AKUInvokeListener ( ListenerEvent.VUNGLE_FINISH.ordinal ());
+		}
     }
 
 	//----------------------------------------------------------------//
     public void onAdStart ( String placementReferenceId ) {
 
 		MoaiLog.i ( "MoaiVungle: onAdStart " + placementReferenceId );
-		AKUInvokeListener ( ListenerEvent.VUNGLE_START.ordinal ());
+
+		synchronized ( Moai.sAkuLock ) {
+			
+			AKUInvokeListener ( ListenerEvent.VUNGLE_START.ordinal ());
+		}
     }
 
 	//----------------------------------------------------------------//
@@ -154,7 +165,10 @@ public class MoaiVungle implements VungleAdEventListener {
 
 		if ( isAdAvailable ) {
 
-			AKUInvokeListener ( ListenerEvent.VUNGLE_READY.ordinal ());
+			synchronized ( Moai.sAkuLock ) {
+
+				AKUInvokeListener ( ListenerEvent.VUNGLE_READY.ordinal ());
+			}
 		}
 		isAvailable = isAdAvailable;
     }

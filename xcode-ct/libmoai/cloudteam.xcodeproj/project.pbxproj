@@ -40,6 +40,7 @@
 				206B9D041BDABB2E0021D349 /* PBXTargetDependency */,
 				20541E081D44B62A004F3772 /* PBXTargetDependency */,
 				2090B6B01BEBA4A80057A676 /* PBXTargetDependency */,
+				D7CDDD3721B17D2F00C81DD0 /* PBXTargetDependency */,
 			);
 			name = build_all_ios;
 			productName = build_all_ios;
@@ -789,6 +790,22 @@
 		D78947CA215010CA00AB7A57 /* GADMEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = D78947BE215010B900AB7A57 /* GADMEnums.h */; };
 		D78947CB215010CA00AB7A57 /* GADMRewardBasedVideoAdNetworkAdapterProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = D78947B5215010B700AB7A57 /* GADMRewardBasedVideoAdNetworkAdapterProtocol.h */; };
 		D78947CC215010CA00AB7A57 /* GADMRewardBasedVideoAdNetworkConnectorProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = D78947B7215010B700AB7A57 /* GADMRewardBasedVideoAdNetworkConnectorProtocol.h */; };
+		D7CDDD3D21B17D7E00C81DD0 /* MOAIYandexAppMetricaIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = D7CDDD3921B17D7E00C81DD0 /* MOAIYandexAppMetricaIOS.h */; };
+		D7CDDD3E21B17D7E00C81DD0 /* host.mm in Sources */ = {isa = PBXBuildFile; fileRef = D7CDDD3A21B17D7E00C81DD0 /* host.mm */; };
+		D7CDDD3F21B17D7E00C81DD0 /* MOAIYandexAppMetricaIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = D7CDDD3B21B17D7E00C81DD0 /* MOAIYandexAppMetricaIOS.mm */; };
+		D7CDDD4021B17D7E00C81DD0 /* host.h in Headers */ = {isa = PBXBuildFile; fileRef = D7CDDD3C21B17D7E00C81DD0 /* host.h */; };
+		D7CDDD6D21B183C700C81DD0 /* YMMUserProfile.h in Headers */ = {isa = PBXBuildFile; fileRef = D7CDDD6121B183C500C81DD0 /* YMMUserProfile.h */; };
+		D7CDDD6E21B183C700C81DD0 /* YMMYandexMetricaConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = D7CDDD6221B183C500C81DD0 /* YMMYandexMetricaConfiguration.h */; };
+		D7CDDD6F21B183C700C81DD0 /* YMMProfileAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = D7CDDD6321B183C500C81DD0 /* YMMProfileAttribute.h */; };
+		D7CDDD7021B183C700C81DD0 /* YMMVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = D7CDDD6421B183C500C81DD0 /* YMMVersion.h */; };
+		D7CDDD7121B183C700C81DD0 /* YMMYandexMetricaPreloadInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = D7CDDD6521B183C600C81DD0 /* YMMYandexMetricaPreloadInfo.h */; };
+		D7CDDD7221B183C700C81DD0 /* YMMReporterConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = D7CDDD6621B183C600C81DD0 /* YMMReporterConfiguration.h */; };
+		D7CDDD7321B183C700C81DD0 /* YMMYandexMetricaReporting.h in Headers */ = {isa = PBXBuildFile; fileRef = D7CDDD6721B183C600C81DD0 /* YMMYandexMetricaReporting.h */; };
+		D7CDDD7421B183C700C81DD0 /* YMMCompletionBlocks.h in Headers */ = {isa = PBXBuildFile; fileRef = D7CDDD6821B183C600C81DD0 /* YMMCompletionBlocks.h */; };
+		D7CDDD7521B183C700C81DD0 /* YMMRevenueInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = D7CDDD6921B183C600C81DD0 /* YMMRevenueInfo.h */; };
+		D7CDDD7621B183C700C81DD0 /* YandexMobileMetrica-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D7CDDD6A21B183C600C81DD0 /* YandexMobileMetrica-umbrella.h */; };
+		D7CDDD7721B183C700C81DD0 /* YMMYandexMetrica.h in Headers */ = {isa = PBXBuildFile; fileRef = D7CDDD6B21B183C700C81DD0 /* YMMYandexMetrica.h */; };
+		D7CDDD7821B183C700C81DD0 /* YandexMobileMetrica.h in Headers */ = {isa = PBXBuildFile; fileRef = D7CDDD6C21B183C700C81DD0 /* YandexMobileMetrica.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1316,6 +1333,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = D7382F81214FEA900052A7B0;
 			remoteInfo = "libmoai-ios-admob";
+		};
+		D7CDDD3621B17D2F00C81DD0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D7CDDBEB21B17AFC00C81DD0;
+			remoteInfo = "libmoai-ios-yandexappmetrica";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1895,6 +1919,23 @@
 		D78947BD215010B900AB7A57 /* GADMediatedNativeAdNotificationSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMediatedNativeAdNotificationSource.h; sourceTree = "<group>"; };
 		D78947BE215010B900AB7A57 /* GADMEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMEnums.h; sourceTree = "<group>"; };
 		D78947BF215010BA00AB7A57 /* GADMediationAdRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMediationAdRequest.h; sourceTree = "<group>"; };
+		D7CDDCF721B17AFC00C81DD0 /* libmoai-ios-yandex-appmetrica.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios-yandex-appmetrica.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7CDDD3921B17D7E00C81DD0 /* MOAIYandexAppMetricaIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MOAIYandexAppMetricaIOS.h; path = "../moai-ios-yandex-appmetrica/MOAIYandexAppMetricaIOS.h"; sourceTree = "<group>"; };
+		D7CDDD3A21B17D7E00C81DD0 /* host.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = host.mm; path = "../moai-ios-yandex-appmetrica/host.mm"; sourceTree = "<group>"; };
+		D7CDDD3B21B17D7E00C81DD0 /* MOAIYandexAppMetricaIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MOAIYandexAppMetricaIOS.mm; path = "../moai-ios-yandex-appmetrica/MOAIYandexAppMetricaIOS.mm"; sourceTree = "<group>"; };
+		D7CDDD3C21B17D7E00C81DD0 /* host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = host.h; path = "../moai-ios-yandex-appmetrica/host.h"; sourceTree = "<group>"; };
+		D7CDDD6121B183C500C81DD0 /* YMMUserProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMMUserProfile.h; path = ../YandexMobileMetrica/YMMUserProfile.h; sourceTree = "<group>"; };
+		D7CDDD6221B183C500C81DD0 /* YMMYandexMetricaConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMMYandexMetricaConfiguration.h; path = ../YandexMobileMetrica/YMMYandexMetricaConfiguration.h; sourceTree = "<group>"; };
+		D7CDDD6321B183C500C81DD0 /* YMMProfileAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMMProfileAttribute.h; path = ../YandexMobileMetrica/YMMProfileAttribute.h; sourceTree = "<group>"; };
+		D7CDDD6421B183C500C81DD0 /* YMMVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMMVersion.h; path = ../YandexMobileMetrica/YMMVersion.h; sourceTree = "<group>"; };
+		D7CDDD6521B183C600C81DD0 /* YMMYandexMetricaPreloadInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMMYandexMetricaPreloadInfo.h; path = ../YandexMobileMetrica/YMMYandexMetricaPreloadInfo.h; sourceTree = "<group>"; };
+		D7CDDD6621B183C600C81DD0 /* YMMReporterConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMMReporterConfiguration.h; path = ../YandexMobileMetrica/YMMReporterConfiguration.h; sourceTree = "<group>"; };
+		D7CDDD6721B183C600C81DD0 /* YMMYandexMetricaReporting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMMYandexMetricaReporting.h; path = ../YandexMobileMetrica/YMMYandexMetricaReporting.h; sourceTree = "<group>"; };
+		D7CDDD6821B183C600C81DD0 /* YMMCompletionBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMMCompletionBlocks.h; path = ../YandexMobileMetrica/YMMCompletionBlocks.h; sourceTree = "<group>"; };
+		D7CDDD6921B183C600C81DD0 /* YMMRevenueInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMMRevenueInfo.h; path = ../YandexMobileMetrica/YMMRevenueInfo.h; sourceTree = "<group>"; };
+		D7CDDD6A21B183C600C81DD0 /* YandexMobileMetrica-umbrella.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "YandexMobileMetrica-umbrella.h"; path = "../YandexMobileMetrica/YandexMobileMetrica-umbrella.h"; sourceTree = "<group>"; };
+		D7CDDD6B21B183C700C81DD0 /* YMMYandexMetrica.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMMYandexMetrica.h; path = ../YandexMobileMetrica/YMMYandexMetrica.h; sourceTree = "<group>"; };
+		D7CDDD6C21B183C700C81DD0 /* YandexMobileMetrica.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YandexMobileMetrica.h; path = ../YandexMobileMetrica/YandexMobileMetrica.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2003,12 +2044,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D7CDDBEC21B17AFC00C81DD0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		032409EE13564CAF000ADC60 /* 3rd party */ = {
 			isa = PBXGroup;
 			children = (
+				D7CDDD4121B17D8800C81DD0 /* yandex-appmetrica */,
 				D78946E02150076900AB7A57 /* google-mobile-ads */,
 				7A3CA449208788920098D698 /* gamesparks */,
 				2049B9681CAA8D38005B83B3 /* adtoapp */,
@@ -2022,6 +2071,7 @@
 			isa = PBXGroup;
 			children = (
 				D7382F78214FE6030052A7B0 /* moai-ios-admob */,
+				D7CDDD3821B17D4C00C81DD0 /* moai-ios-yandex-appmetrica */,
 				7A3CA46A208789100098D698 /* moai-ios-gamesparks */,
 				7A37E04820236EE60015225A /* moai-ios-fyber */,
 				7AB72C061FE93DA8001DC0B1 /* moai-ios-appsflyer */,
@@ -2055,6 +2105,7 @@
 				7A37DF5920236D9E0015225A /* libmoai-ios-fyber.a */,
 				7A3CA40E2087880C0098D698 /* libmoai-ios-gamesparks.a */,
 				D7382F92214FEA900052A7B0 /* libmoai-ios-admob.a */,
+				D7CDDCF721B17AFC00C81DD0 /* libmoai-ios-yandex-appmetrica.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3079,6 +3130,47 @@
 			path = GoogleMobileAds;
 			sourceTree = "<group>";
 		};
+		D7CDDD3821B17D4C00C81DD0 /* moai-ios-yandex-appmetrica */ = {
+			isa = PBXGroup;
+			children = (
+				D7CDDD3C21B17D7E00C81DD0 /* host.h */,
+				D7CDDD3A21B17D7E00C81DD0 /* host.mm */,
+				D7CDDD3921B17D7E00C81DD0 /* MOAIYandexAppMetricaIOS.h */,
+				D7CDDD3B21B17D7E00C81DD0 /* MOAIYandexAppMetricaIOS.mm */,
+			);
+			name = "moai-ios-yandex-appmetrica";
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		D7CDDD4121B17D8800C81DD0 /* yandex-appmetrica */ = {
+			isa = PBXGroup;
+			children = (
+				D7CDDD6021B183A800C81DD0 /* YandexMobileMetrica */,
+			);
+			name = "yandex-appmetrica";
+			path = "../../3rdparty/yandex-appmetrica";
+			sourceTree = "<group>";
+		};
+		D7CDDD6021B183A800C81DD0 /* YandexMobileMetrica */ = {
+			isa = PBXGroup;
+			children = (
+				D7CDDD6A21B183C600C81DD0 /* YandexMobileMetrica-umbrella.h */,
+				D7CDDD6C21B183C700C81DD0 /* YandexMobileMetrica.h */,
+				D7CDDD6821B183C600C81DD0 /* YMMCompletionBlocks.h */,
+				D7CDDD6321B183C500C81DD0 /* YMMProfileAttribute.h */,
+				D7CDDD6621B183C600C81DD0 /* YMMReporterConfiguration.h */,
+				D7CDDD6921B183C600C81DD0 /* YMMRevenueInfo.h */,
+				D7CDDD6121B183C500C81DD0 /* YMMUserProfile.h */,
+				D7CDDD6421B183C500C81DD0 /* YMMVersion.h */,
+				D7CDDD6B21B183C700C81DD0 /* YMMYandexMetrica.h */,
+				D7CDDD6221B183C500C81DD0 /* YMMYandexMetricaConfiguration.h */,
+				D7CDDD6521B183C600C81DD0 /* YMMYandexMetricaPreloadInfo.h */,
+				D7CDDD6721B183C600C81DD0 /* YMMYandexMetricaReporting.h */,
+			);
+			name = YandexMobileMetrica;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -3625,6 +3717,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D7CDDBED21B17AFC00C81DD0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7CDDD7321B183C700C81DD0 /* YMMYandexMetricaReporting.h in Headers */,
+				D7CDDD4021B17D7E00C81DD0 /* host.h in Headers */,
+				D7CDDD7721B183C700C81DD0 /* YMMYandexMetrica.h in Headers */,
+				D7CDDD7121B183C700C81DD0 /* YMMYandexMetricaPreloadInfo.h in Headers */,
+				D7CDDD7621B183C700C81DD0 /* YandexMobileMetrica-umbrella.h in Headers */,
+				D7CDDD7021B183C700C81DD0 /* YMMVersion.h in Headers */,
+				D7CDDD6D21B183C700C81DD0 /* YMMUserProfile.h in Headers */,
+				D7CDDD6E21B183C700C81DD0 /* YMMYandexMetricaConfiguration.h in Headers */,
+				D7CDDD7421B183C700C81DD0 /* YMMCompletionBlocks.h in Headers */,
+				D7CDDD3D21B17D7E00C81DD0 /* MOAIYandexAppMetricaIOS.h in Headers */,
+				D7CDDD7221B183C700C81DD0 /* YMMReporterConfiguration.h in Headers */,
+				D7CDDD7521B183C700C81DD0 /* YMMRevenueInfo.h in Headers */,
+				D7CDDD6F21B183C700C81DD0 /* YMMProfileAttribute.h in Headers */,
+				D7CDDD7821B183C700C81DD0 /* YandexMobileMetrica.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -3883,6 +3996,23 @@
 			productReference = D7382F92214FEA900052A7B0 /* libmoai-ios-admob.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		D7CDDBEB21B17AFC00C81DD0 /* libmoai-ios-yandex-appmetrica */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D7CDDCF221B17AFC00C81DD0 /* Build configuration list for PBXNativeTarget "libmoai-ios-yandex-appmetrica" */;
+			buildPhases = (
+				D7CDDBEC21B17AFC00C81DD0 /* Frameworks */,
+				D7CDDBED21B17AFC00C81DD0 /* Headers */,
+				D7CDDC8021B17AFC00C81DD0 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "libmoai-ios-yandex-appmetrica";
+			productName = OpenUSLS;
+			productReference = D7CDDCF721B17AFC00C81DD0 /* libmoai-ios-yandex-appmetrica.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -3947,6 +4077,7 @@
 				206B9D1B1BDE37CA0021D349 /* libmoai-osx-ct-util */,
 				7A37DF4C20236D9E0015225A /* libmoai-ios-fyber */,
 				7A3CA4012087880C0098D698 /* libmoai-ios-gamesparks */,
+				D7CDDBEB21B17AFC00C81DD0 /* libmoai-ios-yandex-appmetrica */,
 			);
 		};
 /* End PBXProject section */
@@ -4770,6 +4901,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D7CDDC8021B17AFC00C81DD0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7CDDD3F21B17D7E00C81DD0 /* MOAIYandexAppMetricaIOS.mm in Sources */,
+				D7CDDD3E21B17D7E00C81DD0 /* host.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -4857,6 +4997,11 @@
 			isa = PBXTargetDependency;
 			target = D7382F81214FEA900052A7B0 /* libmoai-ios-admob */;
 			targetProxy = D789477521500E9300AB7A57 /* PBXContainerItemProxy */;
+		};
+		D7CDDD3721B17D2F00C81DD0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D7CDDBEB21B17AFC00C81DD0 /* libmoai-ios-yandex-appmetrica */;
+			targetProxy = D7CDDD3621B17D2F00C81DD0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -7843,6 +7988,166 @@
 			};
 			name = Distribution;
 		};
+		D7CDDCF321B17AFC00C81DD0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+					"\"../../3rdparty/yandex-appmetrica\"",
+				);
+				PRODUCT_NAME = "moai-ios-yandex-appmetrica";
+				SDKROOT = iphoneos;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
+				WARNING_CFLAGS = "-w";
+			};
+			name = Debug;
+		};
+		D7CDDCF421B17AFC00C81DD0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+					"\"../../3rdparty/yandex-appmetrica\"",
+				);
+				PRODUCT_NAME = "moai-ios-yandex-appmetrica";
+				SDKROOT = iphoneos;
+				STRIP_STYLE = debugging;
+				WARNING_CFLAGS = "-w";
+			};
+			name = Release;
+		};
+		D7CDDCF521B17AFC00C81DD0 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+					"\"../../3rdparty/yandex-appmetrica\"",
+				);
+				PRODUCT_NAME = "moai-ios-yandex-appmetrica";
+				SDKROOT = iphoneos;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
+				WARNING_CFLAGS = "-w";
+			};
+			name = AdHoc;
+		};
+		D7CDDCF621B17AFC00C81DD0 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+					"\"../../3rdparty/yandex-appmetrica\"",
+				);
+				PRODUCT_NAME = "moai-ios-yandex-appmetrica";
+				SDKROOT = iphoneos;
+				STRIP_STYLE = debugging;
+				WARNING_CFLAGS = "-w";
+			};
+			name = Distribution;
+		};
 		E90D02BF14D5E12700DD75AA /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -8338,6 +8643,17 @@
 				D7382F8F214FEA900052A7B0 /* Release */,
 				D7382F90214FEA900052A7B0 /* AdHoc */,
 				D7382F91214FEA900052A7B0 /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D7CDDCF221B17AFC00C81DD0 /* Build configuration list for PBXNativeTarget "libmoai-ios-yandex-appmetrica" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7CDDCF321B17AFC00C81DD0 /* Debug */,
+				D7CDDCF421B17AFC00C81DD0 /* Release */,
+				D7CDDCF521B17AFC00C81DD0 /* AdHoc */,
+				D7CDDCF621B17AFC00C81DD0 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

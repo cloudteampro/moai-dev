@@ -42,6 +42,7 @@ class MOAIGameSparksAndroid :
 private:
 
 	jmethodID	mJava_Init;
+	jmethodID	mJava_IsAvailable;
 	jmethodID	mJava_RequestAccountDetails;
 	jmethodID	mJava_RequestAuthentication;
 	jmethodID	mJava_RequestBuyGoods;
@@ -54,6 +55,7 @@ private:
 
 	//----------------------------------------------------------------//
 	static int	_init	 						( lua_State* L );
+	static int	_isAvailable	 				( lua_State* L );
 	static int	_requestAccountDetails			( lua_State* L );
 	static int	_requestAuthentication			( lua_State* L );
 	static int	_requestBuyGoods				( lua_State* L );

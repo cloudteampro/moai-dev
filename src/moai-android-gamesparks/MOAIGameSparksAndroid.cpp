@@ -36,6 +36,19 @@ int	MOAIGameSparksAndroid::_init ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+/**	@name	isAvailable
+	@text	Check gs available
+
+	@out 	boolean
+*/
+int MOAIGameSparksAndroid::_isAvailable ( lua_State *L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIGameSparksAndroid, "" )
+
+	lua_pushboolean ( state, self->CallStaticBooleanMethod ( self->mJava_IsAvailable ));
+	return 1;
+}
+
+//----------------------------------------------------------------//
 /**	@lua	requestAccountDetails
 	@text	Request account details.
 				
@@ -457,6 +470,7 @@ MOAIGameSparksAndroid::MOAIGameSparksAndroid () {
 	this->SetClass ( "com/moaisdk/gamesparks/MoaiGameSparks" );
 
 	this->mJava_Init							= this->GetStaticMethod ( "init", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ZZ)V" );
+	this->mJava_IsAvailable						= this->GetStaticMethod ( "isAvailable", "()Z" );
 	this->mJava_RequestAccountDetails			= this->GetStaticMethod ( "requestAccountDetails", "()V" );
 	this->mJava_RequestAuthentication			= this->GetStaticMethod ( "requestAuthentication", "(Ljava/lang/String;Ljava/lang/String;)V" );
 	this->mJava_RequestBuyGoods					= this->GetStaticMethod ( "requestBuyGoods", "(Ljava/lang/String;Ljava/lang/String;)V" );
@@ -525,6 +539,7 @@ void MOAIGameSparksAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 
 	luaL_Reg regTable [] = {
 		{ "init",							_init },
+		{ "isAvailable",					_isAvailable },
 		{ "getListener",					&MOAIGlobalEventSource::_getListener < MOAIGameSparksAndroid > },
 		{ "requestAccountDetails",			_requestAccountDetails },
 		{ "requestAuthentication",			_requestAuthentication },

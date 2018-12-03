@@ -43,6 +43,7 @@ int MOAIGameSparksIOS::_init ( lua_State* L ) {
 
 	[ gs setAvailabilityListener:^ ( BOOL available ) {
 
+		MOAIGameSparksIOS::Get ().isAvailable = available;
 		MOAIGameSparksIOS::Get ().AvailabilityResponse ( available );
 	}];
 
@@ -56,6 +57,20 @@ int MOAIGameSparksIOS::_init ( lua_State* L ) {
 	return 0;
 }
 
+//----------------------------------------------------------------//
+/**	@name	isAvailable
+	@text	Check gs available
+
+	@out 	boolean
+*/
+int MOAIGameSparksIOS::_isAvailable ( lua_State *L ) {
+
+	MOAILuaState state ( L );
+
+	lua_pushboolean ( state, MOAIGameSparksIOS::Get ().isAvailable );
+
+	return 1;
+}
 
 //----------------------------------------------------------------//
 /**	@lua	requestAccountDetails
@@ -873,7 +888,8 @@ void MOAIGameSparksIOS::LogEventSuccessResponse ( NSString *eventKey, NSMutableD
 }
 
 //----------------------------------------------------------------//
-MOAIGameSparksIOS::MOAIGameSparksIOS () {
+MOAIGameSparksIOS::MOAIGameSparksIOS () :
+	isAvailable ( false ) {
 
 	RTTI_SINGLE ( MOAIGlobalEventSource )
 }
@@ -939,6 +955,7 @@ void MOAIGameSparksIOS::RegisterLuaClass ( MOAILuaState& state ) {
 
 	luaL_Reg regTable [] = {
 		{ "init",							_init },
+		{ "isAvailable",					_isAvailable },
 		{ "getListener",					&MOAIGlobalEventSource::_getListener < MOAIGameSparksIOS > },
 		{ "requestAccountDetails",			_requestAccountDetails },
 		{ "requestAuthentication",			_requestAuthentication },

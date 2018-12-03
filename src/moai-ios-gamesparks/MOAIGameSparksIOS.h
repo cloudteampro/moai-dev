@@ -45,8 +45,11 @@ class MOAIGameSparksIOS :
 	public MOAIGlobalClass < MOAIGameSparksIOS, MOAIGlobalEventSource > {
 private:
 
+	BOOL isAvailable;
+
 	//----------------------------------------------------------------//
 	static int	_init	 						( lua_State* L );
+	static int	_isAvailable	 				( lua_State* L );
 	static int	_requestAccountDetails			( lua_State* L );
 	static int	_requestAuthentication			( lua_State* L );
 	static int	_requestBuyGoods				( lua_State* L );

@@ -38,6 +38,14 @@ void AKUModulesAndroidAppFinalize () {
 	#if AKU_WITH_ANDROID_FACEBOOK
 		AKUAndroidFacebookAppFinalize ();
 	#endif
+
+	#if AKU_WITH_ANDROID_FIREBASE_INVITES
+		AKUAndroidFirebaseInvitesAppFinalize ();
+	#endif
+
+	#if AKU_WITH_ANDROID_FIREBASE_CONFIG
+		AKUAndroidFirebaseConfigAppFinalize ();
+	#endif
 	
 	#if AKU_WITH_ANDROID_FLURRY
 		AKUAndroidFlurryAppFinalize ();
@@ -86,6 +94,10 @@ void AKUModulesAndroidAppFinalize () {
 	#if AKU_WITH_ANDROID_UNITY_ADS
 		AKUAndroidUnityAdsAppFinalize ();
 	#endif
+
+	#if AKU_WITH_ANDROID_YANDEX_APPMETRICA
+		AKUAndroidYandexAppMetricaAppFinalize ();
+	#endif
 }
 
 //----------------------------------------------------------------//
@@ -117,6 +129,14 @@ void AKUModulesAndroidAppInitialize () {
 	
 	#if AKU_WITH_ANDROID_FACEBOOK
 		AKUAndroidFacebookAppInitialize ();
+	#endif
+
+	#if AKU_WITH_ANDROID_FIREBASE_INVITES
+		AKUAndroidFirebaseInvitesAppInitialize ();
+	#endif
+
+	#if AKU_WITH_ANDROID_FIREBASE_CONFIG
+		AKUAndroidFirebaseConfigAppInitialize ();
 	#endif
 
 	#if AKU_WITH_ANDROID_FLURRY
@@ -166,6 +186,10 @@ void AKUModulesAndroidAppInitialize () {
 	#if AKU_WITH_ANDROID_UNITY_ADS
 		AKUAndroidUnityAdsAppInitialize ();
 	#endif
+
+	#if AKU_WITH_ANDROID_YANDEX_APPMETRICA
+		AKUAndroidYandexAppMetricaAppInitialize ();
+	#endif
 }
 
 //----------------------------------------------------------------//
@@ -197,6 +221,14 @@ void AKUModulesAndroidContextInitialize () {
 	
 	#if AKU_WITH_ANDROID_FACEBOOK
 		AKUAndroidFacebookContextInitialize ();
+	#endif
+
+	#if AKU_WITH_ANDROID_FIREBASE_INVITES
+		AKUAndroidFirebaseInvitesContextInitialize ();
+	#endif
+
+	#if AKU_WITH_ANDROID_FIREBASE_CONFIG
+		AKUAndroidFirebaseConfigContextInitialize ();
 	#endif
 
 	#if AKU_WITH_ANDROID_FLURRY
@@ -245,6 +277,10 @@ void AKUModulesAndroidContextInitialize () {
 
 	#if AKU_WITH_ANDROID_UNITY_ADS
         AKUAndroidUnityAdsContextInitialize ();
+    #endif
+
+	#if AKU_WITH_ANDROID_YANDEX_APPMETRICA
+        AKUAndroidYandexAppMetricaContextInitialize ();
     #endif
 }
 

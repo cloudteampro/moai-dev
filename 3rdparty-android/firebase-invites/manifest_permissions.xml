@@ -1,0 +1,8 @@
+<!-- Yandex Metrica optional permission. Approximate location derived from network location sources such as cell towers and Wi-Fi -->
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+<!-- Yandex Metrica optional permission. Precise location from location sources such as GPS, cell towers, and Wi-Fi -->
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+<!-- Yandex Metrica optional permission. Wifi state: mac, ssid, ... -->
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>

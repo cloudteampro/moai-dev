@@ -37,6 +37,14 @@
 		#define AKU_WITH_IOS_FACEBOOK 0
 	#endif
 
+	#ifndef AKU_WITH_IOS_FIREBASE_INVITES
+		#define AKU_WITH_IOS_FIREBASE_INVITES 1
+	#endif
+
+	#ifndef AKU_WITH_IOS_FIREBASE_CONFIG
+		#define AKU_WITH_IOS_FIREBASE_CONFIG 1
+	#endif
+
 	#ifndef AKU_WITH_IOS_FLURRY
 		#define AKU_WITH_IOS_FLURRY 0
 	#endif
@@ -87,6 +95,10 @@
 
 	#ifndef AKU_WITH_IOS_VUNGLE
 		#define AKU_WITH_IOS_VUNGLE 1
+	#endif
+
+	#ifndef AKU_WITH_IOS_YANDEX_APPMETRICA
+		#define AKU_WITH_IOS_YANDEX_APPMETRICA 1
 	#endif
 
 #endif

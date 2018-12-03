@@ -39,6 +39,14 @@
 	#include <moai-android-facebook/host.h>
 #endif
 
+#if AKU_WITH_ANDROID_FIREBASE_INVITES
+	#include <moai-android-firebase-invites/host.h>
+#endif
+
+#if AKU_WITH_ANDROID_FIREBASE_CONFIG
+	#include <moai-android-firebase-config/host.h>
+#endif
+
 #if AKU_WITH_ANDROID_FLURRY
 	#include <moai-android-flurry/host.h>
 #endif
@@ -99,6 +107,9 @@
 	#include <moai-android-unity-ads/host.h>
 #endif
 
+#if AKU_WITH_ANDROID_YANDEX_APPMETRICA
+	#include <moai-android-yandex-appmetrica/host.h>
+#endif
 
 //----------------------------------------------------------------//
 void		AKUModulesAndroidAppFinalize				();
