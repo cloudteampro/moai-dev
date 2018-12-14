@@ -42,3 +42,6 @@ docs/api-reference
 /**/java/build/
 /**/java/*.iml
 env.sh
+
+# FIREBASE TOO BIG SIZE LIBRARIES
+3rdparty/Firebase-5.14.0/
