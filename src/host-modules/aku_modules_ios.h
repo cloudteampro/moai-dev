@@ -43,12 +43,8 @@
 	#include <moai-ios-facebook/host.h>
 #endif
 
-#if AKU_WITH_IOS_FIREBASE_INVITES
-	#include <moai-ios-firebase-invites/host.h>
-#endif
-
-#if AKU_WITH_IOS_FIREBASE_CONFIG
-	#include <moai-ios-firebase-config/host.h>
+#if AKU_WITH_IOS_FIREBASE
+	#include <moai-ios-firebase/host.h>
 #endif
 
 #if AKU_WITH_IOS_FLURRY

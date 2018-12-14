@@ -48,6 +48,7 @@ public:
 	jobject				BundleFromLua				( lua_State* L, int index );
 	bool				CallStaticBooleanMethod 	( jmethodID method, ... );
 	long				CallStaticLongMethod		( jmethodID method, ... );
+	double				CallStaticDoubleMethod		( jmethodID method, ... );
 	jobject				CallStaticObjectMethod		( jmethodID method, ... );
 	void				CallStaticVoidMethod		( jmethodID method, ... );
 	void				ClearException				();

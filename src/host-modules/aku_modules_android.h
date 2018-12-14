@@ -39,12 +39,8 @@
 	#include <moai-android-facebook/host.h>
 #endif
 
-#if AKU_WITH_ANDROID_FIREBASE_INVITES
-	#include <moai-android-firebase-invites/host.h>
-#endif
-
-#if AKU_WITH_ANDROID_FIREBASE_CONFIG
-	#include <moai-android-firebase-config/host.h>
+#if AKU_WITH_ANDROID_FIREBASE
+	#include <moai-android-firebase/host.h>
 #endif
 
 #if AKU_WITH_ANDROID_FLURRY

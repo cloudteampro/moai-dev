@@ -7,8 +7,7 @@
 
 #include <moai-core/headers.h>
 
-#import <GADMobileAds.h>
-#import <GADRewardBasedVideoAdDelegate.h>
+#import <GoogleMobileAds/GoogleMobileAds.h>
 
 @class MOAIAdMobIOSDelegate;
 

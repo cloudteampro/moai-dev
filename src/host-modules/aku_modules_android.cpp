@@ -39,12 +39,8 @@ void AKUModulesAndroidAppFinalize () {
 		AKUAndroidFacebookAppFinalize ();
 	#endif
 
-	#if AKU_WITH_ANDROID_FIREBASE_INVITES
-		AKUAndroidFirebaseInvitesAppFinalize ();
-	#endif
-
-	#if AKU_WITH_ANDROID_FIREBASE_CONFIG
-		AKUAndroidFirebaseConfigAppFinalize ();
+	#if AKU_WITH_ANDROID_FIREBASE
+		AKUAndroidFirebaseAppFinalize ();
 	#endif
 	
 	#if AKU_WITH_ANDROID_FLURRY
@@ -131,12 +127,8 @@ void AKUModulesAndroidAppInitialize () {
 		AKUAndroidFacebookAppInitialize ();
 	#endif
 
-	#if AKU_WITH_ANDROID_FIREBASE_INVITES
-		AKUAndroidFirebaseInvitesAppInitialize ();
-	#endif
-
-	#if AKU_WITH_ANDROID_FIREBASE_CONFIG
-		AKUAndroidFirebaseConfigAppInitialize ();
+	#if AKU_WITH_ANDROID_FIREBASE
+		AKUAndroidFirebaseAppInitialize ();
 	#endif
 
 	#if AKU_WITH_ANDROID_FLURRY
@@ -223,12 +215,8 @@ void AKUModulesAndroidContextInitialize () {
 		AKUAndroidFacebookContextInitialize ();
 	#endif
 
-	#if AKU_WITH_ANDROID_FIREBASE_INVITES
-		AKUAndroidFirebaseInvitesContextInitialize ();
-	#endif
-
-	#if AKU_WITH_ANDROID_FIREBASE_CONFIG
-		AKUAndroidFirebaseConfigContextInitialize ();
+	#if AKU_WITH_ANDROID_FIREBASE
+		AKUAndroidFirebaseContextInitialize ();
 	#endif
 
 	#if AKU_WITH_ANDROID_FLURRY

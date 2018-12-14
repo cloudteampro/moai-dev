@@ -49,12 +49,8 @@ void AKUModulesIosAppFinalize () {
 		AKUIosFacebookAppFinalize ();
 	#endif
 
-	#if AKU_WITH_IOS_FIREBASE_INVITES
-		AKUIosFirebaseInvitesAppFinalize ();
-	#endif
-
-	#if AKU_WITH_IOS_FIREBASE_CONFIG
-		AKUIosFirebaseConfigAppFinalize ();
+	#if AKU_WITH_IOS_FIREBASE
+		AKUIosFirebaseAppFinalize ();
 	#endif
 	
 	#if AKU_WITH_IOS_FLURRY
@@ -153,12 +149,8 @@ void AKUModulesIosAppInitialize () {
 		AKUIosFacebookAppInitialize ();
 	#endif
 
-	#if AKU_WITH_IOS_FIREBASE_INVITES
-		AKUIosFirebaseInvitesAppInitialize ();
-	#endif
-
-	#if AKU_WITH_IOS_FIREBASE_CONFIG
-		AKUIosFirebaseConfigAppInitialize ();
+	#if AKU_WITH_IOS_FIREBASE
+		AKUIosFirebaseAppInitialize ();
 	#endif
 	
 	#if AKU_WITH_IOS_FLURRY
@@ -229,6 +221,10 @@ void AKUModulesIosApplicationDidBecomeActive ( UIApplication* application ) {
     #if AKU_WITH_IOS_APPSFLYER
 		AKUIosAppsFlyerApplicationDidBecomeActive ( application );
 	#endif
+
+    #if AKU_WITH_IOS_YANDEX_APPMETRICA
+		AKUIosYandexAppMetricaApplicationDidBecomeActive ( application );
+	#endif
 }
 
 //----------------------------------------------------------------//
@@ -240,6 +236,10 @@ BOOL AKUModulesIosApplicationDidFinishLaunchingWithOptions ( UIApplication* appl
     #if AKU_WITH_IOS_FACEBOOK
         status = status && AKUIosFacebookApplicationDidFinishLaunchingWithOptions ( application, launchOptions );
     #endif
+
+    #if AKU_WITH_IOS_FIREBASE
+        status = status && AKUIosFirebaseApplicationDidFinishLaunchingWithOptions ( application, launchOptions );
+    #endif
     
     return status;
 }
@@ -247,21 +247,26 @@ BOOL AKUModulesIosApplicationDidFinishLaunchingWithOptions ( UIApplication* appl
 //----------------------------------------------------------------//
 BOOL AKUModulesIosApplicationOpenURL ( UIApplication* application,  NSURL* url, NSString* sourceApplication, id annotation ) {
 
+    #if AKU_WITH_IOS_APPSFLYER
+		if ( AKUIosAppsFlyerApplicationOpenURL ( application, url, sourceApplication, annotation )) return YES;
+	#endif
+
     #if AKU_WITH_IOS_FACEBOOK
         if ( AKUIosFacebookApplicationOpenURL ( application, url, sourceApplication, annotation )) return YES;
     #endif
 
-    #if AKU_WITH_IOS_APPSFLYER
-		AKUIosAppsFlyerApplicationOpenURL ( application, url, sourceApplication, annotation );
-	#endif
+    #if AKU_WITH_IOS_FIREBASE
+        if ( AKUIosFirebaseApplicationOpenURL ( application, url, sourceApplication, annotation )) return YES;
+    #endif
 
     #if AKU_WITH_IOS_YANDEX_APPMETRICA
-		AKUIosYanddexAppMetricaApplicationOpenURL ( application, url, sourceApplication, annotation );
+		if ( AKUIosYandexAppMetricaApplicationOpenURL ( application, url, sourceApplication, annotation )) return YES;
 	#endif
 
     return NO;
 }
 
+//----------------------------------------------------------------//
 void AKUModulesIosApplicationDidRegisterForRemoteNotificationsWithDeviceToken ( UIApplication* application,  NSData* deviceToken ) {
 
 	#if AKU_WITH_IOS_FACEBOOK
@@ -269,6 +274,7 @@ void AKUModulesIosApplicationDidRegisterForRemoteNotificationsWithDeviceToken ( 
     #endif
 }
 
+//----------------------------------------------------------------//
 void AKUModulesIosApplicationDidReceiveRemoteNotification ( UIApplication* application,  NSDictionary* userInfo ) {
 
 	#if AKU_WITH_IOS_FACEBOOK
@@ -276,6 +282,7 @@ void AKUModulesIosApplicationDidReceiveRemoteNotification ( UIApplication* appli
     #endif
 }
 
+//----------------------------------------------------------------//
 void AKUModulesIosApplicationHandleActionWithIdentifier ( UIApplication* application,  NSString* identifier, NSDictionary* userInfo ) {
 
 	#if AKU_WITH_IOS_FACEBOOK
@@ -322,12 +329,8 @@ void AKUModulesIosContextInitialize () {
 		AKUIosFacebookContextInitialize ();
 	#endif
 
-	#if AKU_WITH_IOS_FIREBASE_INVITES
-		AKUIosFirebaseInvitesContextInitialize ();
-	#endif
-
-	#if AKU_WITH_IOS_FIREBASE_CONFIG
-		AKUIosFirebaseConfigContextInitialize ();
+	#if AKU_WITH_IOS_FIREBASE
+		AKUIosFirebaseContextInitialize ();
 	#endif
 	
 	#if AKU_WITH_IOS_FLURRY

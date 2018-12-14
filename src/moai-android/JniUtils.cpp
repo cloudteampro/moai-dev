@@ -64,6 +64,17 @@ long JniUtils::CallStaticLongMethod ( jmethodID method, ... ) {
 }
 
 //----------------------------------------------------------------//
+double JniUtils::CallStaticDoubleMethod ( jmethodID method, ... ) {
+
+	va_list args;
+	va_start ( args, method );
+	long result = ( double )this->Env ()->CallStaticDoubleMethod ( this->mClass, method, args );
+	va_end ( args );
+	
+	return result;
+}
+
+//----------------------------------------------------------------//
 jobject JniUtils::CallStaticObjectMethod ( jmethodID method, ... ) {
 	
 	va_list args;

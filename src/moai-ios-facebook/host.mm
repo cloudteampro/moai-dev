@@ -30,10 +30,10 @@ BOOL AKUIosFacebookApplicationDidFinishLaunchingWithOptions ( UIApplication* app
 
 	[[ FBSDKApplicationDelegate sharedInstance ] application:application didFinishLaunchingWithOptions:launchOptions ];
 
-	UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound);
-	UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes categories:nil];
-	[[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-	[[UIApplication sharedApplication] registerForRemoteNotifications];
+	// UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound);
+	// UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes categories:nil];
+	// [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+	// [[UIApplication sharedApplication] registerForRemoteNotifications];
 
 	return YES;
 }
@@ -48,7 +48,7 @@ BOOL AKUIosFacebookApplicationOpenURL ( UIApplication* application,  NSURL* url,
 void AKUIosFacebookApplicationDidRegisterForRemoteNotificationsWithDeviceToken ( UIApplication* application,  NSData* deviceToken ) {
 	UNUSED ( application );
 
-	[FBSDKAppEvents setPushNotificationsDeviceToken:deviceToken];
+	// [FBSDKAppEvents setPushNotificationsDeviceToken:deviceToken];
 }
 
 //----------------------------------------------------------------//
