@@ -254,8 +254,8 @@ int MOAIFirebaseIOS::_showInviteSMSDialog ( lua_State *L ) {
 	MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
 	if ([ MFMessageComposeViewController canSendText ]) {
 		controller.messageComposeDelegate = MOAIFirebaseIOS::Get ().mDelegate;
-		NSArray* to = [ NSArray arrayWithObject:@"" ];
-		[ controller setRecipients:to ];
+		// NSArray* to = [ NSArray arrayWithObject:@"" ];
+		// [ controller setRecipients:to ];
 		[ controller setBody:[ NSString stringWithUTF8String:message ]];
 		
 		if ( controller ) {

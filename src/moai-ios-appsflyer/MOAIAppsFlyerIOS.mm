@@ -4,6 +4,7 @@
 // http://getmoai.com
 //----------------------------------------------------------------//
 
+#import <moai-ios/headers.h>
 #import <moai-ios-appsflyer/MOAIAppsFlyerIOS.h>
 
 //================================================================//
@@ -31,7 +32,29 @@ int MOAIAppsFlyerIOS::_init ( lua_State* L ) {
 	[AppsFlyerTracker sharedTracker].appleAppID = [ NSString stringWithUTF8String:appId ];
 	[AppsFlyerTracker sharedTracker].delegate = MOAIAppsFlyerIOS::Get ().mDelegate;
 	[AppsFlyerTracker sharedTracker].isDebug = isDebug;
+
+	if ( isDebug ) {
+		[AppsFlyerTracker sharedTracker].useReceiptValidationSandbox = YES;
+	}
 	
+	return 0;
+}
+
+//----------------------------------------------------------------//
+/**	@lua	trackAdView
+ @text	Tracking Event Ad Show.
+ 
+ @out 	nil
+ */
+int	MOAIAppsFlyerIOS::_trackAdView ( lua_State* L ) {
+	MOAILuaState state ( L );
+	
+	cc8* placement = state.GetValue < cc8* >( 1, 0 );
+	
+	[[ AppsFlyerTracker sharedTracker ] trackEvent: AFEventAdView withValues: @{
+		AFEventParamAdRevenuePlacementId: [ NSString stringWithUTF8String:placement ]
+	}];
+
 	return 0;
 }
 
@@ -67,6 +90,8 @@ int	MOAIAppsFlyerIOS::_trackLevelAchieved ( lua_State* L ) {
 	[[ AppsFlyerTracker sharedTracker ] trackEvent: AFEventLevelAchieved withValues: @{
 		AFEventParamLevel: [ NSNumber numberWithInt:level ]
 	}];
+
+	return 0;
 }
 
 //----------------------------------------------------------------//
@@ -85,6 +110,40 @@ int	MOAIAppsFlyerIOS::_trackPurchase ( lua_State* L ) {
 		AFEventParamRevenue: [ NSNumber numberWithFloat:revenue ],
 		AFEventParamCurrency: [ NSString stringWithUTF8String:currency ]
 	}];
+
+	return 0;
+}
+
+//----------------------------------------------------------------//
+/**	@lua	validateAndTrackPurchase
+ @text	Validate And Track Event Purchase.
+ 
+ @out 	nil
+ */
+int	MOAIAppsFlyerIOS::_validateAndTrackInAppPurchase ( lua_State* L ) {
+	MOAILuaState state ( L );
+	
+	cc8* productId = state.GetValue < cc8* >( 1, 0 );
+	cc8* price = state.GetValue < cc8* >( 2, 0 );
+	cc8* currency = state.GetValue < cc8* >( 3, 0 );
+	cc8* transactionId = state.GetValue < cc8* >( 4, 0 );
+	
+	[[ AppsFlyerTracker sharedTracker ] validateAndTrackInAppPurchase:[ NSString stringWithUTF8String:productId ]
+		price:[ NSString stringWithUTF8String:price ]
+		currency:[ NSString stringWithUTF8String:currency ]
+		transactionId:[ NSString stringWithUTF8String:transactionId ]
+		additionalParameters:@{}
+		success:^( NSDictionary *result ) {
+			NSLog(@"Purchase succeeded And verified!!! response: %@", result[@"receipt"]);
+			MOAIAppsFlyerIOS::Get ().PurchaseValidateSuccess ( result[@"receipt"] );
+		}
+		failure:^( NSError *error, id response ) {
+			NSLog(@"response = %@", response);
+			MOAIAppsFlyerIOS::Get ().PurchaseValidateFailure ( response );
+		}
+	];
+	
+	return 0;
 }
 
 //================================================================//
@@ -106,13 +165,52 @@ MOAIAppsFlyerIOS::~MOAIAppsFlyerIOS () {
 }
 
 //----------------------------------------------------------------//
+void MOAIAppsFlyerIOS::PurchaseValidateFailure ( NSString *error ) {
+
+	if ( !MOAILuaRuntime::IsValid ()) return;
+	
+	NSLog ( @"MOAIAppsFlyerIOS: PurchaseValidateFailure" );
+
+	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
+	
+	if ( this->PushListener ( PURCHASE_VALIDATE_FAILURE, state )) {
+		
+		OBJC_TO_LUA ( error, state );
+		state.DebugCall ( 1, 0 );
+	}
+}
+
+//----------------------------------------------------------------//
+void MOAIAppsFlyerIOS::PurchaseValidateSuccess ( NSString *result ) {
+
+	if ( !MOAILuaRuntime::IsValid ()) return;
+	
+	NSLog ( @"MOAIAppsFlyerIOS: PurchaseValidateSuccess" );
+
+	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
+
+	if ( this->PushListener ( PURCHASE_VALIDATE_SUCCESS, state )) {
+
+		OBJC_TO_LUA ( result, state );
+		state.DebugCall ( 1, 0 );
+	}
+}
+
+//----------------------------------------------------------------//
 void MOAIAppsFlyerIOS::RegisterLuaClass ( MOAILuaState& state ) {
 
+	state.SetField ( -1, "PURCHASE_VALIDATE_FAILURE",				( u32 )PURCHASE_VALIDATE_FAILURE );
+	state.SetField ( -1, "PURCHASE_VALIDATE_SUCCESS",				( u32 )PURCHASE_VALIDATE_SUCCESS );
+
 	luaL_Reg regTable [] = {
-		{ "init",					_init },
-		{ "trackEvent",				_trackEvent },
-		{ "trackLevelAchieved",		_trackLevelAchieved },
-		{ "trackPurchase",			_trackPurchase },
+		{ "getListener",					&MOAIGlobalEventSource::_getListener < MOAIAppsFlyerIOS > },
+		{ "init",							_init },
+		{ "setListener",					&MOAIGlobalEventSource::_setListener < MOAIAppsFlyerIOS > },
+		{ "trackAdView",					_trackAdView },
+		{ "trackEvent",						_trackEvent },
+		{ "trackLevelAchieved",				_trackLevelAchieved },
+		{ "trackPurchase",					_trackPurchase },
+		{ "validateAndTrackInAppPurchase",	_validateAndTrackInAppPurchase },
 		{ NULL, NULL }
 	};
 

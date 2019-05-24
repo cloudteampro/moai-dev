@@ -23,17 +23,26 @@ private:
 	MoaiAppsFlyerDelegate* mDelegate;
 
 	static int		_init							( lua_State* L );
+	static int		_trackAdView					( lua_State* L );
 	static int		_trackEvent						( lua_State* L );
 	static int		_trackLevelAchieved				( lua_State* L );
 	static int		_trackPurchase					( lua_State* L );
+	static int		_validateAndTrackInAppPurchase	( lua_State* L );
 
 public:
 
 	DECL_LUA_SINGLETON ( MOAIAppsFlyerIOS );
 
+	enum {
+		PURCHASE_VALIDATE_FAILURE,
+		PURCHASE_VALIDATE_SUCCESS
+	};
+
 	//----------------------------------------------------------------//
 					MOAIAppsFlyerIOS				();
 					~MOAIAppsFlyerIOS				();
+	void			PurchaseValidateFailure			( NSString *error );
+	void			PurchaseValidateSuccess			( NSString *result );
 	void			RegisterLuaClass				( MOAILuaState& state );
 };
 

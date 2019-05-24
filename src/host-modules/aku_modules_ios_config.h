@@ -14,7 +14,7 @@
 	#endif
 	
 	#ifndef AKU_WITH_IOS_APPSFLYER
-		#define AKU_WITH_IOS_APPSFLYER 0
+		#define AKU_WITH_IOS_APPSFLYER 1
 	#endif
 
 	#ifndef AKU_WITH_IOS_BILLING
@@ -54,7 +54,7 @@
 	#endif
 	
 	#ifndef AKU_WITH_IOS_GAMESPARKS
-		#define AKU_WITH_IOS_GAMESPARKS 1
+		#define AKU_WITH_IOS_GAMESPARKS 0
 	#endif
 
 	#ifndef AKU_WITH_IOS_MIXPANEL
@@ -90,11 +90,11 @@
 	#endif
 
 	#ifndef AKU_WITH_IOS_VUNGLE
-		#define AKU_WITH_IOS_VUNGLE 1
+		#define AKU_WITH_IOS_VUNGLE 0
 	#endif
 
 	#ifndef AKU_WITH_IOS_YANDEX_APPMETRICA
-		#define AKU_WITH_IOS_YANDEX_APPMETRICA 1
+		#define AKU_WITH_IOS_YANDEX_APPMETRICA 0
 	#endif
 
 #endif

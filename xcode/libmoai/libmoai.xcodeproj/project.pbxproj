@@ -20357,7 +20357,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"../../3rdparty/facebook-ios-sdk-4.23",
+					"../../3rdparty/FacebookSDKs-iOS-4.39.0",
 					../../3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework,
 					"../../3rdparty/vungle-6.2.0",
 					"../../3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
@@ -20496,6 +20496,16 @@
 		03C2F6F6104DE131009A2D5D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"../../3rdparty/FacebookSDKs-iOS-4.39.0",
+					../../3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework,
+					"../../3rdparty/vungle-6.2.0",
+					"../../3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
+					../../3rdparty/kontagent_ios_v1.5.6,
+					"../../3rdparty/adcolony-2.2.4",
+					"../../3rdparty/chartboost-6.1",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					USE_ARES,
 					USE_OPENSSL,
@@ -20533,6 +20543,16 @@
 		03C2F6F7104DE131009A2D5D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"../../3rdparty/FacebookSDKs-iOS-4.39.0",
+					../../3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework,
+					"../../3rdparty/vungle-6.2.0",
+					"../../3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
+					../../3rdparty/kontagent_ios_v1.5.6,
+					"../../3rdparty/adcolony-2.2.4",
+					"../../3rdparty/chartboost-6.1",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
 					USE_ARES,
@@ -21751,7 +21771,7 @@
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"../../3rdparty/facebook-ios-sdk-4.23",
+					"../../3rdparty/FacebookSDKs-iOS-4.39.0",
 					../../3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework,
 					"../../3rdparty/vungle-6.2.0",
 					"../../3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
@@ -27477,7 +27497,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"../../3rdparty/facebook-ios-sdk-4.23",
+					"../../3rdparty/FacebookSDKs-iOS-4.39.0",
 					../../3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework,
 					"../../3rdparty/vungle-6.2.0",
 					"../../3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
@@ -27616,6 +27636,16 @@
 		E90D02C014D5E12700DD75AA /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"../../3rdparty/FacebookSDKs-iOS-4.39.0",
+					../../3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework,
+					"../../3rdparty/vungle-6.2.0",
+					"../../3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
+					../../3rdparty/kontagent_ios_v1.5.6,
+					"../../3rdparty/adcolony-2.2.4",
+					"../../3rdparty/chartboost-6.1",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
 					USE_ARES,
@@ -27921,7 +27951,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"../../3rdparty/facebook-ios-sdk-4.23",
+					"../../3rdparty/FacebookSDKs-iOS-4.39.0",
 					../../3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework,
 					"../../3rdparty/vungle-6.2.0",
 					"../../3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
@@ -28060,6 +28090,16 @@
 		E9C405C6150D999200C7AB04 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"../../3rdparty/FacebookSDKs-iOS-4.39.0",
+					../../3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework,
+					"../../3rdparty/vungle-6.2.0",
+					"../../3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
+					../../3rdparty/kontagent_ios_v1.5.6,
+					"../../3rdparty/adcolony-2.2.4",
+					"../../3rdparty/chartboost-6.1",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
 					USE_ARES,

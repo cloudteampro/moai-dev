@@ -19,12 +19,16 @@ class MOAIAdMobIOS :
 private:
 	
 	MOAIAdMobIOSDelegate*		mDelegate;
+	GADInterstitial*			mInterstitial;
 	
 	//----------------------------------------------------------------//
 	static int	_show							( lua_State* L );
+	static int	_showInterstitial				( lua_State* L );
 	static int	_init							( lua_State* L );
 	static int	_isLoaded						( lua_State* L );
+	static int	_isInterstitialLoaded			( lua_State* L );
 	static int	_loadAd							( lua_State* L );
+	static int	_loadInterstitial				( lua_State* L );
 	
 public:
 
@@ -32,10 +36,14 @@ public:
 	
 	enum {
 		ADMOB_READY,
-		ADMOB_START,
-		ADMOB_FINISH,
+		ADMOB_OPENED,
 		ADMOB_ERROR,
 		ADMOB_CLOSED,
+		ADMOB_REWARDED_READY,
+		ADMOB_REWARDED_START,
+		ADMOB_REWARDED_FINISH,
+		ADMOB_REWARDED_ERROR,
+		ADMOB_REWARDED_CLOSED,
 	};
 	
 			MOAIAdMobIOS				();
@@ -47,7 +55,7 @@ public:
 //================================================================//
 // MOAIAdMobIOSDelegate
 //================================================================//
-@interface MOAIAdMobIOSDelegate : NSObject < GADRewardBasedVideoAdDelegate > {
+@interface MOAIAdMobIOSDelegate : NSObject < GADRewardBasedVideoAdDelegate, GADInterstitialDelegate > {
 @private
 }
 @end

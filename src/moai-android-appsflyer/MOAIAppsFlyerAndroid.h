@@ -16,23 +16,33 @@ class MOAIAppsFlyerAndroid :
 private:
 
 		jmethodID	mJava_Init;
+		jmethodID	mJava_TrackAdView;
 		jmethodID	mJava_TrackEvent;
-		jmethodID	mJava_TrackPurchase;
 		jmethodID	mJava_TrackLevelAchieved;
+		jmethodID	mJava_TrackPurchase;
+		jmethodID	mJava_ValidateAndTrackInAppPurchase;
 
 		//----------------------------------------------------------------//
 		static int	_init	 						( lua_State* L );
+		static int	_trackAdView					( lua_State* L );
 		static int	_trackEvent						( lua_State* L );
-		static int	_trackPurchase					( lua_State* L );
 		static int	_trackLevelAchieved				( lua_State* L );
+		static int	_trackPurchase					( lua_State* L );
+		static int	_validateAndTrackInAppPurchase	( lua_State* L );
 
 public:
 
 		DECL_LUA_SINGLETON ( MOAIAppsFlyerAndroid );
 
+		enum {
+			PURCHASE_VALIDATE_FAILURE,
+			PURCHASE_VALIDATE_SUCCESS
+		};
+
 		//----------------------------------------------------------------//
 						MOAIAppsFlyerAndroid			();
 						~MOAIAppsFlyerAndroid			();
+		void			PurchaseValidateFailure			( cc8* error );
 		void			RegisterLuaClass				( MOAILuaState& state );
 };
 
