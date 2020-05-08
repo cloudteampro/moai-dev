@@ -10,7 +10,7 @@
 	#endif
 
 	#ifndef AKU_WITH_CLOUDTEAM
-		#define AKU_WITH_CLOUDTEAM 0
+		#define AKU_WITH_CLOUDTEAM 1
 	#endif
 
 	#ifndef AKU_WITH_CRYPTO
@@ -27,10 +27,6 @@
 
 	#ifndef AKU_WITH_FMOD_STUDIO
 		#define AKU_WITH_FMOD_STUDIO 1
-	#endif
-
-	#ifndef AKU_WITH_HARNESS
-		#define AKU_WITH_HARNESS 0
 	#endif
 
 	#ifndef AKU_WITH_HTTP_CLIENT
@@ -71,10 +67,6 @@
 
 	#ifndef AKU_WITH_SIM
 		#define AKU_WITH_SIM 1
-	#endif
-
-	#ifndef AKU_WITH_SPINE
-		#define AKU_WITH_SPINE 0
 	#endif
 
 	#ifndef AKU_WITH_SPINE_V3

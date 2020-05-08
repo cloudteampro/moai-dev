@@ -21,7 +21,7 @@ class MOAIFmodBeatDetector :
 private:
 	
 	static const u32		DEFAULT_FFT_WINDOW = 1024;
-	static const float		HISTORY_FILTER = 0.02f;
+	static const float		HISTORY_FILTER;
 	
 	ZLLeanArray < MOAIFmodBeat > mBeats;
 	

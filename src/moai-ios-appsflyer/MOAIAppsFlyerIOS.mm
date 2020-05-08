@@ -134,12 +134,14 @@ int	MOAIAppsFlyerIOS::_validateAndTrackInAppPurchase ( lua_State* L ) {
 		transactionId:[ NSString stringWithUTF8String:transactionId ]
 		additionalParameters:@{}
 		success:^( NSDictionary *result ) {
-			NSLog(@"Purchase succeeded And verified!!! response: %@", result[@"receipt"]);
-			MOAIAppsFlyerIOS::Get ().PurchaseValidateSuccess ( result[@"receipt"] );
+			// NSLog(@"Purchase succeeded And verified!!! response: %@", result[@"receipt"]);
+			// MOAIAppsFlyerIOS::Get ().PurchaseValidateSuccess ( result[@"receipt"] );
+			MOAIAppsFlyerIOS::Get ().InvokeListener ( MOAIAppsFlyerIOS::PURCHASE_VALIDATE_SUCCESS );
 		}
 		failure:^( NSError *error, id response ) {
-			NSLog(@"response = %@", response);
-			MOAIAppsFlyerIOS::Get ().PurchaseValidateFailure ( response );
+			// NSLog(@"response = %@", response);
+			// MOAIAppsFlyerIOS::Get ().PurchaseValidateFailure ( response );
+			MOAIAppsFlyerIOS::Get ().InvokeListener ( MOAIAppsFlyerIOS::PURCHASE_VALIDATE_FAILURE );
 		}
 	];
 	

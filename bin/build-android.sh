@@ -27,10 +27,8 @@ fi
 mkdir -p $libprefix
 libprefix=$(cd $libprefix; pwd)
 
-
 cd `dirname $0`/..
 moai_root=$(pwd)
-
 
 if ! [ -d "build" ]
 then
@@ -38,21 +36,17 @@ mkdir build
 fi
 cd build
 
-
-
-
 build_folder=$moai_root/build
 #we must have a success from here on
 set -e
 
 # one arch currently
+#ARCHS="armeabi-v7a arm64-v8a"
+#ARCHS="arm64-v8a"
 ARCHS="armeabi-v7a"
-# ARCHS="armeabi armeabi-v7a x86"
 for ARCH in $ARCHS
 do
-
   cd $build_folder
-  
   
   if ! [ -d "build-android-$ARCH" ]
   then
@@ -61,15 +55,21 @@ do
   cd build-android-$ARCH
 
   cmake \
+  -DANDROID_NDK=$ANDROID_NDK \
+  -G"Unix Makefiles" \
+  -DMOAI_SDK_HOME=$MOAI_SDK_HOME \
   -DBUILD_ANDROID=TRUE \
-  -DCMAKE_TOOLCHAIN_FILE="$moai_root/cmake/hosts/host-android/android.toolchain.cmake" \
+  -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake \
+  -DANDROID_PLATFORM=android-17 \
   -DCMAKE_BUILD_TYPE=RelWithDebInfo \
   -DMOAI_LUAJIT=False \
   -DANDROID_ABI=$ARCH \
+  -DANDROID_STL=c++_static \
   -DCMAKE_INSTALL_PREFIX=$libprefix/$ARCH \
   -DLIBRARY_OUTPUT_PATH_ROOT=./build-android-$ARCH/ \
-  $moai_root/cmake || exit 1
+  $moai_root/cmake || { echo "error running cmake"; exit 1; }
 
   cmake --build . --target install -- -j$cores
+  
   echo Finished building $ARCH
 done

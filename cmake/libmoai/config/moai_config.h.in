@@ -84,10 +84,6 @@
 	#ifndef MOAI_WITH_MONGOOSE
 		#define MOAI_WITH_MONGOOSE ${MOAI_WITH_MONGOOSE}
 	#endif
-
-	#ifndef MOAI_WITH_MSGPACK
-		#define MOAI_WITH_MSGPACK ${MOAI_WITH_MSGPACK}
-	#endif
 	
 	#ifndef MOAI_WITH_OGG
 		#define MOAI_WITH_OGG ${MOAI_WITH_OGG}

@@ -130,6 +130,9 @@ jclass JniUtils::GetClass ( cc8* className ) {
 		ZLLogF ( ZLLog::CONSOLE, "MOAI JNI: Unable to find java class %s", className );
 		this->ClearException ();
 	}
+
+	ZLLogF ( ZLLog::CONSOLE, "MOAI JNI: Success find java class %s %d", className, clazz );
+
 	return clazz;
 }
 
@@ -172,14 +175,14 @@ jstring JniUtils::GetJString ( cc8* cstr ) {
 //----------------------------------------------------------------//
 jmethodID JniUtils::GetMethod ( cc8* methodName, cc8* methodSignature ) {
 
-	this->GetMethod ( this->mClass, methodName, methodSignature );
+	return this->GetMethod ( this->mClass, methodName, methodSignature );
 }
 
 //----------------------------------------------------------------//
 jmethodID JniUtils::GetMethod ( jclass clazz, cc8* methodName, cc8* methodSignature ) {
 	
 	if ( !clazz ) {
-		ZLLogF ( ZLLog::CONSOLE, "MOAI JNI: Missing class; cannot find java method %d", methodName );
+		ZLLogF ( ZLLog::CONSOLE, "MOAI JNI: Missing class; cannot find java method %s", methodName );
 		this->ClearException ();
 		return NULL;
 	}
@@ -196,14 +199,14 @@ jmethodID JniUtils::GetMethod ( jclass clazz, cc8* methodName, cc8* methodSignat
 //----------------------------------------------------------------//
 jfieldID JniUtils::GetStaticField ( cc8* fieldName ) {
 
-	this->GetStaticField ( this->mClass, fieldName );
+	return this->GetStaticField ( this->mClass, fieldName );
 }
 
 //----------------------------------------------------------------//
 jfieldID JniUtils::GetStaticField ( jclass clazz, cc8* fieldName ) {
 	
 	if ( !clazz ) {
-		ZLLogF ( ZLLog::CONSOLE, "MOAI JNI: Missing class; cannot find static java field id %d", fieldName );
+		ZLLogF ( ZLLog::CONSOLE, "MOAI JNI: Missing class; cannot find static java field id %s", fieldName );
 		this->ClearException ();
 		return NULL;
 	}
@@ -220,7 +223,7 @@ jfieldID JniUtils::GetStaticField ( jclass clazz, cc8* fieldName ) {
 //----------------------------------------------------------------//
 jmethodID JniUtils::GetStaticMethod ( cc8* methodName, cc8* methodSignature ) {
 
-	this->GetStaticMethod ( this->mClass, methodName, methodSignature );
+	return this->GetStaticMethod ( this->mClass, methodName, methodSignature );
 }
 
 //----------------------------------------------------------------//
@@ -444,7 +447,10 @@ void JniUtils::ReleaseCString ( jstring jstr, cc8* cstr ) {
 bool JniUtils::SetClass ( cc8* className ) {
 	
 	ZLLogF ( ZLLog::CONSOLE, "MOAI JNI: set class %s", className );
-	this->mClass = ( jclass )this->Env()->NewGlobalRef ( this->GetClass ( className ));
+	//this->mClass = ( jclass )this->Env()->NewGlobalRef ( this->GetClass ( className ));
+
+	this->mClass = reinterpret_cast<jclass> (this->Env()->NewGlobalRef ( this->GetClass ( className )));
+	
 	return this->mClass != NULL;
 }
 

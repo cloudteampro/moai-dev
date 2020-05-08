@@ -6,6 +6,7 @@
 
 package com.moaisdk.firebase;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.appinvite.FirebaseAppInvite;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,6 +31,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -58,7 +62,8 @@ public class MoaiFirebase {
 	private static String mValuesFromFBDB = "";
 
 	private static Activity sActivity = null;
-	private static FirebaseRemoteConfig mFirebaseRemoteConfig = null;
+	private static FirebaseRemoteConfig sFirebaseRemoteConfig = null;
+	private static FirebaseAnalytics sFirebaseAnalytics = null;
 
 	protected static native void AKUInvokeListener ( int eventID );
 
@@ -76,11 +81,12 @@ public class MoaiFirebase {
 
 		sActivity = activity;
 
-		mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance ();
+		sFirebaseAnalytics = FirebaseAnalytics.getInstance(sActivity);
+		sFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance ();
 		FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder ()
         .setDeveloperModeEnabled ( true )
         .build();
-		mFirebaseRemoteConfig.setConfigSettings ( configSettings );
+		sFirebaseRemoteConfig.setConfigSettings ( configSettings );
 
 		FirebaseDynamicLinks.getInstance ().getDynamicLink ( sActivity.getIntent ()).addOnSuccessListener ( sActivity, new OnSuccessListener < PendingDynamicLinkData > () {
 
@@ -157,7 +163,7 @@ public class MoaiFirebase {
 
 		MoaiLog.i ( "MoaiFirebase: fetchConfig" );
 
-		mFirebaseRemoteConfig.fetch ().addOnCompleteListener ( sActivity, new OnCompleteListener < Void > () {
+		sFirebaseRemoteConfig.fetch ().addOnCompleteListener ( sActivity, new OnCompleteListener < Void > () {
 
 			@Override
 			public void onComplete ( @NonNull Task< Void > task ) {
@@ -185,7 +191,7 @@ public class MoaiFirebase {
 
 		MoaiLog.i ( "MoaiFirebase: activateFetchedConfig" );
 
-		mFirebaseRemoteConfig.activateFetched ();
+		sFirebaseRemoteConfig.activateFetched ();
 	}
 
 	//----------------------------------------------------------------//
@@ -193,7 +199,7 @@ public class MoaiFirebase {
 
 		MoaiLog.i ( "MoaiFirebase: getConfigString key "+key );
 
-		return mFirebaseRemoteConfig.getString ( key );
+		return sFirebaseRemoteConfig.getString ( key );
 	}
 
 	//----------------------------------------------------------------//
@@ -201,7 +207,7 @@ public class MoaiFirebase {
 
 		MoaiLog.i ( "MoaiFirebase: getConfigBoolean key "+key );
 
-		return mFirebaseRemoteConfig.getBoolean ( key );
+		return sFirebaseRemoteConfig.getBoolean ( key );
 	}
 
 	//----------------------------------------------------------------//
@@ -209,7 +215,7 @@ public class MoaiFirebase {
 
 		MoaiLog.i ( "MoaiFirebase: getConfigDouble key "+key );
 
-		return mFirebaseRemoteConfig.getDouble ( key );
+		return sFirebaseRemoteConfig.getDouble ( key );
 	}
 
 	//----------------------------------------------------------------//
@@ -217,7 +223,7 @@ public class MoaiFirebase {
 
 		MoaiLog.i ( "MoaiFirebase: getConfigLong key "+key );
 
-		return mFirebaseRemoteConfig.getLong ( key );
+		return sFirebaseRemoteConfig.getLong ( key );
 	}
 
 	//----------------------------------------------------------------//
@@ -227,6 +233,13 @@ public class MoaiFirebase {
 
 		DatabaseReference userRecord = FirebaseDatabase.getInstance ().getReference ().child ( "users" ).child ( uid );
 		userRecord.child ( "referred_by" ).setValue ( referrerUid );
+	}
+
+	//----------------------------------------------------------------//
+	public static void logEvent ( String eventName, Bundle params ) {
+
+		MoaiLog.i ( "MoaiFirebase: logEvent: " + eventName );
+		sFirebaseAnalytics.logEvent(eventName, params);
 	}
 
 	//----------------------------------------------------------------//

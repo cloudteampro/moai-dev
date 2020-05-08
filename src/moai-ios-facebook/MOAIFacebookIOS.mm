@@ -330,7 +330,7 @@ int MOAIFacebookIOS::_logPurchase ( lua_State *L ) {
 int MOAIFacebookIOS::_login ( lua_State* L ) {
 	MOAI_LUA_SETUP_SINGLE ( MOAIFacebookIOS, "" )
 	
-	FBSDKLoginBehavior loginBehavior = state.GetValue < u32 >( 2, FBSDKLoginBehaviorNative );
+	//FBSDKLoginBehavior loginBehavior = state.GetValue < u32 >( 2, FBSDKLoginBehaviorNative );
 	
 	NSMutableDictionary* paramsDict = [[ NSMutableDictionary alloc ] init ];
 	if ( state.IsType ( 1, LUA_TTABLE )) {
@@ -339,12 +339,12 @@ int MOAIFacebookIOS::_login ( lua_State* L ) {
 	NSArray* paramsArray = [ paramsDict allValues ];
 	
 	FBSDKLoginManager* login = [[ FBSDKLoginManager alloc] init ];
-	login.loginBehavior = loginBehavior;
+	//login.loginBehavior = FBSDKLoginBehaviorBrowser;
 	
 	UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
 	UIViewController* rootVC = [ window rootViewController ];
 	
-	[ login logInWithReadPermissions:paramsArray fromViewController:rootVC handler:^( FBSDKLoginManagerLoginResult *result, NSError *error ) {
+	[ login logInWithPermissions:paramsArray fromViewController:rootVC handler:^( FBSDKLoginManagerLoginResult *result, NSError *error ) {
 	
 		if ( error ) {
 			// clear old token and profile. In case user have switched profiles
@@ -406,7 +406,7 @@ int MOAIFacebookIOS::_sendAppInvite ( lua_State* L ) {
 	UIViewController* rootVC = [ window rootViewController ];
         
     // present the dialog.
-    [FBSDKAppInviteDialog showFromViewController:rootVC withContent:content delegate:nil];
+    // [FBSDKAppInviteDialog showFromViewController:rootVC withContent:content delegate:nil];
 
     [content release];
 	
@@ -615,7 +615,8 @@ int MOAIFacebookIOS::_sendGameRequest ( lua_State* L ) {
 	
 	// Remember reference to lua callback ref.
 	// It will be released automatically in dialog destructor.
-	objc_setAssociatedObject ( dialog, kGameRequestCallbackRef, callbackRef, OBJC_ASSOCIATION_RETAIN_NONATOMIC );
+	//TODO:!!!
+	//objc_setAssociatedObject ( dialog, kGameRequestCallbackRef, callbackRef, OBJC_ASSOCIATION_RETAIN_NONATOMIC );
 	
 	NSError* error = nil;
 	if ([ dialog validateWithError:&error ]) {
@@ -702,10 +703,10 @@ void MOAIFacebookIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "SESSION_EXTENDED",			( u32 )SESSION_EXTENDED );
 	
 	// Login behaviors
-	state.SetField ( -1, "LOGIN_NATIVE",				( u32 )FBSDKLoginBehaviorNative );
-	state.SetField ( -1, "LOGIN_BROWSER",				( u32 )FBSDKLoginBehaviorBrowser );
-	state.SetField ( -1, "LOGIN_SYSTEM_ACCOUNT",		( u32 )FBSDKLoginBehaviorSystemAccount );
-	state.SetField ( -1, "LOGIN_WEB",					( u32 )FBSDKLoginBehaviorWeb );
+	// state.SetField ( -1, "LOGIN_NATIVE",				( u32 )FBSDKLoginBehaviorNative );
+	// state.SetField ( -1, "LOGIN_BROWSER",				( u32 )FBSDKLoginBehaviorBrowser );
+	// state.SetField ( -1, "LOGIN_SYSTEM_ACCOUNT",		( u32 )FBSDKLoginBehaviorSystemAccount );
+	// state.SetField ( -1, "LOGIN_WEB",					( u32 )FBSDKLoginBehaviorWeb );
 	
 	// Game request action types
 	state.SetField ( -1, "ACTION_NONE", 				( u32 )FBSDKGameRequestActionTypeNone );
@@ -1011,37 +1012,37 @@ void MOAIFacebookIOS::SessionExtended ( cc8* token, cc8* expDate ) {
 //----------------------------------------------------------------//
 - ( void ) gameRequestDialog:( FBSDKGameRequestDialog* ) gameRequestDialog didCompleteWithResults:( NSDictionary* ) results {
 	
-	int ref = LUA_NOREF;
-	id object = objc_getAssociatedObject ( gameRequestDialog, kGameRequestCallbackRef );
-	if ( object ) {
-		ref = [( MOAIFacebookLuaCallbackRef* )object ref ];
-	}
+	// int ref = LUA_NOREF;
+	// id object = objc_getAssociatedObject ( gameRequestDialog, kGameRequestCallbackRef );
+	// if ( object ) {
+	// 	ref = [( MOAIFacebookLuaCallbackRef* )object ref ];
+	// }
 	
-	MOAIFacebookIOS::Get ().GameRequestDialogDidComplete ( results, ref );
+	// MOAIFacebookIOS::Get ().GameRequestDialogDidComplete ( results, ref );
 }
 
 //----------------------------------------------------------------//
 - ( void ) gameRequestDialog:( FBSDKGameRequestDialog* ) gameRequestDialog didFailWithError:( NSError* ) error {
 
-	int ref = LUA_NOREF;
-	id object = objc_getAssociatedObject ( gameRequestDialog, kGameRequestCallbackRef );
-	if ( object ) {
-		ref = [( MOAIFacebookLuaCallbackRef* )object ref ];
-	}
+	// int ref = LUA_NOREF;
+	// id object = objc_getAssociatedObject ( gameRequestDialog, kGameRequestCallbackRef );
+	// if ( object ) {
+	// 	ref = [( MOAIFacebookLuaCallbackRef* )object ref ];
+	// }
 	
-	MOAIFacebookIOS::Get ().GameRequestDialogDidFail ( error, ref );
+	// MOAIFacebookIOS::Get ().GameRequestDialogDidFail ( error, ref );
 }
 
 //----------------------------------------------------------------//
 - ( void ) gameRequestDialogDidCancel:( FBSDKGameRequestDialog* ) gameRequestDialog {
 	
-	int ref = LUA_NOREF;
-	id object = objc_getAssociatedObject ( gameRequestDialog, kGameRequestCallbackRef );
-	if ( object ) {
-		ref = [( MOAIFacebookLuaCallbackRef* )object ref ];
-	}
+	// int ref = LUA_NOREF;
+	// id object = objc_getAssociatedObject ( gameRequestDialog, kGameRequestCallbackRef );
+	// if ( object ) {
+	// 	ref = [( MOAIFacebookLuaCallbackRef* )object ref ];
+	// }
 	
-	MOAIFacebookIOS::Get ().GameRequestDialogDidFail ( nil, ref );
+	// MOAIFacebookIOS::Get ().GameRequestDialogDidFail ( nil, ref );
 }
 
 //----------------------------------------------------------------//

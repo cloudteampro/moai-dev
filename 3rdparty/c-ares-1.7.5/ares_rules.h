@@ -96,9 +96,9 @@
  * is the same as the one reported by sizeof() at compile time.
  */
 
-typedef char
-  __cares_rule_01__
-    [CareschkszEQ(long, CARES_SIZEOF_LONG)];
+// typedef char
+//   __cares_rule_01__
+//     [CareschkszEQ(long, CARES_SIZEOF_LONG)];
 
 /*
  * Verify that the size previously defined and expected for

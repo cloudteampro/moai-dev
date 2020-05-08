@@ -93,7 +93,7 @@
 	#endif
 	
 	#ifndef MOAI_WITH_SQLITE
-		#define MOAI_WITH_SQLITE 1
+		#define MOAI_WITH_SQLITE 0
 	#endif
 	
 	#ifndef MOAI_WITH_TLSF

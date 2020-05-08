@@ -9,6 +9,14 @@ file ( GLOB HOST_MODULES_SRC
   "${HOST_ROOT}/host-modules/aku_modules_util.*"
 )
 
+if (BUILD_ANDROID)
+  list( APPEND HOST_MODULES_SRC 
+    "${HOST_ROOT}/host-modules/aku_modules_android_config.h"
+    "${HOST_ROOT}/host-modules/aku_modules_android.h"
+    "${HOST_ROOT}/host-modules/aku_modules_android.cpp"
+  )
+endif (BUILD_ANDROID)
+
 #include_directories ( ${HOST_MODULES_INCLUDES} )
 
 add_library ( host-modules STATIC ${HOST_MODULES_SRC} )
@@ -22,6 +30,11 @@ set_target_properties( host-modules PROPERTIES FOLDER Modules )
 if (MOAI_CRYPTO OR LIB_PATH)
    target_link_libraries ( host-modules moai-crypto )
 endif (MOAI_CRYPTO OR LIB_PATH)
+
+#ASSIMP
+if ( MOAI_ASSIMP OR LIB_PATH)
+  target_link_libraries ( host-modules moai-assimp )
+endif ( MOAI_ASSIMP OR LIB_PATH)
 
 #BOX2D
 if ( MOAI_BOX2D OR LIB_PATH)
@@ -62,9 +75,9 @@ endif ( MOAI_LUAEXT OR LIB_PATH)
   target_link_libraries ( host-modules moai-audiosampler)
 
 #Spine
-if ( MOAI_SPINE OR LIB_PATH)
-  target_link_libraries ( host-modules moai-spine )
-endif ( MOAI_SPINE OR LIB_PATH)
+if ( MOAI_SPINE_V3 OR LIB_PATH)
+  target_link_libraries ( host-modules moai-spine-v3 )
+endif ( MOAI_SPINE_V3 OR LIB_PATH)
 
 if ( MOAI_IMAGE_JPG OR LIB_PATH)
   target_link_libraries ( host-modules moai-image-jpg )

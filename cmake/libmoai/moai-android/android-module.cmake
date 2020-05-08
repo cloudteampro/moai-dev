@@ -4,7 +4,6 @@ macro(ANDROID_MODULE MODULE_NAME MODULE_EXTERNAL MODULE_JAVA_NAME)
     "${MOAI_ROOT}/src/"
     "${CMAKE_BINARY_DIR}/libmoai/config"
    )
-
   
   set ( CMAKE_CURRENT_SOURCE_DIR "${MOAI_ROOT}/src/${MODULE_NAME}" )
 
@@ -33,12 +32,12 @@ macro(ANDROID_MODULE MODULE_NAME MODULE_EXTERNAL MODULE_JAVA_NAME)
     target_link_libraries( ${MODULE_NAME} moai-sim moai-util moai-core )
 
     install(TARGETS ${MODULE_NAME} EXPORT libmoai ARCHIVE DESTINATION lib)
-    install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/ DESTINATION include/${MODULE_NAME}
-              FILES_MATCHING PATTERN "*.h")
+    install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/ DESTINATION include/${MODULE_NAME} FILES_MATCHING PATTERN "*.h")
 
   endif ( MOAI_ANDROID_SRC )
 
   #java
+
   if (EXISTS "${MOAI_ANDROID_JAVA}" )
     install(DIRECTORY ${MOAI_ANDROID_JAVA} DESTINATION ../src/${MODULE_NAME})
   endif ()

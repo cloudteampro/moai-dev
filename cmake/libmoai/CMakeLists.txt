@@ -12,8 +12,7 @@ add_subdirectory ( moai-util )
 add_subdirectory ( moai-sim )
 add_subdirectory ( moai-crypto )
 
-add_subdirectory ( moai-ct-util )
-
+#add_subdirectory ( moai-assimp )
 add_subdirectory ( moai-box2d )
 add_subdirectory ( moai-untz )
 add_subdirectory ( moai-http-client )
@@ -26,7 +25,7 @@ add_subdirectory ( moai-image-pvr )
 add_subdirectory ( moai-image-png )
 add_subdirectory ( moai-image-webp )
 
-add_subdirectory ( moai-spine )
+add_subdirectory ( moai-ct-util )
 add_subdirectory ( moai-spine-v3 )
 add_subdirectory ( moai-fmod-studio )
 

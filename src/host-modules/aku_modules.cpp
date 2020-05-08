@@ -75,10 +75,6 @@ void AKUModulesAppFinalize () {
 		AKUFmodStudioAppFinalize ();
 	#endif
 
-	#if AKU_WITH_HARNESS
-		AKUHarnessAppFinalize ();
-	#endif
-
 	#if AKU_WITH_HTTP_CLIENT
 		AKUHttpClientAppFinalize ();
 	#endif
@@ -97,10 +93,6 @@ void AKUModulesAppFinalize () {
 
 	#if AKU_WITH_SIM
 		AKUSimAppFinalize ();
-	#endif
-
-	#if AKU_WITH_SPINE
-		AKUSpineAppFinalize ();
 	#endif
 
 	#if AKU_WITH_SPINE_V3
@@ -163,10 +155,6 @@ void AKUModulesAppInitialize () {
 		AKUFmodStudioAppInitialize ();
 	#endif
 
-	#if AKU_WITH_HARNESS
-		AKUHarnessAppInitialize ();
-	#endif
-
 	#if AKU_WITH_HTTP_CLIENT
 		AKUHttpClientAppInitialize ();
 	#endif
@@ -185,10 +173,6 @@ void AKUModulesAppInitialize () {
 
 	#if AKU_WITH_SIM
 		AKUSimAppInitialize ();
-	#endif
-
-	#if AKU_WITH_SPINE
-		AKUSpineAppInitialize ();
 	#endif
 
 	#if AKU_WITH_SPINE_V3
@@ -273,10 +257,6 @@ void AKUModulesContextInitialize () {
 
 	#if AKU_WITH_SIM
 		AKUSimContextInitialize ();
-	#endif
-
-	#if AKU_WITH_SPINE
-		AKUSpineContextInitialize ();
 	#endif
 
 	#if AKU_WITH_SPINE_V3

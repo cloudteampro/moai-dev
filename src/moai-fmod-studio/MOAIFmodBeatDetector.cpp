@@ -128,6 +128,8 @@ int MOAIFmodBeatDetector::_setBand ( lua_State *L ) {
 // MOAIFmodBeatDetector
 //================================================================//
 
+const float MOAIFmodBeatDetector::HISTORY_FILTER = 0.02f;
+
 //----------------------------------------------------------------//
 bool MOAIFmodBeatDetector::ApplyAttrOp ( u32 attrID, MOAIAttrOp& attrOp, u32 op ) {
 	

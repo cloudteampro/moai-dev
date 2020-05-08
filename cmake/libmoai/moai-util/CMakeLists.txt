@@ -48,10 +48,6 @@ if ( MOAI_TINYXML )
    target_link_libraries( moai-util tinyxml )
 endif ( MOAI_TINYXML )
 
-if (MOAI_OPENSSL)
-  target_link_libraries( moai-util ssl )
-endif (MOAI_OPENSSL)
-
 install(TARGETS moai-util EXPORT libmoai ARCHIVE DESTINATION lib)
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} DESTINATION include/moai-util

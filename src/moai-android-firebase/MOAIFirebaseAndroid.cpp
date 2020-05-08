@@ -4,6 +4,8 @@
 #include "moai-core/pch.h"
 #include "moai-sim/pch.h"
 
+#include <jni.h>
+
 #include <moai-android/JniUtils.h>
 #include <moai-android-firebase/MOAIFirebaseAndroid.h>
 
@@ -27,6 +29,25 @@ int	MOAIFirebaseAndroid::_init ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+int MOAIFirebaseAndroid::_signInWithCredential ( lua_State *L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIFirebaseAndroid, "" )
+
+	MOAIJString credentials = self->GetJString ( state.GetValue < cc8* >( 1, "" ));
+
+	self->CallStaticVoidMethod ( self->mJava_SignInWithCredential, ( jstring )credentials );
+
+	return 0;
+}
+
+//----------------------------------------------------------------//
+int MOAIFirebaseAndroid::_signOut ( lua_State* L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIFirebaseAndroid, "" )
+
+	self->CallStaticVoidMethod ( self->mJava_SignOut );
+	return 0;
+}
+
+//----------------------------------------------------------------//
 int MOAIFirebaseAndroid::_fetchConfig ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIFirebaseAndroid, "" )
 
@@ -40,6 +61,20 @@ int MOAIFirebaseAndroid::_activateFetchedConfig ( lua_State *L ) {
 
 	self->CallStaticVoidMethod ( self->mJava_ActivateFetchedConfig );
 	return 0;
+}
+
+//----------------------------------------------------------------//
+int MOAIFirebaseAndroid::_getAllKeys ( lua_State *L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIFirebaseAndroid, "" )
+
+    jobjectArray jstringArray = ( jobjectArray )self->CallStaticObjectMethod ( self->mJava_GetAllKeys );	
+
+    if ( jstringArray == NULL ) {
+		return 0;
+    }
+
+	self->StringArrayToLua ( state, jstringArray );
+	return 1;
 }
 
 //----------------------------------------------------------------//
@@ -100,6 +135,20 @@ int MOAIFirebaseAndroid::_createAnonymousAccountWithReferrerInfo ( lua_State *L 
 
 	self->CallStaticVoidMethod ( self->mJava_CreateAnonymousAccountWithReferrerInfo, ( jstring )uid, ( jstring )referrerUid );
 
+	return 0;
+}
+
+//----------------------------------------------------------------//
+int MOAIFirebaseAndroid::_logEvent ( lua_State* L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIFirebaseAndroid, "" )
+	MOAIJString jeventName = self->GetJString ( state.GetValue < cc8* >( 1, "GET" ) );
+
+	jobject jbundle = NULL;
+	if ( state.IsType ( 2, LUA_TTABLE ) ) {
+		jbundle = self->BundleFromLua( L, 2 );
+	}
+
+	self->CallStaticVoidMethod ( self->mJava_LogEvent, ( jstring )jeventName, jbundle );
 	return 0;
 }
 
@@ -219,6 +268,23 @@ int MOAIFirebaseAndroid::_getValuesFromFBDB ( lua_State *L ) {
 	return 1;
 }
 
+//----------------------------------------------------------------//
+int MOAIFirebaseAndroid::_getUserUID ( lua_State *L ) {
+	MOAI_JAVA_LUA_SETUP ( MOAIFirebaseAndroid, "" )
+	
+	JNI_GET_ENV ( jvm, env );
+
+    jstring juserUID = ( jstring )self->CallStaticObjectMethod ( self->mJava_GetUserUID );	
+
+	JNI_GET_CSTRING ( juserUID, userUID );
+
+	lua_pushstring ( state, userUID );
+
+	JNI_RELEASE_CSTRING ( juserUID, userUID );
+
+	return 1;
+}
+
 //================================================================//
 // MOAIFirebaseAndroid
 //================================================================//
@@ -229,15 +295,18 @@ MOAIFirebaseAndroid::MOAIFirebaseAndroid () {
 	RTTI_SINGLE ( MOAIGlobalEventSource )
 	 
 	this->SetClass ( "com/moaisdk/firebase/MoaiFirebase" );
-
 	this->mJava_Init = this->GetStaticMethod ( "init", "()V" );
 	this->mJava_FetchConfig = this->GetStaticMethod ( "fetchConfig", "()V" );
+	this->mJava_SignInWithCredential = this->GetStaticMethod ( "signInWithCredential", "(Ljava/lang/String;)V" );
+	this->mJava_SignOut = this->GetStaticMethod ( "signOut", "()V" );
 	this->mJava_ActivateFetchedConfig = this->GetStaticMethod ( "activateFetchedConfig", "()V" );
+	this->mJava_GetAllKeys = this->GetStaticMethod ( "getAllKeys", "()[Ljava/lang/String;" );
 	this->mJava_GetConfigString = this->GetStaticMethod ( "getConfigString", "(Ljava/lang/String;)Ljava/lang/String;" );
 	this->mJava_GetConfigBoolean = this->GetStaticMethod ( "getConfigBoolean", "(Ljava/lang/String;)Z" );
 	this->mJava_GetConfigDouble = this->GetStaticMethod ( "getConfigDouble", "(Ljava/lang/String;)D" );
 	this->mJava_GetConfigLong = this->GetStaticMethod ( "getConfigLong", "(Ljava/lang/String;)J" );
 	this->mJava_CreateAnonymousAccountWithReferrerInfo = this->GetStaticMethod ( "createAnonymousAccountWithReferrerInfo", "(Ljava/lang/String;Ljava/lang/String;)V" );
+	this->mJava_LogEvent = this->GetStaticMethod ( "logEvent", "(Ljava/lang/String;Landroid/os/Bundle;)V" );
 	this->mJava_GetInvitationId = this->GetStaticMethod ( "getInvitationId", "()Ljava/lang/String;" );
 	this->mJava_GetInvitationDeepLink = this->GetStaticMethod ( "getInvitationDeepLink", "()Ljava/lang/String;" );
 	this->mJava_CreateInvitationDeepLink = this->GetStaticMethod ( "createInvitationDeepLink", "(Ljava/lang/String;)V" );
@@ -246,6 +315,7 @@ MOAIFirebaseAndroid::MOAIFirebaseAndroid () {
 	this->mJava_WriteToFBDB = this->GetStaticMethod ( "writeToFBDB", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V" );
 	this->mJava_ReadFromFBDB = this->GetStaticMethod ( "readFromFBDB", "(Ljava/lang/String;)V" );
 	this->mJava_GetValuesFromFBDB = this->GetStaticMethod ( "getValuesFromFBDB", "()Ljava/lang/String;" );
+	this->mJava_GetUserUID = this->GetStaticMethod ( "getUserUID", "()Ljava/lang/String;" );
 }
 
 //----------------------------------------------------------------//
@@ -260,11 +330,18 @@ void MOAIFirebaseAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "DEEPLINK_CREATED_SUCCEEDED",			( u32 )DEEPLINK_CREATED_SUCCEEDED );
 	state.SetField ( -1, "PENDING_INVITATION_ID_SUCCEEDED",		( u32 )PENDING_INVITATION_ID_SUCCEEDED );
 	state.SetField ( -1, "READ_FBDB_SUCCEEDED",					( u32 )READ_FBDB_SUCCEEDED );
+	state.SetField ( -1, "SIGNIN_WITH_CREDENTIALS_SUCCEEDED",	( u32 )SIGNIN_WITH_CREDENTIALS_SUCCEEDED );
+	state.SetField ( -1, "SIGNIN_WITH_CREDENTIALS_FAILED",		( u32 )SIGNIN_WITH_CREDENTIALS_FAILED );
+	state.SetField ( -1, "SIGNOUT_SUCCEEDED",					( u32 )SIGNOUT_SUCCEEDED );
+	state.SetField ( -1, "SIGNOUT_FAILED",						( u32 )SIGNOUT_FAILED );
 
 	luaL_Reg regTable [] = {
 		{ "init",										_init },
 		{ "fetchConfig",								_fetchConfig },
+		{ "signInWithCredential",						_signInWithCredential },
+		{ "signOut",									_signOut },
 		{ "activateFetchedConfig",						_activateFetchedConfig },
+		{ "getAllKeys",									_getAllKeys },
 		{ "getConfigString",							_getConfigString },
 		{ "getConfigBoolean",							_getConfigBoolean },
 		{ "getConfigDouble",							_getConfigDouble },
@@ -273,11 +350,13 @@ void MOAIFirebaseAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "getInvitationId",							_getInvitationId },
 		{ "getInvitationDeepLink",						_getInvitationDeepLink },
 		{ "createInvitationDeepLink",					_createInvitationDeepLink },
+		{ "logEvent",									_logEvent },
 		{ "showInviteSMSDialog",						_showInviteSMSDialog },
 		{ "showInviteEmailDialog",						_showInviteEmailDialog },
 		{ "writeToFBDB",								_writeToFBDB },
 		{ "readFromFBDB",								_readFromFBDB },
 		{ "getValuesFromFBDB",							_getValuesFromFBDB },
+		{ "getUserUID",									_getUserUID },
 		{ "getListener",								&MOAIGlobalEventSource::_getListener < MOAIFirebaseAndroid > },
 		{ "setListener",								&MOAIGlobalEventSource::_setListener < MOAIFirebaseAndroid > },
 

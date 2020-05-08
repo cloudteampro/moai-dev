@@ -4,6 +4,7 @@
 // http://getmoai.com
 //----------------------------------------------------------------//
 
+#import <moai-ios/headers.h>
 #import <moai-ios-firebase/MOAIFirebaseIOS.h>
 
 //================================================================//
@@ -27,8 +28,6 @@ int MOAIFirebaseIOS::_init ( lua_State* L ) {
 	[FIRMessaging messaging].delegate = MOAIFirebaseIOS::Get ().mDelegate;
 	[GIDSignIn sharedInstance].clientID = [ NSString stringWithUTF8String:clientID ];
 	[GIDSignIn sharedInstance].delegate = MOAIFirebaseIOS::Get ().mDelegate;
-
-	//MOAIFirebaseIOS::Get ().mDatabaseRef = [[ FIRDatabase database ] reference ];
 	
 	return 0;
 }
@@ -43,7 +42,6 @@ int MOAIFirebaseIOS::_fetchConfig ( lua_State* L ) {
 		if ( status == FIRRemoteConfigFetchStatusSuccess ) {
 			
 			NSLog ( @"MOAIFirebaseIOS: fetched config " );
-			//[ MOAIFirebaseIOS::Get ().remoteConfig activateFetched ];
 			MOAIFirebaseIOS::Get ().InvokeListener ( MOAIFirebaseIOS::FETCH_CONFIG_SUCCEEDED );
 		} else {
 			
@@ -57,12 +55,91 @@ int MOAIFirebaseIOS::_fetchConfig ( lua_State* L ) {
 }
 
 //----------------------------------------------------------------//
+int MOAIFirebaseIOS::_signInWithCredential ( lua_State *L ) {
+	
+	NSLog ( @"MOAIFirebaseIOS: signInWithCredential Facebook" );
+	
+	MOAILuaState state ( L );
+	
+	cc8* facebookAccessToken = state.GetValue < cc8* >( 1, 0 );
+	
+	FIRAuthCredential *credential = [ FIRFacebookAuthProvider credentialWithAccessToken:[ NSString stringWithUTF8String:facebookAccessToken ] ];
+	
+	[[ FIRAuth auth ] signInWithCredential:credential completion:^( FIRAuthDataResult * _Nullable authResult, NSError * _Nullable error) {
+		if ( error ) {
+			
+			NSLog ( @"Error signing in: %@", error );
+
+			MOAIFirebaseIOS::Get ().InvokeListener ( MOAIFirebaseIOS::SIGNIN_WITH_CREDENTIALS_FAILED );
+			return;
+		}
+		
+		if ( authResult == nil ) {
+			
+			NSLog ( @"Error signing in: result null" );
+
+			MOAIFirebaseIOS::Get ().InvokeListener ( MOAIFirebaseIOS::SIGNIN_WITH_CREDENTIALS_FAILED );
+			return;
+		}
+		
+		FIRUser *user = authResult.user;
+		
+		MOAIFirebaseIOS::Get ()._userUid = user.uid;
+
+		MOAIFirebaseIOS::Get ().InvokeListener ( MOAIFirebaseIOS::SIGNIN_WITH_CREDENTIALS_SUCCEEDED );
+		//TODO:
+	}];
+	
+	return 0;
+}
+
+//----------------------------------------------------------------//
+int MOAIFirebaseIOS::_signOut ( lua_State *L ) {
+	
+	NSLog ( @"MOAIFirebaseIOS: signOut " );
+
+	NSError *signOutError;
+
+	BOOL status = [[ FIRAuth auth ] signOut:&signOutError ];
+
+	if ( !status ) {
+		
+		NSLog(@"Error signing out: %@", signOutError);
+
+		MOAIFirebaseIOS::Get ().InvokeListener ( MOAIFirebaseIOS::SIGNOUT_FAILED );
+
+		return 0;
+	}
+	
+	MOAIFirebaseIOS::Get ().InvokeListener ( MOAIFirebaseIOS::SIGNOUT_SUCCEEDED );
+	
+	return 0;
+}
+
+//----------------------------------------------------------------//
 int MOAIFirebaseIOS::_activateFetchedConfig ( lua_State *L ) {
 	
 	NSLog ( @"MOAIFirebaseIOS: activateFetchedConfig " );
 
 	[ MOAIFirebaseIOS::Get ().remoteConfig activateFetched ];
 	
+	return 0;
+}
+
+//----------------------------------------------------------------//
+int MOAIFirebaseIOS::_getAllKeys ( lua_State *L ) {
+	
+	NSLog ( @"MOAIFirebaseIOS: getAllKeys " );
+	
+	MOAILuaState state ( L );
+	
+	NSArray<NSString *> *remoteKeys = [[FIRRemoteConfig remoteConfig] allKeysFromSource:FIRRemoteConfigSourceRemote];
+	
+	if ( remoteKeys ) {
+		[ remoteKeys toLua:state ];
+		return 1;
+	}
+
 	return 0;
 }
 
@@ -153,6 +230,23 @@ int MOAIFirebaseIOS::_createAnonymousAccountWithReferrerInfo ( lua_State *L ) {
 }
 
 //----------------------------------------------------------------//
+int MOAIFirebaseIOS::_logEvent ( lua_State *L ) {
+	
+	MOAILuaState state ( L );
+
+	NSString* eventName	= [ NSString stringWithUTF8String:state.GetValue < cc8* >( 1, "" )];
+
+	if ( state.IsType ( 2, LUA_TTABLE )) {
+		NSMutableDictionary* paramsDict = [[ NSMutableDictionary alloc ] init ];
+		[ paramsDict initWithLua:state stackIndex:2 ];
+		[ FIRAnalytics logEventWithName:eventName parameters:paramsDict ];
+		[ paramsDict release ];
+	}
+	
+	return 0;
+}
+
+//----------------------------------------------------------------//
 int MOAIFirebaseIOS::_getInvitationId ( lua_State *L ) {
 
 	NSLog ( @"MOAIFirebaseIOS: getInvitationId " );
@@ -195,10 +289,8 @@ int MOAIFirebaseIOS::_createInvitationDeepLink ( lua_State *L ) {
 	
 	cc8* uid = state.GetValue < cc8* >( 1, 0 );
 	
-//	NSString* encodedUid = [[ NSString stringWithUTF8String:uid ] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
 	NSString* fullUrl = [NSString stringWithFormat:@"http://fruitycat.cloudteam.pro/?invitedby=%@", [ NSString stringWithUTF8String:uid ]];
 	NSURL *link = [[NSURL alloc] initWithString:fullUrl];
-//	NSURL *link = [[NSURL alloc] initWithString:@"http://fruitycat.cloudteam.pro/my-page"];
 	
 	NSString *dynamicLinksDomain = @"cloudteam.page.link";
 	FIRDynamicLinkComponents *linkBuilder = [[FIRDynamicLinkComponents alloc] initWithLink:link domain:dynamicLinksDomain];
@@ -236,26 +328,10 @@ int MOAIFirebaseIOS::_showInviteSMSDialog ( lua_State *L ) {
 	cc8* deepLink = state.GetValue < cc8* >( 3, "" );
 	cc8* customImage = state.GetValue < cc8* >( 4, "" );
 	cc8* cta = state.GetValue < cc8* >( 5, "" );
-
-//	id<FIRInviteBuilder> inviteDialog = [FIRInvites inviteDialog];
-//	[ inviteDialog setInviteDelegate: MOAIFirebaseIOS::Get ().mDelegate ];
-//
-//	FIRInvitesTargetApplication *targetApplication = [[ FIRInvitesTargetApplication alloc ] init ];
-//	targetApplication.androidClientID = @"164086327400-jppiquk90pj7e6rr9ucdft4co7ghpfvq.apps.googleusercontent.com";
-//	[ inviteDialog setOtherPlatformsTargetApplication:targetApplication ];
-//
-//	[ inviteDialog setMessage:[ NSString stringWithUTF8String:message ]];
-//	[ inviteDialog setTitle:[ NSString stringWithUTF8String:title ]];
-//	[ inviteDialog setDeepLink:[ NSString stringWithUTF8String:deepLink ]];
-//	[ inviteDialog setCallToActionText:[ NSString stringWithUTF8String:cta ]];
-//	//[ inviteDialog setCustomImage:[ NSString stringWithUTF8String:customImage ]];
-//	[ inviteDialog open ];
 	
 	MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
 	if ([ MFMessageComposeViewController canSendText ]) {
 		controller.messageComposeDelegate = MOAIFirebaseIOS::Get ().mDelegate;
-		// NSArray* to = [ NSArray arrayWithObject:@"" ];
-		// [ controller setRecipients:to ];
 		[ controller setBody:[ NSString stringWithUTF8String:message ]];
 		
 		if ( controller ) {
@@ -281,20 +357,6 @@ int MOAIFirebaseIOS::_showInviteEmailDialog ( lua_State *L ) {
 	cc8* deepLink = state.GetValue < cc8* >( 3, "" );
 	cc8* customImage = state.GetValue < cc8* >( 4, "" );
 	cc8* cta = state.GetValue < cc8* >( 5, "" );
-	
-//	id<FIRInviteBuilder> inviteDialog = [FIRInvites inviteDialog];
-//	[ inviteDialog setInviteDelegate: MOAIFirebaseIOS::Get ().mDelegate ];
-//
-//	FIRInvitesTargetApplication *targetApplication = [[ FIRInvitesTargetApplication alloc ] init ];
-//	targetApplication.androidClientID = @"164086327400-jppiquk90pj7e6rr9ucdft4co7ghpfvq.apps.googleusercontent.com";
-//	[ inviteDialog setOtherPlatformsTargetApplication:targetApplication ];
-//
-//	[ inviteDialog setMessage:[ NSString stringWithUTF8String:message ]];
-//	[ inviteDialog setTitle:[ NSString stringWithUTF8String:title ]];
-//	[ inviteDialog setDeepLink:[ NSString stringWithUTF8String:deepLink ]];
-//	[ inviteDialog setCallToActionText:[ NSString stringWithUTF8String:cta ]];
-//	//[ inviteDialog setCustomImage:[ NSString stringWithUTF8String:customImage ]];
-//	[ inviteDialog open ];
 
 	MFMailComposeViewController* controller = [[ MFMailComposeViewController alloc ] init ];
 	controller.mailComposeDelegate = MOAIFirebaseIOS::Get ().mDelegate;
@@ -324,11 +386,9 @@ int MOAIFirebaseIOS::_writeToFBDB ( lua_State *L ) {
 	cc8* myUid = state.GetValue < cc8* >( 2, "" );
 	cc8* value = state.GetValue < cc8* >( 3, "" );
 	
-	//FIRDatabaseReference* _ref = MOAIFirebaseIOS::Get ().mDatabaseRef;
-	
 	NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:[ NSString stringWithUTF8String:value ], [ NSString stringWithUTF8String:myUid ], nil];
 	
-	[[[ [[ FIRDatabase database ] reference ] child:@"users" ] child:[ NSString stringWithUTF8String:userUid ]] setValue:dict ];
+	[[[ [[ FIRDatabase database ] reference ] child:@"users" ] child:[ NSString stringWithUTF8String:userUid ]] updateChildValues:dict ];
 
 	return 0;
 }
@@ -343,8 +403,6 @@ int MOAIFirebaseIOS::_readFromFBDB ( lua_State *L ) {
 	cc8* uid = state.GetValue < cc8* >( 1, "" );
 	
 	NSLog ( @"MOAIFirebaseIOS: readFromFBDB %@", [ NSString stringWithUTF8String:uid ]);
-	
-	//FIRDatabaseReference* _ref = MOAIFirebaseIOS::Get ().mDatabaseRef;
 	
 	[[[ [[ FIRDatabase database ] reference ] child:@"users" ] child:[ NSString stringWithUTF8String:uid ]] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
 		
@@ -403,6 +461,24 @@ int MOAIFirebaseIOS::_getValuesFromFBDB ( lua_State *L ) {
 	return 1;
 }
 
+//----------------------------------------------------------------//
+int MOAIFirebaseIOS::_getUserUID ( lua_State *L ) {
+
+	NSLog ( @"MOAIFirebaseIOS: getUserUID " );
+
+	MOAILuaState state ( L );
+
+	if(MOAIFirebaseIOS::Get ()._userUid == nil) {
+		return 0;
+	}
+
+	NSLog ( @"MOAIFirebaseIOS: getUserUID %@", MOAIFirebaseIOS::Get ()._userUid );
+
+	lua_pushstring ( state, [ MOAIFirebaseIOS::Get ()._userUid UTF8String ]);
+
+	return 1;
+}
+
 //================================================================//
 // MOAIFirebaseIOS
 //================================================================//
@@ -415,7 +491,9 @@ MOAIFirebaseIOS::MOAIFirebaseIOS () {
 	mDelegate = [[ MOAIFirebaseIOSDelegate alloc ] init ];
 	
 	this->remoteConfig = [ FIRRemoteConfig remoteConfig ];
-	FIRRemoteConfigSettings *remoteConfigSettings = [[ FIRRemoteConfigSettings alloc ] initWithDeveloperModeEnabled:YES ];
+	//FIRRemoteConfigSettings *remoteConfigSettings = [[ FIRRemoteConfigSettings alloc ] initWithDeveloperModeEnabled:YES ];
+	FIRRemoteConfigSettings *remoteConfigSettings = [[ FIRRemoteConfigSettings alloc ] init ];
+	//remoteConfigSettings.minimumFetchInterval = 0;
 	remoteConfig.configSettings = remoteConfigSettings;
 }
 
@@ -434,11 +512,18 @@ void MOAIFirebaseIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "DEEPLINK_CREATED_SUCCEEDED",			( u32 )DEEPLINK_CREATED_SUCCEEDED );
 	state.SetField ( -1, "PENDING_INVITATION_ID_SUCCEEDED",		( u32 )PENDING_INVITATION_ID_SUCCEEDED );
 	state.SetField ( -1, "READ_FBDB_SUCCEEDED",					( u32 )READ_FBDB_SUCCEEDED );
+	state.SetField ( -1, "SIGNIN_WITH_CREDENTIALS_SUCCEEDED",	( u32 )SIGNIN_WITH_CREDENTIALS_SUCCEEDED );
+	state.SetField ( -1, "SIGNIN_WITH_CREDENTIALS_FAILED",		( u32 )SIGNIN_WITH_CREDENTIALS_FAILED );
+	state.SetField ( -1, "SIGNOUT_SUCCEEDED",					( u32 )SIGNOUT_SUCCEEDED );
+	state.SetField ( -1, "SIGNOUT_FAILED",						( u32 )SIGNOUT_FAILED );
 
 	luaL_Reg regTable [] = {
 		{ "init",										_init },
 		{ "fetchConfig",								_fetchConfig },
+		{ "signInWithCredential",						_signInWithCredential },
+		{ "signOut",									_signOut },
 		{ "activateFetchedConfig",						_activateFetchedConfig },
+		{ "getAllKeys",									_getAllKeys },
 		{ "getConfigString",							_getConfigString },
 		{ "getConfigBoolean",							_getConfigBoolean },
 		{ "getConfigDouble",							_getConfigDouble },
@@ -448,11 +533,13 @@ void MOAIFirebaseIOS::RegisterLuaClass ( MOAILuaState& state ) {
 		{ "getInvitationId",							_getInvitationId },
 		{ "getInvitationDeepLink",						_getInvitationDeepLink },
 		{ "createInvitationDeepLink",					_createInvitationDeepLink },
+		{ "logEvent",									_logEvent },
 		{ "showInviteSMSDialog",						_showInviteSMSDialog },
 		{ "showInviteEmailDialog",						_showInviteEmailDialog },
 		{ "writeToFBDB",								_writeToFBDB },
 		{ "readFromFBDB",								_readFromFBDB },
 		{ "getValuesFromFBDB",							_getValuesFromFBDB },
+		{ "getUserUID",									_getUserUID },
 		{ "getListener",								&MOAIGlobalEventSource::_getListener < MOAIFirebaseIOS > },
 		{ "setListener",								&MOAIGlobalEventSource::_setListener < MOAIFirebaseIOS > },
 		{ NULL, NULL }

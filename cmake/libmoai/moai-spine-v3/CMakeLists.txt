@@ -29,7 +29,7 @@ target_include_directories (moai-spine-v3 PUBLIC
      
 )
 
-target_link_libraries ( moai-spine-v3 moai-sim moai-core moai-util spine zlcore )
+target_link_libraries ( moai-spine-v3 moai-sim moai-core moai-util spine-v3 zlcore )
 set_target_properties(moai-spine-v3 PROPERTIES FOLDER Modules)
 
 install(TARGETS moai-spine-v3 EXPORT libmoai ARCHIVE DESTINATION lib)
