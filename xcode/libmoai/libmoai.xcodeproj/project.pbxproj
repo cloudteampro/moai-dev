@@ -14,11 +14,11 @@
 			);
 			dependencies = (
 				CDBA1E4A1B1E443400DCDC75 /* PBXTargetDependency */,
+				CDFD7C2F1A0857EF00A94E6B /* PBXTargetDependency */,
 				CDBA1E4C1B1E443400DCDC75 /* PBXTargetDependency */,
 				3EDC16EC19F6DD37007A7775 /* PBXTargetDependency */,
 				3EDC16EE19F6DD37007A7775 /* PBXTargetDependency */,
 				CDFD7C2D1A0857EF00A94E6B /* PBXTargetDependency */,
-				CDFD7C2F1A0857EF00A94E6B /* PBXTargetDependency */,
 				3EDC16F419F6DD37007A7775 /* PBXTargetDependency */,
 				3EDC16F819F6DD37007A7775 /* PBXTargetDependency */,
 				3EDC16FC19F6DD37007A7775 /* PBXTargetDependency */,
@@ -32,7 +32,7 @@
 				3EDC170619F6DD37007A7775 /* PBXTargetDependency */,
 				3EDC170A19F6DD37007A7775 /* PBXTargetDependency */,
 				3EDC170C19F6DD37007A7775 /* PBXTargetDependency */,
-				3EDC170E19F6DD37007A7775 /* PBXTargetDependency */,
+				D792B5FA246C521400AD54DB /* PBXTargetDependency */,
 				3EDC171019F6DD37007A7775 /* PBXTargetDependency */,
 			);
 			name = "libmoai-osx-all";
@@ -1700,7 +1700,6 @@
 		CD34310C1B31175F002BEBFA /* MOAISingleTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD3431091B31175F002BEBFA /* MOAISingleTexture.cpp */; };
 		CD34310D1B31175F002BEBFA /* MOAISingleTexture.h in Headers */ = {isa = PBXBuildFile; fileRef = CD34310A1B31175F002BEBFA /* MOAISingleTexture.h */; };
 		CD34310E1B31175F002BEBFA /* MOAISingleTexture.h in Headers */ = {isa = PBXBuildFile; fileRef = CD34310A1B31175F002BEBFA /* MOAISingleTexture.h */; };
-		CD34A24F19C7D77A00BFF405 /* assert.h in Headers */ = {isa = PBXBuildFile; fileRef = CD34A24E19C7D77A00BFF405 /* assert.h */; };
 		CD38E6371F7384CB00802DDB /* ZLHashWriterMbedTLS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6361F7384CA00802DDB /* ZLHashWriterMbedTLS.cpp */; };
 		CD38E6391F7384E200802DDB /* aes.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E61D1F7383DF00802DDB /* aes.c */; };
 		CD38E63A1F7384E200802DDB /* aesni.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E60F1F7383DA00802DDB /* aesni.c */; };
@@ -3542,6 +3541,101 @@
 		CDF941BF1B2FAEC4009D7787 /* MOAIIndexBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = CDF941BB1B2FAEC4009D7787 /* MOAIIndexBuffer.h */; };
 		CDFB27511A3C27F800853B1D /* STLSort.h in Headers */ = {isa = PBXBuildFile; fileRef = CDFB27501A3C27F800853B1D /* STLSort.h */; };
 		CDFB27521A3C27F800853B1D /* STLSort.h in Headers */ = {isa = PBXBuildFile; fileRef = CDFB27501A3C27F800853B1D /* STLSort.h */; };
+		D79C9558246C544D0000ECC9 /* aes.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E61D1F7383DF00802DDB /* aes.c */; };
+		D79C9559246C544D0000ECC9 /* aesni.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E60F1F7383DA00802DDB /* aesni.c */; };
+		D79C955A246C544D0000ECC9 /* arc4.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6311F7383E700802DDB /* arc4.c */; };
+		D79C955B246C544D0000ECC9 /* asn1parse.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E5F01F7383D200802DDB /* asn1parse.c */; };
+		D79C955C246C544D0000ECC9 /* asn1write.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6131F7383DC00802DDB /* asn1write.c */; };
+		D79C955D246C544D0000ECC9 /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6301F7383E600802DDB /* base64.c */; };
+		D79C955E246C544D0000ECC9 /* bignum.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E5FE1F7383D600802DDB /* bignum.c */; };
+		D79C955F246C544D0000ECC9 /* blowfish.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E5F21F7383D300802DDB /* blowfish.c */; };
+		D79C9560246C544D0000ECC9 /* camellia.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E61C1F7383DF00802DDB /* camellia.c */; };
+		D79C9561246C544D0000ECC9 /* ccm.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E60E1F7383DA00802DDB /* ccm.c */; };
+		D79C9562246C544D0000ECC9 /* certs.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6091F7383D900802DDB /* certs.c */; };
+		D79C9563246C544D0000ECC9 /* cipher_wrap.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E5FD1F7383D500802DDB /* cipher_wrap.c */; };
+		D79C9564246C544D0000ECC9 /* cipher.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E62F1F7383E600802DDB /* cipher.c */; };
+		D79C9565246C544D0000ECC9 /* cmac.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E62B1F7383E400802DDB /* cmac.c */; };
+		D79C9566246C544D0000ECC9 /* ctr_drbg.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E5FB1F7383D500802DDB /* ctr_drbg.c */; };
+		D79C9567246C544D0000ECC9 /* debug.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6191F7383DE00802DDB /* debug.c */; };
+		D79C9568246C544D0000ECC9 /* des.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6171F7383DD00802DDB /* des.c */; };
+		D79C9569246C544D0000ECC9 /* dhm.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E5FC1F7383D500802DDB /* dhm.c */; };
+		D79C956A246C544D0000ECC9 /* ecdh.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E5FA1F7383D500802DDB /* ecdh.c */; };
+		D79C956B246C544D0000ECC9 /* ecdsa.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6001F7383D600802DDB /* ecdsa.c */; };
+		D79C956C246C544D0000ECC9 /* ecjpake.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E5EE1F7383D200802DDB /* ecjpake.c */; };
+		D79C956D246C544D0000ECC9 /* ecp_curves.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E5EF1F7383D200802DDB /* ecp_curves.c */; };
+		D79C956E246C544D0000ECC9 /* ecp.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E62E1F7383E500802DDB /* ecp.c */; };
+		D79C956F246C544D0000ECC9 /* entropy_poll.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6121F7383DB00802DDB /* entropy_poll.c */; };
+		D79C9570246C544D0000ECC9 /* entropy.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6101F7383DB00802DDB /* entropy.c */; };
+		D79C9571246C544D0000ECC9 /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E60C1F7383DA00802DDB /* error.c */; };
+		D79C9572246C544D0000ECC9 /* gcm.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6331F7383E800802DDB /* gcm.c */; };
+		D79C9573246C544D0000ECC9 /* havege.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E5F41F7383D300802DDB /* havege.c */; };
+		D79C9574246C544D0000ECC9 /* hmac_drbg.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E61E1F7383E000802DDB /* hmac_drbg.c */; };
+		D79C9575246C544D0000ECC9 /* md_wrap.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E61F1F7383E000802DDB /* md_wrap.c */; };
+		D79C9576246C544D0000ECC9 /* md.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6201F7383E000802DDB /* md.c */; };
+		D79C9577246C544D0000ECC9 /* md2.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E61B1F7383DF00802DDB /* md2.c */; };
+		D79C9578246C544D0000ECC9 /* md4.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6041F7383D700802DDB /* md4.c */; };
+		D79C9579246C544D0000ECC9 /* md5.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6231F7383E100802DDB /* md5.c */; };
+		D79C957A246C544D0000ECC9 /* memory_buffer_alloc.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E60A1F7383D900802DDB /* memory_buffer_alloc.c */; };
+		D79C957B246C544D0000ECC9 /* net_sockets.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E60B1F7383D900802DDB /* net_sockets.c */; };
+		D79C957C246C544D0000ECC9 /* oid.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6291F7383E300802DDB /* oid.c */; };
+		D79C957D246C544D0000ECC9 /* padlock.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E5FF1F7383D600802DDB /* padlock.c */; };
+		D79C957E246C544D0000ECC9 /* pem.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E5F91F7383D400802DDB /* pem.c */; };
+		D79C957F246C544D0000ECC9 /* pk_wrap.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6321F7383E800802DDB /* pk_wrap.c */; };
+		D79C9580246C544D0000ECC9 /* pk.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6271F7383E300802DDB /* pk.c */; };
+		D79C9581246C544D0000ECC9 /* pkcs5.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E62D1F7383E500802DDB /* pkcs5.c */; };
+		D79C9582246C544D0000ECC9 /* pkcs11.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E5F61F7383D400802DDB /* pkcs11.c */; };
+		D79C9583246C544D0000ECC9 /* pkcs12.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6181F7383DD00802DDB /* pkcs12.c */; };
+		D79C9584246C544D0000ECC9 /* pkparse.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6211F7383E100802DDB /* pkparse.c */; };
+		D79C9585246C544D0000ECC9 /* pkwrite.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E5F51F7383D300802DDB /* pkwrite.c */; };
+		D79C9586246C544D0000ECC9 /* platform.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6221F7383E100802DDB /* platform.c */; };
+		D79C9587246C544D0000ECC9 /* ripemd160.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6051F7383D800802DDB /* ripemd160.c */; };
+		D79C9588246C544D0000ECC9 /* rsa.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6341F7383E900802DDB /* rsa.c */; };
+		D79C9589246C544D0000ECC9 /* sha1.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E62C1F7383E400802DDB /* sha1.c */; };
+		D79C958A246C544D0000ECC9 /* sha256.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E61A1F7383DF00802DDB /* sha256.c */; };
+		D79C958B246C544D0000ECC9 /* sha512.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6021F7383D700802DDB /* sha512.c */; };
+		D79C958C246C544D0000ECC9 /* ssl_cache.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6111F7383DB00802DDB /* ssl_cache.c */; };
+		D79C958D246C544D0000ECC9 /* ssl_ciphersuites.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E5F31F7383D300802DDB /* ssl_ciphersuites.c */; };
+		D79C958E246C544D0000ECC9 /* ssl_cli.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6281F7383E300802DDB /* ssl_cli.c */; };
+		D79C958F246C544D0000ECC9 /* ssl_cookie.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6151F7383DC00802DDB /* ssl_cookie.c */; };
+		D79C9590246C544D0000ECC9 /* ssl_srv.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6011F7383D600802DDB /* ssl_srv.c */; };
+		D79C9591246C544D0000ECC9 /* ssl_ticket.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E60D1F7383DA00802DDB /* ssl_ticket.c */; };
+		D79C9592246C544D0000ECC9 /* ssl_tls.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E62A1F7383E300802DDB /* ssl_tls.c */; };
+		D79C9593246C544D0000ECC9 /* threading.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E5F11F7383D200802DDB /* threading.c */; };
+		D79C9594246C544D0000ECC9 /* timing.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6031F7383D700802DDB /* timing.c */; };
+		D79C9595246C544D0000ECC9 /* version_features.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6261F7383E200802DDB /* version_features.c */; };
+		D79C9596246C544D0000ECC9 /* version.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6071F7383D800802DDB /* version.c */; };
+		D79C9597246C544D0000ECC9 /* x509_create.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6161F7383DD00802DDB /* x509_create.c */; };
+		D79C9598246C544D0000ECC9 /* x509_crl.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E5F71F7383D400802DDB /* x509_crl.c */; };
+		D79C9599246C544D0000ECC9 /* x509_crt.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E5F81F7383D400802DDB /* x509_crt.c */; };
+		D79C959A246C544D0000ECC9 /* x509_csr.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6081F7383D800802DDB /* x509_csr.c */; };
+		D79C959B246C544D0000ECC9 /* x509.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6241F7383E200802DDB /* x509.c */; };
+		D79C959C246C544D0000ECC9 /* x509write_crt.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6251F7383E200802DDB /* x509write_crt.c */; };
+		D79C959D246C544D0000ECC9 /* x509write_csr.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6141F7383DC00802DDB /* x509write_csr.c */; };
+		D79C959E246C544D0000ECC9 /* xtea.c in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6061F7383D800802DDB /* xtea.c */; };
+		D79C959F246C54AF0000ECC9 /* ZLHashWriterMbedTLS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD38E6361F7384CA00802DDB /* ZLHashWriterMbedTLS.cpp */; };
+		D79C95A0246C54BB0000ECC9 /* pch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC1238517FA808A00FB64BB /* pch.cpp */; };
+		D79C95A1246C54F90000ECC9 /* headers.h in Headers */ = {isa = PBXBuildFile; fileRef = CDC1238417FA808A00FB64BB /* headers.h */; };
+		D79C95A2246C54F90000ECC9 /* pch.h in Headers */ = {isa = PBXBuildFile; fileRef = CDC1238617FA808A00FB64BB /* pch.h */; };
+		D79C95B7246C59C60000ECC9 /* ascii.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FF1EC662126041900B72E03 /* ascii.h */; };
+		D79C95B8246C59D50000ECC9 /* asciitab.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FF1EC752126041E00B72E03 /* asciitab.h */; };
+		D79C95B9246C59D90000ECC9 /* expat_external.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FF1EC632126041900B72E03 /* expat_external.h */; };
+		D79C95BA246C59DC0000ECC9 /* expat.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FF1EC622126041800B72E03 /* expat.h */; };
+		D79C95BB246C59DF0000ECC9 /* iasciitab.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FF1EC7B2126041F00B72E03 /* iasciitab.h */; };
+		D79C95BC246C59E40000ECC9 /* internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FF1EC602126041800B72E03 /* internal.h */; };
+		D79C95BD246C59E90000ECC9 /* latin1tab.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FF1EC682126041A00B72E03 /* latin1tab.h */; };
+		D79C95BE246C59F50000ECC9 /* loadlibrary.c in Sources */ = {isa = PBXBuildFile; fileRef = 7FF1EC7A2126041F00B72E03 /* loadlibrary.c */; };
+		D79C95BF246C5A030000ECC9 /* nametab.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FF1EC672126041A00B72E03 /* nametab.h */; };
+		D79C95C0246C5A0E0000ECC9 /* siphash.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FF1EC6D2126041B00B72E03 /* siphash.h */; };
+		D79C95C1246C5A170000ECC9 /* utf8tab.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FF1EC722126041D00B72E03 /* utf8tab.h */; };
+		D79C95C2246C5A240000ECC9 /* winconfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FF1EC702126041C00B72E03 /* winconfig.h */; };
+		D79C95C3246C5A240000ECC9 /* xmlparse.c in Sources */ = {isa = PBXBuildFile; fileRef = 7FF1EC792126041F00B72E03 /* xmlparse.c */; };
+		D79C95C4246C5A240000ECC9 /* xmlrole.c in Sources */ = {isa = PBXBuildFile; fileRef = 7FF1EC742126041D00B72E03 /* xmlrole.c */; };
+		D79C95C5246C5A240000ECC9 /* xmlrole.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FF1EC7C2126042000B72E03 /* xmlrole.h */; };
+		D79C95C6246C5A240000ECC9 /* xmltok_impl.c in Sources */ = {isa = PBXBuildFile; fileRef = 7FF1EC6A2126041A00B72E03 /* xmltok_impl.c */; };
+		D79C95C7246C5A240000ECC9 /* xmltok_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FF1EC6C2126041B00B72E03 /* xmltok_impl.h */; };
+		D79C95C8246C5A240000ECC9 /* xmltok_ns.c in Sources */ = {isa = PBXBuildFile; fileRef = 7FF1EC6F2126041C00B72E03 /* xmltok_ns.c */; };
+		D79C95C9246C5A240000ECC9 /* xmltok.c in Sources */ = {isa = PBXBuildFile; fileRef = 7FF1EC712126041C00B72E03 /* xmltok.c */; };
+		D79C95CA246C5A240000ECC9 /* xmltok.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FF1EC612126041800B72E03 /* xmltok.h */; };
 		E9940D6814B7A217006465CC /* lfs.c in Sources */ = {isa = PBXBuildFile; fileRef = E9940D6514B7A217006465CC /* lfs.c */; };
 		E9940D6914B7A217006465CC /* lfs.c in Sources */ = {isa = PBXBuildFile; fileRef = E9940D6514B7A217006465CC /* lfs.c */; };
 		E9940D6A14B7A217006465CC /* lfs.h in Headers */ = {isa = PBXBuildFile; fileRef = E9940D6714B7A217006465CC /* lfs.h */; };
@@ -3688,13 +3782,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = CD04ACB51472557F009C20E5;
 			remoteInfo = "libmoai-osx-zl-core";
-		};
-		3EDC170D19F6DD37007A7775 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CD807DF81831C42100E658D9;
-			remoteInfo = "libmoai-osx-zl-crypto";
 		};
 		3EDC170F19F6DD37007A7775 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -3856,6 +3943,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = CDD06BD5139882D900AB0420;
 			remoteInfo = "libmoai-osx-luaext";
+		};
+		D792B5F9246C521400AD54DB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CD807DF81831C42100E658D9;
+			remoteInfo = "libmoai-osx-zl-crypto";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -5651,7 +5745,6 @@
 		CD5232381808ADC900B81720 /* MOAIBillingIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MOAIBillingIOS.mm; path = "moai-ios-billing/MOAIBillingIOS.mm"; sourceTree = "<group>"; };
 		CD5232391808ADC900B81720 /* MOAIStoreKitListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MOAIStoreKitListener.h; path = "moai-ios-billing/MOAIStoreKitListener.h"; sourceTree = "<group>"; };
 		CD52323A1808ADC900B81720 /* MOAIStoreKitListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MOAIStoreKitListener.mm; path = "moai-ios-billing/MOAIStoreKitListener.mm"; sourceTree = "<group>"; };
-		CD5232BC1808ADF400B81720 /* libmoai-ios-crittercism.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios-crittercism.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD67B45B1B264C51004298CF /* MOAISelectionMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAISelectionMesh.h; sourceTree = "<group>"; };
 		CD67B45E1B264C9C004298CF /* MOAIDeckProxy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAIDeckProxy.cpp; sourceTree = "<group>"; };
 		CD67B45F1B264C9C004298CF /* MOAIDeckProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIDeckProxy.h; sourceTree = "<group>"; };
@@ -5859,7 +5952,6 @@
 		CDA4B7AE1808AC61000129F9 /* libmoai-ios-billing.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios-billing.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDA4B89A1808AC82000129F9 /* libmoai-ios-facebook.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios-facebook.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDA4B9101808AC8F000129F9 /* libmoai-ios-gamecenter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios-gamecenter.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CDA4B9861808AC9D000129F9 /* libmoai-ios-tapjoy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmoai-ios-tapjoy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDAC02BC192407E700392FAB /* MOAIHttpTaskNSURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOAIHttpTaskNSURL.h; sourceTree = "<group>"; };
 		CDAC02BD192407E700392FAB /* MOAIHttpTaskNSURL.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MOAIHttpTaskNSURL.mm; sourceTree = "<group>"; };
 		CDADCCF61A3576A10029FEDA /* MOAITrace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOAITrace.cpp; sourceTree = "<group>"; };
@@ -6186,13 +6278,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CD5232B61808ADF400B81720 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		CD6D751F17EE415D00964415 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -6243,13 +6328,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		CDA4B90A1808AC8F000129F9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CDA4B9801808AC9D000129F9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -6785,8 +6863,6 @@
 				CDA4B7AE1808AC61000129F9 /* libmoai-ios-billing.a */,
 				CDA4B89A1808AC82000129F9 /* libmoai-ios-facebook.a */,
 				CDA4B9101808AC8F000129F9 /* libmoai-ios-gamecenter.a */,
-				CDA4B9861808AC9D000129F9 /* libmoai-ios-tapjoy.a */,
-				CD5232BC1808ADF400B81720 /* libmoai-ios-crittercism.a */,
 				CD4C3A81180A623200C02381 /* libmoai-ios-crypto.a */,
 				CD807E981831C42100E658D9 /* libmoai-osx-zl-crypto.a */,
 				CD95D4A51831D4E20080C34E /* libmoai-osx-crypto.a */,
@@ -9774,30 +9850,40 @@
 				CDCDD00C1A23F233008779B5 /* (null) in Headers */,
 				CDD48B5417FA794B00525B77 /* SFMT-params4253.h in Headers */,
 				CDCDD0281A23F233008779B5 /* (null) in Headers */,
+				D79C95BB246C59DF0000ECC9 /* iasciitab.h in Headers */,
+				D79C95C7246C5A240000ECC9 /* xmltok_impl.h in Headers */,
+				D79C95C1246C5A170000ECC9 /* utf8tab.h in Headers */,
 				CD73D0111BA3FFB800BB50C3 /* jansson_config.h in Headers */,
 				03240CD513564CB0000ADC60 /* ft2build.h in Headers */,
 				03240CD613564CB0000ADC60 /* ftconfig.h in Headers */,
 				CDCDD0121A23F233008779B5 /* (null) in Headers */,
+				D79C95C5246C5A240000ECC9 /* xmlrole.h in Headers */,
 				03240CD713564CB0000ADC60 /* ftheader.h in Headers */,
 				CD73D0271BA3FFB800BB50C3 /* utf.h in Headers */,
 				03240CD813564CB0000ADC60 /* ftmodule.h in Headers */,
 				03240CD913564CB0000ADC60 /* ftoption.h in Headers */,
+				D79C95BA246C59DC0000ECC9 /* expat.h in Headers */,
 				03240CDA13564CB0000ADC60 /* ftstdlib.h in Headers */,
 				03240D4E13564CB0000ADC60 /* tinyxml.h in Headers */,
 				CD69AB4E17FA6CF90053E028 /* sweep.h in Headers */,
 				CDD48B5A17FA794B00525B77 /* SFMT-params216091.h in Headers */,
+				D79C95B8246C59D50000ECC9 /* asciitab.h in Headers */,
+				D79C95B7246C59C60000ECC9 /* ascii.h in Headers */,
 				CDCDD0141A23F233008779B5 /* (null) in Headers */,
+				D79C95BF246C5A030000ECC9 /* nametab.h in Headers */,
 				CD69AB3A17FA6CF90053E028 /* bucketalloc.h in Headers */,
 				CD4900AB141AB6EC00913D80 /* lapi.h in Headers */,
 				CDCDD0201A23F233008779B5 /* (null) in Headers */,
 				CDD48CC117FA79FE00525B77 /* MOAIIso8601DateFormatter.h in Headers */,
 				CD4900AD141AB6EC00913D80 /* lauxlib.h in Headers */,
 				CD4900B0141AB6EC00913D80 /* lcode.h in Headers */,
+				D79C95C2246C5A240000ECC9 /* winconfig.h in Headers */,
 				CD4900B3141AB6EC00913D80 /* ldebug.h in Headers */,
 				CD4900B5141AB6EC00913D80 /* ldo.h in Headers */,
 				CDCDD01C1A23F233008779B5 /* (null) in Headers */,
 				CD4900B8141AB6EC00913D80 /* lfunc.h in Headers */,
 				CD4900BA141AB6EC00913D80 /* lgc.h in Headers */,
+				D79C95C0246C5A0E0000ECC9 /* siphash.h in Headers */,
 				CD4900BE141AB6EC00913D80 /* llex.h in Headers */,
 				CD4900BF141AB6EC00913D80 /* llimits.h in Headers */,
 				CD4900C2141AB6EC00913D80 /* lmem.h in Headers */,
@@ -9806,6 +9892,7 @@
 				CD4900C7141AB6EC00913D80 /* lopcodes.h in Headers */,
 				CD4900CA141AB6EC00913D80 /* lparser.h in Headers */,
 				CDD48B5617FA794B00525B77 /* SFMT-params19937.h in Headers */,
+				D79C95BC246C59E40000ECC9 /* internal.h in Headers */,
 				CD4900CC141AB6EC00913D80 /* lstate.h in Headers */,
 				CDCDD0181A23F233008779B5 /* (null) in Headers */,
 				CD73D0151BA3FFB800BB50C3 /* jansson.h in Headers */,
@@ -9826,6 +9913,7 @@
 				CDD48B5D17FA794B00525B77 /* SFMT.h in Headers */,
 				07658751145CD06900723A7D /* tlsf.h in Headers */,
 				CD73D00F1BA3FFB800BB50C3 /* hashtable.h in Headers */,
+				D79C95BD246C59E90000ECC9 /* latin1tab.h in Headers */,
 				07658753145CD06900723A7D /* tlsfbits.h in Headers */,
 				CDCDD01E1A23F233008779B5 /* (null) in Headers */,
 				CD69AB4617FA6CF90053E028 /* mesh.h in Headers */,
@@ -9834,6 +9922,7 @@
 				CD04AED814725714009C20E5 /* crc32.h in Headers */,
 				CDCDD0221A23F233008779B5 /* (null) in Headers */,
 				CDD48B4F17FA794B00525B77 /* SFMT-common.h in Headers */,
+				D79C95CA246C5A240000ECC9 /* xmltok.h in Headers */,
 				CD04AEDE14725714009C20E5 /* deflate.h in Headers */,
 				CDCDD0101A23F233008779B5 /* (null) in Headers */,
 				CD04AEEA14725714009C20E5 /* inffast.h in Headers */,
@@ -9854,6 +9943,7 @@
 				CDD48B4E17FA794B00525B77 /* SFMT-alti.h in Headers */,
 				20A0B02C1A5020740072F513 /* edtaa3func.h in Headers */,
 				CDD48B5817FA794B00525B77 /* SFMT-params86243.h in Headers */,
+				D79C95B9246C59D90000ECC9 /* expat_external.h in Headers */,
 				CD69AB3E17FA6CF90053E028 /* dict.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -11552,18 +11642,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CD5232481808ADF400B81720 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		CD6D746017EE415D00964415 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD34A24F19C7D77A00BFF405 /* assert.h in Headers */,
 				CD6D74C017EE415D00964415 /* headers.h in Headers */,
 				CD6D74C117EE415D00964415 /* pch.h in Headers */,
 				CD6D74C217EE415D00964415 /* zl_mutex.h in Headers */,
@@ -11635,13 +11717,6 @@
 			files = (
 				CD236666180A5475006A7236 /* host.h in Headers */,
 				CD236668180A5475006A7236 /* MOAIGameCenterIOS.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CDA4B9121808AC9D000129F9 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -11812,6 +11887,15 @@
 				CDF2886317ED41CF00FD4F59 /* ZLVfsVirtualPath.h in Headers */,
 				CDF2886417ED41CF00FD4F59 /* ZLVfsZipArchive.h in Headers */,
 				CDF2886517ED41CF00FD4F59 /* ZLVfsZipStream.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D79C9556246C54180000ECC9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D79C95A1246C54F90000ECC9 /* headers.h in Headers */,
+				D79C95A2246C54F90000ECC9 /* pch.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -12328,23 +12412,6 @@
 			productReference = CD515F8B1BCDBC08000718FB /* libmoai-ios-image-webp.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		CD5232471808ADF400B81720 /* libmoai-ios-crittercism */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CD5232B71808ADF400B81720 /* Build configuration list for PBXNativeTarget "libmoai-ios-crittercism" */;
-			buildPhases = (
-				CD5232481808ADF400B81720 /* Headers */,
-				CD5232831808ADF400B81720 /* Sources */,
-				CD5232B61808ADF400B81720 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "libmoai-ios-crittercism";
-			productName = OpenUSLS;
-			productReference = CD5232BC1808ADF400B81720 /* libmoai-ios-crittercism.a */;
-			productType = "com.apple.product-type.library.static";
-		};
 		CD6D745F17EE415D00964415 /* libmoai-osx-zl-vfs */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD6D752017EE415D00964415 /* Build configuration list for PBXNativeTarget "libmoai-osx-zl-vfs" */;
@@ -12366,6 +12433,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD807E931831C42100E658D9 /* Build configuration list for PBXNativeTarget "libmoai-osx-zl-crypto" */;
 			buildPhases = (
+				D79C9556246C54180000ECC9 /* Headers */,
+				D79C9557246C541D0000ECC9 /* Sources */,
 				CD807E921831C42100E658D9 /* Frameworks */,
 			);
 			buildRules = (
@@ -12477,23 +12546,6 @@
 			name = "libmoai-ios-gamecenter";
 			productName = OpenUSLS;
 			productReference = CDA4B9101808AC8F000129F9 /* libmoai-ios-gamecenter.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		CDA4B9111808AC9D000129F9 /* libmoai-ios-tapjoy */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CDA4B9811808AC9D000129F9 /* Build configuration list for PBXNativeTarget "libmoai-ios-tapjoy" */;
-			buildPhases = (
-				CDA4B9121808AC9D000129F9 /* Headers */,
-				CDA4B94D1808AC9D000129F9 /* Sources */,
-				CDA4B9801808AC9D000129F9 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "libmoai-ios-tapjoy";
-			productName = OpenUSLS;
-			productReference = CDA4B9861808AC9D000129F9 /* libmoai-ios-tapjoy.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		CDC097D41AE9C72E002E325F /* libmoai-ios-movie */ = {
@@ -12655,7 +12707,6 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = NO;
 				LastUpgradeCheck = 0810;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "libmoai" */;
@@ -12685,10 +12736,10 @@
 				03C2F6F3104DE130009A2D5D /* libmoai-ios */,
 				CD257B251A6255380057A53A /* libmoai-ios-apple */,
 				0379C3D51333ECD800E89DDC /* libmoai-ios-3rdparty-core */,
+				0324E2A81356485F000ADC60 /* libmoai-osx-3rdparty-core */,
 				CDA0D9F71A01B111002B71B6 /* libmoai-ios-audio-sampler */,
 				CDA4B7391808AC61000129F9 /* libmoai-ios-billing */,
 				89BE737C173AD2B600DFE837 /* libmoai-ios-box2d */,
-				CD5232471808ADF400B81720 /* libmoai-ios-crittercism */,
 				CD4C3A69180A623200C02381 /* libmoai-ios-crypto */,
 				CDA4B8251808AC82000129F9 /* libmoai-ios-facebook */,
 				CDDD30811574AE0000C410A0 /* libmoai-ios-fmod-designer */,
@@ -12704,14 +12755,12 @@
 				CDD7814D1A11631E00AD133E /* libmoai-ios-motion */,
 				CDC097D41AE9C72E002E325F /* libmoai-ios-movie */,
 				89BE6EF5173AD06700DFE837 /* libmoai-ios-sim */,
-				CDA4B9111808AC9D000129F9 /* libmoai-ios-tapjoy */,
 				CD07C3A313A182AA00C9386C /* libmoai-ios-untz */,
 				CD04AABB14725568009C20E5 /* libmoai-ios-zl-core */,
 				CDC122D417FA804C00FB64BB /* libmoai-ios-zl-crypto */,
 				CDF287EC17ED41CF00FD4F59 /* libmoai-ios-zl-vfs */,
 				0324E2B11356485F000ADC60 /* libmoai-osx */,
 				CD1845231A626BD500FCCCE0 /* libmoai-osx-apple */,
-				0324E2A81356485F000ADC60 /* libmoai-osx-3rdparty-core */,
 				CD32B3C119F9EDD10059D019 /* libmoai-osx-3rdparty-sdl */,
 				CDA0DC161A01B184002B71B6 /* libmoai-osx-audio-sampler */,
 				89BE725E173AD29200DFE837 /* libmoai-osx-box2d */,
@@ -12764,6 +12813,7 @@
 				CDCDD02A1A23F233008779B5 /* (null) in Sources */,
 				03240CEB13564CB0000ADC60 /* raster.c in Sources */,
 				03240CEC13564CB0000ADC60 /* sfnt.c in Sources */,
+				D79C95C6246C5A240000ECC9 /* xmltok_impl.c in Sources */,
 				03240CED13564CB0000ADC60 /* truetype.c in Sources */,
 				03240CEE13564CB0000ADC60 /* type1.c in Sources */,
 				03240CEF13564CB0000ADC60 /* type1cid.c in Sources */,
@@ -12793,16 +12843,19 @@
 				03240D4D13564CB0000ADC60 /* tinyxml.cpp in Sources */,
 				20A0B02A1A5020740072F513 /* edtaa3func.c in Sources */,
 				03240D4F13564CB0000ADC60 /* tinyxmlerror.cpp in Sources */,
+				D79C95BE246C59F50000ECC9 /* loadlibrary.c in Sources */,
 				03240D5013564CB0000ADC60 /* tinyxmlparser.cpp in Sources */,
 				CD4900AA141AB6EC00913D80 /* lapi.c in Sources */,
 				CD4900AC141AB6EC00913D80 /* lauxlib.c in Sources */,
 				CD4900AE141AB6EC00913D80 /* lbaselib.c in Sources */,
+				D79C95C9246C5A240000ECC9 /* xmltok.c in Sources */,
 				CD4900AF141AB6EC00913D80 /* lcode.c in Sources */,
 				CD4900B1141AB6EC00913D80 /* ldblib.c in Sources */,
 				CD4900B2141AB6EC00913D80 /* ldebug.c in Sources */,
 				CD4900B4141AB6EC00913D80 /* ldo.c in Sources */,
 				CD4900B6141AB6EC00913D80 /* ldump.c in Sources */,
 				CD73D0251BA3FFB800BB50C3 /* utf.c in Sources */,
+				D79C95C3246C5A240000ECC9 /* xmlparse.c in Sources */,
 				CD4900B7141AB6EC00913D80 /* lfunc.c in Sources */,
 				CD4900B9141AB6EC00913D80 /* lgc.c in Sources */,
 				CD4900BB141AB6EC00913D80 /* linit.c in Sources */,
@@ -12829,6 +12882,7 @@
 				CD4900DE141AB6EC00913D80 /* print.c in Sources */,
 				CD73D0291BA3FFB800BB50C3 /* value.c in Sources */,
 				CD73D0171BA3FFB800BB50C3 /* load.c in Sources */,
+				D79C95C4246C5A240000ECC9 /* xmlrole.c in Sources */,
 				CD73D00B1BA3FFB800BB50C3 /* hashtable_seed.c in Sources */,
 				CD73D0231BA3FFB800BB50C3 /* strconv.c in Sources */,
 				CDCDD0261A23F233008779B5 /* (null) in Sources */,
@@ -12837,6 +12891,7 @@
 				CD69AB4417FA6CF90053E028 /* mesh.c in Sources */,
 				CD69AB4817FA6CF90053E028 /* priorityq.c in Sources */,
 				CD04AECF14725714009C20E5 /* adler32.c in Sources */,
+				D79C95C8246C5A240000ECC9 /* xmltok_ns.c in Sources */,
 				CD04AED214725714009C20E5 /* compress.c in Sources */,
 				CD04AED514725714009C20E5 /* crc32.c in Sources */,
 				CD04AEDB14725714009C20E5 /* deflate.c in Sources */,
@@ -14515,13 +14570,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CD5232831808ADF400B81720 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		CD6D74CF17EE415D00964415 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -14593,13 +14641,6 @@
 			files = (
 				CD236669180A5475006A7236 /* MOAIGameCenterIOS.mm in Sources */,
 				CD236667180A5475006A7236 /* host.mm in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CDA4B94D1808AC9D000129F9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -14827,6 +14868,86 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D79C9557246C541D0000ECC9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D79C95A0246C54BB0000ECC9 /* pch.cpp in Sources */,
+				D79C959F246C54AF0000ECC9 /* ZLHashWriterMbedTLS.cpp in Sources */,
+				D79C9558246C544D0000ECC9 /* aes.c in Sources */,
+				D79C9559246C544D0000ECC9 /* aesni.c in Sources */,
+				D79C955A246C544D0000ECC9 /* arc4.c in Sources */,
+				D79C955B246C544D0000ECC9 /* asn1parse.c in Sources */,
+				D79C955C246C544D0000ECC9 /* asn1write.c in Sources */,
+				D79C955D246C544D0000ECC9 /* base64.c in Sources */,
+				D79C955E246C544D0000ECC9 /* bignum.c in Sources */,
+				D79C955F246C544D0000ECC9 /* blowfish.c in Sources */,
+				D79C9560246C544D0000ECC9 /* camellia.c in Sources */,
+				D79C9561246C544D0000ECC9 /* ccm.c in Sources */,
+				D79C9562246C544D0000ECC9 /* certs.c in Sources */,
+				D79C9563246C544D0000ECC9 /* cipher_wrap.c in Sources */,
+				D79C9564246C544D0000ECC9 /* cipher.c in Sources */,
+				D79C9565246C544D0000ECC9 /* cmac.c in Sources */,
+				D79C9566246C544D0000ECC9 /* ctr_drbg.c in Sources */,
+				D79C9567246C544D0000ECC9 /* debug.c in Sources */,
+				D79C9568246C544D0000ECC9 /* des.c in Sources */,
+				D79C9569246C544D0000ECC9 /* dhm.c in Sources */,
+				D79C956A246C544D0000ECC9 /* ecdh.c in Sources */,
+				D79C956B246C544D0000ECC9 /* ecdsa.c in Sources */,
+				D79C956C246C544D0000ECC9 /* ecjpake.c in Sources */,
+				D79C956D246C544D0000ECC9 /* ecp_curves.c in Sources */,
+				D79C956E246C544D0000ECC9 /* ecp.c in Sources */,
+				D79C956F246C544D0000ECC9 /* entropy_poll.c in Sources */,
+				D79C9570246C544D0000ECC9 /* entropy.c in Sources */,
+				D79C9571246C544D0000ECC9 /* error.c in Sources */,
+				D79C9572246C544D0000ECC9 /* gcm.c in Sources */,
+				D79C9573246C544D0000ECC9 /* havege.c in Sources */,
+				D79C9574246C544D0000ECC9 /* hmac_drbg.c in Sources */,
+				D79C9575246C544D0000ECC9 /* md_wrap.c in Sources */,
+				D79C9576246C544D0000ECC9 /* md.c in Sources */,
+				D79C9577246C544D0000ECC9 /* md2.c in Sources */,
+				D79C9578246C544D0000ECC9 /* md4.c in Sources */,
+				D79C9579246C544D0000ECC9 /* md5.c in Sources */,
+				D79C957A246C544D0000ECC9 /* memory_buffer_alloc.c in Sources */,
+				D79C957B246C544D0000ECC9 /* net_sockets.c in Sources */,
+				D79C957C246C544D0000ECC9 /* oid.c in Sources */,
+				D79C957D246C544D0000ECC9 /* padlock.c in Sources */,
+				D79C957E246C544D0000ECC9 /* pem.c in Sources */,
+				D79C957F246C544D0000ECC9 /* pk_wrap.c in Sources */,
+				D79C9580246C544D0000ECC9 /* pk.c in Sources */,
+				D79C9581246C544D0000ECC9 /* pkcs5.c in Sources */,
+				D79C9582246C544D0000ECC9 /* pkcs11.c in Sources */,
+				D79C9583246C544D0000ECC9 /* pkcs12.c in Sources */,
+				D79C9584246C544D0000ECC9 /* pkparse.c in Sources */,
+				D79C9585246C544D0000ECC9 /* pkwrite.c in Sources */,
+				D79C9586246C544D0000ECC9 /* platform.c in Sources */,
+				D79C9587246C544D0000ECC9 /* ripemd160.c in Sources */,
+				D79C9588246C544D0000ECC9 /* rsa.c in Sources */,
+				D79C9589246C544D0000ECC9 /* sha1.c in Sources */,
+				D79C958A246C544D0000ECC9 /* sha256.c in Sources */,
+				D79C958B246C544D0000ECC9 /* sha512.c in Sources */,
+				D79C958C246C544D0000ECC9 /* ssl_cache.c in Sources */,
+				D79C958D246C544D0000ECC9 /* ssl_ciphersuites.c in Sources */,
+				D79C958E246C544D0000ECC9 /* ssl_cli.c in Sources */,
+				D79C958F246C544D0000ECC9 /* ssl_cookie.c in Sources */,
+				D79C9590246C544D0000ECC9 /* ssl_srv.c in Sources */,
+				D79C9591246C544D0000ECC9 /* ssl_ticket.c in Sources */,
+				D79C9592246C544D0000ECC9 /* ssl_tls.c in Sources */,
+				D79C9593246C544D0000ECC9 /* threading.c in Sources */,
+				D79C9594246C544D0000ECC9 /* timing.c in Sources */,
+				D79C9595246C544D0000ECC9 /* version_features.c in Sources */,
+				D79C9596246C544D0000ECC9 /* version.c in Sources */,
+				D79C9597246C544D0000ECC9 /* x509_create.c in Sources */,
+				D79C9598246C544D0000ECC9 /* x509_crl.c in Sources */,
+				D79C9599246C544D0000ECC9 /* x509_crt.c in Sources */,
+				D79C959A246C544D0000ECC9 /* x509_csr.c in Sources */,
+				D79C959B246C544D0000ECC9 /* x509.c in Sources */,
+				D79C959C246C544D0000ECC9 /* x509write_crt.c in Sources */,
+				D79C959D246C544D0000ECC9 /* x509write_csr.c in Sources */,
+				D79C959E246C544D0000ECC9 /* xtea.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -14929,11 +15050,6 @@
 			isa = PBXTargetDependency;
 			target = CD04ACB51472557F009C20E5 /* libmoai-osx-zl-core */;
 			targetProxy = 3EDC170B19F6DD37007A7775 /* PBXContainerItemProxy */;
-		};
-		3EDC170E19F6DD37007A7775 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CD807DF81831C42100E658D9 /* libmoai-osx-zl-crypto */;
-			targetProxy = 3EDC170D19F6DD37007A7775 /* PBXContainerItemProxy */;
 		};
 		3EDC171019F6DD37007A7775 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -15049,6 +15165,11 @@
 			isa = PBXTargetDependency;
 			target = CDD06BD5139882D900AB0420 /* libmoai-osx-luaext */;
 			targetProxy = CDFD7C321A0857EF00A94E6B /* PBXContainerItemProxy */;
+		};
+		D792B5FA246C521400AD54DB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CD807DF81831C42100E658D9 /* libmoai-osx-zl-crypto */;
+			targetProxy = D792B5F9246C521400AD54DB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -15261,16 +15382,7 @@
 				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"../../3rdparty/FacebookSDKs-iOS-6.2.0",
-					../../3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework,
-					"../../3rdparty/vungle-6.2.0",
-					"../../3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
-					../../3rdparty/kontagent_ios_v1.5.6,
-					"../../3rdparty/adcolony-2.2.4",
-					"../../3rdparty/chartboost-6.1",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
 				GCC_ENABLE_PASCAL_STRINGS = NO;
@@ -15341,19 +15453,11 @@
 					"\"../../3rdparty/lpng140\"",
 					"\"../../3rdparty/libpvr-3.4\"",
 					"\"../../3rdparty/c-ares-1.7.5\"",
-					"\"../../3rdparty/openssl-1.0.0m/include-iphone\"",
-					"\"../../3rdparty/openssl-1.0.0m/include\"",
-					"\"../../3rdparty/openssl-1.0.0m/crypto\"",
-					"\"../../3rdparty/openssl-1.0.0m\"",
 					"\"../../3rdparty/curl-7.19.7/include-iphone\"",
 					"\"../../3rdparty/curl-7.19.7/lib\"",
 					"\"../../3rdparty/expat-2.2.6/lib\"",
-					"\"../../3rdparty/freeglut-2.8.1/include\"",
 					"\"../../3rdparty/freetype-2.4.4/include\"",
 					"\"../../3rdparty/box2d-2.3.0\"",
-					"\"../../3rdparty/chipmunk-5.3.4/include\"",
-					"\"../../3rdparty/chipmunk-5.3.4/include/chipmunk\"",
-					"\"../../3rdparty/luacrypto-0.2.0/src\"",
 					"\"../../3rdparty/luacurl-1.2.1/src\"",
 					"\"../../3rdparty/luasocket-2.0.2/src\"",
 					"\"../../3rdparty/luasql-2.2.0/src\"",
@@ -15367,16 +15471,10 @@
 					"\"../../3rdparty/tlsf-2.0\"",
 					"\"../../3rdparty/zlib-1.2.3\"",
 					"\"../../3rdparty/ooid-0.99\"",
-					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
-					"\"../../3rdparty/adcolonyiOS-1911/Library\"",
 					"\"../../3rdparty/mongoose\"",
 					"\"../../3rdparty/sdl2-2.0.5/include\"",
 					"\"../../3rdparty/libtess2/include\"",
 					"\"../../3rdparty/sfmt-1.4\"",
-					"\"../../3rdparty/libUAirship-3.0.1/Airship/Common\"",
-					"\"../../3rdparty/libUAirship-3.0.1/Airship/Push\"",
-					"\"../../3rdparty/Flurry-iOS-7.3.0/Flurry\"",
-					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
 					"\"../../3rdparty/sqlite-3.14.1/\"",
 					"\"../../3rdparty/mbedtls/include\"",
 				);
@@ -15404,16 +15502,7 @@
 		03C2F6F6104DE131009A2D5D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"../../3rdparty/FacebookSDKs-iOS-6.2.0",
-					../../3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework,
-					"../../3rdparty/vungle-6.2.0",
-					"../../3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
-					../../3rdparty/kontagent_ios_v1.5.6,
-					"../../3rdparty/adcolony-2.2.4",
-					"../../3rdparty/chartboost-6.1",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					USE_ARES,
 					USE_OPENSSL,
@@ -15451,16 +15540,7 @@
 		03C2F6F7104DE131009A2D5D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"../../3rdparty/FacebookSDKs-iOS-6.2.0",
-					../../3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework,
-					"../../3rdparty/vungle-6.2.0",
-					"../../3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
-					../../3rdparty/kontagent_ios_v1.5.6,
-					"../../3rdparty/adcolony-2.2.4",
-					"../../3rdparty/chartboost-6.1",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
 					USE_ARES,
@@ -15735,8 +15815,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"../../3rdparty/FacebookSDKs-iOS-6.2.0",
-					"../../3rdparty/vungle-6.2.0",
-					"../../3rdparty/adcolony-2.2.4",
 				);
 				HEADER_SEARCH_PATHS = (
 					"\"../../src/zl-vfs\"",
@@ -15750,18 +15828,11 @@
 					"\"../../3rdparty/lpng140\"",
 					"\"../../3rdparty/libpvr-3.4\"",
 					"\"../../3rdparty/c-ares-1.7.5\"",
-					"\"../../3rdparty/openssl-1.0.0m/include-iphone\"",
-					"\"../../3rdparty/openssl-1.0.0m/include\"",
-					"\"../../3rdparty/openssl-1.0.0m/crypto\"",
-					"\"../../3rdparty/openssl-1.0.0m\"",
 					"\"../../3rdparty/curl-7.19.7/include-iphone\"",
 					"\"../../3rdparty/curl-7.19.7/lib\"",
 					"\"../../3rdparty/expat-2.2.6/lib\"",
-					"\"../../3rdparty/freeglut-2.8.1/include\"",
 					"\"../../3rdparty/freetype-2.4.4/include\"",
 					"\"../../3rdparty/box2d-2.3.0\"",
-					"\"../../3rdparty/chipmunk-5.3.4/include\"",
-					"\"../../3rdparty/chipmunk-5.3.4/include/chipmunk\"",
 					"\"../../3rdparty/luacrypto-0.2.0/src\"",
 					"\"../../3rdparty/luacurl-1.2.1/src\"",
 					"\"../../3rdparty/luasocket-2.0.2/src\"",
@@ -15776,16 +15847,10 @@
 					"\"../../3rdparty/tlsf-2.0\"",
 					"\"../../3rdparty/zlib-1.2.3\"",
 					"\"../../3rdparty/ooid-0.99\"",
-					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
-					"\"../../3rdparty/adcolonyiOS-1911/Library\"",
 					"\"../../3rdparty/mongoose\"",
 					"\"../../3rdparty/sdl2-2.0.5/include\"",
 					"\"../../3rdparty/libtess2/include\"",
 					"\"../../3rdparty/sfmt-1.4\"",
-					"\"../../3rdparty/libUAirship-3.0.1/Airship/Common\"",
-					"\"../../3rdparty/libUAirship-3.0.1/Airship/Push\"",
-					"\"../../3rdparty/Flurry-iOS-7.3.0/Flurry\"",
-					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
 					"\"../../3rdparty/sqlite-3.14.1/\"",
 					"\"../../3rdparty/mbedtls/include\"",
 				);
@@ -15801,8 +15866,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"../../3rdparty/FacebookSDKs-iOS-6.2.0",
-					"../../3rdparty/vungle-6.2.0",
-					"../../3rdparty/adcolony-2.2.4",
 				);
 				HEADER_SEARCH_PATHS = (
 					"\"../../src/zl-vfs\"",
@@ -15816,18 +15879,11 @@
 					"\"../../3rdparty/lpng140\"",
 					"\"../../3rdparty/libpvr-3.4\"",
 					"\"../../3rdparty/c-ares-1.7.5\"",
-					"\"../../3rdparty/openssl-1.0.0m/include-iphone\"",
-					"\"../../3rdparty/openssl-1.0.0m/include\"",
-					"\"../../3rdparty/openssl-1.0.0m/crypto\"",
-					"\"../../3rdparty/openssl-1.0.0m\"",
 					"\"../../3rdparty/curl-7.19.7/include-iphone\"",
 					"\"../../3rdparty/curl-7.19.7/lib\"",
 					"\"../../3rdparty/expat-2.2.6/lib\"",
-					"\"../../3rdparty/freeglut-2.8.1/include\"",
 					"\"../../3rdparty/freetype-2.4.4/include\"",
 					"\"../../3rdparty/box2d-2.3.0\"",
-					"\"../../3rdparty/chipmunk-5.3.4/include\"",
-					"\"../../3rdparty/chipmunk-5.3.4/include/chipmunk\"",
 					"\"../../3rdparty/luacrypto-0.2.0/src\"",
 					"\"../../3rdparty/luacurl-1.2.1/src\"",
 					"\"../../3rdparty/luasocket-2.0.2/src\"",
@@ -15842,16 +15898,10 @@
 					"\"../../3rdparty/tlsf-2.0\"",
 					"\"../../3rdparty/zlib-1.2.3\"",
 					"\"../../3rdparty/ooid-0.99\"",
-					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
-					"\"../../3rdparty/adcolonyiOS-1911/Library\"",
 					"\"../../3rdparty/mongoose\"",
 					"\"../../3rdparty/sdl2-2.0.5/include\"",
 					"\"../../3rdparty/libtess2/include\"",
 					"\"../../3rdparty/sfmt-1.4\"",
-					"\"../../3rdparty/libUAirship-3.0.1/Airship/Common\"",
-					"\"../../3rdparty/libUAirship-3.0.1/Airship/Push\"",
-					"\"../../3rdparty/Flurry-iOS-7.3.0/Flurry\"",
-					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
 					"\"../../3rdparty/sqlite-3.14.1/\"",
 					"\"../../3rdparty/mbedtls/include\"",
 				);
@@ -15867,8 +15917,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"../../3rdparty/FacebookSDKs-iOS-6.2.0",
-					"../../3rdparty/vungle-6.2.0",
-					"../../3rdparty/adcolony-2.2.4",
 				);
 				HEADER_SEARCH_PATHS = (
 					"\"../../src/zl-vfs\"",
@@ -15882,18 +15930,11 @@
 					"\"../../3rdparty/lpng140\"",
 					"\"../../3rdparty/libpvr-3.4\"",
 					"\"../../3rdparty/c-ares-1.7.5\"",
-					"\"../../3rdparty/openssl-1.0.0m/include-iphone\"",
-					"\"../../3rdparty/openssl-1.0.0m/include\"",
-					"\"../../3rdparty/openssl-1.0.0m/crypto\"",
-					"\"../../3rdparty/openssl-1.0.0m\"",
 					"\"../../3rdparty/curl-7.19.7/include-iphone\"",
 					"\"../../3rdparty/curl-7.19.7/lib\"",
 					"\"../../3rdparty/expat-2.2.6/lib\"",
-					"\"../../3rdparty/freeglut-2.8.1/include\"",
 					"\"../../3rdparty/freetype-2.4.4/include\"",
 					"\"../../3rdparty/box2d-2.3.0\"",
-					"\"../../3rdparty/chipmunk-5.3.4/include\"",
-					"\"../../3rdparty/chipmunk-5.3.4/include/chipmunk\"",
 					"\"../../3rdparty/luacrypto-0.2.0/src\"",
 					"\"../../3rdparty/luacurl-1.2.1/src\"",
 					"\"../../3rdparty/luasocket-2.0.2/src\"",
@@ -15908,16 +15949,10 @@
 					"\"../../3rdparty/tlsf-2.0\"",
 					"\"../../3rdparty/zlib-1.2.3\"",
 					"\"../../3rdparty/ooid-0.99\"",
-					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
-					"\"../../3rdparty/adcolonyiOS-1911/Library\"",
 					"\"../../3rdparty/mongoose\"",
 					"\"../../3rdparty/sdl2-2.0.5/include\"",
 					"\"../../3rdparty/libtess2/include\"",
 					"\"../../3rdparty/sfmt-1.4\"",
-					"\"../../3rdparty/libUAirship-3.0.1/Airship/Common\"",
-					"\"../../3rdparty/libUAirship-3.0.1/Airship/Push\"",
-					"\"../../3rdparty/Flurry-iOS-7.3.0/Flurry\"",
-					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
 					"\"../../3rdparty/sqlite-3.14.1/\"",
 					"\"../../3rdparty/mbedtls/include\"",
 				);
@@ -15933,8 +15968,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"../../3rdparty/FacebookSDKs-iOS-6.2.0",
-					"../../3rdparty/vungle-6.2.0",
-					"../../3rdparty/adcolony-2.2.4",
 				);
 				HEADER_SEARCH_PATHS = (
 					"\"../../src/zl-vfs\"",
@@ -15948,18 +15981,11 @@
 					"\"../../3rdparty/lpng140\"",
 					"\"../../3rdparty/libpvr-3.4\"",
 					"\"../../3rdparty/c-ares-1.7.5\"",
-					"\"../../3rdparty/openssl-1.0.0m/include-iphone\"",
-					"\"../../3rdparty/openssl-1.0.0m/include\"",
-					"\"../../3rdparty/openssl-1.0.0m/crypto\"",
-					"\"../../3rdparty/openssl-1.0.0m\"",
 					"\"../../3rdparty/curl-7.19.7/include-iphone\"",
 					"\"../../3rdparty/curl-7.19.7/lib\"",
 					"\"../../3rdparty/expat-2.2.6/lib\"",
-					"\"../../3rdparty/freeglut-2.8.1/include\"",
 					"\"../../3rdparty/freetype-2.4.4/include\"",
 					"\"../../3rdparty/box2d-2.3.0\"",
-					"\"../../3rdparty/chipmunk-5.3.4/include\"",
-					"\"../../3rdparty/chipmunk-5.3.4/include/chipmunk\"",
 					"\"../../3rdparty/luacrypto-0.2.0/src\"",
 					"\"../../3rdparty/luacurl-1.2.1/src\"",
 					"\"../../3rdparty/luasocket-2.0.2/src\"",
@@ -15974,16 +16000,10 @@
 					"\"../../3rdparty/tlsf-2.0\"",
 					"\"../../3rdparty/zlib-1.2.3\"",
 					"\"../../3rdparty/ooid-0.99\"",
-					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
-					"\"../../3rdparty/adcolonyiOS-1911/Library\"",
 					"\"../../3rdparty/mongoose\"",
 					"\"../../3rdparty/sdl2-2.0.5/include\"",
 					"\"../../3rdparty/libtess2/include\"",
 					"\"../../3rdparty/sfmt-1.4\"",
-					"\"../../3rdparty/libUAirship-3.0.1/Airship/Common\"",
-					"\"../../3rdparty/libUAirship-3.0.1/Airship/Push\"",
-					"\"../../3rdparty/Flurry-iOS-7.3.0/Flurry\"",
-					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
 					"\"../../3rdparty/sqlite-3.14.1/\"",
 					"\"../../3rdparty/mbedtls/include\"",
 				);
@@ -17109,16 +17129,7 @@
 				DEAD_CODE_STRIPPING = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"../../3rdparty/FacebookSDKs-iOS-6.2.0",
-					../../3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework,
-					"../../3rdparty/vungle-6.2.0",
-					"../../3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
-					../../3rdparty/kontagent_ios_v1.5.6,
-					"../../3rdparty/adcolony-2.2.4",
-					"../../3rdparty/chartboost-6.1",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
 				GCC_ENABLE_PASCAL_STRINGS = NO;
@@ -17188,19 +17199,11 @@
 					"\"../../3rdparty/lpng140\"",
 					"\"../../3rdparty/libpvr-3.4\"",
 					"\"../../3rdparty/c-ares-1.7.5\"",
-					"\"../../3rdparty/openssl-1.0.0m/include-iphone\"",
-					"\"../../3rdparty/openssl-1.0.0m/include\"",
-					"\"../../3rdparty/openssl-1.0.0m/crypto\"",
-					"\"../../3rdparty/openssl-1.0.0m\"",
 					"\"../../3rdparty/curl-7.19.7/include-iphone\"",
 					"\"../../3rdparty/curl-7.19.7/lib\"",
 					"\"../../3rdparty/expat-2.2.6/lib\"",
-					"\"../../3rdparty/freeglut-2.8.1/include\"",
 					"\"../../3rdparty/freetype-2.4.4/include\"",
 					"\"../../3rdparty/box2d-2.3.0\"",
-					"\"../../3rdparty/chipmunk-5.3.4/include\"",
-					"\"../../3rdparty/chipmunk-5.3.4/include/chipmunk\"",
-					"\"../../3rdparty/luacrypto-0.2.0/src\"",
 					"\"../../3rdparty/luacurl-1.2.1/src\"",
 					"\"../../3rdparty/luasocket-2.0.2/src\"",
 					"\"../../3rdparty/luasql-2.2.0/src\"",
@@ -17214,16 +17217,10 @@
 					"\"../../3rdparty/tlsf-2.0\"",
 					"\"../../3rdparty/zlib-1.2.3\"",
 					"\"../../3rdparty/ooid-0.99\"",
-					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
-					"\"../../3rdparty/adcolonyiOS-1911/Library\"",
 					"\"../../3rdparty/mongoose\"",
 					"\"../../3rdparty/sdl2-2.0.5/include\"",
 					"\"../../3rdparty/libtess2/include\"",
 					"\"../../3rdparty/sfmt-1.4\"",
-					"\"../../3rdparty/libUAirship-3.0.1/Airship/Common\"",
-					"\"../../3rdparty/libUAirship-3.0.1/Airship/Push\"",
-					"\"../../3rdparty/Flurry-iOS-7.3.0/Flurry\"",
-					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
 					"\"../../3rdparty/sqlite-3.14.1/\"",
 					"\"../../3rdparty/mbedtls/include\"",
 				);
@@ -19339,141 +19336,6 @@
 			};
 			name = Distribution;
 		};
-		CD5232B81808ADF400B81720 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					USE_ARES,
-					USE_OPENSSL,
-					USE_SSLEAY,
-					USE_SSL,
-					BUILDING_LIBCURL,
-					_DEBUG,
-					DEBUG,
-					POSIX,
-					SQLITE_ENABLE_COLUMN_METADATA,
-					SQLITE_ENABLE_FTS3,
-					SQLITE_ENABLE_FTS3_PARENTHESIS,
-					TIXML_USE_STL,
-					HAVE_MEMMOVE,
-					XML_STATIC,
-					FT_DEBUG_LEVEL_ERROR,
-					FT_DEBUG_LEVEL_TRACE,
-					FT2_BUILD_LIBRARY,
-					DARWIN_NO_CARBON,
-					L_ENDIAN,
-					OPENSSL_NO_GMP,
-					OPENSSL_NO_JPAKE,
-					OPENSSL_NO_MD2,
-					OPENSSL_NO_RC5,
-					OPENSSL_NO_RFC3779,
-					OPENSSL_NO_STORE,
-				);
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
-				PRODUCT_NAME = "moai-ios-crittercism";
-				SDKROOT = iphoneos;
-				SEPARATE_STRIP = NO;
-				STRIP_STYLE = "non-global";
-			};
-			name = Debug;
-		};
-		CD5232B91808ADF400B81720 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					NDEBUG,
-					USE_ARES,
-					USE_OPENSSL,
-					USE_SSLEAY,
-					USE_SSL,
-					BUILDING_LIBCURL,
-					POSIX,
-					SQLITE_ENABLE_COLUMN_METADATA,
-					TIXML_USE_STL,
-					HAVE_MEMMOVE,
-					XML_STATIC,
-					FT2_BUILD_LIBRARY,
-					DARWIN_NO_CARBON,
-					L_ENDIAN,
-					OPENSSL_NO_GMP,
-					OPENSSL_NO_JPAKE,
-					OPENSSL_NO_MD2,
-					OPENSSL_NO_RC5,
-					OPENSSL_NO_RFC3779,
-					OPENSSL_NO_STORE,
-				);
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
-				PRODUCT_NAME = "moai-ios-crittercism";
-				SDKROOT = iphoneos;
-				STRIP_STYLE = debugging;
-			};
-			name = Release;
-		};
-		CD5232BA1808ADF400B81720 /* AdHoc */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					NDEBUG,
-					USE_ARES,
-					USE_OPENSSL,
-					USE_SSLEAY,
-					USE_SSL,
-					BUILDING_LIBCURL,
-					POSIX,
-					SQLITE_ENABLE_COLUMN_METADATA,
-					TIXML_USE_STL,
-					HAVE_MEMMOVE,
-					XML_STATIC,
-					FT2_BUILD_LIBRARY,
-					DARWIN_NO_CARBON,
-					L_ENDIAN,
-					OPENSSL_NO_GMP,
-					OPENSSL_NO_JPAKE,
-					OPENSSL_NO_MD2,
-					OPENSSL_NO_RC5,
-					OPENSSL_NO_RFC3779,
-					OPENSSL_NO_STORE,
-				);
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
-				PRODUCT_NAME = "moai-ios-crittercism";
-				SDKROOT = iphoneos;
-				SEPARATE_STRIP = NO;
-				STRIP_STYLE = "non-global";
-			};
-			name = AdHoc;
-		};
-		CD5232BB1808ADF400B81720 /* Distribution */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					NDEBUG,
-					USE_ARES,
-					USE_OPENSSL,
-					USE_SSLEAY,
-					USE_SSL,
-					BUILDING_LIBCURL,
-					POSIX,
-					SQLITE_ENABLE_COLUMN_METADATA,
-					TIXML_USE_STL,
-					HAVE_MEMMOVE,
-					XML_STATIC,
-					FT2_BUILD_LIBRARY,
-					DARWIN_NO_CARBON,
-					L_ENDIAN,
-					OPENSSL_NO_GMP,
-					OPENSSL_NO_JPAKE,
-					OPENSSL_NO_MD2,
-					OPENSSL_NO_RC5,
-					OPENSSL_NO_RFC3779,
-					OPENSSL_NO_STORE,
-				);
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
-				PRODUCT_NAME = "moai-ios-crittercism";
-				SDKROOT = iphoneos;
-				STRIP_STYLE = debugging;
-			};
-			name = Distribution;
-		};
 		CD6D752117EE415D00964415 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -20192,7 +20054,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"../../3rdparty/FacebookSDKs-iOS-7.0.0",
+				);
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					USE_ARES,
@@ -20233,7 +20098,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"../../3rdparty/FacebookSDKs-iOS-7.0.0",
+				);
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
@@ -20268,7 +20136,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"../../3rdparty/FacebookSDKs-iOS-7.0.0",
+				);
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
@@ -20304,7 +20175,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"../../3rdparty/FacebookSDKs-iOS-7.0.0",
+				);
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
@@ -20465,141 +20339,6 @@
 				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				PRODUCT_NAME = "moai-ios-gamecenter";
-				SDKROOT = iphoneos;
-				STRIP_STYLE = debugging;
-			};
-			name = Distribution;
-		};
-		CDA4B9821808AC9D000129F9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					USE_ARES,
-					USE_OPENSSL,
-					USE_SSLEAY,
-					USE_SSL,
-					BUILDING_LIBCURL,
-					_DEBUG,
-					DEBUG,
-					POSIX,
-					SQLITE_ENABLE_COLUMN_METADATA,
-					SQLITE_ENABLE_FTS3,
-					SQLITE_ENABLE_FTS3_PARENTHESIS,
-					TIXML_USE_STL,
-					HAVE_MEMMOVE,
-					XML_STATIC,
-					FT_DEBUG_LEVEL_ERROR,
-					FT_DEBUG_LEVEL_TRACE,
-					FT2_BUILD_LIBRARY,
-					DARWIN_NO_CARBON,
-					L_ENDIAN,
-					OPENSSL_NO_GMP,
-					OPENSSL_NO_JPAKE,
-					OPENSSL_NO_MD2,
-					OPENSSL_NO_RC5,
-					OPENSSL_NO_RFC3779,
-					OPENSSL_NO_STORE,
-				);
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
-				PRODUCT_NAME = "moai-ios-tapjoy";
-				SDKROOT = iphoneos;
-				SEPARATE_STRIP = NO;
-				STRIP_STYLE = "non-global";
-			};
-			name = Debug;
-		};
-		CDA4B9831808AC9D000129F9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					NDEBUG,
-					USE_ARES,
-					USE_OPENSSL,
-					USE_SSLEAY,
-					USE_SSL,
-					BUILDING_LIBCURL,
-					POSIX,
-					SQLITE_ENABLE_COLUMN_METADATA,
-					TIXML_USE_STL,
-					HAVE_MEMMOVE,
-					XML_STATIC,
-					FT2_BUILD_LIBRARY,
-					DARWIN_NO_CARBON,
-					L_ENDIAN,
-					OPENSSL_NO_GMP,
-					OPENSSL_NO_JPAKE,
-					OPENSSL_NO_MD2,
-					OPENSSL_NO_RC5,
-					OPENSSL_NO_RFC3779,
-					OPENSSL_NO_STORE,
-				);
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
-				PRODUCT_NAME = "moai-ios-tapjoy";
-				SDKROOT = iphoneos;
-				STRIP_STYLE = debugging;
-			};
-			name = Release;
-		};
-		CDA4B9841808AC9D000129F9 /* AdHoc */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					NDEBUG,
-					USE_ARES,
-					USE_OPENSSL,
-					USE_SSLEAY,
-					USE_SSL,
-					BUILDING_LIBCURL,
-					POSIX,
-					SQLITE_ENABLE_COLUMN_METADATA,
-					TIXML_USE_STL,
-					HAVE_MEMMOVE,
-					XML_STATIC,
-					FT2_BUILD_LIBRARY,
-					DARWIN_NO_CARBON,
-					L_ENDIAN,
-					OPENSSL_NO_GMP,
-					OPENSSL_NO_JPAKE,
-					OPENSSL_NO_MD2,
-					OPENSSL_NO_RC5,
-					OPENSSL_NO_RFC3779,
-					OPENSSL_NO_STORE,
-				);
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
-				PRODUCT_NAME = "moai-ios-tapjoy";
-				SDKROOT = iphoneos;
-				SEPARATE_STRIP = NO;
-				STRIP_STYLE = "non-global";
-			};
-			name = AdHoc;
-		};
-		CDA4B9851808AC9D000129F9 /* Distribution */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					NDEBUG,
-					USE_ARES,
-					USE_OPENSSL,
-					USE_SSLEAY,
-					USE_SSL,
-					BUILDING_LIBCURL,
-					POSIX,
-					SQLITE_ENABLE_COLUMN_METADATA,
-					TIXML_USE_STL,
-					HAVE_MEMMOVE,
-					XML_STATIC,
-					FT2_BUILD_LIBRARY,
-					DARWIN_NO_CARBON,
-					L_ENDIAN,
-					OPENSSL_NO_GMP,
-					OPENSSL_NO_JPAKE,
-					OPENSSL_NO_MD2,
-					OPENSSL_NO_RC5,
-					OPENSSL_NO_RFC3779,
-					OPENSSL_NO_STORE,
-				);
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
-				PRODUCT_NAME = "moai-ios-tapjoy";
 				SDKROOT = iphoneos;
 				STRIP_STYLE = debugging;
 			};
@@ -21582,16 +21321,7 @@
 				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"../../3rdparty/FacebookSDKs-iOS-6.2.0",
-					../../3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework,
-					"../../3rdparty/vungle-6.2.0",
-					"../../3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
-					../../3rdparty/kontagent_ios_v1.5.6,
-					"../../3rdparty/adcolony-2.2.4",
-					"../../3rdparty/chartboost-6.1",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
 				GCC_ENABLE_PASCAL_STRINGS = NO;
@@ -21662,19 +21392,11 @@
 					"\"../../3rdparty/lpng140\"",
 					"\"../../3rdparty/libpvr-3.4\"",
 					"\"../../3rdparty/c-ares-1.7.5\"",
-					"\"../../3rdparty/openssl-1.0.0m/include-iphone\"",
-					"\"../../3rdparty/openssl-1.0.0m/include\"",
-					"\"../../3rdparty/openssl-1.0.0m/crypto\"",
-					"\"../../3rdparty/openssl-1.0.0m\"",
 					"\"../../3rdparty/curl-7.19.7/include-iphone\"",
 					"\"../../3rdparty/curl-7.19.7/lib\"",
 					"\"../../3rdparty/expat-2.2.6/lib\"",
-					"\"../../3rdparty/freeglut-2.8.1/include\"",
 					"\"../../3rdparty/freetype-2.4.4/include\"",
 					"\"../../3rdparty/box2d-2.3.0\"",
-					"\"../../3rdparty/chipmunk-5.3.4/include\"",
-					"\"../../3rdparty/chipmunk-5.3.4/include/chipmunk\"",
-					"\"../../3rdparty/luacrypto-0.2.0/src\"",
 					"\"../../3rdparty/luacurl-1.2.1/src\"",
 					"\"../../3rdparty/luasocket-2.0.2/src\"",
 					"\"../../3rdparty/luasql-2.2.0/src\"",
@@ -21688,16 +21410,10 @@
 					"\"../../3rdparty/tlsf-2.0\"",
 					"\"../../3rdparty/zlib-1.2.3\"",
 					"\"../../3rdparty/ooid-0.99\"",
-					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
-					"\"../../3rdparty/adcolonyiOS-1911/Library\"",
 					"\"../../3rdparty/mongoose\"",
 					"\"../../3rdparty/sdl2-2.0.5/include\"",
 					"\"../../3rdparty/libtess2/include\"",
 					"\"../../3rdparty/sfmt-1.4\"",
-					"\"../../3rdparty/libUAirship-3.0.1/Airship/Common\"",
-					"\"../../3rdparty/libUAirship-3.0.1/Airship/Push\"",
-					"\"../../3rdparty/Flurry-iOS-7.3.0/Flurry\"",
-					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
 					"\"../../3rdparty/sqlite-3.14.1/\"",
 					"\"../../3rdparty/mbedtls/include\"",
 				);
@@ -21725,16 +21441,7 @@
 		E90D02C014D5E12700DD75AA /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"../../3rdparty/FacebookSDKs-iOS-6.2.0",
-					../../3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework,
-					"../../3rdparty/vungle-6.2.0",
-					"../../3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
-					../../3rdparty/kontagent_ios_v1.5.6,
-					"../../3rdparty/adcolony-2.2.4",
-					"../../3rdparty/chartboost-6.1",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
 					USE_ARES,
@@ -22038,16 +21745,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"../../3rdparty/FacebookSDKs-iOS-6.2.0",
-					../../3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework,
-					"../../3rdparty/vungle-6.2.0",
-					"../../3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
-					../../3rdparty/kontagent_ios_v1.5.6,
-					"../../3rdparty/adcolony-2.2.4",
-					"../../3rdparty/chartboost-6.1",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
 				GCC_ENABLE_PASCAL_STRINGS = NO;
@@ -22118,19 +21816,11 @@
 					"\"../../3rdparty/lpng140\"",
 					"\"../../3rdparty/libpvr-3.4\"",
 					"\"../../3rdparty/c-ares-1.7.5\"",
-					"\"../../3rdparty/openssl-1.0.0m/include-iphone\"",
-					"\"../../3rdparty/openssl-1.0.0m/include\"",
-					"\"../../3rdparty/openssl-1.0.0m/crypto\"",
-					"\"../../3rdparty/openssl-1.0.0m\"",
 					"\"../../3rdparty/curl-7.19.7/include-iphone\"",
 					"\"../../3rdparty/curl-7.19.7/lib\"",
 					"\"../../3rdparty/expat-2.2.6/lib\"",
-					"\"../../3rdparty/freeglut-2.8.1/include\"",
 					"\"../../3rdparty/freetype-2.4.4/include\"",
 					"\"../../3rdparty/box2d-2.3.0\"",
-					"\"../../3rdparty/chipmunk-5.3.4/include\"",
-					"\"../../3rdparty/chipmunk-5.3.4/include/chipmunk\"",
-					"\"../../3rdparty/luacrypto-0.2.0/src\"",
 					"\"../../3rdparty/luacurl-1.2.1/src\"",
 					"\"../../3rdparty/luasocket-2.0.2/src\"",
 					"\"../../3rdparty/luasql-2.2.0/src\"",
@@ -22144,16 +21834,10 @@
 					"\"../../3rdparty/tlsf-2.0\"",
 					"\"../../3rdparty/zlib-1.2.3\"",
 					"\"../../3rdparty/ooid-0.99\"",
-					"\"../../3rdparty/crittercism-4.3.3/CrittercismSDK\"",
-					"\"../../3rdparty/adcolonyiOS-1911/Library\"",
 					"\"../../3rdparty/mongoose\"",
 					"\"../../3rdparty/sdl2-2.0.5/include\"",
 					"\"../../3rdparty/libtess2/include\"",
 					"\"../../3rdparty/sfmt-1.4\"",
-					"\"../../3rdparty/libUAirship-3.0.1/Airship/Common\"",
-					"\"../../3rdparty/libUAirship-3.0.1/Airship/Push\"",
-					"\"../../3rdparty/Flurry-iOS-7.3.0/Flurry\"",
-					"\"../../3rdparty/mixpanel-iphone-2.2.0/Mixpanel\"",
 					"\"../../3rdparty/sqlite-3.14.1/\"",
 					"\"../../3rdparty/mbedtls/include\"",
 				);
@@ -22180,16 +21864,7 @@
 		E9C405C6150D999200C7AB04 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"../../3rdparty/FacebookSDKs-iOS-6.2.0",
-					../../3rdparty/TapjoySDK_iOS_v10.0.2/Libraries/Tapjoy.embeddedframework,
-					"../../3rdparty/vungle-6.2.0",
-					"../../3rdparty/MobileAppTracking-ios-2.6/sdk-ios",
-					../../3rdparty/kontagent_ios_v1.5.6,
-					"../../3rdparty/adcolony-2.2.4",
-					"../../3rdparty/chartboost-6.1",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
 					USE_ARES,
@@ -22850,17 +22525,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		CD5232B71808ADF400B81720 /* Build configuration list for PBXNativeTarget "libmoai-ios-crittercism" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CD5232B81808ADF400B81720 /* Debug */,
-				CD5232B91808ADF400B81720 /* Release */,
-				CD5232BA1808ADF400B81720 /* AdHoc */,
-				CD5232BB1808ADF400B81720 /* Distribution */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
 		CD6D752017EE415D00964415 /* Build configuration list for PBXNativeTarget "libmoai-osx-zl-vfs" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -22945,17 +22609,6 @@
 				CDA4B90D1808AC8F000129F9 /* Release */,
 				CDA4B90E1808AC8F000129F9 /* AdHoc */,
 				CDA4B90F1808AC8F000129F9 /* Distribution */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		CDA4B9811808AC9D000129F9 /* Build configuration list for PBXNativeTarget "libmoai-ios-tapjoy" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CDA4B9821808AC9D000129F9 /* Debug */,
-				CDA4B9831808AC9D000129F9 /* Release */,
-				CDA4B9841808AC9D000129F9 /* AdHoc */,
-				CDA4B9851808AC9D000129F9 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

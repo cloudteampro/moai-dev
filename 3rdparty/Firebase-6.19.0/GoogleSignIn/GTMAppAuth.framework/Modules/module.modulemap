@@ -1,8 +1,0 @@
-framework module GTMAppAuth {
-umbrella header "GTMAppAuth.h"
-export *
-module * { export * }
-  link framework "SafariServices"
-  link framework "Security"
-  link framework "SystemConfiguration"
-}

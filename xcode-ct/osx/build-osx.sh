@@ -9,6 +9,6 @@ OSX_BIN=../bin/osx
 
 #---------------------------------------------------------------
 # build osx
-xcodebuild -derivedDataPath build -configuration Release -project moai-osx.xcodeproj -scheme moai-osx || exit 1
+xcodebuild -derivedDataPath build -configuration Release -project moai-osx.xcodeproj -scheme moai-osx -verbose || exit 1
 
 popd > /dev/null

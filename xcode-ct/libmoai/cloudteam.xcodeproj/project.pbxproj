@@ -399,13 +399,6 @@
 			remoteGlobalIDString = 89BE74A1173AD2B600DFE837;
 			remoteInfo = "libmoai-ios-box2d";
 		};
-		20DA09121BDE93C50070C61F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD5232BC1808ADF400B81720;
-			remoteInfo = "libmoai-ios-crittercism";
-		};
 		20DA09141BDE93C50070C61F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
@@ -510,13 +503,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 89BE6F06173AD06700DFE837;
 			remoteInfo = "libmoai-ios-sim";
-		};
-		20DA09381BDE93C50070C61F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 20DA08C11BDE93C30070C61F /* libmoai.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CDA4B9861808AC9D000129F9;
-			remoteInfo = "libmoai-ios-tapjoy";
 		};
 		20DA093A1BDE93C50070C61F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1038,10 +1024,10 @@
 				20DA09011BDE93C50070C61F /* libmoai-ios.a */,
 				20DA09031BDE93C50070C61F /* libmoai-ios-apple.a */,
 				20DA09051BDE93C50070C61F /* libmoai-ios-3rdparty-core.a */,
+				20DA094B1BDE93C50070C61F /* libmoai-osx-3rdparty-core.a */,
 				20DA090B1BDE93C50070C61F /* libmoai-ios-audio-sampler.a */,
 				20DA090D1BDE93C50070C61F /* libmoai-ios-billing.a */,
 				20DA090F1BDE93C50070C61F /* libmoai-ios-box2d.a */,
-				20DA09131BDE93C50070C61F /* libmoai-ios-crittercism.a */,
 				20DA09151BDE93C50070C61F /* libmoai-ios-crypto.a */,
 				20DA09171BDE93C50070C61F /* libmoai-ios-facebook.a */,
 				20DA091B1BDE93C50070C61F /* libmoai-ios-fmod-designer.a */,
@@ -1057,14 +1043,12 @@
 				20DA09331BDE93C50070C61F /* libmoai-ios-motion.a */,
 				20DA09351BDE93C50070C61F /* libmoai-ios-movie.a */,
 				20DA09371BDE93C50070C61F /* libmoai-ios-sim.a */,
-				20DA09391BDE93C50070C61F /* libmoai-ios-tapjoy.a */,
 				20DA093B1BDE93C50070C61F /* libmoai-ios-untz.a */,
 				20DA09411BDE93C50070C61F /* libmoai-ios-zl-core.a */,
 				20DA09431BDE93C50070C61F /* libmoai-ios-zl-crypto.a */,
 				20DA09451BDE93C50070C61F /* libmoai-ios-zl-vfs.a */,
 				20DA09471BDE93C50070C61F /* libmoai-osx.a */,
 				20DA09491BDE93C50070C61F /* libmoai-osx-apple.a */,
-				20DA094B1BDE93C50070C61F /* libmoai-osx-3rdparty-core.a */,
 				20DA094F1BDE93C50070C61F /* libmoai-osx-3rdparty-sdl.a */,
 				20DA09511BDE93C50070C61F /* libmoai-osx-audio-sampler.a */,
 				20DA09531BDE93C50070C61F /* libmoai-osx-box2d.a */,
@@ -1656,7 +1640,6 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = NO;
 				LastUpgradeCheck = 0810;
 				TargetAttributes = {
 					206B9CF11BDABA590021D349 = {
@@ -1754,13 +1737,6 @@
 			fileType = archive.ar;
 			path = "libmoai-ios-box2d.a";
 			remoteRef = 20DA090E1BDE93C50070C61F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		20DA09131BDE93C50070C61F /* libmoai-ios-crittercism.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libmoai-ios-crittercism.a";
-			remoteRef = 20DA09121BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		20DA09151BDE93C50070C61F /* libmoai-ios-crypto.a */ = {
@@ -1866,13 +1842,6 @@
 			fileType = archive.ar;
 			path = "libmoai-ios-sim.a";
 			remoteRef = 20DA09361BDE93C50070C61F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		20DA09391BDE93C50070C61F /* libmoai-ios-tapjoy.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libmoai-ios-tapjoy.a";
-			remoteRef = 20DA09381BDE93C50070C61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		20DA093B1BDE93C50070C61F /* libmoai-ios-untz.a */ = {
@@ -2469,6 +2438,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/fmod-studio/lib/ios";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -2507,6 +2477,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/fmod-studio/lib/ios";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -2543,6 +2514,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/fmod-studio/lib/ios";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -2581,6 +2553,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/fmod-studio/lib/ios";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -2618,6 +2591,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/fmod-studio/lib/osx";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -2662,6 +2636,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/fmod-studio/lib/osx";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -2704,6 +2679,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/fmod-studio/lib/osx";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -2748,6 +2724,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/fmod-studio/lib/osx";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"${inherited}",
 					MACOSX,
@@ -3897,7 +3874,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/appsflyer-5.1.0;
+				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/appsflyer-5.3.0";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -3936,7 +3913,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/appsflyer-5.1.0;
+				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/appsflyer-5.3.0";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -3973,7 +3950,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/appsflyer-5.1.0;
+				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/appsflyer-5.3.0";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -4012,7 +3989,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = ../../3rdparty/appsflyer-5.1.0;
+				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/appsflyer-5.3.0";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -4197,7 +4174,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/Firebase-6.19.0/Google-Mobile-Ads-SDK";
+				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/Firebase-6.24.0/Google-Mobile-Ads-SDK";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -4237,7 +4214,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/Firebase-6.19.0/Google-Mobile-Ads-SDK";
+				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/Firebase-6.24.0/Google-Mobile-Ads-SDK";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -4275,7 +4252,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/Firebase-6.19.0/Google-Mobile-Ads-SDK";
+				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/Firebase-6.24.0/Google-Mobile-Ads-SDK";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -4315,7 +4292,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/Firebase-6.19.0/Google-Mobile-Ads-SDK";
+				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/Firebase-6.24.0/Google-Mobile-Ads-SDK";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -4355,15 +4332,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"../../3rdparty/Firebase-6.19.0/FirebaseRemoteConfig",
-					"../../3rdparty/Firebase-6.19.0/FirebaseAnalytics",
-					"../../3rdparty/Firebase-6.19.0/FirebaseMessaging",
-					"../../3rdparty/Firebase-6.19.0/FirebaseAuth",
-					"../../3rdparty/Firebase-6.19.0/GoogleSignIn",
-					"../../3rdparty/Firebase-6.19.0/FirebaseDynamicLinks",
-					"../../3rdparty/Firebase-6.19.0/FirebaseDatabase",
-				);
+				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/Firebase-6.24.0/**";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -4388,6 +4357,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+					"\"../../3rdparty/Firebase-6.24.0\"",
 				);
 				PRODUCT_NAME = "moai-ios-firebase";
 				SDKROOT = iphoneos;
@@ -4404,15 +4374,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"../../3rdparty/Firebase-6.19.0/FirebaseRemoteConfig",
-					"../../3rdparty/Firebase-6.19.0/FirebaseAnalytics",
-					"../../3rdparty/Firebase-6.19.0/FirebaseMessaging",
-					"../../3rdparty/Firebase-6.19.0/FirebaseAuth",
-					"../../3rdparty/Firebase-6.19.0/GoogleSignIn",
-					"../../3rdparty/Firebase-6.19.0/FirebaseDynamicLinks",
-					"../../3rdparty/Firebase-6.19.0/FirebaseDatabase",
-				);
+				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/Firebase-6.24.0/**";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -4437,6 +4399,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+					"\"../../3rdparty/Firebase-6.24.0\"",
 				);
 				PRODUCT_NAME = "moai-ios-firebase";
 				SDKROOT = iphoneos;
@@ -4451,15 +4414,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"../../3rdparty/Firebase-6.19.0/FirebaseRemoteConfig",
-					"../../3rdparty/Firebase-6.19.0/FirebaseAnalytics",
-					"../../3rdparty/Firebase-6.19.0/FirebaseMessaging",
-					"../../3rdparty/Firebase-6.19.0/FirebaseAuth",
-					"../../3rdparty/Firebase-6.19.0/GoogleSignIn",
-					"../../3rdparty/Firebase-6.19.0/FirebaseDynamicLinks",
-					"../../3rdparty/Firebase-6.19.0/FirebaseDatabase",
-				);
+				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/Firebase-6.24.0/**";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -4484,6 +4439,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+					"\"../../3rdparty/Firebase-6.24.0\"",
 				);
 				PRODUCT_NAME = "moai-ios-firebase";
 				SDKROOT = iphoneos;
@@ -4500,15 +4456,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"../../3rdparty/Firebase-6.19.0/FirebaseRemoteConfig",
-					"../../3rdparty/Firebase-6.19.0/FirebaseAnalytics",
-					"../../3rdparty/Firebase-6.19.0/FirebaseMessaging",
-					"../../3rdparty/Firebase-6.19.0/FirebaseAuth",
-					"../../3rdparty/Firebase-6.19.0/GoogleSignIn",
-					"../../3rdparty/Firebase-6.19.0/FirebaseDynamicLinks",
-					"../../3rdparty/Firebase-6.19.0/FirebaseDatabase",
-				);
+				FRAMEWORK_SEARCH_PATHS = "../../3rdparty/Firebase-6.24.0/**";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
@@ -4533,6 +4481,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FMOD_IOS_SDK_ROOT)/api/inc",
+					"\"../../3rdparty/Firebase-6.24.0\"",
 				);
 				PRODUCT_NAME = "moai-ios-firebase";
 				SDKROOT = iphoneos;

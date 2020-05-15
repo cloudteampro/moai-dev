@@ -839,6 +839,16 @@ int zl_setvbuf ( ZLFILE* fp, char* buffer, int mode, size_t size ) {
 }
 
 //----------------------------------------------------------------//
+int zl_system ( const char* command ) {
+
+	#ifdef MOAI_OS_IPHONE
+		assert ( false );
+	#else
+		return system ( command );
+	#endif
+}
+
+//----------------------------------------------------------------//
 ZLFILE* zl_tmpfile ( void ) {
 
 	ZLVfsFile* file = new ZLVfsFile ();
