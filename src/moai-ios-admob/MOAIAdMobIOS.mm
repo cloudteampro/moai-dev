@@ -18,26 +18,31 @@ int MOAIAdMobIOS::_show ( lua_State* L ) {
 
 	MOAILuaState state ( L );
 
-	if (![[ GADRewardBasedVideoAd sharedInstance ] isReady ]) {
+	cc8* placement = state.GetValue < cc8* >( 1, 0 );
+	
+	GADRewardedAd* ad = [MOAIAdMobIOS::Get ().mRewardedAds objectForKey:[ NSString stringWithUTF8String:placement ] ];
 
-		NSLog ( @"MOAIAdMobIOS: GADRewardBasedVideoAd: not ready" );
+	if (!ad.isReady) {
+
+		NSLog ( @"MOAIAdMobIOS: GADRewardedAd: not ready" );
 		state.Push ( false );
 		return 1;
 	}
 
-	UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
-	UIViewController* rootVC = [ window rootViewController ];
+	if (ad.isReady) {
+		
+		UIWindow* window = [[ UIApplication sharedApplication ] keyWindow ];
+		UIViewController* rootVC = [ window rootViewController ];
 
-	if ([[ GADRewardBasedVideoAd sharedInstance ] isReady ]) {
-
-		NSLog ( @"MOAIAdMobIOS: GADRewardBasedVideoAd: presentFromRootViewController" );
+		NSLog ( @"MOAIAdMobIOS: GADRewardedAd: presentFromRootViewController" );
 
 		state.Push ( true );
-	  	[[ GADRewardBasedVideoAd sharedInstance ] presentFromRootViewController:rootVC ];
+
+		[ad presentFromRootViewController:rootVC delegate:MOAIAdMobIOS::Get ().mDelegate];
 		return 1;
 	}
 
-	NSLog ( @"MOAIAdMobIOS: GADRewardBasedVideoAd: failed to show" );
+	NSLog ( @"MOAIAdMobIOS: GADRewardedAd: failed to show" );
 	
 	state.Push ( false );
 
@@ -86,7 +91,11 @@ int MOAIAdMobIOS::_isLoaded ( lua_State* L ) {
 
 	MOAILuaState state ( L );
 
-	bool isLoaded = [[ GADRewardBasedVideoAd sharedInstance ] isReady ];
+	cc8* placementName = state.GetValue < cc8* >( 1, 0 );
+	
+	GADRewardedAd* ad = [MOAIAdMobIOS::Get ().mRewardedAds objectForKey:[ NSString stringWithUTF8String:placementName ] ];
+	
+	bool isLoaded = ad.isReady;
 
 	state.Push ( isLoaded );
 
@@ -123,7 +132,18 @@ int MOAIAdMobIOS::_init ( lua_State* L ) {
 	
 	[ GADMobileAds configureWithApplicationID:[ NSString stringWithUTF8String:appID ]];
 
-	[ GADRewardBasedVideoAd sharedInstance ].delegate = MOAIAdMobIOS::Get ().mDelegate;
+	GADMobileAds.sharedInstance.requestConfiguration.testDeviceIdentifiers = @[ @"6780f62cf37078e65adfea52fa8cd64e" ];
+	
+	if ( state.IsType ( 2, LUA_TTABLE )) {
+		NSMutableDictionary* placementsDict = [[ NSMutableDictionary alloc ] init ];
+		[ placementsDict initWithLua:state stackIndex:2 ];
+		for (NSString* placementName in placementsDict) {
+			NSString* placementId = placementsDict[placementName];
+			GADRewardedAd* ad = [[GADRewardedAd alloc] initWithAdUnitID:placementId];
+			[MOAIAdMobIOS::Get ().mRewardedAds setObject:ad forKey:placementName];
+		}
+		[ placementsDict release ];
+	}
 	
 	return 0;
 }
@@ -139,13 +159,41 @@ int MOAIAdMobIOS::_loadAd ( lua_State* L ) {
 
 	MOAILuaState state ( L );
 
-	if ([[ GADRewardBasedVideoAd sharedInstance ] isReady ]) {
-		return 0;
-	}
+//	if ([[ GADRewardBasedVideoAd sharedInstance ] isReady ]) {
+//		return 0;
+//	}
+//
+//	cc8* unitID = state.GetValue < cc8* >( 1, "" );
+//
+//	[[ GADRewardBasedVideoAd sharedInstance ] loadRequest:[GADRequest request] withAdUnitID:[ NSString stringWithUTF8String:unitID ]];
+//
+	cc8* placementName = state.GetValue < cc8* >( 1, 0 );
 	
-	cc8* unitID = state.GetValue < cc8* >( 1, "" );
+	GADRewardedAd* ad = [MOAIAdMobIOS::Get ().mRewardedAds objectForKey:[ NSString stringWithUTF8String:placementName ] ];
+	
+	GADRewardedAd* adNew = [[GADRewardedAd alloc] initWithAdUnitID:ad.adUnitID];
 
-	[[ GADRewardBasedVideoAd sharedInstance ] loadRequest:[GADRequest request] withAdUnitID:[ NSString stringWithUTF8String:unitID ]];
+	[MOAIAdMobIOS::Get ().mRewardedAds setObject:adNew forKey:[ NSString stringWithUTF8String:placementName ]];
+
+	[ad release];
+	
+	GADRequest *request = [GADRequest request];
+	[adNew loadRequest:request completionHandler:^(GADRequestError * _Nullable error) {
+	  if (error) {
+		// Handle ad failed to load case.
+	  		NSLog ( @"MOAIAdMobIOS: didFailToLoadWithError: Reward based video ad failed to load." );
+		  MOAIAdMobIOS::Get ().InvokeListener ( MOAIAdMobIOS::ADMOB_REWARDED_ERROR );
+	  } else {
+		// Ad successfully loaded.
+		  
+		NSLog ( @"MOAIAdMobIOS: rewardBasedVideoAdDidReceiveAd: Reward based video ad is received." );
+
+		  NSLog(@"MOAIAdMobIOS: rewardBasedVideoAdDidReceiveAd: %@", ((NSString *)[MOAIAdMobIOS::Get ().mRewardedAds allKeysForObject:adNew ][0]));
+
+
+		 	MOAIAdMobIOS::Get ().InvokeListener ( MOAIAdMobIOS::ADMOB_REWARDED_READY );
+	  }
+	}];
 
 	return 0;
 }
@@ -185,6 +233,7 @@ MOAIAdMobIOS::MOAIAdMobIOS () {
 	
 	mDelegate = [[ MOAIAdMobIOSDelegate alloc ] init];
 	mInterstitial = [GADInterstitial alloc];
+	mRewardedAds = [[ NSMutableDictionary alloc ] init];
 }
 
 //----------------------------------------------------------------//
@@ -192,6 +241,7 @@ MOAIAdMobIOS::~MOAIAdMobIOS () {
 	
 	[ mDelegate release ];
 	[ mInterstitial release ];
+	[ mRewardedAds release ];
 }
 
 //----------------------------------------------------------------//
@@ -202,6 +252,18 @@ void MOAIAdMobIOS::NotifyVideoFinished ( u32 result ) {
 	if ( this->PushListener ( ADMOB_REWARDED_FINISH, state )) {
 		
 		state.Push ( result );
+		state.DebugCall ( 1, 0 );
+	}
+}
+
+//----------------------------------------------------------------//
+void MOAIAdMobIOS::NotifyVideoClosed ( NSString* placementName ) {
+	
+	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
+	
+	if ( this->PushListener ( ADMOB_REWARDED_CLOSED, state )) {
+		
+		OBJC_TO_LUA ( placementName, state );
 		state.DebugCall ( 1, 0 );
 	}
 }
@@ -240,52 +302,93 @@ void MOAIAdMobIOS::RegisterLuaClass ( MOAILuaState& state ) {
 //================================================================//
 @implementation MOAIAdMobIOSDelegate
 
-	- ( void ) rewardBasedVideoAd: ( GADRewardBasedVideoAd * ) rewardBasedVideoAd 
-		didRewardUserWithReward: ( GADAdReward * ) reward {
+	//================================================================//
+	// Rewarded
+	//================================================================//
 
-		NSLog ( @"MOAIAdMobIOS: didRewardUserWithReward: didRewardUserWithReward" );
-
-		MOAIAdMobIOS::Get ().NotifyVideoFinished ( 1 );
+	/// Tells the delegate that the user earned a reward.
+	- (void)rewardedAd:(GADRewardedAd *)rewardedAd userDidEarnReward:(GADAdReward *)reward {
+	  // TODO: Reward the user.
+	  NSLog(@"rewardedAd:userDidEarnReward:");
+		
+	  MOAIAdMobIOS::Get ().NotifyVideoFinished ( 1 );
 	}
 
-	- ( void ) rewardBasedVideoAdDidReceiveAd: ( GADRewardBasedVideoAd * ) rewardBasedVideoAd {
-
-		NSLog ( @"MOAIAdMobIOS: rewardBasedVideoAdDidReceiveAd: Reward based video ad is received." );
-		MOAIAdMobIOS::Get ().InvokeListener ( MOAIAdMobIOS::ADMOB_REWARDED_READY );
-	}
-
-	- ( void ) rewardBasedVideoAdDidOpen: ( GADRewardBasedVideoAd * ) rewardBasedVideoAd {
-
-		NSLog ( @"MOAIAdMobIOS: rewardBasedVideoAdDidOpen: Opened reward based video ad." );
-	}
-
-	- ( void ) rewardBasedVideoAdDidStartPlaying: ( GADRewardBasedVideoAd * ) rewardBasedVideoAd {
-
-		NSLog ( @"MOAIAdMobIOS: rewardBasedVideoAdDidStartPlaying: Reward based video ad started playing." );
+	/// Tells the delegate that the rewarded ad was presented.
+	- (void)rewardedAdDidPresent:(GADRewardedAd *)rewardedAd {
+	  NSLog(@"rewardedAdDidPresent:");
+		
 		MOAIAdMobIOS::Get ().InvokeListener ( MOAIAdMobIOS::ADMOB_REWARDED_START );
 	}
 
-	- ( void ) rewardBasedVideoAdDidCompletePlaying: ( GADRewardBasedVideoAd * ) rewardBasedVideoAd {
+	/// Tells the delegate that the rewarded ad failed to present.
+	- (void)rewardedAd:(GADRewardedAd *)rewardedAd didFailToPresentWithError:(NSError *)error {
+	  NSLog(@"rewardedAd:didFailToPresentWithError");
 
-		NSLog ( @"MOAIAdMobIOS: rewardBasedVideoAdDidCompletePlaying: Reward based video ad has completed." );
-		// MOAIAdMobIOS::Get ().InvokeListener ( MOAIAdMobIOS::ADMOB_REWARDED_FINISH );
-	}
-
-	- ( void ) rewardBasedVideoAdDidClose: ( GADRewardBasedVideoAd * ) rewardBasedVideoAd {
-
-		NSLog ( @"MOAIAdMobIOS: rewardBasedVideoAdDidClose: Reward based video ad is closed." );
-		MOAIAdMobIOS::Get ().InvokeListener ( MOAIAdMobIOS::ADMOB_REWARDED_CLOSED );
-	}
-
-	- ( void ) rewardBasedVideoAdWillLeaveApplication: ( GADRewardBasedVideoAd * ) rewardBasedVideoAd {
-		
-		NSLog ( @"MOAIAdMobIOS: rewardBasedVideoAdWillLeaveApplication: Reward based video ad will leave application." );
-	}
-
-	- ( void ) rewardBasedVideoAd: (  GADRewardBasedVideoAd * ) rewardBasedVideoAd didFailToLoadWithError:( NSError * )error {
-		NSLog ( @"MOAIAdMobIOS: didFailToLoadWithError: Reward based video ad failed to load." );
 		MOAIAdMobIOS::Get ().InvokeListener ( MOAIAdMobIOS::ADMOB_REWARDED_ERROR );
 	}
+
+	/// Tells the delegate that the rewarded ad was dismissed.
+	- (void)rewardedAdDidDismiss:(GADRewardedAd *)rewardedAd {
+	  NSLog(@"rewardedAdDidDismiss:");
+		
+	  //MOAIAdMobIOS::Get ().InvokeListener ( MOAIAdMobIOS::ADMOB_REWARDED_CLOSED );
+
+		MOAIAdMobIOS::Get ().NotifyVideoClosed ( (NSString *) [MOAIAdMobIOS::Get ().mRewardedAds allKeysForObject:rewardedAd ][0] );
+	}
+
+//	- ( void ) rewardBasedVideoAd: ( GADRewardBasedVideoAd * ) rewardBasedVideoAd 
+//		didRewardUserWithReward: ( GADAdReward * ) reward {
+//
+//		NSLog ( @"MOAIAdMobIOS: didRewardUserWithReward: didRewardUserWithReward" );
+//
+//		MOAIAdMobIOS::Get ().NotifyVideoFinished ( 1 );
+//	}
+//
+//	- ( void ) rewardBasedVideoAdDidReceiveAd: ( GADRewardBasedVideoAd * ) rewardBasedVideoAd {
+//
+//		NSLog ( @"MOAIAdMobIOS: rewardBasedVideoAdDidReceiveAd: Reward based video ad is received." );
+//		MOAIAdMobIOS::Get ().InvokeListener ( MOAIAdMobIOS::ADMOB_REWARDED_READY );
+//	}
+//
+//	- ( void ) rewardBasedVideoAdDidOpen: ( GADRewardBasedVideoAd * ) rewardBasedVideoAd {
+//
+//		NSLog ( @"MOAIAdMobIOS: rewardBasedVideoAdDidOpen: Opened reward based video ad." );
+//	}
+//
+//	- ( void ) rewardBasedVideoAdDidStartPlaying: ( GADRewardBasedVideoAd * ) rewardBasedVideoAd {
+//
+//		NSLog ( @"MOAIAdMobIOS: rewardBasedVideoAdDidStartPlaying: Reward based video ad started playing." );
+//		MOAIAdMobIOS::Get ().InvokeListener ( MOAIAdMobIOS::ADMOB_REWARDED_START );
+//	}
+//
+//	- ( void ) rewardBasedVideoAdDidCompletePlaying: ( GADRewardBasedVideoAd * ) rewardBasedVideoAd {
+//
+//		NSLog ( @"MOAIAdMobIOS: rewardBasedVideoAdDidCompletePlaying: Reward based video ad has completed." );
+//		// MOAIAdMobIOS::Get ().InvokeListener ( MOAIAdMobIOS::ADMOB_REWARDED_FINISH );
+//	}
+//
+//	- ( void ) rewardBasedVideoAdDidClose: ( GADRewardBasedVideoAd * ) rewardBasedVideoAd {
+//
+//		NSLog ( @"MOAIAdMobIOS: rewardBasedVideoAdDidClose: Reward based video ad is closed." );
+//		MOAIAdMobIOS::Get ().InvokeListener ( MOAIAdMobIOS::ADMOB_REWARDED_CLOSED );
+//	}
+//
+//	- ( void ) rewardBasedVideoAdWillLeaveApplication: ( GADRewardBasedVideoAd * ) rewardBasedVideoAd {
+//		
+//		NSLog ( @"MOAIAdMobIOS: rewardBasedVideoAdWillLeaveApplication: Reward based video ad will leave application." );
+//	}
+//
+//	- ( void ) rewardBasedVideoAd: (  GADRewardBasedVideoAd * ) rewardBasedVideoAd didFailToLoadWithError:( NSError * )error {
+//		NSLog ( @"MOAIAdMobIOS: didFailToLoadWithError: Reward based video ad failed to load." );
+//		MOAIAdMobIOS::Get ().InvokeListener ( MOAIAdMobIOS::ADMOB_REWARDED_ERROR );
+//	}
+
+	//================================================================//
+
+	//================================================================//
+	// Interstitial
+	//================================================================//
 
 	- ( void ) interstitialDidReceiveAd: ( GADInterstitial * ) ad {
 		
@@ -322,5 +425,7 @@ void MOAIAdMobIOS::RegisterLuaClass ( MOAILuaState& state ) {
 	- ( void ) interstitialWillLeaveApplication:(GADInterstitial *)ad {
 		NSLog(@"interstitialWillLeaveApplication");
 	}
+
+	//================================================================//
 
 @end

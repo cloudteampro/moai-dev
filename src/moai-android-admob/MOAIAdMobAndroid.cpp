@@ -27,7 +27,8 @@ extern JavaVM* jvm;
 int MOAIAdMobAndroid::_show ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIAdMobAndroid, "" )
 
-	lua_pushboolean ( state, self->CallStaticBooleanMethod ( self->mJava_Show ));
+	MOAIJString placementName = self->GetJString ( state.GetValue < cc8* >( 1, 0 ));
+	lua_pushboolean ( state, self->CallStaticBooleanMethod ( self->mJava_Show, ( jstring )placementName ));
 	return 1;
 }
 
@@ -53,7 +54,8 @@ int MOAIAdMobAndroid::_showInterstitial ( lua_State* L ) {
 int MOAIAdMobAndroid::_isLoaded ( lua_State *L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIAdMobAndroid, "" )
 
-	lua_pushboolean ( state, self->CallStaticBooleanMethod ( self->mJava_IsLoaded ));
+	MOAIJString placementName = self->GetJString ( state.GetValue < cc8* >( 1, 0 ));
+	lua_pushboolean ( state, self->CallStaticBooleanMethod ( self->mJava_IsLoaded, ( jstring )placementName ));
 	return 1;
 }
 
@@ -81,8 +83,12 @@ int MOAIAdMobAndroid::_init ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIAdMobAndroid, "" )
 
 	MOAIJString appID = self->GetJString ( state.GetValue < cc8* >( 1, "" ));
+	jobject jbundle = NULL;
+	if ( state.IsType ( 2, LUA_TTABLE ) ) {
+		jbundle = self->BundleFromLua( L, 2 );
+	}
 
-	self->CallStaticVoidMethod ( self->mJava_Init, ( jstring )appID );
+	self->CallStaticVoidMethod ( self->mJava_Init, ( jstring )appID, jbundle );
 	return 0;
 }
 
@@ -96,9 +102,9 @@ int MOAIAdMobAndroid::_init ( lua_State* L ) {
 int MOAIAdMobAndroid::_loadAd ( lua_State* L ) {
 	MOAI_JAVA_LUA_SETUP ( MOAIAdMobAndroid, "" )
 
-	MOAIJString unitID = self->GetJString ( state.GetValue < cc8* >( 1, "" ));
+	MOAIJString placementName = self->GetJString ( state.GetValue < cc8* >( 1, "" ));
 
-	self->CallStaticVoidMethod ( self->mJava_LoadAd, ( jstring )unitID );
+	self->CallStaticVoidMethod ( self->mJava_LoadAd, ( jstring )placementName );
 	return 0;
 }
 
@@ -129,10 +135,10 @@ MOAIAdMobAndroid::MOAIAdMobAndroid () {
 
 	this->SetClass ( "com/moaisdk/admob/MoaiAdMob" );
 
-	this->mJava_Show					= this->GetStaticMethod ( "show", "()Z" );
+	this->mJava_Show					= this->GetStaticMethod ( "show", "(Ljava/lang/String;)Z" );
 	this->mJava_ShowInterstitial		= this->GetStaticMethod ( "showInterstitial", "()Z" );
-	this->mJava_Init					= this->GetStaticMethod ( "init", "(Ljava/lang/String;)V" );
-	this->mJava_IsLoaded				= this->GetStaticMethod ( "isLoaded", "()Z" );
+	this->mJava_Init					= this->GetStaticMethod ( "init", "(Ljava/lang/String;Landroid/os/Bundle;)V" );
+	this->mJava_IsLoaded				= this->GetStaticMethod ( "isLoaded", "(Ljava/lang/String;)Z" );
 	this->mJava_IsInterstitialLoaded	= this->GetStaticMethod ( "isInterstitialLoaded", "()Z" );
 	this->mJava_LoadAd					= this->GetStaticMethod ( "loadAd", "(Ljava/lang/String;)V" );
 	this->mJava_LoadInterstitial		= this->GetStaticMethod ( "loadInterstitial", "(Ljava/lang/String;)V" );
@@ -150,6 +156,17 @@ void MOAIAdMobAndroid::NotifyVideoFinished ( int result ) {
 	if ( this->PushListener ( ADMOB_REWARDED_FINISH, state )) {
 
 		state.Push ( result );
+		state.DebugCall ( 1, 0 );
+	}
+}
+
+//----------------------------------------------------------------//
+void MOAIAdMobAndroid::NotifyVideoClosed ( cc8* placementName ) {
+	MOAIScopedLuaState state = MOAILuaRuntime::Get ().State ();
+
+	if ( this->PushListener ( ADMOB_REWARDED_CLOSED, state )) {
+
+		state.Push ( placementName );
 		state.DebugCall ( 1, 0 );
 	}
 }
@@ -204,5 +221,17 @@ extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_admob_MoaiAdMob_AKUVideoCompl
 		ZLLog::LogF ( 1, ZLLog::CONSOLE, "Java_com_moaisdk_admob_MoaiAdMob_AKUVideoCompleted\n" );
 
 		MOAIAdMobAndroid::Get ().NotifyVideoFinished ( result );
+	}
+}
+
+//----------------------------------------------------------------//
+extern "C" JNIEXPORT void JNICALL Java_com_moaisdk_admob_MoaiAdMob_AKUVideoClosed ( JNIEnv* env, jclass obj, jstring jplacementName ) {
+
+	if ( MOAIAdMobAndroid::IsValid ()) {
+		ZLLog::LogF ( 1, ZLLog::CONSOLE, "Java_com_moaisdk_admob_MoaiAdMob_AKUVideoClosed\n" );
+
+		JNI_GET_CSTRING ( jplacementName, placementName );
+		MOAIAdMobAndroid::Get ().NotifyVideoClosed ( placementName );
+		JNI_RELEASE_CSTRING ( jplacementName, placementName );
 	}
 }

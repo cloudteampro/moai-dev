@@ -6,6 +6,7 @@
 #define MOAIADMOBIOS_H
 
 #include <moai-core/headers.h>
+#include <moai-ios/headers.h>
 
 #import <GoogleMobileAds/GoogleMobileAds.h>
 
@@ -46,16 +47,19 @@ public:
 		ADMOB_REWARDED_CLOSED,
 	};
 	
+	NSMutableDictionary* 		mRewardedAds;
+		
 			MOAIAdMobIOS				();
-			~MOAIAdMobIOS			();
+			~MOAIAdMobIOS				();
 	void	NotifyVideoFinished			( u32 result );
+	void	NotifyVideoClosed			( NSString* placementName );
 	void	RegisterLuaClass			( MOAILuaState& state );
 };
 
 //================================================================//
 // MOAIAdMobIOSDelegate
 //================================================================//
-@interface MOAIAdMobIOSDelegate : NSObject < GADRewardBasedVideoAdDelegate, GADInterstitialDelegate > {
+@interface MOAIAdMobIOSDelegate : NSObject < GADRewardedAdDelegate, GADInterstitialDelegate > {
 @private
 }
 @end

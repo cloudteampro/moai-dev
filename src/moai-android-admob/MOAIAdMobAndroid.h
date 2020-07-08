@@ -53,6 +53,7 @@ public:
 					MOAIAdMobAndroid				();
 					~MOAIAdMobAndroid				();
 	void			NotifyVideoFinished				( int result );
+	void			NotifyVideoClosed				( cc8* placementName );
 	void			RegisterLuaClass				( MOAILuaState& state );
 };
 

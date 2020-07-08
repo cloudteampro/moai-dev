@@ -42,8 +42,8 @@ set -e
 
 # one arch currently
 #ARCHS="armeabi-v7a arm64-v8a"
-#ARCHS="arm64-v8a"
-ARCHS="armeabi-v7a"
+ARCHS="arm64-v8a"
+#ARCHS="armeabi-v7a"
 for ARCH in $ARCHS
 do
   cd $build_folder

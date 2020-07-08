@@ -7,22 +7,39 @@
 package com.moaisdk.admob;
 
 import android.app.Activity;
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 
 import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.RequestConfiguration;
+import com.google.android.gms.ads.rewarded.RewardItem;
+import com.google.android.gms.ads.rewarded.RewardedAdCallback;
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
+import com.ironsource.mediationsdk.integration.IntegrationHelper;
 import com.moaisdk.core.*;
+
+import com.ironsource.mediationsdk.*;
 
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.reward.RewardItem;
-import com.google.android.gms.ads.reward.RewardedVideoAd;
-import com.google.android.gms.ads.reward.RewardedVideoAdListener;
+//import com.google.android.gms.ads.reward.RewardItem;
+import com.google.android.gms.ads.rewarded.RewardedAd;
+//import com.google.android.gms.ads.reward.RewardedVideoAd;
+//import com.google.android.gms.ads.reward.RewardedVideoAdListener;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 //================================================================//
 // MoaiAdMob
 //================================================================//
 
-public class MoaiAdMob implements RewardedVideoAdListener {
+public class MoaiAdMob {//} implements RewardedVideoAdListener {
 
 	public enum ListenerEvent {
 		ADMOB_READY,
@@ -38,14 +55,17 @@ public class MoaiAdMob implements RewardedVideoAdListener {
 
 	private static Activity sActivity = null;
 	private static InterstitialAd interstitialAd = null;
-    private static RewardedVideoAd rewardedVideoAd = null;
+	private static Bundle sPlacements = null;
+    //private static RewardedVideoAd rewardedVideoAd = null;
 	private static MoaiAdMob sRewardedAdsListener = null;
+	private static HashMap<String, RewardedAd> rewardedAds = null;
 	private static AdListener sAdsListener = null;
 
 	private static boolean destroyed = false;
 
 	protected static native void AKUInvokeListener ( int eventID );
 	protected static native void AKUVideoCompleted ( int result );
+	protected static native void AKUVideoClosed ( String placementName );
 
 	//----------------------------------------------------------------//
 	public static void onCreate ( Activity activity ) {
@@ -60,10 +80,12 @@ public class MoaiAdMob implements RewardedVideoAdListener {
 
 		MoaiLog.i ( "MoaiAdMob: onPause" );
 
-		if ( rewardedVideoAd != null ) {
-		
-			rewardedVideoAd.pause ( sActivity );
-		}
+		IronSource.onPause ( sActivity );
+
+//		if ( rewardedVideoAd != null ) {
+//
+//			rewardedVideoAd.pause ( sActivity );
+//		}
 	}
 
 	//----------------------------------------------------------------//
@@ -71,10 +93,12 @@ public class MoaiAdMob implements RewardedVideoAdListener {
 
 		MoaiLog.i ( "MoaiAdMob: onResume" );
 
-		if ( rewardedVideoAd != null ) {
-		
-			rewardedVideoAd.resume ( sActivity );
-		}
+		IronSource.onResume ( sActivity );
+
+//		if ( rewardedVideoAd != null ) {
+//
+//			rewardedVideoAd.resume ( sActivity );
+//		}
 	}
 
 	//----------------------------------------------------------------//
@@ -88,12 +112,12 @@ public class MoaiAdMob implements RewardedVideoAdListener {
 
 		MoaiLog.i ( "MoaiAdMob: onDestroy" );
 
-		if ( rewardedVideoAd != null ) {
-		
-	    	rewardedVideoAd.destroy ( sActivity );
-	        rewardedVideoAd.setRewardedVideoAdListener ( null );
-	        rewardedVideoAd = null;
-	    }
+//		if ( rewardedVideoAd != null ) {
+//
+//	    	rewardedVideoAd.destroy ( sActivity );
+//	        rewardedVideoAd.setRewardedVideoAdListener ( null );
+//	        rewardedVideoAd = null;
+//	    }
 
 	    if ( interstitialAd != null ) {
 			interstitialAd.setAdListener ( null );
@@ -108,15 +132,77 @@ public class MoaiAdMob implements RewardedVideoAdListener {
 	//================================================================//
 
 	//----------------------------------------------------------------//
-	public static boolean show () {
+	public static boolean show ( final String placementName ) {
 
-        MoaiLog.i ( "MoaiAdMob show : isLoaded " + rewardedVideoAd.isLoaded () );
+		for ( String key : rewardedAds.keySet() ) {
+			if (key.equals(placementName)) {
+				MoaiLog.i ( "MoaiAdMob show : " + placementName + " isLoaded " + rewardedAds.get(key).isLoaded() );
+				if (rewardedAds.get(key).isLoaded()) {
+					RewardedAdCallback adCallback = new RewardedAdCallback() {
+						@Override
+						public void onRewardedAdOpened() {
+							// Ad opened.
+							if ( destroyed ) return;
 
-        if ( rewardedVideoAd.isLoaded ()) {
+							synchronized ( Moai.sAkuLock ) {
 
-		    rewardedVideoAd.show ();
-			return true;
+								MoaiLog.i ( "MoaiAdMob: onRewardedAdOpened" );
+								MoaiAdMob.AKUInvokeListener ( ListenerEvent.ADMOB_REWARDED_START.ordinal ());
+							}
+						}
+
+						@Override
+						public void onRewardedAdClosed() {
+							// Ad closed.
+							if ( destroyed ) return;
+
+							synchronized ( Moai.sAkuLock ) {
+
+								MoaiLog.i ( "MoaiAdMob: onRewardedAdClosed" );
+								//MoaiAdMob.AKUInvokeListener ( ListenerEvent.ADMOB_REWARDED_CLOSED.ordinal () );
+								MoaiAdMob.AKUVideoClosed ( placementName );
+							}
+						}
+
+						@Override
+						public void onUserEarnedReward(@NonNull RewardItem reward) {
+							// User earned reward.
+
+							if ( destroyed ) return;
+
+							synchronized ( Moai.sAkuLock ) {
+
+								MoaiLog.i ( "MoaiAdMob: onUserEarnedReward currency: " + reward.getType () + "  amount: " + reward.getAmount ());
+								MoaiAdMob.AKUVideoCompleted ( 1 );
+							}
+						}
+
+						@Override
+						public void onRewardedAdFailedToShow(int errorCode) {
+							// Ad failed to display.
+
+							if ( destroyed ) return;
+
+							synchronized ( Moai.sAkuLock ) {
+
+								MoaiLog.i ( "MoaiAdMob: onRewardedAdFailedToShow errorCode - "+errorCode );
+								MoaiAdMob.AKUInvokeListener ( ListenerEvent.ADMOB_REWARDED_ERROR.ordinal ());
+							}
+						}
+					};
+					rewardedAds.get(key).show(sActivity, adCallback);
+					return true;
+				}
+			}
 		}
+
+//        MoaiLog.i ( "MoaiAdMob show : " + placementName + " isLoaded " + rewardedVideoAd.isLoaded () );
+//
+//        if ( rewardedVideoAd.isLoaded ()) {
+//
+//		    rewardedVideoAd.show ();
+//			return true;
+//		}
 
 		return false;
 	}
@@ -136,28 +222,53 @@ public class MoaiAdMob implements RewardedVideoAdListener {
 	}
 
 	//----------------------------------------------------------------//
-	public static void init ( String appId ) {
+	public static void init ( String appId, Bundle placements ) {
 
         MoaiLog.i ( "MoaiAdMob init" );
 
 		sRewardedAdsListener = new MoaiAdMob ();
 		sAdsListener = new AdMobAdListener ();
+		sPlacements = placements;
+		rewardedAds = new HashMap<String, RewardedAd>();
+		Set<String> keys = placements.keySet();
+		for(String key : keys) {
+			rewardedAds.put(key, new RewardedAd(sActivity, placements.getString(key)));
+		}
 
-		// MobileAds.initialize ( sActivity, appId );
+		MobileAds.initialize ( sActivity, appId );
 
-		rewardedVideoAd = MobileAds.getRewardedVideoAdInstance ( sActivity );
-        rewardedVideoAd.setRewardedVideoAdListener ( sRewardedAdsListener );
+//		List<String> testDeviceIds = Arrays.asList("AEABDDF5281389889CD2726746CF73B3");
+//		RequestConfiguration configuration = new RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build();
+//		MobileAds.setRequestConfiguration(configuration);
+
+		//rewardedVideoAd = MobileAds.getRewardedVideoAdInstance ( sActivity );
+        //rewardedVideoAd.setRewardedVideoAdListener ( sRewardedAdsListener );
 
 		interstitialAd = new InterstitialAd ( sActivity );
 		interstitialAd.setAdListener ( sAdsListener );
+
+		//IntegrationHelper.validateIntegration(sActivity);
 	}
 
 	//----------------------------------------------------------------//
-	public static boolean isLoaded () {
+	public static boolean isLoaded ( String placementName ) {
 		
         // MoaiLog.i ( "MoaiAdMob isLoaded "+rewardedVideoAd.isLoaded () );
 
-		return rewardedVideoAd.isLoaded ();
+		//MoaiLog.i ("-------------------------------");
+		//for ( Map.Entry<String, AdapterStatus> entry : MobileAds.getInitializationStatus ().getAdapterStatusMap ().entrySet () ) {
+		//	MoaiLog.i (entry.getKey ()+"----"+entry.getValue ().getInitializationState ());
+		//}
+
+		for ( String key : rewardedAds.keySet() ) {
+			if (key.equals(placementName)) {
+				//MoaiLog.i ( "MoaiAdMob isLoaded " + placementName + " " +rewardedAds.get(key).isLoaded () );
+				return rewardedAds.get(key).isLoaded();
+			}
+		}
+
+		//return rewardedVideoAd.isLoaded ();
+		return false;
 	}
 
 	//----------------------------------------------------------------//
@@ -169,14 +280,50 @@ public class MoaiAdMob implements RewardedVideoAdListener {
 	}
 
 	//----------------------------------------------------------------//
-	public static void loadAd ( String unitId ) {
+	public static void loadAd ( String placementName ) {
 
-        MoaiLog.i ( "MoaiAdMob loadAd unitId - "+unitId+" isLoaded "+rewardedVideoAd.isLoaded() );
+		for ( String key : rewardedAds.keySet() ) {
+			if (key.equals(placementName)) {
+				RewardedAd rewardedAd = new RewardedAd(sActivity, sPlacements.getString(key));
 
-        if ( !rewardedVideoAd.isLoaded() ) {
+				rewardedAds.put(key, rewardedAd);
 
-    		rewardedVideoAd.loadAd ( unitId, new AdRequest.Builder ().build ());
-    	}
+				RewardedAdLoadCallback adLoadCallback = new RewardedAdLoadCallback() {
+					@Override
+					public void onRewardedAdLoaded() {
+						// Ad successfully loaded.
+						if ( destroyed ) return;
+
+						synchronized ( Moai.sAkuLock ) {
+
+							MoaiLog.i ( "MoaiAdMob: onRewardedAdLoaded" );
+							MoaiAdMob.AKUInvokeListener ( ListenerEvent.ADMOB_REWARDED_READY.ordinal ());
+						}
+					}
+
+					@Override
+					public void onRewardedAdFailedToLoad(int errorCode) {
+						// Ad failed to load.
+
+						if ( destroyed ) return;
+
+						synchronized ( Moai.sAkuLock ) {
+
+							MoaiLog.i ( "MoaiAdMob: onRewardedAdFailedToLoad errorCode - "+errorCode );
+							MoaiAdMob.AKUInvokeListener ( ListenerEvent.ADMOB_REWARDED_ERROR.ordinal ());
+						}
+					}
+				};
+				rewardedAd.loadAd(new AdRequest.Builder().build(), adLoadCallback);
+			}
+		}
+
+//        MoaiLog.i ( "MoaiAdMob loadAd unitId - "+placementName+" isLoaded "+rewardedVideoAd.isLoaded() );
+//
+//        if ( !rewardedVideoAd.isLoaded() ) {
+//
+//    		rewardedVideoAd.loadAd ( unitId, new AdRequest.Builder ().build ());
+//    	}
 	}
 
 	//----------------------------------------------------------------//
@@ -189,7 +336,7 @@ public class MoaiAdMob implements RewardedVideoAdListener {
 	}
 
 	//================================================================//
-	// VunglePub.EventListener
+	// AdMob.EventListener
 	//================================================================//
 
 	//----------------------------------------------------------------//
@@ -260,9 +407,9 @@ public class MoaiAdMob implements RewardedVideoAdListener {
 	public void onRewardedVideoStarted () {
 
 		if ( destroyed ) return;
-		
+
 		synchronized ( Moai.sAkuLock ) {
-			
+
 	    	MoaiLog.i ( "MoaiAdMob: onRewardedVideoStarted" );
 			MoaiAdMob.AKUInvokeListener ( ListenerEvent.ADMOB_REWARDED_START.ordinal ());
 		}
