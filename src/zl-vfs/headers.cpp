@@ -77,6 +77,13 @@ int zl_chdir ( const char* path ) {
 void zl_cleanup ( void ) {
 
 	ZLVfsFileSystem::Get ().Cleanup ();
+	
+#ifdef ANDROID
+	zl_stderr = 0;
+	zl_stdin = 0;
+	zl_stdout = 0;
+	return;
+#endif
 
 	ZLVfsFile* file;
 	
@@ -270,6 +277,13 @@ char* zl_getcwd ( char* buffer, size_t length ) {
 void zl_init () {
 
 	ZLVfsFileSystem::Get ().Init ();
+
+#ifdef ANDROID
+	zl_stderr = 0;
+	zl_stdin = 0;
+	zl_stdout = 0;
+	return;
+#endif
 
 	ZLVfsFile* file;
 

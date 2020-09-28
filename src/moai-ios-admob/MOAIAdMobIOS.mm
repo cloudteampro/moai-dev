@@ -145,6 +145,12 @@ int MOAIAdMobIOS::_init ( lua_State* L ) {
 		[ placementsDict release ];
 	}
 	
+	// [[GADMobileAds sharedInstance] startWithCompletionHandler:^(GADInitializationStatus *_Nonnull status) {
+
+	// 	if (status)
+	// 	MOAIAdMobIOS::Get ().InvokeListener ( MOAIAdMobIOS::PENDING_INVITATION_ID_SUCCEEDED );
+	// }];
+	
 	return 0;
 }
 

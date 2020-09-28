@@ -9,6 +9,9 @@
 
 #include <moai-core/host.h>
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 AKU_API void    AKUIosAdMobAppFinalize               ();
 AKU_API void    AKUIosAdMobAppInitialize             ();
 AKU_API void    AKUIosAdMobContextInitialize         ();
